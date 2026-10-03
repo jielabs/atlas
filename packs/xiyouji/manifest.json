@@ -1,0 +1,26 @@
+{
+  "atlas": 1,
+  "id": "xiyouji",
+  "name": "Journey to the West",
+  "name_zh": "西游记",
+  "region": {
+    "polygon": [[70, 15], [125, 15], [125, 48], [70, 48]],
+    "view": { "center": [96, 33], "zoom": 3.4, "year": 13 }
+  },
+  "range": { "start": 1, "end": 100 },
+  "data": { "eras": "eras.json", "events": "events.json", "tours": "tours.json" },
+  "layers": [
+    { "id": "route", "name": "Road west", "name_zh": "取经路线", "data": "layers/route.geojson",
+      "type": "line", "color": "#c47a2c", "width": 3 },
+    { "id": "kingdoms", "name": "Kingdoms passed", "name_zh": "人间国度", "data": "layers/kingdoms.geojson",
+      "type": "circle", "color": "#b93a26", "radius": 6 },
+    { "id": "realms", "name": "Three realms", "name_zh": "三界", "data": "layers/realms.geojson",
+      "type": "circle", "color": "#7a5195", "radius": 7 },
+    { "id": "continents", "name": "Four continents", "name_zh": "四大部洲", "data": "layers/continents.geojson",
+      "type": "fill", "color": "#6b5a7a", "opacity": 0.1, "on": false }
+  ],
+  "plugins": ["plugins/realms.js"],
+  "attribution": "Journey to the West (1592). Episode geography is partly traditional identification, partly invented.",
+  "note": "The axis is the chapter number, not years. Places are real, traditionally identified, projected from religious geography, or invented. Terrain and coastlines are modern.",
+  "note_zh": "本图的「年」是回目。地名分四种：史有其地、旧说比附、神话投影、纯属虚构。地形、海岸线和河流均为现代地理。"
+}
