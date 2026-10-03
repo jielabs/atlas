@@ -55,7 +55,7 @@ real years, 184–280, and the chapter is a field. Borders are real too, drawn f
 - [x] **4. events ch 39–57** (208–210): Changban, the Red Cliffs, Zhou Yu's three angers
 - [x] **5. events ch 58–77** (211–220): Tong Pass, Yizhou, Hanzhong, Guan Yu's fall
 - [x] **6. events ch 78–85** (220–223): three emperors, Yiling, Baidi
-- [ ] **7. events ch 86–104** (224–234): the southern campaign and the northern expeditions
+- [x] **7. events ch 86–104** (224–234): the southern campaign and the northern expeditions
 - [ ] **8. events ch 105–120** (234–280): the Sima, Jiang Wei, the fall of Shu, Jin
 - [ ] **9. layers**: capitals, Guan Yu's five passes, the northern expeditions, truth halos under the event markers
 - [ ] **10. tours**: Guan Yu, the Red Cliffs, Zhuge Liang, Liu Bei's life, the road to unity
@@ -69,3 +69,4 @@ real years, 184–280, and the chapter is a field. Borders are real too, drawn f
 - chunk 4, events ch 39-57 (208-210): 27 events from Bowang to Pang Tong at Leiyang. The Red Cliffs chapters are the novel at its most inventive: the arrows, the beating, the chained ships, the east wind and Huarong are all fiction around a battle that is history. (events total 91)
 - chunk 5, events ch 58-77 (211-220): 32 events from Tong Pass to Jade Spring Hill. Two reversals stand out: Ma Teng was killed because Ma Chao rebelled, not the other way round, and the single-sword meeting was Lu Su's challenge to Guan Yu. (events total 123)
 - chunk 6, events ch 78-85 (220-223): 14 events from Hua Tuo to the five armies. This stretch is mostly history: Cao Cao's death, the two enthronements, Zhang Fei's murder, Yiling and the charge at Baidi are all recorded; Hua Tuo is twelve years late and the seven-step poem is a later legend. (events total 137)
+- chunk 7, events ch 86-104 (224-234): 31 events from Qin Mi's riddles to Wuzhang Plains. The empty fort is the clearest case of the novel taking a real trick from one hero (Zhao Yun, 219) and giving it to another; the seven captures, the second memorial and the seven lamps are flagged as doubtful or invented. (events total 166)
