@@ -96,7 +96,7 @@ Target: about 180 events total.
 - [x] **6. events: flames (ch 51–71)** — 如来助降, 女儿国落胎泉, 真假美猴王, 火焰山借芭蕉扇, 祭赛国碧波潭, 荆棘岭, 小雷音, 朱紫国, 盘丝洞. ~32 events
 - [x] **7. events: india (ch 72–92)** — 狮驼岭, 比丘国, 陷空山无底洞, 灭法国, 隐雾山, 凤仙郡求雨, 玉华州, 金平府犀牛. ~30 events
 - [x] **8. events: sutras (ch 93–100)** — 天竺国玉兔, 铜台府, 凌云渡脱胎, 灵山传经, 无字真经, 通天河老鼋沉经, 五圣成真. ~14 events
-- [ ] **9. layers: route.geojson + kingdoms.geojson** — the road west as ~10 segments with `from`/`to` chapters so it grows; the ten kingdoms as points with cards.
+- [x] **9. layers: route.geojson + kingdoms.geojson** — the road west as ~10 segments with `from`/`to` chapters so it grows; the ten kingdoms as points with cards.
 - [ ] **10. layers: realms.geojson + continents.geojson** — 天宫·地府·龙宫·灵山 as four `projected` points; 四大部洲 as four deliberately vague polygons, clipped to the pack's box.
 - [ ] **11. tours: `monkey-rise` + `road-west`** — the rise and fall of Monkey (花果山 → 方寸山 → 龙宫 → 地府 → 天宫 → 五行山); the whole pilgrimage in 16 steps. `road-west` is the headline tour.
 - [ ] **12. tours: `three-strikes` + `flaming-mountain` + `xuanzang-real`** — `xuanzang-real` copies the eight steps of the atlas's own `xuanzang` tour from `data/tours.json` verbatim (text included), with `year` remapped to the chapter each step corresponds to, so the real journey and the novel can be played side by side.
@@ -124,3 +124,4 @@ Target: about 180 events total.
 - chunk 7, events for the india era (ch 72-92): 22 events from Silk Cave to the rhinoceroses of Green Dragon Mountain; the law-destroying kingdom set against Gandhara's empty monasteries, and Yuhua against the palace where Xuanzang died. (events total 120)
 - chunk 8, events for the sutras era (ch 93-100): 12 events from Jetavana to the five saints; the embroidered ball at Kanyakubja set against Harsha's assembly of 642, and the return against the real 645 homecoming with 657 texts. (events total 132)
 - coverage pass: chapters 39 and 69 filled, 史实 notes raised from 24 to 33 of 134 (25%) (events total 134)
+- chunk 9, route and kingdoms layers: tools/xiyouji/build_layers.py derives the road from events.json: 52 stations and 51 legs, each appearing at its arrival chapter and coloured by the footing of where it arrives. The long jumps are the identified places themselves (Tongtian River, the Women's Country, Turfan), which is the point. Kingdoms: the ten the pilgrims pass plus the Tang, each appearing on arrival. (events total 134)

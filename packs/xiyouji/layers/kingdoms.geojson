@@ -1,1 +1,203 @@
-{ "type": "FeatureCollection", "features": [] }
+{
+ "type": "FeatureCollection",
+ "features": [
+  {
+   "type": "Feature",
+   "properties": {
+    "name": "Great Tang",
+    "name_zh": "大唐",
+    "text": "Emperor Taizong's empire, capital Chang'an. The pilgrimage starts and ends here (ch. 9-13, 100).",
+    "text_zh": "唐太宗的大唐，都城长安。取经从这里出发，也回到这里（第9–13回、第100回）。",
+    "from": 1,
+    "color": "#2c7a68"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     108.96,
+     34.22
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "name": "Baoxiang",
+    "name_zh": "宝象国",
+    "text": "Its princess was carried off by the Yellow Robe Monster, the Wolf Star, for thirteen years (ch. 28-31).",
+    "text_zh": "公主百花羞被黄袍怪（奎木狼）摄去十三年（第28–31回）。",
+    "from": 29,
+    "color": "#8a8a5a"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     91.3,
+     42.6
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "name": "Wuji",
+    "name_zh": "乌鸡国",
+    "text": "Its king lay three years drowned in a well while Manjusri's lion ruled in his shape (ch. 36-39).",
+    "text_zh": "国王被推入井中三年，文殊的青毛狮子变作他的模样坐了王位（第36–39回）。",
+    "from": 37,
+    "color": "#8a8a5a"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     89.6,
+     41.15
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "name": "Cheqi",
+    "name_zh": "车迟国",
+    "text": "Ruled by three Taoist masters who enslaved the monks, until the contest of magic (ch. 44-46). Placed at Agni (Karashahr), which Xuanzang visited.",
+    "text_zh": "三位道士国师当国，和尚沦为苦力，直到斗法（第44–46回）。比附为玄奘经过的阿耆尼国（焉耆）。",
+    "from": 44,
+    "color": "#c47a2c"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     86.57,
+     42.06
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "name": "Western Liang, the Women's Country",
+    "name_zh": "西梁女国",
+    "text": "A kingdom of women whose queen offered Tripitaka her throne (ch. 53-54). Placed at the Eastern Women's Kingdom of the Record of the Western Regions.",
+    "text_zh": "女儿国，女王愿以一国之富招唐僧为王（第53–54回）。比附为《大唐西域记》所载东女国。",
+    "from": 53,
+    "color": "#c47a2c"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     80.5,
+     31.5
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "name": "Jisai",
+    "name_zh": "祭赛国",
+    "text": "Its pagoda's relic was stolen by the nine-headed bird of Green Wave Lake (ch. 62-63).",
+    "text_zh": "金光寺宝塔佛宝被碧波潭九头虫盗走（第62–63回）。",
+    "from": 62,
+    "color": "#8a8a5a"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     87.6,
+     42.5
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "name": "Zhuzi",
+    "name_zh": "朱紫国",
+    "text": "Its king pined three years for a queen taken by Guanyin's golden-haired hou (ch. 68-71).",
+    "text_zh": "国王因金圣宫娘娘被观音坐骑金毛犼摄去，相思成病三年（第68–71回）。",
+    "from": 68,
+    "color": "#8a8a5a"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     83.5,
+     41.4
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "name": "Lion-Camel Kingdom",
+    "name_zh": "狮驼国",
+    "text": "A kingdom eaten whole by the Great Peng five hundred years before the pilgrims came (ch. 74-77).",
+    "text_zh": "五百年前被大鹏金翅雕吃尽满城君臣百姓，成了妖城（第74–77回）。",
+    "from": 74,
+    "color": "#8a8a5a"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     78.3,
+     41.6
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "name": "Bhiksu",
+    "name_zh": "比丘国",
+    "text": "A deer spirit, the king's father-in-law, demanded 1,111 children's hearts (ch. 78-79).",
+    "text_zh": "国丈白鹿精要用一千一百一十一个小儿心肝做药引（第78–79回）。",
+    "from": 78,
+    "color": "#8a8a5a"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     76.2,
+     40.6
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "name": "The Law-Destroying Kingdom",
+    "name_zh": "灭法国",
+    "text": "Its king had killed 9,996 monks before Wukong shaved the whole court bald (ch. 84).",
+    "text_zh": "国王已杀九千九百九十六个和尚，被悟空一夜剃光满朝头发，改名钦法国（第84回）。",
+    "from": 84,
+    "color": "#8a8a5a"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     72.0,
+     34.6
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "name": "India",
+    "name_zh": "天竺国",
+    "text": "Its princess was replaced by the Jade Rabbit (ch. 93-95). Placed at Kanyakubja, Harsha's capital.",
+    "text_zh": "公主被月宫玉兔顶替（第93–95回）。比附为戒日王都城曲女城。",
+    "from": 93,
+    "color": "#c47a2c"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     79.9,
+     27.06
+    ]
+   }
+  }
+ ]
+}

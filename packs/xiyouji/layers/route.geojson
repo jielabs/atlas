@@ -1,1 +1,1229 @@
-{ "type": "FeatureCollection", "features": [] }
+{
+ "type": "FeatureCollection",
+ "features": [
+  {
+   "type": "Feature",
+   "properties": {
+    "name": "Chang'an → Famen Temple",
+    "name_zh": "长安 → 法门寺（今陕西扶风）",
+    "text": "Chapter 13. Arrival point: real.",
+    "text_zh": "第13回。到达地点：史有其地。",
+    "from": 13,
+    "color": "#2c7a68"
+   },
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      108.94,
+      34.21
+     ],
+     [
+      107.9,
+      34.44
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "name": "Famen Temple → Hezhou (Linxia)",
+    "name_zh": "法门寺（今陕西扶风） → 河州卫（今甘肃临夏）",
+    "text": "Chapter 13–14. Arrival point: real.",
+    "text_zh": "第13–14回。到达地点：史有其地。",
+    "from": 13,
+    "color": "#2c7a68"
+   },
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      107.9,
+      34.44
+     ],
+     [
+      103.2,
+      35.6
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "name": "Hezhou (Linxia) → Two Frontiers Mountain",
+    "name_zh": "河州卫（今甘肃临夏） → 两界山以西",
+    "text": "Chapter 14–15. Arrival point: invented.",
+    "text_zh": "第14–15回。到达地点：纯属虚构。",
+    "from": 14,
+    "color": "#8a8a5a"
+   },
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      103.2,
+      35.6
+     ],
+     [
+      102.5,
+      35.82
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "name": "Two Frontiers Mountain → Guanyin Temple",
+    "name_zh": "两界山以西 → 观音禅院",
+    "text": "Chapter 16–17. Arrival point: invented.",
+    "text_zh": "第16–17回。到达地点：纯属虚构。",
+    "from": 16,
+    "color": "#8a8a5a"
+   },
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      102.5,
+      35.82
+     ],
+     [
+      101.45,
+      36.2
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "name": "Guanyin Temple → Gao Village",
+    "name_zh": "观音禅院 → 高老庄（书称乌斯藏国界）",
+    "text": "Chapter 18. Arrival point: identified.",
+    "text_zh": "第18回。到达地点：旧说比附。",
+    "from": 18,
+    "color": "#c47a2c"
+   },
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      101.45,
+      36.2
+     ],
+     [
+      100.5,
+      36.6
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "name": "Gao Village → Pagoda Mountain",
+    "name_zh": "高老庄（书称乌斯藏国界） → 浮屠山",
+    "text": "Chapter 19. Arrival point: invented.",
+    "text_zh": "第19回。到达地点：纯属虚构。",
+    "from": 19,
+    "color": "#8a8a5a"
+   },
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      100.5,
+      36.6
+     ],
+     [
+      99.5,
+      37.2
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "name": "Pagoda Mountain → Fuling Mountain",
+    "name_zh": "浮屠山 → 福陵山云栈洞",
+    "text": "Chapter 19. Arrival point: invented.",
+    "text_zh": "第19回。到达地点：纯属虚构。",
+    "from": 19,
+    "color": "#8a8a5a"
+   },
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      99.5,
+      37.2
+     ],
+     [
+      100.3,
+      36.95
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "name": "Fuling Mountain → Yellow Wind Ridge",
+    "name_zh": "福陵山云栈洞 → 黄风岭黄风洞",
+    "text": "Chapter 20–21. Arrival point: invented.",
+    "text_zh": "第20–21回。到达地点：纯属虚构。",
+    "from": 20,
+    "color": "#8a8a5a"
+   },
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      100.3,
+      36.95
+     ],
+     [
+      98.5,
+      38.0
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "name": "Yellow Wind Ridge → River of Flowing Sands (Mokhayan Desert?)",
+    "name_zh": "黄风岭黄风洞 → 流沙河（八百里，莫贺延碛？）",
+    "text": "Chapter 22. Arrival point: identified.",
+    "text_zh": "第22回。到达地点：旧说比附。",
+    "from": 22,
+    "color": "#c47a2c"
+   },
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      98.5,
+      38.0
+     ],
+     [
+      95.6,
+      40.1
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "name": "River of Flowing Sands (Mokhayan Desert?) → A farmstead in the wilds",
+    "name_zh": "流沙河（八百里，莫贺延碛？） → 荒野庄院",
+    "text": "Chapter 23. Arrival point: invented.",
+    "text_zh": "第23回。到达地点：纯属虚构。",
+    "from": 23,
+    "color": "#8a8a5a"
+   },
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      95.6,
+      40.1
+     ],
+     [
+      94.9,
+      40.45
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "name": "A farmstead in the wilds → Wuzhuang Temple, Longevity Mountain",
+    "name_zh": "荒野庄院 → 万寿山五庄观",
+    "text": "Chapter 24–26. Arrival point: invented.",
+    "text_zh": "第24–26回。到达地点：纯属虚构。",
+    "from": 24,
+    "color": "#8a8a5a"
+   },
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      94.9,
+      40.45
+     ],
+     [
+      94.0,
+      41.0
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "name": "Wuzhuang Temple, Longevity Mountain → White Tiger Ridge",
+    "name_zh": "万寿山五庄观 → 白虎岭",
+    "text": "Chapter 27. Arrival point: invented.",
+    "text_zh": "第27回。到达地点：纯属虚构。",
+    "from": 27,
+    "color": "#8a8a5a"
+   },
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      94.0,
+      41.0
+     ],
+     [
+      92.8,
+      41.6
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "name": "White Tiger Ridge → Moon Waves Cave, Bowl Mountain",
+    "name_zh": "白虎岭 → 碗子山波月洞（黑松林）",
+    "text": "Chapter 28. Arrival point: invented.",
+    "text_zh": "第28回。到达地点：纯属虚构。",
+    "from": 28,
+    "color": "#8a8a5a"
+   },
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      92.8,
+      41.6
+     ],
+     [
+      91.8,
+      42.2
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "name": "Moon Waves Cave, Bowl Mountain → Kingdom of Baoxiang",
+    "name_zh": "碗子山波月洞（黑松林） → 宝象国",
+    "text": "Chapter 29–31. Arrival point: invented.",
+    "text_zh": "第29–31回。到达地点：纯属虚构。",
+    "from": 29,
+    "color": "#8a8a5a"
+   },
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      91.8,
+      42.2
+     ],
+     [
+      91.3,
+      42.6
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "name": "Kingdom of Baoxiang → Lotus Flower Cave, Flat-Top Mountain",
+    "name_zh": "宝象国 → 平顶山莲花洞",
+    "text": "Chapter 32–35. Arrival point: invented.",
+    "text_zh": "第32–35回。到达地点：纯属虚构。",
+    "from": 32,
+    "color": "#8a8a5a"
+   },
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      91.3,
+      42.6
+     ],
+     [
+      90.8,
+      41.6
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "name": "Lotus Flower Cave, Flat-Top Mountain → Baolin Temple",
+    "name_zh": "平顶山莲花洞 → 宝林寺",
+    "text": "Chapter 36–39. Arrival point: invented.",
+    "text_zh": "第36–39回。到达地点：纯属虚构。",
+    "from": 36,
+    "color": "#8a8a5a"
+   },
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      90.8,
+      41.6
+     ],
+     [
+      89.9,
+      41.3
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "name": "Baolin Temple → Fire Cloud Cave, Mount Hao",
+    "name_zh": "宝林寺 → 号山枯松涧火云洞",
+    "text": "Chapter 40–42. Arrival point: invented.",
+    "text_zh": "第40–42回。到达地点：纯属虚构。",
+    "from": 40,
+    "color": "#8a8a5a"
+   },
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      89.9,
+      41.3
+     ],
+     [
+      88.8,
+      41.0
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "name": "Fire Cloud Cave, Mount Hao → Black River",
+    "name_zh": "号山枯松涧火云洞 → 衡阳峪黑水河",
+    "text": "Chapter 43. Arrival point: invented.",
+    "text_zh": "第43回。到达地点：纯属虚构。",
+    "from": 43,
+    "color": "#8a8a5a"
+   },
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      88.8,
+      41.0
+     ],
+     [
+      88.0,
+      41.5
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "name": "Black River → Kingdom of Cheqi (Karashahr?)",
+    "name_zh": "衡阳峪黑水河 → 车迟国（焉耆一带？）",
+    "text": "Chapter 44–46. Arrival point: identified.",
+    "text_zh": "第44–46回。到达地点：旧说比附。",
+    "from": 44,
+    "color": "#c47a2c"
+   },
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      88.0,
+      41.5
+     ],
+     [
+      86.57,
+      42.06
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "name": "Kingdom of Cheqi (Karashahr?) → Chen Village, Heaven-Reaching River (Tongtian River?)",
+    "name_zh": "车迟国（焉耆一带？） → 通天河陈家庄（青海玉树一带？）",
+    "text": "Chapter 47–49. Arrival point: identified.",
+    "text_zh": "第47–49回。到达地点：旧说比附。",
+    "from": 47,
+    "color": "#c47a2c"
+   },
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      86.57,
+      42.06
+     ],
+     [
+      96.6,
+      33.4
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "name": "Chen Village, Heaven-Reaching River (Tongtian River?) → Golden Helmet Cave, Golden Helmet Mountain",
+    "name_zh": "通天河陈家庄（青海玉树一带？） → 金兜山金兜洞",
+    "text": "Chapter 50–52. Arrival point: invented.",
+    "text_zh": "第50–52回。到达地点：纯属虚构。",
+    "from": 50,
+    "color": "#8a8a5a"
+   },
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      96.6,
+      33.4
+     ],
+     [
+      95.4,
+      34.6
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "name": "Golden Helmet Cave, Golden Helmet Mountain → Child and Mother River, Western Liang",
+    "name_zh": "金兜山金兜洞 → 西梁女国子母河",
+    "text": "Chapter 53–55. Arrival point: identified.",
+    "text_zh": "第53–55回。到达地点：旧说比附。",
+    "from": 53,
+    "color": "#c47a2c"
+   },
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      95.4,
+      34.6
+     ],
+     [
+      80.8,
+      31.8
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "name": "Child and Mother River, Western Liang → Mountain road",
+    "name_zh": "西梁女国子母河 → 山路",
+    "text": "Chapter 56. Arrival point: invented.",
+    "text_zh": "第56回。到达地点：纯属虚构。",
+    "from": 56,
+    "color": "#8a8a5a"
+   },
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      80.8,
+      31.8
+     ],
+     [
+      82.0,
+      33.0
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "name": "Mountain road → Flaming Mountain (Turfan)",
+    "name_zh": "山路 → 火焰山（吐鲁番）",
+    "text": "Chapter 59. Arrival point: identified.",
+    "text_zh": "第59回。到达地点：旧说比附。",
+    "from": 59,
+    "color": "#c47a2c"
+   },
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      82.0,
+      33.0
+     ],
+     [
+      89.2,
+      42.9
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "name": "Flaming Mountain (Turfan) → Cloud-Touching Cave, Accumulated Thunder Mountain",
+    "name_zh": "火焰山（吐鲁番） → 积雷山摩云洞",
+    "text": "Chapter 60. Arrival point: invented.",
+    "text_zh": "第60回。到达地点：纯属虚构。",
+    "from": 60,
+    "color": "#8a8a5a"
+   },
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      89.2,
+      42.9
+     ],
+     [
+      88.7,
+      43.35
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "name": "Cloud-Touching Cave, Accumulated Thunder Mountain → Flaming Mountain",
+    "name_zh": "积雷山摩云洞 → 火焰山",
+    "text": "Chapter 61. Arrival point: identified.",
+    "text_zh": "第61回。到达地点：旧说比附。",
+    "from": 61,
+    "color": "#c47a2c"
+   },
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      88.7,
+      43.35
+     ],
+     [
+      89.35,
+      42.8
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "name": "Flaming Mountain → Kingdom of Jisai",
+    "name_zh": "火焰山 → 祭赛国金光寺",
+    "text": "Chapter 62–63. Arrival point: invented.",
+    "text_zh": "第62–63回。到达地点：纯属虚构。",
+    "from": 62,
+    "color": "#8a8a5a"
+   },
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      89.35,
+      42.8
+     ],
+     [
+      87.6,
+      42.5
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "name": "Kingdom of Jisai → Thorn Ridge, Hall of the Tree Immortals",
+    "name_zh": "祭赛国金光寺 → 荆棘岭木仙庵",
+    "text": "Chapter 64. Arrival point: invented.",
+    "text_zh": "第64回。到达地点：纯属虚构。",
+    "from": 64,
+    "color": "#8a8a5a"
+   },
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      87.6,
+      42.5
+     ],
+     [
+      86.5,
+      41.95
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "name": "Thorn Ridge, Hall of the Tree Immortals → Lesser Thunderclap Monastery",
+    "name_zh": "荆棘岭木仙庵 → 小西天小雷音寺",
+    "text": "Chapter 65–66. Arrival point: invented.",
+    "text_zh": "第65–66回。到达地点：纯属虚构。",
+    "from": 65,
+    "color": "#8a8a5a"
+   },
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      86.5,
+      41.95
+     ],
+     [
+      85.5,
+      41.7
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "name": "Lesser Thunderclap Monastery → Tuoluo Village, Rotten Persimmon Lane",
+    "name_zh": "小西天小雷音寺 → 驼罗庄稀柿衕",
+    "text": "Chapter 67. Arrival point: invented.",
+    "text_zh": "第67回。到达地点：纯属虚构。",
+    "from": 67,
+    "color": "#8a8a5a"
+   },
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      85.5,
+      41.7
+     ],
+     [
+      84.5,
+      41.6
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "name": "Tuoluo Village, Rotten Persimmon Lane → Kingdom of Zhuzi",
+    "name_zh": "驼罗庄稀柿衕 → 朱紫国",
+    "text": "Chapter 68–71. Arrival point: invented.",
+    "text_zh": "第68–71回。到达地点：纯属虚构。",
+    "from": 68,
+    "color": "#8a8a5a"
+   },
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      84.5,
+      41.6
+     ],
+     [
+      83.5,
+      41.4
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "name": "Kingdom of Zhuzi → Silk Cave",
+    "name_zh": "朱紫国 → 盘丝岭盘丝洞",
+    "text": "Chapter 72. Arrival point: invented.",
+    "text_zh": "第72回。到达地点：纯属虚构。",
+    "from": 72,
+    "color": "#8a8a5a"
+   },
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      83.5,
+      41.4
+     ],
+     [
+      82.0,
+      41.55
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "name": "Silk Cave → Yellow Flower Temple",
+    "name_zh": "盘丝岭盘丝洞 → 黄花观",
+    "text": "Chapter 73. Arrival point: invented.",
+    "text_zh": "第73回。到达地点：纯属虚构。",
+    "from": 73,
+    "color": "#8a8a5a"
+   },
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      82.0,
+      41.55
+     ],
+     [
+      81.0,
+      41.6
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "name": "Yellow Flower Temple → Lion-Camel Ridge",
+    "name_zh": "黄花观 → 八百里狮驼岭",
+    "text": "Chapter 74–76. Arrival point: invented.",
+    "text_zh": "第74–76回。到达地点：纯属虚构。",
+    "from": 74,
+    "color": "#8a8a5a"
+   },
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      81.0,
+      41.6
+     ],
+     [
+      78.85,
+      41.9
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "name": "Lion-Camel Ridge → Lion-Camel City",
+    "name_zh": "八百里狮驼岭 → 狮驼城",
+    "text": "Chapter 77. Arrival point: invented.",
+    "text_zh": "第77回。到达地点：纯属虚构。",
+    "from": 77,
+    "color": "#8a8a5a"
+   },
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      78.85,
+      41.9
+     ],
+     [
+      78.3,
+      41.6
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "name": "Lion-Camel City → Kingdom of Bhiksu",
+    "name_zh": "狮驼城 → 比丘国（小儿城）",
+    "text": "Chapter 78–79. Arrival point: invented.",
+    "text_zh": "第78–79回。到达地点：纯属虚构。",
+    "from": 78,
+    "color": "#8a8a5a"
+   },
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      78.3,
+      41.6
+     ],
+     [
+      76.2,
+      40.6
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "name": "Kingdom of Bhiksu → Black Pine Forest",
+    "name_zh": "比丘国（小儿城） → 黑松林",
+    "text": "Chapter 80–81. Arrival point: invented.",
+    "text_zh": "第80–81回。到达地点：纯属虚构。",
+    "from": 80,
+    "color": "#8a8a5a"
+   },
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      76.2,
+      40.6
+     ],
+     [
+      75.0,
+      39.6
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "name": "Black Pine Forest → Bottomless Cave, Pitfall Mountain",
+    "name_zh": "黑松林 → 陷空山无底洞",
+    "text": "Chapter 82–83. Arrival point: invented.",
+    "text_zh": "第82–83回。到达地点：纯属虚构。",
+    "from": 82,
+    "color": "#8a8a5a"
+   },
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      75.0,
+      39.6
+     ],
+     [
+      74.0,
+      38.4
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "name": "Bottomless Cave, Pitfall Mountain → Law-Destroying Kingdom",
+    "name_zh": "陷空山无底洞 → 灭法国（犍陀罗一带？）",
+    "text": "Chapter 84. Arrival point: invented.",
+    "text_zh": "第84回。到达地点：纯属虚构。",
+    "from": 84,
+    "color": "#8a8a5a"
+   },
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      74.0,
+      38.4
+     ],
+     [
+      72.0,
+      34.6
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "name": "Law-Destroying Kingdom → Hidden Mist Mountain",
+    "name_zh": "灭法国（犍陀罗一带？） → 隐雾山折岳连环洞",
+    "text": "Chapter 85–86. Arrival point: invented.",
+    "text_zh": "第85–86回。到达地点：纯属虚构。",
+    "from": 85,
+    "color": "#8a8a5a"
+   },
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      72.0,
+      34.6
+     ],
+     [
+      73.2,
+      33.6
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "name": "Hidden Mist Mountain → Fengxian Prefecture",
+    "name_zh": "隐雾山折岳连环洞 → 天竺外郡凤仙郡",
+    "text": "Chapter 87. Arrival point: invented.",
+    "text_zh": "第87回。到达地点：纯属虚构。",
+    "from": 87,
+    "color": "#8a8a5a"
+   },
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      73.2,
+      33.6
+     ],
+     [
+      75.5,
+      31.0
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "name": "Fengxian Prefecture → Yuhua Prefecture",
+    "name_zh": "天竺外郡凤仙郡 → 天竺下郡玉华州",
+    "text": "Chapter 88–89. Arrival point: invented.",
+    "text_zh": "第88–89回。到达地点：纯属虚构。",
+    "from": 88,
+    "color": "#8a8a5a"
+   },
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      75.5,
+      31.0
+     ],
+     [
+      77.0,
+      29.5
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "name": "Yuhua Prefecture → Bamboo Knot Mountain",
+    "name_zh": "天竺下郡玉华州 → 竹节山九曲盘桓洞",
+    "text": "Chapter 90. Arrival point: invented.",
+    "text_zh": "第90回。到达地点：纯属虚构。",
+    "from": 90,
+    "color": "#8a8a5a"
+   },
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      77.0,
+      29.5
+     ],
+     [
+      77.4,
+      30.0
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "name": "Bamboo Knot Mountain → Jinping Prefecture",
+    "name_zh": "竹节山九曲盘桓洞 → 天竺外郡金平府",
+    "text": "Chapter 91–92. Arrival point: invented.",
+    "text_zh": "第91–92回。到达地点：纯属虚构。",
+    "from": 91,
+    "color": "#8a8a5a"
+   },
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      77.4,
+      30.0
+     ],
+     [
+      78.5,
+      28.5
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "name": "Jinping Prefecture → Jetavana, Shravasti",
+    "name_zh": "天竺外郡金平府 → 给孤布金寺（舍卫城祇园）",
+    "text": "Chapter 93. Arrival point: real.",
+    "text_zh": "第93回。到达地点：史有其地。",
+    "from": 93,
+    "color": "#2c7a68"
+   },
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      78.5,
+      28.5
+     ],
+     [
+      82.05,
+      27.51
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "name": "Jetavana, Shravasti → Capital of India (Kanyakubja?)",
+    "name_zh": "给孤布金寺（舍卫城祇园） → 天竺国都（曲女城？）",
+    "text": "Chapter 93–95. Arrival point: identified.",
+    "text_zh": "第93–95回。到达地点：旧说比附。",
+    "from": 93,
+    "color": "#c47a2c"
+   },
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      82.05,
+      27.51
+     ],
+     [
+      79.9,
+      27.06
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "name": "Capital of India (Kanyakubja?) → Dingling county, Tongtai prefecture",
+    "name_zh": "天竺国都（曲女城？） → 铜台府地灵县",
+    "text": "Chapter 96. Arrival point: invented.",
+    "text_zh": "第96回。到达地点：纯属虚构。",
+    "from": 96,
+    "color": "#8a8a5a"
+   },
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      79.9,
+      27.06
+     ],
+     [
+      83.0,
+      26.5
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "name": "Dingling county, Tongtai prefecture → Cloud-Touching Ford",
+    "name_zh": "铜台府地灵县 → 凌云渡（灵山脚下）",
+    "text": "Chapter 98. Arrival point: projected.",
+    "text_zh": "第98回。到达地点：神话投影。",
+    "from": 98,
+    "color": "#7a5195"
+   },
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      83.0,
+      26.5
+     ],
+     [
+      85.1,
+      24.7
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "name": "Cloud-Touching Ford → Heaven-Reaching River (Tongtian River?)",
+    "name_zh": "凌云渡（灵山脚下） → 通天河（青海玉树一带？）",
+    "text": "Chapter 99. Arrival point: identified.",
+    "text_zh": "第99回。到达地点：旧说比附。",
+    "from": 99,
+    "color": "#c47a2c"
+   },
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      85.1,
+      24.7
+     ],
+     [
+      96.6,
+      33.4
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "name": "Heaven-Reaching River (Tongtian River?) → Chang'an",
+    "name_zh": "通天河（青海玉树一带？） → 长安",
+    "text": "Chapter 100. Arrival point: real.",
+    "text_zh": "第100回。到达地点：史有其地。",
+    "from": 100,
+    "color": "#2c7a68"
+   },
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      96.6,
+      33.4
+     ],
+     [
+      108.96,
+      34.22
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "name": "Chang'an → Spirit Mountain",
+    "name_zh": "长安 → 灵山（神话投影于灵鹫山）",
+    "text": "Chapter 100. Arrival point: projected.",
+    "text_zh": "第100回。到达地点：神话投影。",
+    "from": 100,
+    "color": "#7a5195"
+   },
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      108.96,
+      34.22
+     ],
+     [
+      85.42,
+      24.96
+     ]
+    ]
+   }
+  }
+ ]
+}
