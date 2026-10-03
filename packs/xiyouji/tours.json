@@ -299,5 +299,263 @@
     "text_zh": "第一百回。径回东土长安。玄奘645年带回六百五十七部经，此后十九年专心译经。"
    }
   ]
+ },
+ {
+  "id": "three-strikes",
+  "era": "demons",
+  "start": 27,
+  "end": 27,
+  "path": false,
+  "title": "Three strikes at the White Bone Demon",
+  "title_zh": "三打白骨精",
+  "summary": "One hillside, three disguises, one dismissal. A test of whether the atlas can tell a story at the scale of a single valley.",
+  "summary_zh": "一道山岭，三番变化，一纸贬书。也是测试这个地图能不能在一条山谷的尺度上讲故事。",
+  "steps": [
+   {
+    "year": 27,
+    "at": [
+     92.9,
+     41.68
+    ],
+    "zoom": 7.5,
+    "event": "ch27-white-bone-demon",
+    "text": "Chapter 27. On White Tiger Ridge Tripitaka is hungry, and Wukong somersaults off to pick peaches on a southern hill. A skeleton spirit has been watching for the chance.",
+    "text_zh": "第二十七回。白虎岭上唐僧腹饥，悟空驾筋斗云去南山摘桃。白骨精早在暗中窥伺。"
+   },
+   {
+    "year": 27,
+    "at": [
+     92.82,
+     41.63
+    ],
+    "zoom": 8.5,
+    "event": "ch27-white-bone-demon",
+    "text": "First, a village girl with a jar of rice for the monks. Wukong comes back, sees through her and strikes; she escapes in spirit and leaves a body behind, and the rice turns out to be maggots.",
+    "text_zh": "第一番，变作送斋饭的村姑。悟空回来识破，一棒打去，妖精元神脱身，留下假尸，罐里的饭原来是长蛆。"
+   },
+   {
+    "year": 27,
+    "at": [
+     92.78,
+     41.6
+    ],
+    "zoom": 8.5,
+    "event": "ch27-white-bone-demon",
+    "text": "Second, the girl's old mother, weeping for her daughter. Strike two. Bajie tells the master his disciple is killing innocent people, and Tripitaka recites the tightening spell twenty times.",
+    "text_zh": "第二番，变作寻女的老妇人，悟空又是一棒。八戒挑唆说师兄滥杀无辜，唐僧把紧箍咒念了二十遍。"
+   },
+   {
+    "year": 27,
+    "at": [
+     92.75,
+     41.56
+    ],
+    "zoom": 8.5,
+    "event": "ch27-white-bone-demon",
+    "text": "Third, the old father, praying. This time Wukong calls the local gods to watch before he strikes, and the demon is dead for good: a pile of bones, with 'White Bone Lady' written on the spine.",
+    "text_zh": "第三番，变作念佛的老公公。这次悟空先唤来山神土地作证，一棒打死，化作一堆粉骷髅，脊梁上刻着“白骨夫人”四字。"
+   },
+   {
+    "year": 27,
+    "at": [
+     92.7,
+     41.5
+    ],
+    "zoom": 8,
+    "event": "ch27-expels-wukong",
+    "text": "Bajie says the writing is a trick. Tripitaka writes Wukong a letter of dismissal, and Wukong bows to him from every side before he goes home.",
+    "text_zh": "八戒说那字是障眼法。唐僧写下贬书，悟空拔毫毛变作分身，四面围住师父拜别，含泪回花果山。"
+   }
+  ]
+ },
+ {
+  "id": "flaming-mountain",
+  "era": "flames",
+  "start": 59,
+  "end": 61,
+  "path": true,
+  "title": "Three times for the palm-leaf fan",
+  "title_zh": "三调芭蕉扇",
+  "summary": "The Flaming Mountain is real: a red sandstone ridge at Turfan, the hottest place in China, on the site of the kingdom of Gaochang.",
+  "summary_zh": "火焰山实有其地：吐鲁番盆地北缘的红砂岩山，全国最热的地方，就在古高昌国境内。",
+  "steps": [
+   {
+    "year": 59,
+    "at": [
+     89.2,
+     42.9
+    ],
+    "zoom": 6.5,
+    "event": "ch59-flaming-mountain",
+    "text": "Chapter 59. Autumn, and it grows hotter as they go west. Eight hundred li of fire across the road.",
+    "text_zh": "第五十九回。时值深秋，越往西越热，八百里火焰挡住去路。"
+   },
+   {
+    "year": 59,
+    "at": [
+     89.0,
+     43.15
+    ],
+    "zoom": 7,
+    "event": "ch59-first-fan",
+    "text": "Princess Iron Fan, Red Boy's mother, will not lend her fan. One wave blows Wukong fifty thousand li.",
+    "text_zh": "红孩儿之母铁扇公主不肯借扇，一扇将悟空扇出五万余里。"
+   },
+   {
+    "year": 59,
+    "at": [
+     98.62,
+     38.22
+    ],
+    "zoom": 5,
+    "event": "ch21-lingji-bodhisattva",
+    "text": "He lands at Little Sumeru Mountain, where Bodhisattva Lingji once calmed the Yellow Wind for him (chapter 21), and is given a pill that fixes him against any wind.",
+    "text_zh": "他落在小须弥山，正是第二十一回灵吉菩萨定风魔的地方，菩萨送他一粒定风丹。"
+   },
+   {
+    "year": 59,
+    "at": [
+     89.0,
+     43.15
+    ],
+    "zoom": 7,
+    "event": "ch59-first-fan",
+    "text": "Back again, he gets into her belly as an insect in her tea and forces a fan out of her. It is a false one, and the fire only grows.",
+    "text_zh": "再到芭蕉洞，变作小虫随茶钻进她肚里，逼出一把扇子，却是假的，越扇火越旺。"
+   },
+   {
+    "year": 60,
+    "at": [
+     88.7,
+     43.35
+    ],
+    "zoom": 7,
+    "event": "ch60-second-fan",
+    "text": "Chapter 60. Disguised as the Bull Demon King he talks the real fan out of the princess, and the Bull, disguised as Bajie, talks it back.",
+    "text_zh": "第六十回。悟空变作牛魔王骗得真扇，牛魔王又变作八戒把扇子骗了回去。"
+   },
+   {
+    "year": 61,
+    "at": [
+     89.35,
+     42.8
+    ],
+    "zoom": 6.8,
+    "event": "ch61-third-fan",
+    "text": "Chapter 61. With heaven's army and Nezha the Bull is brought down as a great white bull. Forty-nine waves of the fan, and the fire is out for good.",
+    "text_zh": "第六十一回。天兵与哪吒围住牛魔王，现出大白牛原形就擒。悟空连扇四十九扇，火焰永息。"
+   },
+   {
+    "year": 61,
+    "at": [
+     89.53,
+     42.85
+    ],
+    "zoom": 8,
+    "event": "ch59-flaming-mountain",
+    "text": "A few kilometres from the mountain are the ruins of Gaochang, where in 630 the king Qu Wentai tried to keep Xuanzang for life. The monk refused food until the king gave way and sent him on with letters, silver and men.",
+    "text_zh": "火焰山下数公里就是高昌故城。630年，高昌王麴文泰想把玄奘终身留下，玄奘绝食明志，国王才放行，并赠以书信、银钱和人马。"
+   }
+  ]
+ },
+ {
+  "id": "xuanzang-real",
+  "era": "disciples",
+  "start": 12,
+  "end": 100,
+  "path": true,
+  "title": "The real journey, against the novel",
+  "title_zh": "玄奘真实西行（对照）",
+  "summary": "The atlas's own eight-step tour of Xuanzang's historical journey, text unchanged. Each step sits at the chapter where the novel reaches the same place and opens that chapter's episode. The timeline steps back at Kanyakubja, because the novel puts the Indian capital before Spirit Mountain and history puts it after Nalanda.",
+  "summary_zh": "atlas 自带的八步玄奘西行导览，文字原样照录。每一步放在小说走到同一地点的那一回，并打开该回的故事。曲女城一步时间轴会往回退：小说把天竺国都放在灵山之前，历史上玄奘却是在那烂陀之后才到曲女城。",
+  "steps": [
+   {
+    "year": 12,
+    "at": [
+     108.96,
+     34.22
+    ],
+    "zoom": 4.4,
+    "text": "629 (some say 627): Xuanzang, troubled by contradictions between Buddhist texts, sets out for India. The border is closed, so he leaves without permission.",
+    "text_zh": "629年（一说627年），玄奘因佛经译本互相矛盾，决心西行求取原典。当时边关禁止出境，他只能私自出发。",
+    "event": "ch12-sent-west"
+   },
+   {
+    "year": 22,
+    "at": [
+     95.8,
+     40.3
+    ],
+    "zoom": 4.6,
+    "text": "He slips past the Yumen beacon towers at night and crosses the Mokhayan desert alone, nearly dying of thirst.",
+    "text_zh": "他夜过玉门关外的烽燧，独自穿越八百里莫贺延碛，几乎渴死在沙漠中。",
+    "event": "ch22-flowing-sands"
+   },
+   {
+    "year": 59,
+    "at": [
+     89.5,
+     42.9
+    ],
+    "zoom": 4.8,
+    "text": "At Gaochang (Turfan) King Qu Wentai welcomes him and tries to keep him. Xuanzang goes on hunger strike until the king lets him go, with letters and supplies.",
+    "text_zh": "到达高昌，国王麴文泰盛情挽留，玄奘绝食明志。国王终于放行，并赠送路费、人马和给沿途各国的书信。",
+    "event": "ch59-flaming-mountain"
+   },
+   {
+    "year": 74,
+    "at": [
+     75.4,
+     42.8
+    ],
+    "zoom": 4.6,
+    "text": "Over the Tian Shan he meets the Khagan of the Western Turks near Suyab, whose protection opens the road through Central Asia.",
+    "text_zh": "翻越天山，在素叶城一带见到西突厥可汗，得到可汗的保护和文书，得以穿越中亚诸国。",
+    "event": "ch74-lion-camel-warning"
+   },
+   {
+    "year": 98,
+    "at": [
+     85.44,
+     25.13
+    ],
+    "zoom": 4.6,
+    "text": "Via Samarkand and the Hindu Kush he reaches India and studies for about five years at Nalanda under the abbot Silabhadra.",
+    "text_zh": "经撒马尔罕，越兴都库什山进入印度，在那烂陀寺师从戒贤法师学习约五年。",
+    "event": "ch98-spirit-mountain"
+   },
+   {
+    "year": 93,
+    "at": [
+     79.9,
+     27.06
+    ],
+    "zoom": 4.6,
+    "text": "642: King Harsha holds a great assembly at Kanyakubja; Xuanzang defends his teaching for eighteen days and no one refutes him.",
+    "text_zh": "642年，戒日王在曲女城召开大会，玄奘为论主，十八天无人能驳倒他，声名远播。",
+    "event": "ch93-embroidered-ball"
+   },
+   {
+    "year": 99,
+    "at": [
+     79.9,
+     37.1
+    ],
+    "zoom": 4.4,
+    "text": "Turning down offers to stay, he crosses the Pamirs and waits at Khotan for the emperor's pardon for leaving illegally.",
+    "text_zh": "他谢绝挽留，翻越葱岭东归，在于阗上表请罪，等待唐太宗的回复。"
+   },
+   {
+    "year": 100,
+    "at": [
+     108.96,
+     34.22
+    ],
+    "zoom": 4.4,
+    "text": "645: Chang'an turns out to greet him. He spends the rest of his life translating, and dictates the Record of the Western Regions.",
+    "text_zh": "645年回到长安，万人空巷。此后他专心译经，并口述《大唐西域记》。",
+    "event": "ch100-return-to-changan"
+   }
+  ]
  }
 ]
