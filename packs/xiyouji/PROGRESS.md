@@ -98,7 +98,7 @@ Target: about 180 events total.
 - [x] **8. events: sutras (ch 93–100)** — 天竺国玉兔, 铜台府, 凌云渡脱胎, 灵山传经, 无字真经, 通天河老鼋沉经, 五圣成真. ~14 events
 - [x] **9. layers: route.geojson + kingdoms.geojson** — the road west as ~10 segments with `from`/`to` chapters so it grows; the ten kingdoms as points with cards.
 - [x] **10. layers: realms.geojson + continents.geojson** — 天宫·地府·龙宫·灵山 as four `projected` points; 四大部洲 as four deliberately vague polygons, clipped to the pack's box.
-- [ ] **11. tours: `monkey-rise` + `road-west`** — the rise and fall of Monkey (花果山 → 方寸山 → 龙宫 → 地府 → 天宫 → 五行山); the whole pilgrimage in 16 steps. `road-west` is the headline tour.
+- [x] **11. tours: `monkey-rise` + `road-west`** — the rise and fall of Monkey (花果山 → 方寸山 → 龙宫 → 地府 → 天宫 → 五行山); the whole pilgrimage in 16 steps. `road-west` is the headline tour.
 - [ ] **12. tours: `three-strikes` + `flaming-mountain` + `xuanzang-real`** — `xuanzang-real` copies the eight steps of the atlas's own `xuanzang` tour from `data/tours.json` verbatim (text included), with `year` remapped to the chapter each step corresponds to, so the real journey and the novel can be played side by side.
 - [ ] **13. finish** — run the validator; write `packs/xiyouji/README.md` (what it is, the open URL, what the four footings mean, one screenshot-less paragraph on known limits); reconcile DESIGN.md with what was actually built, including the two corrections noted below; final commit.
 
@@ -126,3 +126,4 @@ Target: about 180 events total.
 - coverage pass: chapters 39 and 69 filled, 史实 notes raised from 24 to 33 of 134 (25%) (events total 134)
 - chunk 9, route and kingdoms layers: tools/xiyouji/build_layers.py derives the road from events.json: 52 stations and 51 legs, each appearing at its arrival chapter and coloured by the footing of where it arrives. The long jumps are the identified places themselves (Tongtian River, the Women's Country, Turfan), which is the point. Kingdoms: the ten the pilgrims pass plus the Tang, each appearing on arrival. (events total 134)
 - chunk 10, realms and continents layers: The three realms (heaven on the Kunlun, the underworld on Mount Tai, the dragon court in the East China Sea, Spirit Mountain on Vulture Peak) as projected points, and the four continents as soft ellipses with the Buddha's verdict on each from chapter 8. Both built by build_layers.py. (events total 134)
+- chunk 11, tours monkey-rise and road-west: monkey-rise: nine steps from Flower-Fruit Mountain through the dragon court, the underworld and heaven to Five Elements Mountain. road-west: the headline tour, sixteen stops from Chang'an to Spirit Mountain and back, calling out where identified places make the road jump. (events total 134)

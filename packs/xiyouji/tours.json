@@ -1,1 +1,303 @@
-[]
+[
+ {
+  "id": "monkey-rise",
+  "era": "monkey",
+  "start": 1,
+  "end": 7,
+  "path": true,
+  "title": "The rise and fall of the Monkey King",
+  "title_zh": "美猴王的起落",
+  "summary": "From a stone on Flower-Fruit Mountain to five hundred years under Five Elements Mountain, by way of the dragon court, the underworld and heaven.",
+  "summary_zh": "从花果山一块仙石，经龙宫、地府、天宫，到五行山下压了五百年。",
+  "steps": [
+   {
+    "year": 1,
+    "at": [
+     119.4,
+     34.5
+    ],
+    "zoom": 5.2,
+    "event": "ch01-stone-monkey",
+    "text": "Chapter 1. A stone on Flower-Fruit Mountain splits and a monkey steps out. The mountain is traditionally placed at Yuntai Shan, Lianyungang, near where the author is usually said to have lived.",
+    "text_zh": "第一回。花果山仙石迸裂，石猴出世。旧说花果山在连云港云台山，离通常所说的作者故乡淮安不远。"
+   },
+   {
+    "year": 1,
+    "at": [
+     73.0,
+     34.0
+    ],
+    "zoom": 4.2,
+    "event": "ch01-patriarch-subodhi",
+    "text": "He crosses two seas to find a teacher on Lingtai Fangcun Mountain, whose name is a riddle for 'the heart'. The novel puts it in the western continent; the map puts it northwest of India.",
+    "text_zh": "他漂洋过海，在灵台方寸山拜师，山名是“心”字的隐语。书中说在西牛贺洲，本图把它放在印度西北。"
+   },
+   {
+    "year": 3,
+    "at": [
+     122.5,
+     31.0
+    ],
+    "zoom": 5,
+    "event": "ch03-ruyi-staff",
+    "text": "Chapter 3. He takes the gold-banded staff from the Dragon King of the Eastern Sea.",
+    "text_zh": "第三回。东海龙宫夺得如意金箍棒。"
+   },
+   {
+    "year": 3,
+    "at": [
+     117.1,
+     36.25
+    ],
+    "zoom": 5.5,
+    "event": "ch03-book-of-life",
+    "text": "He strikes his name from the Book of Life and Death. The underworld is drawn on Mount Tai, which Chinese belief made the governor of the dead.",
+    "text_zh": "地府勾销生死簿。地府画在泰山：旧俗以泰山主治鬼魂。"
+   },
+   {
+    "year": 4,
+    "at": [
+     80.0,
+     36.0
+    ],
+    "zoom": 4.6,
+    "event": "ch04-keeper-of-horses",
+    "text": "Chapter 4. Heaven tries to buy him off with a post in the stables. Heaven is drawn on the Kunlun, the pillar of heaven.",
+    "text_zh": "第四回。天庭招安，封他弼马温。天宫画在昆仑山，昆仑是天柱。"
+   },
+   {
+    "year": 5,
+    "at": [
+     79.94,
+     35.95
+    ],
+    "zoom": 4.8,
+    "event": "ch05-peach-banquet",
+    "text": "Chapter 5. Left out of the Peach Banquet, he eats the peaches, the wine and Laozi's elixir.",
+    "text_zh": "第五回。蟠桃会不请他，他偷吃蟠桃、御酒和老君金丹。"
+   },
+   {
+    "year": 6,
+    "at": [
+     119.36,
+     34.58
+    ],
+    "zoom": 5.4,
+    "event": "ch06-erlang-shen",
+    "text": "Chapter 6. Erlang Shen catches him at home on Flower-Fruit Mountain after a contest of transformations.",
+    "text_zh": "第六回。二郎神与他斗变化，在花果山将他擒住。"
+   },
+   {
+    "year": 7,
+    "at": [
+     80.1,
+     35.92
+    ],
+    "zoom": 4.8,
+    "event": "ch07-eight-trigrams-furnace",
+    "text": "Chapter 7. Forty-nine days in Laozi's furnace leave him with fire-golden eyes.",
+    "text_zh": "第七回。八卦炉中炼了四十九日，反炼出一双火眼金睛。"
+   },
+   {
+    "year": 7,
+    "at": [
+     102.8,
+     35.8
+    ],
+    "zoom": 5.2,
+    "event": "ch07-buddha-palm",
+    "text": "He cannot leap out of the Buddha's palm, and the palm becomes Five Elements Mountain. Later chapters put it on the Tang frontier, west of Hezhou, where Tripitaka will find him.",
+    "text_zh": "翻不出如来掌心，被压在五行山下。后文说此山在大唐边界河州卫以西，唐僧将在这里找到他。"
+   }
+  ]
+ },
+ {
+  "id": "road-west",
+  "era": "disciples",
+  "start": 12,
+  "end": 100,
+  "path": true,
+  "title": "The road west",
+  "title_zh": "西天取经路",
+  "summary": "The whole pilgrimage in sixteen stops, from Chang'an to Spirit Mountain and back. Watch where the novel's places can be pinned to a map and where they jump.",
+  "summary_zh": "十六站走完取经全程，从长安到灵山再回长安。留意小说的地名哪些能落到地图上，哪些会突然跳开。",
+  "steps": [
+   {
+    "year": 12,
+    "at": [
+     108.94,
+     34.21
+    ],
+    "zoom": 5.5,
+    "event": "ch12-sent-west",
+    "text": "Chapter 12. Taizong sends his sworn brother west with a passport and a golden bowl. In history Xuanzang was refused permission and left in secret.",
+    "text_zh": "第十二回。唐太宗赐通关文牒和紫金钵盂，送御弟西行。历史上玄奘出境的请求被驳回，是偷越出关的。"
+   },
+   {
+    "year": 14,
+    "at": [
+     102.8,
+     35.8
+    ],
+    "zoom": 6,
+    "event": "ch14-frees-wukong",
+    "text": "Chapter 14. At Two Frontiers Mountain, the edge of the Tang, he frees Sun Wukong.",
+    "text_zh": "第十四回。大唐边界两界山，揭帖放出孙悟空。"
+   },
+   {
+    "year": 18,
+    "at": [
+     100.5,
+     36.6
+    ],
+    "zoom": 6,
+    "event": "ch18-gao-village",
+    "text": "Chapter 18. Pigsy at Gao Village, which the novel places on the border of Wusizang, the Ming name for Tibet.",
+    "text_zh": "第十八回。高老庄收八戒。书中说此地属乌斯藏国界，乌斯藏是明代对西藏的称呼。"
+   },
+   {
+    "year": 22,
+    "at": [
+     95.6,
+     40.1
+    ],
+    "zoom": 5.6,
+    "event": "ch22-flowing-sands",
+    "text": "Chapter 22. Sandy at the River of Flowing Sands, eight hundred li wide. It is the Mokhayan desert, which Xuanzang crossed alone and nearly died in.",
+    "text_zh": "第二十二回。八百里流沙河收沙僧。原型是莫贺延碛，玄奘独自穿越，几乎渴死。"
+   },
+   {
+    "year": 27,
+    "at": [
+     92.8,
+     41.6
+    ],
+    "zoom": 6,
+    "event": "ch27-white-bone-demon",
+    "text": "Chapter 27. Three times Wukong strikes the White Bone Demon, and Tripitaka drives him away for it.",
+    "text_zh": "第二十七回。三打白骨精，唐僧因此赶走悟空。"
+   },
+   {
+    "year": 33,
+    "at": [
+     90.7,
+     41.5
+    ],
+    "zoom": 6,
+    "event": "ch33-calabash",
+    "text": "Chapters 32 to 35. The gourd that swallows anyone who answers to his name.",
+    "text_zh": "第三十二至三十五回。叫一声名字、答应了就被装进去的紫金红葫芦。"
+   },
+   {
+    "year": 42,
+    "at": [
+     88.86,
+     40.86
+    ],
+    "zoom": 6,
+    "event": "ch42-red-boy-tamed",
+    "text": "Chapter 42. Guanyin tames Red Boy, son of the Bull Demon King.",
+    "text_zh": "第四十二回。观音收伏牛魔王之子红孩儿。"
+   },
+   {
+    "year": 46,
+    "at": [
+     86.5,
+     42.0
+    ],
+    "zoom": 5.8,
+    "event": "ch46-cheqi-contest",
+    "text": "Chapter 46. The contest of magic at Cheqi, placed at Karashahr. Xuanzang found Buddhism thriving here, not Taoists in power.",
+    "text_zh": "第四十六回。车迟国斗法，比附为焉耆。玄奘在这里看到的是佛寺林立，并非道士当国。"
+   },
+   {
+    "year": 49,
+    "at": [
+     96.54,
+     33.46
+    ],
+    "zoom": 4.6,
+    "event": "ch49-fish-basket-guanyin",
+    "text": "Chapters 47 to 49. The Heaven-Reaching River. Identified with the real Tongtian in Qinghai, it throws the road a thousand kilometres southeast. The novel's geography does not run in order.",
+    "text_zh": "第四十七至四十九回。通天河。比附为青海的通天河，路线一下子向东南跳出上千公里，小说的地理并不按顺序排列。"
+   },
+   {
+    "year": 54,
+    "at": [
+     80.5,
+     31.5
+    ],
+    "zoom": 4.6,
+    "event": "ch54-womens-country",
+    "text": "Chapter 54. The Women's Country, identified with the Eastern Women's Kingdom of the Record of the Western Regions, north of the Himalayas. Another jump.",
+    "text_zh": "第五十四回。西梁女国，比附为《大唐西域记》所载喜马拉雅北麓的东女国，又是一次大跳跃。"
+   },
+   {
+    "year": 61,
+    "at": [
+     89.35,
+     42.8
+    ],
+    "zoom": 5.6,
+    "event": "ch61-third-fan",
+    "text": "Chapters 59 to 61. The Flaming Mountain is real, at Turfan, the ancient Gaochang where a king once tried to keep Xuanzang for good.",
+    "text_zh": "第五十九至六十一回。火焰山实有其地，就在吐鲁番，即古高昌，高昌王曾想把玄奘永远留下。"
+   },
+   {
+    "year": 77,
+    "at": [
+     78.3,
+     41.6
+    ],
+    "zoom": 5.6,
+    "event": "ch77-great-peng",
+    "text": "Chapter 77. Lion-Camel City, a kingdom eaten by the Great Peng. Near here Xuanzang's party lost a third of its men on the Tian Shan glaciers.",
+    "text_zh": "第七十七回。狮驼城，一国人被大鹏吃尽。玄奘一行翻越天山冰川，在这一带冻死了三四成人。"
+   },
+   {
+    "year": 84,
+    "at": [
+     72.0,
+     34.6
+    ],
+    "zoom": 5.6,
+    "event": "ch84-law-destroying-kingdom",
+    "text": "Chapter 84. The kingdom that kills monks. In Gandhara Xuanzang found a thousand monasteries in ruins.",
+    "text_zh": "第八十四回。灭法国。玄奘在犍陀罗看到上千座佛寺都已荒废。"
+   },
+   {
+    "year": 93,
+    "at": [
+     79.9,
+     27.06
+    ],
+    "zoom": 5.6,
+    "event": "ch93-embroidered-ball",
+    "text": "Chapter 93. India. The princess's ball falls on Tripitaka at the capital, placed at Kanyakubja, where Harsha made Xuanzang chief debater in 642.",
+    "text_zh": "第九十三回。天竺国公主抛绣球打中唐僧。都城比附为曲女城，642年戒日王在此请玄奘做论主。"
+   },
+   {
+    "year": 98,
+    "at": [
+     85.45,
+     25.0
+    ],
+    "zoom": 6,
+    "event": "ch98-spirit-mountain",
+    "text": "Chapter 98. Spirit Mountain, after 5,048 days. Drawn on Vulture Peak, beside Nalanda, where Xuanzang really studied for five years.",
+    "text_zh": "第九十八回。历经五千零四十八日到达灵山。画在灵鹫山，旁边就是玄奘真正求学五年的那烂陀寺。"
+   },
+   {
+    "year": 100,
+    "at": [
+     108.96,
+     34.22
+    ],
+    "zoom": 5.2,
+    "event": "ch100-return-to-changan",
+    "text": "Chapter 100. Home to Chang'an. Xuanzang came back in 645 with 657 texts and spent nineteen years translating them.",
+    "text_zh": "第一百回。径回东土长安。玄奘645年带回六百五十七部经，此后十九年专心译经。"
+   }
+  ]
+ }
+]
