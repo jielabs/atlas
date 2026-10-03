@@ -44,8 +44,9 @@ in the engine keeps working unchanged: the three timeline zooms, the event filte
 Cost: `fmtYear()` (`app.js:141`) will render the axis as `1年 … 100年` / `1 … 100 CE`. For the first pass we
 accept that; §6 proposes a ~20-line generalization that makes it read 第一回 / Ch. 1.
 
-The historical dates are not thrown away — every event also carries a `historical` note where one applies
-(`第十三回` ↔ 629 CE 夜过玉门关), shown in the story text. That is the comparison the pack is for.
+The historical dates are not thrown away. Where the real journey touches an episode, the event's summary ends
+with a `史实：` / `Historically:` clause (第二十二回 流沙河 ↔ the Mokhayan desert, 629). That comparison is the
+point of the pack. *(As built: a quarter of the events, 33 of 134, carry one. See §10.)*
 
 ### 2.2 Space: realms, not borders
 
@@ -63,26 +64,30 @@ empire would sit under the pilgrimage as a backdrop. Wrong, and distracting.
 > **Decision: the pack hides the engine's border layers from a plugin, and draws its own space instead.**
 
 A plugin gets the raw MapLibre map (`atlas.map`), so `plugins/realms.js` switches off `neighbour-fill`,
-`neighbour-line`, `focus-fill`, `focus-casing`, `focus-line`, `hl-fill` and `hl-line` on startup. What replaces
-them is the novel's own geography, as pack layers:
+`neighbour-line`, `focus-fill`, `focus-casing`, `focus-line`, `hl-fill` and `hl-line` on startup, together with
+the polity name labels and the period card's "map: the world around 1 BCE" line, and offers all of it back as
+one 真实疆域 / Real borders chip. What replaces them is the novel's own geography, as pack layers:
 
 | Layer | Type | What it is |
 | --- | --- | --- |
 | 四大部洲 | `fill` | Four symbolic continents: 东胜神洲, 南赡部洲, 西牛贺洲, 北俱芦洲. Deliberately vague blobs — the book is vague. |
-| 取经路线 | `line` | The road west, segments carrying `from`/`to` chapters so it grows as the timeline moves. |
-| 人间国度 | `circle` | The ten kingdoms the pilgrims pass through, each with a card. |
+| 取经路线 | `line` | The road west, derived from the events: each leg carries the `from` chapter it is reached in, so it grows as the timeline moves. |
+| 人间国度 | `circle` | The ten kingdoms the pilgrims pass through, plus the Tang, each with a card, appearing on arrival. |
 | 三界 | `circle` | 天宫, 地府, 龙宫, 灵山 — see below. |
 
 ### 2.3 Places: real, identified, or invented
 
-Every event needs a `lat`/`lon`. Each place gets a `ground` field saying how we got it, and the layer draws the
-three kinds differently (solid, ringed, dashed) so the map never lies about its own certainty:
+Every event needs a `lat`/`lon`. Each place gets a `ground` field saying how we got it, and the reader can see it
+two ways, so the map never lies about its own certainty: the pack's own layers colour each feature by footing
+(the road's legs by where they arrive, the kingdoms by where they sit), and every uncertain `place_zh` carries
+the doubt in a parenthetical, e.g. 车迟国（焉耆一带？）. Event markers themselves cannot be restyled: the engine
+builds them and the plugin API has no hook for it.
 
 | `ground` | Meaning | Examples |
 | --- | --- | --- |
 | `real` | Attested place, coordinates from the atlas's own data | 长安 `108.96, 34.22`; 玉门关 `95.8, 40.3`; 高昌 `89.5, 42.9`; 那烂陀 `85.44, 25.13`; 曲女城 `79.9, 27.06`; 于阗 `79.9, 37.1` (all reused from the `xuanzang` tour) |
-| `identified` | Fictional name with a traditional real-world identification | 火焰山 → 吐鲁番 `89.2, 42.9`; 流沙河 → 莫贺延碛; 女儿国 → 东女国/于阗 一带; 车迟国 → 车师/焉耆; 花果山 → 连云港云台山 `119.4, 34.5` |
-| `projected` | Mythic space, placed at the earthly site its cult belongs to | 地府 → 泰山 `117.1, 36.25` (泰山治鬼); 天宫 → 昆仑 `80, 36` (天柱); 龙宫 → 东海 `123, 30.5`; 灵台方寸山 → 西牛贺洲, placed northwest of India |
+| `identified` | Fictional name with a traditional real-world identification | 火焰山 → 吐鲁番 `89.2, 42.9`; 流沙河 → 莫贺延碛; 女儿国 → 《大唐西域记》东女国 `80.5, 31.5`; 车迟国 → 焉耆 `86.57, 42.06`; 通天河 → 青海通天河 `96.6, 33.4`; 花果山 → 连云港云台山 `119.4, 34.5` |
+| `projected` | Mythic space, placed at the earthly site its cult belongs to | 地府 → 泰山 `117.1, 36.25` (泰山治鬼); 天宫 → 昆仑 `80, 36` (天柱); 龙宫 → 东海 `122.5, 31.0`; 灵山 → 灵鹫山 `85.45, 25.0`; 灵台方寸山 → 西牛贺洲, placed northwest of India `73, 34` |
 | `invented` | No defensible anchor; placed on the route by interpolation | most of the 妖怪 lairs between kingdoms |
 
 The `projected` row is the interesting one. Rather than refusing to draw heaven, we draw it at the place Chinese
@@ -114,22 +119,23 @@ The timeline sizes bands by the square root of their length, so the 7-chapter �
 Target **150–200 events**: the 八十一难 as the spine, plus the set pieces of the first twelve chapters.
 
 ```json
-{ "id": "ch44-cheqi-contest", "year": 45, "level": 1, "category": "diplomacy",
+{ "id": "ch46-cheqi-contest", "year": 46, "level": 1, "category": "diplomacy",
   "title": "The contest at Cheqi", "title_zh": "车迟国斗法",
-  "place": "Cheqi (Qarashahr?)", "place_zh": "车迟国（焉耆一带？）",
-  "lat": 42.06, "lon": 86.57, "ground": "identified",
-  "summary_zh": "三个道士得国王宠信，役使和尚筑观。悟空与之斗求雨、坐禅、砍头，一一取胜。",
-  "historical": "玄奘过焉耆、龟兹时，记其国小乘盛行，与小说所写道士当国正相反。",
-  "refs": ["044"] }
+  "place": "Kingdom of Cheqi (Karashahr?)", "place_zh": "车迟国（焉耆一带？）",
+  "lat": 42.0, "lon": 86.5, "ground": "identified",
+  "summary": "… Historically: Xuanzang passed through Agni, around Karashahr, and recorded a dozen Buddhist monasteries …",
+  "summary_zh": "师徒与三位国师斗求雨、斗坐禅、隔板猜枚、砍头、剖腹剜心、滚油洗澡…… 史实：玄奘经阿耆尼国（今焉耆一带），记其国有佛寺十余所、僧徒二千余人，习学小乘……" }
 ```
 
 - `year` is the chapter number.
 - `level` drives the detail filter: `1` for the famous episodes (大闹天宫, 三打白骨精, 火焰山), `2` for the rest
   of the 八十一难, `3` for incidental stops.
-- `ground` and `historical` are extra fields. The engine ignores unknown fields, so they cost nothing; the pack's
-  plugin reads `ground` to style markers and appends `historical` to the card.
-- `refs: ["044"]` builds a link to the original chapter through the manifest's `refs.url`. Candidate source:
-  the Chinese Wikisource text of 《西游记》 — **the exact URL pattern needs checking before it goes in.**
+- `ground` is an extra field. The engine ignores unknown fields, so it costs nothing; the validator checks it
+  and the layer builder uses it.
+- There is no separate `historical` field: pack events have no story file (`data.details` is not a manifest
+  key), so the summary is the only text a card shows, and the 史实 clause lives at its end.
+- No `refs` yet. A link to the original chapter would go through the manifest's `refs.url`, but no
+  chapter-addressable source has been confirmed (§9, question 3), and a broken link is worse than none.
 
 ### Categories are a fixed list — map onto them
 
@@ -153,26 +159,25 @@ fights" / "only the kingdom politics", which is a reasonable way to read the boo
 
 ## 5. Tours, layers, plugins
 
-**Tours** (`tours.json`), 8–10, each with `path: true` so the route draws as it goes:
+**Tours** (`tours.json`), five, with `path: true` so the route draws as it goes (`three-strikes` excepted):
 
 | id | era | Steps |
 | --- | --- | --- |
 | `monkey-rise` | `monkey` | 花果山 → 灵台方寸山 → 东海龙宫 → 地府 → 天宫 → 五行山 |
 | `road-west` | `disciples` | The full pilgrimage in 16 steps, the pack's headline tour |
-| `three-strikes` | `demons` | 三打白骨精, 4 steps on one hillside — tests whether the engine reads at small scale |
-| `flaming-mountain` | `flames` | 火焰山 → 翠云山 → 摩云洞 → 借扇 |
+| `three-strikes` | `demons` | 三打白骨精, 5 steps on one hillside at zoom 7.5–8.5 — tests whether the engine reads at small scale |
+| `flaming-mountain` | `flames` | 火焰山 → 芭蕉洞 → 小须弥山 → 摩云洞 → 三调 → 高昌故城, 7 steps |
 | `xuanzang-real` | `disciples` | The historical journey, reusing the 8 steps of the atlas's own `xuanzang` tour verbatim, so the two routes can be compared step by step |
 
 `xuanzang-real` is the control group. Running it next to `road-west` is the whole point of the pack.
 
 **Plugins**
 
-- `plugins/realms.js` — hides the engine's border layers (§2.2); draws the 四大部洲 and the 三界 markers; styles
-  markers by `ground`; appends the `historical` note to event cards.
-- `plugins/journey.js` — adapted from `examples/demo-pack/plugins/journey.js` (30 lines). Animates the pilgrims
-  along the current leg as a tour step flies, and grows 取经路线 as the chapter axis advances.
-- `plugins/chapter.js` *(optional)* — shows the chapter's own couplet title (回目) in a corner, which is the
-  closest thing the book has to a section heading.
+- `plugins/realms.js` — the only plugin built. It hides the engine's border layers, polity labels and map line
+  (§2.2) and offers them back as the 真实疆域 chip, and hides the Neighbours chip (and its group, once empty).
+  The 四大部洲 and 三界 turned out to need no code: they are plain manifest layers.
+- *Not built:* `journey.js` (the route already grows with the chapter axis, and `path: true` draws each tour's
+  track) and `chapter.js` (回目 couplet titles). Both remain good polish.
 
 ## 6. Engine changes — all optional, all small
 
@@ -198,8 +203,8 @@ Change 1 is the one that matters conceptually: it is what turns a history engine
   "name": "Journey to the West",
   "name_zh": "西游记",
   "region": {
-    "polygon": [[75, 20], [125, 20], [125, 48], [75, 48]],
-    "view": { "center": [100, 35], "zoom": 3.6, "year": 13 }
+    "polygon": [[70, 15], [125, 15], [125, 48], [70, 48]],
+    "view": { "center": [96, 33], "zoom": 3.4, "year": 13 }
   },
   "range": { "start": 1, "end": 100 },
   "data": { "eras": "eras.json", "events": "events.json", "tours": "tours.json" },
@@ -213,11 +218,10 @@ Change 1 is the one that matters conceptually: it is what turns a history engine
     { "id": "realms", "name": "Three realms", "name_zh": "三界", "data": "layers/realms.geojson",
       "type": "circle", "color": "#7a5195", "radius": 7 }
   ],
-  "plugins": ["plugins/realms.js", "plugins/journey.js"],
-  "refs": { "label": "Read the chapter", "label_zh": "读原文", "url": "TODO-confirm/{ref}" },
-  "attribution": "《西游记》 (1592). Episode geography is partly traditional identification, partly invented; see ground field.",
-  "note_zh": "本图的「年」是回目。地名分三种：史有其地、旧说比附、纯属虚构，标记样式不同。地形与海岸线为现代地理。",
-  "note": "The axis is chapter number, not years. Places are real, traditionally identified, or invented, drawn differently. Terrain and coastlines are modern."
+  "plugins": ["plugins/realms.js"],
+  "attribution": "Journey to the West (1592). Episode geography is partly traditional identification, partly invented.",
+  "note": "The axis is the chapter number, not years. Places are real, traditionally identified, projected from religious geography, or invented. Terrain and coastlines are modern.",
+  "note_zh": "本图的「年」是回目。地名分四种：史有其地、旧说比附、神话投影、纯属虚构。地形、海岸线和河流均为现代地理。"
 }
 ```
 
@@ -240,11 +244,15 @@ A pack on the same site always loads, so no `PACK_ORIGINS` entry is needed (`app
 | **3. Generalize** | Engine changes 1 and 2 from §6, on a separate branch | After the data exists, so the change is driven by a real pack. |
 | **4. Polish** | 四大部洲, `chapter.js` couplet titles, remaining tours | Optional. |
 
-### A tool for phase 1
+### Tools
 
-`tools/xiyouji/build_events.py`: read a hand-written chapter table (`chapters.tsv`: 回 · 标题 · 地点 · ground ·
-lon · lat · category · level · 一句话) and emit `events.json`. Writing 150 events by hand in JSON is miserable;
-writing 150 rows in a table is not. Mirrors how `tools/build_cities.py` and `tools/build_passes.py` already work.
+*As built:* phases 0, 1, 2 and 4 are done, phase 3 is not (see §10). The events were written straight into
+`events.json` in chunks, so the planned `build_events.py` table converter was not needed. Two tools were:
+
+- `tools/xiyouji/check_pack.py` — checks everything `app.js` silently ignores (era tiling, the nine categories,
+  chapter range, coordinate box, footing, tour step targets, layer geometry) and reports coverage per era.
+- `tools/xiyouji/build_layers.py` — derives the road from the events and writes all four layers. Rerun it after
+  editing events.
 
 ## 9. Open questions
 
@@ -261,3 +269,42 @@ writing 150 rows in a table is not. Mirrors how `tools/build_cities.py` and `too
 5. **Is a second novel needed to prove the point?** 《三国演义》 would be the easy case (real years, real
    geography, real borders — it would need nothing but data). 《镜花缘》 or 《山海经》 would be the hard case
    (pure invented geography, which needs the custom-terrain work the engine does not have yet).
+
+## 10. What was built, and what it answered
+
+**Built** (branch `xiyouji`, `packs/xiyouji/`): 8 eras over chapters 1–100; 134 events, at least one in every
+chapter; 5 tours; 4 layers; one plugin. Places by footing: 76 invented, 29 identified, 17 projected, 12 real.
+33 events (25%) carry a 史实 clause, drawn from the *Biography of the Tripitaka Master* and the *Record of the
+Western Regions*. All texts are bilingual. The validator passes with no errors and no warnings.
+
+**Checked in a browser** (headless Chrome driven over CDP, no console errors): the pack loads alone, the timeline
+shows the eight bands 猴 缘 徒 魔 国 焰 竺 经, the event list and filters work, the layers toggle, the borders and
+their labels stay hidden across chapter changes and come back with the chip, all five tours play, and the
+English interface works.
+
+**Answers to §9**
+
+1. *The axis.* It works at all three zooms. The whole-book view reads as a progress bar; the era zoom spreads
+   an arc's chapters over the full rail, one tick each. The third zoom adds little for arcs of 21 chapters or
+   fewer. What is wrong is the wording, not the mechanics: `45年` / `27 CE`, "each segment is one map", "decades
+   view". All of it is engine change 1 in §6.
+2. *The first seven chapters.* The `projected` anchors render and the `monkey-rise` tour flies between them
+   without trouble; whether 天宫 on the Kunlun and 地府 on Mount Tai *read* as sensible is a judgement for a
+   human reader, and the main thing to look at when reviewing.
+3. *Chapter links.* Still open; no `refs` until a source is confirmed.
+5. *A second novel.* Still worth doing, for the reasons given.
+
+**Findings worth keeping**
+
+- The novel's geography does not run in order. Once places are pinned to their traditional identifications, the
+  road jumps: Cheqi at Karashahr (ch. 44), then the Heaven-Reaching River in Qinghai (ch. 47), the Women's
+  Country north of the Himalayas (ch. 53), back to Turfan for the Flaming Mountain (ch. 59). The map shows this
+  at a glance, which no reading of the text does. It is the clearest evidence that the atlas adds something to a
+  novel rather than illustrating it.
+- `xuanzang-real` against the novel is the best view in the pack: the historical step and the novel's episode at
+  the same place, side by side (e.g. Gaochang and the Flaming Mountain, ch. 59).
+- Engine friction, in order of how much it showed: the year wording (§6, change 1); the world borders a pack
+  cannot opt out of (change 2, worked around in `realms.js`, including labels and the period card line that
+  the original plan missed); the fixed categories (change 4, worked around by the mapping in §4).
+- Auto layers (`AUTO_RULES` in `app.js`) can light up the engine's own 路线 / 官道 chips during a tour step even
+  though a pack shown alone has no data for them. Cosmetic; a pack-aware `AUTO_RULES` would fix it.
