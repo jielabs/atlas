@@ -266,8 +266,8 @@
   "lat": 40.05,
   "lon": 95.5,
   "ground": "identified",
-  "summary": "On her way east Guanyin meets a monster who eats travellers and wears a necklace of nine skulls, the skulls of earlier pilgrims. She names him Sha Wujing and tells him to wait for the monk.",
-  "summary_zh": "观音东行至流沙河，遇一食人妖怪，项下挂九个取经人的骷髅。观音为他摩顶受戒，取名沙悟净，命他在此等候取经人。"
+  "summary": "On her way east Guanyin meets a monster who eats travellers and wears a necklace of nine skulls, the skulls of earlier pilgrims. She names him Sha Wujing and tells him to wait for the monk. Historically: in the desert beyond the Yumen Pass, the biography says, there were no birds or beasts, no water or grass, and Xuanzang found his way by following the piles of bones and horse dung left by earlier travellers.",
+  "summary_zh": "观音东行至流沙河，遇一食人妖怪，项下挂九个取经人的骷髅。观音为他摩顶受戒，取名沙悟净，命他在此等候取经人。史实：《慈恩传》写莫贺延碛“上无飞鸟，下无走兽，复无水草”，玄奘只能顺着前人留下的白骨和马粪辨认道路前行。"
  },
  {
   "id": "ch08-pigsy-foretold",
@@ -401,8 +401,8 @@
   "lat": 34.25,
   "lon": 108.97,
   "ground": "real",
-  "summary": "The minister Xiao Yu is told to find a monk of virtue for the mass. He picks Chen Xuanzang, River Float, and Taizong appoints him master of the ceremony. Historically: Xiao Yu was a real Tang chancellor and a devout Buddhist.",
-  "summary_zh": "太宗命萧瑀选拔有德行的高僧主持水陆大会，选中陈玄奘，封为“天下大阐都僧纲”。史实：萧瑀是唐初实有的宰相，崇信佛法。"
+  "summary": "The minister Xiao Yu is told to find a monk of virtue for the mass. He picks Chen Xuanzang, River Float, and Taizong appoints him master of the ceremony. Historically: Xiao Yu was a real Tang chancellor and a devout Buddhist, but the man who picked Xuanzang out was not Xiao Yu but the official Zheng Shanguo, who at an ordination examination in Luoyang let the thirteen-year-old boy in although he was under age.",
+  "summary_zh": "太宗命萧瑀选拔有德行的高僧主持水陆大会，选中陈玄奘，封为“天下大阐都僧纲”。史实：萧瑀确是唐初崇佛的宰相，但真正破格选中玄奘的是大理卿郑善果。玄奘十三岁在洛阳应试度僧，年龄不够，郑善果赞他“诵业易成，风骨难得”，破格录取。"
  },
  {
   "id": "ch11-liu-quan-melons",
@@ -446,8 +446,8 @@
   "lat": 34.23,
   "lon": 108.99,
   "ground": "real",
-  "summary": "Disguised as a scabby monk, Guanyin sells a cassock and staff at a ruinous price, then interrupts the mass: these are Lesser Vehicle teachings, and the true Great Vehicle scriptures are in the west. She rises into the air in her true form.",
-  "summary_zh": "观音变作癞头和尚卖袈裟锡杖，又在大会上高声说这些都是小乘教法，大乘佛法三藏在西天，随即现出真身，驾云而去。"
+  "summary": "Disguised as a scabby monk, Guanyin sells a cassock and staff at a ruinous price, then interrupts the mass: these are Lesser Vehicle teachings, and the true Great Vehicle scriptures are in the west. She rises into the air in her true form. Historically: the Great Vehicle was the reason Xuanzang went. Chinese schools disagreed over doctrine, and he wanted the original of the Yogacarabhumi, a treatise he hoped would settle the question.",
+  "summary_zh": "观音变作癞头和尚卖袈裟锡杖，又在大会上高声说这些都是小乘教法，大乘佛法三藏在西天，随即现出真身，驾云而去。史实：求大乘原典确是玄奘西行的动机。他见国内各家对佛理说法不一，想求取《瑜伽师地论》原本来解决分歧。"
  },
  {
   "id": "ch13-leaves-changan",
@@ -566,8 +566,8 @@
   "lat": 36.05,
   "lon": 102.0,
   "ground": "invented",
-  "summary": "A dragon swallows Tripitaka's horse whole. Guanyin comes, reveals him as the Western Sea dragon prince, and turns him into a white horse for the journey.",
-  "summary_zh": "鹰愁涧小白龙一口吞了三藏坐骑。观音到来，说明他是西海龙王三太子，将他化作白马，驮三藏西行。"
+  "summary": "A dragon swallows Tripitaka's horse whole. Guanyin comes, reveals him as the Western Sea dragon prince, and turns him into a white horse for the journey. Historically: at Guazhou an old foreigner swapped Xuanzang a thin old red horse that had made the trip to Hami fifteen times. In the desert, when Xuanzang was dying of thirst, it was the horse that found grass and water.",
+  "summary_zh": "鹰愁涧小白龙一口吞了三藏坐骑。观音到来，说明他是西海龙王三太子，将他化作白马，驮三藏西行。史实：玄奘在瓜州从一位胡人老翁手里换得一匹瘦老赤马，说此马往返伊吾已十五次。后来在沙漠中玄奘渴得昏倒，正是这匹马找到了青草和水池。"
  },
  {
   "id": "ch16-guanyin-temple-fire",
@@ -611,8 +611,8 @@
   "lat": 36.6,
   "lon": 100.5,
   "ground": "identified",
-  "summary": "A rich farmer's son-in-law turns out to be a pig spirit. Wukong takes the bride's place and fights him; he turns out to be Zhu Wuneng, waiting for the pilgrim, and becomes the second disciple, Zhu Bajie, Eight Precepts. The novel places the village on the border of Tibet.",
-  "summary_zh": "高太公家女婿原来是个猪精。悟空变作高小姐与他厮斗，问出他就是观音点化的猪悟能，于是拜三藏为师，取名八戒。书中说高老庄属乌斯藏国界，即西藏。"
+  "summary": "A rich farmer's son-in-law turns out to be a pig spirit. Wukong takes the bride's place and fights him; he turns out to be Zhu Wuneng, waiting for the pilgrim, and becomes the second disciple, Zhu Bajie, Eight Precepts. The novel places the village on the border of Tibet. Historically: Wusizang is the Ming name for central Tibet; under the Tang it was the empire of Tubo. The anachronism is one of the marks of the novel's Ming date.",
+  "summary_zh": "高太公家女婿原来是个猪精。悟空变作高小姐与他厮斗，问出他就是观音点化的猪悟能，于是拜三藏为师，取名八戒。书中说高老庄属乌斯藏国界，即西藏。史实：“乌斯藏”是明代对前后藏的称呼，唐代称吐蕃。这个时代错置正说明小说成书于明代。"
  },
  {
   "id": "ch19-heart-sutra",
@@ -821,8 +821,8 @@
   "lat": 42.6,
   "lon": 91.3,
   "ground": "invented",
-  "summary": "Tripitaka has his passport stamped and delivers the letter. The king begs the pilgrims to rescue his daughter; Bajie and Sandy go and are beaten.",
-  "summary_zh": "三藏入宝象国倒换关文，呈上公主家书。国王求他们降妖救女，八戒、沙僧前去，一个逃回、一个被擒。"
+  "summary": "Tripitaka has his passport stamped and delivers the letter. The king begs the pilgrims to rescue his daughter; Bajie and Sandy go and are beaten. Historically: the real equivalent of the Tang passport was a set of twenty-four letters the King of Gaochang wrote to the rulers ahead, each sent with a bolt of fine silk.",
+  "summary_zh": "三藏入宝象国倒换关文，呈上公主家书。国王求他们降妖救女，八戒、沙僧前去，一个逃回、一个被擒。史实：真实历史上起通关文牒作用的，是高昌王麴文泰写给沿途屈支等二十四国国王的书信，每封附大绫一匹为信物。"
  },
  {
   "id": "ch30-monk-into-tiger",
@@ -964,15 +964,30 @@
   "year": 38,
   "level": 2,
   "category": "politics",
-  "title": "The true and false kings of Wuji",
-  "title_zh": "乌鸡国真假国王",
+  "title": "Bajie carries the drowned king out of the well",
+  "title_zh": "八戒井底背尸",
   "place": "Kingdom of Wuji",
   "place_zh": "乌鸡国",
   "lat": 41.15,
   "lon": 89.6,
   "ground": "invented",
-  "summary": "Wukong tells the crown prince the truth, Bajie fishes the king's body out of the well, and Wukong fetches a pill of Laozi's elixir from heaven to bring him back to life. At court the false king is unmasked; he is the blue-haired lion Manjusri rides.",
-  "summary_zh": "悟空向太子说明真相，八戒下井背出国王尸身，悟空上天向老君讨来九转还魂丹救活国王。金殿上假国王现形，原来是文殊菩萨坐骑青毛狮子，奉佛旨来报当年国王浸文殊三日之仇。"
+  "summary": "Wukong tells the crown prince the truth with the jade tablet as proof. That night Bajie, promised treasure, goes down the well in the palace garden and finds instead the king's body, preserved by the Dragon King's pearl.",
+  "summary_zh": "悟空以白玉圭为证，向太子说明真相。夜里八戒听说井下有宝贝，下到御花园八角琉璃井，背上来的却是国王尸身，由井龙王的定颜珠保着三年不坏。"
+ },
+ {
+  "id": "ch39-elixir-and-lion",
+  "year": 39,
+  "level": 2,
+  "category": "war",
+  "title": "The elixir, and Manjusri's lion",
+  "title_zh": "金丹还魂·文殊收狮",
+  "place": "Kingdom of Wuji",
+  "place_zh": "乌鸡国",
+  "lat": 41.1,
+  "lon": 89.55,
+  "ground": "invented",
+  "summary": "Wukong begs one pill of nine-times-refined elixir from Laozi and breathes life back into the king. At court the false king is unmasked as the blue-haired lion Manjusri rides; the bodhisattva explains that the king had once soaked him for three days in the river, and the lion was sent to repay it.",
+  "summary_zh": "悟空上兜率宫向老君讨得一粒九转还魂丹，又度一口仙气，救活国王。金殿上假国王现形，文殊菩萨前来收回坐骑青毛狮子，说当年乌鸡国王曾把化身凡僧的文殊浸在御水河中三日三夜，此狮奉佛旨来报这一箭之仇。"
  },
  {
   "id": "ch40-red-boy-baby",
@@ -1241,8 +1256,8 @@
   "lat": 33.0,
   "lon": 82.0,
   "ground": "invented",
-  "summary": "Highwaymen rob the pilgrims. Wukong kills two, and the next day the rest of the gang, whom Tripitaka had sheltered without knowing, and cuts off the leader's head. Tripitaka recites the spell until Wukong rolls on the ground and drives him off for a second time.",
-  "summary_zh": "强盗劫路，悟空打死两个；次日又将收留他们过夜的杨老儿家的不肖子连同全伙打杀，还割下首级。唐僧念紧箍咒不止，第二次赶走悟空。"
+  "summary": "Highwaymen rob the pilgrims. Wukong kills two, and the next day the rest of the gang, whom Tripitaka had sheltered without knowing, and cuts off the leader's head. Tripitaka recites the spell until Wukong rolls on the ground and drives him off for a second time. Historically: on the Ganges river pirates who worshipped the goddess Durga seized Xuanzang's boat and chose him as their sacrifice. As they made the altar ready a black storm blew up, and the frightened pirates let him go.",
+  "summary_zh": "强盗劫路，悟空打死两个；次日又将收留他们过夜的杨老儿家的不肖子连同全伙打杀，还割下首级。唐僧念紧箍咒不止，第二次赶走悟空。史实：玄奘在恒河上遭盗匪劫船，盗匪信奉突伽天神，选中他做祭品。设坛将杀时黑风骤起、飞沙折木，盗匪惊惧，叩头放了他。"
  },
  {
   "id": "ch57-false-monkey",
@@ -1346,8 +1361,8 @@
   "lat": 42.5,
   "lon": 87.6,
   "ground": "invented",
-  "summary": "In Jisai the monks of the Golden Light Temple are shackled: the treasure in their pagoda was stolen and the king blames them. Tripitaka sweeps all thirteen storeys and Wukong catches two fish spirits at the top.",
-  "summary_zh": "祭赛国金光寺宝塔上的佛宝舍利被盗，国王怪罪寺僧，僧人披枷带锁。唐僧发愿扫塔，扫到十三层，悟空擒住两个鱼精。"
+  "summary": "In Jisai the monks of the Golden Light Temple are shackled: the treasure in their pagoda was stolen and the king blames them. Tripitaka sweeps all thirteen storeys and Wukong catches two fish spirits at the top. Historically: Xuanzang brought home 150 relics of the Buddha along with his scriptures and images, and the Big Wild Goose Pagoda was built in Chang'an in 652 to house what he had brought.",
+  "summary_zh": "祭赛国金光寺宝塔上的佛宝舍利被盗，国王怪罪寺僧，僧人披枷带锁。唐僧发愿扫塔，扫到十三层，悟空擒住两个鱼精。史实：玄奘归国时带回如来肉舍利一百五十粒和大批经像；652年长安大慈恩寺建大雁塔，就是为了收藏他带回的经像。"
  },
  {
   "id": "ch63-nine-headed-bird",
@@ -1440,6 +1455,21 @@
   "summary_zh": "朱紫国王病了三年，悟空揭榜行医，悬丝诊脉，用大黄、巴豆、锅底灰和白龙马尿制成“乌金丹”治好国王。病根是相思：金圣宫娘娘被妖魔摄去。"
  },
  {
+  "id": "ch69-zhuzi-tells",
+  "year": 69,
+  "level": 3,
+  "category": "politics",
+  "title": "The King of Zhuzi tells his story",
+  "title_zh": "君王筵上论妖邪",
+  "place": "Kingdom of Zhuzi",
+  "place_zh": "朱紫国",
+  "lat": 41.33,
+  "lon": 83.45,
+  "ground": "invented",
+  "summary": "Cured, the king explains at the feast: three years ago at the Dragon Boat Festival a demon called the Sai Taisui took his queen, and has come back since for palace maids. As he speaks the demon's vanguard blows in on a wind, and Wukong drives it off.",
+  "summary_zh": "国王病愈设宴，席间说起三年前端午节，麒麟山赛太岁摄走金圣宫娘娘，此后又来索要宫女。正说着妖风大作，先锋小妖来了，悟空一棒打退。"
+ },
+ {
   "id": "ch70-golden-bells",
   "year": 70,
   "level": 2,
@@ -1526,8 +1556,8 @@
   "lat": 41.9,
   "lon": 78.85,
   "ground": "invented",
-  "summary": "An old man on the road warns them: three demon kings and forty-seven thousand little demons hold the ridge. It is the Great White Planet again.",
-  "summary_zh": "路旁老者报信：狮驼岭有三个魔头、四万七八千小妖。原来又是太白金星。"
+  "summary": "An old man on the road warns them: three demon kings and forty-seven thousand little demons hold the ridge. It is the Great White Planet again. Historically: this is near the worst of Xuanzang's real road, the glacier pass over the Tian Shan, seven days on ice where three or four in every ten of his party died of cold and hunger.",
+  "summary_zh": "路旁老者报信：狮驼岭有三个魔头、四万七八千小妖。原来又是太白金星。史实：玄奘真实路线上最凶险的一段就在这一带：翻越凌山（天山冰川）七日，同行者冻饿而死十之三四，牛马死得更多。"
  },
  {
   "id": "ch75-inside-the-lion",
@@ -1871,8 +1901,8 @@
   "lat": 26.5,
   "lon": 83.0,
   "ground": "invented",
-  "summary": "A retired official has vowed to feed ten thousand monks and has fed 9,996. The four pilgrims complete his vow. He keeps them for half a month and sends them off with a grand procession.",
-  "summary_zh": "寇洪员外许愿斋万僧，已斋了九千九百九十六人，正缺四位，唐僧师徒恰好凑足。员外留住半月，鼓乐旌幡远送出城。"
+  "summary": "A retired official has vowed to feed ten thousand monks and has fed 9,996. The four pilgrims complete his vow. He keeps them for half a month and sends them off with a grand procession. Historically: Harsha held a great almsgiving every five years at Prayaga, giving away his treasury over seventy-five days; Xuanzang attended the sixth.",
+  "summary_zh": "寇洪员外许愿斋万僧，已斋了九千九百九十六人，正缺四位，唐僧师徒恰好凑足。员外留住半月，鼓乐旌幡远送出城。史实：戒日王每五年在钵逻耶伽举行一次“无遮大施”，七十五日间倾尽府库布施，玄奘曾应邀参加第六次。"
  },
  {
   "id": "ch97-kou-hong-revived",

@@ -123,3 +123,4 @@ Target: about 180 events total.
 - chunk 6, events for the flames era (ch 51-71): 21 events from the blue buffalo to Zhuzi. The Women's Country is identified with the Eastern Women's Kingdom of the Record of the Western Regions; the Flaming Mountain event carries the real Gaochang story. (events total 98)
 - chunk 7, events for the india era (ch 72-92): 22 events from Silk Cave to the rhinoceroses of Green Dragon Mountain; the law-destroying kingdom set against Gandhara's empty monasteries, and Yuhua against the palace where Xuanzang died. (events total 120)
 - chunk 8, events for the sutras era (ch 93-100): 12 events from Jetavana to the five saints; the embroidered ball at Kanyakubja set against Harsha's assembly of 642, and the return against the real 645 homecoming with 657 texts. (events total 132)
+- coverage pass: chapters 39 and 69 filled, 史实 notes raised from 24 to 33 of 134 (25%) (events total 134)
