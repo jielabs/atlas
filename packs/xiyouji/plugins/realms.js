@@ -9,13 +9,21 @@
 // plain GeoJSON layer in the manifest, drawn by the engine.
 
 const BORDERS = ["neighbour-fill", "neighbour-line", "focus-fill", "focus-casing", "focus-line", "hl-fill", "hl-line"];
+// The border maps also bring HTML labels with each polity's name (.mk-polity) and a line in the period card
+// naming the map (#era-snap, "map: the world around 1 BCE"). Both describe a map the reader cannot see, so they
+// go with it. Hidden labels have no width, and declutter() skips those, so they don't push other labels away.
+const CSS = "html.xyj-no-borders .mk-polity, html.xyj-no-borders #era-snap { display: none !important; }";
 
 export default function setup(atlas) {
   let on = false;
+  const style = document.createElement("style");
+  style.textContent = CSS;
+  document.head.append(style);
   const apply = () => {
     for (const id of BORDERS) {
       if (atlas.map.getLayer(id)) atlas.map.setLayoutProperty(id, "visibility", on ? "visible" : "none");
     }
+    document.documentElement.classList.toggle("xyj-no-borders", !on);
   };
 
   apply();
@@ -24,6 +32,12 @@ export default function setup(atlas) {
   // re-assert the choice afterwards.
   atlas.on("year", apply);
 
-  // "Neighbours" means nothing with no borders on the map; the chip above replaces it.
-  document.getElementById("t-neighbours")?.setAttribute("hidden", "");
+  // "Neighbours" means nothing with no borders on the map; the chip above replaces it. In a pack shown alone it
+  // is the last chip left in its group, so hide the group too, as init() does for groups it empties.
+  const chip = document.getElementById("t-neighbours");
+  if (chip) {
+    chip.hidden = true;
+    const group = chip.closest(".lg");
+    if (group && ![...group.querySelectorAll(".chip")].some((c) => !c.hidden)) group.hidden = true;
+  }
 }
