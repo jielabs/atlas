@@ -50,7 +50,7 @@ real years, 184–280, and the chapter is a field. Borders are real too, drawn f
 ## Chunks
 
 - [x] **1. events ch 1–9** (184–192): 桃园结义 to the fall of Dong Zhuo
-- [ ] **2. events ch 10–21** (193–199): the warlords, Lü Bu, Cao Cao and the emperor
+- [x] **2. events ch 10–21** (193–199): the warlords, Lü Bu, Cao Cao and the emperor
 - [ ] **3. events ch 22–38** (199–208): Guandu, Guan Yu's five passes, the three visits
 - [ ] **4. events ch 39–57** (208–210): Changban, the Red Cliffs, Zhou Yu's three angers
 - [ ] **5. events ch 58–77** (211–220): Tong Pass, Yizhou, Hanzhong, Guan Yu's fall
@@ -64,3 +64,4 @@ real years, 184–280, and the chapter is a field. Borders are real too, drawn f
 ## Done
 
 - chunk 1, events ch 1-9 (184-192): 19 events from the peach garden to Li Jue and Guo Si: 8 history, 7 embellished, 4 fiction. The oath, Hua Xiong, the three heroes against Lü Bu and Diaochan are the novel's; Zhang Fei's whipping was Liu Bei's own. (events total 19)
+- chunk 2, events ch 10-21 (193-199): 20 events from Cao Cao's revenge in Xuzhou to Che Zhou. More history than chunk 1: the halberd at the camp gate, Taishi Ci against Sun Ce and Lü Bu's end are all in the Records; Xutian, the plum wine and the swallowed eye are the embellishments. (events total 39)
