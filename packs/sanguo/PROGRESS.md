@@ -52,7 +52,7 @@ real years, 184–280, and the chapter is a field. Borders are real too, drawn f
 - [x] **1. events ch 1–9** (184–192): 桃园结义 to the fall of Dong Zhuo
 - [x] **2. events ch 10–21** (193–199): the warlords, Lü Bu, Cao Cao and the emperor
 - [x] **3. events ch 22–38** (199–208): Guandu, Guan Yu's five passes, the three visits
-- [ ] **4. events ch 39–57** (208–210): Changban, the Red Cliffs, Zhou Yu's three angers
+- [x] **4. events ch 39–57** (208–210): Changban, the Red Cliffs, Zhou Yu's three angers
 - [ ] **5. events ch 58–77** (211–220): Tong Pass, Yizhou, Hanzhong, Guan Yu's fall
 - [ ] **6. events ch 78–85** (220–223): three emperors, Yiling, Baidi
 - [ ] **7. events ch 86–104** (224–234): the southern campaign and the northern expeditions
@@ -65,4 +65,5 @@ real years, 184–280, and the chapter is a field. Borders are real too, drawn f
 
 - chunk 1, events ch 1-9 (184-192): 19 events from the peach garden to Li Jue and Guo Si: 8 history, 7 embellished, 4 fiction. The oath, Hua Xiong, the three heroes against Lü Bu and Diaochan are the novel's; Zhang Fei's whipping was Liu Bei's own. (events total 19)
 - chunk 2, events ch 10-21 (193-199): 20 events from Cao Cao's revenge in Xuzhou to Che Zhou. More history than chunk 1: the halberd at the camp gate, Taishi Ci against Sun Ce and Lü Bu's end are all in the Records; Xutian, the plum wine and the swallowed eye are the embellishments. (events total 39)
-- chunk 3, events ch 22-38 (199-208): 26 events from Wang Zhong and Liu Dai to Huang Zu. Guan Yu's year shows the pattern: Yan Liang and the sealed gifts are history, Wen Chou and Cai Yang were other men's kills, and the five passes are pure invention. (events total 64)
+- chunk 3, events ch 22-38 (199-208): 25 events from Wang Zhong and Liu Dai to Huang Zu. Guan Yu's year shows the pattern: Yan Liang and the sealed gifts are history, Wen Chou and Cai Yang were other men's kills, and the five passes are pure invention. (events total 64)
+- chunk 4, events ch 39-57 (208-210): 27 events from Bowang to Pang Tong at Leiyang. The Red Cliffs chapters are the novel at its most inventive: the arrows, the beating, the chained ships, the east wind and Huarong are all fiction around a battle that is history. (events total 91)
