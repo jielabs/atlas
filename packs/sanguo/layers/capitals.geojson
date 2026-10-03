@@ -1,0 +1,214 @@
+{
+ "type": "FeatureCollection",
+ "features": [
+  {
+   "type": "Feature",
+   "properties": {
+    "color": "#2c7a68",
+    "name": "Luoyang, capital of the Han",
+    "name_zh": "洛阳（东汉都城）",
+    "text": "Until Dong Zhuo burned it and moved the court west in 190–191.",
+    "text_zh": "190–191年董卓焚城西迁之前的东汉都城。",
+    "from": 184,
+    "to": 191
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     112.62,
+     34.72
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "color": "#2c7a68",
+    "name": "Chang'an, the court under Dong Zhuo and his generals",
+    "name_zh": "长安（献帝西迁）",
+    "text": "The emperor's prison under Dong Zhuo, then Li Jue and Guo Si, until his escape in 195–196.",
+    "text_zh": "董卓及李傕、郭汜挟持献帝之地，直到195–196年献帝东归。",
+    "from": 191,
+    "to": 196
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     108.94,
+     34.27
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "color": "#9a8a4a",
+    "name": "Shouchun, Yuan Shu's capital",
+    "name_zh": "寿春（袁术称帝）",
+    "text": "Where Yuan Shu proclaimed his short-lived dynasty in 197.",
+    "text_zh": "197年袁术在此称帝，国号仲，两年而亡。",
+    "from": 197,
+    "to": 200
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     116.78,
+     32.57
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "color": "#2c7a68",
+    "name": "Xu, the Han court under Cao Cao",
+    "name_zh": "许都（汉献帝）",
+    "text": "Cao Cao kept the emperor here from 196 until the end of the Han in 220.",
+    "text_zh": "196年曹操迎献帝都许，至220年汉亡。",
+    "from": 196,
+    "to": 221
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     113.85,
+     34.03
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "color": "#3f6e8c",
+    "name": "Ye, Cao Cao's seat",
+    "name_zh": "邺城（曹操、魏王）",
+    "text": "Cao Cao's base after 204, capital of his Wei kingdom from 213.",
+    "text_zh": "204年曹操取邺后的根据地，213年起为魏公、魏王国都。",
+    "from": 204,
+    "to": 221
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     114.35,
+     36.3
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "color": "#4f7f5a",
+    "name": "Gong'an, Liu Bei's Jingzhou seat",
+    "name_zh": "公安（刘备驻荆州）",
+    "text": "Liu Bei's headquarters after the Red Cliffs.",
+    "text_zh": "赤壁之战后刘备在荆州的治所。",
+    "from": 209,
+    "to": 214
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     112.23,
+     30.06
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "color": "#4f7f5a",
+    "name": "Chengdu, capital of Shu Han",
+    "name_zh": "成都（蜀汉都城）",
+    "text": "Liu Bei's capital from 214, the Shu Han capital from 221 until the surrender of 263.",
+    "text_zh": "214年刘备取益州，221年称帝都此，至263年降魏。",
+    "from": 214,
+    "to": 264
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     104.07,
+     30.67
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "color": "#b5523b",
+    "name": "Jianye, Sun Quan's seat",
+    "name_zh": "建业（孙权）",
+    "text": "Sun Quan moved here, renaming Moling, in 212.",
+    "text_zh": "212年孙权移治秣陵，改名建业。",
+    "from": 212,
+    "to": 221
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     118.8,
+     32.05
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "color": "#b5523b",
+    "name": "Wuchang, Sun Quan's capital",
+    "name_zh": "武昌（孙权）",
+    "text": "Sun Quan's capital while he faced Shu and Wei from the middle Yangzi.",
+    "text_zh": "孙权为对付蜀、魏，移都武昌。",
+    "from": 221,
+    "to": 229
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     114.88,
+     30.4
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "color": "#b5523b",
+    "name": "Jianye, capital of Wu",
+    "name_zh": "建业（吴国都城）",
+    "text": "Capital of Wu from Sun Quan's enthronement in 229 until the surrender of 280.",
+    "text_zh": "229年孙权称帝后都建业，至280年降晋。",
+    "from": 229,
+    "to": 281
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     118.8,
+     32.05
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "color": "#3f6e8c",
+    "name": "Luoyang, capital of Wei and Jin",
+    "name_zh": "洛阳（魏、晋都城）",
+    "text": "Rebuilt as the capital of Wei from 220, and of Jin from 265.",
+    "text_zh": "220年起重建为魏都，265年起为晋都。",
+    "from": 220,
+    "to": 281
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     112.62,
+     34.72
+    ]
+   }
+  }
+ ]
+}

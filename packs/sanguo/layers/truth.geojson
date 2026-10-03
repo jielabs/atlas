@@ -1,0 +1,3672 @@
+{
+ "type": "FeatureCollection",
+ "features": [
+  {
+   "type": "Feature",
+   "properties": {
+    "color": "#8a4f9e",
+    "from": 184,
+    "to": 187,
+    "name": "The novel's invention: The oath in the peach garden",
+    "name_zh": "小说虚构：桃园三结义",
+    "text": "Chapter 1.",
+    "text_zh": "第1回。"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     115.97,
+     39.49
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "color": "#2c7a68",
+    "from": 184,
+    "to": 187,
+    "name": "Recorded history: The Yellow Turbans rise",
+    "name_zh": "正史有载：黄巾起义",
+    "text": "Chapter 1.",
+    "text_zh": "第1回。"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     115.0,
+     37.6
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "color": "#2c7a68",
+    "from": 184,
+    "to": 187,
+    "name": "Recorded history: Fire at Changshe",
+    "name_zh": "正史有载：长社火攻黄巾",
+    "text": "Chapter 1.",
+    "text_zh": "第1回。"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     113.77,
+     34.22
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "color": "#c9a227",
+    "from": 184,
+    "to": 187,
+    "name": "Real, but embellished by the novel: The brothers' first battle",
+    "name_zh": "史有其事，演义加工：刘关张初破黄巾",
+    "text": "Chapter 1.",
+    "text_zh": "第1回。"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     116.08,
+     39.6
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "color": "#c9a227",
+    "from": 185,
+    "to": 188,
+    "name": "Real, but embellished by the novel: Zhang Fei whips the inspector",
+    "name_zh": "史有其事，演义加工：张翼德怒鞭督邮",
+    "text": "Chapter 2.",
+    "text_zh": "第2回。"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     115.1,
+     38.45
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "color": "#2c7a68",
+    "from": 189,
+    "to": 192,
+    "name": "Recorded history: He Jin plots against the eunuchs and is killed",
+    "name_zh": "正史有载：何进谋诛宦官",
+    "text": "Chapter 2.",
+    "text_zh": "第2回。"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     112.62,
+     34.72
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "color": "#c9a227",
+    "from": 189,
+    "to": 192,
+    "name": "Real, but embellished by the novel: Lü Bu kills his master for a horse",
+    "name_zh": "史有其事，演义加工：李肃说吕布",
+    "text": "Chapter 3.",
+    "text_zh": "第3回。"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     112.58,
+     34.76
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "color": "#2c7a68",
+    "from": 189,
+    "to": 192,
+    "name": "Recorded history: Dong Zhuo deposes the emperor",
+    "name_zh": "正史有载：董卓废少帝立献帝",
+    "text": "Chapter 4.",
+    "text_zh": "第4回。"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     112.66,
+     34.69
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "color": "#c9a227",
+    "from": 189,
+    "to": 192,
+    "name": "Real, but embellished by the novel: Cao Cao's dagger, and Lü Boshe",
+    "name_zh": "史有其事，演义加工：孟德献刀·误杀吕伯奢",
+    "text": "Chapter 4.",
+    "text_zh": "第4回。"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     113.98,
+     34.72
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "color": "#c9a227",
+    "from": 190,
+    "to": 193,
+    "name": "Real, but embellished by the novel: Eighteen lords against Dong Zhuo",
+    "name_zh": "史有其事，演义加工：十八路诸侯讨董卓",
+    "text": "Chapter 5.",
+    "text_zh": "第5回。"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     114.2,
+     35.25
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "color": "#8a4f9e",
+    "from": 190,
+    "to": 193,
+    "name": "The novel's invention: Guan Yu kills Hua Xiong before the wine cools",
+    "name_zh": "小说虚构：温酒斩华雄",
+    "text": "Chapter 5.",
+    "text_zh": "第5回。"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     113.2,
+     34.86
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "color": "#8a4f9e",
+    "from": 190,
+    "to": 193,
+    "name": "The novel's invention: Three heroes fight Lü Bu",
+    "name_zh": "小说虚构：三英战吕布",
+    "text": "Chapter 5.",
+    "text_zh": "第5回。"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     113.25,
+     34.82
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "color": "#2c7a68",
+    "from": 190,
+    "to": 193,
+    "name": "Recorded history: Dong Zhuo burns Luoyang",
+    "name_zh": "正史有载：董卓焚洛阳迁都",
+    "text": "Chapter 6.",
+    "text_zh": "第6回。"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     112.7,
+     34.75
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "color": "#c9a227",
+    "from": 191,
+    "to": 194,
+    "name": "Real, but embellished by the novel: Sun Jian hides the imperial seal",
+    "name_zh": "史有其事，演义加工：孙坚匿玉玺",
+    "text": "Chapter 6.",
+    "text_zh": "第6回。"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     112.55,
+     34.68
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "color": "#c9a227",
+    "from": 191,
+    "to": 194,
+    "name": "Real, but embellished by the novel: Yuan Shao and Gongsun Zan at the Pan River",
+    "name_zh": "史有其事，演义加工：袁绍磐河战公孙",
+    "text": "Chapter 7.",
+    "text_zh": "第7回。"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     115.27,
+     37.05
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "color": "#2c7a68",
+    "from": 191,
+    "to": 194,
+    "name": "Recorded history: Sun Jian dies at Xian Hill",
+    "name_zh": "正史有载：孙坚跨江击刘表战死",
+    "text": "Chapter 7.",
+    "text_zh": "第7回。"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     112.17,
+     32.0
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "color": "#8a4f9e",
+    "from": 192,
+    "to": 195,
+    "name": "The novel's invention: Diaochan and the chain of stratagems",
+    "name_zh": "小说虚构：王司徒巧使连环计",
+    "text": "Chapter 8.",
+    "text_zh": "第8回。"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     108.92,
+     34.29
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "color": "#2c7a68",
+    "from": 192,
+    "to": 195,
+    "name": "Recorded history: Lü Bu kills Dong Zhuo",
+    "name_zh": "正史有载：吕布诛董卓",
+    "text": "Chapter 9.",
+    "text_zh": "第9回。"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     108.94,
+     34.27
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "color": "#2c7a68",
+    "from": 192,
+    "to": 195,
+    "name": "Recorded history: Li Jue and Guo Si take Chang'an",
+    "name_zh": "正史有载：李傕郭汜犯长安",
+    "text": "Chapter 9.",
+    "text_zh": "第9回。"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     108.98,
+     34.24
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "color": "#2c7a68",
+    "from": 193,
+    "to": 196,
+    "name": "Recorded history: Cao Cao avenges his father in Xuzhou",
+    "name_zh": "正史有载：曹操兴师报父仇",
+    "text": "Chapter 10.",
+    "text_zh": "第10回。"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     117.18,
+     34.26
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "color": "#2c7a68",
+    "from": 194,
+    "to": 197,
+    "name": "Recorded history: Ma Teng and Han Sui march on Chang'an",
+    "name_zh": "正史有载：马腾举义讨李傕",
+    "text": "Chapter 10.",
+    "text_zh": "第10回。"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     108.75,
+     34.2
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "color": "#2c7a68",
+    "from": 194,
+    "to": 197,
+    "name": "Recorded history: Lü Bu defeats Cao Cao at Puyang",
+    "name_zh": "正史有载：吕温侯濮阳破曹操",
+    "text": "Chapter 11.",
+    "text_zh": "第11回。"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     115.03,
+     35.75
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "color": "#2c7a68",
+    "from": 194,
+    "to": 197,
+    "name": "Recorded history: Liu Bei relieves Kong Rong at Beihai",
+    "name_zh": "正史有载：刘皇叔北海救孔融",
+    "text": "Chapter 11.",
+    "text_zh": "第11回。"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     118.8,
+     36.6
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "color": "#c9a227",
+    "from": 194,
+    "to": 197,
+    "name": "Real, but embellished by the novel: Tao Qian offers Xuzhou three times",
+    "name_zh": "史有其事，演义加工：陶恭祖三让徐州",
+    "text": "Chapter 12.",
+    "text_zh": "第12回。"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     118.35,
+     34.6
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "color": "#2c7a68",
+    "from": 195,
+    "to": 198,
+    "name": "Recorded history: The emperor escapes from Chang'an",
+    "name_zh": "正史有载：献帝东归",
+    "text": "Chapter 13.",
+    "text_zh": "第13回。"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     110.95,
+     34.6
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "color": "#2c7a68",
+    "from": 195,
+    "to": 198,
+    "name": "Recorded history: Taishi Ci and the Little Conqueror at Shenting",
+    "name_zh": "正史有载：太史慈酣斗小霸王",
+    "text": "Chapter 15.",
+    "text_zh": "第15回。"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     119.4,
+     31.85
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "color": "#2c7a68",
+    "from": 196,
+    "to": 199,
+    "name": "Recorded history: Cao Cao brings the emperor to Xu",
+    "name_zh": "正史有载：曹孟德移驾幸许都",
+    "text": "Chapter 14.",
+    "text_zh": "第14回。"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     113.85,
+     34.03
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "color": "#c9a227",
+    "from": 196,
+    "to": 199,
+    "name": "Real, but embellished by the novel: Lü Bu seizes Xuzhou",
+    "name_zh": "史有其事，演义加工：吕奉先乘夜袭徐郡",
+    "text": "Chapter 14.",
+    "text_zh": "第14回。"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     117.96,
+     34.33
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "color": "#2c7a68",
+    "from": 196,
+    "to": 199,
+    "name": "Recorded history: Sun Ce takes the lower Yangzi",
+    "name_zh": "正史有载：孙伯符大战严白虎",
+    "text": "Chapter 15.",
+    "text_zh": "第15回。"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     120.6,
+     31.3
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "color": "#2c7a68",
+    "from": 196,
+    "to": 199,
+    "name": "Recorded history: Lü Bu shoots the halberd at the camp gate",
+    "name_zh": "正史有载：吕奉先射戟辕门",
+    "text": "Chapter 16.",
+    "text_zh": "第16回。"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     116.93,
+     34.73
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "color": "#2c7a68",
+    "from": 197,
+    "to": 200,
+    "name": "Recorded history: Defeat at Wan: Dian Wei dies",
+    "name_zh": "正史有载：曹孟德败师淯水",
+    "text": "Chapter 16.",
+    "text_zh": "第16回。"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     112.53,
+     33.0
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "color": "#2c7a68",
+    "from": 197,
+    "to": 200,
+    "name": "Recorded history: Yuan Shu calls himself emperor",
+    "name_zh": "正史有载：袁术称帝",
+    "text": "Chapter 17.",
+    "text_zh": "第17回。"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     116.78,
+     32.57
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "color": "#2c7a68",
+    "from": 198,
+    "to": 201,
+    "name": "Recorded history: Cao Cao cuts his hair for his head",
+    "name_zh": "正史有载：割发代首",
+    "text": "Chapter 17.",
+    "text_zh": "第17回。"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     112.35,
+     32.85
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "color": "#c9a227",
+    "from": 198,
+    "to": 201,
+    "name": "Real, but embellished by the novel: Xiahou Dun swallows his own eye",
+    "name_zh": "史有其事，演义加工：夏侯惇拔矢啖睛",
+    "text": "Chapter 18.",
+    "text_zh": "第18回。"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     117.1,
+     34.5
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "color": "#2c7a68",
+    "from": 198,
+    "to": 201,
+    "name": "Recorded history: Lü Bu dies at the White Gate Tower",
+    "name_zh": "正史有载：白门楼吕布殒命",
+    "text": "Chapter 19.",
+    "text_zh": "第19回。"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     117.98,
+     34.36
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "color": "#2c7a68",
+    "from": 199,
+    "to": 202,
+    "name": "Recorded history: The edict sewn in a belt",
+    "name_zh": "正史有载：董国舅内阁受诏",
+    "text": "Chapter 20.",
+    "text_zh": "第20回。"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     113.82,
+     34.06
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "color": "#c9a227",
+    "from": 199,
+    "to": 202,
+    "name": "Real, but embellished by the novel: The hunt at Xutian",
+    "name_zh": "史有其事，演义加工：曹阿瞒许田打围",
+    "text": "Chapter 20.",
+    "text_zh": "第20回。"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     113.95,
+     34.1
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "color": "#c9a227",
+    "from": 199,
+    "to": 202,
+    "name": "Real, but embellished by the novel: Talking of heroes over warm wine",
+    "name_zh": "史有其事，演义加工：曹操煮酒论英雄",
+    "text": "Chapter 21.",
+    "text_zh": "第21回。"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     113.78,
+     33.98
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "color": "#c9a227",
+    "from": 199,
+    "to": 202,
+    "name": "Real, but embellished by the novel: Guan Yu takes Xuzhou by a ruse",
+    "name_zh": "史有其事，演义加工：关公赚城斩车胄",
+    "text": "Chapter 21.",
+    "text_zh": "第21回。"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     117.93,
+     34.3
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "color": "#c9a227",
+    "from": 199,
+    "to": 202,
+    "name": "Real, but embellished by the novel: Guan Yu and Zhang Fei capture Wang Zhong and Liu Dai",
+    "name_zh": "史有其事，演义加工：关张共擒王刘二将",
+    "text": "Chapter 22.",
+    "text_zh": "第22回。"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     117.05,
+     34.6
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "color": "#2c7a68",
+    "from": 199,
+    "to": 202,
+    "name": "Recorded history: Mi Heng strips and drums before Cao Cao",
+    "name_zh": "正史有载：祢正平裸衣骂贼",
+    "text": "Chapter 23.",
+    "text_zh": "第23回。"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     113.88,
+     34.0
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "color": "#8a4f9e",
+    "from": 200,
+    "to": 203,
+    "name": "The novel's invention: The physician Ji Ping tries to poison Cao Cao",
+    "name_zh": "小说虚构：吉太医下毒遭刑",
+    "text": "Chapter 23.",
+    "text_zh": "第23回。"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     113.81,
+     34.08
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "color": "#2c7a68",
+    "from": 200,
+    "to": 203,
+    "name": "Recorded history: Cao Cao crushes Liu Bei, who flees to Yuan Shao",
+    "name_zh": "正史有载：皇叔败走投袁绍",
+    "text": "Chapter 24.",
+    "text_zh": "第24回。"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     116.93,
+     34.73
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "color": "#2c7a68",
+    "from": 200,
+    "to": 203,
+    "name": "Recorded history: Guan Yu kills Yan Liang at Baima",
+    "name_zh": "正史有载：关羽斩颜良",
+    "text": "Chapter 25.",
+    "text_zh": "第25回。"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     114.65,
+     35.55
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "color": "#c9a227",
+    "from": 200,
+    "to": 203,
+    "name": "Real, but embellished by the novel: Guan Yu's three conditions",
+    "name_zh": "史有其事，演义加工：屯土山关公约三事",
+    "text": "Chapter 25.",
+    "text_zh": "第25回。"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     117.9,
+     34.42
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "color": "#8a4f9e",
+    "from": 200,
+    "to": 203,
+    "name": "The novel's invention: Guan Yu kills Wen Chou",
+    "name_zh": "小说虚构：关云长诛文丑",
+    "text": "Chapter 26.",
+    "text_zh": "第26回。"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     114.2,
+     35.15
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "color": "#2c7a68",
+    "from": 200,
+    "to": 203,
+    "name": "Recorded history: Guan Yu hangs up his seal and leaves",
+    "name_zh": "正史有载：关云长挂印封金",
+    "text": "Chapter 26.",
+    "text_zh": "第26回。"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     113.9,
+     34.07
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "color": "#8a4f9e",
+    "from": 200,
+    "to": 203,
+    "name": "The novel's invention: Across five passes, six generals killed",
+    "name_zh": "小说虚构：过五关斩六将",
+    "text": "Chapter 27.",
+    "text_zh": "第27回。"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     112.6,
+     34.78
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "color": "#c9a227",
+    "from": 200,
+    "to": 203,
+    "name": "Real, but embellished by the novel: Cai Yang killed, the brothers reunited at Gucheng",
+    "name_zh": "史有其事，演义加工：斩蔡阳古城聚义",
+    "text": "Chapter 28.",
+    "text_zh": "第28回。"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     114.5,
+     33.1
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "color": "#c9a227",
+    "from": 200,
+    "to": 203,
+    "name": "Real, but embellished by the novel: Sun Ce kills Yu Ji and dies; Sun Quan succeeds",
+    "name_zh": "史有其事，演义加工：小霸王怒斩于吉",
+    "text": "Chapter 29.",
+    "text_zh": "第29回。"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     119.45,
+     32.15
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "color": "#2c7a68",
+    "from": 200,
+    "to": 203,
+    "name": "Recorded history: The battle of Guandu",
+    "name_zh": "正史有载：官渡之战",
+    "text": "Chapter 30.",
+    "text_zh": "第30回。"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     114.05,
+     34.78
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "color": "#2c7a68",
+    "from": 200,
+    "to": 203,
+    "name": "Recorded history: Cao Cao burns the granary at Wuchao",
+    "name_zh": "正史有载：劫乌巢孟德烧粮",
+    "text": "Chapter 30.",
+    "text_zh": "第30回。"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     114.42,
+     35.07
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "color": "#2c7a68",
+    "from": 201,
+    "to": 204,
+    "name": "Recorded history: Cao Cao defeats Yuan Shao again at Cangting",
+    "name_zh": "正史有载：曹操仓亭破本初",
+    "text": "Chapter 31.",
+    "text_zh": "第31回。"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     115.75,
+     36.15
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "color": "#2c7a68",
+    "from": 201,
+    "to": 204,
+    "name": "Recorded history: Liu Bei shelters with Liu Biao",
+    "name_zh": "正史有载：玄德荆州依刘表",
+    "text": "Chapter 31.",
+    "text_zh": "第31回。"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     112.36,
+     32.52
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "color": "#2c7a68",
+    "from": 204,
+    "to": 207,
+    "name": "Recorded history: Cao Cao floods Ye and takes Ji province",
+    "name_zh": "正史有载：决漳河曹操取冀州",
+    "text": "Chapter 32.",
+    "text_zh": "第32回。"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     114.35,
+     36.3
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "color": "#2c7a68",
+    "from": 204,
+    "to": 207,
+    "name": "Recorded history: Cao Pi takes Lady Zhen",
+    "name_zh": "正史有载：曹丕乘乱纳甄氏",
+    "text": "Chapter 33.",
+    "text_zh": "第33回。"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     114.31,
+     36.34
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "color": "#2c7a68",
+    "from": 207,
+    "to": 210,
+    "name": "Recorded history: White Wolf Mountain and Guo Jia's last plan",
+    "name_zh": "正史有载：郭嘉遗计定辽东",
+    "text": "Chapter 33.",
+    "text_zh": "第33回。"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     119.7,
+     41.1
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "color": "#c9a227",
+    "from": 207,
+    "to": 210,
+    "name": "Real, but embellished by the novel: The horse that leapt the Tan Stream",
+    "name_zh": "史有其事，演义加工：刘皇叔跃马过檀溪",
+    "text": "Chapter 34.",
+    "text_zh": "第34回。"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     112.13,
+     32.04
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "color": "#2c7a68",
+    "from": 207,
+    "to": 210,
+    "name": "Recorded history: The Water Mirror names the Sleeping Dragon",
+    "name_zh": "正史有载：玄德南漳逢隐沦",
+    "text": "Chapter 35.",
+    "text_zh": "第35回。"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     111.84,
+     31.78
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "color": "#8a4f9e",
+    "from": 207,
+    "to": 210,
+    "name": "The novel's invention: Shan Fu breaks Cao Ren's formation",
+    "name_zh": "小说虚构：单福新野破曹仁",
+    "text": "Chapter 35.",
+    "text_zh": "第35回。"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     112.4,
+     32.48
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "color": "#c9a227",
+    "from": 207,
+    "to": 210,
+    "name": "Real, but embellished by the novel: Xu Shu recommends Zhuge Liang as he leaves",
+    "name_zh": "史有其事，演义加工：元直走马荐诸葛",
+    "text": "Chapter 36.",
+    "text_zh": "第36回。"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     112.33,
+     32.56
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "color": "#2c7a68",
+    "from": 207,
+    "to": 210,
+    "name": "Recorded history: Three visits to the thatched cottage",
+    "name_zh": "正史有载：刘玄德三顾草庐",
+    "text": "Chapter 37.",
+    "text_zh": "第37回。"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     112.04,
+     32.02
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "color": "#2c7a68",
+    "from": 207,
+    "to": 210,
+    "name": "Recorded history: The Longzhong plan: the realm in three",
+    "name_zh": "正史有载：隆中对",
+    "text": "Chapter 38.",
+    "text_zh": "第38回。"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     112.07,
+     31.98
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "color": "#2c7a68",
+    "from": 208,
+    "to": 211,
+    "name": "Recorded history: Sun Quan avenges his father on Huang Zu",
+    "name_zh": "正史有载：孙权破黄祖报父仇",
+    "text": "Chapter 38.",
+    "text_zh": "第38回。"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     114.28,
+     30.55
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "color": "#c9a227",
+    "from": 208,
+    "to": 211,
+    "name": "Real, but embellished by the novel: Zhuge Liang's first battle: fire at Bowang",
+    "name_zh": "史有其事，演义加工：博望坡军师初用兵",
+    "text": "Chapter 39.",
+    "text_zh": "第39回。"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     112.83,
+     33.17
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "color": "#8a4f9e",
+    "from": 208,
+    "to": 211,
+    "name": "The novel's invention: Zhuge Liang burns Xinye",
+    "name_zh": "小说虚构：诸葛亮火烧新野",
+    "text": "Chapter 40.",
+    "text_zh": "第40回。"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     112.39,
+     32.49
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "color": "#2c7a68",
+    "from": 208,
+    "to": 211,
+    "name": "Recorded history: Liu Cong surrenders Jingzhou",
+    "name_zh": "正史有载：蔡夫人议献荆州",
+    "text": "Chapter 40.",
+    "text_zh": "第40回。"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     112.15,
+     32.05
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "color": "#c9a227",
+    "from": 208,
+    "to": 211,
+    "name": "Real, but embellished by the novel: Zhao Yun rides alone to save the heir",
+    "name_zh": "史有其事，演义加工：赵子龙单骑救主",
+    "text": "Chapter 41.",
+    "text_zh": "第41回。"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     111.78,
+     30.82
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "color": "#2c7a68",
+    "from": 208,
+    "to": 211,
+    "name": "Recorded history: Liu Bei flees with the people",
+    "name_zh": "正史有载：刘玄德携民渡江",
+    "text": "Chapter 41.",
+    "text_zh": "第41回。"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     111.8,
+     30.85
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "color": "#c9a227",
+    "from": 208,
+    "to": 211,
+    "name": "Real, but embellished by the novel: Zhang Fei at Changban Bridge",
+    "name_zh": "史有其事，演义加工：张翼德大闹长坂桥",
+    "text": "Chapter 42.",
+    "text_zh": "第42回。"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     111.83,
+     30.79
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "color": "#c9a227",
+    "from": 208,
+    "to": 211,
+    "name": "Real, but embellished by the novel: Zhuge Liang argues down Wu's scholars",
+    "name_zh": "史有其事，演义加工：诸葛亮舌战群儒",
+    "text": "Chapter 43.",
+    "text_zh": "第43回。"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     115.98,
+     29.7
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "color": "#2c7a68",
+    "from": 208,
+    "to": 211,
+    "name": "Recorded history: Sun Quan cuts the table",
+    "name_zh": "正史有载：孙权决计破曹操",
+    "text": "Chapter 44.",
+    "text_zh": "第44回。"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     116.02,
+     29.74
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "color": "#8a4f9e",
+    "from": 208,
+    "to": 211,
+    "name": "The novel's invention: Zhuge Liang provokes Zhou Yu with Cao Zhi's poem",
+    "name_zh": "小说虚构：孔明用智激周瑜",
+    "text": "Chapter 44.",
+    "text_zh": "第44回。"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     115.94,
+     29.67
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "color": "#8a4f9e",
+    "from": 208,
+    "to": 211,
+    "name": "The novel's invention: Jiang Gan steals a forged letter",
+    "name_zh": "小说虚构：群英会蒋干中计",
+    "text": "Chapter 45.",
+    "text_zh": "第45回。"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     113.7,
+     29.92
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "color": "#8a4f9e",
+    "from": 208,
+    "to": 211,
+    "name": "The novel's invention: Borrowing arrows with straw boats",
+    "name_zh": "小说虚构：草船借箭",
+    "text": "Chapter 46.",
+    "text_zh": "第46回。"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     113.5,
+     29.92
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "color": "#8a4f9e",
+    "from": 208,
+    "to": 211,
+    "name": "The novel's invention: Huang Gai takes the beating",
+    "name_zh": "小说虚构：献密计黄盖受刑",
+    "text": "Chapter 46.",
+    "text_zh": "第46回。"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     113.66,
+     29.86
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "color": "#8a4f9e",
+    "from": 208,
+    "to": 211,
+    "name": "The novel's invention: Pang Tong talks Cao Cao into chaining his ships",
+    "name_zh": "小说虚构：庞统巧授连环计",
+    "text": "Chapter 47.",
+    "text_zh": "第47回。"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     113.45,
+     29.95
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "color": "#c9a227",
+    "from": 208,
+    "to": 211,
+    "name": "Real, but embellished by the novel: Cao Cao chants a poem on the river",
+    "name_zh": "史有其事，演义加工：宴长江曹操赋诗",
+    "text": "Chapter 48.",
+    "text_zh": "第48回。"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     113.42,
+     29.99
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "color": "#8a4f9e",
+    "from": 208,
+    "to": 211,
+    "name": "The novel's invention: Zhuge Liang calls up the east wind",
+    "name_zh": "小说虚构：七星坛诸葛祭风",
+    "text": "Chapter 49.",
+    "text_zh": "第49回。"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     113.66,
+     29.84
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "color": "#2c7a68",
+    "from": 208,
+    "to": 211,
+    "name": "Recorded history: Fire at the Red Cliffs",
+    "name_zh": "正史有载：火烧赤壁",
+    "text": "Chapter 49.",
+    "text_zh": "第49回。"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     113.62,
+     29.88
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "color": "#8a4f9e",
+    "from": 208,
+    "to": 211,
+    "name": "The novel's invention: Guan Yu lets Cao Cao go at Huarong",
+    "name_zh": "小说虚构：关云长义释曹操",
+    "text": "Chapter 50.",
+    "text_zh": "第50回。"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     112.85,
+     29.75
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "color": "#2c7a68",
+    "from": 208,
+    "to": 211,
+    "name": "Recorded history: Sun Quan besieges Hefei",
+    "name_zh": "正史有载：孙仲谋大战张文远",
+    "text": "Chapter 53.",
+    "text_zh": "第53回。"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     117.25,
+     31.85
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "color": "#c9a227",
+    "from": 209,
+    "to": 212,
+    "name": "Real, but embellished by the novel: Zhou Yu is wounded at Jiangling; the first anger",
+    "name_zh": "史有其事，演义加工：孔明一气周公瑾",
+    "text": "Chapter 51.",
+    "text_zh": "第51回。"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     112.2,
+     30.35
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "color": "#2c7a68",
+    "from": 209,
+    "to": 212,
+    "name": "Recorded history: Zhao Yun takes Guiyang and refuses a bride",
+    "name_zh": "正史有载：赵子龙计取桂阳",
+    "text": "Chapter 52.",
+    "text_zh": "第52回。"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     113.0,
+     25.8
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "color": "#8a4f9e",
+    "from": 209,
+    "to": 212,
+    "name": "The novel's invention: Guan Yu spares Huang Zhong at Changsha",
+    "name_zh": "小说虚构：关云长义释黄汉升",
+    "text": "Chapter 53.",
+    "text_zh": "第53回。"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     112.97,
+     28.2
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "color": "#c9a227",
+    "from": 209,
+    "to": 212,
+    "name": "Real, but embellished by the novel: Liu Bei marries Sun Quan's sister",
+    "name_zh": "史有其事，演义加工：甘露寺刘备招亲",
+    "text": "Chapter 54.",
+    "text_zh": "第54回。"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     119.47,
+     32.22
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "color": "#c9a227",
+    "from": 210,
+    "to": 213,
+    "name": "Real, but embellished by the novel: A wife lost and an army too: the second anger",
+    "name_zh": "史有其事，演义加工：孔明二气周公瑾",
+    "text": "Chapter 55.",
+    "text_zh": "第55回。"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     112.23,
+     30.06
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "color": "#c9a227",
+    "from": 210,
+    "to": 213,
+    "name": "Real, but embellished by the novel: The third anger: Zhou Yu dies",
+    "name_zh": "史有其事，演义加工：孔明三气周公瑾",
+    "text": "Chapter 56.",
+    "text_zh": "第56回。"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     113.1,
+     29.37
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "color": "#c9a227",
+    "from": 210,
+    "to": 213,
+    "name": "Real, but embellished by the novel: The feast at the Bronze Sparrow Terrace",
+    "name_zh": "史有其事，演义加工：曹操大宴铜雀台",
+    "text": "Chapter 56.",
+    "text_zh": "第56回。"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     114.3,
+     36.28
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "color": "#8a4f9e",
+    "from": 210,
+    "to": 213,
+    "name": "The novel's invention: Zhuge Liang mourns Zhou Yu",
+    "name_zh": "小说虚构：柴桑口卧龙吊丧",
+    "text": "Chapter 57.",
+    "text_zh": "第57回。"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     115.96,
+     29.73
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "color": "#2c7a68",
+    "from": 210,
+    "to": 213,
+    "name": "Recorded history: Pang Tong neglects Leiyang county",
+    "name_zh": "正史有载：耒阳县凤雏理事",
+    "text": "Chapter 57.",
+    "text_zh": "第57回。"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     112.85,
+     26.42
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "color": "#c9a227",
+    "from": 211,
+    "to": 214,
+    "name": "Real, but embellished by the novel: Cao Cao cuts his beard and throws off his robe",
+    "name_zh": "史有其事，演义加工：曹阿瞒割须弃袍",
+    "text": "Chapter 58.",
+    "text_zh": "第58回。"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     110.32,
+     34.63
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "color": "#c9a227",
+    "from": 211,
+    "to": 214,
+    "name": "Real, but embellished by the novel: Ma Chao rises to avenge his father",
+    "name_zh": "史有其事，演义加工：马孟起兴兵雪恨",
+    "text": "Chapter 58.",
+    "text_zh": "第58回。"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     110.25,
+     34.6
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "color": "#2c7a68",
+    "from": 211,
+    "to": 214,
+    "name": "Recorded history: The blotted letter sets Han Sui against Ma Chao",
+    "name_zh": "正史有载：曹操抹书间韩遂",
+    "text": "Chapter 59.",
+    "text_zh": "第59回。"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     109.45,
+     34.48
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "color": "#c9a227",
+    "from": 211,
+    "to": 214,
+    "name": "Real, but embellished by the novel: Xu Chu strips to fight Ma Chao",
+    "name_zh": "史有其事，演义加工：许褚裸衣斗马超",
+    "text": "Chapter 59.",
+    "text_zh": "第59回。"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     109.55,
+     34.55
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "color": "#c9a227",
+    "from": 211,
+    "to": 214,
+    "name": "Real, but embellished by the novel: Zhang Song brings the map of Shu",
+    "name_zh": "史有其事，演义加工：张永年献西川图",
+    "text": "Chapter 60.",
+    "text_zh": "第60回。"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     112.27,
+     30.1
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "color": "#2c7a68",
+    "from": 212,
+    "to": 215,
+    "name": "Recorded history: Liu Bei meets Liu Zhang at Fu",
+    "name_zh": "正史有载：刘备入川涪城会",
+    "text": "Chapter 60.",
+    "text_zh": "第60回。"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     104.75,
+     31.47
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "color": "#2c7a68",
+    "from": 212,
+    "to": 215,
+    "name": "Recorded history: Zhao Yun stops the boat and takes back the heir",
+    "name_zh": "正史有载：赵云截江夺阿斗",
+    "text": "Chapter 61.",
+    "text_zh": "第61回。"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     112.32,
+     30.12
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "color": "#2c7a68",
+    "from": 212,
+    "to": 215,
+    "name": "Recorded history: Liu Bei kills Yang Huai and Gao Pei",
+    "name_zh": "正史有载：取涪关杨高授首",
+    "text": "Chapter 62.",
+    "text_zh": "第62回。"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     104.72,
+     31.52
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "color": "#2c7a68",
+    "from": 213,
+    "to": 216,
+    "name": "Recorded history: Sun Quan's letter at Ruxu",
+    "name_zh": "正史有载：孙权遗书退老瞒",
+    "text": "Chapter 61.",
+    "text_zh": "第61回。"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     117.86,
+     31.43
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "color": "#c9a227",
+    "from": 214,
+    "to": 217,
+    "name": "Real, but embellished by the novel: Pang Tong dies at Fallen Phoenix Slope",
+    "name_zh": "史有其事，演义加工：庞统落凤坡中箭",
+    "text": "Chapter 63.",
+    "text_zh": "第63回。"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     104.4,
+     30.98
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "color": "#2c7a68",
+    "from": 214,
+    "to": 217,
+    "name": "Recorded history: Zhang Fei spares Yan Yan",
+    "name_zh": "正史有载：张翼德义释严颜",
+    "text": "Chapter 63.",
+    "text_zh": "第63回。"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     106.55,
+     29.56
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "color": "#2c7a68",
+    "from": 214,
+    "to": 217,
+    "name": "Recorded history: Zhang Ren is captured and refuses to serve",
+    "name_zh": "正史有载：孔明定计捉张任",
+    "text": "Chapter 64.",
+    "text_zh": "第64回。"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     104.45,
+     30.93
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "color": "#2c7a68",
+    "from": 214,
+    "to": 217,
+    "name": "Recorded history: Liu Bei takes Chengdu",
+    "name_zh": "正史有载：刘备自领益州牧",
+    "text": "Chapter 65.",
+    "text_zh": "第65回。"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     104.07,
+     30.67
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "color": "#c9a227",
+    "from": 214,
+    "to": 217,
+    "name": "Real, but embellished by the novel: Ma Chao fights Zhang Fei, then joins Liu Bei",
+    "name_zh": "史有其事，演义加工：马超大战葭萌关",
+    "text": "Chapter 65.",
+    "text_zh": "第65回。"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     105.82,
+     32.43
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "color": "#2c7a68",
+    "from": 214,
+    "to": 217,
+    "name": "Recorded history: Empress Fu is killed",
+    "name_zh": "正史有载：伏皇后为国捐生",
+    "text": "Chapter 66.",
+    "text_zh": "第66回。"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     113.85,
+     34.03
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "color": "#c9a227",
+    "from": 215,
+    "to": 218,
+    "name": "Real, but embellished by the novel: Guan Yu goes to the meeting with a single sword",
+    "name_zh": "史有其事，演义加工：关云长单刀赴会",
+    "text": "Chapter 66.",
+    "text_zh": "第66回。"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     112.33,
+     28.6
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "color": "#2c7a68",
+    "from": 215,
+    "to": 218,
+    "name": "Recorded history: Zhang Liao at Xiaoyao Ford",
+    "name_zh": "正史有载：张辽威震逍遥津",
+    "text": "Chapter 67.",
+    "text_zh": "第67回。"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     117.29,
+     31.87
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "color": "#2c7a68",
+    "from": 215,
+    "to": 218,
+    "name": "Recorded history: Cao Cao takes Hanzhong",
+    "name_zh": "正史有载：曹操平定汉中地",
+    "text": "Chapter 67.",
+    "text_zh": "第67回。"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     106.55,
+     33.15
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "color": "#2c7a68",
+    "from": 215,
+    "to": 218,
+    "name": "Recorded history: Zhang Fei takes Wakou Pass",
+    "name_zh": "正史有载：猛张飞智取瓦口隘",
+    "text": "Chapter 70.",
+    "text_zh": "第70回。"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     106.97,
+     30.84
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "color": "#2c7a68",
+    "from": 216,
+    "to": 219,
+    "name": "Recorded history: Gan Ning raids Cao Cao's camp with a hundred riders",
+    "name_zh": "正史有载：甘宁百骑劫魏营",
+    "text": "Chapter 68.",
+    "text_zh": "第68回。"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     117.82,
+     31.47
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "color": "#c9a227",
+    "from": 216,
+    "to": 219,
+    "name": "Real, but embellished by the novel: Zuo Ci plays tricks on Cao Cao",
+    "name_zh": "史有其事，演义加工：左慈掷杯戏曹操",
+    "text": "Chapter 68.",
+    "text_zh": "第68回。"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     114.38,
+     36.27
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "color": "#2c7a68",
+    "from": 218,
+    "to": 221,
+    "name": "Recorded history: Five officials rise against Cao Cao and die",
+    "name_zh": "正史有载：讨汉贼五臣死节",
+    "text": "Chapter 69.",
+    "text_zh": "第69回。"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     113.88,
+     34.08
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "color": "#2c7a68",
+    "from": 219,
+    "to": 222,
+    "name": "Recorded history: Huang Zhong kills Xiahou Yuan at Mount Dingjun",
+    "name_zh": "正史有载：黄忠定军山斩夏侯渊",
+    "text": "Chapter 71.",
+    "text_zh": "第71回。"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     106.68,
+     33.1
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "color": "#2c7a68",
+    "from": 219,
+    "to": 222,
+    "name": "Recorded history: Zhao Yun's open gate on the Han River",
+    "name_zh": "正史有载：据汉水赵云寡胜众",
+    "text": "Chapter 71.",
+    "text_zh": "第71回。"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     106.75,
+     33.17
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "color": "#c9a227",
+    "from": 219,
+    "to": 222,
+    "name": "Real, but embellished by the novel: 'Chicken rib' and the death of Yang Xiu",
+    "name_zh": "史有其事，演义加工：杨修之死与鸡肋",
+    "text": "Chapter 72.",
+    "text_zh": "第72回。"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     106.9,
+     33.1
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "color": "#2c7a68",
+    "from": 219,
+    "to": 222,
+    "name": "Recorded history: Liu Bei becomes King of Hanzhong",
+    "name_zh": "正史有载：玄德进位汉中王",
+    "text": "Chapter 73.",
+    "text_zh": "第73回。"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     106.62,
+     33.18
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "color": "#c9a227",
+    "from": 219,
+    "to": 222,
+    "name": "Real, but embellished by the novel: Guan Yu floods seven armies",
+    "name_zh": "史有其事，演义加工：关云长水淹七军",
+    "text": "Chapter 74.",
+    "text_zh": "第74回。"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     112.15,
+     32.07
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "color": "#c9a227",
+    "from": 219,
+    "to": 222,
+    "name": "Real, but embellished by the novel: Scraping the poison from Guan Yu's bone",
+    "name_zh": "史有其事，演义加工：关云长刮骨疗毒",
+    "text": "Chapter 75.",
+    "text_zh": "第75回。"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     112.1,
+     32.12
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "color": "#2c7a68",
+    "from": 219,
+    "to": 222,
+    "name": "Recorded history: Lü Meng crosses the river in white",
+    "name_zh": "正史有载：吕子明白衣渡江",
+    "text": "Chapter 75.",
+    "text_zh": "第75回。"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     112.25,
+     30.32
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "color": "#2c7a68",
+    "from": 219,
+    "to": 222,
+    "name": "Recorded history: Guan Yu retreats to Maicheng",
+    "name_zh": "正史有载：关云长败走麦城",
+    "text": "Chapter 76.",
+    "text_zh": "第76回。"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     111.92,
+     30.68
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "color": "#2c7a68",
+    "from": 219,
+    "to": 222,
+    "name": "Recorded history: Guan Yu is captured and killed",
+    "name_zh": "正史有载：关羽父子遇害",
+    "text": "Chapter 77.",
+    "text_zh": "第77回。"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     111.68,
+     31.07
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "color": "#8a4f9e",
+    "from": 220,
+    "to": 223,
+    "name": "The novel's invention: Guan Yu's ghost at Jade Spring Hill",
+    "name_zh": "小说虚构：玉泉山关公显圣",
+    "text": "Chapter 77.",
+    "text_zh": "第77回。"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     111.76,
+     30.72
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "color": "#2c7a68",
+    "from": 220,
+    "to": 223,
+    "name": "Recorded history: Cao Cao dies at Luoyang",
+    "name_zh": "正史有载：曹操病逝",
+    "text": "Chapter 78.",
+    "text_zh": "第78回。"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     112.62,
+     34.72
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "color": "#c9a227",
+    "from": 220,
+    "to": 223,
+    "name": "Real, but embellished by the novel: Hua Tuo offers to open Cao Cao's skull",
+    "name_zh": "史有其事，演义加工：治风疾神医身死",
+    "text": "Chapter 78.",
+    "text_zh": "第78回。"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     112.58,
+     34.69
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "color": "#c9a227",
+    "from": 220,
+    "to": 223,
+    "name": "Real, but embellished by the novel: Cao Zhi's poem in seven steps",
+    "name_zh": "史有其事，演义加工：兄逼弟曹植赋诗",
+    "text": "Chapter 79.",
+    "text_zh": "第79回。"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     114.35,
+     36.3
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "color": "#2c7a68",
+    "from": 220,
+    "to": 223,
+    "name": "Recorded history: Liu Bei executes his adopted son Liu Feng",
+    "name_zh": "正史有载：侄陷叔刘封伏法",
+    "text": "Chapter 79.",
+    "text_zh": "第79回。"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     104.03,
+     30.71
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "color": "#2c7a68",
+    "from": 220,
+    "to": 223,
+    "name": "Recorded history: Cao Pi ends the Han",
+    "name_zh": "正史有载：曹丕废帝篡炎刘",
+    "text": "Chapter 80.",
+    "text_zh": "第80回。"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     113.95,
+     33.85
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "color": "#2c7a68",
+    "from": 221,
+    "to": 224,
+    "name": "Recorded history: Liu Bei proclaims himself emperor of Han",
+    "name_zh": "正史有载：汉王正位续大统",
+    "text": "Chapter 80.",
+    "text_zh": "第80回。"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     104.07,
+     30.67
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "color": "#2c7a68",
+    "from": 221,
+    "to": 224,
+    "name": "Recorded history: Zhang Fei is murdered by his own men",
+    "name_zh": "正史有载：急兄仇张飞遇害",
+    "text": "Chapter 81.",
+    "text_zh": "第81回。"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     105.97,
+     31.58
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "color": "#2c7a68",
+    "from": 221,
+    "to": 224,
+    "name": "Recorded history: Liu Bei marches against Wu",
+    "name_zh": "正史有载：雪弟恨先主兴兵",
+    "text": "Chapter 81.",
+    "text_zh": "第81回。"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     110.98,
+     30.83
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "color": "#2c7a68",
+    "from": 221,
+    "to": 224,
+    "name": "Recorded history: Sun Quan submits to Wei and receives the nine gifts",
+    "name_zh": "正史有载：孙权降魏受九锡",
+    "text": "Chapter 82.",
+    "text_zh": "第82回。"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     114.88,
+     30.4
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "color": "#2c7a68",
+    "from": 222,
+    "to": 225,
+    "name": "Recorded history: The scholar Lu Xun is made commander",
+    "name_zh": "正史有载：守江口书生拜大将",
+    "text": "Chapter 83.",
+    "text_zh": "第83回。"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     111.3,
+     30.7
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "color": "#2c7a68",
+    "from": 222,
+    "to": 225,
+    "name": "Recorded history: Lu Xun burns the camps at Yiling",
+    "name_zh": "正史有载：陆逊营烧七百里",
+    "text": "Chapter 84.",
+    "text_zh": "第84回。"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     111.42,
+     30.55
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "color": "#8a4f9e",
+    "from": 222,
+    "to": 225,
+    "name": "The novel's invention: The Stone Sentinel Maze traps Lu Xun",
+    "name_zh": "小说虚构：孔明巧布八阵图",
+    "text": "Chapter 84.",
+    "text_zh": "第84回。"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     109.48,
+     31.0
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "color": "#2c7a68",
+    "from": 223,
+    "to": 226,
+    "name": "Recorded history: Liu Bei entrusts his son to Zhuge Liang",
+    "name_zh": "正史有载：白帝城托孤",
+    "text": "Chapter 85.",
+    "text_zh": "第85回。"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     109.57,
+     31.04
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "color": "#c9a227",
+    "from": 223,
+    "to": 226,
+    "name": "Real, but embellished by the novel: Zhuge Liang turns back five armies without leaving home",
+    "name_zh": "史有其事，演义加工：诸葛亮安居平五路",
+    "text": "Chapter 85.",
+    "text_zh": "第85回。"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     104.11,
+     30.64
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "color": "#2c7a68",
+    "from": 224,
+    "to": 227,
+    "name": "Recorded history: Qin Mi outtalks the envoy of Wu",
+    "name_zh": "正史有载：难张温秦宓逞天辩",
+    "text": "Chapter 86.",
+    "text_zh": "第86回。"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     104.1,
+     30.7
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "color": "#c9a227",
+    "from": 224,
+    "to": 227,
+    "name": "Real, but embellished by the novel: Xu Sheng turns back Cao Pi on the Yangzi",
+    "name_zh": "史有其事，演义加工：破曹丕徐盛用火攻",
+    "text": "Chapter 86.",
+    "text_zh": "第86回。"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     119.45,
+     32.3
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "color": "#2c7a68",
+    "from": 225,
+    "to": 228,
+    "name": "Recorded history: Zhuge Liang marches south",
+    "name_zh": "正史有载：征南寇丞相大兴师",
+    "text": "Chapter 87.",
+    "text_zh": "第87回。"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     102.25,
+     27.9
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "color": "#c9a227",
+    "from": 225,
+    "to": 228,
+    "name": "Real, but embellished by the novel: Crossing the Lu River in the fifth month",
+    "name_zh": "史有其事，演义加工：渡泸水再缚番王",
+    "text": "Chapter 88.",
+    "text_zh": "第88回。"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     102.85,
+     26.65
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "color": "#8a4f9e",
+    "from": 225,
+    "to": 228,
+    "name": "The novel's invention: The poisoned springs of Bald Dragon Cave",
+    "name_zh": "小说虚构：武乡侯四番用计",
+    "text": "Chapter 89.",
+    "text_zh": "第89回。"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     102.9,
+     25.5
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "color": "#c9a227",
+    "from": 225,
+    "to": 228,
+    "name": "Real, but embellished by the novel: Meng Huo captured seven times",
+    "name_zh": "史有其事，演义加工：七擒孟获",
+    "text": "Chapter 90.",
+    "text_zh": "第90回。"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     102.62,
+     24.88
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "color": "#8a4f9e",
+    "from": 225,
+    "to": 228,
+    "name": "The novel's invention: Burning the rattan-armoured army",
+    "name_zh": "小说虚构：烧藤甲七擒孟获",
+    "text": "Chapter 90.",
+    "text_zh": "第90回。"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     102.0,
+     24.6
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "color": "#8a4f9e",
+    "from": 225,
+    "to": 228,
+    "name": "The novel's invention: Offering 'heads' at the Lu River",
+    "name_zh": "小说虚构：祭泸水汉相班师",
+    "text": "Chapter 91.",
+    "text_zh": "第91回。"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     102.9,
+     26.55
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "color": "#2c7a68",
+    "from": 227,
+    "to": 230,
+    "name": "Recorded history: The memorial on the eve of the campaign",
+    "name_zh": "正史有载：伐中原武侯上表",
+    "text": "Chapter 91.",
+    "text_zh": "第91回。"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     104.04,
+     30.64
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "color": "#c9a227",
+    "from": 228,
+    "to": 231,
+    "name": "Real, but embellished by the novel: Zhao Yun, seventy, kills five generals",
+    "name_zh": "史有其事，演义加工：赵子龙力斩五将",
+    "text": "Chapter 92.",
+    "text_zh": "第92回。"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     107.05,
+     33.6
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "color": "#2c7a68",
+    "from": 228,
+    "to": 231,
+    "name": "Recorded history: Three commanderies go over to Shu",
+    "name_zh": "正史有载：诸葛亮智取三城",
+    "text": "Chapter 92.",
+    "text_zh": "第92回。"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     105.25,
+     34.75
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "color": "#8a4f9e",
+    "from": 228,
+    "to": 231,
+    "name": "The novel's invention: Zhuge Liang curses Wang Lang to death",
+    "name_zh": "小说虚构：武乡侯骂死王朗",
+    "text": "Chapter 93.",
+    "text_zh": "第93回。"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     105.4,
+     34.1
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "color": "#2c7a68",
+    "from": 228,
+    "to": 231,
+    "name": "Recorded history: Jiang Wei comes over",
+    "name_zh": "正史有载：姜伯约归降孔明",
+    "text": "Chapter 93.",
+    "text_zh": "第93回。"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     105.18,
+     34.7
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "color": "#2c7a68",
+    "from": 228,
+    "to": 231,
+    "name": "Recorded history: Sima Yi crushes Meng Da",
+    "name_zh": "正史有载：司马懿克日擒孟达",
+    "text": "Chapter 94.",
+    "text_zh": "第94回。"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     110.25,
+     32.25
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "color": "#2c7a68",
+    "from": 228,
+    "to": 231,
+    "name": "Recorded history: Ma Su loses Jieting",
+    "name_zh": "正史有载：马谡拒谏失街亭",
+    "text": "Chapter 95.",
+    "text_zh": "第95回。"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     105.83,
+     34.95
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "color": "#8a4f9e",
+    "from": 228,
+    "to": 231,
+    "name": "The novel's invention: The empty fort",
+    "name_zh": "小说虚构：空城计",
+    "text": "Chapter 95.",
+    "text_zh": "第95回。"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     105.3,
+     34.2
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "color": "#2c7a68",
+    "from": 228,
+    "to": 231,
+    "name": "Recorded history: Zhuge Liang executes Ma Su in tears",
+    "name_zh": "正史有载：孔明挥泪斩马谡",
+    "text": "Chapter 96.",
+    "text_zh": "第96回。"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     107.03,
+     33.07
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "color": "#2c7a68",
+    "from": 228,
+    "to": 231,
+    "name": "Recorded history: Zhou Fang cuts his hair to trap Cao Xiu",
+    "name_zh": "正史有载：周鲂断发赚曹休",
+    "text": "Chapter 96.",
+    "text_zh": "第96回。"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     116.95,
+     30.9
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "color": "#c9a227",
+    "from": 228,
+    "to": 231,
+    "name": "Real, but embellished by the novel: The second memorial",
+    "name_zh": "史有其事，演义加工：讨魏国武侯再上表",
+    "text": "Chapter 97.",
+    "text_zh": "第97回。"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     107.0,
+     33.12
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "color": "#c9a227",
+    "from": 228,
+    "to": 231,
+    "name": "Real, but embellished by the novel: Zhuge Liang takes Chencang",
+    "name_zh": "史有其事，演义加工：袭陈仓武侯取胜",
+    "text": "Chapter 98.",
+    "text_zh": "第98回。"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     107.15,
+     34.37
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "color": "#2c7a68",
+    "from": 228,
+    "to": 231,
+    "name": "Recorded history: Wang Shuang is killed in the pursuit",
+    "name_zh": "正史有载：追汉军王双受诛",
+    "text": "Chapter 98.",
+    "text_zh": "第98回。"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     106.98,
+     34.27
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "color": "#2c7a68",
+    "from": 229,
+    "to": 232,
+    "name": "Recorded history: Shu takes Wudu and Yinping",
+    "name_zh": "正史有载：诸葛亮取武都阴平",
+    "text": "Chapter 99.",
+    "text_zh": "第99回。"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     105.7,
+     33.75
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "color": "#c9a227",
+    "from": 230,
+    "to": 233,
+    "name": "Real, but embellished by the novel: Cao Zhen's invasion is drowned in rain",
+    "name_zh": "史有其事，演义加工：汉兵劫寨破曹真",
+    "text": "Chapter 100.",
+    "text_zh": "第100回。"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     108.7,
+     33.75
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "color": "#2c7a68",
+    "from": 231,
+    "to": 234,
+    "name": "Recorded history: Zhang He is killed at Mumen",
+    "name_zh": "正史有载：奔剑阁张郃中计",
+    "text": "Chapter 101.",
+    "text_zh": "第101回。"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     105.55,
+     34.35
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "color": "#c9a227",
+    "from": 231,
+    "to": 234,
+    "name": "Real, but embellished by the novel: Reaping Wei's wheat at Shanggui",
+    "name_zh": "史有其事，演义加工：出陇上诸葛妆神",
+    "text": "Chapter 101.",
+    "text_zh": "第101回。"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     105.7,
+     34.58
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "color": "#c9a227",
+    "from": 234,
+    "to": 237,
+    "name": "Real, but embellished by the novel: Wooden oxen and gliding horses",
+    "name_zh": "史有其事，演义加工：诸葛亮造木牛流马",
+    "text": "Chapter 102.",
+    "text_zh": "第102回。"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     107.4,
+     34.0
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "color": "#8a4f9e",
+    "from": 234,
+    "to": 237,
+    "name": "The novel's invention: Sima Yi trapped by fire in Shangfang Valley",
+    "name_zh": "小说虚构：上方谷司马受困",
+    "text": "Chapter 103.",
+    "text_zh": "第103回。"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     107.5,
+     34.25
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "color": "#8a4f9e",
+    "from": 234,
+    "to": 237,
+    "name": "The novel's invention: Zhuge Liang prays to the stars for more life",
+    "name_zh": "小说虚构：五丈原诸葛禳星",
+    "text": "Chapter 103.",
+    "text_zh": "第103回。"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     107.63,
+     34.31
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "color": "#2c7a68",
+    "from": 234,
+    "to": 237,
+    "name": "Recorded history: The star falls at Wuzhang Plains",
+    "name_zh": "正史有载：陨大星汉丞相归天",
+    "text": "Chapter 104.",
+    "text_zh": "第104回。"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     107.65,
+     34.28
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "color": "#c9a227",
+    "from": 234,
+    "to": 237,
+    "name": "Real, but embellished by the novel: 'Who dares kill me?' Wei Yan dies",
+    "name_zh": "史有其事，演义加工：武侯预伏锦囊计",
+    "text": "Chapter 105.",
+    "text_zh": "第105回。"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     106.95,
+     33.2
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "color": "#2c7a68",
+    "from": 237,
+    "to": 240,
+    "name": "Recorded history: The emperor tries to move the bronze dew plate",
+    "name_zh": "正史有载：魏主拆取承露盘",
+    "text": "Chapter 105.",
+    "text_zh": "第105回。"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     108.94,
+     34.27
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "color": "#2c7a68",
+    "from": 238,
+    "to": 241,
+    "name": "Recorded history: Sima Yi destroys Gongsun Yuan",
+    "name_zh": "正史有载：公孙渊兵败死襄平",
+    "text": "Chapter 106.",
+    "text_zh": "第106回。"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     123.17,
+     41.27
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "color": "#2c7a68",
+    "from": 248,
+    "to": 251,
+    "name": "Recorded history: Sima Yi feigns senility",
+    "name_zh": "正史有载：司马懿诈病赚曹爽",
+    "text": "Chapter 106.",
+    "text_zh": "第106回。"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     112.62,
+     34.72
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "color": "#2c7a68",
+    "from": 249,
+    "to": 252,
+    "name": "Recorded history: The coup at Gaoping tomb",
+    "name_zh": "正史有载：高平陵之变",
+    "text": "Chapter 107.",
+    "text_zh": "第107回。"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     112.55,
+     34.4
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "color": "#2c7a68",
+    "from": 249,
+    "to": 252,
+    "name": "Recorded history: Jiang Wei is beaten at Niutou Mountain",
+    "name_zh": "正史有载：姜维兵败牛头山",
+    "text": "Chapter 107.",
+    "text_zh": "第107回。"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     104.2,
+     34.45
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "color": "#2c7a68",
+    "from": 252,
+    "to": 255,
+    "name": "Recorded history: Ding Feng fights in the snow at Dongxing",
+    "name_zh": "正史有载：丁奉雪中奋短兵",
+    "text": "Chapter 108.",
+    "text_zh": "第108回。"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     117.85,
+     31.55
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "color": "#2c7a68",
+    "from": 253,
+    "to": 256,
+    "name": "Recorded history: Sun Jun kills Zhuge Ke at a banquet",
+    "name_zh": "正史有载：孙峻席间施密计",
+    "text": "Chapter 108.",
+    "text_zh": "第108回。"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     118.78,
+     32.08
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "color": "#2c7a68",
+    "from": 254,
+    "to": 257,
+    "name": "Recorded history: Sima Shi deposes the emperor",
+    "name_zh": "正史有载：废曹芳魏家果报",
+    "text": "Chapter 109.",
+    "text_zh": "第109回。"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     112.66,
+     34.75
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "color": "#2c7a68",
+    "from": 255,
+    "to": 258,
+    "name": "Recorded history: Jiang Wei's victory west of the Tao",
+    "name_zh": "正史有载：姜维背水破大敌",
+    "text": "Chapter 110.",
+    "text_zh": "第110回。"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     103.85,
+     35.4
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "color": "#2c7a68",
+    "from": 255,
+    "to": 258,
+    "name": "Recorded history: Wen Yang charges alone",
+    "name_zh": "正史有载：文鸯单骑退雄兵",
+    "text": "Chapter 110.",
+    "text_zh": "第110回。"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     114.9,
+     33.5
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "color": "#2c7a68",
+    "from": 256,
+    "to": 259,
+    "name": "Recorded history: Deng Ai defeats Jiang Wei at Duangu",
+    "name_zh": "正史有载：邓士载智败姜伯约",
+    "text": "Chapter 111.",
+    "text_zh": "第111回。"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     105.5,
+     34.45
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "color": "#2c7a68",
+    "from": 257,
+    "to": 260,
+    "name": "Recorded history: Zhuge Dan rises at Shouchun",
+    "name_zh": "正史有载：诸葛诞义讨司马昭",
+    "text": "Chapter 111.",
+    "text_zh": "第111回。"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     116.78,
+     32.57
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "color": "#2c7a68",
+    "from": 258,
+    "to": 261,
+    "name": "Recorded history: Shouchun falls; Zhuge Dan's men die rather than surrender",
+    "name_zh": "正史有载：救寿春于诠死节",
+    "text": "Chapter 112.",
+    "text_zh": "第112回。"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     116.82,
+     32.61
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "color": "#2c7a68",
+    "from": 258,
+    "to": 261,
+    "name": "Recorded history: Sun Xiu destroys the regent Sun Chen",
+    "name_zh": "正史有载：丁奉定计斩孙綝",
+    "text": "Chapter 113.",
+    "text_zh": "第113回。"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     118.82,
+     32.02
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "color": "#2c7a68",
+    "from": 260,
+    "to": 263,
+    "name": "Recorded history: Cao Mao rides out to die",
+    "name_zh": "正史有载：曹髦驱车死南阙",
+    "text": "Chapter 114.",
+    "text_zh": "第114回。"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     112.64,
+     34.69
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "color": "#2c7a68",
+    "from": 262,
+    "to": 265,
+    "name": "Recorded history: Jiang Wei farms at Tazhong",
+    "name_zh": "正史有载：托屯田姜维避祸",
+    "text": "Chapter 115.",
+    "text_zh": "第115回。"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     103.6,
+     34.05
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "color": "#2c7a68",
+    "from": 263,
+    "to": 266,
+    "name": "Recorded history: Zhong Hui invades Shu through Hanzhong",
+    "name_zh": "正史有载：钟会分兵汉中道",
+    "text": "Chapter 116.",
+    "text_zh": "第116回。"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     106.9,
+     33.0
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "color": "#2c7a68",
+    "from": 263,
+    "to": 266,
+    "name": "Recorded history: Deng Ai crosses the Yinping wilderness",
+    "name_zh": "正史有载：邓士载偷度阴平",
+    "text": "Chapter 117.",
+    "text_zh": "第117回。"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     104.6,
+     32.6
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "color": "#2c7a68",
+    "from": 263,
+    "to": 266,
+    "name": "Recorded history: Zhuge Zhan dies at Mianzhu",
+    "name_zh": "正史有载：诸葛瞻战死绵竹",
+    "text": "Chapter 117.",
+    "text_zh": "第117回。"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     104.2,
+     31.35
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "color": "#2c7a68",
+    "from": 263,
+    "to": 266,
+    "name": "Recorded history: Liu Shan surrenders; Liu Chen dies in the ancestral temple",
+    "name_zh": "正史有载：哭祖庙一王死孝",
+    "text": "Chapter 118.",
+    "text_zh": "第118回。"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     104.07,
+     30.67
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "color": "#2c7a68",
+    "from": 264,
+    "to": 267,
+    "name": "Recorded history: Jiang Wei's false surrender and Zhong Hui's revolt",
+    "name_zh": "正史有载：假投降巧计成虚话",
+    "text": "Chapter 119.",
+    "text_zh": "第119回。"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     104.1,
+     30.7
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "color": "#2c7a68",
+    "from": 264,
+    "to": 267,
+    "name": "Recorded history: 'I am happy here, I do not miss Shu'",
+    "name_zh": "正史有载：乐不思蜀",
+    "text": "Chapter 119.",
+    "text_zh": "第119回。"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     112.6,
+     34.76
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "color": "#2c7a68",
+    "from": 265,
+    "to": 268,
+    "name": "Recorded history: Sima Yan ends Wei and founds Jin",
+    "name_zh": "正史有载：再受禅依样画葫芦",
+    "text": "Chapter 119.",
+    "text_zh": "第119回。"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     112.68,
+     34.71
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "color": "#2c7a68",
+    "from": 272,
+    "to": 275,
+    "name": "Recorded history: Yang Hu and Lu Kang, enemies and friends",
+    "name_zh": "正史有载：羊陆之交",
+    "text": "Chapter 120.",
+    "text_zh": "第120回。"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     112.15,
+     32.05
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "color": "#2c7a68",
+    "from": 280,
+    "to": 283,
+    "name": "Recorded history: Sun Hao surrenders; the three kingdoms become one",
+    "name_zh": "正史有载：降孙皓三分归一统",
+    "text": "Chapter 120.",
+    "text_zh": "第120回。"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     118.8,
+     32.05
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "color": "#2c7a68",
+    "from": 280,
+    "to": 283,
+    "name": "Recorded history: Wang Jun's fleet comes down the Yangzi",
+    "name_zh": "正史有载：王濬楼船下益州",
+    "text": "Chapter 120.",
+    "text_zh": "第120回。"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     111.2,
+     30.75
+    ]
+   }
+  }
+ ]
+}

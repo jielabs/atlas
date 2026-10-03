@@ -10,6 +10,16 @@
   "range": { "start": 184, "end": 280 },
   "data": { "eras": "eras.json", "events": "events.json", "tours": "tours.json" },
   "library": "../index.json",
+  "layers": [
+    { "id": "truth", "name": "History or invention", "name_zh": "正史·演义·虚构", "data": "layers/truth.geojson",
+      "type": "circle", "color": "#2c7a68", "radius": 11 },
+    { "id": "capitals", "name": "Capitals", "name_zh": "都城", "data": "layers/capitals.geojson",
+      "type": "circle", "color": "#3f6e8c", "radius": 6 },
+    { "id": "five-passes", "name": "Guan Yu's five passes", "name_zh": "过五关路线", "data": "layers/five-passes.geojson",
+      "type": "line", "color": "#8a4f9e", "width": 3, "dash": [2, 1.5] },
+    { "id": "expeditions", "name": "Northern expeditions", "name_zh": "诸葛北伐", "data": "layers/expeditions.geojson",
+      "type": "line", "color": "#4f7f5a", "width": 3, "dash": [3, 1.5] }
+  ],
   "attribution": "Romance of the Three Kingdoms (14th c.). Warlord borders drawn from commandery seats, approximate.",
   "note": "Years are real years. Each event is marked as recorded history, a real event embellished by the novel, or the novel's invention. Warlord borders are drawn from commandery seats and are approximate. Terrain and coastlines are modern.",
   "note_zh": "年份为真实公元纪年。每个事件都标明是正史所载、史有其事而演义加工，还是小说虚构。群雄疆域按郡治推出，只是近似示意。地形、海岸线和河流均为现代地理。"

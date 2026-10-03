@@ -1,0 +1,155 @@
+{
+ "type": "FeatureCollection",
+ "features": [
+  {
+   "type": "Feature",
+   "properties": {
+    "color": "#8a4f9e",
+    "from": 200,
+    "to": 202,
+    "name": "Guan Yu's ride: Xu → Dongling Pass",
+    "name_zh": "千里走单骑：许都 → 东岭关",
+    "text": "Chapters 27–28. Kills Kong Xiu at Dongling Pass. None of it happened, and none of these men is in the histories. Dongling Pass is placed approximately; the novel gives no location.",
+    "text_zh": "第27–28回。在东岭关斩孔秀。史书并无此事，这些守将也都不见于史书。东岭关位置为示意，小说未说明所在。"
+   },
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      113.85,
+      34.03
+     ],
+     [
+      112.95,
+      34.45
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "color": "#8a4f9e",
+    "from": 200,
+    "to": 202,
+    "name": "Guan Yu's ride: Dongling Pass → Luoyang",
+    "name_zh": "千里走单骑：东岭关 → 洛阳",
+    "text": "Chapters 27–28. Kills Han Fu and Meng Tan at Luoyang. None of it happened, and none of these men is in the histories. Dongling Pass is placed approximately; the novel gives no location.",
+    "text_zh": "第27–28回。在洛阳斩韩福、孟坦。史书并无此事，这些守将也都不见于史书。东岭关位置为示意，小说未说明所在。"
+   },
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      112.95,
+      34.45
+     ],
+     [
+      112.62,
+      34.72
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "color": "#8a4f9e",
+    "from": 200,
+    "to": 202,
+    "name": "Guan Yu's ride: Luoyang → Sishui Pass",
+    "name_zh": "千里走单骑：洛阳 → 汜水关",
+    "text": "Chapters 27–28. Kills Bian Xi at Sishui Pass. None of it happened, and none of these men is in the histories. Dongling Pass is placed approximately; the novel gives no location.",
+    "text_zh": "第27–28回。在汜水关斩卞喜。史书并无此事，这些守将也都不见于史书。东岭关位置为示意，小说未说明所在。"
+   },
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      112.62,
+      34.72
+     ],
+     [
+      113.2,
+      34.86
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "color": "#8a4f9e",
+    "from": 200,
+    "to": 202,
+    "name": "Guan Yu's ride: Sishui Pass → Xingyang",
+    "name_zh": "千里走单骑：汜水关 → 荥阳",
+    "text": "Chapters 27–28. Kills Wang Zhi at Xingyang. None of it happened, and none of these men is in the histories. Dongling Pass is placed approximately; the novel gives no location.",
+    "text_zh": "第27–28回。在荥阳斩王植。史书并无此事，这些守将也都不见于史书。东岭关位置为示意，小说未说明所在。"
+   },
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      113.2,
+      34.86
+     ],
+     [
+      113.38,
+      34.79
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "color": "#8a4f9e",
+    "from": 200,
+    "to": 202,
+    "name": "Guan Yu's ride: Xingyang → the Yellow River ford",
+    "name_zh": "千里走单骑：荥阳 → 黄河渡口",
+    "text": "Chapters 27–28. Kills Qin Qi at the Yellow River ford. None of it happened, and none of these men is in the histories. Dongling Pass is placed approximately; the novel gives no location.",
+    "text_zh": "第27–28回。在黄河渡口斩秦琪。史书并无此事，这些守将也都不见于史书。东岭关位置为示意，小说未说明所在。"
+   },
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      113.38,
+      34.79
+     ],
+     [
+      114.65,
+      35.55
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "color": "#8a4f9e",
+    "from": 200,
+    "to": 202,
+    "name": "Guan Yu's ride: the Yellow River ford → Gucheng",
+    "name_zh": "千里走单骑：黄河渡口 → 古城",
+    "text": "Chapters 27–28. Kills Cai Yang at Gucheng. None of it happened, and none of these men is in the histories. Dongling Pass is placed approximately; the novel gives no location.",
+    "text_zh": "第27–28回。在古城斩蔡阳。史书并无此事，这些守将也都不见于史书。东岭关位置为示意，小说未说明所在。"
+   },
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      114.65,
+      35.55
+     ],
+     [
+      114.5,
+      33.1
+     ]
+    ]
+   }
+  }
+ ]
+}
