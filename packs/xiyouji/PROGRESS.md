@@ -89,7 +89,7 @@ steps `{year, at: [lon, lat], zoom?, event?, text, text_zh}`. Prefer 8–16 step
 Target: about 180 events total.
 
 - [x] **1. events: monkey (ch 1–7)** — 灵根育孕, 访道, 悟彻菩提, 龙宫夺宝, 地府销名, 官封齐天大圣, 乱蟠桃会, 八卦炉, 压五行山. ~14 events
-- [ ] **2. events: mandate (ch 8–12)** — 观音奉旨访僧, 魏征斩泾河龙, 唐王入冥, 玄奘应诏, 领通关文牒. ~10 events
+- [x] **2. events: mandate (ch 8–12)** — 观音奉旨访僧, 魏征斩泾河龙, 唐王入冥, 玄奘应诏, 领通关文牒. ~10 events
 - [ ] **3. events: disciples (ch 13–22)** — 双叉岭, 两界山收悟空, 紧箍儿, 鹰愁涧白马, 观音院黑熊精, 高老庄收八戒, 黄风岭, 流沙河收沙僧. ~18 events
 - [ ] **4. events: demons (ch 23–35)** — 四圣试禅心, 五庄观人参果, 三打白骨精, 黑松林宝象国, 平顶山金角银角, 莲花洞, 乌鸡国. ~22 events
 - [ ] **5. events: kingdoms (ch 36–50)** — 乌鸡国除妖, 红孩儿号山, 黑水河, 车迟国斗法, 通天河灵感大王, 金兜洞. ~24 events
@@ -116,3 +116,4 @@ Target: about 180 events total.
 
 (iterations append one line each: chunk, event count, commit)
 - chunk 1, events for the monkey era (ch 1-7): 16 events from the stone monkey to Five Elements Mountain; heaven, the underworld and the dragon court placed at their projected earthly sites. (events total 16)
+- chunk 2, events for the mandate era (ch 8-12): 14 events from the Buddha's offer at Vulture Peak to Taizong sending Xuanzang west; the closing event sets the novel's imperial send-off against the real illegal departure. (events total 30)
