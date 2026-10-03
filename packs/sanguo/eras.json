@@ -1,0 +1,332 @@
+{
+ "range": {
+  "start": 184,
+  "end": 280
+ },
+ "eras": [
+  {
+   "id": "yellow-turbans",
+   "name": "The Yellow Turbans",
+   "name_zh": "黄巾之乱",
+   "glyph": "巾",
+   "short": "Turbans",
+   "tiny": "YT",
+   "start": 184,
+   "end": 188,
+   "chapters": [
+    1,
+    2
+   ],
+   "summary": "The Yellow Turbans rise across the empire; Liu Bei, Guan Yu and Zhang Fei swear brotherhood and win their first battles.",
+   "summary_zh": "黄巾起义席卷天下，刘关张桃园结义，初立战功。",
+   "snapshots": [
+    {
+     "from": 184,
+     "borders": "../../data/borders/eastern-han.geojson",
+     "label": "The Eastern Han's thirteen provinces",
+     "label_zh": "东汉十三州"
+    }
+   ]
+  },
+  {
+   "id": "dong-zhuo",
+   "name": "Dong Zhuo",
+   "name_zh": "董卓乱政",
+   "glyph": "卓",
+   "short": "Dong Zhuo",
+   "tiny": "DZ",
+   "start": 189,
+   "end": 192,
+   "chapters": [
+    3,
+    9
+   ],
+   "summary": "Dong Zhuo seizes the court, the eastern lords rise against him, he burns Luoyang and moves the court west, and Lü Bu kills him.",
+   "summary_zh": "董卓入京废立，关东诸侯起兵讨伐，董卓火烧洛阳挟帝西迁，终为吕布所杀。",
+   "snapshots": [
+    {
+     "from": 189,
+     "borders": "../../data/borders/eastern-han.geojson",
+     "label": "The Eastern Han's thirteen provinces",
+     "label_zh": "东汉十三州"
+    },
+    {
+     "from": 191,
+     "borders": "borders/sg-191.geojson",
+     "label": "191: Dong Zhuo moves the court to Chang'an; governors hold their provinces",
+     "label_zh": "191年：董卓挟天子西迁长安，州郡长官各据一方"
+    }
+   ]
+  },
+  {
+   "id": "warlords",
+   "name": "The Warlords",
+   "name_zh": "群雄割据",
+   "glyph": "雄",
+   "short": "Warlords",
+   "tiny": "Wl",
+   "start": 193,
+   "end": 199,
+   "chapters": [
+    10,
+    21
+   ],
+   "summary": "Cao Cao, Lü Bu, Yuan Shu, Sun Ce and Liu Bei fight for the middle of the empire; Cao Cao takes the emperor to Xu.",
+   "summary_zh": "曹操、吕布、袁术、孙策、刘备逐鹿中原，曹操迎献帝都许，挟天子以令诸侯。",
+   "snapshots": [
+    {
+     "from": 193,
+     "borders": "borders/sg-191.geojson",
+     "label": "191: Dong Zhuo moves the court to Chang'an; governors hold their provinces",
+     "label_zh": "191年：董卓挟天子西迁长安，州郡长官各据一方"
+    },
+    {
+     "from": 194,
+     "borders": "borders/sg-194.geojson",
+     "label": "194: Cao Cao holds Yan, Liu Bei is given Xu, Li Jue and Guo Si hold the court",
+     "label_zh": "194年：曹操据兖州，刘备领徐州，李傕、郭汜把持朝廷"
+    },
+    {
+     "from": 196,
+     "borders": "borders/sg-196.geojson",
+     "label": "196: Lü Bu takes Xu, Cao Cao brings the emperor to Xu, Sun Ce takes the lower Yangzi",
+     "label_zh": "196年：吕布夺徐州，曹操迎献帝都许，孙策平定江东"
+    },
+    {
+     "from": 199,
+     "borders": "borders/sg-199.geojson",
+     "label": "199: on the eve of Guandu, Yuan Shao holds the north, Cao Cao the middle",
+     "label_zh": "199年：官渡之战前夕，袁绍据河北四州，曹操据中原"
+    }
+   ]
+  },
+  {
+   "id": "guandu",
+   "name": "Guandu and the North",
+   "name_zh": "官渡与北定",
+   "glyph": "渡",
+   "short": "Guandu",
+   "tiny": "Gd",
+   "start": 200,
+   "end": 207,
+   "chapters": [
+    22,
+    38
+   ],
+   "summary": "Cao Cao defeats Yuan Shao at Guandu and unites the north; Guan Yu crosses five passes; Liu Bei visits Zhuge Liang three times.",
+   "summary_zh": "官渡之战曹操大破袁绍，统一北方；关羽过五关斩六将；刘备三顾茅庐。",
+   "snapshots": [
+    {
+     "from": 200,
+     "borders": "borders/sg-199.geojson",
+     "label": "199: on the eve of Guandu, Yuan Shao holds the north, Cao Cao the middle",
+     "label_zh": "199年：官渡之战前夕，袁绍据河北四州，曹操据中原"
+    },
+    {
+     "from": 207,
+     "borders": "borders/sg-207.geojson",
+     "label": "207: Cao Cao has united the north",
+     "label_zh": "207年：曹操统一北方"
+    }
+   ]
+  },
+  {
+   "id": "red-cliffs",
+   "name": "The Red Cliffs",
+   "name_zh": "赤壁之战",
+   "glyph": "赤",
+   "short": "Red Cliffs",
+   "tiny": "RC",
+   "start": 208,
+   "end": 210,
+   "chapters": [
+    39,
+    57
+   ],
+   "summary": "Cao Cao comes south, Liu Bei flees at Changban, Sun and Liu ally and burn his fleet at the Red Cliffs; Zhou Yu dies.",
+   "summary_zh": "曹操南下，长坂坡刘备败走，孙刘联军火烧赤壁，周瑜病逝。",
+   "snapshots": [
+    {
+     "from": 208,
+     "borders": "borders/sg-207.geojson",
+     "label": "207: Cao Cao has united the north",
+     "label_zh": "207年：曹操统一北方"
+    },
+    {
+     "from": 209,
+     "borders": "borders/sg-209.geojson",
+     "label": "209: after the Red Cliffs, Liu Bei takes the four commanderies south of the Yangzi",
+     "label_zh": "209年：赤壁之后，刘备取荆南四郡，周瑜取江陵"
+    }
+   ]
+  },
+  {
+   "id": "three-way",
+   "name": "The Realm Divided in Three",
+   "name_zh": "三分天下",
+   "glyph": "分",
+   "short": "Tripartite",
+   "tiny": "Tp",
+   "start": 211,
+   "end": 219,
+   "chapters": [
+    58,
+    77
+   ],
+   "summary": "Liu Bei takes Yizhou and Hanzhong; Cao Cao becomes King of Wei; Guan Yu floods seven armies and loses Jingzhou.",
+   "summary_zh": "刘备取益州、汉中，曹操进位魏王，关羽水淹七军，大意失荆州。",
+   "snapshots": [
+    {
+     "from": 211,
+     "borders": "borders/sg-211.geojson",
+     "label": "211: Cao Cao wins Guanzhong at Tong Pass; Liu Bei borrows Jingzhou",
+     "label_zh": "211年：曹操潼关破马超取关中，刘备借得荆州"
+    },
+    {
+     "from": 214,
+     "borders": "borders/sg-214.geojson",
+     "label": "214: Liu Bei takes Yizhou",
+     "label_zh": "214年：刘备取益州"
+    },
+    {
+     "from": 215,
+     "borders": "borders/sg-215.geojson",
+     "label": "215: Jingzhou divided along the Xiang; Cao Cao takes Hanzhong",
+     "label_zh": "215年：孙刘湘水划界，曹操取汉中"
+    },
+    {
+     "from": 219,
+     "borders": "borders/sg-219.geojson",
+     "label": "219: Liu Bei takes Hanzhong and calls himself its king",
+     "label_zh": "219年：刘备取汉中，自立为汉中王"
+    }
+   ]
+  },
+  {
+   "id": "three-states",
+   "name": "Three Emperors",
+   "name_zh": "三国鼎立",
+   "glyph": "鼎",
+   "short": "3 States",
+   "tiny": "3S",
+   "start": 220,
+   "end": 223,
+   "chapters": [
+    78,
+    85
+   ],
+   "summary": "Cao Pi ends the Han, Liu Bei and later Sun Quan take the title; Liu Bei is burned out at Yiling and dies at Baidi.",
+   "summary_zh": "曹丕代汉，刘备称帝，夷陵之战火烧连营，白帝城托孤。",
+   "snapshots": [
+    {
+     "from": 220,
+     "borders": "borders/sg-220.geojson",
+     "label": "220: Wu takes Jingzhou; Cao Pi ends the Han; Wei, Shu and Wu",
+     "label_zh": "220年：孙权袭取荆州，曹丕代汉，三国鼎立"
+    }
+   ]
+  },
+  {
+   "id": "expeditions",
+   "name": "Zhuge Liang's Campaigns",
+   "name_zh": "诸葛北伐",
+   "glyph": "伐",
+   "short": "Campaigns",
+   "tiny": "ZL",
+   "start": 224,
+   "end": 234,
+   "chapters": [
+    86,
+    104
+   ],
+   "summary": "Zhuge Liang pacifies the south, then marches north six times; Jieting, the empty city, and the death at Wuzhang Plains.",
+   "summary_zh": "诸葛亮南征七擒孟获，六出祁山北伐，失街亭、空城计，星落五丈原。",
+   "snapshots": [
+    {
+     "from": 224,
+     "borders": "borders/sg-220.geojson",
+     "label": "220: Wu takes Jingzhou; Cao Pi ends the Han; Wei, Shu and Wu",
+     "label_zh": "220年：孙权袭取荆州，曹丕代汉，三国鼎立"
+    },
+    {
+     "from": 229,
+     "borders": "borders/sg-229.geojson",
+     "label": "229: Zhuge Liang takes Wudu and Yinping",
+     "label_zh": "229年：诸葛亮取武都、阴平"
+    }
+   ]
+  },
+  {
+   "id": "sima",
+   "name": "The Rise of the Sima",
+   "name_zh": "司马专权",
+   "glyph": "马",
+   "short": "Sima",
+   "tiny": "Sm",
+   "start": 235,
+   "end": 263,
+   "chapters": [
+    105,
+    118
+   ],
+   "summary": "Sima Yi takes power in Wei; Jiang Wei fights on in Shu; Wei conquers Shu.",
+   "summary_zh": "司马懿高平陵夺权，姜维九伐中原，魏灭蜀汉。",
+   "snapshots": [
+    {
+     "from": 235,
+     "borders": "borders/sg-229.geojson",
+     "label": "229: Zhuge Liang takes Wudu and Yinping",
+     "label_zh": "229年：诸葛亮取武都、阴平"
+    },
+    {
+     "from": 238,
+     "borders": "borders/sg-238.geojson",
+     "label": "238: Sima Yi destroys the Gongsun of Liaodong",
+     "label_zh": "238年：司马懿平辽东公孙渊"
+    },
+    {
+     "from": 263,
+     "borders": "borders/sg-263.geojson",
+     "label": "263: Wei conquers Shu",
+     "label_zh": "263年：魏灭蜀"
+    }
+   ]
+  },
+  {
+   "id": "jin",
+   "name": "All Under Jin",
+   "name_zh": "三分归晋",
+   "glyph": "晋",
+   "short": "Jin",
+   "tiny": "Jn",
+   "start": 264,
+   "end": 280,
+   "chapters": [
+    119,
+    120
+   ],
+   "summary": "Sima Yan ends Wei and founds Jin; Jin conquers Wu, and the three kingdoms are one.",
+   "summary_zh": "司马炎代魏建晋，晋灭吴，三分归一统。",
+   "snapshots": [
+    {
+     "from": 264,
+     "borders": "borders/sg-263.geojson",
+     "label": "263: Wei conquers Shu",
+     "label_zh": "263年：魏灭蜀"
+    },
+    {
+     "from": 265,
+     "borders": "borders/sg-265.geojson",
+     "label": "265: Sima Yan ends Wei and founds Jin",
+     "label_zh": "265年：司马炎代魏建晋"
+    },
+    {
+     "from": 280,
+     "borders": "borders/sg-280.geojson",
+     "label": "280: Jin conquers Wu; the realm is one again",
+     "label_zh": "280年：晋灭吴，三分归一统"
+    }
+   ]
+  }
+ ]
+}

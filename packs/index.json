@@ -1,0 +1,11 @@
+{
+ "about": "The shelf of packs on this site. Each manifest that names this file in `library` lists these in the region chip, which switches between them. An entry with no manifest is the atlas itself.",
+ "packs": [
+  { "id": "xiyouji", "name": "Journey to the West", "name_zh": "西游记", "color": "#c47a2c",
+    "sub": "Chapters 1–100 · a novel's geography", "sub_zh": "第1–100回 · 小说的地理", "manifest": "xiyouji/manifest.json" },
+  { "id": "sanguo", "name": "Romance of the Three Kingdoms", "name_zh": "三国演义", "color": "#b93a26",
+    "sub": "184–280 · history and invention", "sub_zh": "184–280年 · 七分史实，三分虚构", "manifest": "sanguo/manifest.json" },
+  { "id": "atlas", "name": "History atlas", "name_zh": "历代地图", "color": "#2c7a68",
+    "sub": "3000 BCE to today", "sub_zh": "前3000年至今" }
+ ]
+}

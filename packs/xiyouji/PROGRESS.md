@@ -7,7 +7,7 @@ Design decisions live in [DESIGN.md](DESIGN.md); do not re-litigate them here.
 
 1. Read this file. Take the **first unchecked chunk** in §Chunks. Do only that one.
 2. Write the data, following §Contract exactly.
-3. Run `python3 tools/xiyouji/check_pack.py`. It must exit 0. Fix what it reports; never commit with errors.
+3. Run `python3 tools/packs/check_pack.py packs/xiyouji`. It must exit 0. Fix what it reports; never commit with errors.
 4. `git add -A && git commit` on branch `xiyouji`, message `xiyouji: <chunk name>`.
 5. Tick the chunk's box in this file, note the event count, and commit that too (amend into step 4 is fine).
 6. If every chunk is ticked, run the validator once more, then **stop the loop**.

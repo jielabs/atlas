@@ -1,18 +1,26 @@
-"""Check the Journey to the West pack against what app.js expects, and report coverage.
+"""Check a data pack against what app.js expects, and report coverage.
 
-Usage: python3 tools/xiyouji/check_pack.py [pack dir]        (default: packs/xiyouji)
+Usage: python3 tools/packs/check_pack.py <pack dir>        (e.g. packs/xiyouji, packs/sanguo)
 
 Errors fail the run (exit 1); warnings only print. The engine silently ignores malformed data, so this is the
-only way to know a pack is sound before opening it. See packs/xiyouji/DESIGN.md.
+only way to know a pack is sound before opening it. Rules every pack shares come first; RULES below adds what a
+particular pack promises about itself (its footing field, its chapters, its historical notes).
 """
 import json, os, re, sys
 
-PACK = sys.argv[1] if len(sys.argv) > 1 else "packs/xiyouji"
-# The nine categories hardcoded in app.js (CATS) and the four kinds of place footing the pack defines.
+if len(sys.argv) < 2:
+    sys.exit(__doc__)
+PACK = sys.argv[1].rstrip("/")
+# The nine categories hardcoded in app.js (CATS).
 CATS = {"war", "politics", "reform", "rebellion", "diplomacy", "economy", "culture", "science", "society"}
-GROUNDS = {"real", "identified", "projected", "invented"}
-# The pilgrimage runs Chang'an to India; anything outside this box is a typo, not a design choice.
-BOX = (65.0, 125.0, 15.0, 48.0)
+# Per pack, by manifest id. `field`: a required event field and its allowed values. `chapters`: (first, last, the
+# event field holding the chapter); every chapter should have an event. `notes`: values of `field` whose events must
+# carry a 史实 / Historically clause (None: none required, but zh and en must agree).
+RULES = {
+ "xiyouji": {"field": ("ground", {"real", "identified", "projected", "invented"}), "chapters": (1, 100, "year"), "notes": None},
+ "sanguo": {"field": ("truth", {"history", "embellished", "fiction"}), "chapters": (1, 120, "chapter"),
+            "notes": {"embellished", "fiction"}},
+}
 GEOM_OK = {"fill": {"Polygon", "MultiPolygon"}, "line": {"LineString", "MultiLineString", "Polygon", "MultiPolygon"},
            "circle": {"Point", "MultiPoint"}}
 
@@ -45,6 +53,10 @@ def inbox(lon, lat, where):
 
 # ---- manifest -------------------------------------------------------------
 m = load("manifest.json") or {}
+RULE = RULES.get(m.get("id"), {})
+# Coordinates must lie near the pack's region (3 degrees of slack); anything further is a typo.
+_poly = (m.get("region") or {}).get("polygon") or [[-180, -85], [180, 85]]
+BOX = (min(p[0] for p in _poly) - 3, max(p[0] for p in _poly) + 3, min(p[1] for p in _poly) - 3, max(p[1] for p in _poly) + 3)
 if m.get("atlas") != 1: err("manifest: atlas must be 1")
 if not re.fullmatch(r"[a-z0-9-]+", str(m.get("id", ""))): err("manifest: id must match [a-z0-9-]+")
 rng = m.get("range") or {}
@@ -60,6 +72,16 @@ for L in m.get("layers", []):
     pair(L, "name", f"layer {L.get('id')}")
 for p in m.get("plugins", []):
     if not os.path.exists(os.path.join(PACK, p)): err(f"manifest: plugin {p} does not exist")
+if m.get("library"):
+    lib_path = os.path.normpath(os.path.join(PACK, m["library"]))
+    lib = json.load(open(lib_path, encoding="utf-8")) if os.path.exists(lib_path) else None
+    if lib is None: err(f"manifest: library {m['library']} does not exist")
+    else:
+        for e in lib.get("packs", []):
+            if e.get("manifest") and not os.path.exists(os.path.join(os.path.dirname(lib_path), e["manifest"])):
+                err(f"library: {e.get('id')} points at missing {e['manifest']}")
+        if m.get("id") not in {e.get("id") for e in lib.get("packs", [])}:
+            err(f"library: no entry for this pack's id {m.get('id')!r}")
 if (m.get("refs") or {}).get("url", "").startswith("TODO"):
     warn("manifest: refs.url is still a placeholder; chapter links will be broken")
 
@@ -77,6 +99,13 @@ for i, e in enumerate(eras):
     for k in ("short", "tiny"):
         if not str(e.get(k, "")).strip(): warn(f"{where}: {k} missing, the timeline falls back to the full name")
     if not isinstance(e.get("start"), int) or not isinstance(e.get("end"), int): err(f"{where}: start/end must be integers")
+    snaps = e.get("snapshots") or []
+    for j, sn in enumerate(snaps):
+        f = os.path.normpath(os.path.join(PACK, str(sn.get("borders", "")).split("#")[0]))
+        if not os.path.exists(f): err(f"{where} snapshot {j + 1}: {sn.get('borders')} does not exist")
+        if not isinstance(sn.get("from"), int): err(f"{where} snapshot {j + 1}: from must be an integer")
+    if snaps and snaps[0].get("from") != e.get("start"):
+        err(f"{where}: the first snapshot must start at the era's start {e.get('start')}")
 if eras and all(isinstance(e.get("start"), int) and isinstance(e.get("end"), int) for e in eras):
     if eras[0]["start"] != START or eras[-1]["end"] != END:
         err(f"eras must span the manifest range {START}-{END}, got {eras[0]['start']}-{eras[-1]['end']}")
@@ -107,9 +136,20 @@ for i, ev in enumerate(events):
     if ev.get("level") not in (1, 2, 3): err(f"{where}: level must be 1, 2 or 3")
     if ev.get("category") not in CATS: err(f"{where}: category {ev.get('category')!r} is not one of {sorted(CATS)}")
     inbox(ev.get("lon"), ev.get("lat"), where)
-    g = ev.get("ground")
-    if g not in GROUNDS: err(f"{where}: ground {g!r} must be one of {sorted(GROUNDS)}")
-    else: grounds[g] = grounds.get(g, 0) + 1
+    zh_note, en_note = "史实：" in str(ev.get("summary_zh", "")), "Historically:" in str(ev.get("summary", ""))
+    if zh_note != en_note: err(f"{where}: the 史实 note and the Historically note must come together")
+    if RULE.get("field"):
+        key, allowed = RULE["field"]
+        g = ev.get(key)
+        if g not in allowed: err(f"{where}: {key} {g!r} must be one of {sorted(allowed)}")
+        else:
+            grounds[g] = grounds.get(g, 0) + 1
+            if RULE.get("notes") and g in RULE["notes"] and not zh_note:
+                err(f"{where}: {key} is {g}, so the summary must say what really happened (史实： / Historically:)")
+    if RULE.get("chapters"):
+        c0, c1, ck = RULE["chapters"]
+        c = ev.get(ck)
+        if not isinstance(c, int) or not c0 <= c <= c1: err(f"{where}: {ck} must be a chapter {c0}-{c1}")
 
 # ---- tours ----------------------------------------------------------------
 tours = load("tours.json") or []
@@ -160,13 +200,19 @@ if eras:
         n = per_era.get(e["id"], 0)
         span = e["end"] - e["start"] + 1
         flag = "  <- empty" if n == 0 else ""
-        print(f"  {e['id']:<10} ch {e['start']:>3}-{e['end']:<3} ({span:>2} ch)  {n:>3} events{flag}")
+        unit = "ch" if RULE.get("chapters", (0, 0, ""))[2] == "year" else "yr"
+        chs = f"  ch {e['chapters'][0]}-{e['chapters'][1]}" if e.get("chapters") else ""
+        print(f"  {e['id']:<14} {unit} {e['start']:>3}-{e['end']:<3} ({span:>2} {unit}){chs:<14}  {n:>3} events{flag}")
 if grounds:
-    print("\nplaces by footing: " + ", ".join(f"{k} {v}" for k, v in sorted(grounds.items())))
+    print(f"\nevents by {RULE['field'][0]}: " + ", ".join(f"{k} {v}" for k, v in sorted(grounds.items())))
 if events:
-    have = {ev["year"] for ev in events if isinstance(ev.get("year"), int)}
-    gaps = [c for c in range(START, END + 1) if c not in have]
-    print(f"\nchapters with no event: {len(gaps)}" + (f" -> {gaps}" if 0 < len(gaps) <= 40 else ""))
+    notes = sum("史实：" in str(ev.get("summary_zh", "")) for ev in events)
+    print(f"historical notes: {notes} of {len(events)} ({notes / len(events):.0%})")
+if events and RULE.get("chapters"):
+    c0, c1, ck = RULE["chapters"]
+    have = {ev.get(ck) for ev in events}
+    gaps = [c for c in range(c0, c1 + 1) if c not in have]
+    print(f"chapters with no event: {len(gaps)}" + (f" -> {gaps}" if 0 < len(gaps) <= 40 else ""))
 
 for w in warnings: print(f"WARN  {w}")
 for e in errors: print(f"ERROR {e}")

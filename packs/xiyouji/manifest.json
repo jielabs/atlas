@@ -9,6 +9,7 @@
   },
   "range": { "start": 1, "end": 100 },
   "data": { "eras": "eras.json", "events": "events.json", "tours": "tours.json" },
+  "library": "../index.json",
   "layers": [
     { "id": "route", "name": "Road west", "name_zh": "取经路线", "data": "layers/route.geojson",
       "type": "line", "color": "#c47a2c", "width": 3 },

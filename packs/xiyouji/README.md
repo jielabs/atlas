@@ -46,7 +46,7 @@ parenthetical with a question mark in the place name.
 - Edit `events.json`, `tours.json` or `eras.json` by hand. Keep the conventions in [PROGRESS.md](PROGRESS.md)
   (§Contract): `year` is the chapter, nine allowed categories, a footing on every place, JSON written with
   `indent=1` and `ensure_ascii=False`.
-- `python3 tools/xiyouji/check_pack.py` checks the pack. It catches what the atlas would silently ignore.
+- `python3 tools/packs/check_pack.py packs/xiyouji` checks the pack. It catches what the atlas would silently ignore.
 - `python3 tools/xiyouji/build_layers.py` rebuilds the four layers. The road is derived from the events, so
   rerun it after moving or adding one.
 

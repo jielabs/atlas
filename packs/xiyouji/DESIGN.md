@@ -249,7 +249,7 @@ A pack on the same site always loads, so no `PACK_ORIGINS` entry is needed (`app
 *As built:* phases 0, 1, 2 and 4 are done, phase 3 is not (see §10). The events were written straight into
 `events.json` in chunks, so the planned `build_events.py` table converter was not needed. Two tools were:
 
-- `tools/xiyouji/check_pack.py` — checks everything `app.js` silently ignores (era tiling, the nine categories,
+- `tools/packs/check_pack.py` — checks everything `app.js` silently ignores (era tiling, the nine categories,
   chapter range, coordinate box, footing, tour step targets, layer geometry) and reports coverage per era.
 - `tools/xiyouji/build_layers.py` — derives the road from the events and writes all four layers. Rerun it after
   editing events.
