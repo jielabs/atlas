@@ -1,1 +1,73 @@
-{ "type": "FeatureCollection", "features": [] }
+{
+ "type": "FeatureCollection",
+ "features": [
+  {
+   "type": "Feature",
+   "properties": {
+    "name": "Heavenly Palace",
+    "name_zh": "天宫",
+    "text": "The Jade Emperor's court, where Wukong kept the horses, guarded the peaches and wrecked the banquet (ch. 4-7). Drawn on the Kunlun, the pillar of heaven and home of the Queen Mother of the West.",
+    "text_zh": "玉帝的天庭，悟空在此做弼马温、看蟠桃园、大闹天宫（第4–7回）。投影在昆仑山：昆仑是天柱，也是西王母的居所。",
+    "color": "#7a5195"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     80.0,
+     36.0
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "name": "The underworld",
+    "name_zh": "幽冥地府",
+    "text": "The ten courts of the dead, where Wukong struck out his name and Taizong pleaded his case (ch. 3, 10-11, 58, 97). Drawn on Mount Tai, which in Chinese belief governed the souls of the dead.",
+    "text_zh": "十殿阎罗所在，悟空在此勾销生死簿，唐太宗在此对质还魂（第3、10–11、58、97回）。投影在泰山：旧俗以泰山主治鬼魂。",
+    "color": "#7a5195"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     117.1,
+     36.25
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "name": "Dragon Palace of the Eastern Sea",
+    "name_zh": "东海龙宫",
+    "text": "Where Wukong took the gold-banded staff (ch. 3) and went to sulk after his first quarrel with Tripitaka (ch. 14). Drawn in the East China Sea.",
+    "text_zh": "悟空在此取得金箍棒（第3回），第一次与唐僧闹翻后也到这里散心（第14回）。投影在东海。",
+    "color": "#7a5195"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     122.5,
+     31.0
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "name": "Spirit Mountain",
+    "name_zh": "灵山",
+    "text": "The Buddha's Thunderclap Monastery, the end of the road (ch. 8, 58, 98, 100). Drawn on Vulture Peak outside Rajgir, where the Buddha is said to have preached, a few miles from Nalanda where Xuanzang studied.",
+    "text_zh": "如来的雷音寺，取经路的终点（第8、58、98、100回）。投影在王舍城外的灵鹫山，相传佛陀在此说法，距玄奘求学的那烂陀寺不远。",
+    "color": "#7a5195"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     85.45,
+     25.0
+    ]
+   }
+  }
+ ]
+}

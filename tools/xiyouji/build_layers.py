@@ -1,6 +1,6 @@
-"""Build the pack's road-west and kingdoms layers.
+"""Build the pack's four layers: the road west, the kingdoms, the three realms and the four continents.
 
-Usage: python3 tools/xiyouji/build_layers.py        (writes packs/xiyouji/layers/route.geojson and kingdoms.geojson)
+Usage: python3 tools/xiyouji/build_layers.py        (writes packs/xiyouji/layers/*.geojson)
 
 The road is derived from events.json, so it follows whatever the events say: the pilgrimage events in chapter
 order, from the send-off in Chang'an (chapter 12) to the return (chapter 100), skipping the episodes that happen
@@ -90,4 +90,49 @@ kf = [{"type": "Feature", "properties": {"name": n, "name_zh": nz, "text": t, "t
        "color": FOOTING[g]}, "geometry": {"type": "Point", "coordinates": [lon, lat]}}
       for n, nz, lon, lat, g, fr, t, tz in KINGDOMS]
 dump(f"{PACK}/layers/kingdoms.geojson", {"type": "FeatureCollection", "features": kf})
-print(f"route: {len(stations)} stations, {len(legs)} legs; kingdoms: {len(kf)}")
+
+# The realms beyond the human world, each drawn at the earthly site Chinese religion already gives it.
+P = FOOTING["projected"]
+REALMS = [
+ ("Heavenly Palace", "天宫", 80.0, 36.0,
+  "The Jade Emperor's court, where Wukong kept the horses, guarded the peaches and wrecked the banquet (ch. 4-7). Drawn on the Kunlun, the pillar of heaven and home of the Queen Mother of the West.",
+  "玉帝的天庭，悟空在此做弼马温、看蟠桃园、大闹天宫（第4–7回）。投影在昆仑山：昆仑是天柱，也是西王母的居所。"),
+ ("The underworld", "幽冥地府", 117.1, 36.25,
+  "The ten courts of the dead, where Wukong struck out his name and Taizong pleaded his case (ch. 3, 10-11, 58, 97). Drawn on Mount Tai, which in Chinese belief governed the souls of the dead.",
+  "十殿阎罗所在，悟空在此勾销生死簿，唐太宗在此对质还魂（第3、10–11、58、97回）。投影在泰山：旧俗以泰山主治鬼魂。"),
+ ("Dragon Palace of the Eastern Sea", "东海龙宫", 122.5, 31.0,
+  "Where Wukong took the gold-banded staff (ch. 3) and went to sulk after his first quarrel with Tripitaka (ch. 14). Drawn in the East China Sea.",
+  "悟空在此取得金箍棒（第3回），第一次与唐僧闹翻后也到这里散心（第14回）。投影在东海。"),
+ ("Spirit Mountain", "灵山", 85.45, 25.0,
+  "The Buddha's Thunderclap Monastery, the end of the road (ch. 8, 58, 98, 100). Drawn on Vulture Peak outside Rajgir, where the Buddha is said to have preached, a few miles from Nalanda where Xuanzang studied.",
+  "如来的雷音寺，取经路的终点（第8、58、98、100回）。投影在王舍城外的灵鹫山，相传佛陀在此说法，距玄奘求学的那烂陀寺不远。"),
+]
+rf = [{"type": "Feature", "properties": {"name": n, "name_zh": nz, "text": t, "text_zh": tz, "color": P},
+       "geometry": {"type": "Point", "coordinates": [lon, lat]}} for n, nz, lon, lat, t, tz in REALMS]
+dump(f"{PACK}/layers/realms.geojson", {"type": "FeatureCollection", "features": rf})
+
+# The four continents of Buddhist cosmology, as the novel uses them. Deliberately soft ellipses, clamped to the
+# pack's box: the book says which continent a place is in, never where one ends.
+W, E, S, N = 65.0, 125.0, 15.0, 48.0
+def blob(cx, cy, rx, ry, n=36):
+    ring = [[round(min(E, max(W, cx + rx * math.cos(2 * math.pi * i / n))), 2),
+             round(min(N, max(S, cy + ry * math.sin(2 * math.pi * i / n))), 2)] for i in range(n)]
+    return {"type": "Polygon", "coordinates": [ring + [ring[0]]]}
+CONTINENTS = [
+ ("Purvavideha, the eastern continent", "东胜神洲", (121.5, 32.0, 3.5, 7.0), "#4f8f86",
+  "Home of Flower-Fruit Mountain. The Buddha: its people revere heaven and earth, and are clear-hearted and even-tempered (ch. 8).",
+  "花果山所在。如来说：东胜神洲者，敬天礼地，心爽气平（第8回）。"),
+ ("Jambudvipa, the southern continent", "南赡部洲", (109.0, 32.0, 8.5, 9.0), "#b5523b",
+  "The Tang empire. The Buddha: its people are greedy and lustful, delight in trouble, and kill and quarrel much, which is why it needs the scriptures (ch. 8).",
+  "大唐所在。如来说：南赡部洲者，贪淫乐祸，多杀多争，所以要传经劝善（第8回）。"),
+ ("Aparagodaniya, the western continent", "西牛贺洲", (82.0, 31.0, 17.0, 13.0), "#c47a2c",
+  "Everything beyond Two Frontiers Mountain, all the way to Spirit Mountain. The Buddha: its people neither covet nor kill, and nourish the spirit (ch. 8). The demons on the road suggest otherwise.",
+  "两界山以西直到灵山都属此洲。如来说：我西牛贺洲者，不贪不杀，养气潜灵（第8回）。一路妖魔却不大像。"),
+ ("Uttarakuru, the northern continent", "北俱芦洲", (105.0, 46.0, 18.0, 2.5), "#6a8aa0",
+  "Never visited in the story. The Buddha: its people kill, but only to eat, and are simple and do little harm (ch. 8).",
+  "书中师徒从未到过。如来说：北俱芦洲者，虽好杀生，只因糊口，性拙情疏，无多作践（第8回）。"),
+]
+cf = [{"type": "Feature", "properties": {"name": n, "name_zh": nz, "text": t, "text_zh": tz, "color": c},
+       "geometry": blob(*g)} for n, nz, g, c, t, tz in CONTINENTS]
+dump(f"{PACK}/layers/continents.geojson", {"type": "FeatureCollection", "features": cf})
+print(f"route: {len(stations)} stations, {len(legs)} legs; kingdoms: {len(kf)}; realms: {len(rf)}; continents: {len(cf)}")
