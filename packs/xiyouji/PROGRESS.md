@@ -92,7 +92,7 @@ Target: about 180 events total.
 - [x] **2. events: mandate (ch 8–12)** — 观音奉旨访僧, 魏征斩泾河龙, 唐王入冥, 玄奘应诏, 领通关文牒. ~10 events
 - [x] **3. events: disciples (ch 13–22)** — 双叉岭, 两界山收悟空, 紧箍儿, 鹰愁涧白马, 观音院黑熊精, 高老庄收八戒, 黄风岭, 流沙河收沙僧. ~18 events
 - [x] **4. events: demons (ch 23–35)** — 四圣试禅心, 五庄观人参果, 三打白骨精, 黑松林宝象国, 平顶山金角银角, 莲花洞, 乌鸡国. ~22 events
-- [ ] **5. events: kingdoms (ch 36–50)** — 乌鸡国除妖, 红孩儿号山, 黑水河, 车迟国斗法, 通天河灵感大王, 金兜洞. ~24 events
+- [x] **5. events: kingdoms (ch 36–50)** — 乌鸡国除妖, 红孩儿号山, 黑水河, 车迟国斗法, 通天河灵感大王, 金兜洞. ~24 events
 - [ ] **6. events: flames (ch 51–71)** — 如来助降, 女儿国落胎泉, 真假美猴王, 火焰山借芭蕉扇, 祭赛国碧波潭, 荆棘岭, 小雷音, 朱紫国, 盘丝洞. ~32 events
 - [ ] **7. events: india (ch 72–92)** — 狮驼岭, 比丘国, 陷空山无底洞, 灭法国, 隐雾山, 凤仙郡求雨, 玉华州, 金平府犀牛. ~30 events
 - [ ] **8. events: sutras (ch 93–100)** — 天竺国玉兔, 铜台府, 凌云渡脱胎, 灵山传经, 无字真经, 通天河老鼋沉经, 五圣成真. ~14 events
@@ -119,3 +119,4 @@ Target: about 180 events total.
 - chunk 2, events for the mandate era (ch 8-12): 14 events from the Buddha's offer at Vulture Peak to Taizong sending Xuanzang west; the closing event sets the novel's imperial send-off against the real illegal departure. (events total 30)
 - chunk 3, events for the disciples era (ch 13-22): 16 events from leaving Chang'an to Sandy at the River of Flowing Sands; Shi Pantuo, the Heart Sutra and the Mokhayan desert set against Wukong, the hermit and the Flowing Sands. (events total 46)
 - chunk 4, events for the demons era (ch 23-35): 16 events from the four saints' test to the calabash of Lotus Flower Cave. Wuji, listed under this chunk in the plan, starts at chapter 36 and belongs to the kingdoms era. (events total 62)
+- chunk 5, events for the kingdoms era (ch 36-50): 15 events from Wuji to Golden Helmet Mountain. Cheqi sits at Karashahr and the Heaven-Reaching River on the real Tongtian in Qinghai, so the identified places jump about, which is the honest result. (events total 77)
