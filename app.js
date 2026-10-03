@@ -42,6 +42,7 @@ const state = {
   mode: "china",        // the region whose periods the timeline shows, or "world" for plain calendar years
   home: "china",        // the region the data belongs to: "china", or the open pack's id
   pack: null,           // the open data pack: { url, manifest, only }
+  library: [],          // other packs on the open pack's shelf, listed by the region chip (openLibrary)
   chinaEras: [], regions: [], regionById: {}, worldEras: [], worldIndex: [], raw: {},
   detail: 2, cats: [],   // event detail level shown (1 大事, 2 要事, 3 细目) and category tags (empty: all)
   range: { start: -2070, end: 1912 },
@@ -199,7 +200,7 @@ async function loadBorders(path) {
 
 async function loadJSON(path) {
   // Revalidate, so a browser holding an older data file picks up the new one after a publish.
-  const res = await fetch(BASE + path, { cache: "no-cache" });
+  const res = await fetch(new URL(path, BASE), { cache: "no-cache" });
   if (!res.ok) throw new Error(`Could not load ${path} (${res.status})`);
   return res.json();
 }
@@ -500,7 +501,12 @@ function setupRegions(eras, regions, worldIndex) {
 // otherwise it comes first, so inside its outline it wins over the atlas's regions.
 function addPack(manifest, eras, worldIndex, only) {
   const id = manifest.id;
-  const list = eras.eras.map((e) => ({ ...e, region: id, worldMaps: true, focus: e.focus || [], snapshots: worldSnaps(e.start, e.end) }));
+  // A period may bring its own border maps (`snapshots`, paths relative to the manifest). They are drawn like the
+  // atlas's dynasty maps: inside the East Asia window, with the outer world map around them, and the file's own
+  // `focus` flags unless the period names its focus. Other periods use the world border maps.
+  const list = eras.eras.map((e) => e.snapshots?.length
+    ? { ...e, region: id, packMaps: true, focus: e.focus || null, snapshots: e.snapshots.map((s) => ({ ...s, borders: packPath(s.borders) })) }
+    : { ...e, region: id, worldMaps: true, focus: e.focus || [], snapshots: worldSnaps(e.start, e.end) });
   const R = manifest.region || {};
   const [[w, so], [ea, n]] = R.bounds || [[-180, -85], [180, 85]];
   const region = { id, name: manifest.name, name_zh: manifest.name_zh || manifest.name, color: manifest.color, eras: list,
@@ -536,6 +542,33 @@ async function openPack(url) {
   for (const k of ["eras", "events"]) if (!manifest.data?.[k]) throw new Error(`The pack has no ${k}.`);
   if (!/^[a-z0-9-]+$/.test(manifest.id || "")) throw new Error("The pack has no valid id.");
   return { url: u.href, manifest, only: PACK_ONLY };
+}
+// A path from the open pack, relative to its manifest, in the form loadJSON takes: relative to the atlas when the
+// pack is on the same site, an absolute URL otherwise.
+function packPath(path) {
+  const u = new URL(path, state.pack.url);
+  if (!allowedOrigin(u)) throw new Error(`Pack files from ${u.origin} are not allowed.`);
+  return u.href.startsWith(BASE) ? u.href.slice(BASE.length) : u.href;
+}
+// The other packs on the same shelf. A manifest may name a library file ({packs: [{id, name, name_zh, sub, sub_zh,
+// color, manifest}]}, manifest paths relative to the library file); the region chip then lists them and switches
+// between them. An entry with no manifest stands for the atlas itself.
+async function openLibrary(pack) {
+  if (!pack.manifest.library) return [];
+  const u = new URL(pack.manifest.library, pack.url);
+  if (!allowedOrigin(u)) throw new Error(`Libraries from ${u.origin} are not allowed.`);
+  const res = await fetch(u, { cache: "no-cache" });
+  if (!res.ok) throw new Error(`Could not load the library (${res.status}).`);
+  return ((await res.json()).packs || []).map((p) => ({ ...p, url: p.manifest ? new URL(p.manifest, u).href : null }))
+    .filter((p) => !p.url || allowedOrigin(new URL(p.url)));
+}
+// The address that opens a library entry: its pack alone, or the atlas itself, in the current language.
+function libraryHref(p) {
+  const q = new URLSearchParams(location.search);
+  q.delete("pack"); q.delete("packonly");
+  if (p.url) { q.set("pack", p.url.startsWith(BASE) ? p.url.slice(BASE.length) : p.url); q.set("packonly", "1"); }
+  q.set("lang", state.lang);
+  return `${location.pathname}?${q}`;
 }
 // A file of the open pack by its manifest key (eras, events, tours, places).
 function packFile(key) {
@@ -931,11 +964,11 @@ function setEra(era, quiet) {
 // are drawn as the main states; China's own periods keep the dynasty map's focus.
 const rawBorders = (path) => state.raw[path] || (state.raw[path] = loadBorders(path));
 async function setMaps(era, year) {
-  const ce = state.chinaEras.find((e) => !e.worldMaps && year >= e.start && year <= e.end);
+  const ce = era.packMaps ? era : state.chinaEras.find((e) => !e.worldMaps && year >= e.start && year <= e.end);
   const china = ce ? snapshotFor(ce, year).borders : null;
   const w = worldAt(year);
   const world = w ? (china ? w.outer : w.full) : null;
-  const focus = era.focus || (state.mode === "china" ? null : []);
+  const focus = era.focus || (state.mode === "china" || era.packMaps ? null : []);
   const key = [china, world, focus ? focus.join("|") : "*"].join("§");
   if (key === state.snapshot) return;
   state.snapshot = key;
@@ -1913,7 +1946,7 @@ function goRegion(id) {
 function renderRegionBtn() {
   const r = state.regionById[state.mode];
   $("region-name").textContent = r ? (zh() ? r.short_zh || r.name_zh : r.short || r.name) : t("allWorld");
-  $("region-btn").hidden = state.regions.length < 2;
+  $("region-btn").hidden = state.regions.length < 2 && !state.library?.length;
 }
 function toggleRegionPop(open) {
   const pop = $("region-pop"), btn = $("region-btn");
@@ -1922,7 +1955,18 @@ function toggleRegionPop(open) {
   btn.setAttribute("aria-expanded", open);
   if (!open) return;
   const y = state.year;
-  const row = (id, color, name, sub, full = name) => `<button type="button" role="menuitem" data-r="${esc(id)}" title="${esc(full)}" class="${id === state.mode ? "here" : ""}" style="--rc:${esc(color)}"><i></i><b>${esc(name)}</b><span>${esc(sub)}</span></button>`;
+  const row = (id, color, name, sub, full = name, here = id === state.mode) => `<button type="button" role="menuitem" data-r="${esc(id)}" title="${esc(full)}" class="${here ? "here" : ""}" style="--rc:${esc(color)}"><i></i><b>${esc(name)}</b><span>${esc(sub)}</span></button>`;
+  if (state.library?.length) {
+    // A pack with a library: the menu is the shelf, and picking another book opens it.
+    const cur = state.pack.manifest.id;
+    pop.innerHTML = state.library.map((p) => row(p.id, p.color || "#888", tx(p, "name") || p.id, tx(p, "sub") || "", tx(p, "name") || p.id, p.id === cur)).join("");
+    pop.querySelectorAll("[data-r]").forEach((b) => b.addEventListener("click", () => {
+      toggleRegionPop(false);
+      const p = state.library.find((x) => x.id === b.dataset.r);
+      if (p && p.id !== cur) location.href = libraryHref(p);
+    }));
+    return;
+  }
   pop.innerHTML = state.regions.map((r) => { const era = regionEra(r, y); return row(r.id, r.color || "#888", zh() ? r.short_zh || r.name_zh : r.short || r.name, era ? nameOf(era) : "", nameOf(r)); }).join("")
     + row("world", "#777", t("allWorld"), fmtYear(y));
   pop.querySelectorAll("[data-r]").forEach((b) => b.addEventListener("click", () => {
@@ -2795,6 +2839,7 @@ async function init() {
   if (PACK_URL) {
     state.pack = await openPack(PACK_URL);
     state.selected = null;
+    state.library = await openLibrary(state.pack).catch((e) => { console.warn(e.message); return []; });
   }
   applyLang();
   const plugins = importPlugins();

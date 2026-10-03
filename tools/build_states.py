@@ -11,6 +11,8 @@ Optional: `backdrop` names a border file whose non-focus features (the neighbour
 added around the seeded states, minus the seeded land. A snapshot's `names` map renames
 states or backdrop features from then on ({old name: [name, zh]} or null to drop one);
 features that end up with the same name are merged, e.g. the Sixteen Prefectures and Liao.
+`out` (optional) is the directory the snapshots are written to, default data/borders; a data pack keeps its
+own maps next to it (tools/sanguo/build_borders.py builds one that way).
 """
 import json, os, re, sys, urllib.request
 from shapely.geometry import shape, mapping, MultiPoint, Point, box
@@ -111,7 +113,7 @@ def build(spec_path):
         feats.sort(key=lambda f: f["properties"]["focus"])
         out = json.dumps({"type": "FeatureCollection", "features": feats}, separators=(",", ":"), ensure_ascii=False)
         out = re.sub(r"(\d+\.\d{3})\d+", r"\1", out)
-        open(os.path.join(ROOT, "data", "borders", f"{snap['id']}.geojson"), "w").write(out)
+        open(os.path.join(ROOT, spec.get("out", "data/borders"), f"{snap['id']}.geojson"), "w").write(out)
         print(f"{snap['id']:10s} {len(feats):3d} polities  {len(out)//1024} KB")
 
 

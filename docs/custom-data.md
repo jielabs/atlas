@@ -61,6 +61,7 @@ my-pack/
 | `attribution` | Added to the map credits. |
 | `note`, `note_zh` | When the pack is shown alone, this replaces the borders note in the side panel. |
 | `layers` | Map overlays drawn from GeoJSON. See [plugins.md](plugins.md#layers). |
+| `library` | Optional path to a shelf of packs to switch between (see [A shelf of packs](#a-shelf-of-packs)). |
 | `plugins` | JavaScript modules that extend the atlas. See [plugins.md](plugins.md#plugins). |
 
 Text fields come in pairs: `x` in English and `x_zh` in Chinese. If the Chinese one is missing, the English one is
@@ -80,8 +81,28 @@ shown.
 ```
 
 Periods must follow each other with no gaps. `glyph` is the seal in the era card (one or two characters). `short`
-and `tiny` are the labels on the timeline when space runs out. A pack's periods use the atlas's world border maps, so
-they need no `snapshots`.
+and `tiny` are the labels on the timeline when space runs out.
+
+### Border maps
+
+By default a pack's periods use the atlas's world border maps, so they need nothing more. A period can bring its own
+maps instead, as `snapshots`, a list of GeoJSON files with the year each takes over:
+
+```json
+{ "id": "red-cliffs", "start": 208, "end": 210, "...": "...",
+  "snapshots": [
+    { "from": 208, "borders": "borders/sg-207.geojson", "label": "207: Cao Cao has united the north", "label_zh": "207年：曹操统一北方" },
+    { "from": 209, "borders": "borders/sg-209.geojson" }
+  ] }
+```
+
+Paths are relative to the manifest, and may point at the atlas's own maps on the same site
+(`../../data/borders/eastern-han.geojson`). The maps are drawn like the atlas's dynasty maps: inside the East Asia
+window, with the outer world map around it. Features take the shape of `data/borders/*.geojson`: `name`, `name_zh`, a
+`label` point, `area`, optional `color`, and `focus: true` for the states the period is about (the rest are drawn as
+neighbours). A period's `focus` list of names, if given, overrides the flags. `label` / `label_zh` describe the map in
+the era card. The Three Kingdoms pack builds its maps from commandery seats with `tools/build_states.py`
+(`tools/sanguo/build_borders.py`).
 
 ## events.json: dated, located events
 
@@ -120,6 +141,25 @@ they need no `snapshots`.
 
 Each step flies the camera to `at` (with optional `zoom`, `pitch` and `bearing`), moves the timeline to `year` and
 shows `text`. `event` links the step to an event's story, and `path: true` draws the journey so far.
+
+## A shelf of packs
+
+Several packs on one site can be switched between from the region chip at the top left. Each manifest names the same
+library file, and the chip's menu lists its entries:
+
+```json
+{ "packs": [
+  { "id": "xiyouji", "name": "Journey to the West", "name_zh": "西游记", "sub": "Chapters 1–100", "sub_zh": "第1–100回",
+    "color": "#c47a2c", "manifest": "xiyouji/manifest.json" },
+  { "id": "sanguo", "name": "Romance of the Three Kingdoms", "name_zh": "三国演义", "manifest": "sanguo/manifest.json" },
+  { "id": "atlas", "name": "History atlas", "name_zh": "历代地图" }
+] }
+```
+
+`manifest` paths are relative to the library file; an entry with no manifest opens the atlas itself. Picking an entry
+reloads the page with that pack shown alone, in the current language, so each pack keeps its own timeline, layers
+and plugins. The library and its packs follow the same allowlist as any pack. This repository's shelf is
+`packs/index.json`.
 
 ## Hosting and the allowlist
 
