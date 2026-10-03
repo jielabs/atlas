@@ -1,10 +1,8 @@
-"""Build the Three Kingdoms pack's map layers.
+"""Build the Three Kingdoms pack's static map layers. (The truth discs under the event markers are computed live
+by packs/sanguo/plugins/truth.js, since they must follow the engine's period and filters.)
 
 Usage: python3 tools/sanguo/build_layers.py        (writes packs/sanguo/layers/*.geojson)
 
-- truth.geojson: a coloured disc under every event marker (green history, amber embellished, purple fiction), shown
-  for the same years the engine shows the marker, so the map says at a glance how much of a stretch is invented.
-  Derived from events.json; rerun after editing events.
 - capitals.geojson: the capitals of the court and the three states, each for the years it served.
 - five-passes.geojson: Guan Yu's fictional ride through five passes (chapter 27), which runs hundreds of li out of
   its way.
@@ -13,12 +11,7 @@ Usage: python3 tools/sanguo/build_layers.py        (writes packs/sanguo/layers/*
 import json
 
 PACK = "packs/sanguo"
-TRUTH = {"history": ("#2c7a68", "Recorded history", "正史有载"),
-         "embellished": ("#c9a227", "Real, but embellished by the novel", "史有其事，演义加工"),
-         "fiction": ("#8a4f9e", "The novel's invention", "小说虚构")}
-# app.js keeps an event on the map from its year for max(2, era length / 60) more years; every era here is
-# under 120 years long, so that is two.
-ACTIVE = 3
+FICTION = "#8a4f9e"   # the same purple plugins/truth.js uses for invented episodes
 
 
 def dump(name, features):
@@ -34,12 +27,6 @@ def point(lon, lat, **props):
 def line(coords, **props):
     return {"type": "Feature", "properties": props, "geometry": {"type": "LineString", "coordinates": coords}}
 
-
-events = json.load(open(f"{PACK}/events.json", encoding="utf-8"))
-dump("truth", [point(e["lon"], e["lat"], color=TRUTH[e["truth"]][0], **{"from": e["year"], "to": e.get("endYear", e["year"]) + ACTIVE},
-                     name=f"{TRUTH[e['truth']][1]}: {e['title']}", name_zh=f"{TRUTH[e['truth']][2]}：{e['title_zh']}",
-                     text=f"Chapter {e['chapter']}.", text_zh=f"第{e['chapter']}回。")
-               for e in events])
 
 HAN, WEI, SHU, WU, YUAN = "#2c7a68", "#3f6e8c", "#4f7f5a", "#b5523b", "#9a8a4a"
 CAPITALS = [
@@ -58,7 +45,6 @@ CAPITALS = [
 dump("capitals", [point(lon, lat, color=c, name=n, name_zh=nz, text=t, text_zh=tz, **{"from": a, "to": b})
                   for lon, lat, a, b, c, n, nz, t, tz in CAPITALS])
 
-FICTION = TRUTH["fiction"][0]
 PASSES = [  # (lon, lat, place, place_zh, general, general_zh)
  (113.85, 34.03, "Xu", "许都", None, None),
  (112.95, 34.45, "Dongling Pass", "东岭关", "Kong Xiu", "孔秀"),

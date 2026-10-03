@@ -20,6 +20,9 @@ python3 -m http.server 8000        # from the repository root
 
 **The timeline is chapters, not years.** Where the interface says `45年` or `45 CE`, read chapter 45.
 
+The chip at the top left switches to the companion pack, [Romance of the Three Kingdoms](../sanguo/README.md),
+or back to the atlas itself (the shelf is `packs/index.json`).
+
 ## What is in it
 
 | | |

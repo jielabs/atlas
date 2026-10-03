@@ -123,6 +123,12 @@
      "label_zh": "199年：官渡之战前夕，袁绍据河北四州，曹操据中原"
     },
     {
+     "from": 204,
+     "borders": "borders/sg-204.geojson",
+     "label": "204: Yuan Shao is dead; Cao Cao takes Ye, Ji and Qing",
+     "label_zh": "204年：袁绍已死，曹操攻克邺城，取冀州、青州"
+    },
+    {
      "from": 207,
      "borders": "borders/sg-207.geojson",
      "label": "207: Cao Cao has united the north",

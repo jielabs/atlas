@@ -98,6 +98,9 @@
                  "beiping", "liaoxi", "taiyuan", "shangdang", "xihe", "yanmen", "yunzhong", "wuyuan", "shuofang", "shangjun"],
     "hansui": ["jingzhao", "pingyi", "fufeng"],
     "sunce": ["danyang", "moling", "wu", "kuaiji", "dongye", "yuzhang", "luling", "poyang", "lujiang"] } },
+  { "id": "sg-204", "names": { "Yuan Shao": ["The Yuan heirs", "袁氏诸子"], "Sun Ce": ["Sun Quan", "孙权"] }, "set": {
+    "caocao": ["wei", "zhao", "changshan", "zhongshan", "hejian", "bohai", "qinghe", "julu", "anping",
+               "qi", "beihai", "donglai", "pingyuan", "lean", "jinan"] } },
   { "id": "sg-207", "names": { "Sun Ce": ["Sun Quan", "孙权"], "Gongsun Du": ["Gongsun Kang", "公孙康"] }, "set": {
     "caocao": ["wei", "zhao", "changshan", "zhongshan", "hejian", "bohai", "qinghe", "julu", "anping",
                "qi", "beihai", "donglai", "pingyuan", "lean", "jinan", "zhuo", "guangyang", "dai", "shanggu", "yuyang",

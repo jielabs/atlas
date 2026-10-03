@@ -59,7 +59,7 @@ real years, 184–280, and the chapter is a field. Borders are real too, drawn f
 - [x] **8. events ch 105–120** (234–280): the Sima, Jiang Wei, the fall of Shu, Jin
 - [x] **9. layers**: capitals, Guan Yu's five passes, the northern expeditions, truth halos under the event markers
 - [x] **10. tours**: Guan Yu, the Red Cliffs, Zhuge Liang, Liu Bei's life, the road to unity
-- [ ] **11. finish**: README, browser check, docs
+- [x] **11. finish**: README, browser check, docs
 
 ## Done
 
@@ -73,3 +73,4 @@ real years, 184–280, and the chapter is a field. Borders are real too, drawn f
 - chunk 8, events ch 105-120 (234-280): 27 events from Wei Yan's death to the surrender of Wu. The last stretch is almost all history: the Sima coup, Cao Mao's death, Deng Ai at Yinping, Liu Shan's 'happy here' and Wang Jun's fleet are told as the sources tell them. Every chapter now has an event. (events total 193)
 - chunk 9, layers: truth halos, capitals, five passes, expeditions: tools/sanguo/build_layers.py writes four layers: a disc under every event coloured by truth and shown for the same years as the marker (derived from events.json), eleven capitals with their years, Guan Yu's fictional ride through five passes, and Zhuge Liang's five northern campaigns kept on the map until Shu falls. (events total 193)
 - chunk 10, tours: Guan Yu, the Red Cliffs, Zhuge Liang, Liu Bei, the road to unity: Five tours, 68 steps, each step tagged history / embellished / fiction. Guan Yu and the Red Cliffs are the two where invention is densest; the road to unity is there to watch the borders change from one Han to a dozen warlords to three states to one Jin. (events total 193)
+- chunk 11, finish: live truth discs, 204 map, README, browser check: The truth discs are now computed by plugins/truth.js with the engine's own rules, because a static layer left discs with no marker across periods and under the detail filter; checked to match the markers one for one under every filter and across seven sample years. Added the 204 map (Cao Cao takes Ji and Qing), wrote the README, and pointed Journey to the West's README at the shelf. Checked in headless Chrome: borders change with the years, all layers and five tours work, English works, no console errors. (events total 193)
