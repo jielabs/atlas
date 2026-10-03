@@ -95,7 +95,7 @@ Target: about 180 events total.
 - [x] **5. events: kingdoms (ch 36–50)** — 乌鸡国除妖, 红孩儿号山, 黑水河, 车迟国斗法, 通天河灵感大王, 金兜洞. ~24 events
 - [x] **6. events: flames (ch 51–71)** — 如来助降, 女儿国落胎泉, 真假美猴王, 火焰山借芭蕉扇, 祭赛国碧波潭, 荆棘岭, 小雷音, 朱紫国, 盘丝洞. ~32 events
 - [x] **7. events: india (ch 72–92)** — 狮驼岭, 比丘国, 陷空山无底洞, 灭法国, 隐雾山, 凤仙郡求雨, 玉华州, 金平府犀牛. ~30 events
-- [ ] **8. events: sutras (ch 93–100)** — 天竺国玉兔, 铜台府, 凌云渡脱胎, 灵山传经, 无字真经, 通天河老鼋沉经, 五圣成真. ~14 events
+- [x] **8. events: sutras (ch 93–100)** — 天竺国玉兔, 铜台府, 凌云渡脱胎, 灵山传经, 无字真经, 通天河老鼋沉经, 五圣成真. ~14 events
 - [ ] **9. layers: route.geojson + kingdoms.geojson** — the road west as ~10 segments with `from`/`to` chapters so it grows; the ten kingdoms as points with cards.
 - [ ] **10. layers: realms.geojson + continents.geojson** — 天宫·地府·龙宫·灵山 as four `projected` points; 四大部洲 as four deliberately vague polygons, clipped to the pack's box.
 - [ ] **11. tours: `monkey-rise` + `road-west`** — the rise and fall of Monkey (花果山 → 方寸山 → 龙宫 → 地府 → 天宫 → 五行山); the whole pilgrimage in 16 steps. `road-west` is the headline tour.
@@ -122,3 +122,4 @@ Target: about 180 events total.
 - chunk 5, events for the kingdoms era (ch 36-50): 15 events from Wuji to Golden Helmet Mountain. Cheqi sits at Karashahr and the Heaven-Reaching River on the real Tongtian in Qinghai, so the identified places jump about, which is the honest result. (events total 77)
 - chunk 6, events for the flames era (ch 51-71): 21 events from the blue buffalo to Zhuzi. The Women's Country is identified with the Eastern Women's Kingdom of the Record of the Western Regions; the Flaming Mountain event carries the real Gaochang story. (events total 98)
 - chunk 7, events for the india era (ch 72-92): 22 events from Silk Cave to the rhinoceroses of Green Dragon Mountain; the law-destroying kingdom set against Gandhara's empty monasteries, and Yuhua against the palace where Xuanzang died. (events total 120)
+- chunk 8, events for the sutras era (ch 93-100): 12 events from Jetavana to the five saints; the embroidered ball at Kanyakubja set against Harsha's assembly of 642, and the return against the real 645 homecoming with 657 texts. (events total 132)
