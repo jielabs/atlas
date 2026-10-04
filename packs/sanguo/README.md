@@ -57,20 +57,21 @@ The discs follow the event markers exactly, including the detail and topic filte
 
 ## Publishing
 
-The pack is published as a stand-alone site at <https://sanguo.192-155-81-57.sslip.io/> (nginx on the VPS `dev`,
-Let's Encrypt certificate renewed by certbot's timer). `tools/sanguo/deploy.sh` checks the pack, builds
-`dist/sanguo` with `tools/sanguo/build_site.py` (150 MB with all tiles for the region) and copies it with rsync.
-The nginx site is kept in `tools/sanguo/nginx/` as it was before certbot added the TLS block.
+The pack is published as a stand-alone site at <https://atlas.yangjie.org/>. The name is proxied by Cloudflare
+(SSL mode Full, or Full (strict)); the origin is nginx on the VPS `dev`, with a Let's Encrypt certificate issued and
+renewed through the webroot `/var/www/acme`, so renewal works whether or not Cloudflare redirects HTTP to HTTPS.
+The nginx site is kept in `tools/sanguo/nginx/`.
+
+`tools/sanguo/deploy.sh` checks the pack, builds `dist/atlas` with `tools/sanguo/build_site.py` (150 MB with all
+tiles for the region) and copies it with rsync. The page names the pack in `<html data-pack>`, so the address
+stays `https://atlas.yangjie.org/`.
 
 On the server itself (the build needs only Python 3 and rsync):
 
 ```sh
-git clone git@github.com:jielabs/atlas.git && cd atlas && git checkout sanguo
-tools/sanguo/deploy.sh /var/www/sanguo        # later: git pull && tools/sanguo/deploy.sh /var/www/sanguo
+git clone --depth 1 -b sanguo git@github.com:jielabs/atlas.git && cd atlas
+tools/sanguo/deploy.sh /var/www/atlas        # later: git pull --ff-only && tools/sanguo/deploy.sh /var/www/atlas
 ```
-
-To move it to a real domain: point the domain's A record at 192.155.81.57, add the name to `server_name` in the
-nginx site, and run `sudo certbot --nginx -d <domain>`.
 
 ## Known limits
 

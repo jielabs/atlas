@@ -1,6 +1,6 @@
 """Build a stand-alone static site that shows only the Three Kingdoms pack.
 
-Usage: python3 tools/sanguo/build_site.py [--tiles full|lean] [--out dist/sanguo]
+Usage: python3 tools/sanguo/build_site.py [--tiles full|lean] [--out dist/atlas]
 
 The engine needs only a small part of the atlas to run one pack shown alone: the page, the world maps around the
 pack's East Asia window for its years, the river and landscape names, and the elevation and imagery tiles. This
@@ -10,8 +10,8 @@ Tiles: `full` keeps every bundled zoom that touches the pack's area (the page wo
 `lean` keeps zooms 0-5 only, and past them the browser fetches AWS Terrain Tiles and EOX Sentinel-2 itself, as
 app.js already does when it can reach them (LIVE).
 
-The root address opens the pack: index.html gets a line that adds ?pack=…&packonly=1 when the address names no
-pack. The manifest's library is dropped, since the site has one book.
+The root address opens the pack: index.html names it in <html data-pack data-packonly>, so the address stays
+clean. The manifest's library is dropped, since the site has one book.
 """
 import argparse, gzip, json, math, os, re, shutil
 
@@ -23,7 +23,7 @@ LEAN_MAX_ZOOM = 5
 
 ap = argparse.ArgumentParser()
 ap.add_argument("--tiles", choices=["full", "lean"], default="full")
-ap.add_argument("--out", default="dist/sanguo")
+ap.add_argument("--out", default="dist/atlas")
 args = ap.parse_args()
 OUT = os.path.join(ROOT, args.out)
 
@@ -53,12 +53,8 @@ for p in ["app.js", "style.css", "vendor/maplibre-gl.css", "LICENSE",
 manifest = json.load(open(src(f"{PACK}/manifest.json"), encoding="utf-8"))
 html = open(src("index.html"), encoding="utf-8").read()
 html = html.replace("<title>Atlas</title>", f"<title>{manifest['name_zh']} · {manifest['name']}</title>")
-opener = ('<script>\n// This site shows one pack: open it unless the address names another.\n'
-          'if (!new URLSearchParams(location.search).has("pack")) history.replaceState(null, "", "?pack='
-          f'{PACK}/manifest.json&packonly=1" + (location.search ? "&" + location.search.slice(1) : "") + location.hash);\n'
-          '</script>\n')
-assert html.count('<script src="app.js') == 1
-html = html.replace('<script src="app.js', opener + '<script src="app.js')
+assert html.count('<html lang="zh-CN">') == 1
+html = html.replace('<html lang="zh-CN">', f'<html lang="zh-CN" data-pack="{PACK}/manifest.json" data-packonly="1">')
 write("index.html", html)
 
 # Data the engine always reads (app.js init and buildStyle), and the illustration index it reads when a story opens;

@@ -1,0 +1,61 @@
+# atlas.yangjie.org: the stand-alone atlas site (Romance of the Three Kingdoms on the atlas engine). Static files in
+# /var/www/atlas, built by tools/sanguo/build_site.py in github.com/jielabs/atlas (branch sanguo) and copied with rsync.
+#
+# The name is proxied by Cloudflare, which fetches from here over HTTPS. The certificate is Let's Encrypt, issued
+# and renewed through the webroot /var/www/acme, which answers on both ports so it works whether or not
+# Cloudflare redirects HTTP to HTTPS.
+#
+# To remove: delete this file and its link in sites-enabled, reload nginx,
+# `sudo certbot delete --cert-name atlas.yangjie.org`, and delete /var/www/atlas.
+server {
+    listen 80;
+    listen [::]:80;
+    server_name atlas.yangjie.org;
+
+    location ^~ /.well-known/acme-challenge/ {
+        root /var/www/acme;
+    }
+    location / {
+        return 301 https://$host$request_uri;
+    }
+}
+
+server {
+    listen 443 ssl;
+    listen [::]:443 ssl;
+    server_name atlas.yangjie.org;
+
+    ssl_certificate /etc/letsencrypt/live/atlas.yangjie.org/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/atlas.yangjie.org/privkey.pem;
+    include /etc/letsencrypt/options-ssl-nginx.conf;
+    ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem;
+
+    root /var/www/atlas;
+    index index.html;
+    autoindex off;
+
+    gzip on;
+    gzip_types text/css application/javascript application/json application/geo+json image/svg+xml;
+    gzip_min_length 1024;
+
+    location ^~ /.well-known/acme-challenge/ {
+        root /var/www/acme;
+    }
+    # .geojson is not in mime.types; give it its type so it is gzipped too.
+    location ~* \.geojson$ {
+        default_type application/geo+json;
+        add_header Cache-Control "no-cache";
+    }
+    # Page, code and data revalidate on every load (the engine fetches data with cache: no-cache anyway), so a
+    # new deploy shows at once; unchanged files come back as 304.
+    location ~* \.(html|js|css|json)$ {
+        add_header Cache-Control "no-cache";
+    }
+    # Elevation and imagery archives: large, and rebuilt rarely. Cloudflare caches them at the edge too.
+    location /tiles/ {
+        add_header Cache-Control "public, max-age=2592000";
+    }
+    location / {
+        try_files $uri $uri/ =404;
+    }
+}

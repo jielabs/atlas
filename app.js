@@ -12,9 +12,12 @@ const BASE = document.baseURI.replace(/[^/]*([?#].*)?$/, "");
 // ?pack=<manifest URL>. Pack text ends up in the page, so packs load only from these sites (and a local
 // server while developing). See docs/custom-data.md.
 const PACK_ORIGINS = ["https://atlas.daiyip.com", "https://bible.daiyip.com", "https://daiyip.github.io"];
-const PACK_URL = new URLSearchParams(location.search).get("pack");
+// A site built around one pack names it on the page instead (<html data-pack="…" data-packonly="1">), so its address
+// stays clean; ?pack= in the address still wins.
+const QUERY = new URLSearchParams(location.search), PAGE = document.documentElement.dataset;
+const PACK_URL = QUERY.get("pack") || PAGE.pack || null;
 // ?packonly=1 shows the pack alone; by default it is added to the atlas's own data.
-const PACK_ONLY = PACK_URL && ["1", "true"].includes(new URLSearchParams(location.search).get("packonly"));
+const PACK_ONLY = PACK_URL && ["1", "true"].includes(QUERY.has("pack") ? QUERY.get("packonly") : PAGE.packonly);
 // ?embed=1: inside another site's page (an iframe) the atlas shows only the map and a small era label; the host page
 // shows the story and drives the atlas through a pack plugin (docs/plugins.md, "Embedding").
 const EMBED = new URLSearchParams(location.search).get("embed") === "1";
