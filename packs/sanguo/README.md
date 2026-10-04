@@ -55,6 +55,16 @@ The discs follow the event markers exactly, including the detail and topic filte
   `python3 tools/sanguo/build_borders.py` (needs shapely). Then add the map to the era in `eras.json`.
 - `python3 tools/sanguo/build_layers.py` rebuilds the capitals, the five passes and the expeditions.
 
+## Publishing
+
+The pack is published as a stand-alone site at <https://sanguo.192-155-81-57.sslip.io/> (nginx on the VPS `dev`,
+Let's Encrypt certificate renewed by certbot's timer). `tools/sanguo/deploy.sh` checks the pack, builds
+`dist/sanguo` with `tools/sanguo/build_site.py` (150 MB with all tiles for the region) and copies it with rsync.
+The nginx site is kept in `tools/sanguo/nginx/` as it was before certbot added the TLS block.
+
+To move it to a real domain: point the domain's A record at 192.155.81.57, add the name to `server_name` in the
+nginx site, and run `sudo certbot --nginx -d <domain>`.
+
 ## Known limits
 
 - Warlord borders are grown from commandery seats, so their edges are indicative only; between the snapshot years
