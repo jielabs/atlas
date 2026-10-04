@@ -16,8 +16,9 @@ FORCE=; [ "$1" = "--force" ] && FORCE=1
 COMMIT=$(git rev-parse --short HEAD)
 git fetch -q origin || fail "could not reach GitHub to check that $COMMIT is pushed"
 [ -n "$(git branch -r --contains HEAD)" ] || fail "commit $COMMIT is not on GitHub yet; push it first"
-DEV=$(curl -fsS --max-time 15 https://atlas.yangjie.org/version.json \
-      | python3 -c 'import json, sys; d = json.load(sys.stdin); print(d["commit"] + ("+changes" if d["dirty"] else ""))') || DEV=unreachable
+DEV=$(curl -fsS --max-time 15 https://atlas.yangjie.org/version.json 2>/dev/null \
+      | python3 -c 'import json, sys; d = json.load(sys.stdin); print(d["commit"] + ("+changes" if d["dirty"] else ""))' 2>/dev/null) \
+      || DEV="an unknown version (no version.json)"
 if [ "$DEV" != "$COMMIT" ]; then
   [ -n "$FORCE" ] || fail "dev runs $DEV, not $COMMIT; publish it with deploy_dev.sh and check it there first (or --force)"
   echo "deploy_prod: dev runs $DEV, promoting $COMMIT anyway (--force)" >&2
