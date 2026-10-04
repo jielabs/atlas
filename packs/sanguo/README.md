@@ -62,6 +62,13 @@ Let's Encrypt certificate renewed by certbot's timer). `tools/sanguo/deploy.sh` 
 `dist/sanguo` with `tools/sanguo/build_site.py` (150 MB with all tiles for the region) and copies it with rsync.
 The nginx site is kept in `tools/sanguo/nginx/` as it was before certbot added the TLS block.
 
+On the server itself (the build needs only Python 3 and rsync):
+
+```sh
+git clone git@github.com:jielabs/atlas.git && cd atlas && git checkout sanguo
+tools/sanguo/deploy.sh /var/www/sanguo        # later: git pull && tools/sanguo/deploy.sh /var/www/sanguo
+```
+
 To move it to a real domain: point the domain's A record at 192.155.81.57, add the name to `server_name` in the
 nginx site, and run `sudo certbot --nginx -d <domain>`.
 
