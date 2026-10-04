@@ -1,12 +1,11 @@
-// The stand-alone atlas site on Cloudflare Workers static assets: no Worker code, only the files built by
-//   python3 tools/sanguo/build_site.py --pages
-// (the --pages flag adds the _headers file Cloudflare reads for caching and types). Deploy with
-//   npx wrangler deploy --config tools/sanguo/wrangler.jsonc
+// Production: the stand-alone atlas site at sanguo.yangjie.org, on Cloudflare Workers static assets (no Worker code).
+// Publish with tools/sanguo/deploy_prod.sh, which builds dist/atlas-prod (build_site.py --env prod --pages; the
+// --pages flag adds the _headers file Cloudflare reads for caching and types) and runs `wrangler deploy` on this file.
 {
   "name": "atlas",
   "compatibility_date": "2026-10-01",
   "assets": {
-    "directory": "../../dist/atlas"
+    "directory": "../../dist/atlas-prod"
   },
   "workers_dev": false,
   // Cloudflare creates and keeps the DNS record for a Workers custom domain.

@@ -1,6 +1,6 @@
 """Build a stand-alone static site that shows only the Three Kingdoms pack.
 
-Usage: python3 tools/sanguo/build_site.py [--tiles full|lean] [--out dist/atlas] [--pages]
+Usage: python3 tools/sanguo/build_site.py [--tiles full|lean] [--out dist/atlas] [--pages] [--env prod|dev]
 
 The engine needs only a small part of the atlas to run one pack shown alone: the page, the world maps around the
 pack's East Asia window for its years, the river and landscape names, and the elevation and imagery tiles. This
@@ -13,10 +13,16 @@ app.js already does when it can reach them (LIVE).
 The root address opens the pack: index.html names it in <html data-pack data-packonly>, so the address stays
 clean. The manifest's library is dropped, since the site has one book.
 
---pages adds a _headers file for Cloudflare Pages, which does there what the nginx site in tools/sanguo/nginx/ does:
-tile archives cached for 30 days, .geojson given its type. Pages already revalidates everything else on each load.
+--pages adds a _headers file for Cloudflare (Workers static assets or Pages), which does there what the nginx site
+in tools/sanguo/nginx/ does: tile archives cached for 30 days, .geojson given its type. Cloudflare already
+revalidates everything else on each load.
+
+Every build writes version.json (commit, branch, whether the working tree had uncommitted changes, build time), so
+each environment says what it runs; tools/sanguo/deploy_prod.sh compares it before promoting. --env dev marks the
+build as the development site: " · dev" after the pack's name (tab title and panels) and a robots.txt that keeps
+search engines out.
 """
-import argparse, gzip, json, math, os, re, shutil
+import argparse, datetime, gzip, json, math, os, re, shutil, subprocess
 
 ROOT = os.path.normpath(os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", ".."))
 PACK = "packs/sanguo"
@@ -27,7 +33,8 @@ LEAN_MAX_ZOOM = 5
 ap = argparse.ArgumentParser()
 ap.add_argument("--tiles", choices=["full", "lean"], default="full")
 ap.add_argument("--out", default="dist/atlas")
-ap.add_argument("--pages", action="store_true", help="add a _headers file for Cloudflare Pages")
+ap.add_argument("--pages", action="store_true", help="add a _headers file for Cloudflare")
+ap.add_argument("--env", choices=["prod", "dev"], default="prod", help="dev marks the site as the development one")
 args = ap.parse_args()
 OUT = os.path.join(ROOT, args.out)
 
@@ -56,7 +63,8 @@ for p in ["app.js", "style.css", "vendor/maplibre-gl.css", "LICENSE",
     copy(p)
 manifest = json.load(open(src(f"{PACK}/manifest.json"), encoding="utf-8"))
 html = open(src("index.html"), encoding="utf-8").read()
-html = html.replace("<title>Atlas</title>", f"<title>{manifest['name_zh']} · {manifest['name']}</title>")
+title = f"{manifest['name_zh']} · {manifest['name']}" + (" (dev)" if args.env == "dev" else "")
+html = html.replace("<title>Atlas</title>", f"<title>{title}</title>")
 assert html.count('<html lang="zh-CN">') == 1
 html = html.replace('<html lang="zh-CN">', f'<html lang="zh-CN" data-pack="{PACK}/manifest.json" data-packonly="1">')
 write("index.html", html)
@@ -76,6 +84,9 @@ for dirpath, _, files in os.walk(src(PACK)):
         if not f.endswith(".md"):
             copy(rel)
 manifest.pop("library", None)
+if args.env == "dev":
+    manifest["name"] += " · dev"
+    manifest["name_zh"] += " · dev"
 write(f"{PACK}/manifest.json", json.dumps(manifest, ensure_ascii=False, indent=2) + "\n")
 
 # Border maps the pack's periods name outside the pack (the atlas's Eastern Han map), and the outer world maps
@@ -124,6 +135,17 @@ for d in ["tiles/pack", "tiles/sat"]:
         else:
             dropped += 1
 
+
+def git(*a):
+    return subprocess.run(["git", *a], cwd=ROOT, capture_output=True, text=True).stdout.strip()
+
+
+version = {"commit": git("rev-parse", "--short", "HEAD"), "branch": git("rev-parse", "--abbrev-ref", "HEAD"),
+           "dirty": bool(git("status", "--porcelain", "--untracked-files=no")), "env": args.env,
+           "built": datetime.datetime.now(datetime.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")}
+write("version.json", json.dumps(version) + "\n")
+if args.env == "dev":
+    write("robots.txt", "User-agent: *\nDisallow: /\n")
 
 if args.pages:
     write("_headers", "/tiles/*\n  Cache-Control: public, max-age=2592000\n"

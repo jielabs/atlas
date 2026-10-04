@@ -57,23 +57,35 @@ The discs follow the event markers exactly, including the detail and topic filte
 
 ## Publishing
 
-The pack is published as a stand-alone site in two places, from the same build (`tools/sanguo/build_site.py`, 150 MB
-with all tiles for the region). The page names the pack in `<html data-pack>`, so the address stays clean.
+The pack is published as a stand-alone site in two environments, built by `tools/sanguo/build_site.py` (150 MB with
+all tiles for the region). The page names the pack in `<html data-pack>`, so addresses stay clean, and every build
+writes `version.json` (commit, branch, uncommitted changes, build time), so each environment says what it runs.
 
-**<https://sanguo.yangjie.org/>, on Cloudflare.** Workers static assets (`tools/sanguo/wrangler.jsonc`): no server
-and no Worker code; Cloudflare serves the files from its edge (brotli, the `_headers` file written by
-`build_site.py --pages` for tile caching and the `.geojson` type) and keeps the custom domain's DNS record and
-certificate. Publish with `tools/sanguo/deploy_cloudflare.sh` after `npx wrangler login` once.
+| | Development | Production |
+| --- | --- | --- |
+| Address | <https://atlas.yangjie.org/> | <https://sanguo.yangjie.org/> |
+| Host | nginx on the VPS `dev`, behind Cloudflare | Cloudflare Workers static assets, no server |
+| Marked | " · dev" after the name, `robots.txt` keeps search engines out | — |
+| Publish | `tools/sanguo/deploy_dev.sh` (any state of the tree) | `tools/sanguo/deploy_prod.sh` (only what dev runs) |
 
-**<https://atlas.yangjie.org/>, on the VPS.** Proxied by Cloudflare (SSL mode Full, or Full (strict)) to nginx on
-the VPS `dev`; Let's Encrypt certificate issued and renewed through the webroot `/var/www/acme`; the nginx site is
-in `tools/sanguo/nginx/`. Publish with `tools/sanguo/deploy.sh` from a workstation, or on the server itself (needs
-only Python 3 and rsync):
+The workflow: commit, push, publish to dev and look at it there, then promote. `deploy_prod.sh` refuses to run with
+uncommitted changes, with a commit that is not on GitHub, or when dev runs a different commit; `--force` skips the
+last check for an urgent fix.
+
+Development, from a workstation (`deploy_dev.sh` copies to `jie@dev:/var/www/atlas`), or on the server itself, which
+needs only Python 3 and rsync:
 
 ```sh
 git clone --depth 1 -b sanguo git@github.com:jielabs/atlas.git && cd atlas
-tools/sanguo/deploy.sh /var/www/atlas        # later: git pull --ff-only && tools/sanguo/deploy.sh /var/www/atlas
+tools/sanguo/deploy_dev.sh /var/www/atlas      # later: git pull --ff-only && tools/sanguo/deploy_dev.sh /var/www/atlas
 ```
+
+The dev site is proxied by Cloudflare (SSL mode Full, or Full (strict)) to nginx, whose site is in
+`tools/sanguo/nginx/`; its Let's Encrypt certificate is issued and renewed through the webroot `/var/www/acme`.
+
+Production needs `npx wrangler login` once on the machine that publishes. `tools/sanguo/wrangler.jsonc` binds
+sanguo.yangjie.org as a Workers custom domain, so Cloudflare keeps its DNS record and certificate; the `_headers`
+file from `build_site.py --pages` caches the tile archives for 30 days and types the `.geojson` files.
 
 ## Known limits
 
