@@ -1,0 +1,2131 @@
+{
+ "type": "FeatureCollection",
+ "features": [
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      114.2,
+      35.25
+     ],
+     [
+      113.2,
+      34.86
+     ],
+     [
+      113.25,
+      34.82
+     ]
+    ]
+   },
+   "properties": {
+    "id": "lords-advance",
+    "side": "lords",
+    "color": "#9a8a4a",
+    "from": 190,
+    "to": 191,
+    "name": "The eastern lords advance on Hulao Pass",
+    "name_zh": "诸侯进兵虎牢关",
+    "text": "the eastern lords, 190, chapters 5. The coalition moves from Suanzao to the passes guarding Luoyang (in the novel, Hua Xiong and the three heroes against Lü Bu).",
+    "text_zh": "关东诸侯，190年，第5回。关东联军自酸枣进逼汜水关、虎牢关（小说中温酒斩华雄、三英战吕布即在此）。"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      112.9,
+      33.73
+     ],
+     [
+      112.65,
+      34.25
+     ],
+     [
+      112.62,
+      34.72
+     ]
+    ]
+   },
+   "properties": {
+    "id": "sun-jian-luoyang",
+    "side": "sun",
+    "color": "#b5523b",
+    "from": 190,
+    "to": 192,
+    "name": "Sun Jian fights his way to Luoyang",
+    "name_zh": "孙坚进军洛阳",
+    "text": "the Sun / Wu, 190–191, chapters 5–6. Sun Jian beats Dong Zhuo's army at Yangren and is first into the burned capital.",
+    "text_zh": "孙氏·吴，190–191年，第5–6回。孙坚阳人破董卓军，率先进入被焚的洛阳。"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      112.62,
+      34.72
+     ],
+     [
+      110.87,
+      34.52
+     ],
+     [
+      110.08,
+      34.56
+     ],
+     [
+      108.94,
+      34.27
+     ]
+    ]
+   },
+   "properties": {
+    "id": "dong-zhuo-west",
+    "side": "dong",
+    "color": "#8a4f6e",
+    "from": 190,
+    "to": 191,
+    "name": "Dong Zhuo drags the court west",
+    "name_zh": "董卓挟天子西迁",
+    "text": "Dong Zhuo, 190, chapters 6. Dong Zhuo burns Luoyang and forces the emperor and a million people west to Chang'an.",
+    "text_zh": "董卓，190年，第6回。董卓焚洛阳，驱赶天子与百万百姓西迁长安。"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      114.2,
+      35.25
+     ],
+     [
+      113.38,
+      34.79
+     ]
+    ]
+   },
+   "properties": {
+    "id": "cao-bianshui",
+    "side": "cao",
+    "color": "#3f6e8c",
+    "from": 190,
+    "to": 191,
+    "name": "Cao Cao pursues Dong Zhuo alone",
+    "name_zh": "曹操追击董卓",
+    "text": "Cao Cao / Wei, 190, chapters 6. Cao Cao alone pursues, and is routed by Xu Rong on the Bian River.",
+    "text_zh": "曹操·魏，190年，第6回。诸侯中唯曹操追击，在汴水被徐荣击败。"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      115.5,
+      35.57
+     ],
+     [
+      117.18,
+      34.26
+     ],
+     [
+      118.35,
+      34.6
+     ]
+    ]
+   },
+   "properties": {
+    "id": "cao-xuzhou",
+    "side": "cao",
+    "color": "#3f6e8c",
+    "from": 193,
+    "to": 195,
+    "name": "Cao Cao's revenge on Xuzhou",
+    "name_zh": "曹操兴兵报父仇",
+    "text": "Cao Cao / Wei, 193–194, chapters 10–11. Cao Cao marches from Yan province into Xuzhou to avenge his father.",
+    "text_zh": "曹操·魏，193–194年，第10–11回。曹操自兖州攻入徐州，为父报仇。"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      113.35,
+      35.1
+     ],
+     [
+      114.55,
+      34.66
+     ],
+     [
+      115.03,
+      35.75
+     ]
+    ]
+   },
+   "properties": {
+    "id": "lubu-yanzhou",
+    "side": "lubu",
+    "color": "#c47a2c",
+    "from": 194,
+    "to": 196,
+    "name": "Lü Bu seizes Yan province",
+    "name_zh": "吕布袭取兖州",
+    "text": "Lü Bu, 194–195, chapters 11–12. With Chen Gong and Zhang Miao, Lü Bu takes Yan province behind Cao Cao's back.",
+    "text_zh": "吕布，194–195年，第11–12回。吕布得陈宫、张邈之助，趁曹操东征袭取兖州。"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      108.94,
+      34.27
+     ],
+     [
+      110.08,
+      34.56
+     ],
+     [
+      110.87,
+      34.52
+     ],
+     [
+      110.95,
+      34.6
+     ],
+     [
+      111.2,
+      35.14
+     ],
+     [
+      112.62,
+      34.72
+     ]
+    ]
+   },
+   "properties": {
+    "id": "emperor-east",
+    "side": "han",
+    "color": "#2c7a68",
+    "from": 195,
+    "to": 197,
+    "name": "The emperor's flight east",
+    "name_zh": "献帝东归",
+    "text": "the Han court, 195–196, chapters 13. The court escapes Chang'an, is chased and robbed, crosses the Yellow River at night and comes home to the ruins of Luoyang.",
+    "text_zh": "汉廷，195–196年，第13回。献帝逃出长安，一路被追兵抢掠，夜渡黄河，回到满目疮痍的洛阳。"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      112.62,
+      34.72
+     ],
+     [
+      113.85,
+      34.03
+     ]
+    ]
+   },
+   "properties": {
+    "id": "emperor-to-xu",
+    "side": "cao",
+    "color": "#3f6e8c",
+    "from": 196,
+    "to": 197,
+    "name": "Cao Cao takes the emperor to Xu",
+    "name_zh": "曹操迎帝都许",
+    "text": "Cao Cao / Wei, 196, chapters 14. Cao Cao brings the court from Luoyang to his base at Xu.",
+    "text_zh": "曹操·魏，196年，第14回。曹操将朝廷从洛阳迁到自己的根据地许县。"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      118.35,
+      31.7
+     ],
+     [
+      118.48,
+      31.65
+     ],
+     [
+      119.57,
+      32.0
+     ],
+     [
+      120.6,
+      31.3
+     ],
+     [
+      120.58,
+      30.0
+     ]
+    ]
+   },
+   "properties": {
+    "id": "sun-ce-east",
+    "side": "sun",
+    "color": "#b5523b",
+    "from": 194,
+    "to": 197,
+    "name": "Sun Ce crosses the Yangzi and takes Jiangdong",
+    "name_zh": "孙策平定江东",
+    "text": "the Sun / Wu, 194–196, chapters 15. From Liyang Sun Ce crosses at Niuzhu and takes Qu'e, Wu and Kuaiji in two years.",
+    "text_zh": "孙氏·吴，194–196年，第15回。孙策自历阳牛渚渡江，两年间取曲阿、吴郡、会稽。"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      113.85,
+      34.03
+     ],
+     [
+      112.53,
+      33.0
+     ]
+    ]
+   },
+   "properties": {
+    "id": "wancheng",
+    "side": "cao",
+    "color": "#3f6e8c",
+    "from": 197,
+    "to": 198,
+    "name": "Cao Cao marches on Wan",
+    "name_zh": "曹操征张绣",
+    "text": "Cao Cao / Wei, 197, chapters 16. Zhang Xiu surrenders and then rises in the night; Dian Wei dies at the gate.",
+    "text_zh": "曹操·魏，197年，第16回。张绣先降后反，夜袭曹营，典韦战死。"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      113.85,
+      34.03
+     ],
+     [
+      117.18,
+      34.26
+     ],
+     [
+      117.96,
+      34.33
+     ]
+    ]
+   },
+   "properties": {
+    "id": "xiapi-campaign",
+    "side": "cao",
+    "color": "#3f6e8c",
+    "from": 198,
+    "to": 199,
+    "name": "Cao Cao marches on Lü Bu",
+    "name_zh": "曹操东征吕布",
+    "text": "Cao Cao / Wei, 198, chapters 18–19. Cao Cao takes Pengcheng, floods Xiapi and ends Lü Bu at the White Gate Tower.",
+    "text_zh": "曹操·魏，198年，第18–19回。曹操攻取彭城，水淹下邳，白门楼斩吕布。"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "MultiLineString",
+    "coordinates": [
+     [
+      [
+       114.35,
+       36.3
+      ],
+      [
+       114.55,
+       35.68
+      ],
+      [
+       114.65,
+       35.55
+      ]
+     ],
+     [
+      [
+       114.55,
+       35.68
+      ],
+      [
+       114.2,
+       35.15
+      ],
+      [
+       114.05,
+       34.78
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "id": "yuan-south",
+    "side": "yuan",
+    "color": "#7a5195",
+    "from": 200,
+    "to": 201,
+    "name": "Yuan Shao comes south",
+    "name_zh": "袁绍大军南下",
+    "text": "Yuan Shao, 200, chapters 25–30. Yan Liang besieges Baima; the main army crosses the Yellow River at Yanjin and closes on Guandu.",
+    "text_zh": "袁绍，200年，第25–30回。颜良围白马，袁绍主力自延津渡河，进逼官渡。"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "MultiLineString",
+    "coordinates": [
+     [
+      [
+       113.85,
+       34.03
+      ],
+      [
+       114.05,
+       34.78
+      ]
+     ],
+     [
+      [
+       114.05,
+       34.78
+      ],
+      [
+       114.2,
+       35.15
+      ],
+      [
+       114.65,
+       35.55
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "id": "cao-guandu",
+    "side": "cao",
+    "color": "#3f6e8c",
+    "from": 200,
+    "to": 201,
+    "name": "Cao Cao holds Guandu",
+    "name_zh": "曹操拒守官渡",
+    "text": "Cao Cao / Wei, 200, chapters 25–30. Cao Cao comes up from Xu to Guandu, and rides out to relieve Baima, where Guan Yu kills Yan Liang.",
+    "text_zh": "曹操·魏，200年，第25–30回。曹操自许都进屯官渡，并出兵解白马之围，关羽斩颜良。"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      114.05,
+      34.78
+     ],
+     [
+      114.42,
+      35.07
+     ]
+    ]
+   },
+   "properties": {
+    "id": "wuchao-raid",
+    "side": "cao",
+    "color": "#3f6e8c",
+    "from": 200,
+    "to": 201,
+    "name": "The night raid on Wuchao",
+    "name_zh": "夜袭乌巢",
+    "text": "Cao Cao / Wei, 200, chapters 30. Cao Cao leads five thousand men under Yuan banners to burn Yuan Shao's grain.",
+    "text_zh": "曹操·魏，200年，第30回。曹操亲率五千人打着袁军旗号夜袭乌巢，焚烧袁绍粮草。"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      114.05,
+      34.78
+     ],
+     [
+      114.55,
+      35.68
+     ],
+     [
+      114.35,
+      36.3
+     ],
+     [
+      116.7,
+      38.05
+     ]
+    ]
+   },
+   "properties": {
+    "id": "cao-north",
+    "side": "cao",
+    "color": "#3f6e8c",
+    "from": 202,
+    "to": 206,
+    "name": "Cao Cao takes the north",
+    "name_zh": "曹操平定河北",
+    "text": "Cao Cao / Wei, 202–205, chapters 31–33. After Guandu Cao Cao crosses the river, takes Ye and pursues Yuan Tan to Nanpi.",
+    "text_zh": "曹操·魏，202–205年，第31–33回。官渡之后曹操渡河北上，攻克邺城，追斩袁谭于南皮。"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      114.35,
+      36.3
+     ],
+     [
+      115.5,
+      39.05
+     ],
+     [
+      117.4,
+      40.03
+     ],
+     [
+      118.86,
+      40.4
+     ],
+     [
+      119.7,
+      41.1
+     ],
+     [
+      120.4,
+      41.6
+     ]
+    ]
+   },
+   "properties": {
+    "id": "wuhuan",
+    "side": "cao",
+    "color": "#3f6e8c",
+    "from": 207,
+    "to": 208,
+    "name": "Beyond the Wall to White Wolf Mountain",
+    "name_zh": "北征乌桓",
+    "text": "Cao Cao / Wei, 207, chapters 33. Through the Lulong pass and five hundred li of empty country to White Wolf Mountain and Liucheng.",
+    "text_zh": "曹操·魏，207年，第33回。出卢龙塞，穿越五百里荒野，直抵白狼山、柳城。"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      112.53,
+      33.0
+     ],
+     [
+      112.36,
+      32.52
+     ],
+     [
+      112.15,
+      32.07
+     ],
+     [
+      112.13,
+      32.01
+     ],
+     [
+      111.78,
+      30.82
+     ],
+     [
+      112.2,
+      30.35
+     ]
+    ]
+   },
+   "properties": {
+    "id": "cao-south",
+    "side": "cao",
+    "color": "#3f6e8c",
+    "from": 208,
+    "to": 209,
+    "name": "Cao Cao comes south",
+    "name_zh": "曹操南征荆州",
+    "text": "Cao Cao / Wei, 208, chapters 40–42. Liu Cong surrenders; Cao Cao's cavalry ride three hundred li in a day and night to catch Liu Bei at Changban.",
+    "text_zh": "曹操·魏，208年，第40–42回。刘琮投降，曹操轻骑一日一夜行三百余里，在长坂追上刘备。"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      112.15,
+      32.07
+     ],
+     [
+      112.13,
+      32.01
+     ],
+     [
+      111.8,
+      30.85
+     ],
+     [
+      111.78,
+      30.82
+     ],
+     [
+      113.0,
+      30.6
+     ],
+     [
+      114.28,
+      30.55
+     ]
+    ]
+   },
+   "properties": {
+    "id": "liu-bei-flight",
+    "side": "liu",
+    "color": "#4f7f5a",
+    "from": 208,
+    "to": 209,
+    "name": "Liu Bei flees south with the people",
+    "name_zh": "刘备携民南撤",
+    "text": "Liu Bei / Shu, 208, chapters 41–42. From Fancheng past Xiangyang to Changban, then east to the Han ford and Xiakou.",
+    "text_zh": "刘备·蜀，208年，第41–42回。自樊城经襄阳南撤至长坂，再东走汉津，到达夏口。"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      112.2,
+      30.35
+     ],
+     [
+      112.4,
+      29.72
+     ],
+     [
+      113.45,
+      29.95
+     ]
+    ]
+   },
+   "properties": {
+    "id": "cao-downriver",
+    "side": "cao",
+    "color": "#3f6e8c",
+    "from": 208,
+    "to": 209,
+    "name": "Cao Cao's fleet comes down the Yangzi",
+    "name_zh": "曹军顺江东下",
+    "text": "Cao Cao / Wei, 208, chapters 45–48. From Jiangling the northern army sails down to Wulin, facing the Red Cliffs.",
+    "text_zh": "曹操·魏，208年，第45–48回。曹军自江陵顺江东下，屯兵乌林，与赤壁隔江相望。"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      115.98,
+      29.7
+     ],
+     [
+      114.85,
+      30.37
+     ],
+     [
+      113.62,
+      29.88
+     ]
+    ]
+   },
+   "properties": {
+    "id": "zhou-yu-west",
+    "side": "sun",
+    "color": "#b5523b",
+    "from": 208,
+    "to": 209,
+    "name": "Zhou Yu sails west to the Red Cliffs",
+    "name_zh": "周瑜西进赤壁",
+    "text": "the Sun / Wu, 208, chapters 44–49. Zhou Yu and Cheng Pu bring thirty thousand men up the river from Chaisang.",
+    "text_zh": "孙氏·吴，208年，第44–49回。周瑜、程普率三万水军自柴桑溯江西上。"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      114.28,
+      30.55
+     ],
+     [
+      114.85,
+      30.37
+     ]
+    ]
+   },
+   "properties": {
+    "id": "liu-bei-chibi",
+    "side": "liu",
+    "color": "#4f7f5a",
+    "from": 208,
+    "to": 209,
+    "name": "Liu Bei joins Zhou Yu",
+    "name_zh": "刘备会师樊口",
+    "text": "Liu Bei / Shu, 208, chapters 44–49. From Xiakou Liu Bei moves to Fankou and joins the Wu fleet.",
+    "text_zh": "刘备·蜀，208年，第44–49回。刘备自夏口移屯樊口，与东吴水军会合。"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "MultiLineString",
+    "coordinates": [
+     [
+      [
+       113.45,
+       29.95
+      ],
+      [
+       112.85,
+       29.75
+      ],
+      [
+       112.2,
+       30.35
+      ]
+     ],
+     [
+      [
+       112.2,
+       30.35
+      ],
+      [
+       112.13,
+       32.01
+      ],
+      [
+       112.53,
+       33.0
+      ],
+      [
+       113.85,
+       34.03
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "id": "huarong-retreat",
+    "side": "cao",
+    "color": "#3f6e8c",
+    "from": 208,
+    "to": 209,
+    "name": "Cao Cao's retreat by Huarong",
+    "name_zh": "曹操败走华容道",
+    "text": "Cao Cao / Wei, 208, chapters 50. Through the marshes to Jiangling, then north to Xu, leaving Cao Ren to hold Jiangling.",
+    "text_zh": "曹操·魏，208年，第50回。曹操经华容道穿越沼泽退至江陵，留曹仁守江陵，自己北还许都。"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      113.62,
+      29.88
+     ],
+     [
+      112.4,
+      29.72
+     ],
+     [
+      112.2,
+      30.35
+     ]
+    ]
+   },
+   "properties": {
+    "id": "zhou-yu-jiangling",
+    "side": "sun",
+    "color": "#b5523b",
+    "from": 209,
+    "to": 210,
+    "name": "Zhou Yu besieges Jiangling",
+    "name_zh": "周瑜攻打南郡",
+    "text": "the Sun / Wu, 209, chapters 51. A year's siege of Cao Ren in Jiangling.",
+    "text_zh": "孙氏·吴，209年，第51回。周瑜围攻据守江陵的曹仁一年。"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "MultiLineString",
+    "coordinates": [
+     [
+      [
+       112.23,
+       30.06
+      ],
+      [
+       111.7,
+       29.0
+      ]
+     ],
+     [
+      [
+       112.23,
+       30.06
+      ],
+      [
+       112.97,
+       28.2
+      ],
+      [
+       113.0,
+       25.8
+      ]
+     ],
+     [
+      [
+       112.97,
+       28.2
+      ],
+      [
+       111.6,
+       26.4
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "id": "jingnan",
+    "side": "liu",
+    "color": "#4f7f5a",
+    "from": 209,
+    "to": 210,
+    "name": "Liu Bei takes the four southern commanderies",
+    "name_zh": "刘备取荆南四郡",
+    "text": "Liu Bei / Shu, 209, chapters 52–53. Zhang Fei to Wuling, Guan Yu to Changsha, Zhao Yun to Guiyang, Liu Bei and Zhuge Liang to Lingling.",
+    "text_zh": "刘备·蜀，209年，第52–53回。张飞取武陵，关羽取长沙，赵云取桂阳，刘备、诸葛亮取零陵。"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "MultiLineString",
+    "coordinates": [
+     [
+      [
+       114.35,
+       36.3
+      ],
+      [
+       112.62,
+       34.72
+      ],
+      [
+       110.25,
+       34.6
+      ]
+     ],
+     [
+      [
+       110.25,
+       34.6
+      ],
+      [
+       110.32,
+       34.85
+      ],
+      [
+       109.5,
+       34.5
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "id": "cao-tongguan",
+    "side": "cao",
+    "color": "#3f6e8c",
+    "from": 211,
+    "to": 212,
+    "name": "Cao Cao to Tong Pass and across the Yellow River",
+    "name_zh": "曹操西征潼关",
+    "text": "Cao Cao / Wei, 211, chapters 58–59. Cao Cao faces Ma Chao at Tong Pass, slips across the river at Puban and wins south of the Wei.",
+    "text_zh": "曹操·魏，211年，第58–59回。曹操在潼关与马超对峙，从蒲阪津北渡黄河，再南渡渭水，大破关中联军。"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      105.25,
+      34.75
+     ],
+     [
+      107.15,
+      34.37
+     ],
+     [
+      108.94,
+      34.27
+     ],
+     [
+      110.25,
+      34.6
+     ]
+    ]
+   },
+   "properties": {
+    "id": "ma-chao-east",
+    "side": "ma",
+    "color": "#9a6a3a",
+    "from": 211,
+    "to": 212,
+    "name": "Ma Chao marches on Tong Pass",
+    "name_zh": "马超兴兵潼关",
+    "text": "Ma Chao, 211, chapters 58. Ma Chao and Han Sui bring the armies of the northwest to Tong Pass.",
+    "text_zh": "马超，211年，第58回。马超、韩遂率关西诸军进据潼关。"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      112.23,
+      30.06
+     ],
+     [
+      111.3,
+      30.7
+     ],
+     [
+      109.57,
+      31.04
+     ],
+     [
+      106.55,
+      29.56
+     ],
+     [
+      104.75,
+      31.47
+     ],
+     [
+      105.82,
+      32.43
+     ]
+    ]
+   },
+   "properties": {
+    "id": "into-shu",
+    "side": "liu",
+    "color": "#4f7f5a",
+    "from": 211,
+    "to": 213,
+    "name": "Liu Bei goes up the Yangzi into Shu",
+    "name_zh": "刘备入川",
+    "text": "Liu Bei / Shu, 211–212, chapters 60–62. Invited by Liu Zhang, Liu Bei sails up through the gorges to Jiangzhou, meets Liu Zhang at Fu and goes on to Jiameng.",
+    "text_zh": "刘备·蜀，211–212年，第60–62回。应刘璋之邀，刘备溯江穿越三峡到江州，在涪城与刘璋相会，再北上葭萌。"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "MultiLineString",
+    "coordinates": [
+     [
+      [
+       105.82,
+       32.43
+      ],
+      [
+       104.75,
+       31.47
+      ],
+      [
+       104.4,
+       30.98
+      ],
+      [
+       104.07,
+       30.67
+      ]
+     ],
+     [
+      [
+       106.55,
+       29.56
+      ],
+      [
+       105.6,
+       30.5
+      ],
+      [
+       104.4,
+       30.98
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "id": "take-chengdu",
+    "side": "liu",
+    "color": "#4f7f5a",
+    "from": 212,
+    "to": 215,
+    "name": "Liu Bei turns on Liu Zhang",
+    "name_zh": "刘备进取成都",
+    "text": "Liu Bei / Shu, 212–214, chapters 62–65. From Jiameng back south through Fu and Luo to Chengdu, while Zhuge Liang, Zhang Fei and Zhao Yun come up the river from Jiangzhou.",
+    "text_zh": "刘备·蜀，212–214年，第62–65回。刘备自葭萌回师，经涪城、雒城南下成都；诸葛亮、张飞、赵云自江州溯江分路来会。"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      117.25,
+      31.85
+     ],
+     [
+      117.86,
+      31.43
+     ]
+    ]
+   },
+   "properties": {
+    "id": "cao-ruxu",
+    "side": "cao",
+    "color": "#3f6e8c",
+    "from": 213,
+    "to": 214,
+    "name": "Cao Cao at Ruxu",
+    "name_zh": "曹操进军濡须",
+    "text": "Cao Cao / Wei, 213, chapters 61. Cao Cao comes south from Hefei to the Ruxu dyke; after a month he goes home.",
+    "text_zh": "曹操·魏，213年，第61回。曹操自合肥南下濡须口，相持月余而还。"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      118.8,
+      32.05
+     ],
+     [
+      117.86,
+      31.43
+     ]
+    ]
+   },
+   "properties": {
+    "id": "sun-ruxu",
+    "side": "sun",
+    "color": "#b5523b",
+    "from": 213,
+    "to": 214,
+    "name": "Sun Quan holds Ruxu",
+    "name_zh": "孙权拒守濡须",
+    "text": "the Sun / Wu, 213, chapters 61. Sun Quan comes up from Jianye to hold the fort at Ruxu.",
+    "text_zh": "孙氏·吴，213年，第61回。孙权自建业进屯濡须坞。"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      115.98,
+      29.7
+     ],
+     [
+      116.05,
+      30.52
+     ],
+     [
+      117.25,
+      31.85
+     ]
+    ]
+   },
+   "properties": {
+    "id": "sun-hefei",
+    "side": "sun",
+    "color": "#b5523b",
+    "from": 215,
+    "to": 216,
+    "name": "Sun Quan marches on Hefei",
+    "name_zh": "孙权进攻合肥",
+    "text": "the Sun / Wu, 215, chapters 67. A hundred thousand men against Hefei, until Zhang Liao's eight hundred charge at Xiaoyao Ford.",
+    "text_zh": "孙氏·吴，215年，第67回。孙权率十万大军进攻合肥，被张辽八百人在逍遥津冲破。"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      108.94,
+      34.27
+     ],
+     [
+      107.15,
+      34.37
+     ],
+     [
+      106.98,
+      34.27
+     ],
+     [
+      105.95,
+      33.75
+     ],
+     [
+      106.55,
+      33.15
+     ],
+     [
+      107.03,
+      33.07
+     ]
+    ]
+   },
+   "properties": {
+    "id": "cao-hanzhong",
+    "side": "cao",
+    "color": "#3f6e8c",
+    "from": 215,
+    "to": 216,
+    "name": "Cao Cao takes Hanzhong",
+    "name_zh": "曹操平定汉中",
+    "text": "Cao Cao / Wei, 215, chapters 67. Through the Dasan Pass and over the mountains to Yangping, where Zhang Lu's defences give way.",
+    "text_zh": "曹操·魏，215年，第67回。曹操出散关翻越秦岭，攻破阳平关，张鲁投降。"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      104.07,
+      30.67
+     ],
+     [
+      104.75,
+      31.47
+     ],
+     [
+      105.82,
+      32.43
+     ],
+     [
+      106.55,
+      33.15
+     ],
+     [
+      106.68,
+      33.1
+     ]
+    ]
+   },
+   "properties": {
+    "id": "liu-hanzhong",
+    "side": "liu",
+    "color": "#4f7f5a",
+    "from": 218,
+    "to": 220,
+    "name": "Liu Bei marches on Hanzhong",
+    "name_zh": "刘备进取汉中",
+    "text": "Liu Bei / Shu, 218–219, chapters 70–72. From Chengdu by the Jinniu road to Yangping Pass and Mount Dingjun, where Huang Zhong kills Xiahou Yuan.",
+    "text_zh": "刘备·蜀，218–219年，第70–72回。刘备自成都经金牛道北上阳平关、定军山，黄忠斩夏侯渊。"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      108.94,
+      34.27
+     ],
+     [
+      107.6,
+      34.2
+     ],
+     [
+      106.95,
+      33.2
+     ],
+     [
+      106.55,
+      33.15
+     ]
+    ]
+   },
+   "properties": {
+    "id": "cao-hanzhong-219",
+    "side": "cao",
+    "color": "#3f6e8c",
+    "from": 219,
+    "to": 220,
+    "name": "Cao Cao comes to save Hanzhong, and leaves",
+    "name_zh": "曹操争夺汉中",
+    "text": "Cao Cao / Wei, 219, chapters 71–72. Down the Xie valley road to Yangping; after months of stalemate, 'chicken rib', and back the same way.",
+    "text_zh": "曹操·魏，219年，第71–72回。曹操经褒斜道南下阳平，相持数月，以“鸡肋”为令，原路撤回。"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      112.2,
+      30.35
+     ],
+     [
+      112.2,
+      31.0
+     ],
+     [
+      112.13,
+      32.01
+     ],
+     [
+      112.15,
+      32.07
+     ]
+    ]
+   },
+   "properties": {
+    "id": "guan-yu-north",
+    "side": "liu",
+    "color": "#4f7f5a",
+    "from": 219,
+    "to": 220,
+    "name": "Guan Yu marches north",
+    "name_zh": "关羽北伐襄樊",
+    "text": "Liu Bei / Shu, 219, chapters 73–74. From Jiangling up the Han to Xiangyang and Fancheng, where the autumn floods drown seven armies.",
+    "text_zh": "刘备·蜀，219年，第73–74回。关羽自江陵沿汉水北上，围攻襄阳、樊城，秋雨汉水泛滥，水淹七军。"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      112.53,
+      33.0
+     ],
+     [
+      112.15,
+      32.07
+     ]
+    ]
+   },
+   "properties": {
+    "id": "xu-huang-relief",
+    "side": "cao",
+    "color": "#3f6e8c",
+    "from": 219,
+    "to": 220,
+    "name": "Xu Huang relieves Fancheng",
+    "name_zh": "徐晃救援樊城",
+    "text": "Cao Cao / Wei, 219, chapters 76. From Wan, Xu Huang breaks through Guan Yu's siege lines.",
+    "text_zh": "曹操·魏，219年，第76回。徐晃自宛城南下，冲破关羽的围城营垒。"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      115.9,
+      29.75
+     ],
+     [
+      113.8,
+      29.68
+     ],
+     [
+      112.23,
+      30.06
+     ],
+     [
+      112.2,
+      30.35
+     ]
+    ]
+   },
+   "properties": {
+    "id": "lu-meng",
+    "side": "sun",
+    "color": "#b5523b",
+    "from": 219,
+    "to": 220,
+    "name": "Lü Meng crosses in white",
+    "name_zh": "吕蒙白衣渡江",
+    "text": "the Sun / Wu, 219, chapters 75. From Xunyang, soldiers hidden in merchant boats, past the beacons to Gong'an and Jiangling.",
+    "text_zh": "孙氏·吴，219年，第75回。吕蒙自寻阳出发，精兵藏于商船，白衣摇橹，袭取公安、江陵。"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      112.15,
+      32.07
+     ],
+     [
+      112.13,
+      32.01
+     ],
+     [
+      111.8,
+      30.85
+     ],
+     [
+      111.92,
+      30.68
+     ],
+     [
+      111.68,
+      31.07
+     ]
+    ]
+   },
+   "properties": {
+    "id": "guan-yu-retreat",
+    "side": "liu",
+    "color": "#4f7f5a",
+    "from": 219,
+    "to": 220,
+    "name": "Guan Yu's last retreat",
+    "name_zh": "关羽败走麦城",
+    "text": "Liu Bei / Shu, 219, chapters 76–77. Jiangling lost behind him, Guan Yu falls back to Maicheng and breaks out towards Shu, to the ambush at Linju.",
+    "text_zh": "刘备·蜀，219年，第76–77回。后方江陵已失，关羽退守麦城，突围西走，在临沮遭伏被擒。"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      104.07,
+      30.67
+     ],
+     [
+      106.55,
+      29.56
+     ],
+     [
+      109.57,
+      31.04
+     ],
+     [
+      110.98,
+      30.83
+     ],
+     [
+      111.3,
+      30.7
+     ],
+     [
+      111.42,
+      30.55
+     ]
+    ]
+   },
+   "properties": {
+    "id": "yiling-advance",
+    "side": "liu",
+    "color": "#4f7f5a",
+    "from": 221,
+    "to": 223,
+    "name": "Liu Bei marches down the gorges against Wu",
+    "name_zh": "刘备东征孙吴",
+    "text": "Liu Bei / Shu, 221–222, chapters 81–84. From Chengdu down the Yangzi through Baidi and Zigui to Yiling and Xiaoting.",
+    "text_zh": "刘备·蜀，221–222年，第81–84回。刘备自成都顺江东下，经白帝、秭归，进抵夷陵、猇亭。"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      111.3,
+      30.7
+     ],
+     [
+      111.42,
+      30.55
+     ]
+    ]
+   },
+   "properties": {
+    "id": "lu-xun-fire",
+    "side": "sun",
+    "color": "#b5523b",
+    "from": 222,
+    "to": 223,
+    "name": "Lu Xun's counter-attack",
+    "name_zh": "陆逊火攻反击",
+    "text": "the Sun / Wu, 222, chapters 84. Lu Xun fires the Shu camps one after another along the river.",
+    "text_zh": "孙氏·吴，222年，第84回。陆逊沿江火攻，连破蜀军四十余营。"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      111.42,
+      30.55
+     ],
+     [
+      110.98,
+      30.83
+     ],
+     [
+      109.57,
+      31.04
+     ]
+    ]
+   },
+   "properties": {
+    "id": "yiling-retreat",
+    "side": "liu",
+    "color": "#4f7f5a",
+    "from": 222,
+    "to": 223,
+    "name": "Liu Bei flees to Baidi",
+    "name_zh": "刘备败退白帝",
+    "text": "Liu Bei / Shu, 222, chapters 84–85. The beaten army falls back up the gorges to Baidi, where Liu Bei will die.",
+    "text_zh": "刘备·蜀，222年，第84–85回。蜀军大败，刘备溯江退回白帝城，次年病逝于此。"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      104.07,
+      30.67
+     ],
+     [
+      104.6,
+      28.75
+     ],
+     [
+      102.25,
+      27.9
+     ],
+     [
+      102.85,
+      26.65
+     ],
+     [
+      102.62,
+      24.88
+     ],
+     [
+      103.8,
+      25.5
+     ]
+    ]
+   },
+   "properties": {
+    "id": "southern-campaign",
+    "side": "liu",
+    "color": "#4f7f5a",
+    "from": 225,
+    "to": 226,
+    "name": "Zhuge Liang marches south",
+    "name_zh": "诸葛亮南征",
+    "text": "Liu Bei / Shu, 225, chapters 87–90. From Chengdu by Bodao and Yuexi, across the Lu in the fifth month, to Dian and Wei.",
+    "text_zh": "刘备·蜀，225年，第87–90回。诸葛亮自成都经僰道、越巂，五月渡泸，深入南中。"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "MultiLineString",
+    "coordinates": [
+     [
+      [
+       107.03,
+       33.07
+      ],
+      [
+       105.4,
+       34.1
+      ],
+      [
+       105.25,
+       34.75
+      ]
+     ],
+     [
+      [
+       105.25,
+       34.75
+      ],
+      [
+       105.83,
+       34.95
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "id": "expedition-1",
+    "side": "liu",
+    "color": "#4f7f5a",
+    "from": 228,
+    "to": 229,
+    "name": "First expedition: through Qishan",
+    "name_zh": "第一次北伐：出祁山",
+    "text": "Liu Bei / Shu, 228, chapters 91–95. Out through Qishan; three commanderies go over; Ma Su loses Jieting.",
+    "text_zh": "刘备·蜀，228年，第91–95回。出祁山，三郡响应，马谡失街亭。"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      107.03,
+      33.07
+     ],
+     [
+      107.05,
+      33.6
+     ]
+    ]
+   },
+   "properties": {
+    "id": "zhao-yun-decoy",
+    "side": "liu",
+    "color": "#4f7f5a",
+    "from": 228,
+    "to": 229,
+    "name": "Zhao Yun's decoy at Ji Valley",
+    "name_zh": "赵云出箕谷",
+    "text": "Liu Bei / Shu, 228, chapters 92. The decoy column up the Ji Valley road.",
+    "text_zh": "刘备·蜀，228年，第92回。赵云率疑兵出箕谷。"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      112.53,
+      33.0
+     ],
+     [
+      110.25,
+      32.25
+     ]
+    ]
+   },
+   "properties": {
+    "id": "sima-yi-meng-da",
+    "side": "cao",
+    "color": "#3f6e8c",
+    "from": 228,
+    "to": 229,
+    "name": "Sima Yi's march on Meng Da",
+    "name_zh": "司马懿奔袭孟达",
+    "text": "Cao Cao / Wei, 228, chapters 94. Twelve hundred li in eight days from Wan to Xincheng.",
+    "text_zh": "曹操·魏，228年，第94回。司马懿自宛城八日行一千二百里，奔袭新城孟达。"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      108.94,
+      34.27
+     ],
+     [
+      106.6,
+      34.85
+     ],
+     [
+      105.83,
+      34.95
+     ]
+    ]
+   },
+   "properties": {
+    "id": "zhang-he-jieting",
+    "side": "cao",
+    "color": "#3f6e8c",
+    "from": 228,
+    "to": 229,
+    "name": "Zhang He to Jieting",
+    "name_zh": "张郃驰援街亭",
+    "text": "Cao Cao / Wei, 228, chapters 95. From Chang'an over the Long road to Jieting, where he cuts off Ma Su's water.",
+    "text_zh": "曹操·魏，228年，第95回。张郃自长安越陇关西进街亭，断马谡汲水之道。"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      107.03,
+      33.07
+     ],
+     [
+      106.98,
+      34.27
+     ],
+     [
+      107.15,
+      34.37
+     ]
+    ]
+   },
+   "properties": {
+    "id": "expedition-2",
+    "side": "liu",
+    "color": "#4f7f5a",
+    "from": 228,
+    "to": 229,
+    "name": "Second expedition: Chencang",
+    "name_zh": "第二次北伐：攻陈仓",
+    "text": "Liu Bei / Shu, 228, chapters 97–98. Through the Dasan Pass against Hao Zhao's Chencang.",
+    "text_zh": "刘备·蜀，228年，第97–98回。出散关，围攻郝昭据守的陈仓。"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      107.03,
+      33.07
+     ],
+     [
+      105.7,
+      33.75
+     ],
+     [
+      104.68,
+      32.95
+     ]
+    ]
+   },
+   "properties": {
+    "id": "expedition-3",
+    "side": "liu",
+    "color": "#4f7f5a",
+    "from": 229,
+    "to": 230,
+    "name": "Third expedition: Wudu and Yinping",
+    "name_zh": "第三次北伐：取武都阴平",
+    "text": "Liu Bei / Shu, 229, chapters 99. Chen Shi takes Wudu and Yinping.",
+    "text_zh": "刘备·蜀，229年，第99回。陈式攻取武都、阴平。"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      107.03,
+      33.07
+     ],
+     [
+      105.4,
+      34.1
+     ],
+     [
+      105.7,
+      34.58
+     ],
+     [
+      105.55,
+      34.35
+     ]
+    ]
+   },
+   "properties": {
+    "id": "expedition-4",
+    "side": "liu",
+    "color": "#4f7f5a",
+    "from": 231,
+    "to": 232,
+    "name": "Fourth expedition: Qishan and Shanggui",
+    "name_zh": "第四次北伐：出祁山割麦",
+    "text": "Liu Bei / Shu, 231, chapters 101. Out through Qishan to reap the wheat at Shanggui; Zhang He dies at Mumen in the retreat.",
+    "text_zh": "刘备·蜀，231年，第101回。出祁山，割上邽之麦，退兵时于木门道射杀张郃。"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      107.03,
+      33.07
+     ],
+     [
+      106.95,
+      33.2
+     ],
+     [
+      107.6,
+      34.2
+     ],
+     [
+      107.65,
+      34.28
+     ]
+    ]
+   },
+   "properties": {
+    "id": "expedition-5",
+    "side": "liu",
+    "color": "#4f7f5a",
+    "from": 234,
+    "to": 235,
+    "name": "Fifth expedition: up the Xie valley to Wuzhang",
+    "name_zh": "第五次北伐：出斜谷屯五丈原",
+    "text": "Liu Bei / Shu, 234, chapters 102–104. Up the Xie valley road to the Wuzhang plains, a hundred days facing Sima Yi across the Wei.",
+    "text_zh": "刘备·蜀，234年，第102–104回。经褒斜道北出斜谷，屯兵五丈原，与司马懿隔渭水对峙百余日。"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      112.62,
+      34.72
+     ],
+     [
+      114.35,
+      36.3
+     ],
+     [
+      118.85,
+      39.98
+     ],
+     [
+      122.4,
+      41.0
+     ],
+     [
+      123.17,
+      41.27
+     ]
+    ]
+   },
+   "properties": {
+    "id": "liaodong",
+    "side": "cao",
+    "color": "#3f6e8c",
+    "from": 238,
+    "to": 239,
+    "name": "Sima Yi marches on Liaodong",
+    "name_zh": "司马懿远征辽东",
+    "text": "Cao Cao / Wei, 238, chapters 106. Four thousand li from Luoyang to Xiangping.",
+    "text_zh": "曹操·魏，238年，第106回。司马懿自洛阳远征四千里，直抵襄平。"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      105.7,
+      33.75
+     ],
+     [
+      103.6,
+      34.05
+     ],
+     [
+      103.85,
+      35.4
+     ]
+    ]
+   },
+   "properties": {
+    "id": "jiang-wei-taoxi",
+    "side": "liu",
+    "color": "#4f7f5a",
+    "from": 255,
+    "to": 256,
+    "name": "Jiang Wei's march to the Tao",
+    "name_zh": "姜维出兵洮西",
+    "text": "Liu Bei / Shu, 255, chapters 110. Jiang Wei's greatest victory, west of the Tao at Didao.",
+    "text_zh": "刘备·蜀，255年，第110回。姜维出兵洮西，大破魏军于狄道。"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      105.4,
+      34.1
+     ],
+     [
+      105.7,
+      34.58
+     ],
+     [
+      105.5,
+      34.45
+     ]
+    ]
+   },
+   "properties": {
+    "id": "jiang-wei-duangu",
+    "side": "liu",
+    "color": "#4f7f5a",
+    "from": 256,
+    "to": 257,
+    "name": "Jiang Wei's march to Duangu",
+    "name_zh": "姜维兵败段谷",
+    "text": "Liu Bei / Shu, 256, chapters 111. Out through Qishan towards Shanggui; Deng Ai is waiting at Duangu.",
+    "text_zh": "刘备·蜀，256年，第111回。姜维出祁山向上邽，被邓艾在段谷击败。"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      107.03,
+      33.07
+     ],
+     [
+      107.9,
+      33.8
+     ],
+     [
+      108.2,
+      34.05
+     ]
+    ]
+   },
+   "properties": {
+    "id": "jiang-wei-luo",
+    "side": "liu",
+    "color": "#4f7f5a",
+    "from": 257,
+    "to": 258,
+    "name": "Jiang Wei through the Luo valley",
+    "name_zh": "姜维出骆谷",
+    "text": "Liu Bei / Shu, 257, chapters 112. Through the Luo valley to the grain stores at Changcheng.",
+    "text_zh": "刘备·蜀，257年，第112回。姜维出骆谷，直逼长城囤粮处。"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      108.94,
+      34.27
+     ],
+     [
+      107.9,
+      33.8
+     ],
+     [
+      107.03,
+      33.07
+     ],
+     [
+      106.55,
+      33.15
+     ],
+     [
+      105.52,
+      32.28
+     ]
+    ]
+   },
+   "properties": {
+    "id": "zhong-hui",
+    "side": "cao",
+    "color": "#3f6e8c",
+    "from": 263,
+    "to": 264,
+    "name": "Zhong Hui invades through Hanzhong",
+    "name_zh": "钟会伐蜀",
+    "text": "Cao Cao / Wei, 263, chapters 116–117. A hundred thousand men through the Luo valley into Hanzhong, then south to Jiange, where Jiang Wei holds him.",
+    "text_zh": "曹操·魏，263年，第116–117回。钟会率十余万大军经骆谷入汉中，南下至剑阁，被姜维挡住。"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      103.85,
+      35.4
+     ],
+     [
+      103.6,
+      34.05
+     ],
+     [
+      104.68,
+      32.95
+     ],
+     [
+      104.75,
+      31.78
+     ],
+     [
+      104.2,
+      31.35
+     ],
+     [
+      104.07,
+      30.67
+     ]
+    ]
+   },
+   "properties": {
+    "id": "deng-ai",
+    "side": "cao",
+    "color": "#3f6e8c",
+    "from": 263,
+    "to": 264,
+    "name": "Deng Ai through the Yinping wilderness",
+    "name_zh": "邓艾偷渡阴平",
+    "text": "Cao Cao / Wei, 263, chapters 117–118. From Didao against Jiang Wei at Tazhong, then seven hundred li of trackless mountains to Jiangyou, Mianzhu and Chengdu.",
+    "text_zh": "曹操·魏，263年，第117–118回。邓艾自狄道攻沓中，再穿越七百里无人山区，经江油、绵竹，直取成都。"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      103.6,
+      34.05
+     ],
+     [
+      104.68,
+      32.95
+     ],
+     [
+      105.52,
+      32.28
+     ]
+    ]
+   },
+   "properties": {
+    "id": "jiang-wei-jiange",
+    "side": "liu",
+    "color": "#4f7f5a",
+    "from": 263,
+    "to": 264,
+    "name": "Jiang Wei falls back to Jiange",
+    "name_zh": "姜维退守剑阁",
+    "text": "Liu Bei / Shu, 263, chapters 116–117. From Tazhong past Yinping to the pass at Jiange.",
+    "text_zh": "刘备·蜀，263年，第116–117回。姜维自沓中经阴平退守剑阁。"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      104.07,
+      30.67
+     ],
+     [
+      106.55,
+      29.56
+     ],
+     [
+      109.57,
+      31.04
+     ],
+     [
+      111.2,
+      30.75
+     ],
+     [
+      112.2,
+      30.35
+     ],
+     [
+      114.88,
+      30.4
+     ],
+     [
+      118.8,
+      32.05
+     ]
+    ]
+   },
+   "properties": {
+    "id": "wang-jun",
+    "side": "jin",
+    "color": "#46637d",
+    "from": 279,
+    "to": 281,
+    "name": "Wang Jun's fleet comes down the Yangzi",
+    "name_zh": "王濬楼船下益州",
+    "text": "Jin, 279–280, chapters 120. From Chengdu down the whole Yangzi, burning the chains across the gorges, to Jianye.",
+    "text_zh": "晋，279–280年，第120回。王濬楼船自成都顺江而下，烧断横江铁锁，直抵建业。"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      112.13,
+      32.01
+     ],
+     [
+      112.2,
+      30.35
+     ]
+    ]
+   },
+   "properties": {
+    "id": "du-yu",
+    "side": "jin",
+    "color": "#46637d",
+    "from": 279,
+    "to": 281,
+    "name": "Du Yu takes Jiangling",
+    "name_zh": "杜预攻取江陵",
+    "text": "Jin, 279–280, chapters 120. From Xiangyang south to Jiangling, 'like splitting bamboo'.",
+    "text_zh": "晋，279–280年，第120回。杜预自襄阳南下攻克江陵，势如破竹。"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      116.78,
+      32.57
+     ],
+     [
+      117.25,
+      31.85
+     ],
+     [
+      118.35,
+      31.7
+     ]
+    ]
+   },
+   "properties": {
+    "id": "wang-hun",
+    "side": "jin",
+    "color": "#46637d",
+    "from": 279,
+    "to": 281,
+    "name": "Wang Hun comes down to the river",
+    "name_zh": "王浑进兵江北",
+    "text": "Jin, 279–280, chapters 120. From Shouchun to the north bank opposite Jianye.",
+    "text_zh": "晋，279–280年，第120回。王浑自寿春南下，进至建业对岸的江北。"
+   }
+  }
+ ]
+}

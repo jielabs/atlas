@@ -96,7 +96,7 @@ places it.
 - [x] **R2. events ch 31–60**
 - [x] **R3. events ch 61–90**
 - [x] **R4. events ch 91–120**
-- [ ] **R5. campaigns layer and plugin**
+- [x] **R5. campaigns layer and plugin**
 - [ ] **R6. tours: the battles**
 - [ ] **R7. tours: the people and the long campaigns**
 - [ ] **R8. finish: validate, README, publish to dev for review**
@@ -104,3 +104,4 @@ places it.
 - chunk R2, round 2: events ch 31-60: 22 events: the Yuan brothers, Liu Bei's thighs, Lady Cai behind the screen, the first two visits, Liu Qi's ladder, Kong Rong, Lady Mi's well, Liu Bei throwing down his son, Guan Yu's fleet at the Han ford, Lu Su's corridor speech, Kan Ze's letter, the ambushes on the road to Huarong, Zhou Yu's feigned death, Taishi Ci, the swords in the bridal chamber, Liulang Ford and Zhang Song reciting Cao Cao's book. (events total 238)
 - chunk R3, round 2: events ch 61-90: 16 events: Huang Zhong and Wei Yan's rivalry, Yang Fu against Ma Chao, Cao Cao as King of Wei, Guan Lu, Tiandang Mountain, the retreat through the Xie Valley, Guan Yu's march north, Pang De's coffin, Xu Huang's charge, the burial of Guan Yu's head at Luoyang, Huang Zhong's death and the enemies delivered at Xiaoting, and four more of Meng Huo's captures. Pang Tong's death moves to Fallen Phoenix Slope, where the novel puts it. (events total 254)
 - chunk R4, round 2: events ch 91-120: 18 events: the Qiang in the snow, Jiang Wei's false letter, Zhao Yun's death, Sun Quan's enthronement, Wei's three-road invasion, the contest of formations, the northern plain, the wooden statue, Iron Cage Mountain, the Luo Valley, Huang Hao, the ghost on Mount Dingjun, Deng Ai's cage cart and death, Sun Hao's cruelty and Du Yu's splitting bamboo. Every chapter now has at least two events. (events total 272)
+- chunk R5, round 2: campaign routes layer and plugin: 60 army movements in layers/campaigns.geojson, built from a table of Han place names in tools/sanguo/build_layers.py: the coalition against Dong Zhuo, Cao Cao's wars with Lü Bu and Yuan Shao, the march beyond the Wall, Changban, the Red Cliffs and Huarong, the conquest of Shu, Hanzhong, Fancheng and the fall of Jingzhou, Yiling, the southern campaign, the five northern expeditions with the Wei answers, Liaodong, Jiang Wei, the conquest of Shu and of Wu. plugins/campaigns.js draws them coloured by side with a pale casing and arrowheads, filtered by year, and marches out the routes a tour step names over the 2.6 s of the camera flight. The separate expeditions layer is folded in. The validator checks the routes file and every route a tour step names. (events total 272)

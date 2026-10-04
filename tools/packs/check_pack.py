@@ -15,11 +15,12 @@ PACK = sys.argv[1].rstrip("/")
 CATS = {"war", "politics", "reform", "rebellion", "diplomacy", "economy", "culture", "science", "society"}
 # Per pack, by manifest id. `field`: a required event field and its allowed values. `chapters`: (first, last, the
 # event field holding the chapter); every chapter should have an event. `notes`: values of `field` whose events must
-# carry a 史实 / Historically clause (None: none required, but zh and en must agree).
+# carry a 史实 / Historically clause (None: none required, but zh and en must agree). `routes`: a GeoJSON file of
+# movements (loaded by a plugin) whose feature ids tour steps may name in "route".
 RULES = {
  "xiyouji": {"field": ("ground", {"real", "identified", "projected", "invented"}), "chapters": (1, 100, "year"), "notes": None},
  "sanguo": {"field": ("truth", {"history", "embellished", "fiction"}), "chapters": (1, 120, "chapter"),
-            "notes": {"embellished", "fiction"}},
+            "notes": {"embellished", "fiction"}, "routes": "layers/campaigns.geojson"},
 }
 GEOM_OK = {"fill": {"Polygon", "MultiPolygon"}, "line": {"LineString", "MultiLineString", "Polygon", "MultiPolygon"},
            "circle": {"Point", "MultiPoint"}}
@@ -151,6 +152,25 @@ for i, ev in enumerate(events):
         c = ev.get(ck)
         if not isinstance(c, int) or not c0 <= c <= c1: err(f"{where}: {ck} must be a chapter {c0}-{c1}")
 
+# ---- routes (movements a plugin draws, named by tour steps) ---------------------
+route_ids = set()
+if RULE.get("routes"):
+    rg = load(RULE["routes"]) or {}
+    for j, f in enumerate(rg.get("features", [])):
+        pr, gt = f.get("properties", {}), (f.get("geometry") or {}).get("type")
+        fw = f"{RULE['routes']}#{pr.get('id', j)}"
+        if not pr.get("id"): err(f"{fw}: id is required")
+        elif pr["id"] in route_ids: err(f"{fw}: duplicate id")
+        route_ids.add(pr.get("id"))
+        if gt not in ("LineString", "MultiLineString"): err(f"{fw}: must be a LineString or MultiLineString, not {gt}")
+        if not (isinstance(pr.get("from"), int) and isinstance(pr.get("to"), int) and pr["from"] < pr["to"]):
+            err(f"{fw}: needs integer from < to")
+        elif not (START <= pr["from"] <= END): err(f"{fw}: from {pr['from']} is outside {START}-{END}")
+        if not pr.get("color"): err(f"{fw}: color is required")
+        pair(pr, "name", fw)
+        for line in (f["geometry"]["coordinates"] if gt == "MultiLineString" else [f.get("geometry", {}).get("coordinates", [])]):
+            for x, y in line: inbox(x, y, fw)
+
 # ---- tours ----------------------------------------------------------------
 tours = load("tours.json") or []
 if not isinstance(tours, list): err("tours.json: must be a list"); tours = []
@@ -172,6 +192,8 @@ for i, t in enumerate(tours):
         else: inbox(at[0], at[1], sw)
         pair(s, "text", sw)
         if s.get("event") and s["event"] not in ids: err(f"{sw}: event {s['event']!r} is not in events.json")
+        for r in ([s["route"]] if isinstance(s.get("route"), str) else s.get("route") or []):
+            if r not in route_ids: err(f"{sw}: route {r!r} is not in {RULE.get('routes') or 'any routes file'}")
 
 # ---- layers ---------------------------------------------------------------
 for L in m.get("layers", []):
