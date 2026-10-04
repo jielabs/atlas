@@ -74,3 +74,30 @@ real years, 184–280, and the chapter is a field. Borders are real too, drawn f
 - chunk 9, layers: truth halos, capitals, five passes, expeditions: tools/sanguo/build_layers.py writes four layers: a disc under every event coloured by truth and shown for the same years as the marker (derived from events.json), eleven capitals with their years, Guan Yu's fictional ride through five passes, and Zhuge Liang's five northern campaigns kept on the map until Shu falls. (events total 193)
 - chunk 10, tours: Guan Yu, the Red Cliffs, Zhuge Liang, Liu Bei, the road to unity: Five tours, 68 steps, each step tagged history / embellished / fiction. Guan Yu and the Red Cliffs are the two where invention is densest; the road to unity is there to watch the borders change from one Han to a dozen warlords to three states to one Jin. (events total 193)
 - chunk 11, finish: live truth discs, 204 map, README, browser check: The truth discs are now computed by plugins/truth.js with the engine's own rules, because a static layer left discs with no marker across periods and under the detail filter; checked to match the markers one for one under every filter and across seven sample years. Added the 204 map (Cao Cao takes Ji and Qing), wrote the README, and pointed Journey to the West's README at the shelf. Checked in headless Chrome: borders change with the years, all layers and five tours work, English works, no console errors. (events total 193)
+
+## Round 2 — the novel's story first (2026-10-04)
+
+The user asked for more events and tours, with the novel's plot as the guide rather than the histories, and for army
+movement routes, above all for the great battles. The truth marks and 史实 notes stay (they are the pack's point of
+difference), but the novel now leads: an episode goes in because the novel tells it, and is placed where the novel
+places it.
+
+- Events: every chapter gets at least two, the two halves of its couplet title, plus the best-known episodes still
+  missing. Same contract as above.
+- Campaigns: `layers/campaigns.geojson` (built by `tools/sanguo/build_layers.py`), one feature per army movement:
+  `id`, `name`/`name_zh`, `text`/`text_zh`, `side` and `color` (曹魏 #3f6e8c, 蜀汉 #4f7f5a, 孙吴 #b5523b, 袁绍 #7a5195,
+  吕布 #c47a2c, 董卓 #8a4f6e, 晋 #46637d, others #8a8a5a), `from`/`to` years, LineString or MultiLineString in
+  the direction of march. `plugins/campaigns.js` draws them with direction arrows, and when a tour step names
+  `"route": ["id", …]` it animates those routes being marched.
+- Tours: battle and character tours whose steps carry `route` where an army moves. The validator checks that every
+  `route` id exists.
+
+- [x] **R1. events ch 1–30**
+- [ ] **R2. events ch 31–60**
+- [ ] **R3. events ch 61–90**
+- [ ] **R4. events ch 91–120**
+- [ ] **R5. campaigns layer and plugin**
+- [ ] **R6. tours: the battles**
+- [ ] **R7. tours: the people and the long campaigns**
+- [ ] **R8. finish: validate, README, publish to dev for review**
+- chunk R1, round 2: events ch 1-30: 23 events: the brothers saving Dong Zhuo, Sun Jian first over the walls of Wan, Beimang, the Wenming garden, the Bian River, Yuan Shao taking Ji, the halberd in the Phoenix Pavilion, two tigers and one piece of meat, Wang Hou's head, Jia Xu's two pursuits, the flooding of Xiapi, Chen Lin's proclamation, the monk Pujing, Sun Quan's succession, Cao Cao barefoot for Xu You, and more. (events total 216)
