@@ -95,7 +95,7 @@ places it.
 - [x] **R1. events ch 1–30**
 - [x] **R2. events ch 31–60**
 - [x] **R3. events ch 61–90**
-- [ ] **R4. events ch 91–120**
+- [x] **R4. events ch 91–120**
 - [ ] **R5. campaigns layer and plugin**
 - [ ] **R6. tours: the battles**
 - [ ] **R7. tours: the people and the long campaigns**
@@ -103,3 +103,4 @@ places it.
 - chunk R1, round 2: events ch 1-30: 23 events: the brothers saving Dong Zhuo, Sun Jian first over the walls of Wan, Beimang, the Wenming garden, the Bian River, Yuan Shao taking Ji, the halberd in the Phoenix Pavilion, two tigers and one piece of meat, Wang Hou's head, Jia Xu's two pursuits, the flooding of Xiapi, Chen Lin's proclamation, the monk Pujing, Sun Quan's succession, Cao Cao barefoot for Xu You, and more. (events total 216)
 - chunk R2, round 2: events ch 31-60: 22 events: the Yuan brothers, Liu Bei's thighs, Lady Cai behind the screen, the first two visits, Liu Qi's ladder, Kong Rong, Lady Mi's well, Liu Bei throwing down his son, Guan Yu's fleet at the Han ford, Lu Su's corridor speech, Kan Ze's letter, the ambushes on the road to Huarong, Zhou Yu's feigned death, Taishi Ci, the swords in the bridal chamber, Liulang Ford and Zhang Song reciting Cao Cao's book. (events total 238)
 - chunk R3, round 2: events ch 61-90: 16 events: Huang Zhong and Wei Yan's rivalry, Yang Fu against Ma Chao, Cao Cao as King of Wei, Guan Lu, Tiandang Mountain, the retreat through the Xie Valley, Guan Yu's march north, Pang De's coffin, Xu Huang's charge, the burial of Guan Yu's head at Luoyang, Huang Zhong's death and the enemies delivered at Xiaoting, and four more of Meng Huo's captures. Pang Tong's death moves to Fallen Phoenix Slope, where the novel puts it. (events total 254)
+- chunk R4, round 2: events ch 91-120: 18 events: the Qiang in the snow, Jiang Wei's false letter, Zhao Yun's death, Sun Quan's enthronement, Wei's three-road invasion, the contest of formations, the northern plain, the wooden statue, Iron Cage Mountain, the Luo Valley, Huang Hao, the ghost on Mount Dingjun, Deng Ai's cage cart and death, Sun Hao's cruelty and Du Yu's splitting bamboo. Every chapter now has at least two events. (events total 272)

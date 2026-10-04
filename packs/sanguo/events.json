@@ -3392,6 +3392,22 @@
   "summary_zh": "降魏的孟达密谋反正归蜀。司马懿不待奏报，八日行军一千二百里，围城十六日破之，斩孟达。"
  },
  {
+  "id": "ch094-qiang-snow",
+  "year": 228,
+  "chapter": 94,
+  "level": 3,
+  "category": "war",
+  "truth": "fiction",
+  "title": "Zhuge Liang beats the Qiang in the snow",
+  "title_zh": "诸葛亮乘雪破羌兵",
+  "place": "Longxi",
+  "place_zh": "陇西",
+  "lat": 35.2,
+  "lon": 104.3,
+  "summary": "Wei calls in a Qiang army with iron-clad war carts. Zhuge Liang waits for snow, has pits dug and covered, and the heavy carts pitch into them. Historically: invented.",
+  "summary_zh": "魏国请来西羌兵助战，羌兵有铁车阵。诸葛亮等大雪降下，在雪地里挖坑设伏，铁车纷纷陷落。史实：并无此事。"
+ },
+ {
   "id": "ch095-jieting",
   "year": 228,
   "chapter": 95,
@@ -3456,6 +3472,22 @@
   "summary_zh": "东吴鄱阳太守周鲂诈降，为取信于魏，当着使者的面剪下头发谢罪。曹休率军深入接应，在石亭被陆逊大败。"
  },
  {
+  "id": "ch097-zhao-yun-dies",
+  "year": 228,
+  "chapter": 97,
+  "level": 2,
+  "category": "society",
+  "truth": "embellished",
+  "title": "Zhao Yun dies",
+  "title_zh": "赵子龙病逝",
+  "place": "Chengdu",
+  "place_zh": "成都",
+  "lat": 30.7,
+  "lon": 104.05,
+  "summary": "As Zhuge Liang prepares to march again, word comes that Zhao Yun has died. Zhuge Liang stamps and weeps that he has lost an arm. Historically: Zhao Yun died in 229, a year later than the novel has it; Liu Bei's praise, 'courage from head to foot', is from the Zhao Yun biezhuan.",
+  "summary_zh": "诸葛亮正准备再次北伐，传来赵云病故的消息，诸葛亮跌足痛哭，说“国家损一栋梁，吾去一臂也”。史实：赵云卒于229年，比小说晚一年；刘备称赞他“一身都是胆”，见于裴注引《赵云别传》。"
+ },
+ {
   "id": "ch097-second-memorial",
   "year": 228,
   "chapter": 97,
@@ -3470,6 +3502,22 @@
   "lon": 107.0,
   "summary": "Zhuge Liang submits a second memorial before marching again, ending: I shall bend my back to the task until death. Historically: the 'Later Memorial' is not in Zhuge Liang's collected works and is known only from a later copy cited in the notes; its authenticity has been argued over for centuries.",
   "summary_zh": "诸葛亮再次北伐前又上一表，末句为“鞠躬尽瘁，死而后已”。史实：《后出师表》不见于《诸葛亮集》，只靠裴注引张俨《默记》流传下来，其真伪千百年来争论不休。"
+ },
+ {
+  "id": "ch097-jiang-wei-letter",
+  "year": 228,
+  "chapter": 97,
+  "level": 3,
+  "category": "war",
+  "truth": "fiction",
+  "title": "Jiang Wei's false letter to Cao Zhen",
+  "title_zh": "破曹兵姜维诈献书",
+  "place": "Near Dasan Pass",
+  "place_zh": "散关附近",
+  "lat": 34.22,
+  "lon": 106.9,
+  "summary": "Jiang Wei sends Cao Zhen a secret letter offering to come back to Wei and open the Shu lines; Cao Zhen marches to meet him and into an ambush. Historically: invented.",
+  "summary_zh": "姜维写密信给曹真，诈称愿意反正归魏、里应外合。曹真信以为真，领兵接应，中了埋伏。史实：并无此事。"
  },
  {
   "id": "ch098-chencang",
@@ -3504,6 +3552,22 @@
   "summary_zh": "蜀军从陈仓撤退，魏将王双率骑兵追击，被诸葛亮击斩。《三国志·诸葛亮传》记有其名。"
  },
  {
+  "id": "ch098-sun-quan-emperor",
+  "year": 229,
+  "chapter": 98,
+  "level": 2,
+  "category": "politics",
+  "truth": "history",
+  "title": "Sun Quan proclaims himself emperor",
+  "title_zh": "孙权称帝",
+  "place": "Wuchang",
+  "place_zh": "武昌（今湖北鄂州）",
+  "lat": 30.4,
+  "lon": 114.88,
+  "summary": "Sun Quan takes the title of emperor at Wuchang and soon moves his capital to Jianye. Shu, rather than break the alliance, sends congratulations: now there are three emperors.",
+  "summary_zh": "孙权在武昌即皇帝位，不久迁都建业。蜀汉为保全联盟，遣使祝贺。至此三国皆已称帝。"
+ },
+ {
   "id": "ch099-wudu-yinping",
   "year": 229,
   "chapter": 99,
@@ -3520,6 +3584,22 @@
   "summary_zh": "第三次北伐，陈式攻取武都、阴平二郡，诸葛亮击退魏国援军。这是历次北伐中唯一长期守住的战果。"
  },
  {
+  "id": "ch099-sima-yi-han-river",
+  "year": 230,
+  "chapter": 99,
+  "level": 3,
+  "category": "war",
+  "truth": "history",
+  "title": "Wei invades Shu by three roads",
+  "title_zh": "司马懿入寇西蜀",
+  "place": "Xicheng",
+  "place_zh": "西城（今陕西安康）",
+  "lat": 32.68,
+  "lon": 109.0,
+  "summary": "Wei strikes back: Cao Zhen through the Ziwu Valley, Zhang He through the Xie Valley, Sima Yi up the Han River from Wan. Thirty days of rain end it before the armies meet.",
+  "summary_zh": "魏国三路伐蜀：曹真出子午谷，张郃出斜谷，司马懿从宛城溯汉水西上。连降三十多天大雨，各路未及交战便撤回。"
+ },
+ {
   "id": "ch100-cao-zhen-rains",
   "year": 230,
   "chapter": 100,
@@ -3534,6 +3614,22 @@
   "lon": 108.7,
   "summary": "Wei invades Shu by three roads; the rain falls for thirty days, the roads wash out, and the armies turn back. In the novel Zhuge Liang then writes Cao Zhen a mocking letter that kills him with rage. Historically: the rains and the retreat are recorded; Cao Zhen died of illness the next year.",
   "summary_zh": "曹真等率魏军三路伐蜀，连降大雨三十余日，栈道断绝，只得撤兵。小说又写诸葛亮致书羞辱曹真，将他活活气死。史实：大雨退兵有记载；曹真是次年病逝的。"
+ },
+ {
+  "id": "ch100-battle-formations",
+  "year": 230,
+  "chapter": 100,
+  "level": 3,
+  "category": "war",
+  "truth": "fiction",
+  "title": "Zhuge Liang humiliates Sima Yi in a contest of formations",
+  "title_zh": "武侯斗阵辱仲达",
+  "place": "Qishan",
+  "place_zh": "祁山",
+  "lat": 34.15,
+  "lon": 105.45,
+  "summary": "Sima Yi challenges Zhuge Liang to a contest of battle formations. Zhuge Liang names each of Sima Yi's at a glance, then lays out his own Eight Trigrams formation, and Sima Yi's officers go in and are captured. Historically: invented.",
+  "summary_zh": "司马懿与诸葛亮斗阵法，诸葛亮一眼识破对方阵名，又摆出八卦阵，魏将闯入阵中纷纷被擒。史实：并无此事。"
  },
  {
   "id": "ch101-zhang-he",
@@ -3584,6 +3680,22 @@
   "summary_zh": "为在蜀道运粮，诸葛亮造木牛流马；小说又写他让司马懿仿造，再扭转牛舌使其不能行动，劫走魏粮。史实：木牛、流马见于《三国志·诸葛亮传》，分别用于231年和234年，构造早已失传；扭舌劫粮出自小说。"
  },
  {
+  "id": "ch102-north-plain",
+  "year": 234,
+  "chapter": 102,
+  "level": 3,
+  "category": "war",
+  "truth": "history",
+  "title": "Guo Huai holds the northern plain",
+  "title_zh": "司马懿占北原渭桥",
+  "place": "The northern plain",
+  "place_zh": "渭水北原",
+  "lat": 34.35,
+  "lon": 107.5,
+  "summary": "Guo Huai sees that if Zhuge Liang crosses the Wei and takes the northern plain he can cut the road to the west, and seizes it first. The campaign settles into a stalemate across the river.",
+  "summary_zh": "郭淮看出诸葛亮若渡渭水占据北原，就能隔断陇右通道，抢先屯兵北原。两军从此隔着渭水对峙。"
+ },
+ {
   "id": "ch103-shangfang-valley",
   "year": 234,
   "chapter": 103,
@@ -3630,6 +3742,22 @@
   "lon": 107.65,
   "summary": "After a hundred days facing Sima Yi across the Wei River, Zhuge Liang dies in camp at fifty-four. The army withdraws in good order, and when Sima Yi pursues and the Shu banners turn to face him, he flees: the people said 'a dead Zhuge put a living Zhongda to flight'. The saying is recorded in the Han-Jin chunqiu.",
   "summary_zh": "诸葛亮与司马懿在渭水相持百余日，病逝于五丈原军中，年五十四岁。蜀军有序撤退，司马懿追来，蜀军反旗鸣鼓作势迎战，司马懿急忙退走。百姓编出谚语：“死诸葛走生仲达。”此语见于裴注引《汉晋春秋》。"
+ },
+ {
+  "id": "ch104-wooden-statue",
+  "year": 234,
+  "chapter": 104,
+  "level": 2,
+  "category": "war",
+  "truth": "embellished",
+  "title": "A wooden statue puts Sima Yi to flight",
+  "title_zh": "见木像魏都督丧胆",
+  "place": "Wuzhang Plains",
+  "place_zh": "五丈原撤军路上",
+  "lat": 34.2,
+  "lon": 107.55,
+  "summary": "Sima Yi pursues the retreating Shu army; it turns, and in the middle sits Zhuge Liang in his carriage. Sima Yi flees, feeling for his head. It was a wooden statue. Historically: the Han-Jin chunqiu says the Shu army turned its banners and beat its drums, and Sima Yi fell back; the statue is the novel's.",
+  "summary_zh": "司马懿追击撤退的蜀军，蜀军忽然回旗返鼓，中间推出诸葛亮端坐车上。司马懿大惊而逃，一路摸着脑袋问“吾有头否”。那是一尊木像。史实：裴注引《汉晋春秋》载蜀军反旗鸣鼓作势，司马懿退走；木像出自小说。"
  },
  {
   "id": "ch105-wei-yan",
@@ -3760,6 +3888,22 @@
   "summary_zh": "东吴权臣诸葛恪（诸葛亮之侄、诸葛瑾之子）北伐新城大败而归，在宫中宴席上被孙峻伏兵杀死。"
  },
  {
+  "id": "ch109-tielong",
+  "year": 253,
+  "chapter": 109,
+  "level": 3,
+  "category": "war",
+  "truth": "fiction",
+  "title": "Jiang Wei traps Sima Zhao on Iron Cage Mountain",
+  "title_zh": "困司马汉将奇谋",
+  "place": "Iron Cage Mountain",
+  "place_zh": "铁笼山",
+  "lat": 34.7,
+  "lon": 103.8,
+  "summary": "Jiang Wei traps Sima Zhao on a waterless mountain; Sima Zhao prays and a spring gushes out, and he is rescued. Historically: invented.",
+  "summary_zh": "姜维把司马昭围困在缺水的铁笼山上，司马昭拜泉求水，泉水涌出，后被救出。史实：并无此事。"
+ },
+ {
   "id": "ch109-cao-fang-deposed",
   "year": 254,
   "chapter": 109,
@@ -3840,6 +3984,22 @@
   "summary_zh": "镇东大将军诸葛诞在寿春起兵讨伐司马昭，东吴派兵援助。司马昭挟持皇帝和太后随军亲征，防止后方生变，率大军围攻寿春。"
  },
  {
+  "id": "ch112-changcheng",
+  "year": 257,
+  "chapter": 112,
+  "level": 3,
+  "category": "war",
+  "truth": "history",
+  "title": "Jiang Wei marches through the Luo Valley",
+  "title_zh": "取长城伯约鏖兵",
+  "place": "Changcheng, near the Mang River",
+  "place_zh": "长城（今陕西周至）",
+  "lat": 34.05,
+  "lon": 108.2,
+  "summary": "While Wei is busy with Zhuge Dan's rising, Jiang Wei comes out through the Luo Valley to the grain stores at Changcheng, but Sima Wang and Deng Ai hold firm and he withdraws.",
+  "summary_zh": "趁魏国忙于平定诸葛诞，姜维出骆谷，直逼长城囤粮处，司马望、邓艾坚守不战，姜维只得撤回。"
+ },
+ {
   "id": "ch112-shouchun-falls",
   "year": 258,
   "chapter": 112,
@@ -3872,6 +4032,22 @@
   "summary_zh": "吴帝孙休被权臣孙綝扶上皇位，与丁奉、张布定计，在腊会宴上擒杀孙綝。"
  },
  {
+  "id": "ch113-formations-deng-ai",
+  "year": 258,
+  "chapter": 113,
+  "level": 3,
+  "category": "war",
+  "truth": "fiction",
+  "title": "Jiang Wei outwits Deng Ai at formations",
+  "title_zh": "姜维斗阵破邓艾",
+  "place": "Qishan",
+  "place_zh": "祁山",
+  "lat": 34.08,
+  "lon": 105.42,
+  "summary": "Deng Ai challenges Jiang Wei to a contest of formations and Jiang Wei, who learned from Zhuge Liang, wins it. Historically: invented.",
+  "summary_zh": "邓艾与姜维斗阵，姜维得诸葛亮真传，以八阵之法取胜。史实：并无此事。"
+ },
+ {
   "id": "ch114-cao-mao",
   "year": 260,
   "chapter": 114,
@@ -3886,6 +4062,22 @@
   "lon": 112.64,
   "summary": "'Sima Zhao's heart is known to every man in the street', says the nineteen-year-old emperor Cao Mao, and leads a few hundred palace servants out to attack him. One of Sima Zhao's officers runs him through with a spear in the street. The saying is in the Han-Jin chunqiu.",
   "summary_zh": "十九岁的魏帝曹髦说“司马昭之心，路人所知也”，亲率宫中数百僮仆出宫讨伐司马昭，在南阙下被司马昭部下成济一戈刺穿胸膛而死。这句话见于裴注引《汉晋春秋》。"
+ },
+ {
+  "id": "ch114-abandoned-grain",
+  "year": 260,
+  "chapter": 114,
+  "level": 3,
+  "category": "war",
+  "truth": "fiction",
+  "title": "Jiang Wei baits Wei with abandoned grain",
+  "title_zh": "姜维弃粮胜魏兵",
+  "place": "Qishan",
+  "place_zh": "祁山",
+  "lat": 34.15,
+  "lon": 105.35,
+  "summary": "Jiang Wei leaves a train of grain carts as bait; the Wei troops rush to seize it and are cut to pieces. Historically: invented.",
+  "summary_zh": "姜维故意丢弃粮车，魏军争抢粮草，被伏兵冲杀。史实：并无此事。"
  },
  {
   "id": "ch115-tazhong",
@@ -3904,6 +4096,22 @@
   "summary_zh": "宦官黄皓得宠专权，姜维屡次北伐也遭朝臣非议。他为避祸，率军到远离成都的沓中屯田。"
  },
  {
+  "id": "ch115-huang-hao",
+  "year": 262,
+  "chapter": 115,
+  "level": 3,
+  "category": "politics",
+  "truth": "history",
+  "title": "The eunuch Huang Hao and the recall of Jiang Wei",
+  "title_zh": "诏班师后主信谗",
+  "place": "Chengdu",
+  "place_zh": "成都",
+  "lat": 30.69,
+  "lon": 104.08,
+  "summary": "The eunuch Huang Hao runs the court. Jiang Wei asks Liu Shan to execute him; Liu Shan refuses, and Jiang Wei, fearing for himself, takes his army off to farm at Tazhong. Jiang Wei's biography records it.",
+  "summary_zh": "宦官黄皓专权，姜维奏请后主诛杀黄皓，后主不许。姜维怕遭陷害，率军到沓中屯田避祸。见于《三国志·姜维传》。"
+ },
+ {
   "id": "ch116-zhong-hui",
   "year": 263,
   "chapter": 116,
@@ -3918,6 +4126,22 @@
   "lon": 106.9,
   "summary": "Sima Zhao sends three armies against Shu. Zhong Hui pours through Hanzhong with a hundred thousand men, and on the way pays his respects at Zhuge Liang's tomb on Mount Dingjun, forbidding his soldiers to cut wood near it. The novel has Zhuge Liang's ghost appear to him there.",
   "summary_zh": "司马昭三路伐蜀，钟会率十余万大军经汉中南下，途中到定军山祭拜诸葛亮墓，下令士兵不得在墓旁砍柴放牧。小说又写诸葛亮在此显圣，嘱他勿伤百姓。"
+ },
+ {
+  "id": "ch116-dingjun-ghost",
+  "year": 263,
+  "chapter": 116,
+  "level": 3,
+  "category": "culture",
+  "truth": "fiction",
+  "title": "Zhuge Liang's ghost appears on Mount Dingjun",
+  "title_zh": "武侯显圣定军山",
+  "place": "Mount Dingjun",
+  "place_zh": "定军山武侯墓",
+  "lat": 33.08,
+  "lon": 106.66,
+  "summary": "Zhong Hui, offering sacrifice at Zhuge Liang's tomb, sees the ghost of the chancellor, who asks him to spare the people of Shu. Historically: Zhong Hui did sacrifice at the tomb and forbade his soldiers to cut wood near it; the ghost is the novel's.",
+  "summary_zh": "钟会到定军山诸葛亮墓前祭拜，忽见武侯显圣，嘱他入川后勿伤百姓。史实：钟会确曾祭拜诸葛亮墓，并下令士兵不得在墓旁砍柴放牧；显圣出自小说。"
  },
  {
   "id": "ch117-yinping",
@@ -3968,6 +4192,22 @@
   "summary_zh": "后主刘禅出城向邓艾投降。其子北地王刘谌主张背城一战，劝阻不成，到昭烈庙中痛哭，先杀妻儿，然后自杀。此事见于裴注引《汉晋春秋》。"
  },
  {
+  "id": "ch118-deng-ai-cage",
+  "year": 264,
+  "chapter": 118,
+  "level": 2,
+  "category": "politics",
+  "truth": "history",
+  "title": "Deng Ai is carried off in a prison cart",
+  "title_zh": "入西川二士争功",
+  "place": "Chengdu",
+  "place_zh": "成都",
+  "lat": 30.72,
+  "lon": 104.03,
+  "summary": "Deng Ai, conqueror of Shu, behaves as if he were its king; Zhong Hui, jealous, reports him as a rebel, and Deng Ai is arrested and sent east in a cage cart. Recorded in both men's biographies.",
+  "summary_zh": "灭蜀首功的邓艾在成都承制拜官，有些专擅；钟会忌其功劳，诬告他谋反，邓艾被收捕，装入槛车押往洛阳。见于《三国志》邓艾、钟会传。"
+ },
+ {
   "id": "ch119-zhong-hui-revolt",
   "year": 264,
   "chapter": 119,
@@ -4000,6 +4240,22 @@
   "summary_zh": "司马昭在洛阳设宴，命人演奏蜀地乐曲，旧蜀臣都伤心落泪，刘禅却嬉笑自若。司马昭问他是否思念蜀国，刘禅答：“此间乐，不思蜀。”此事见于裴注引《汉晋春秋》。"
  },
  {
+  "id": "ch119-deng-ai-killed",
+  "year": 264,
+  "chapter": 119,
+  "level": 3,
+  "category": "politics",
+  "truth": "history",
+  "title": "Deng Ai and his son are killed",
+  "title_zh": "邓艾父子被杀",
+  "place": "Mianzhu",
+  "place_zh": "绵竹以西",
+  "lat": 31.35,
+  "lon": 104.2,
+  "summary": "After Zhong Hui's revolt fails, Deng Ai's men go after the cart to free him; Wei Guan, who had arrested him, sends Tian Xu to kill him and his son on the road.",
+  "summary_zh": "钟会之乱平定后，邓艾部下追赶槛车想救回邓艾，监军卫瓘怕他报复，派田续在绵竹以西追杀了邓艾父子。"
+ },
+ {
   "id": "ch119-jin-founded",
   "year": 265,
   "chapter": 119,
@@ -4014,6 +4270,22 @@
   "lon": 112.68,
   "summary": "Sima Zhao dies, and his son Sima Yan has the last Wei emperor abdicate to him, on a terrace, after three refusals, exactly as Cao Pi had done to the Han forty-five years before. The novel's chapter title calls it drawing a gourd from the same pattern.",
   "summary_zh": "司马昭死后，其子司马炎逼魏元帝曹奂禅位，筑坛受禅，三辞三让，与四十五年前曹丕代汉如出一辙。小说回目称之为“依样画葫芦”。"
+ },
+ {
+  "id": "ch120-sun-hao",
+  "year": 270,
+  "chapter": 120,
+  "level": 3,
+  "category": "society",
+  "truth": "history",
+  "title": "Sun Hao's cruelty",
+  "title_zh": "孙皓暴政",
+  "place": "Jianye",
+  "place_zh": "建业",
+  "lat": 32.07,
+  "lon": 118.78,
+  "summary": "The last Wu emperor, Sun Hao, drinks, builds palaces, and has ministers' faces flayed and eyes gouged out. Wu's best men are killed or flee, and its people wait for Jin. Recorded in Sun Hao's biography.",
+  "summary_zh": "吴国末帝孙皓荒淫残暴，大兴土木，动辄剥人面皮、凿人眼睛。忠臣或被杀或出逃，百姓离心，只等晋军到来。见于《三国志·孙皓传》。"
  },
  {
   "id": "ch120-yang-hu-lu-kang",
@@ -4062,5 +4334,21 @@
   "lon": 111.2,
   "summary": "Wang Jun's great warships, built in Yizhou for seven years, sail down the Yangzi. Wu has chained the gorges with iron and planted iron spikes in the river; Wang Jun sends rafts ahead to catch the spikes and burns through the chains with torches soaked in oil.",
   "summary_zh": "王濬在益州造楼船七年，率水军顺江东下。东吴在江中暗设铁锥、横江拉起铁锁，王濬先放木筏冲走铁锥，再用灌满麻油的火炬烧断铁锁，一路势如破竹。"
+ },
+ {
+  "id": "ch120-splitting-bamboo",
+  "year": 280,
+  "chapter": 120,
+  "level": 2,
+  "category": "war",
+  "truth": "history",
+  "title": "Du Yu takes Jiangling, 'like splitting bamboo'",
+  "title_zh": "杜预势如破竹",
+  "place": "Jiangling",
+  "place_zh": "江陵",
+  "lat": 30.35,
+  "lon": 112.2,
+  "summary": "Du Yu takes Jiangling; when officers urge waiting out the summer floods, he answers that the army's momentum is like splitting bamboo: after the first few joints, the rest open of themselves. The phrase is from his biography in the Book of Jin.",
+  "summary_zh": "杜预攻克江陵。有人主张等过了夏季水涨再进兵，杜预说：“今兵威已振，譬如破竹，数节之后，皆迎刃而解。”“势如破竹”一语即出于此，见于《晋书·杜预传》。"
  }
 ]
