@@ -1,684 +1,5 @@
 [
  {
-  "id": "guan-yu",
-  "era": "guandu",
-  "start": 184,
-  "end": 220,
-  "path": true,
-  "title": "Guan Yu: the man and the legend",
-  "title_zh": "关羽：其人与传说",
-  "summary": "Thirteen stops from the peach garden to Jade Spring Hill. Each step says whether the story is history, embellished, or invented; with Guan Yu more than with anyone, the legend outgrew the man.",
-  "summary_zh": "从桃园到玉泉山十三站，每站都标明是正史、演义加工还是虚构。三国人物中，传说超过本人最多的就是关羽。",
-  "steps": [
-   {
-    "year": 184,
-    "at": [
-     115.97,
-     39.49
-    ],
-    "zoom": 6,
-    "event": "ch001-peach-garden",
-    "text": "[Fiction] The oath in the peach garden. The Records says only that the three were close as brothers.",
-    "text_zh": "【虚构】桃园结义。史书只说三人“恩若兄弟”。"
-   },
-   {
-    "year": 190,
-    "at": [
-     113.2,
-     34.86
-    ],
-    "zoom": 6.5,
-    "event": "ch005-hua-xiong",
-    "text": "[Fiction] Hua Xiong killed before the wine cools. Sun Jian's men killed him; Guan Yu was not there.",
-    "text_zh": "【虚构】温酒斩华雄。华雄实为孙坚所斩，关羽并不在场。"
-   },
-   {
-    "year": 200,
-    "at": [
-     117.9,
-     34.42
-    ],
-    "zoom": 6.5,
-    "event": "ch025-three-conditions",
-    "text": "[Embellished] The three conditions on Tushan. In history he was simply captured.",
-    "text_zh": "【演义加工】土山约三事。史实上他只是兵败被擒。"
-   },
-   {
-    "year": 200,
-    "at": [
-     114.65,
-     35.55
-    ],
-    "zoom": 6.5,
-    "event": "ch025-yan-liang",
-    "text": "[History] Yan Liang at Baima: the one great duel the Records tells as the novel does.",
-    "text_zh": "【正史】白马斩颜良，这是史书与小说记载一致的一场阵前斩将。"
-   },
-   {
-    "year": 200,
-    "at": [
-     112.6,
-     34.78
-    ],
-    "zoom": 5.5,
-    "event": "ch027-five-passes",
-    "text": "[Fiction] Five passes, six generals: switch on the five-passes layer to see how far out of the way the route runs. None of it happened.",
-    "text_zh": "【虚构】过五关斩六将。打开“过五关路线”图层，可以看到这条路绕了多远。史书并无此事。"
-   },
-   {
-    "year": 200,
-    "at": [
-     114.5,
-     33.1
-    ],
-    "zoom": 6,
-    "event": "ch028-cai-yang",
-    "text": "[Embellished] Cai Yang at Gucheng. Liu Bei killed him, in Runan.",
-    "text_zh": "【演义加工】古城斩蔡阳。蔡阳实为刘备在汝南所杀。"
-   },
-   {
-    "year": 208,
-    "at": [
-     112.85,
-     29.75
-    ],
-    "zoom": 6.5,
-    "event": "ch050-huarong",
-    "text": "[Fiction] Huarong: he lets Cao Cao go. Invented; Liu Bei simply arrived too late.",
-    "text_zh": "【虚构】华容道义释曹操。虚构，史实是刘备追之不及。"
-   },
-   {
-    "year": 215,
-    "at": [
-     112.33,
-     28.6
-    ],
-    "zoom": 6.5,
-    "event": "ch066-single-sword",
-    "text": "[Embellished] The single-sword meeting. Lu Su called it and Lu Su did the scolding.",
-    "text_zh": "【演义加工】单刀赴会。发起会面、当面责备的其实是鲁肃。"
-   },
-   {
-    "year": 219,
-    "at": [
-     112.15,
-     32.07
-    ],
-    "zoom": 6.5,
-    "event": "ch074-seven-armies",
-    "text": "[Embellished] Seven armies drowned. The autumn rains did it; he used them.",
-    "text_zh": "【演义加工】水淹七军。是秋雨使汉水泛滥，关羽乘势进攻。"
-   },
-   {
-    "year": 219,
-    "at": [
-     112.1,
-     32.12
-    ],
-    "zoom": 7,
-    "event": "ch075-scraping-the-bone",
-    "text": "[Embellished] Scraping the bone while playing chess: real, though the surgeon was not Hua Tuo.",
-    "text_zh": "【演义加工】刮骨疗毒、谈笑弈棋确有其事，只是医生并非华佗。"
-   },
-   {
-    "year": 219,
-    "at": [
-     112.25,
-     30.32
-    ],
-    "zoom": 6.5,
-    "event": "ch075-white-robes",
-    "text": "[History] Lü Meng's men in white take Jiangling behind him.",
-    "text_zh": "【正史】吕蒙白衣渡江，袭取江陵。"
-   },
-   {
-    "year": 219,
-    "at": [
-     111.68,
-     31.07
-    ],
-    "zoom": 6.5,
-    "event": "ch077-guan-yu-dies",
-    "text": "[History] Captured at Linju and beheaded.",
-    "text_zh": "【正史】临沮被擒，遇害。"
-   },
-   {
-    "year": 220,
-    "at": [
-     111.76,
-     30.72
-    ],
-    "zoom": 7,
-    "event": "ch077-yuquan-ghost",
-    "text": "[Fiction] The ghost at Jade Spring Hill: the beginning of a cult that made him a god.",
-    "text_zh": "【虚构】玉泉山显圣：此后千年，关羽被尊为关帝。"
-   }
-  ]
- },
- {
-  "id": "zhuge-liang",
-  "era": "expeditions",
-  "start": 207,
-  "end": 234,
-  "path": true,
-  "title": "Zhuge Liang",
-  "title_zh": "诸葛亮",
-  "summary": "Fourteen steps from the thatched cottage to Wuzhang Plains. The novel made him a wizard; the history shows a statesman whose own words survive.",
-  "summary_zh": "从草庐到五丈原十四步。小说把他写成了近乎神算的奇人，史书里的他则是一位留下了亲笔文字的政治家。",
-  "steps": [
-   {
-    "year": 207,
-    "at": [
-     112.04,
-     32.02
-    ],
-    "zoom": 7,
-    "event": "ch037-three-visits",
-    "text": "[History] Three visits to the cottage, as he himself wrote.",
-    "text_zh": "【正史】三顾茅庐，他在《出师表》中亲笔写过。"
-   },
-   {
-    "year": 207,
-    "at": [
-     112.07,
-     31.98
-    ],
-    "zoom": 7,
-    "event": "ch038-longzhong-plan",
-    "text": "[History] The Longzhong plan.",
-    "text_zh": "【正史】隆中对。"
-   },
-   {
-    "year": 208,
-    "at": [
-     112.83,
-     33.17
-    ],
-    "zoom": 6.5,
-    "event": "ch039-bowang",
-    "text": "[Embellished] Bowang: a real ambush, five years before he arrived.",
-    "text_zh": "【演义加工】博望坡：确有此战，但比他出山早了五年。"
-   },
-   {
-    "year": 208,
-    "at": [
-     115.98,
-     29.7
-    ],
-    "zoom": 6,
-    "event": "ch043-debating-the-scholars",
-    "text": "[Embellished] The embassy to Wu.",
-    "text_zh": "【演义加工】出使东吴。"
-   },
-   {
-    "year": 208,
-    "at": [
-     113.66,
-     29.84
-    ],
-    "zoom": 6.5,
-    "event": "ch049-east-wind",
-    "text": "[Fiction] The east wind, the novel's wizardry.",
-    "text_zh": "【虚构】借东风，小说中的神机妙算。"
-   },
-   {
-    "year": 223,
-    "at": [
-     109.57,
-     31.04
-    ],
-    "zoom": 6.5,
-    "event": "ch085-baidi",
-    "text": "[History] Liu Bei's charge at Baidi.",
-    "text_zh": "【正史】白帝城受托孤。"
-   },
-   {
-    "year": 225,
-    "at": [
-     102.62,
-     24.88
-    ],
-    "zoom": 5.5,
-    "event": "ch090-seven-captures",
-    "text": "[Embellished] Meng Huo seven times: a later, doubtful number.",
-    "text_zh": "【演义加工】七擒孟获，次数出自后来的记载，颇可怀疑。"
-   },
-   {
-    "year": 227,
-    "at": [
-     104.04,
-     30.64
-    ],
-    "zoom": 6,
-    "event": "ch091-memorial",
-    "text": "[History] The memorial on leaving for the north.",
-    "text_zh": "【正史】上《出师表》，率军北伐。"
-   },
-   {
-    "year": 228,
-    "at": [
-     105.83,
-     34.95
-    ],
-    "zoom": 6.5,
-    "event": "ch095-jieting",
-    "text": "[History] Ma Su loses Jieting.",
-    "text_zh": "【正史】马谡失街亭。"
-   },
-   {
-    "year": 228,
-    "at": [
-     105.3,
-     34.2
-    ],
-    "zoom": 6.5,
-    "event": "ch095-empty-fort",
-    "text": "[Fiction] The empty fort: a story Pei Songzhi already refuted.",
-    "text_zh": "【虚构】空城计，裴松之当年就已驳斥。"
-   },
-   {
-    "year": 228,
-    "at": [
-     107.03,
-     33.07
-    ],
-    "zoom": 6.5,
-    "event": "ch096-ma-su-executed",
-    "text": "[History] Ma Su executed, in tears.",
-    "text_zh": "【正史】挥泪斩马谡。"
-   },
-   {
-    "year": 234,
-    "at": [
-     107.4,
-     34.0
-    ],
-    "zoom": 6.5,
-    "event": "ch102-wooden-oxen",
-    "text": "[Embellished] Wooden oxen and gliding horses.",
-    "text_zh": "【演义加工】木牛流马。"
-   },
-   {
-    "year": 234,
-    "at": [
-     107.5,
-     34.25
-    ],
-    "zoom": 7,
-    "event": "ch103-shangfang-valley",
-    "text": "[Fiction] Rain saves Sima Yi at Shangfang Valley.",
-    "text_zh": "【虚构】上方谷，大雨救了司马懿。"
-   },
-   {
-    "year": 234,
-    "at": [
-     107.65,
-     34.28
-    ],
-    "zoom": 7,
-    "event": "ch104-wuzhang",
-    "text": "[History] The star falls at Wuzhang Plains.",
-    "text_zh": "【正史】星落五丈原。"
-   }
-  ]
- },
- {
-  "id": "liu-bei",
-  "era": "yellow-turbans",
-  "start": 184,
-  "end": 223,
-  "path": true,
-  "title": "Liu Bei, from straw sandals to emperor",
-  "title_zh": "刘备：从织席贩履到称帝",
-  "summary": "Fifteen steps through a life spent losing and starting again: Zhuo, Xuzhou, Xu, Jingzhou, Chengdu, Baidi.",
-  "summary_zh": "十五步走完屡败屡起的一生：涿郡、徐州、许都、荆州、成都、白帝城。",
-  "steps": [
-   {
-    "year": 184,
-    "at": [
-     115.97,
-     39.49
-    ],
-    "zoom": 6,
-    "event": "ch001-peach-garden",
-    "text": "[Fiction] The peach garden at Zhuo.",
-    "text_zh": "【虚构】涿郡桃园。"
-   },
-   {
-    "year": 185,
-    "at": [
-     115.1,
-     38.45
-    ],
-    "zoom": 6.5,
-    "event": "ch002-whipping-the-inspector",
-    "text": "[Embellished] The inspector whipped. It was Liu Bei's own temper, not Zhang Fei's.",
-    "text_zh": "【演义加工】鞭打督邮，动手的其实是刘备本人。"
-   },
-   {
-    "year": 194,
-    "at": [
-     118.35,
-     34.6
-    ],
-    "zoom": 6,
-    "event": "ch012-three-offers-of-xuzhou",
-    "text": "[Embellished] Xuzhou offered to him.",
-    "text_zh": "【演义加工】领徐州。"
-   },
-   {
-    "year": 199,
-    "at": [
-     113.78,
-     33.98
-    ],
-    "zoom": 6.5,
-    "event": "ch021-heroes-over-wine",
-    "text": "[Embellished] Talking of heroes with Cao Cao.",
-    "text_zh": "【演义加工】与曹操煮酒论英雄。"
-   },
-   {
-    "year": 200,
-    "at": [
-     116.93,
-     34.73
-    ],
-    "zoom": 6,
-    "event": "ch024-liu-bei-flees-to-yuan",
-    "text": "[History] Routed, he flees to Yuan Shao.",
-    "text_zh": "【正史】兵败投袁绍。"
-   },
-   {
-    "year": 207,
-    "at": [
-     112.13,
-     32.04
-    ],
-    "zoom": 7,
-    "event": "ch034-tan-stream",
-    "text": "[Embellished] The leap over the Tan Stream.",
-    "text_zh": "【演义加工】跃马过檀溪。"
-   },
-   {
-    "year": 207,
-    "at": [
-     112.04,
-     32.02
-    ],
-    "zoom": 7,
-    "event": "ch037-three-visits",
-    "text": "[History] Three visits to Zhuge Liang.",
-    "text_zh": "【正史】三顾茅庐。"
-   },
-   {
-    "year": 208,
-    "at": [
-     111.8,
-     30.85
-    ],
-    "zoom": 6.5,
-    "event": "ch041-crossing-with-the-people",
-    "text": "[History] Fleeing south with the people.",
-    "text_zh": "【正史】携民渡江。"
-   },
-   {
-    "year": 209,
-    "at": [
-     119.47,
-     32.22
-    ],
-    "zoom": 6.5,
-    "event": "ch054-ganlu-temple",
-    "text": "[Embellished] Married to Sun Quan's sister.",
-    "text_zh": "【演义加工】娶孙权之妹。"
-   },
-   {
-    "year": 212,
-    "at": [
-     104.75,
-     31.47
-    ],
-    "zoom": 6,
-    "event": "ch060-liu-bei-enters-shu",
-    "text": "[History] Into Shu, at Liu Zhang's invitation.",
-    "text_zh": "【正史】应刘璋之邀入川。"
-   },
-   {
-    "year": 214,
-    "at": [
-     104.07,
-     30.67
-    ],
-    "zoom": 6,
-    "event": "ch065-governor-of-yizhou",
-    "text": "[History] Chengdu is his.",
-    "text_zh": "【正史】取成都，领益州牧。"
-   },
-   {
-    "year": 219,
-    "at": [
-     106.62,
-     33.18
-    ],
-    "zoom": 6.5,
-    "event": "ch073-king-of-hanzhong",
-    "text": "[History] King of Hanzhong.",
-    "text_zh": "【正史】进位汉中王。"
-   },
-   {
-    "year": 221,
-    "at": [
-     104.07,
-     30.67
-    ],
-    "zoom": 6,
-    "event": "ch080-liu-bei-emperor",
-    "text": "[History] Emperor of Han, at Chengdu.",
-    "text_zh": "【正史】成都称帝。"
-   },
-   {
-    "year": 222,
-    "at": [
-     111.42,
-     30.55
-    ],
-    "zoom": 6.5,
-    "event": "ch084-yiling",
-    "text": "[History] Burned out at Yiling.",
-    "text_zh": "【正史】夷陵兵败。"
-   },
-   {
-    "year": 223,
-    "at": [
-     109.57,
-     31.04
-    ],
-    "zoom": 6.5,
-    "event": "ch085-baidi",
-    "text": "[History] Death at Baidi.",
-    "text_zh": "【正史】白帝城托孤，病逝。"
-   }
-  ]
- },
- {
-  "id": "road-to-unity",
-  "era": "jin",
-  "start": 184,
-  "end": 280,
-  "path": false,
-  "title": "Long divided, the realm unites",
-  "title_zh": "分久必合",
-  "summary": "Ninety-six years in fifteen steps, from the Yellow Turbans to the surrender of Wu. Watch the borders change under the markers: one Han, a dozen warlords, three states, one Jin.",
-  "summary_zh": "十五步走完九十六年，从黄巾起义到吴国投降。留意疆域的变化：一个汉朝，十几路诸侯，三个国家，最后归于一个晋朝。",
-  "steps": [
-   {
-    "year": 184,
-    "at": [
-     115.0,
-     37.6
-    ],
-    "zoom": 4.6,
-    "event": "ch001-yellow-turbans",
-    "text": "[History] 184: the Yellow Turbans rise across a united Han.",
-    "text_zh": "【正史】184年：黄巾起义，汉朝尚是一统。"
-   },
-   {
-    "year": 190,
-    "at": [
-     112.7,
-     34.75
-    ],
-    "zoom": 4.8,
-    "event": "ch006-burns-luoyang",
-    "text": "[History] 190: Dong Zhuo burns Luoyang; the governors take their provinces.",
-    "text_zh": "【正史】190年：董卓焚洛阳，州郡长官各据一方。"
-   },
-   {
-    "year": 196,
-    "at": [
-     113.85,
-     34.03
-    ],
-    "zoom": 4.8,
-    "event": "ch014-emperor-to-xu",
-    "text": "[History] 196: Cao Cao takes the emperor to Xu.",
-    "text_zh": "【正史】196年：曹操迎献帝都许。"
-   },
-   {
-    "year": 200,
-    "at": [
-     114.05,
-     34.78
-    ],
-    "zoom": 4.8,
-    "event": "ch030-guandu",
-    "text": "[History] 200: Guandu decides the north.",
-    "text_zh": "【正史】200年：官渡之战决定北方归属。"
-   },
-   {
-    "year": 208,
-    "at": [
-     113.62,
-     29.88
-    ],
-    "zoom": 4.8,
-    "event": "ch049-red-cliffs",
-    "text": "[History] 208: the Red Cliffs stop Cao Cao in the south.",
-    "text_zh": "【正史】208年：赤壁之战阻止曹操南下。"
-   },
-   {
-    "year": 214,
-    "at": [
-     104.07,
-     30.67
-    ],
-    "zoom": 4.8,
-    "event": "ch065-governor-of-yizhou",
-    "text": "[History] 214: Liu Bei takes Yizhou; three powers.",
-    "text_zh": "【正史】214年：刘备取益州，三分之势已成。"
-   },
-   {
-    "year": 220,
-    "at": [
-     113.95,
-     33.85
-    ],
-    "zoom": 4.8,
-    "event": "ch080-cao-pi-emperor",
-    "text": "[History] 220: Cao Pi ends the Han; three emperors follow.",
-    "text_zh": "【正史】220年：曹丕代汉，三国相继称帝。"
-   },
-   {
-    "year": 222,
-    "at": [
-     111.42,
-     30.55
-    ],
-    "zoom": 4.8,
-    "event": "ch084-yiling",
-    "text": "[History] 222: Yiling fixes the border between Shu and Wu.",
-    "text_zh": "【正史】222年：夷陵之战后蜀吴边界从此定型。"
-   },
-   {
-    "year": 234,
-    "at": [
-     107.65,
-     34.28
-    ],
-    "zoom": 4.8,
-    "event": "ch104-wuzhang",
-    "text": "[History] 234: Zhuge Liang dies; the north is not retaken.",
-    "text_zh": "【正史】234年：诸葛亮病逝，北伐终未成功。"
-   },
-   {
-    "year": 249,
-    "at": [
-     112.55,
-     34.4
-    ],
-    "zoom": 4.8,
-    "event": "ch107-gaopingling",
-    "text": "[History] 249: the Sima take Wei.",
-    "text_zh": "【正史】249年：司马氏掌控魏国。"
-   },
-   {
-    "year": 263,
-    "at": [
-     104.6,
-     32.6
-    ],
-    "zoom": 5,
-    "event": "ch117-yinping",
-    "text": "[History] 263: Deng Ai crosses Yinping.",
-    "text_zh": "【正史】263年：邓艾偷渡阴平。"
-   },
-   {
-    "year": 263,
-    "at": [
-     104.07,
-     30.67
-    ],
-    "zoom": 4.8,
-    "event": "ch118-shu-falls",
-    "text": "[History] 263: Shu surrenders.",
-    "text_zh": "【正史】263年：蜀汉投降。"
-   },
-   {
-    "year": 265,
-    "at": [
-     112.68,
-     34.71
-    ],
-    "zoom": 4.8,
-    "event": "ch119-jin-founded",
-    "text": "[History] 265: Jin replaces Wei.",
-    "text_zh": "【正史】265年：晋代魏。"
-   },
-   {
-    "year": 280,
-    "at": [
-     111.2,
-     30.75
-    ],
-    "zoom": 4.8,
-    "event": "ch120-wang-jun-fleet",
-    "text": "[History] 280: Wang Jun's fleet comes down the Yangzi.",
-    "text_zh": "【正史】280年：王濬楼船顺江而下。"
-   },
-   {
-    "year": 280,
-    "at": [
-     118.8,
-     32.05
-    ],
-    "zoom": 4.6,
-    "event": "ch120-wu-falls",
-    "text": "[History] 280: Wu surrenders; the realm is one.",
-    "text_zh": "【正史】280年：吴国投降，天下一统。"
-   }
-  ]
- },
- {
   "id": "anti-dong",
   "era": "dong-zhuo",
   "start": 189,
@@ -2260,6 +1581,1771 @@
     "event": "ch120-wu-falls",
     "text": "[History] Sun Hao surrenders. Long divided, the realm is one.",
     "text_zh": "【正史】孙皓出降，分久必合。"
+   }
+  ]
+ },
+ {
+  "id": "cao-cao",
+  "era": "guandu",
+  "start": 184,
+  "end": 220,
+  "path": false,
+  "title": "Cao Cao: a hero for an age of chaos",
+  "title_zh": "曹操：乱世之奸雄",
+  "summary": "From a young officer against the Yellow Turbans to King of Wei: eighteen stops, most of them marches.",
+  "summary_zh": "从讨伐黄巾的年轻骑都尉到魏王：十八站，大多是行军。",
+  "steps": [
+   {
+    "year": 184,
+    "at": [
+     113.77,
+     34.22
+    ],
+    "zoom": 6.6,
+    "event": "ch001-changshe",
+    "text": "[History] The young Cao Cao at Changshe.",
+    "text_zh": "【正史】长社初露锋芒。"
+   },
+   {
+    "year": 189,
+    "at": [
+     113.98,
+     34.72
+    ],
+    "zoom": 6.4,
+    "event": "ch004-cao-cao-flees",
+    "text": "[Embellished] The failed dagger, the flight, Lü Boshe.",
+    "text_zh": "【演义加工】献刀出逃，误杀吕伯奢。"
+   },
+   {
+    "year": 190,
+    "at": [
+     113.79,
+     35.02
+    ],
+    "zoom": 6.4,
+    "event": "ch006-bianshui",
+    "text": "[History] Alone after Dong Zhuo, beaten on the Bian.",
+    "text_zh": "【正史】独追董卓，汴水兵败。",
+    "route": [
+     "cao-bianshui"
+    ]
+   },
+   {
+    "year": 193,
+    "at": [
+     116.92,
+     34.91
+    ],
+    "zoom": 6,
+    "event": "ch010-xuzhou-massacre",
+    "text": "[History] Revenge on Xuzhou.",
+    "text_zh": "【正史】兴兵报父仇。",
+    "route": [
+     "cao-xuzhou"
+    ]
+   },
+   {
+    "year": 194,
+    "at": [
+     115.03,
+     35.75
+    ],
+    "zoom": 6.6,
+    "event": "ch011-puyang",
+    "text": "[History] Lü Bu takes his province; fire at Puyang.",
+    "text_zh": "【正史】吕布袭兖州，濮阳火中脱险。"
+   },
+   {
+    "year": 196,
+    "at": [
+     113.23,
+     34.38
+    ],
+    "zoom": 6.2,
+    "event": "ch014-emperor-to-xu",
+    "text": "[History] The emperor to Xu.",
+    "text_zh": "【正史】迎献帝都许。",
+    "route": [
+     "emperor-to-xu"
+    ]
+   },
+   {
+    "year": 197,
+    "at": [
+     113.19,
+     33.52
+    ],
+    "zoom": 6.4,
+    "event": "ch016-wancheng",
+    "text": "[History] Defeat at Wan: Dian Wei dies at the gate.",
+    "text_zh": "【正史】宛城之败，典韦战死。",
+    "route": [
+     "wancheng"
+    ]
+   },
+   {
+    "year": 198,
+    "at": [
+     112.35,
+     32.85
+    ],
+    "zoom": 6.6,
+    "event": "ch017-hair-for-head",
+    "text": "[History] Hair for a head.",
+    "text_zh": "【正史】割发代首。"
+   },
+   {
+    "year": 198,
+    "at": [
+     115.91,
+     34.18
+    ],
+    "zoom": 6,
+    "event": "ch019-white-gate-tower",
+    "text": "[History] Lü Bu ends at the White Gate Tower.",
+    "text_zh": "【正史】白门楼斩吕布。",
+    "route": [
+     "xiapi-campaign"
+    ]
+   },
+   {
+    "year": 199,
+    "at": [
+     113.78,
+     33.98
+    ],
+    "zoom": 6.8,
+    "event": "ch021-heroes-over-wine",
+    "text": "[Embellished] Talking of heroes over wine.",
+    "text_zh": "【演义加工】煮酒论英雄。"
+   },
+   {
+    "year": 200,
+    "at": [
+     114.25,
+     34.79
+    ],
+    "zoom": 6.8,
+    "event": "ch030-wuchao",
+    "text": "[History] Guandu, and the raid on Wuchao.",
+    "text_zh": "【正史】官渡之战，夜袭乌巢。",
+    "route": [
+     "cao-guandu",
+     "wuchao-raid"
+    ]
+   },
+   {
+    "year": 207,
+    "at": [
+     117.22,
+     38.19
+    ],
+    "zoom": 5.2,
+    "event": "ch033-white-wolf-mountain",
+    "text": "[History] The north united, beyond the Wall.",
+    "text_zh": "【正史】统一河北，北征乌桓。",
+    "route": [
+     "cao-north",
+     "wuhuan"
+    ]
+   },
+   {
+    "year": 208,
+    "at": [
+     112.16,
+     31.68
+    ],
+    "zoom": 5.8,
+    "event": "ch040-cong-surrenders",
+    "text": "[History] South to Jingzhou.",
+    "text_zh": "【正史】南下荆州。",
+    "route": [
+     "cao-south"
+    ]
+   },
+   {
+    "year": 208,
+    "at": [
+     112.99,
+     31.89
+    ],
+    "zoom": 6.2,
+    "event": "ch050-huarong",
+    "text": "[Fiction] The Red Cliffs, and Huarong.",
+    "text_zh": "【虚构】赤壁兵败，华容脱险。",
+    "route": [
+     "huarong-retreat"
+    ]
+   },
+   {
+    "year": 211,
+    "at": [
+     111.92,
+     35.4
+    ],
+    "zoom": 6,
+    "event": "ch058-cuts-his-beard",
+    "text": "[Embellished] Tong Pass: beard and robe.",
+    "text_zh": "【演义加工】潼关割须弃袍。",
+    "route": [
+     "cao-tongguan"
+    ]
+   },
+   {
+    "year": 216,
+    "at": [
+     114.35,
+     36.3
+    ],
+    "zoom": 6.2,
+    "event": "ch068-king-of-wei",
+    "text": "[History] King of Wei.",
+    "text_zh": "【正史】进位魏王。"
+   },
+   {
+    "year": 215,
+    "at": [
+     107.44,
+     33.72
+    ],
+    "zoom": 5.8,
+    "event": "ch067-hanzhong-taken",
+    "text": "[History] Hanzhong taken, and lost: 'chicken rib'.",
+    "text_zh": "【正史】取汉中，又以“鸡肋”弃之。",
+    "route": [
+     "cao-hanzhong",
+     "cao-hanzhong-219"
+    ]
+   },
+   {
+    "year": 220,
+    "at": [
+     112.62,
+     34.72
+    ],
+    "zoom": 6.4,
+    "event": "ch078-cao-cao-dies",
+    "text": "[History] Death at Luoyang.",
+    "text_zh": "【正史】病逝洛阳。"
+   }
+  ]
+ },
+ {
+  "id": "sun-family",
+  "era": "warlords",
+  "start": 184,
+  "end": 280,
+  "path": false,
+  "title": "Three generations of the Sun",
+  "title_zh": "孙氏三代",
+  "summary": "Sun Jian, the Tiger of Jiangdong; Sun Ce, the Little Conqueror; Sun Quan, who held the south for fifty years.",
+  "summary_zh": "江东猛虎孙坚、小霸王孙策、坐断东南五十年的孙权。",
+  "steps": [
+   {
+    "year": 184,
+    "at": [
+     112.55,
+     33.02
+    ],
+    "zoom": 6.4,
+    "event": "ch002-sun-jian-wan",
+    "text": "[History] Sun Jian, first over the wall at Wan.",
+    "text_zh": "【正史】孙坚宛城先登。"
+   },
+   {
+    "year": 191,
+    "at": [
+     112.76,
+     34.22
+    ],
+    "zoom": 6,
+    "event": "ch006-imperial-seal",
+    "text": "[Embellished] Into Luoyang first; the jade seal.",
+    "text_zh": "【演义加工】率先攻入洛阳，得传国玉玺。",
+    "route": [
+     "sun-jian-luoyang"
+    ]
+   },
+   {
+    "year": 191,
+    "at": [
+     112.17,
+     32.0
+    ],
+    "zoom": 6.6,
+    "event": "ch007-sun-jian-dies",
+    "text": "[History] Killed at Xian Hill.",
+    "text_zh": "【正史】岘山中伏身亡。"
+   },
+   {
+    "year": 195,
+    "at": [
+     119.4,
+     31.85
+    ],
+    "zoom": 6.6,
+    "event": "ch015-taishi-ci",
+    "text": "[History] Sun Ce and Taishi Ci at Shenting.",
+    "text_zh": "【正史】孙策神亭酣斗太史慈。"
+   },
+   {
+    "year": 196,
+    "at": [
+     119.47,
+     31.0
+    ],
+    "zoom": 5.8,
+    "event": "ch015-sun-ce-east",
+    "text": "[History] The Little Conqueror takes Jiangdong.",
+    "text_zh": "【正史】小霸王平定江东。",
+    "route": [
+     "sun-ce-east"
+    ]
+   },
+   {
+    "year": 200,
+    "at": [
+     119.45,
+     32.15
+    ],
+    "zoom": 6.4,
+    "event": "ch029-sun-ce-dies",
+    "text": "[Embellished] Yu Ji, and Sun Ce's death.",
+    "text_zh": "【演义加工】怒斩于吉，伤重而亡。"
+   },
+   {
+    "year": 200,
+    "at": [
+     120.6,
+     31.3
+    ],
+    "zoom": 6.4,
+    "event": "ch029-sun-quan-succeeds",
+    "text": "[History] Sun Quan, eighteen, takes over.",
+    "text_zh": "【正史】孙权十八岁坐领江东。"
+   },
+   {
+    "year": 208,
+    "at": [
+     114.28,
+     30.55
+    ],
+    "zoom": 6.4,
+    "event": "ch038-huang-zu",
+    "text": "[History] Revenge on Huang Zu.",
+    "text_zh": "【正史】破黄祖报父仇。"
+   },
+   {
+    "year": 208,
+    "at": [
+     116.02,
+     29.74
+    ],
+    "zoom": 6.4,
+    "event": "ch044-sun-quan-decides",
+    "text": "[History] He cuts the table.",
+    "text_zh": "【正史】拔刀斫案，决意抗曹。"
+   },
+   {
+    "year": 208,
+    "at": [
+     114.8,
+     30.04
+    ],
+    "zoom": 6.2,
+    "event": "ch049-red-cliffs",
+    "text": "[History] The Red Cliffs.",
+    "text_zh": "【正史】赤壁破曹。",
+    "route": [
+     "zhou-yu-west"
+    ]
+   },
+   {
+    "year": 215,
+    "at": [
+     116.62,
+     30.77
+    ],
+    "zoom": 6.2,
+    "event": "ch067-xiaoyao-ford",
+    "text": "[History] Hefei, and the leap at Xiaoyao Ford.",
+    "text_zh": "【正史】合肥逍遥津，跃马脱险。",
+    "route": [
+     "sun-hefei"
+    ]
+   },
+   {
+    "year": 219,
+    "at": [
+     114.05,
+     30.02
+    ],
+    "zoom": 6,
+    "event": "ch075-white-robes",
+    "text": "[History] Jingzhou taken from Guan Yu.",
+    "text_zh": "【正史】白衣渡江，袭取荆州。",
+    "route": [
+     "lu-meng"
+    ]
+   },
+   {
+    "year": 222,
+    "at": [
+     111.36,
+     30.62
+    ],
+    "zoom": 6.6,
+    "event": "ch084-yiling",
+    "text": "[History] Yiling: Lu Xun burns out Liu Bei.",
+    "text_zh": "【正史】夷陵之战，陆逊火烧连营。",
+    "route": [
+     "lu-xun-fire"
+    ]
+   },
+   {
+    "year": 229,
+    "at": [
+     114.88,
+     30.4
+    ],
+    "zoom": 6.4,
+    "event": "ch098-sun-quan-emperor",
+    "text": "[History] Sun Quan, emperor.",
+    "text_zh": "【正史】孙权称帝。"
+   },
+   {
+    "year": 280,
+    "at": [
+     118.8,
+     32.05
+    ],
+    "zoom": 6.2,
+    "event": "ch120-wu-falls",
+    "text": "[History] Fifty years after him, his grandson surrenders.",
+    "text_zh": "【正史】五十年后，其孙孙皓出降。"
+   }
+  ]
+ },
+ {
+  "id": "zhao-yun",
+  "era": "red-cliffs",
+  "start": 191,
+  "end": 228,
+  "path": true,
+  "title": "Zhao Zilong of Changshan",
+  "title_zh": "常山赵子龙",
+  "summary": "Thirty years at Liu Bei's side and never beaten in the novel: Jieqiao, Changban, Guiyang, the river, the Han, the five generals.",
+  "summary_zh": "追随刘备三十年，在小说里从未败过：界桥、长坂、桂阳、截江、汉水、斩五将。",
+  "steps": [
+   {
+    "year": 191,
+    "at": [
+     115.27,
+     37.05
+    ],
+    "zoom": 6.4,
+    "event": "ch007-jieqiao",
+    "text": "[Embellished] First appearance: saving Gongsun Zan at Jieqiao.",
+    "text_zh": "【演义加工】初登场：界桥救公孙瓒。"
+   },
+   {
+    "year": 200,
+    "at": [
+     114.45,
+     33.15
+    ],
+    "zoom": 6.4,
+    "event": "ch028-zhao-yun-joins",
+    "text": "[Embellished] He finds Liu Bei again.",
+    "text_zh": "【演义加工】古城来投刘备。"
+   },
+   {
+    "year": 208,
+    "at": [
+     111.78,
+     30.82
+    ],
+    "zoom": 7,
+    "event": "ch041-zhao-yun-changban",
+    "text": "[Embellished] Changban: the heir in his breastplate.",
+    "text_zh": "【演义加工】长坂坡单骑救主。"
+   },
+   {
+    "year": 208,
+    "at": [
+     111.77,
+     30.85
+    ],
+    "zoom": 7.2,
+    "event": "ch042-throws-the-child",
+    "text": "[Fiction] Liu Bei throws down his son for him.",
+    "text_zh": "【虚构】刘备为他摔阿斗。"
+   },
+   {
+    "year": 209,
+    "at": [
+     112.3,
+     27.93
+    ],
+    "zoom": 6.4,
+    "event": "ch052-guiyang",
+    "text": "[History] Guiyang, and the bride he refuses.",
+    "text_zh": "【正史】取桂阳，拒婚赵范之嫂。",
+    "route": [
+     "jingnan"
+    ]
+   },
+   {
+    "year": 212,
+    "at": [
+     112.32,
+     30.12
+    ],
+    "zoom": 6.6,
+    "event": "ch061-river-rescue",
+    "text": "[History] He takes back the heir from the river.",
+    "text_zh": "【正史】截江夺阿斗。"
+   },
+   {
+    "year": 219,
+    "at": [
+     106.75,
+     33.17
+    ],
+    "zoom": 6.8,
+    "event": "ch071-empty-camp",
+    "text": "[History] The open gate on the Han River: 'courage from head to foot'.",
+    "text_zh": "【正史】汉水空营，一身是胆。"
+   },
+   {
+    "year": 228,
+    "at": [
+     107.04,
+     33.34
+    ],
+    "zoom": 6.4,
+    "event": "ch092-zhao-yun-old",
+    "text": "[Embellished] At seventy, five generals in a day.",
+    "text_zh": "【演义加工】年过七旬，力斩五将。",
+    "route": [
+     "zhao-yun-decoy"
+    ]
+   },
+   {
+    "year": 228,
+    "at": [
+     104.05,
+     30.7
+    ],
+    "zoom": 6.4,
+    "event": "ch097-zhao-yun-dies",
+    "text": "[Embellished] His death; Zhuge Liang has lost an arm.",
+    "text_zh": "【演义加工】病逝，诸葛亮如失一臂。"
+   }
+  ]
+ },
+ {
+  "id": "lu-bu",
+  "era": "dong-zhuo",
+  "start": 189,
+  "end": 198,
+  "path": true,
+  "title": "Lü Bu: among men, Lü Bu",
+  "title_zh": "吕布：人中吕布",
+  "summary": "The greatest fighter of the age and its least trusted man: two adoptive fathers killed, two provinces taken, one halberd shot, one tower.",
+  "summary_zh": "天下第一猛将，也是最不可信的人：两弑义父，两夺州郡，辕门射戟，殒命白门楼。",
+  "steps": [
+   {
+    "year": 189,
+    "at": [
+     112.58,
+     34.76
+    ],
+    "zoom": 6.6,
+    "event": "ch003-red-hare",
+    "text": "[Embellished] Red Hare, and Ding Yuan's head.",
+    "text_zh": "【演义加工】赤兔马与丁原的首级。"
+   },
+   {
+    "year": 190,
+    "at": [
+     113.25,
+     34.82
+    ],
+    "zoom": 7,
+    "event": "ch005-three-heroes-vs-lu-bu",
+    "text": "[Fiction] Three heroes against him at Hulao.",
+    "text_zh": "【虚构】虎牢关前三英战吕布。"
+   },
+   {
+    "year": 192,
+    "at": [
+     108.92,
+     34.29
+    ],
+    "zoom": 6.6,
+    "event": "ch008-diaochan",
+    "text": "[Fiction] Diaochan.",
+    "text_zh": "【虚构】连环计中的貂蝉。"
+   },
+   {
+    "year": 192,
+    "at": [
+     108.88,
+     34.31
+    ],
+    "zoom": 7,
+    "event": "ch008-phoenix-pavilion",
+    "text": "[Embellished] The halberd in the pavilion.",
+    "text_zh": "【演义加工】凤仪亭掷戟。"
+   },
+   {
+    "year": 192,
+    "at": [
+     108.94,
+     34.27
+    ],
+    "zoom": 6.6,
+    "event": "ch009-dong-zhuo-killed",
+    "text": "[History] He kills Dong Zhuo.",
+    "text_zh": "【正史】刺杀董卓。"
+   },
+   {
+    "year": 194,
+    "at": [
+     114.19,
+     35.2
+    ],
+    "zoom": 6,
+    "event": "ch011-puyang",
+    "text": "[History] He seizes Yan province from Cao Cao.",
+    "text_zh": "【正史】袭取兖州，濮阳破曹。",
+    "route": [
+     "lubu-yanzhou"
+    ]
+   },
+   {
+    "year": 195,
+    "at": [
+     115.57,
+     35.07
+    ],
+    "zoom": 6.4,
+    "event": "ch012-dingtao",
+    "text": "[History] Beaten at Dingtao.",
+    "text_zh": "【正史】定陶兵败。"
+   },
+   {
+    "year": 196,
+    "at": [
+     117.96,
+     34.33
+    ],
+    "zoom": 6.6,
+    "event": "ch014-lu-bu-takes-xuzhou",
+    "text": "[Embellished] He takes Xuzhou from Liu Bei.",
+    "text_zh": "【演义加工】乘夜袭取徐州。"
+   },
+   {
+    "year": 196,
+    "at": [
+     116.93,
+     34.73
+    ],
+    "zoom": 7,
+    "event": "ch016-halberd-shot",
+    "text": "[History] The halberd at the camp gate.",
+    "text_zh": "【正史】辕门射戟。"
+   },
+   {
+    "year": 198,
+    "at": [
+     115.91,
+     34.18
+    ],
+    "zoom": 6.4,
+    "event": "ch019-flooding-xiapi",
+    "text": "[History] Cao Cao comes; Xiapi flooded.",
+    "text_zh": "【正史】曹操东征，水淹下邳。",
+    "route": [
+     "xiapi-campaign"
+    ]
+   },
+   {
+    "year": 198,
+    "at": [
+     117.98,
+     34.36
+    ],
+    "zoom": 7,
+    "event": "ch019-white-gate-tower",
+    "text": "[History] The White Gate Tower.",
+    "text_zh": "【正史】白门楼殒命。"
+   }
+  ]
+ },
+ {
+  "id": "sima-yi",
+  "era": "sima",
+  "start": 228,
+  "end": 265,
+  "path": false,
+  "title": "Sima Yi: the patient one",
+  "title_zh": "司马懿：隐忍之人",
+  "summary": "Zhuge Liang's great opponent, who outlived him and everyone else, and whose grandson founded Jin.",
+  "summary_zh": "诸葛亮的一生之敌，熬过了他，也熬过了所有人；其孙司马炎建立晋朝。",
+  "steps": [
+   {
+    "year": 228,
+    "at": [
+     111.39,
+     32.62
+    ],
+    "zoom": 6.2,
+    "event": "ch094-meng-da",
+    "text": "[History] Twelve hundred li in eight days.",
+    "text_zh": "【正史】八日奔袭一千二百里擒孟达。",
+    "route": [
+     "sima-yi-meng-da"
+    ]
+   },
+   {
+    "year": 228,
+    "at": [
+     105.3,
+     34.2
+    ],
+    "zoom": 7,
+    "event": "ch095-empty-fort",
+    "text": "[Fiction] He turns back from the empty fort.",
+    "text_zh": "【虚构】空城前引兵退去。"
+   },
+   {
+    "year": 230,
+    "at": [
+     105.45,
+     34.15
+    ],
+    "zoom": 6.8,
+    "event": "ch100-battle-formations",
+    "text": "[Fiction] Outmatched at formations.",
+    "text_zh": "【虚构】斗阵受辱。"
+   },
+   {
+    "year": 234,
+    "at": [
+     107.5,
+     34.35
+    ],
+    "zoom": 6.8,
+    "event": "ch102-north-plain",
+    "text": "[History] The northern plain: he will not fight.",
+    "text_zh": "【正史】据守北原，坚壁不战。"
+   },
+   {
+    "year": 234,
+    "at": [
+     107.5,
+     34.25
+    ],
+    "zoom": 7,
+    "event": "ch103-shangfang-valley",
+    "text": "[Fiction] Saved by rain in Shangfang Valley.",
+    "text_zh": "【虚构】上方谷遇大雨得脱。"
+   },
+   {
+    "year": 234,
+    "at": [
+     107.55,
+     34.2
+    ],
+    "zoom": 7,
+    "event": "ch104-wooden-statue",
+    "text": "[Embellished] Put to flight by a wooden statue.",
+    "text_zh": "【演义加工】见木像而逃。"
+   },
+   {
+    "year": 238,
+    "at": [
+     117.9,
+     38.0
+    ],
+    "zoom": 5,
+    "event": "ch106-liaodong",
+    "text": "[History] Four thousand li to Liaodong.",
+    "text_zh": "【正史】远征辽东。",
+    "route": [
+     "liaodong"
+    ]
+   },
+   {
+    "year": 248,
+    "at": [
+     112.62,
+     34.72
+    ],
+    "zoom": 6.6,
+    "event": "ch106-feigned-illness",
+    "text": "[History] Porridge down his chest.",
+    "text_zh": "【正史】诈病赚曹爽。"
+   },
+   {
+    "year": 249,
+    "at": [
+     112.55,
+     34.4
+    ],
+    "zoom": 6.4,
+    "event": "ch107-gaopingling",
+    "text": "[History] The coup at Gaoping tomb.",
+    "text_zh": "【正史】高平陵之变。"
+   },
+   {
+    "year": 265,
+    "at": [
+     112.68,
+     34.71
+    ],
+    "zoom": 6,
+    "event": "ch119-jin-founded",
+    "text": "[History] Sixteen years after him, his grandson ends Wei.",
+    "text_zh": "【正史】其孙司马炎代魏建晋。"
+   }
+  ]
+ },
+ {
+  "id": "jiang-wei",
+  "era": "sima",
+  "start": 228,
+  "end": 264,
+  "path": false,
+  "title": "Jiang Wei: the last campaigner",
+  "title_zh": "姜维：九伐中原",
+  "summary": "Zhuge Liang's heir in war, who marched north again and again after him, and tried to save Shu even after it surrendered.",
+  "summary_zh": "诸葛亮的军事传人，在他死后屡次北伐，蜀亡之后仍图复国。",
+  "steps": [
+   {
+    "year": 228,
+    "at": [
+     105.18,
+     34.7
+    ],
+    "zoom": 6.8,
+    "event": "ch093-jiang-wei",
+    "text": "[History] He comes over to Zhuge Liang.",
+    "text_zh": "【正史】归降诸葛亮。"
+   },
+   {
+    "year": 228,
+    "at": [
+     106.9,
+     34.22
+    ],
+    "zoom": 6.6,
+    "event": "ch097-jiang-wei-letter",
+    "text": "[Fiction] His false letter to Cao Zhen.",
+    "text_zh": "【虚构】诈献书破曹真。"
+   },
+   {
+    "year": 249,
+    "at": [
+     104.2,
+     34.45
+    ],
+    "zoom": 6.4,
+    "event": "ch107-niutou",
+    "text": "[History] Beaten at Niutou Mountain.",
+    "text_zh": "【正史】兵败牛头山。"
+   },
+   {
+    "year": 255,
+    "at": [
+     104.65,
+     34.58
+    ],
+    "zoom": 6.2,
+    "event": "ch110-taoxi",
+    "text": "[History] Victory west of the Tao.",
+    "text_zh": "【正史】洮西大捷。",
+    "route": [
+     "jiang-wei-taoxi"
+    ]
+   },
+   {
+    "year": 256,
+    "at": [
+     105.55,
+     34.34
+    ],
+    "zoom": 6.6,
+    "event": "ch111-duangu",
+    "text": "[History] Deng Ai waits at Duangu.",
+    "text_zh": "【正史】段谷兵败。",
+    "route": [
+     "jiang-wei-duangu"
+    ]
+   },
+   {
+    "year": 257,
+    "at": [
+     107.62,
+     33.56
+    ],
+    "zoom": 6.4,
+    "event": "ch112-changcheng",
+    "text": "[History] Through the Luo valley.",
+    "text_zh": "【正史】出骆谷，逼长城。",
+    "route": [
+     "jiang-wei-luo"
+    ]
+   },
+   {
+    "year": 253,
+    "at": [
+     103.8,
+     34.7
+    ],
+    "zoom": 6.6,
+    "event": "ch109-tielong",
+    "text": "[Fiction] Iron Cage Mountain.",
+    "text_zh": "【虚构】铁笼山困司马昭。"
+   },
+   {
+    "year": 262,
+    "at": [
+     104.08,
+     30.69
+    ],
+    "zoom": 6.4,
+    "event": "ch115-huang-hao",
+    "text": "[History] The eunuch, and the retreat to Tazhong.",
+    "text_zh": "【正史】黄皓弄权，沓中避祸。"
+   },
+   {
+    "year": 263,
+    "at": [
+     104.56,
+     33.16
+    ],
+    "zoom": 5.8,
+    "event": "ch116-zhong-hui",
+    "text": "[History] Back to Jiange to hold Zhong Hui.",
+    "text_zh": "【正史】退守剑阁，力拒钟会。",
+    "route": [
+     "jiang-wei-jiange"
+    ]
+   },
+   {
+    "year": 264,
+    "at": [
+     104.1,
+     30.7
+    ],
+    "zoom": 6.6,
+    "event": "ch119-zhong-hui-revolt",
+    "text": "[History] The false surrender.",
+    "text_zh": "【正史】假投降，图复国。"
+   }
+  ]
+ },
+ {
+  "id": "guan-yu",
+  "era": "guandu",
+  "start": 184,
+  "end": 220,
+  "path": true,
+  "title": "Guan Yu: the man and the legend",
+  "title_zh": "关羽：其人与传说",
+  "summary": "From the peach garden to Jade Spring Hill. Each step says whether the story is history, embellished, or invented; with Guan Yu more than with anyone, the legend outgrew the man.",
+  "summary_zh": "从桃园到玉泉山，每站都标明是正史、演义加工还是虚构。三国人物中，传说超过本人最多的就是关羽。",
+  "steps": [
+   {
+    "year": 184,
+    "at": [
+     115.97,
+     39.49
+    ],
+    "zoom": 6,
+    "event": "ch001-peach-garden",
+    "text": "[Fiction] The oath in the peach garden.",
+    "text_zh": "【虚构】桃园结义。"
+   },
+   {
+    "year": 190,
+    "at": [
+     113.7,
+     35.03
+    ],
+    "zoom": 6.8,
+    "event": "ch005-hua-xiong",
+    "text": "[Fiction] Hua Xiong before the wine cools.",
+    "text_zh": "【虚构】温酒斩华雄。",
+    "route": [
+     "lords-advance"
+    ]
+   },
+   {
+    "year": 200,
+    "at": [
+     117.9,
+     34.42
+    ],
+    "zoom": 6.6,
+    "event": "ch025-three-conditions",
+    "text": "[Embellished] Three conditions on Tushan.",
+    "text_zh": "【演义加工】土山约三事。"
+   },
+   {
+    "year": 200,
+    "at": [
+     114.25,
+     34.79
+    ],
+    "zoom": 6.4,
+    "event": "ch025-yan-liang",
+    "text": "[History] Yan Liang at Baima.",
+    "text_zh": "【正史】白马斩颜良。",
+    "route": [
+     "cao-guandu"
+    ]
+   },
+   {
+    "year": 200,
+    "at": [
+     113.9,
+     34.07
+    ],
+    "zoom": 6.4,
+    "event": "ch026-seals-the-gifts",
+    "text": "[History] He seals the gifts and goes.",
+    "text_zh": "【正史】挂印封金。"
+   },
+   {
+    "year": 200,
+    "at": [
+     112.6,
+     34.78
+    ],
+    "zoom": 5.6,
+    "event": "ch027-five-passes",
+    "text": "[Fiction] Five passes, six generals (switch on the five-passes layer).",
+    "text_zh": "【虚构】过五关斩六将（可打开“过五关路线”图层）。"
+   },
+   {
+    "year": 200,
+    "at": [
+     113.17,
+     34.88
+    ],
+    "zoom": 7,
+    "event": "ch027-puji",
+    "text": "[Fiction] The monk Pujing.",
+    "text_zh": "【虚构】镇国寺普净。"
+   },
+   {
+    "year": 200,
+    "at": [
+     114.5,
+     33.1
+    ],
+    "zoom": 6.4,
+    "event": "ch028-cai-yang",
+    "text": "[Embellished] Cai Yang at Gucheng.",
+    "text_zh": "【演义加工】古城斩蔡阳。"
+   },
+   {
+    "year": 208,
+    "at": [
+     112.85,
+     29.75
+    ],
+    "zoom": 6.6,
+    "event": "ch050-huarong",
+    "text": "[Fiction] Huarong: he lets Cao Cao go.",
+    "text_zh": "【虚构】华容道义释曹操。"
+   },
+   {
+    "year": 215,
+    "at": [
+     112.33,
+     28.6
+    ],
+    "zoom": 6.4,
+    "event": "ch066-single-sword",
+    "text": "[Embellished] The single-sword meeting.",
+    "text_zh": "【演义加工】单刀赴会。"
+   },
+   {
+    "year": 219,
+    "at": [
+     112.16,
+     31.21
+    ],
+    "zoom": 6.4,
+    "event": "ch074-seven-armies",
+    "text": "[Embellished] North to Fancheng; seven armies drowned.",
+    "text_zh": "【演义加工】北伐襄樊，水淹七军。",
+    "route": [
+     "guan-yu-north"
+    ]
+   },
+   {
+    "year": 219,
+    "at": [
+     112.1,
+     32.12
+    ],
+    "zoom": 7,
+    "event": "ch075-scraping-the-bone",
+    "text": "[Embellished] Scraping the bone.",
+    "text_zh": "【演义加工】刮骨疗毒。"
+   },
+   {
+    "year": 219,
+    "at": [
+     114.05,
+     30.02
+    ],
+    "zoom": 6,
+    "event": "ch075-white-robes",
+    "text": "[History] Jiangling lost behind him.",
+    "text_zh": "【正史】后方江陵失守。",
+    "route": [
+     "lu-meng"
+    ]
+   },
+   {
+    "year": 219,
+    "at": [
+     111.92,
+     31.38
+    ],
+    "zoom": 6.2,
+    "event": "ch077-guan-yu-dies",
+    "text": "[History] Maicheng, and Linju.",
+    "text_zh": "【正史】败走麦城，临沮遇害。",
+    "route": [
+     "guan-yu-retreat"
+    ]
+   },
+   {
+    "year": 220,
+    "at": [
+     111.76,
+     30.72
+    ],
+    "zoom": 7,
+    "event": "ch077-yuquan-ghost",
+    "text": "[Fiction] The ghost at Jade Spring Hill.",
+    "text_zh": "【虚构】玉泉山显圣。"
+   }
+  ]
+ },
+ {
+  "id": "zhuge-liang",
+  "era": "expeditions",
+  "start": 207,
+  "end": 234,
+  "path": false,
+  "title": "Zhuge Liang",
+  "title_zh": "诸葛亮",
+  "summary": "From the thatched cottage to Wuzhang Plains. The novel made him a wizard; the history shows a statesman whose own words survive.",
+  "summary_zh": "从草庐到五丈原。小说把他写成了近乎神算的奇人，史书里的他则是一位留下了亲笔文字的政治家。",
+  "steps": [
+   {
+    "year": 207,
+    "at": [
+     112.04,
+     32.02
+    ],
+    "zoom": 7,
+    "event": "ch037-three-visits",
+    "text": "[History] Three visits to the cottage.",
+    "text_zh": "【正史】三顾茅庐。"
+   },
+   {
+    "year": 207,
+    "at": [
+     112.07,
+     31.98
+    ],
+    "zoom": 7,
+    "event": "ch038-longzhong-plan",
+    "text": "[History] The Longzhong plan.",
+    "text_zh": "【正史】隆中对。"
+   },
+   {
+    "year": 208,
+    "at": [
+     112.83,
+     33.17
+    ],
+    "zoom": 6.6,
+    "event": "ch039-bowang",
+    "text": "[Embellished] First battle: fire at Bowang.",
+    "text_zh": "【演义加工】博望坡初用兵。"
+   },
+   {
+    "year": 208,
+    "at": [
+     115.98,
+     29.7
+    ],
+    "zoom": 6.2,
+    "event": "ch043-debating-the-scholars",
+    "text": "[Embellished] The embassy to Wu.",
+    "text_zh": "【演义加工】舌战群儒。"
+   },
+   {
+    "year": 208,
+    "at": [
+     113.66,
+     29.84
+    ],
+    "zoom": 6.8,
+    "event": "ch049-east-wind",
+    "text": "[Fiction] The east wind.",
+    "text_zh": "【虚构】借东风。"
+   },
+   {
+    "year": 210,
+    "at": [
+     113.1,
+     29.37
+    ],
+    "zoom": 6.4,
+    "event": "ch056-zhou-yu-dies",
+    "text": "[Embellished] Three angers for Zhou Yu.",
+    "text_zh": "【演义加工】三气周瑜。"
+   },
+   {
+    "year": 223,
+    "at": [
+     109.57,
+     31.04
+    ],
+    "zoom": 6.6,
+    "event": "ch085-baidi",
+    "text": "[History] The charge at Baidi.",
+    "text_zh": "【正史】白帝城受托孤。"
+   },
+   {
+    "year": 225,
+    "at": [
+     103.42,
+     27.77
+    ],
+    "zoom": 5.4,
+    "event": "ch090-seven-captures",
+    "text": "[Embellished] South, seven times Meng Huo.",
+    "text_zh": "【演义加工】南征七擒孟获。",
+    "route": [
+     "southern-campaign"
+    ]
+   },
+   {
+    "year": 227,
+    "at": [
+     104.04,
+     30.64
+    ],
+    "zoom": 6,
+    "event": "ch091-memorial",
+    "text": "[History] The memorial.",
+    "text_zh": "【正史】出师表。"
+   },
+   {
+    "year": 228,
+    "at": [
+     106.14,
+     34.01
+    ],
+    "zoom": 6.2,
+    "event": "ch095-jieting",
+    "text": "[History] Out through Qishan; Jieting lost.",
+    "text_zh": "【正史】出祁山，失街亭。",
+    "route": [
+     "expedition-1"
+    ]
+   },
+   {
+    "year": 228,
+    "at": [
+     105.3,
+     34.2
+    ],
+    "zoom": 7,
+    "event": "ch095-empty-fort",
+    "text": "[Fiction] The empty fort.",
+    "text_zh": "【虚构】空城计。"
+   },
+   {
+    "year": 228,
+    "at": [
+     107.03,
+     33.07
+    ],
+    "zoom": 6.4,
+    "event": "ch096-ma-su-executed",
+    "text": "[History] Ma Su executed, in tears.",
+    "text_zh": "【正史】挥泪斩马谡。"
+   },
+   {
+    "year": 234,
+    "at": [
+     107.3,
+     33.67
+    ],
+    "zoom": 6.2,
+    "event": "ch102-wooden-oxen",
+    "text": "[Embellished] Up the Xie valley with the wooden oxen.",
+    "text_zh": "【演义加工】五出斜谷，木牛流马。",
+    "route": [
+     "expedition-5"
+    ]
+   },
+   {
+    "year": 234,
+    "at": [
+     107.63,
+     34.31
+    ],
+    "zoom": 7,
+    "event": "ch103-seven-lamps",
+    "text": "[Fiction] Seven lamps for more life.",
+    "text_zh": "【虚构】五丈原禳星。"
+   },
+   {
+    "year": 234,
+    "at": [
+     107.65,
+     34.28
+    ],
+    "zoom": 7,
+    "event": "ch104-wuzhang",
+    "text": "[History] The star falls.",
+    "text_zh": "【正史】星落五丈原。"
+   }
+  ]
+ },
+ {
+  "id": "liu-bei",
+  "era": "yellow-turbans",
+  "start": 184,
+  "end": 223,
+  "path": true,
+  "title": "Liu Bei, from straw sandals to emperor",
+  "title_zh": "刘备：从织席贩履到称帝",
+  "summary": "A life spent losing and starting again: Zhuo, Xuzhou, Xu, Jingzhou, Chengdu, Hanzhong, Baidi.",
+  "summary_zh": "屡败屡起的一生：涿郡、徐州、许都、荆州、成都、汉中、白帝城。",
+  "steps": [
+   {
+    "year": 184,
+    "at": [
+     115.97,
+     39.49
+    ],
+    "zoom": 6,
+    "event": "ch001-peach-garden",
+    "text": "[Fiction] The peach garden at Zhuo.",
+    "text_zh": "【虚构】涿郡桃园。"
+   },
+   {
+    "year": 185,
+    "at": [
+     115.1,
+     38.45
+    ],
+    "zoom": 6.4,
+    "event": "ch002-whipping-the-inspector",
+    "text": "[Embellished] The inspector whipped.",
+    "text_zh": "【演义加工】鞭打督邮。"
+   },
+   {
+    "year": 194,
+    "at": [
+     118.35,
+     34.6
+    ],
+    "zoom": 6,
+    "event": "ch012-three-offers-of-xuzhou",
+    "text": "[Embellished] Xuzhou offered to him.",
+    "text_zh": "【演义加工】陶谦三让徐州。"
+   },
+   {
+    "year": 199,
+    "at": [
+     113.78,
+     33.98
+    ],
+    "zoom": 6.6,
+    "event": "ch021-heroes-over-wine",
+    "text": "[Embellished] Talking of heroes with Cao Cao.",
+    "text_zh": "【演义加工】与曹操煮酒论英雄。"
+   },
+   {
+    "year": 200,
+    "at": [
+     116.93,
+     34.73
+    ],
+    "zoom": 6,
+    "event": "ch024-liu-bei-flees-to-yuan",
+    "text": "[History] Routed, to Yuan Shao.",
+    "text_zh": "【正史】兵败投袁绍。"
+   },
+   {
+    "year": 206,
+    "at": [
+     112.14,
+     32.03
+    ],
+    "zoom": 6.6,
+    "event": "ch034-thigh-flesh",
+    "text": "[History] Flesh on his thighs.",
+    "text_zh": "【正史】髀肉之叹。"
+   },
+   {
+    "year": 207,
+    "at": [
+     112.13,
+     32.04
+    ],
+    "zoom": 7,
+    "event": "ch034-tan-stream",
+    "text": "[Embellished] The leap over the Tan.",
+    "text_zh": "【演义加工】跃马过檀溪。"
+   },
+   {
+    "year": 207,
+    "at": [
+     112.04,
+     32.02
+    ],
+    "zoom": 7,
+    "event": "ch037-three-visits",
+    "text": "[History] Three visits.",
+    "text_zh": "【正史】三顾茅庐。"
+   },
+   {
+    "year": 208,
+    "at": [
+     113.03,
+     31.31
+    ],
+    "zoom": 6,
+    "event": "ch041-crossing-with-the-people",
+    "text": "[History] South with the people.",
+    "text_zh": "【正史】携民渡江。",
+    "route": [
+     "liu-bei-flight"
+    ]
+   },
+   {
+    "year": 209,
+    "at": [
+     119.47,
+     32.22
+    ],
+    "zoom": 6.4,
+    "event": "ch054-ganlu-temple",
+    "text": "[Embellished] A wife from Wu.",
+    "text_zh": "【演义加工】甘露寺招亲。"
+   },
+   {
+    "year": 212,
+    "at": [
+     108.49,
+     30.99
+    ],
+    "zoom": 5.4,
+    "event": "ch060-liu-bei-enters-shu",
+    "text": "[History] Into Shu.",
+    "text_zh": "【正史】溯江入川。",
+    "route": [
+     "into-shu"
+    ]
+   },
+   {
+    "year": 214,
+    "at": [
+     105.31,
+     30.99
+    ],
+    "zoom": 6,
+    "event": "ch065-governor-of-yizhou",
+    "text": "[History] Chengdu.",
+    "text_zh": "【正史】取成都。",
+    "route": [
+     "take-chengdu"
+    ]
+   },
+   {
+    "year": 219,
+    "at": [
+     105.38,
+     31.91
+    ],
+    "zoom": 6,
+    "event": "ch073-king-of-hanzhong",
+    "text": "[History] Hanzhong, and a king's title.",
+    "text_zh": "【正史】取汉中，进位汉中王。",
+    "route": [
+     "liu-hanzhong"
+    ]
+   },
+   {
+    "year": 221,
+    "at": [
+     104.07,
+     30.67
+    ],
+    "zoom": 6.2,
+    "event": "ch080-liu-bei-emperor",
+    "text": "[History] Emperor of Han.",
+    "text_zh": "【正史】成都称帝。"
+   },
+   {
+    "year": 222,
+    "at": [
+     107.75,
+     30.3
+    ],
+    "zoom": 5.8,
+    "event": "ch084-yiling",
+    "text": "[History] Down the gorges to Yiling, and burned out.",
+    "text_zh": "【正史】东征夷陵，火烧连营。",
+    "route": [
+     "yiling-advance"
+    ]
+   },
+   {
+    "year": 223,
+    "at": [
+     110.5,
+     30.8
+    ],
+    "zoom": 6.4,
+    "event": "ch085-baidi",
+    "text": "[History] Back to Baidi to die.",
+    "text_zh": "【正史】退回白帝，托孤而终。",
+    "route": [
+     "yiling-retreat"
+    ]
+   }
+  ]
+ },
+ {
+  "id": "road-to-unity",
+  "era": "jin",
+  "start": 184,
+  "end": 280,
+  "path": false,
+  "title": "Long divided, the realm unites",
+  "title_zh": "分久必合",
+  "summary": "Ninety-six years in fifteen steps, with the great marches of each. Watch the borders change: one Han, a dozen warlords, three states, one Jin.",
+  "summary_zh": "十五步走完九十六年，每一步都有当年的大进军。留意疆域的变化：一个汉朝，十几路诸侯，三个国家，最后归于晋。",
+  "steps": [
+   {
+    "year": 184,
+    "at": [
+     115.0,
+     37.6
+    ],
+    "zoom": 4.6,
+    "event": "ch001-yellow-turbans",
+    "text": "[History] 184: the Yellow Turbans rise across a united Han.",
+    "text_zh": "【正史】184年：黄巾起义，汉朝尚是一统。"
+   },
+   {
+    "year": 190,
+    "at": [
+     110.78,
+     34.5
+    ],
+    "zoom": 4.8,
+    "event": "ch006-burns-luoyang",
+    "text": "[History] 190: Dong Zhuo burns Luoyang and drags the court west.",
+    "text_zh": "【正史】190年：董卓焚洛阳，挟天子西迁。",
+    "route": [
+     "dong-zhuo-west"
+    ]
+   },
+   {
+    "year": 196,
+    "at": [
+     116.61,
+     32.36
+    ],
+    "zoom": 4.8,
+    "event": "ch014-emperor-to-xu",
+    "text": "[History] 196: Cao Cao takes the emperor to Xu.",
+    "text_zh": "【正史】196年：曹操迎献帝都许。",
+    "route": [
+     "emperor-to-xu",
+     "sun-ce-east"
+    ]
+   },
+   {
+    "year": 200,
+    "at": [
+     114.25,
+     35.16
+    ],
+    "zoom": 4.8,
+    "event": "ch030-guandu",
+    "text": "[History] 200: Guandu decides the north.",
+    "text_zh": "【正史】200年：官渡之战决定北方归属。",
+    "route": [
+     "yuan-south",
+     "cao-guandu"
+    ]
+   },
+   {
+    "year": 208,
+    "at": [
+     113.88,
+     31.35
+    ],
+    "zoom": 4.8,
+    "event": "ch049-red-cliffs",
+    "text": "[History] 208: the Red Cliffs stop Cao Cao in the south.",
+    "text_zh": "【正史】208年：赤壁之战阻止曹操南下。",
+    "route": [
+     "cao-south",
+     "cao-downriver",
+     "zhou-yu-west"
+    ]
+   },
+   {
+    "year": 214,
+    "at": [
+     108.15,
+     30.99
+    ],
+    "zoom": 4.8,
+    "event": "ch065-governor-of-yizhou",
+    "text": "[History] 214: Liu Bei takes Yizhou; three powers.",
+    "text_zh": "【正史】214年：刘备取益州，三分之势已成。",
+    "route": [
+     "into-shu",
+     "take-chengdu"
+    ]
+   },
+   {
+    "year": 220,
+    "at": [
+     113.95,
+     33.85
+    ],
+    "zoom": 4.8,
+    "event": "ch080-cao-pi-emperor",
+    "text": "[History] 220: Cao Pi ends the Han; three emperors follow.",
+    "text_zh": "【正史】220年：曹丕代汉，三国相继称帝。"
+   },
+   {
+    "year": 222,
+    "at": [
+     107.75,
+     30.3
+    ],
+    "zoom": 4.8,
+    "event": "ch084-yiling",
+    "text": "[History] 222: Yiling fixes the border between Shu and Wu.",
+    "text_zh": "【正史】222年：夷陵之战定下蜀吴边界。",
+    "route": [
+     "yiling-advance"
+    ]
+   },
+   {
+    "year": 234,
+    "at": [
+     107.3,
+     33.67
+    ],
+    "zoom": 4.8,
+    "event": "ch104-wuzhang",
+    "text": "[History] 234: Zhuge Liang dies; the north is not retaken.",
+    "text_zh": "【正史】234年：诸葛亮病逝，北伐终未成功。",
+    "route": [
+     "expedition-5"
+    ]
+   },
+   {
+    "year": 249,
+    "at": [
+     112.55,
+     34.4
+    ],
+    "zoom": 4.8,
+    "event": "ch107-gaopingling",
+    "text": "[History] 249: the Sima take Wei.",
+    "text_zh": "【正史】249年：司马氏掌控魏国。"
+   },
+   {
+    "year": 263,
+    "at": [
+     106.27,
+     33.03
+    ],
+    "zoom": 5,
+    "event": "ch117-yinping",
+    "text": "[History] 263: two roads into Shu.",
+    "text_zh": "【正史】263年：魏军两路伐蜀。",
+    "route": [
+     "zhong-hui",
+     "deng-ai"
+    ]
+   },
+   {
+    "year": 263,
+    "at": [
+     104.07,
+     30.67
+    ],
+    "zoom": 4.8,
+    "event": "ch118-shu-falls",
+    "text": "[History] 263: Shu surrenders.",
+    "text_zh": "【正史】263年：蜀汉投降。"
+   },
+   {
+    "year": 265,
+    "at": [
+     112.68,
+     34.71
+    ],
+    "zoom": 4.8,
+    "event": "ch119-jin-founded",
+    "text": "[History] 265: Jin replaces Wei.",
+    "text_zh": "【正史】265年：晋代魏。"
+   },
+   {
+    "year": 280,
+    "at": [
+     111.44,
+     31.06
+    ],
+    "zoom": 4.6,
+    "event": "ch120-wang-jun-fleet",
+    "text": "[History] 280: Jin by land and water.",
+    "text_zh": "【正史】280年：晋军水陆并进。",
+    "route": [
+     "wang-jun",
+     "du-yu",
+     "wang-hun"
+    ]
+   },
+   {
+    "year": 280,
+    "at": [
+     118.8,
+     32.05
+    ],
+    "zoom": 4.6,
+    "event": "ch120-wu-falls",
+    "text": "[History] 280: Wu surrenders; the realm is one.",
+    "text_zh": "【正史】280年：吴国投降，天下一统。"
    }
   ]
  }
