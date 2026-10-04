@@ -54,6 +54,7 @@ my-pack/
 | `name`, `name_zh` | Display name in English and Chinese. |
 | `data.eras`, `data.events` | Required. Paths relative to the manifest. |
 | `data.tours` | Optional guided tours. |
+| `data.people` | Optional rulers and famous people (see [people.json](#peoplejson-rulers-and-people)). |
 | `region.polygon` | Outline `[[lon, lat], ...]`. While the map is mostly inside it, the timeline shows the pack's periods. `region.bounds` (`[[west, south], [east, north]]`) is used as a box when there is no polygon. |
 | `region.view` | First view when there is no link and no remembered view: `center`, `zoom`, `year`. |
 | `range` | `{start, end}`: the years the pack's periods cover. Negative years are BCE. |
@@ -125,6 +126,7 @@ the era card. The Three Kingdoms pack builds its maps from commandery seats with
 | `category` | One of `war`, `politics`, `reform`, `rebellion`, `diplomacy`, `economy`, `culture`, `science`, `society`. |
 | `title`, `place`, `summary` (+ `_zh`) | Text for the list, the map card and the story view. |
 | `refs` | Optional, for the manifest's `refs` link. |
+| `people` | Optional ids from `data.people`: the story shows them as chips, and each person's card lists their events. |
 
 ## tours.json: guided tours
 
@@ -141,6 +143,28 @@ the era card. The Three Kingdoms pack builds its maps from commandery seats with
 
 Each step flies the camera to `at` (with optional `zoom`, `pitch` and `bearing`), moves the timeline to `year` and
 shows `text`. `event` links the step to an event's story, and `path: true` draws the journey so far.
+
+## people.json: rulers and people
+
+The same three lists as the atlas's own per-period files (`data/layers/<era>.json`), for the whole pack; each period
+gets the reigns and lives that touch its years. With them, a pack shown alone keeps the Rulers and People tabs and
+their map switches, which it otherwise hides.
+
+```json
+{
+  "polities": { "Wei": { "name_zh": "曹魏", "focus": true } },
+  "rulers": { "Wei": [ { "name": "Cao Pi", "name_zh": "曹丕", "title": "Emperor Wen of Wei", "title_zh": "魏文帝", "from": 220, "to": 226 } ] },
+  "people": [ { "id": "zhuge-liang", "name": "Zhuge Liang", "name_zh": "诸葛亮", "born": 181, "died": 234, "show": [207, 234],
+                "field": "strategist", "place": "Longzhong", "place_zh": "隆中", "lat": 32.0, "lon": 112.05,
+                "known_for": "...", "known_for_zh": "..." } ]
+}
+```
+
+| Field | Meaning |
+| --- | --- |
+| `polities` | Countries by key: `name_zh`, and `focus` for the main ones (listed first). A key that is also a `name` on the period's border map puts the reigning ruler under that label. |
+| `rulers` | Reigns by country key: `name`, `title` (+ `_zh`), `from`, `to`, optional `circa`. In a handover year the later reign wins. |
+| `people` | `id`, `name`, `born`, `died`, `field` (`general`, `statesman`, `strategist`, `thinker`, `poet`, `writer`, `historian`, `scholar`, `religious`, `artist`, `scientist`, `physician`, `engineer`, `explorer` or `other`), `place`, `lat`, `lon`, `known_for` (+ `_zh`). The marker shows for the life, or for `show: [from, to]` when given; a person with no `died` needs `show`. |
 
 ## A shelf of packs
 

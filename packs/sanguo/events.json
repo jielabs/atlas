@@ -13,7 +13,12 @@
   "lat": 39.49,
   "lon": 115.97,
   "summary": "Liu Bei, a straw-sandal seller of imperial descent, the butcher Zhang Fei and the fugitive Guan Yu swear brotherhood among the peach blossoms in Zhang Fei's garden: not born on the same day, they will die on the same day. Historically: the Records of the Three Kingdoms says only that the three slept in the same bed and were close as brothers. There was no oath.",
-  "summary_zh": "卖草鞋的汉室宗亲刘备、屠户张飞、亡命的关羽，在张飞庄后桃园焚香结拜：不求同年同月同日生，但愿同年同月同日死。史实：《三国志·关羽传》只说三人“寝则同床，恩若兄弟”，并无桃园结义之事。"
+  "summary_zh": "卖草鞋的汉室宗亲刘备、屠户张飞、亡命的关羽，在张飞庄后桃园焚香结拜：不求同年同月同日生，但愿同年同月同日死。史实：《三国志·关羽传》只说三人“寝则同床，恩若兄弟”，并无桃园结义之事。",
+  "people": [
+   "liu-bei",
+   "zhang-fei",
+   "guan-yu"
+  ]
  },
  {
   "id": "ch001-yellow-turbans",
@@ -29,7 +34,10 @@
   "lat": 37.6,
   "lon": 115.0,
   "summary": "Zhang Jiao of Julu, preacher of the Way of Great Peace, raises hundreds of thousands across eight provinces under yellow headcloths: 'The blue heaven is dead, the yellow heaven shall rise.' The novel opens here, as the history does.",
-  "summary_zh": "巨鹿人张角以太平道传教十余年，信众数十万遍布八州，头裹黄巾一齐起事，口号是“苍天已死，黄天当立，岁在甲子，天下大吉”。小说和史书都从这里写起。"
+  "summary_zh": "巨鹿人张角以太平道传教十余年，信众数十万遍布八州，头裹黄巾一齐起事，口号是“苍天已死，黄天当立，岁在甲子，天下大吉”。小说和史书都从这里写起。",
+  "people": [
+   "zhang-jiao"
+  ]
  },
  {
   "id": "ch001-changshe",
@@ -45,7 +53,10 @@
   "lat": 34.22,
   "lon": 113.77,
   "summary": "The Han generals Huangfu Song and Zhu Jun, besieged at Changshe, set the rebels' grass camp alight in a night wind and rout them; the young cavalry commander Cao Cao arrives to join the pursuit. This is the reader's first sight of Cao Cao, and it is history.",
-  "summary_zh": "皇甫嵩、朱儁被黄巾围于长社，乘夜风纵火烧其草营，大破黄巾。年轻的骑都尉曹操率军赶到，参与追击。这是读者第一次见到曹操，史有其事。"
+  "summary_zh": "皇甫嵩、朱儁被黄巾围于长社，乘夜风纵火烧其草营，大破黄巾。年轻的骑都尉曹操率军赶到，参与追击。这是读者第一次见到曹操，史有其事。",
+  "people": [
+   "cao-cao"
+  ]
  },
  {
   "id": "ch001-first-battle",
@@ -61,7 +72,12 @@
   "lat": 39.6,
   "lon": 116.08,
   "summary": "With five hundred volunteers the three brothers meet a Yellow Turban army; Zhang Fei spears Deng Mao and Guan Yu cuts down Cheng Yuanzhi. Historically: Liu Bei did raise a band and fight the Yellow Turbans under the colonel Zou Jing, and was rewarded with a minor post; the duels and the names are the novel's.",
-  "summary_zh": "三兄弟招募乡勇五百，迎战黄巾，张飞刺死邓茂，关羽斩程远志。史实：《三国志·先主传》载刘备率部众随校尉邹靖讨黄巾有功，授安喜县尉；阵斩二将及其姓名出自小说。"
+  "summary_zh": "三兄弟招募乡勇五百，迎战黄巾，张飞刺死邓茂，关羽斩程远志。史实：《三国志·先主传》载刘备率部众随校尉邹靖讨黄巾有功，授安喜县尉；阵斩二将及其姓名出自小说。",
+  "people": [
+   "zhang-fei",
+   "guan-yu",
+   "liu-bei"
+  ]
  },
  {
   "id": "ch002-saves-dong-zhuo",
@@ -77,7 +93,13 @@
   "lat": 37.07,
   "lon": 115.15,
   "summary": "Liu Bei, Guan Yu and Zhang Fei rescue Dong Zhuo from a Yellow Turban rout. Learning they hold no office, Dong Zhuo treats them with contempt, and Zhang Fei has to be held back from killing him. Historically: Dong Zhuo was indeed beaten by Zhang Jiao at Guangzong and dismissed, but the rescue is the novel's.",
-  "summary_zh": "刘关张救下被黄巾击败的董卓。董卓问得三人都是白身，十分轻慢，张飞大怒要杀他，被刘备拦住。史实：董卓确在广宗被张角击败、因此免官，但刘关张救驾一事出自小说。"
+  "summary_zh": "刘关张救下被黄巾击败的董卓。董卓问得三人都是白身，十分轻慢，张飞大怒要杀他，被刘备拦住。史实：董卓确在广宗被张角击败、因此免官，但刘关张救驾一事出自小说。",
+  "people": [
+   "dong-zhuo",
+   "zhang-fei",
+   "liu-bei",
+   "zhang-jiao"
+  ]
  },
  {
   "id": "ch002-sun-jian-wan",
@@ -93,7 +115,10 @@
   "lat": 33.02,
   "lon": 112.55,
   "summary": "Zhu Jun besieges the Yellow Turbans in Wan. Sun Jian climbs the wall first and his men pour in after him; the novel sets the three brothers fighting beside him. Sun Jian's own biography records him first over the wall.",
-  "summary_zh": "朱儁围攻据守宛城的黄巾军，孙坚身先士卒登上城头，部众随之攻入；小说让刘关张也在军中助战。孙坚先登宛城见于《三国志·孙坚传》。"
+  "summary_zh": "朱儁围攻据守宛城的黄巾军，孙坚身先士卒登上城头，部众随之攻入；小说让刘关张也在军中助战。孙坚先登宛城见于《三国志·孙坚传》。",
+  "people": [
+   "sun-jian"
+  ]
  },
  {
   "id": "ch002-whipping-the-inspector",
@@ -109,7 +134,11 @@
   "lat": 38.45,
   "lon": 115.1,
   "summary": "A corrupt inspector humiliates Liu Bei, now sheriff of Anxi, and demands a bribe. Zhang Fei drags him out, ties him to a hitching post and breaks ten willow switches on him, and the brothers leave office. Historically: it was Liu Bei himself who tied up the inspector and gave him two hundred strokes. The novel hands the anger to Zhang Fei to keep its hero mild.",
-  "summary_zh": "督邮索贿刁难安喜县尉刘备，张飞揪他出来绑在拴马桩上，折柳条连打十几根，兄弟三人弃官而去。史实：《三国志·先主传》及裴注《典略》载，绑督邮、杖二百的是刘备本人。小说把这口怒气转给了张飞，好保住主角宽厚的形象。"
+  "summary_zh": "督邮索贿刁难安喜县尉刘备，张飞揪他出来绑在拴马桩上，折柳条连打十几根，兄弟三人弃官而去。史实：《三国志·先主传》及裴注《典略》载，绑督邮、杖二百的是刘备本人。小说把这口怒气转给了张飞，好保住主角宽厚的形象。",
+  "people": [
+   "zhang-fei",
+   "liu-bei"
+  ]
  },
  {
   "id": "ch002-he-jin",
@@ -125,7 +154,13 @@
   "lat": 34.72,
   "lon": 112.62,
   "summary": "After Emperor Ling dies, the regent He Jin plans to destroy the palace eunuchs and summons provincial armies, Dong Zhuo's among them, against Cao Cao's advice. The eunuchs lure him into the palace and behead him; Yuan Shao storms in and kills two thousand eunuchs.",
-  "summary_zh": "灵帝驾崩，大将军何进谋诛宦官，不听曹操劝阻，召董卓等外兵进京。十常侍诱何进入宫杀之，袁绍率兵入宫，尽杀宦官二千余人。"
+  "summary_zh": "灵帝驾崩，大将军何进谋诛宦官，不听曹操劝阻，召董卓等外兵进京。十常侍诱何进入宫杀之，袁绍率兵入宫，尽杀宦官二千余人。",
+  "people": [
+   "he-jin",
+   "cao-cao",
+   "dong-zhuo",
+   "yuan-shao"
+  ]
  },
  {
   "id": "ch003-red-hare",
@@ -141,7 +176,11 @@
   "lat": 34.76,
   "lon": 112.58,
   "summary": "Dong Zhuo sends Li Su to Lü Bu with gold, pearls and the horse Red Hare. Lü Bu cuts off his adoptive father Ding Yuan's head and goes over to Dong Zhuo. Historically: Lü Bu did kill Ding Yuan and join Dong Zhuo, and Red Hare was his horse ('Lü Bu among men, Red Hare among horses'), but the gift of the horse is the novel's.",
-  "summary_zh": "董卓派李肃携黄金、明珠和赤兔马去说降吕布。吕布斩义父丁原首级，投了董卓。史实：吕布杀丁原、归董卓确有其事，赤兔也确是吕布坐骑（“人中有吕布，马中有赤兔”），但董卓以赤兔相赠出自小说。"
+  "summary_zh": "董卓派李肃携黄金、明珠和赤兔马去说降吕布。吕布斩义父丁原首级，投了董卓。史实：吕布杀丁原、归董卓确有其事，赤兔也确是吕布坐骑（“人中有吕布，马中有赤兔”），但董卓以赤兔相赠出自小说。",
+  "people": [
+   "lu-bu",
+   "dong-zhuo"
+  ]
  },
  {
   "id": "ch003-beimang",
@@ -157,7 +196,10 @@
   "lat": 34.8,
   "lon": 112.58,
   "summary": "The eunuch Zhang Rang flees the palace with the boy emperor and his brother; in the dark they stumble through the hills, the novel says following a cloud of fireflies, until Dong Zhuo's army finds them and escorts them back. Historically: Zhang Rang's flight, his suicide in the Yellow River and Dong Zhuo's meeting with the emperor at Beimang are recorded; the fireflies are a much-told detail.",
-  "summary_zh": "宦官张让劫持少帝和陈留王出逃，兄弟二人在黑夜中摸索山路，小说写他们追着萤火虫的微光前行，直到董卓大军迎驾回京。史实：张让劫帝出逃、走投无路投河而死，董卓在北邙迎驾，都有记载；萤火引路是流传甚广的细节。"
+  "summary_zh": "宦官张让劫持少帝和陈留王出逃，兄弟二人在黑夜中摸索山路，小说写他们追着萤火虫的微光前行，直到董卓大军迎驾回京。史实：张让劫帝出逃、走投无路投河而死，董卓在北邙迎驾，都有记载；萤火引路是流传甚广的细节。",
+  "people": [
+   "dong-zhuo"
+  ]
  },
  {
   "id": "ch003-wenming-garden",
@@ -173,7 +215,12 @@
   "lat": 34.74,
   "lon": 112.64,
   "summary": "At a banquet Dong Zhuo proposes deposing the emperor; Ding Yuan stands up and denounces him, with Lü Bu glaring behind him. Historically: Dong Zhuo did put the deposition to the court, but the man who spoke out was the minister Lu Zhi, and Yuan Shao left the capital rather than agree; Ding Yuan was already dead by then.",
-  "summary_zh": "董卓设宴于温明园，提议废立天子，丁原拍案而起当众斥责，身后吕布怒目而视。史实：董卓确曾在朝会上议废立，当场反对的是尚书卢植，袁绍也不肯附和而出奔；丁原此时已被吕布所杀。"
+  "summary_zh": "董卓设宴于温明园，提议废立天子，丁原拍案而起当众斥责，身后吕布怒目而视。史实：董卓确曾在朝会上议废立，当场反对的是尚书卢植，袁绍也不肯附和而出奔；丁原此时已被吕布所杀。",
+  "people": [
+   "dong-zhuo",
+   "lu-bu",
+   "yuan-shao"
+  ]
  },
  {
   "id": "ch004-dethrones-emperor",
@@ -189,7 +236,11 @@
   "lat": 34.69,
   "lon": 112.66,
   "summary": "Master of the capital, Dong Zhuo deposes the young emperor, later poisons him, and puts his nine-year-old half-brother on the throne as Emperor Xian, the last of the Han.",
-  "summary_zh": "董卓控制京师，废少帝为弘农王，后又鸩杀之，立年仅九岁的陈留王刘协为帝，即汉献帝，东汉最后一位皇帝。"
+  "summary_zh": "董卓控制京师，废少帝为弘农王，后又鸩杀之，立年仅九岁的陈留王刘协为帝，即汉献帝，东汉最后一位皇帝。",
+  "people": [
+   "dong-zhuo",
+   "emperor-xian"
+  ]
  },
  {
   "id": "ch004-cao-cao-flees",
@@ -205,7 +256,12 @@
   "lat": 34.72,
   "lon": 113.98,
   "summary": "Cao Cao tries to stab Dong Zhuo, turns the dagger into a gift and flees. The magistrate of Zhongmou, Chen Gong, arrests him and then runs away with him; at the house of his father's friend Lü Boshe Cao Cao kills the family in a panic and says: better I wrong the world than the world wrong me. Historically: the attempted stabbing is invented; Cao Cao was held at Zhongmou by an unnamed official and released, not by Chen Gong; the killing of Lü Boshe's household survives in three conflicting versions, and only one gives him the famous line, in milder words.",
-  "summary_zh": "曹操借献七星刀行刺董卓不成，逃出洛阳，在中牟被县令陈宫拿住，陈宫弃官随他出逃。在故人吕伯奢家，曹操疑心起杀尽其家，说出“宁教我负天下人，休教天下人负我”。史实：献刀行刺是小说虚构；《三国志·武帝纪》载曹操在中牟被一位不知名的亭长疑为逃犯扣下，又被放走，并非陈宫；杀吕伯奢家一事在裴注所引三种史料中说法互相矛盾，只有孙盛《杂记》记有他说“宁我负人，毋人负我”。"
+  "summary_zh": "曹操借献七星刀行刺董卓不成，逃出洛阳，在中牟被县令陈宫拿住，陈宫弃官随他出逃。在故人吕伯奢家，曹操疑心起杀尽其家，说出“宁教我负天下人，休教天下人负我”。史实：献刀行刺是小说虚构；《三国志·武帝纪》载曹操在中牟被一位不知名的亭长疑为逃犯扣下，又被放走，并非陈宫；杀吕伯奢家一事在裴注所引三种史料中说法互相矛盾，只有孙盛《杂记》记有他说“宁我负人，毋人负我”。",
+  "people": [
+   "cao-cao",
+   "dong-zhuo",
+   "chen-gong"
+  ]
  },
  {
   "id": "ch005-eastern-alliance",
@@ -221,7 +277,12 @@
   "lat": 35.25,
   "lon": 114.2,
   "summary": "Cao Cao forges an imperial summons and the eastern lords rise; eighteen of them meet with Yuan Shao as their leader. Historically: the eastern coalition of 190 was real and did choose Yuan Shao as its head, but it never assembled in one place and was not eighteen strong; its armies camped separately at Suanzao, Henei and Luyang and mostly avoided battle.",
-  "summary_zh": "曹操发矫诏，关东诸侯响应，十八路人马会盟，推袁绍为盟主。史实：190年关东联军确有其事，也确推袁绍为盟主，但从未在一处会师，也不是十八路；各军分驻酸枣、河内、鲁阳等地，大多按兵不动。"
+  "summary_zh": "曹操发矫诏，关东诸侯响应，十八路人马会盟，推袁绍为盟主。史实：190年关东联军确有其事，也确推袁绍为盟主，但从未在一处会师，也不是十八路；各军分驻酸枣、河内、鲁阳等地，大多按兵不动。",
+  "people": [
+   "dong-zhuo",
+   "cao-cao",
+   "yuan-shao"
+  ]
  },
  {
   "id": "ch005-hua-xiong",
@@ -237,7 +298,14 @@
   "lat": 34.86,
   "lon": 113.2,
   "summary": "Dong Zhuo's general Hua Xiong cuts down champion after champion. Guan Yu, a mere mounted archer, asks to go; Cao Cao pours him a cup of hot wine, and he returns with Hua Xiong's head before it has cooled. Historically: Hua Xiong was killed by Sun Jian's army at Yangren, as the Records of the Three Kingdoms says in Sun Jian's biography. Guan Yu had nothing to do with it.",
-  "summary_zh": "董卓部将华雄连斩联军数将。马弓手关羽请战，曹操斟热酒一杯，关羽提华雄首级回来时酒尚温。史实：《三国志·孙坚传》载华雄是孙坚在阳人之战中所斩，与关羽无关。"
+  "summary_zh": "董卓部将华雄连斩联军数将。马弓手关羽请战，曹操斟热酒一杯，关羽提华雄首级回来时酒尚温。史实：《三国志·孙坚传》载华雄是孙坚在阳人之战中所斩，与关羽无关。",
+  "people": [
+   "hua-xiong",
+   "dong-zhuo",
+   "guan-yu",
+   "cao-cao",
+   "sun-jian"
+  ]
  },
  {
   "id": "ch005-three-heroes-vs-lu-bu",
@@ -253,7 +321,13 @@
   "lat": 34.82,
   "lon": 113.25,
   "summary": "Lü Bu rides out of Hulao Pass and no lord can stand against him. Zhang Fei, then Guan Yu, then Liu Bei take him on together until he retreats. Historically: there was no such fight; Liu Bei was not part of the coalition's front at all. Hulao and Sishui are in fact two names for the same pass.",
-  "summary_zh": "吕布出虎牢关，诸侯无人能敌。张飞、关羽、刘备先后上阵，三人合战吕布，吕布败走。史实：并无此战，刘备当时根本不在联军前线。虎牢关与汜水关其实是同一处关隘的两个名字。"
+  "summary_zh": "吕布出虎牢关，诸侯无人能敌。张飞、关羽、刘备先后上阵，三人合战吕布，吕布败走。史实：并无此战，刘备当时根本不在联军前线。虎牢关与汜水关其实是同一处关隘的两个名字。",
+  "people": [
+   "lu-bu",
+   "zhang-fei",
+   "guan-yu",
+   "liu-bei"
+  ]
  },
  {
   "id": "ch006-burns-luoyang",
@@ -269,7 +343,11 @@
   "lat": 34.75,
   "lon": 112.7,
   "summary": "Dong Zhuo moves the court and a million people west to Chang'an, burns the palaces and the city, and has the imperial tombs dug up for their treasure. For years Luoyang lies empty.",
-  "summary_zh": "董卓挟天子西迁长安，驱赶洛阳百万百姓同行，焚烧宫室民居，又命吕布发掘帝陵取宝。洛阳从此荒废多年。"
+  "summary_zh": "董卓挟天子西迁长安，驱赶洛阳百万百姓同行，焚烧宫室民居，又命吕布发掘帝陵取宝。洛阳从此荒废多年。",
+  "people": [
+   "dong-zhuo",
+   "lu-bu"
+  ]
  },
  {
   "id": "ch006-bianshui",
@@ -285,7 +363,11 @@
   "lat": 34.82,
   "lon": 113.5,
   "summary": "Alone among the lords, Cao Cao pursues Dong Zhuo and is ambushed by Xu Rong at the Bian River. His horse is wounded and he is hit by an arrow; his cousin Cao Hong gives him his own horse: the world can do without Cao Hong, but not without you. Recorded in the Records.",
-  "summary_zh": "诸侯中只有曹操率军追击董卓，在汴水遭徐荣伏击，坐骑受伤，自己也中了箭。堂弟曹洪把马让给他，说“天下可无洪，不可无君”。此事见于《三国志·武帝纪》和《曹洪传》。"
+  "summary_zh": "诸侯中只有曹操率军追击董卓，在汴水遭徐荣伏击，坐骑受伤，自己也中了箭。堂弟曹洪把马让给他，说“天下可无洪，不可无君”。此事见于《三国志·武帝纪》和《曹洪传》。",
+  "people": [
+   "cao-cao",
+   "dong-zhuo"
+  ]
  },
  {
   "id": "ch006-imperial-seal",
@@ -301,7 +383,10 @@
   "lat": 34.68,
   "lon": 112.55,
   "summary": "Entering the ruins, Sun Jian's men find the jade seal of the empire in a well and he keeps it secretly, breaking his oath to the coalition. Historically: the story comes from the Book of Wu cited in the notes to the Records; the commentator Pei Songzhi himself doubted that the loyal Sun Jian would hide it.",
-  "summary_zh": "孙坚进入洛阳废墟，在井中得到传国玉玺，背着盟约藏匿起来。史实：此事出自裴松之注所引《吴书》，裴松之本人就怀疑忠于汉室的孙坚会私藏玉玺。"
+  "summary_zh": "孙坚进入洛阳废墟，在井中得到传国玉玺，背着盟约藏匿起来。史实：此事出自裴松之注所引《吴书》，裴松之本人就怀疑忠于汉室的孙坚会私藏玉玺。",
+  "people": [
+   "sun-jian"
+  ]
  },
  {
   "id": "ch007-jieqiao",
@@ -317,7 +402,13 @@
   "lat": 37.05,
   "lon": 115.27,
   "summary": "Yuan Shao and Gongsun Zan go to war over Ji province. Gongsun Zan is about to be speared when a young officer from Changshan, Zhao Yun, rides in and saves him: Zhao Yun's first appearance. Historically: the battle, at Jieqiao, was real and Yuan Shao won it with crossbowmen; Zhao Yun's rescue is the novel's.",
-  "summary_zh": "袁绍与公孙瓒争夺冀州。公孙瓒险被文丑刺中，常山少年赵云挺枪救下，这是赵云首次登场。史实：两军确在界桥交战，袁绍以麹义的强弩兵大破公孙瓒白马义从；赵云救公孙瓒出自小说。"
+  "summary_zh": "袁绍与公孙瓒争夺冀州。公孙瓒险被文丑刺中，常山少年赵云挺枪救下，这是赵云首次登场。史实：两军确在界桥交战，袁绍以麹义的强弩兵大破公孙瓒白马义从；赵云救公孙瓒出自小说。",
+  "people": [
+   "yuan-shao",
+   "gongsun-zan",
+   "wen-chou",
+   "zhao-yun"
+  ]
  },
  {
   "id": "ch007-sun-jian-dies",
@@ -333,7 +424,14 @@
   "lat": 32.0,
   "lon": 112.17,
   "summary": "Sent by Yuan Shu against Liu Biao, Sun Jian crosses the Han River and besieges Xiangyang. Riding alone through the hills at night he is shot down by Huang Zu's men. He is thirty-seven; his sons Sun Ce and Sun Quan will build Wu.",
-  "summary_zh": "孙坚受袁术之命进攻刘表，渡汉水围襄阳。他单骑行经岘山，被黄祖部下伏兵射杀，年仅三十七岁。其子孙策、孙权后来开创东吴基业。"
+  "summary_zh": "孙坚受袁术之命进攻刘表，渡汉水围襄阳。他单骑行经岘山，被黄祖部下伏兵射杀，年仅三十七岁。其子孙策、孙权后来开创东吴基业。",
+  "people": [
+   "sun-jian",
+   "liu-biao",
+   "yuan-shu",
+   "sun-ce",
+   "sun-quan"
+  ]
  },
  {
   "id": "ch007-yuan-shao-ji",
@@ -349,7 +447,11 @@
   "lat": 36.33,
   "lon": 114.38,
   "summary": "On Feng Ji's advice Yuan Shao invites Gongsun Zan to threaten Ji province, then offers the frightened governor Han Fu his protection. Han Fu hands over the province, and the coalition's leader has a base at last.",
-  "summary_zh": "袁绍用逢纪之计，暗约公孙瓒南下威逼冀州，再以保护为名劝冀州牧韩馥让位。韩馥胆怯，交出冀州，袁绍从此有了根据地。"
+  "summary_zh": "袁绍用逢纪之计，暗约公孙瓒南下威逼冀州，再以保护为名劝冀州牧韩馥让位。韩馥胆怯，交出冀州，袁绍从此有了根据地。",
+  "people": [
+   "yuan-shao",
+   "gongsun-zan"
+  ]
  },
  {
   "id": "ch008-diaochan",
@@ -365,7 +467,13 @@
   "lat": 34.29,
   "lon": 108.92,
   "summary": "The minister Wang Yun promises his singing girl Diaochan to Lü Bu and then gives her to Dong Zhuo. Lü Bu finds her weeping in the Phoenix Pavilion and Dong Zhuo throws a halberd at him. Historically: Diaochan never existed. The Records of the Three Kingdoms says Lü Bu was having an affair with one of Dong Zhuo's maids, feared discovery, and that Wang Yun used his unease to recruit him.",
-  "summary_zh": "司徒王允先将歌女貂蝉许给吕布，又献给董卓，挑拨父子反目。吕布在凤仪亭见貂蝉哭诉，董卓掷戟刺他。史实：貂蝉其人不见于史书。《三国志·吕布传》载吕布与董卓的侍婢私通，恐事发心中不安，王允便利用这一点说动他做内应。"
+  "summary_zh": "司徒王允先将歌女貂蝉许给吕布，又献给董卓，挑拨父子反目。吕布在凤仪亭见貂蝉哭诉，董卓掷戟刺他。史实：貂蝉其人不见于史书。《三国志·吕布传》载吕布与董卓的侍婢私通，恐事发心中不安，王允便利用这一点说动他做内应。",
+  "people": [
+   "wang-yun",
+   "diao-chan",
+   "lu-bu",
+   "dong-zhuo"
+  ]
  },
  {
   "id": "ch008-phoenix-pavilion",
@@ -381,7 +489,12 @@
   "lat": 34.31,
   "lon": 108.88,
   "summary": "Dong Zhuo finds Lü Bu holding Diaochan in the Phoenix Pavilion, snatches up Lü Bu's halberd and hurls it at him. Lü Bu dodges, and from that day the father and adopted son are enemies. Historically: Lü Bu's biography says Dong Zhuo, in a temper, once threw a hand halberd at him; Diaochan and the pavilion are the novel's.",
-  "summary_zh": "董卓在凤仪亭撞见吕布抱着貂蝉，抓起吕布的方天画戟掷去，吕布闪身躲过，父子从此成仇。史实：《三国志·吕布传》载董卓曾因小事发怒，拔手戟掷向吕布；貂蝉与凤仪亭出自小说。"
+  "summary_zh": "董卓在凤仪亭撞见吕布抱着貂蝉，抓起吕布的方天画戟掷去，吕布闪身躲过，父子从此成仇。史实：《三国志·吕布传》载董卓曾因小事发怒，拔手戟掷向吕布；貂蝉与凤仪亭出自小说。",
+  "people": [
+   "dong-zhuo",
+   "lu-bu",
+   "diao-chan"
+  ]
  },
  {
   "id": "ch009-dong-zhuo-killed",
@@ -397,7 +510,11 @@
   "lat": 34.27,
   "lon": 108.94,
   "summary": "As Dong Zhuo enters the palace, Lü Bu runs him through on the emperor's order. His corpse is left in the street; the guards put a lamp wick in his navel, and it burns for days on his fat.",
-  "summary_zh": "董卓入宫朝贺，吕布奉诏书将他刺死。董卓暴尸街头，守尸吏在他肚脐里点上灯芯，脂膏流地，燃了好几天。"
+  "summary_zh": "董卓入宫朝贺，吕布奉诏书将他刺死。董卓暴尸街头，守尸吏在他肚脐里点上灯芯，脂膏流地，燃了好几天。",
+  "people": [
+   "lu-bu",
+   "dong-zhuo"
+  ]
  },
  {
   "id": "ch009-li-jue-guo-si",
@@ -413,7 +530,14 @@
   "lat": 34.24,
   "lon": 108.98,
   "summary": "Refused a pardon, Dong Zhuo's generals Li Jue and Guo Si take Jia Xu's advice and march on Chang'an. Lü Bu flees, Wang Yun is killed, and the emperor falls into the hands of a new pair of warlords.",
-  "summary_zh": "董卓部将李傕、郭汜求赦不得，听从贾诩之计反攻长安。吕布出逃，王允被杀，献帝又落入新的军阀手中。"
+  "summary_zh": "董卓部将李傕、郭汜求赦不得，听从贾诩之计反攻长安。吕布出逃，王允被杀，献帝又落入新的军阀手中。",
+  "people": [
+   "dong-zhuo",
+   "jia-xu",
+   "lu-bu",
+   "wang-yun",
+   "emperor-xian"
+  ]
  },
  {
   "id": "ch010-xuzhou-massacre",
@@ -429,7 +553,11 @@
   "lat": 34.26,
   "lon": 117.18,
   "summary": "Cao Cao's father Cao Song is murdered with his family on the road through Tao Qian's territory. Cao Cao invades Xuzhou and puts the countryside to the sword. Historically: the sources disagree on who killed Cao Song, but agree on the revenge: the Book of the Later Han says hundreds of thousands were killed and the Si River was choked with bodies.",
-  "summary_zh": "曹操之父曹嵩携家眷途经陶谦辖境被害，曹操起兵攻徐州，所到之处大肆屠戮。史实：谁杀了曹嵩，诸书说法不一，但对复仇的记载一致：《后汉书·陶谦传》说男女被杀数十万人，泗水为之不流。"
+  "summary_zh": "曹操之父曹嵩携家眷途经陶谦辖境被害，曹操起兵攻徐州，所到之处大肆屠戮。史实：谁杀了曹嵩，诸书说法不一，但对复仇的记载一致：《后汉书·陶谦传》说男女被杀数十万人，泗水为之不流。",
+  "people": [
+   "cao-cao",
+   "tao-qian"
+  ]
  },
  {
   "id": "ch010-ma-teng",
@@ -445,7 +573,11 @@
   "lat": 34.2,
   "lon": 108.75,
   "summary": "The Liang province warlords Ma Teng and Han Sui march on Chang'an to rid the court of Li Jue and Guo Si, and are beaten back at Changping. Ma Teng's son Ma Chao, seventeen, shows his mettle for the first time.",
-  "summary_zh": "西凉马腾、韩遂起兵讨伐李傕、郭汜，在长平观战败退回。马腾之子马超年方十七，初露锋芒。"
+  "summary_zh": "西凉马腾、韩遂起兵讨伐李傕、郭汜，在长平观战败退回。马腾之子马超年方十七，初露锋芒。",
+  "people": [
+   "ma-teng",
+   "ma-chao"
+  ]
  },
  {
   "id": "ch011-puyang",
@@ -461,7 +593,13 @@
   "lat": 35.75,
   "lon": 115.03,
   "summary": "While Cao Cao is away in Xuzhou, Chen Gong and Zhang Miao hand Yan province to Lü Bu. At Puyang Cao Cao is lured into the city, the gates are fired, and he escapes with his beard and hand burned; Dian Wei holds the line.",
-  "summary_zh": "曹操远征徐州，陈宫、张邈迎吕布入兖州。曹操攻濮阳中计入城，城门火起，他烧伤手掌、焦了胡须才逃出，典韦死战断后。"
+  "summary_zh": "曹操远征徐州，陈宫、张邈迎吕布入兖州。曹操攻濮阳中计入城，城门火起，他烧伤手掌、焦了胡须才逃出，典韦死战断后。",
+  "people": [
+   "cao-cao",
+   "chen-gong",
+   "lu-bu",
+   "dian-wei"
+  ]
  },
  {
   "id": "ch011-kong-rong",
@@ -477,7 +615,12 @@
   "lat": 36.6,
   "lon": 118.8,
   "summary": "Besieged by Yellow Turban remnants, Kong Rong sends Taishi Ci through the lines to Liu Bei, who comes with three thousand men and lifts the siege. Kong Rong's surprise that Liu Bei even knew his name is in the Records too.",
-  "summary_zh": "孔融被黄巾余部管亥围困，派太史慈突围求救于刘备，刘备率三千兵解围。刘备惊讶孔融竟知世间有刘备，《三国志·太史慈传》也有记载。"
+  "summary_zh": "孔融被黄巾余部管亥围困，派太史慈突围求救于刘备，刘备率三千兵解围。刘备惊讶孔融竟知世间有刘备，《三国志·太史慈传》也有记载。",
+  "people": [
+   "kong-rong",
+   "taishi-ci",
+   "liu-bei"
+  ]
  },
  {
   "id": "ch011-rescue-xuzhou",
@@ -493,7 +636,13 @@
   "lat": 34.55,
   "lon": 118.4,
   "summary": "Tao Qian, besieged by Cao Cao, begs for help. Liu Bei brings his few thousand men, Tao Qian gives him four thousand more, and Cao Cao, his own base in danger from Lü Bu, withdraws.",
-  "summary_zh": "陶谦被曹操围攻，向各方求救。刘备率数千人赶来，陶谦又拨给他四千兵马。曹操后方被吕布袭取，只得撤军。"
+  "summary_zh": "陶谦被曹操围攻，向各方求救。刘备率数千人赶来，陶谦又拨给他四千兵马。曹操后方被吕布袭取，只得撤军。",
+  "people": [
+   "liu-bei",
+   "tao-qian",
+   "cao-cao",
+   "lu-bu"
+  ]
  },
  {
   "id": "ch012-three-offers-of-xuzhou",
@@ -509,7 +658,11 @@
   "lat": 34.6,
   "lon": 118.35,
   "summary": "Tao Qian offers his province to Liu Bei three times, and Liu Bei refuses twice before accepting on the old man's deathbed. Historically: Tao Qian, dying, told his officer Mi Zhu that only Liu Bei could hold the province, and Mi Zhu brought the province to him. One offer, not three; the novel triples it to show Liu Bei's modesty.",
-  "summary_zh": "陶谦三次要把徐州让给刘备，刘备两次推辞，直到陶谦临终才接受。史实：《三国志·先主传》载陶谦病重时对别驾麋竺说“非刘备不能安此州”，麋竺率州人迎刘备。只有一次，小说添成三让，以显刘备谦让。"
+  "summary_zh": "陶谦三次要把徐州让给刘备，刘备两次推辞，直到陶谦临终才接受。史实：《三国志·先主传》载陶谦病重时对别驾麋竺说“非刘备不能安此州”，麋竺率州人迎刘备。只有一次，小说添成三让，以显刘备谦让。",
+  "people": [
+   "tao-qian",
+   "liu-bei"
+  ]
  },
  {
   "id": "ch012-dingtao",
@@ -525,7 +678,12 @@
   "lat": 35.07,
   "lon": 115.57,
   "summary": "After a year of fighting and a famine that halts both armies, Cao Cao defeats Lü Bu at Dingtao and Juye and takes back Yan province. Lü Bu flees east to Liu Bei.",
-  "summary_zh": "兖州之战打了一年，又逢大饥荒双方罢兵。195年曹操在定陶、巨野大破吕布，收复兖州，吕布东奔投靠刘备。"
+  "summary_zh": "兖州之战打了一年，又逢大饥荒双方罢兵。195年曹操在定陶、巨野大破吕布，收复兖州，吕布东奔投靠刘备。",
+  "people": [
+   "cao-cao",
+   "lu-bu",
+   "liu-bei"
+  ]
  },
  {
   "id": "ch013-emperor-escapes-east",
@@ -541,7 +699,10 @@
   "lat": 34.6,
   "lon": 110.95,
   "summary": "Li Jue and Guo Si turn on each other, one holding the emperor and the other the ministers. In the confusion the court flees east, chased and robbed all the way, crossing the Yellow River at night in a single boat, and reaches the ruins of Luoyang living on wild plants.",
-  "summary_zh": "李傕、郭汜反目相攻，一个劫持天子，一个扣押公卿。献帝趁乱东逃，一路被追兵抢掠，夜里乘一条小船渡过黄河，回到满目废墟的洛阳，百官采野菜充饥。"
+  "summary_zh": "李傕、郭汜反目相攻，一个劫持天子，一个扣押公卿。献帝趁乱东逃，一路被追兵抢掠，夜里乘一条小船渡过黄河，回到满目废墟的洛阳，百官采野菜充饥。",
+  "people": [
+   "emperor-xian"
+  ]
  },
  {
   "id": "ch013-li-guo-war",
@@ -573,7 +734,11 @@
   "lat": 31.85,
   "lon": 119.4,
   "summary": "Sun Ce, scouting with thirteen riders, meets Taishi Ci alone. They fight until Sun Ce has Taishi Ci's short halberd and Taishi Ci has Sun Ce's helmet. Later captured, Taishi Ci joins him. All of it is in the Records.",
-  "summary_zh": "孙策带十三骑侦察，与单骑巡哨的太史慈相遇，两人厮打，孙策夺得太史慈背后的手戟，太史慈抢得孙策的头盔。后来太史慈被俘归降。这些《三国志·太史慈传》都有记载。"
+  "summary_zh": "孙策带十三骑侦察，与单骑巡哨的太史慈相遇，两人厮打，孙策夺得太史慈背后的手戟，太史慈抢得孙策的头盔。后来太史慈被俘归降。这些《三国志·太史慈传》都有记载。",
+  "people": [
+   "taishi-ci",
+   "sun-ce"
+  ]
  },
  {
   "id": "ch014-emperor-to-xu",
@@ -589,7 +754,10 @@
   "lat": 34.03,
   "lon": 113.85,
   "summary": "Cao Cao takes the starving court from Luoyang to his base at Xu. From now on he holds the emperor and commands the lords in his name, the advantage that wins him the north.",
-  "summary_zh": "曹操将饥困的朝廷从洛阳迎到自己的根据地许县，从此“奉天子以令不臣”，这是他统一北方的最大本钱。"
+  "summary_zh": "曹操将饥困的朝廷从洛阳迎到自己的根据地许县，从此“奉天子以令不臣”，这是他统一北方的最大本钱。",
+  "people": [
+   "cao-cao"
+  ]
  },
  {
   "id": "ch014-lu-bu-takes-xuzhou",
@@ -605,7 +773,11 @@
   "lat": 34.33,
   "lon": 117.96,
   "summary": "Left to guard Xiapi, Zhang Fei gets drunk and whips Cao Bao, Lü Bu's father-in-law, who opens the gates to Lü Bu by night. Historically: Zhang Fei did quarrel with Cao Bao and killed him, and the city did fall to Lü Bu from inside, through a Danyang officer who opened the gate; the drunken whipping and the father-in-law are the novel's.",
-  "summary_zh": "张飞留守下邳，醉后鞭打吕布的岳父曹豹，曹豹夜开城门迎吕布。史实：据裴注引《英雄记》，张飞与曹豹失和，杀了曹豹，城中丹杨兵将领许耽开门迎入吕布；醉酒鞭打和“岳父”之说出自小说。"
+  "summary_zh": "张飞留守下邳，醉后鞭打吕布的岳父曹豹，曹豹夜开城门迎吕布。史实：据裴注引《英雄记》，张飞与曹豹失和，杀了曹豹，城中丹杨兵将领许耽开门迎入吕布；醉酒鞭打和“岳父”之说出自小说。",
+  "people": [
+   "lu-bu",
+   "zhang-fei"
+  ]
  },
  {
   "id": "ch014-two-tigers",
@@ -621,7 +793,13 @@
   "lat": 34.0,
   "lon": 113.82,
   "summary": "Xun Yu proposes setting Liu Bei and Lü Bu at each other like two tigers over one piece of meat, then, when that fails, driving the tiger to swallow the wolf by sending Liu Bei against Yuan Shu. Historically: these schemes are the novel's; no source records them.",
-  "summary_zh": "荀彧献“二虎竞食之计”，想让刘备与吕布相争；不成，又献“驱虎吞狼之计”，诏令刘备攻打袁术，让吕布乘虚而入。史实：两条计策都出自小说，史书无载。"
+  "summary_zh": "荀彧献“二虎竞食之计”，想让刘备与吕布相争；不成，又献“驱虎吞狼之计”，诏令刘备攻打袁术，让吕布乘虚而入。史实：两条计策都出自小说，史书无载。",
+  "people": [
+   "xun-yu",
+   "liu-bei",
+   "lu-bu",
+   "yuan-shu"
+  ]
  },
  {
   "id": "ch015-sun-ce-east",
@@ -637,7 +815,12 @@
   "lat": 31.3,
   "lon": 120.6,
   "summary": "With his father's old troops, borrowed from Yuan Shu for the jade seal, Sun Ce crosses the Yangzi and takes Danyang, Wu and Kuaiji in two years, defeating Liu Yao, Yan Baihu and Wang Lang. The Little Conqueror is twenty-one.",
-  "summary_zh": "孙策以传国玉玺为质，向袁术借回父亲旧部，渡江东进，两年间击败刘繇、严白虎、王朗，据有丹阳、吴郡、会稽。“小霸王”时年二十一岁。"
+  "summary_zh": "孙策以传国玉玺为质，向袁术借回父亲旧部，渡江东进，两年间击败刘繇、严白虎、王朗，据有丹阳、吴郡、会稽。“小霸王”时年二十一岁。",
+  "people": [
+   "sun-ce",
+   "yuan-shu",
+   "wang-lang"
+  ]
  },
  {
   "id": "ch016-halberd-shot",
@@ -653,7 +836,12 @@
   "lat": 34.73,
   "lon": 116.93,
   "summary": "Yuan Shu's general Ji Ling attacks Liu Bei at Xiaopei. Lü Bu invites both to a feast, plants a halberd at the camp gate a hundred and fifty paces away, and says: if my arrow hits the side blade, you both go home. It hits. This is the Records, almost word for word.",
-  "summary_zh": "袁术部将纪灵攻打小沛的刘备。吕布请双方赴宴，在营门立一支戟，说一箭射中戟的小枝，两家就罢兵。一箭正中。《三国志·吕布传》几乎原样记载。"
+  "summary_zh": "袁术部将纪灵攻打小沛的刘备。吕布请双方赴宴，在营门立一支戟，说一箭射中戟的小枝，两家就罢兵。一箭正中。《三国志·吕布传》几乎原样记载。",
+  "people": [
+   "lu-bu",
+   "yuan-shu",
+   "liu-bei"
+  ]
  },
  {
   "id": "ch016-wancheng",
@@ -669,7 +857,11 @@
   "lat": 33.0,
   "lon": 112.53,
   "summary": "Zhang Xiu surrenders, then rebels when Cao Cao takes his uncle's widow into his tent. In the night attack Cao Cao's eldest son Cao Ang and his nephew die, and Dian Wei holds the gate alone until he falls.",
-  "summary_zh": "张绣投降后，曹操纳其婶母邹氏，张绣羞怒，夜袭曹营。曹操长子曹昂、侄子曹安民战死，典韦独守营门，力战而死。"
+  "summary_zh": "张绣投降后，曹操纳其婶母邹氏，张绣羞怒，夜袭曹营。曹操长子曹昂、侄子曹安民战死，典韦独守营门，力战而死。",
+  "people": [
+   "cao-cao",
+   "dian-wei"
+  ]
  },
  {
   "id": "ch017-yuan-shu-emperor",
@@ -685,7 +877,10 @@
   "lat": 32.57,
   "lon": 116.78,
   "summary": "Holding the jade seal and trusting a prophecy, Yuan Shu proclaims himself emperor of a new dynasty at Shouchun. Every other lord turns on him, and his lavish court starves its people.",
-  "summary_zh": "袁术自恃得了传国玉玺，又迷信谶语，在寿春称帝，国号“仲”。各路诸侯群起而攻，他宫中奢靡无度，百姓饥馑相食。"
+  "summary_zh": "袁术自恃得了传国玉玺，又迷信谶语，在寿春称帝，国号“仲”。各路诸侯群起而攻，他宫中奢靡无度，百姓饥馑相食。",
+  "people": [
+   "yuan-shu"
+  ]
  },
  {
   "id": "ch017-cao-vs-yuan-shu",
@@ -701,7 +896,11 @@
   "lat": 33.55,
   "lon": 117.0,
   "summary": "Yuan Shu, now calling himself emperor, invades Chen. Cao Cao marches east, Yuan Shu flees across the Huai, and Cao Cao beheads his generals Qiao Rui and others.",
-  "summary_zh": "称帝的袁术侵犯陈国，曹操东征，袁术闻讯渡淮而逃，曹操斩其部将桥蕤等人。"
+  "summary_zh": "称帝的袁术侵犯陈国，曹操东征，袁术闻讯渡淮而逃，曹操斩其部将桥蕤等人。",
+  "people": [
+   "cao-cao",
+   "yuan-shu"
+  ]
  },
  {
   "id": "ch017-wang-hou",
@@ -717,7 +916,10 @@
   "lat": 32.75,
   "lon": 116.85,
   "summary": "Grain runs short at the siege of Shouchun. Cao Cao has the quartermaster Wang Hou hand out rations in a smaller measure; when the soldiers grumble, he beheads Wang Hou for cheating them. Historically: the Cao Man zhuan cited in the notes tells the trick and the execution, but gives the officer no name.",
-  "summary_zh": "围攻寿春时军粮不足，曹操让管粮官王垕用小斛发粮。士兵怨声四起，曹操便以克扣军粮之罪斩了王垕，“借你的头来安定军心”。史实：裴注引《曹瞒传》记有以小斛发粮、斩主者安众之事，但未记其姓名。"
+  "summary_zh": "围攻寿春时军粮不足，曹操让管粮官王垕用小斛发粮。士兵怨声四起，曹操便以克扣军粮之罪斩了王垕，“借你的头来安定军心”。史实：裴注引《曹瞒传》记有以小斛发粮、斩主者安众之事，但未记其姓名。",
+  "people": [
+   "cao-cao"
+  ]
  },
  {
   "id": "ch017-hair-for-head",
@@ -733,7 +935,10 @@
   "lat": 32.85,
   "lon": 112.35,
   "summary": "Cao Cao orders death for anyone who tramples the wheat. When his own horse bolts into a field, he cuts off his hair instead of his head. The story is in the Cao Man zhuan cited in the notes to the Records.",
-  "summary_zh": "曹操下令践踏麦田者斩，自己的马受惊踏入麦田，便割下头发代替首级。此事见于裴注所引《曹瞒传》。"
+  "summary_zh": "曹操下令践踏麦田者斩，自己的马受惊踏入麦田，便割下头发代替首级。此事见于裴注所引《曹瞒传》。",
+  "people": [
+   "cao-cao"
+  ]
  },
  {
   "id": "ch018-xiahou-dun-eye",
@@ -749,7 +954,11 @@
   "lat": 34.5,
   "lon": 117.1,
   "summary": "An arrow strikes Xiahou Dun in the left eye. He pulls it out with the eyeball on it, cries that his parents' flesh and blood must not be wasted, swallows the eye and kills the archer. Historically: the Records says only that a stray arrow cost him his left eye in the war against Lü Bu, and that he hated mirrors ever after.",
-  "summary_zh": "夏侯惇左目中箭，拔箭连眼珠带出，大呼“父精母血，不可弃也”，将眼珠吞下，挺枪刺死放箭之人。史实：《三国志·夏侯惇传》只说他征吕布时被流矢射伤左眼，裴注引《魏略》说他从此厌恶照镜子。"
+  "summary_zh": "夏侯惇左目中箭，拔箭连眼珠带出，大呼“父精母血，不可弃也”，将眼珠吞下，挺枪刺死放箭之人。史实：《三国志·夏侯惇传》只说他征吕布时被流矢射伤左眼，裴注引《魏略》说他从此厌恶照镜子。",
+  "people": [
+   "xiahou-dun",
+   "lu-bu"
+  ]
  },
  {
   "id": "ch018-jia-xu",
@@ -765,7 +974,11 @@
   "lat": 32.7,
   "lon": 112.1,
   "summary": "Cao Cao lifts the siege of Rang and withdraws. Zhang Xiu pursues against Jia Xu's advice and is beaten; Jia Xu then tells him to pursue again at once, and this time he wins, because Cao Cao's rearguard has relaxed. Jia Xu's biography records both calls.",
-  "summary_zh": "曹操解穰城之围撤退。张绣不听贾诩劝阻追击，大败而回；贾诩却让他立刻再追，这次大胜，因为曹军断后已经松懈。两次判断都见于《三国志·贾诩传》。"
+  "summary_zh": "曹操解穰城之围撤退。张绣不听贾诩劝阻追击，大败而回；贾诩却让他立刻再追，这次大胜，因为曹军断后已经松懈。两次判断都见于《三国志·贾诩传》。",
+  "people": [
+   "jia-xu",
+   "cao-cao"
+  ]
  },
  {
   "id": "ch019-white-gate-tower",
@@ -781,7 +994,13 @@
   "lat": 34.36,
   "lon": 117.98,
   "summary": "Cao Cao floods Xiapi and Lü Bu's officers hand him over bound. He begs to serve Cao Cao; Liu Bei remarks, 'Remember Ding Yuan and Dong Zhuo', and Cao Cao has him strangled. Chen Gong goes to his death refusing to beg. All of this is in the Records.",
-  "summary_zh": "曹操水淹下邳，吕布部将缚吕布出降。吕布求曹操收用，刘备在旁说：“明公不见吕布事丁建阳、董太师乎？”曹操遂下令缢杀吕布。陈宫不肯求饶，从容就死。这些都见于《三国志》。"
+  "summary_zh": "曹操水淹下邳，吕布部将缚吕布出降。吕布求曹操收用，刘备在旁说：“明公不见吕布事丁建阳、董太师乎？”曹操遂下令缢杀吕布。陈宫不肯求饶，从容就死。这些都见于《三国志》。",
+  "people": [
+   "lu-bu",
+   "cao-cao",
+   "liu-bei",
+   "chen-gong"
+  ]
  },
  {
   "id": "ch019-flooding-xiapi",
@@ -797,7 +1016,12 @@
   "lat": 34.37,
   "lon": 117.94,
   "summary": "Lü Bu shuts himself up in Xiapi. On Guo Jia and Xun You's advice Cao Cao breaks the dykes of the Si and Yi rivers and floods the city; after a month Lü Bu's officers turn on him.",
-  "summary_zh": "吕布困守下邳，曹操采纳郭嘉、荀攸之计，决泗水、沂水灌城。围城一个多月，吕布部将叛变。"
+  "summary_zh": "吕布困守下邳，曹操采纳郭嘉、荀攸之计，决泗水、沂水灌城。围城一个多月，吕布部将叛变。",
+  "people": [
+   "cao-cao",
+   "lu-bu",
+   "guo-jia"
+  ]
  },
  {
   "id": "ch019-zhang-liao",
@@ -813,7 +1037,14 @@
   "lat": 34.31,
   "lon": 117.99,
   "summary": "Brought before Cao Cao, Zhang Liao curses him and asks to die; Guan Yu and Liu Bei plead for him, and Cao Cao unties him himself. Historically: Zhang Liao's biography says only that when Lü Bu fell, he brought his troops over to Cao Cao.",
-  "summary_zh": "张辽被押到曹操面前，破口大骂，只求一死。关羽、刘备为他求情，曹操亲解其缚。史实：《三国志·张辽传》只说吕布败后张辽率部投降，并无骂曹求情之事。"
+  "summary_zh": "张辽被押到曹操面前，破口大骂，只求一死。关羽、刘备为他求情，曹操亲解其缚。史实：《三国志·张辽传》只说吕布败后张辽率部投降，并无骂曹求情之事。",
+  "people": [
+   "zhang-liao",
+   "cao-cao",
+   "guan-yu",
+   "liu-bei",
+   "lu-bu"
+  ]
  },
  {
   "id": "ch020-belt-edict",
@@ -829,7 +1060,11 @@
   "lat": 34.06,
   "lon": 113.82,
   "summary": "The emperor's father-in-law Dong Cheng says he has a secret edict, sewn into a jade belt, ordering Cao Cao's death, and gathers conspirators, Liu Bei among them. The plot is discovered in 200 and all but Liu Bei are killed.",
-  "summary_zh": "国舅董承自称受了缝在玉带中的密诏，要诛杀曹操，联络刘备等人。次年事泄，董承等人被杀，只有刘备因出征在外得免。《三国志·先主传》记有“受帝衣带中密诏”。"
+  "summary_zh": "国舅董承自称受了缝在玉带中的密诏，要诛杀曹操，联络刘备等人。次年事泄，董承等人被杀，只有刘备因出征在外得免。《三国志·先主传》记有“受帝衣带中密诏”。",
+  "people": [
+   "cao-cao",
+   "liu-bei"
+  ]
  },
  {
   "id": "ch020-hunt-at-xutian",
@@ -845,7 +1080,12 @@
   "lat": 34.1,
   "lon": 113.95,
   "summary": "At an imperial hunt Cao Cao shoots a deer with the emperor's own bow and accepts the cheers meant for the throne. Guan Yu wants to kill him on the spot; Liu Bei stops him. Historically: the Records of Shu cited in the notes says that during a hunt at Xu Guan Yu urged Liu Bei to kill Cao Cao and Liu Bei refused; the deer and the emperor's arrow are the novel's.",
-  "summary_zh": "许田围猎，曹操借天子宝弓金箭射中一鹿，群臣以为天子射中，齐呼万岁，曹操竟纵马挡在天子前受贺。关羽提刀欲斩曹操，被刘备拦住。史实：裴注引《蜀记》载刘备在许都时与曹操共猎，关羽劝刘备杀曹，刘备不从；射鹿、受贺出自小说。"
+  "summary_zh": "许田围猎，曹操借天子宝弓金箭射中一鹿，群臣以为天子射中，齐呼万岁，曹操竟纵马挡在天子前受贺。关羽提刀欲斩曹操，被刘备拦住。史实：裴注引《蜀记》载刘备在许都时与曹操共猎，关羽劝刘备杀曹，刘备不从；射鹿、受贺出自小说。",
+  "people": [
+   "cao-cao",
+   "guan-yu",
+   "liu-bei"
+  ]
  },
  {
   "id": "ch021-heroes-over-wine",
@@ -861,7 +1101,15 @@
   "lat": 33.98,
   "lon": 113.78,
   "summary": "Over green plums and warm wine Cao Cao asks who the heroes of the age are, dismisses every name Liu Bei offers, and says: there are only two, you and I. Liu Bei drops his chopsticks and blames a clap of thunder. Historically: the line and the dropped chopsticks are in the Records; the thunder comes from the Chronicle of Huayang, and the plums and wine from the novel.",
-  "summary_zh": "青梅煮酒，曹操问天下英雄，刘备列举袁术、袁绍、刘表、孙策，都被曹操一一否定。曹操说：“今天下英雄，惟使君与操耳。”刘备吓得筷子落地，借雷声掩饰。史实：这句话和失落匕箸见于《三国志·先主传》，借雷声掩饰出自《华阳国志》，青梅煮酒是小说的点缀。"
+  "summary_zh": "青梅煮酒，曹操问天下英雄，刘备列举袁术、袁绍、刘表、孙策，都被曹操一一否定。曹操说：“今天下英雄，惟使君与操耳。”刘备吓得筷子落地，借雷声掩饰。史实：这句话和失落匕箸见于《三国志·先主传》，借雷声掩饰出自《华阳国志》，青梅煮酒是小说的点缀。",
+  "people": [
+   "cao-cao",
+   "liu-bei",
+   "yuan-shu",
+   "yuan-shao",
+   "liu-biao",
+   "sun-ce"
+  ]
  },
  {
   "id": "ch021-che-zhou",
@@ -877,7 +1125,12 @@
   "lat": 34.3,
   "lon": 117.93,
   "summary": "Sent out against Yuan Shu, Liu Bei turns back on Cao Cao's governor of Xuzhou, Che Zhou; Guan Yu tricks him into opening the gate and cuts him down. Historically: the Records says simply that Liu Bei killed Che Zhou and held Xuzhou. The novel gives the deed to Guan Yu.",
-  "summary_zh": "刘备奉命截击袁术，趁机反曹，关羽诈称曹军，赚开城门斩了徐州刺史车胄。史实：《三国志·先主传》只说“先主遂杀徐州刺史车胄”，小说把功劳记在关羽名下。"
+  "summary_zh": "刘备奉命截击袁术，趁机反曹，关羽诈称曹军，赚开城门斩了徐州刺史车胄。史实：《三国志·先主传》只说“先主遂杀徐州刺史车胄”，小说把功劳记在关羽名下。",
+  "people": [
+   "guan-yu",
+   "liu-bei",
+   "yuan-shu"
+  ]
  },
  {
   "id": "ch022-wang-liu",
@@ -893,7 +1146,13 @@
   "lat": 34.6,
   "lon": 117.05,
   "summary": "Cao Cao sends Wang Zhong and Liu Dai against the rebel Liu Bei; Guan Yu takes one alive and Zhang Fei the other, and Liu Bei sends them back to soften Cao Cao. Historically: the Records says Cao Cao sent the two and they failed; the captures are the novel's.",
-  "summary_zh": "曹操派王忠、刘岱攻打反叛的刘备，关羽生擒王忠，张飞活捉刘岱，刘备又把二人放回以缓和关系。史实：《三国志·先主传》注只说曹操派二人进攻未能取胜，生擒情节出自小说。"
+  "summary_zh": "曹操派王忠、刘岱攻打反叛的刘备，关羽生擒王忠，张飞活捉刘岱，刘备又把二人放回以缓和关系。史实：《三国志·先主传》注只说曹操派二人进攻未能取胜，生擒情节出自小说。",
+  "people": [
+   "cao-cao",
+   "liu-bei",
+   "guan-yu",
+   "zhang-fei"
+  ]
  },
  {
   "id": "ch023-mi-heng",
@@ -909,7 +1168,12 @@
   "lat": 34.0,
   "lon": 113.88,
   "summary": "The brilliant, arrogant Mi Heng, made to serve as a drummer at a banquet, strips naked in front of the guests, drums the 'Yuyang' rhythm and abuses Cao Cao. Cao Cao sends him off to Liu Biao rather than kill him himself. The scene is in the Book of the Later Han.",
-  "summary_zh": "狂士祢衡被曹操罚作鼓吏，在宴会上当众裸身更衣，击《渔阳》鼓，痛骂曹操。曹操不愿背杀士之名，把他送给刘表。此事见于《后汉书·祢衡传》。"
+  "summary_zh": "狂士祢衡被曹操罚作鼓吏，在宴会上当众裸身更衣，击《渔阳》鼓，痛骂曹操。曹操不愿背杀士之名，把他送给刘表。此事见于《后汉书·祢衡传》。",
+  "people": [
+   "mi-heng",
+   "cao-cao",
+   "liu-biao"
+  ]
  },
  {
   "id": "ch022-chen-lin",
@@ -925,7 +1189,12 @@
   "lat": 36.32,
   "lon": 114.33,
   "summary": "Yuan Shao's secretary Chen Lin writes a proclamation abusing Cao Cao back to his grandfather. Cao Cao, laid up with a headache, reads it, breaks into a cold sweat and finds his headache gone. Historically: the proclamation survives; the cured headache is told in the Dianlüe of something Chen Lin wrote for Cao Cao later, after he changed sides.",
-  "summary_zh": "袁绍的书记陈琳作讨曹檄文，把曹操祖宗三代骂了个遍。曹操正犯头风卧床，读后惊出一身冷汗，头风竟然好了。史实：檄文原文至今尚存；“读之头风顿愈”见于《典略》，说的却是陈琳后来归曹、为曹操起草的文书。"
+  "summary_zh": "袁绍的书记陈琳作讨曹檄文，把曹操祖宗三代骂了个遍。曹操正犯头风卧床，读后惊出一身冷汗，头风竟然好了。史实：檄文原文至今尚存；“读之头风顿愈”见于《典略》，说的却是陈琳后来归曹、为曹操起草的文书。",
+  "people": [
+   "chen-lin",
+   "yuan-shao",
+   "cao-cao"
+  ]
  },
  {
   "id": "ch023-ji-ping",
@@ -941,7 +1210,10 @@
   "lat": 34.08,
   "lon": 113.81,
   "summary": "Joined to Dong Cheng's plot, the court physician Ji Ping puts poison in Cao Cao's medicine, is found out and tortured to death. Historically: a physician named Ji Ben did rebel at Xu, but in 218, eighteen years later and in a different plot. The novel moves him into the belt edict.",
-  "summary_zh": "太医吉平参与董承密谋，在曹操的药里下毒，事泄被拷打至死。史实：太医令吉本（吉平）确曾在许都起事，但那是218年与耿纪、韦晃同谋，晚了十八年，小说把他移进了衣带诏一案。"
+  "summary_zh": "太医吉平参与董承密谋，在曹操的药里下毒，事泄被拷打至死。史实：太医令吉本（吉平）确曾在许都起事，但那是218年与耿纪、韦晃同谋，晚了十八年，小说把他移进了衣带诏一案。",
+  "people": [
+   "cao-cao"
+  ]
  },
  {
   "id": "ch024-liu-bei-flees-to-yuan",
@@ -957,7 +1229,13 @@
   "lat": 34.73,
   "lon": 116.93,
   "summary": "With the plot exposed, Cao Cao executes Dong Cheng's household, including the pregnant Consort Dong, and marches east himself. Liu Bei's army breaks; he flees to Yuan Shao, and Guan Yu, holding Xiapi with Liu Bei's wives, is cut off.",
-  "summary_zh": "密谋败露，曹操诛杀董承全族，连有孕的董贵妃也不放过，随即亲征刘备。刘备兵败，逃往河北投奔袁绍；守下邳、保护刘备家眷的关羽陷入重围。"
+  "summary_zh": "密谋败露，曹操诛杀董承全族，连有孕的董贵妃也不放过，随即亲征刘备。刘备兵败，逃往河北投奔袁绍；守下邳、保护刘备家眷的关羽陷入重围。",
+  "people": [
+   "yuan-shao",
+   "cao-cao",
+   "liu-bei",
+   "guan-yu"
+  ]
  },
  {
   "id": "ch024-consort-dong",
@@ -973,7 +1251,11 @@
   "lat": 34.06,
   "lon": 113.87,
   "summary": "The belt plot is discovered. Cao Cao executes Dong Cheng and his fellow conspirators and their families, and has Dong Cheng's daughter, the emperor's consort, killed though she is pregnant and the emperor begs for her life.",
-  "summary_zh": "衣带诏事泄，曹操诛杀董承等人并夷其三族。董承之女董贵妃身怀有孕，献帝苦苦求情，仍被曹操缢杀。"
+  "summary_zh": "衣带诏事泄，曹操诛杀董承等人并夷其三族。董承之女董贵妃身怀有孕，献帝苦苦求情，仍被曹操缢杀。",
+  "people": [
+   "cao-cao",
+   "emperor-xian"
+  ]
  },
  {
   "id": "ch025-yan-liang",
@@ -989,7 +1271,12 @@
   "lat": 35.55,
   "lon": 114.65,
   "summary": "Yuan Shao's general Yan Liang besieges Baima. Guan Yu spots his parasol, charges through ten thousand men, stabs him and comes back with his head. One of the few great duels in the novel that the Records tells too, almost in the same words.",
-  "summary_zh": "袁绍大将颜良围白马。关羽望见颜良的麾盖，策马冲入万军之中，刺颜良，斩其首而还。这是小说中少数几场《三国志》同样记载的阵前斩将，文字几乎一样。"
+  "summary_zh": "袁绍大将颜良围白马。关羽望见颜良的麾盖，策马冲入万军之中，刺颜良，斩其首而还。这是小说中少数几场《三国志》同样记载的阵前斩将，文字几乎一样。",
+  "people": [
+   "guan-yu",
+   "yan-liang",
+   "yuan-shao"
+  ]
  },
  {
   "id": "ch025-three-conditions",
@@ -1005,7 +1292,12 @@
   "lat": 34.42,
   "lon": 117.9,
   "summary": "Surrounded on a hill, Guan Yu agrees to come over on three conditions: he surrenders to the Han, not to Cao Cao; Liu Bei's wives are protected; and he will leave the moment he learns where Liu Bei is. Historically: the Records says simply that Cao Cao captured Guan Yu and made him a general. The conditions are the novel's.",
-  "summary_zh": "关羽被困土山，提出三个条件才肯归顺：降汉不降曹；保护二位嫂嫂；一旦得知刘备下落，立即辞去。史实：《三国志·关羽传》只说“曹公禽羽以归，拜为偏将军”，约三事出自小说。"
+  "summary_zh": "关羽被困土山，提出三个条件才肯归顺：降汉不降曹；保护二位嫂嫂；一旦得知刘备下落，立即辞去。史实：《三国志·关羽传》只说“曹公禽羽以归，拜为偏将军”，约三事出自小说。",
+  "people": [
+   "guan-yu",
+   "liu-bei",
+   "cao-cao"
+  ]
  },
  {
   "id": "ch026-wen-chou",
@@ -1021,7 +1313,13 @@
   "lat": 35.15,
   "lon": 114.2,
   "summary": "Yan Liang's sworn brother Wen Chou comes to avenge him and dies at Guan Yu's hand in three bouts. Historically: Wen Chou was killed at Yanjin when Cao Cao baited his cavalry with abandoned baggage; the Records credits Cao Cao's army, not Guan Yu.",
-  "summary_zh": "颜良的结义兄弟文丑前来报仇，与关羽交手不到三合即被斩杀。史实：《三国志·武帝纪》载曹操在延津抛弃辎重引诱袁军，趁其争抢时出击，斩了文丑，并未提到关羽。"
+  "summary_zh": "颜良的结义兄弟文丑前来报仇，与关羽交手不到三合即被斩杀。史实：《三国志·武帝纪》载曹操在延津抛弃辎重引诱袁军，趁其争抢时出击，斩了文丑，并未提到关羽。",
+  "people": [
+   "guan-yu",
+   "wen-chou",
+   "yan-liang",
+   "cao-cao"
+  ]
  },
  {
   "id": "ch026-seals-the-gifts",
@@ -1037,7 +1335,13 @@
   "lat": 34.07,
   "lon": 113.9,
   "summary": "Having repaid Cao Cao with Yan Liang's head, Guan Yu seals up every gift, leaves a letter, and rides off to Liu Bei. Cao Cao forbids pursuit: each serves his own master. The Records tells it the same way.",
-  "summary_zh": "关羽斩颜良报答了曹操，将曹操所赐财物尽数封存，留书告辞，投奔刘备。曹操不许追赶，说“彼各为其主，勿追也”。《三国志·关羽传》记载相同。"
+  "summary_zh": "关羽斩颜良报答了曹操，将曹操所赐财物尽数封存，留书告辞，投奔刘备。曹操不许追赶，说“彼各为其主，勿追也”。《三国志·关羽传》记载相同。",
+  "people": [
+   "guan-yu",
+   "yan-liang",
+   "cao-cao",
+   "liu-bei"
+  ]
  },
  {
   "id": "ch027-five-passes",
@@ -1053,7 +1357,10 @@
   "lat": 34.78,
   "lon": 112.6,
   "summary": "Escorting his sisters-in-law alone, Guan Yu forces his way through five passes and kills six of Cao Cao's commanders: Kong Xiu at Dongling Pass, Han Fu and Meng Tan at Luoyang, Bian Xi at Sishui, Wang Zhi at Xingyang and Qin Qi at the Yellow River ford. Historically: none of it happened, and none of the six generals is known to history. The route itself gives the game away: from Xu to the north it runs west to Luoyang and back east again, hundreds of li out of the way.",
-  "summary_zh": "关羽护送二嫂，千里走单骑，连闯五关，斩东岭关孔秀、洛阳韩福和孟坦、汜水关卞喜、荥阳王植、黄河渡口秦琪六将。史实：并无此事，六员守将也都不见于史书。路线本身就露了馅：从许都去河北，却先向西绕到洛阳再折回东边，平白多走了几百里。"
+  "summary_zh": "关羽护送二嫂，千里走单骑，连闯五关，斩东岭关孔秀、洛阳韩福和孟坦、汜水关卞喜、荥阳王植、黄河渡口秦琪六将。史实：并无此事，六员守将也都不见于史书。路线本身就露了馅：从许都去河北，却先向西绕到洛阳再折回东边，平白多走了几百里。",
+  "people": [
+   "guan-yu"
+  ]
  },
  {
   "id": "ch027-puji",
@@ -1069,7 +1376,10 @@
   "lat": 34.88,
   "lon": 113.17,
   "summary": "At Sishui Pass Bian Xi invites Guan Yu to a temple with axemen hidden behind the walls. The monk Pujing, from Guan Yu's home county, warns him by tapping his knife; Guan Yu kills Bian Xi. Pujing will reappear at Jade Spring Hill to receive Guan Yu's ghost. Historically: invented.",
-  "summary_zh": "汜水关守将卞喜在镇国寺埋伏刀斧手，请关羽赴宴。寺中老僧普净是关羽同乡，以戒刀暗示，关羽识破，斩了卞喜。普净后来在玉泉山点化关羽的阴魂。史实：并无此事。"
+  "summary_zh": "汜水关守将卞喜在镇国寺埋伏刀斧手，请关羽赴宴。寺中老僧普净是关羽同乡，以戒刀暗示，关羽识破，斩了卞喜。普净后来在玉泉山点化关羽的阴魂。史实：并无此事。",
+  "people": [
+   "guan-yu"
+  ]
  },
  {
   "id": "ch028-cai-yang",
@@ -1085,7 +1395,12 @@
   "lat": 33.1,
   "lon": 114.5,
   "summary": "Zhang Fei, holding the town of Gucheng, thinks Guan Yu has turned traitor; Guan Yu proves himself by beheading the pursuing Cai Yang before the third drumbeat ends, and the three brothers are together again. Historically: Cai Yang was killed by Liu Bei in Runan, not by Guan Yu.",
-  "summary_zh": "据守古城的张飞以为关羽降曹变节，关羽在三通鼓内斩了追来的曹将蔡阳以明心迹，兄弟三人在古城重聚。史实：《三国志·先主传》载蔡阳是在汝南被刘备所杀，与关羽无关。"
+  "summary_zh": "据守古城的张飞以为关羽降曹变节，关羽在三通鼓内斩了追来的曹将蔡阳以明心迹，兄弟三人在古城重聚。史实：《三国志·先主传》载蔡阳是在汝南被刘备所杀，与关羽无关。",
+  "people": [
+   "zhang-fei",
+   "guan-yu",
+   "liu-bei"
+  ]
  },
  {
   "id": "ch028-zhao-yun-joins",
@@ -1101,7 +1416,13 @@
   "lat": 33.15,
   "lon": 114.45,
   "summary": "After Gongsun Zan's fall Zhao Yun has wandered; he meets Liu Bei on the way to Gucheng and joins him for good, completing the band of brothers and followers. Historically: the Zhao Yun biezhuan says he rejoined Liu Bei at Ye, when Liu Bei was a guest of Yuan Shao.",
-  "summary_zh": "公孙瓒败亡后赵云流落四方，在去古城途中与刘备相遇，从此追随不离。史实：裴注引《赵云别传》载赵云是在刘备投靠袁绍时，于邺城与刘备相见归附。"
+  "summary_zh": "公孙瓒败亡后赵云流落四方，在去古城途中与刘备相遇，从此追随不离。史实：裴注引《赵云别传》载赵云是在刘备投靠袁绍时，于邺城与刘备相见归附。",
+  "people": [
+   "zhao-yun",
+   "gongsun-zan",
+   "liu-bei",
+   "yuan-shao"
+  ]
  },
  {
   "id": "ch029-sun-ce-dies",
@@ -1117,7 +1438,12 @@
   "lat": 32.15,
   "lon": 119.45,
   "summary": "Sun Ce executes the Taoist healer Yu Ji, whom his officers revere; the dead man's ghost haunts him until his wound reopens and he dies at twenty-six, leaving Jiangdong to his brother Sun Quan. Historically: Sun Ce died of wounds from an ambush by the retainers of Xu Gong, whom he had killed. Yu Ji's execution comes from the Jiangbiao zhuan and the Soushen ji, and Pei Songzhi already doubted it.",
-  "summary_zh": "孙策斩了深受将士敬奉的道士于吉，于吉阴魂作祟，孙策箭疮迸裂，年仅二十六岁而死，临终将江东交给弟弟孙权。史实：孙策是打猎时被他所杀的许贡的门客伏击，伤重而死。斩于吉之事出自《江表传》《搜神记》，裴松之已表示怀疑。"
+  "summary_zh": "孙策斩了深受将士敬奉的道士于吉，于吉阴魂作祟，孙策箭疮迸裂，年仅二十六岁而死，临终将江东交给弟弟孙权。史实：孙策是打猎时被他所杀的许贡的门客伏击，伤重而死。斩于吉之事出自《江表传》《搜神记》，裴松之已表示怀疑。",
+  "people": [
+   "sun-ce",
+   "yu-ji",
+   "sun-quan"
+  ]
  },
  {
   "id": "ch029-sun-quan-succeeds",
@@ -1133,7 +1459,14 @@
   "lat": 31.3,
   "lon": 120.6,
   "summary": "Dying, Sun Ce tells his eighteen-year-old brother: at leading the armies of Jiangdong into battle you are not my equal, but at finding and using able men I am not yours. Zhang Zhao and Zhou Yu stand by him, and Lu Su comes to join him. The words are in Sun Ce's biography.",
-  "summary_zh": "孙策临终对十八岁的弟弟孙权说：“举江东之众，决机于两陈之间，与天下争衡，卿不如我；举贤任能，各尽其心，以保江东，我不如卿。”张昭、周瑜辅佐，鲁肃也来投奔。此语见于《三国志·孙策传》。"
+  "summary_zh": "孙策临终对十八岁的弟弟孙权说：“举江东之众，决机于两陈之间，与天下争衡，卿不如我；举贤任能，各尽其心，以保江东，我不如卿。”张昭、周瑜辅佐，鲁肃也来投奔。此语见于《三国志·孙策传》。",
+  "people": [
+   "sun-quan",
+   "sun-ce",
+   "zhang-zhao",
+   "zhou-yu",
+   "lu-su"
+  ]
  },
  {
   "id": "ch030-guandu",
@@ -1149,7 +1482,11 @@
   "lat": 34.78,
   "lon": 114.05,
   "summary": "Yuan Shao comes south with a hundred thousand men; Cao Cao holds the line at Guandu with a fraction of that, for months, short of food. The Records and the novel agree on the battle that decided the north.",
-  "summary_zh": "袁绍率十万大军南下，曹操以寡兵据守官渡，相持数月，粮草将尽。这场决定北方归属的大战，史书和小说的记载基本一致。"
+  "summary_zh": "袁绍率十万大军南下，曹操以寡兵据守官渡，相持数月，粮草将尽。这场决定北方归属的大战，史书和小说的记载基本一致。",
+  "people": [
+   "yuan-shao",
+   "cao-cao"
+  ]
  },
  {
   "id": "ch030-wuchao",
@@ -1165,7 +1502,12 @@
   "lat": 35.07,
   "lon": 114.42,
   "summary": "Yuan Shao's adviser Xu You, slighted, defects and tells Cao Cao where Yuan Shao's grain is stored. Cao Cao leads five thousand men there by night under Yuan banners and burns it all; Yuan Shao's army collapses.",
-  "summary_zh": "袁绍谋士许攸受了冷落，投奔曹操，献上袁军囤粮之地。曹操亲率五千步骑打着袁军旗号夜袭乌巢，尽焚其粮，袁军随之崩溃。"
+  "summary_zh": "袁绍谋士许攸受了冷落，投奔曹操，献上袁军囤粮之地。曹操亲率五千步骑打着袁军旗号夜袭乌巢，尽焚其粮，袁军随之崩溃。",
+  "people": [
+   "cao-cao",
+   "yuan-shao",
+   "xu-you"
+  ]
  },
  {
   "id": "ch030-xu-you-barefoot",
@@ -1181,7 +1523,11 @@
   "lat": 34.82,
   "lon": 114.08,
   "summary": "When Xu You's name is announced at night, Cao Cao runs out without his shoes, clapping his hands with joy. Xu You asks how much grain he has; Cao Cao lies twice before admitting a month's worth, and Xu You tells him about Wuchao. The Cao Man zhuan cited in the notes tells it.",
-  "summary_zh": "许攸夜投曹营，曹操闻报，来不及穿鞋就跑出来迎接，拍手大笑。许攸问军粮还有多少，曹操两次谎报，最后才承认只够一个月，许攸便献上乌巢之计。此事见于裴注引《曹瞒传》。"
+  "summary_zh": "许攸夜投曹营，曹操闻报，来不及穿鞋就跑出来迎接，拍手大笑。许攸问军粮还有多少，曹操两次谎报，最后才承认只够一个月，许攸便献上乌巢之计。此事见于裴注引《曹瞒传》。",
+  "people": [
+   "cao-cao",
+   "xu-you"
+  ]
  },
  {
   "id": "ch030-ju-shou",
@@ -1197,7 +1543,11 @@
   "lat": 34.9,
   "lon": 114.12,
   "summary": "Yuan Shao's adviser Ju Shou, who had warned him against fighting at Guandu, is captured in the rout. Cao Cao, an old friend, offers him a post; he tries to escape back to Yuan Shao and is executed.",
-  "summary_zh": "曾劝袁绍不要在官渡决战的谋士沮授兵败被俘。曹操与他是旧识，想留用他，沮授却图谋逃回袁营，被杀。"
+  "summary_zh": "曾劝袁绍不要在官渡决战的谋士沮授兵败被俘。曹操与他是旧识，想留用他，沮授却图谋逃回袁营，被杀。",
+  "people": [
+   "yuan-shao",
+   "cao-cao"
+  ]
  },
  {
   "id": "ch031-cangting",
@@ -1213,7 +1563,11 @@
   "lat": 36.15,
   "lon": 115.75,
   "summary": "Yuan Shao gathers what is left and fights again at Cangting on the Yellow River, and is beaten again.",
-  "summary_zh": "袁绍收拾残部，在黄河边的仓亭再战，又被曹操击败。"
+  "summary_zh": "袁绍收拾残部，在黄河边的仓亭再战，又被曹操击败。",
+  "people": [
+   "cao-cao",
+   "yuan-shao"
+  ]
  },
  {
   "id": "ch031-liu-bei-to-liu-biao",
@@ -1229,7 +1583,12 @@
   "lat": 32.52,
   "lon": 112.36,
   "summary": "Beaten in Runan, Liu Bei goes south to his kinsman Liu Biao, governor of Jingzhou, who posts him at Xinye to guard the northern border. He will stay seven years.",
-  "summary_zh": "刘备在汝南被曹操击败，南投同宗荆州牧刘表，刘表让他屯驻新野，防备北方。他在荆州一待就是七年。"
+  "summary_zh": "刘备在汝南被曹操击败，南投同宗荆州牧刘表，刘表让他屯驻新野，防备北方。他在荆州一待就是七年。",
+  "people": [
+   "liu-bei",
+   "liu-biao",
+   "cao-cao"
+  ]
  },
  {
   "id": "ch032-yuan-brothers",
@@ -1245,7 +1604,11 @@
   "lat": 35.68,
   "lon": 114.55,
   "summary": "Yuan Shao dies having named his youngest son Yuan Shang heir over the eldest, Yuan Tan. The brothers go to war with each other, and Yuan Tan even asks Cao Cao for help, which is all Cao Cao needs.",
-  "summary_zh": "袁绍死前废长立幼，以幼子袁尚为嗣。长子袁谭不服，兄弟相攻，袁谭甚至向曹操求援，给了曹操各个击破的机会。"
+  "summary_zh": "袁绍死前废长立幼，以幼子袁尚为嗣。长子袁谭不服，兄弟相攻，袁谭甚至向曹操求援，给了曹操各个击破的机会。",
+  "people": [
+   "yuan-shao",
+   "cao-cao"
+  ]
  },
  {
   "id": "ch032-ye-taken",
@@ -1261,7 +1624,11 @@
   "lat": 36.3,
   "lon": 114.35,
   "summary": "Yuan Shao dies in 202 and his sons Yuan Tan and Yuan Shang fight each other. Cao Cao digs a channel from the Zhang River round Ye and floods it; after months the city starves and falls, and Ye becomes his capital.",
-  "summary_zh": "202年袁绍病死，袁谭、袁尚兄弟相争。曹操围邺，掘堑引漳河水灌城，城中饿死大半，城破后邺成为曹操的大本营。"
+  "summary_zh": "202年袁绍病死，袁谭、袁尚兄弟相争。曹操围邺，掘堑引漳河水灌城，城中饿死大半，城破后邺成为曹操的大本营。",
+  "people": [
+   "cao-cao",
+   "yuan-shao"
+  ]
  },
  {
   "id": "ch033-lady-zhen",
@@ -1277,7 +1644,10 @@
   "lat": 36.34,
   "lon": 114.31,
   "summary": "In the sack of Ye, Cao Pi finds Yuan Xi's wife Lady Zhen hiding in the palace and takes her for himself. She will be the mother of the second Wei emperor.",
-  "summary_zh": "邺城破时，曹丕在袁府中见到袁熙之妻甄氏，纳为己妻。她后来生下魏明帝曹叡。"
+  "summary_zh": "邺城破时，曹丕在袁府中见到袁熙之妻甄氏，纳为己妻。她后来生下魏明帝曹叡。",
+  "people": [
+   "cao-pi"
+  ]
  },
  {
   "id": "ch034-thigh-flesh",
@@ -1293,7 +1663,11 @@
   "lat": 32.03,
   "lon": 112.14,
   "summary": "Returning from the privy at a banquet with Liu Biao, Liu Bei is in tears: he has not been in the saddle for so long that the flesh has grown back on his thighs, the years are passing, and he has achieved nothing. The Jiuzhou chunqiu cited in the notes records it.",
-  "summary_zh": "刘备在刘表席间如厕回来，泪流满面。他说自己久不骑马，大腿内侧又长出了肉，日月如梭，人将老去，却功业未建。此事见于裴注引《九州春秋》。"
+  "summary_zh": "刘备在刘表席间如厕回来，泪流满面。他说自己久不骑马，大腿内侧又长出了肉，日月如梭，人将老去，却功业未建。此事见于裴注引《九州春秋》。",
+  "people": [
+   "liu-bei",
+   "liu-biao"
+  ]
  },
  {
   "id": "ch033-white-wolf-mountain",
@@ -1309,7 +1683,11 @@
   "lat": 41.1,
   "lon": 119.7,
   "summary": "Cao Cao crosses the desolate country beyond the Wall, defeats the Wuhuan at White Wolf Mountain and kills their chief Tadun. Guo Jia dies on the way back, having predicted that Gongsun Kang would send the heads of the fleeing Yuan brothers if left alone. He does.",
-  "summary_zh": "曹操远征塞外，在白狼山大破乌桓，斩其首领蹋顿。郭嘉在归途中病逝，他生前料定只要不逼，公孙康自会斩送逃去辽东的袁尚、袁熙。果然如此。"
+  "summary_zh": "曹操远征塞外，在白狼山大破乌桓，斩其首领蹋顿。郭嘉在归途中病逝，他生前料定只要不逼，公孙康自会斩送逃去辽东的袁尚、袁熙。果然如此。",
+  "people": [
+   "guo-jia",
+   "cao-cao"
+  ]
  },
  {
   "id": "ch034-tan-stream",
@@ -1325,7 +1703,11 @@
   "lat": 32.04,
   "lon": 112.13,
   "summary": "Warned that Liu Biao's in-laws mean to kill him at a banquet, Liu Bei rides out and comes up against the Tan Stream. His horse Dilu, said to bring bad luck to its master, leaps three zhang across and saves him. Historically: the leap is told in the Shiyu cited in the notes, and the commentator Sun Sheng called it a fabrication.",
-  "summary_zh": "刘备得知蔡瑁要在宴上害他，骑马逃出，被檀溪拦住去路。人说妨主的的卢马一跃三丈，跳过檀溪救了他。史实：此事出自裴注所引《世语》，孙盛已指其为虚妄之言。"
+  "summary_zh": "刘备得知蔡瑁要在宴上害他，骑马逃出，被檀溪拦住去路。人说妨主的的卢马一跃三丈，跳过檀溪救了他。史实：此事出自裴注所引《世语》，孙盛已指其为虚妄之言。",
+  "people": [
+   "liu-bei",
+   "cai-mao"
+  ]
  },
  {
   "id": "ch034-behind-the-screen",
@@ -1341,7 +1723,12 @@
   "lat": 32.0,
   "lon": 112.11,
   "summary": "Liu Biao asks Liu Bei whether to make his elder or younger son heir; Liu Bei advises the elder. Lady Cai, mother of the younger, hears it from behind a screen and from then on plots Liu Bei's death. Historically: the quarrel over Liu Biao's succession was real; the listening behind the screen is the novel's.",
-  "summary_zh": "刘表问刘备该立长子刘琦还是幼子刘琮，刘备主张立长。刘琮之母蔡夫人在屏风后偷听，从此与蔡瑁合谋要害刘备。史实：刘表立嗣之争确有其事，隔屏偷听出自小说。"
+  "summary_zh": "刘表问刘备该立长子刘琦还是幼子刘琮，刘备主张立长。刘琮之母蔡夫人在屏风后偷听，从此与蔡瑁合谋要害刘备。史实：刘表立嗣之争确有其事，隔屏偷听出自小说。",
+  "people": [
+   "liu-biao",
+   "liu-bei",
+   "cai-mao"
+  ]
  },
  {
   "id": "ch035-water-mirror",
@@ -1357,7 +1744,12 @@
   "lat": 31.78,
   "lon": 111.84,
   "summary": "The recluse Sima Hui, the 'Water Mirror', tells Liu Bei that ordinary scholars cannot see the times, and that the men who can are the Sleeping Dragon and the Young Phoenix. Historically: the Xiangyang ji cited in the notes records the remark.",
-  "summary_zh": "隐士司马徽（号水镜先生）对刘备说，儒生俗士不识时务，识时务者在乎俊杰，此间自有伏龙、凤雏。史实：裴注引《襄阳记》记有此语。"
+  "summary_zh": "隐士司马徽（号水镜先生）对刘备说，儒生俗士不识时务，识时务者在乎俊杰，此间自有伏龙、凤雏。史实：裴注引《襄阳记》记有此语。",
+  "people": [
+   "liu-bei",
+   "sima-hui",
+   "pang-tong"
+  ]
  },
  {
   "id": "ch035-shan-fu",
@@ -1373,7 +1765,12 @@
   "lat": 32.48,
   "lon": 112.4,
   "summary": "Under the false name Shan Fu, Xu Shu becomes Liu Bei's strategist and defeats Cao Ren by breaking his 'Eight Gates Golden Lock' formation. Historically: Xu Shu did serve Liu Bei at Xinye, but no such battle is recorded.",
-  "summary_zh": "徐庶化名单福，做了刘备的军师，识破并攻破曹仁的“八门金锁阵”。史实：徐庶确在新野投奔刘备，但并无此战记载。"
+  "summary_zh": "徐庶化名单福，做了刘备的军师，识破并攻破曹仁的“八门金锁阵”。史实：徐庶确在新野投奔刘备，但并无此战记载。",
+  "people": [
+   "xu-shu",
+   "cao-ren",
+   "liu-bei"
+  ]
  },
  {
   "id": "ch036-xu-shu-recommends",
@@ -1389,7 +1786,13 @@
   "lat": 32.56,
   "lon": 112.33,
   "summary": "Cao Cao lures Xu Shu away with a forged letter from his mother. As he rides off he turns back to tell Liu Bei of Zhuge Liang. Historically: Xu Shu did recommend Zhuge Liang, but while still in Liu Bei's service; he left only in 208, when his mother was captured during the flight from Changban.",
-  "summary_zh": "曹操以伪造的母亲书信骗走徐庶，徐庶临行回马，向刘备举荐诸葛亮。史实：《三国志·诸葛亮传》载徐庶荐诸葛亮时仍在刘备帐下；他离开刘备是在208年长坂兵败、母亲被曹军所获之后。"
+  "summary_zh": "曹操以伪造的母亲书信骗走徐庶，徐庶临行回马，向刘备举荐诸葛亮。史实：《三国志·诸葛亮传》载徐庶荐诸葛亮时仍在刘备帐下；他离开刘备是在208年长坂兵败、母亲被曹军所获之后。",
+  "people": [
+   "xu-shu",
+   "cao-cao",
+   "liu-bei",
+   "zhuge-liang"
+  ]
  },
  {
   "id": "ch036-fancheng-ruse",
@@ -1405,7 +1808,14 @@
   "lat": 32.09,
   "lon": 112.17,
   "summary": "While Cao Ren is out fighting, Shan Fu sends Guan Yu to take his base at Fancheng behind him. Cao Ren learns the name of the strategist who beat him and Cao Cao realises it is Xu Shu. Historically: invented.",
-  "summary_zh": "单福趁曹仁出战，派关羽袭取其根据地樊城。曹仁战败，曹操打听得这位军师正是徐庶。史实：并无此事。"
+  "summary_zh": "单福趁曹仁出战，派关羽袭取其根据地樊城。曹仁战败，曹操打听得这位军师正是徐庶。史实：并无此事。",
+  "people": [
+   "liu-bei",
+   "xu-shu",
+   "cao-ren",
+   "guan-yu",
+   "cao-cao"
+  ]
  },
  {
   "id": "ch037-three-visits",
@@ -1421,7 +1831,11 @@
   "lat": 32.02,
   "lon": 112.04,
   "summary": "Liu Bei goes three times to Zhuge Liang's cottage in the hills, the third time in snow, and waits on the steps while he sleeps. Historically: the visits are real; Zhuge Liang himself wrote in his memorial that Liu Bei 'visited me three times in my thatched cottage'. The snow and the waiting are the novel's.",
-  "summary_zh": "刘备三顾诸葛亮的茅庐，第三次冒雪而去，站在阶下等候他午睡醒来。史实：三顾确有其事，诸葛亮在《出师表》中亲笔写道“三顾臣于草庐之中”；风雪与立候是小说的渲染。"
+  "summary_zh": "刘备三顾诸葛亮的茅庐，第三次冒雪而去，站在阶下等候他午睡醒来。史实：三顾确有其事，诸葛亮在《出师表》中亲笔写道“三顾臣于草庐之中”；风雪与立候是小说的渲染。",
+  "people": [
+   "liu-bei",
+   "zhuge-liang"
+  ]
  },
  {
   "id": "ch037-first-visits",
@@ -1437,7 +1851,11 @@
   "lat": 32.05,
   "lon": 112.0,
   "summary": "On the first visit the boy says the master is out; on the second, in wind and snow, Liu Bei meets one after another Zhuge Liang's friends, his brother and his father-in-law, each of whom he takes for Zhuge Liang. Historically: the visits are real, but these meetings are the novel's.",
-  "summary_zh": "第一次去，书童说先生出门了；第二次冒着风雪去，刘备先后遇到崔州平、石广元、孟公威、诸葛均和黄承彦，每次都以为见到了诸葛亮。史实：三顾确有其事，这些相遇出自小说。"
+  "summary_zh": "第一次去，书童说先生出门了；第二次冒着风雪去，刘备先后遇到崔州平、石广元、孟公威、诸葛均和黄承彦，每次都以为见到了诸葛亮。史实：三顾确有其事，这些相遇出自小说。",
+  "people": [
+   "liu-bei",
+   "zhuge-liang"
+  ]
  },
  {
   "id": "ch038-longzhong-plan",
@@ -1453,7 +1871,12 @@
   "lat": 31.98,
   "lon": 112.07,
   "summary": "Zhuge Liang lays out the plan: the north is Cao Cao's and cannot be fought yet, the east is Sun Quan's and must be an ally; take Jingzhou and Yizhou, and wait for the moment to march on the centre. The speech is in the Records, and the next fifteen years follow it.",
-  "summary_zh": "诸葛亮分析天下：北方曹操不可与争锋，江东孙权可以为援而不可图，应先取荆州、益州，待天下有变，再两路北伐。这番话载于《三国志·诸葛亮传》，此后十五年的局势大体照此展开。"
+  "summary_zh": "诸葛亮分析天下：北方曹操不可与争锋，江东孙权可以为援而不可图，应先取荆州、益州，待天下有变，再两路北伐。这番话载于《三国志·诸葛亮传》，此后十五年的局势大体照此展开。",
+  "people": [
+   "zhuge-liang",
+   "cao-cao",
+   "sun-quan"
+  ]
  },
  {
   "id": "ch038-huang-zu",
@@ -1469,7 +1892,11 @@
   "lat": 30.55,
   "lon": 114.28,
   "summary": "Sun Quan finally takes Xiakou and kills Huang Zu, whose men killed his father Sun Jian seventeen years before.",
-  "summary_zh": "孙权攻破夏口，斩黄祖，报了十七年前父亲孙坚被黄祖部下射杀之仇。"
+  "summary_zh": "孙权攻破夏口，斩黄祖，报了十七年前父亲孙坚被黄祖部下射杀之仇。",
+  "people": [
+   "sun-quan",
+   "sun-jian"
+  ]
  },
  {
   "id": "ch039-bowang",
@@ -1485,7 +1912,12 @@
   "lat": 33.17,
   "lon": 112.83,
   "summary": "Zhuge Liang, newly arrived and resented by Guan Yu and Zhang Fei, wins their respect by luring Xiahou Dun into a narrow valley at Bowang and burning his army. Historically: the ambush at Bowang was real, but it was in 202, five years before Zhuge Liang joined, and the Records gives it to Liu Bei himself.",
-  "summary_zh": "诸葛亮初到，关张不服。他在博望坡设伏，诱夏侯惇进入狭谷，纵火大破曹军，众将从此心服。史实：博望之战确有其事，但发生在202年，比诸葛亮出山早了五年，《三国志·先主传》记作刘备亲自设伏。"
+  "summary_zh": "诸葛亮初到，关张不服。他在博望坡设伏，诱夏侯惇进入狭谷，纵火大破曹军，众将从此心服。史实：博望之战确有其事，但发生在202年，比诸葛亮出山早了五年，《三国志·先主传》记作刘备亲自设伏。",
+  "people": [
+   "zhuge-liang",
+   "xiahou-dun",
+   "liu-bei"
+  ]
  },
  {
   "id": "ch039-upstairs",
@@ -1501,7 +1933,11 @@
   "lat": 31.98,
   "lon": 112.12,
   "summary": "Liu Biao's elder son Liu Qi, afraid of his stepmother, leads Zhuge Liang up into a tower and has the ladder taken away: now no one can hear. Zhuge Liang reminds him of the prince who died at home and the one who lived because he went abroad, and Liu Qi asks to command Jiangxia. Zhuge Liang's biography tells it.",
-  "summary_zh": "刘表长子刘琦畏惧继母迫害，请诸葛亮登上高楼，命人撤去梯子，求他献计。诸葛亮说：“君不见申生在内而危，重耳在外而安乎？”刘琦于是请求出镇江夏。此事见于《三国志·诸葛亮传》。"
+  "summary_zh": "刘表长子刘琦畏惧继母迫害，请诸葛亮登上高楼，命人撤去梯子，求他献计。诸葛亮说：“君不见申生在内而危，重耳在外而安乎？”刘琦于是请求出镇江夏。此事见于《三国志·诸葛亮传》。",
+  "people": [
+   "liu-biao",
+   "zhuge-liang"
+  ]
  },
  {
   "id": "ch040-xinye-fire",
@@ -1517,7 +1953,12 @@
   "lat": 32.49,
   "lon": 112.39,
   "summary": "Zhuge Liang abandons Xinye, fills it with tinder, and burns Cao Ren's army when it moves in for the night, then floods the survivors at the White River. Historically: there is no record of it. Liu Bei was at Fancheng when Liu Cong surrendered, and simply fled south.",
-  "summary_zh": "诸葛亮弃守新野，在城中埋下引火之物，待曹仁大军入城歇宿时纵火焚烧，又在白河放水淹其残兵。史实：并无此事记载。刘琮投降时刘备驻在樊城，得讯后直接南逃。"
+  "summary_zh": "诸葛亮弃守新野，在城中埋下引火之物，待曹仁大军入城歇宿时纵火焚烧，又在白河放水淹其残兵。史实：并无此事记载。刘琮投降时刘备驻在樊城，得讯后直接南逃。",
+  "people": [
+   "zhuge-liang",
+   "cao-ren",
+   "liu-bei"
+  ]
  },
  {
   "id": "ch040-cong-surrenders",
@@ -1533,7 +1974,12 @@
   "lat": 32.05,
   "lon": 112.15,
   "summary": "Liu Biao dies as Cao Cao marches south. His young son Liu Cong, steered by his mother's family, surrenders the whole province without a fight, and does not tell Liu Bei until Cao Cao is near.",
-  "summary_zh": "曹操南下之际刘表病死，幼子刘琮在蔡氏一族撺掇下不战而降，直到曹军将至才派人告知刘备。"
+  "summary_zh": "曹操南下之际刘表病死，幼子刘琮在蔡氏一族撺掇下不战而降，直到曹军将至才派人告知刘备。",
+  "people": [
+   "cao-cao",
+   "liu-biao",
+   "liu-bei"
+  ]
  },
  {
   "id": "ch040-kong-rong",
@@ -1549,7 +1995,11 @@
   "lat": 34.01,
   "lon": 113.84,
   "summary": "The scholar Kong Rong, a descendant of Confucius who had mocked Cao Cao for years, is executed with his family as Cao Cao marches south. His young children are said to have been playing a game and to have gone on with it calmly when the soldiers came: under an overturned nest, how could the eggs stay whole?",
-  "summary_zh": "孔子后人孔融多年来屡屡讥讽曹操，曹操南征前将他满门处死。相传他的两个幼子正在下棋，从容不迫地说：“安有巢毁而卵不破乎？”"
+  "summary_zh": "孔子后人孔融多年来屡屡讥讽曹操，曹操南征前将他满门处死。相传他的两个幼子正在下棋，从容不迫地说：“安有巢毁而卵不破乎？”",
+  "people": [
+   "kong-rong",
+   "cao-cao"
+  ]
  },
  {
   "id": "ch041-zhao-yun-changban",
@@ -1565,7 +2015,12 @@
   "lat": 30.82,
   "lon": 111.78,
   "summary": "Cao Cao's cavalry catch the column at Changban. Zhao Yun rides back into the enemy seven times, carries the infant Liu Shan out in his breastplate, and kills more than fifty officers on the way. Historically: the Records says Zhao Yun carried the infant to safety and protected his mother Lady Gan. The seven charges and fifty generals are the novel's.",
-  "summary_zh": "曹军骑兵在长坂追上刘备。赵云在曹军中七进七出，怀抱幼主刘禅杀出重围，一路斩曹将五十余员。史实：《三国志·赵云传》载赵云“身抱弱子，即后主也，保护甘夫人，即后主母也，皆得免难”；七进七出、斩五十余将出自小说。"
+  "summary_zh": "曹军骑兵在长坂追上刘备。赵云在曹军中七进七出，怀抱幼主刘禅杀出重围，一路斩曹将五十余员。史实：《三国志·赵云传》载赵云“身抱弱子，即后主也，保护甘夫人，即后主母也，皆得免难”；七进七出、斩五十余将出自小说。",
+  "people": [
+   "zhao-yun",
+   "liu-bei",
+   "liu-shan"
+  ]
  },
  {
   "id": "ch041-crossing-with-the-people",
@@ -1581,7 +2036,10 @@
   "lat": 30.85,
   "lon": 111.8,
   "summary": "More than a hundred thousand people follow Liu Bei south, with thousands of carts, moving ten li a day. Urged to leave them and save himself, he refuses: great deeds are founded on people. The Records says the same.",
-  "summary_zh": "十余万百姓追随刘备南撤，辎重车辆数千，日行仅十余里。有人劝他弃民速走，刘备说：“夫济大事必以人为本，今人归吾，吾何忍弃去！”《三国志·先主传》记载相同。"
+  "summary_zh": "十余万百姓追随刘备南撤，辎重车辆数千，日行仅十余里。有人劝他弃民速走，刘备说：“夫济大事必以人为本，今人归吾，吾何忍弃去！”《三国志·先主传》记载相同。",
+  "people": [
+   "liu-bei"
+  ]
  },
  {
   "id": "ch041-lady-mi",
@@ -1597,7 +2055,12 @@
   "lat": 30.81,
   "lon": 111.74,
   "summary": "Wounded and unable to ride, Lady Mi hands the infant Liu Shan to Zhao Yun and throws herself into a dry well so that he will not stay behind for her; Zhao Yun pulls down a wall to cover it. Historically: the sources say nothing of Lady Mi at Changban; it was Lady Gan, Liu Shan's mother, whom Zhao Yun saved.",
-  "summary_zh": "糜夫人身负重伤不能上马，把阿斗托付给赵云，投枯井而死，免得赵云为她耽误；赵云推倒土墙掩住井口。史实：史书并无糜夫人死于长坂的记载，赵云救下的是阿斗的生母甘夫人。"
+  "summary_zh": "糜夫人身负重伤不能上马，把阿斗托付给赵云，投枯井而死，免得赵云为她耽误；赵云推倒土墙掩住井口。史实：史书并无糜夫人死于长坂的记载，赵云救下的是阿斗的生母甘夫人。",
+  "people": [
+   "lady-mi",
+   "liu-shan",
+   "zhao-yun"
+  ]
  },
  {
   "id": "ch042-changban-bridge",
@@ -1613,7 +2076,10 @@
   "lat": 30.79,
   "lon": 111.83,
   "summary": "Zhang Fei holds the bridge with twenty riders, glares and roars: I am Zhang Yide, who will come and fight me to the death? Xiahou Jie falls dead from his horse in fright and Cao Cao's army falls back. Historically: the Records tells the bridge, the glare and the challenge in almost those words; the officer frightened to death is the novel's.",
-  "summary_zh": "张飞率二十骑据守长坂桥，横矛瞪目大喝：“身是张益德也，可来共决死！”夏侯杰被吓得肝胆碎裂，坠马而死，曹军退却。史实：《三国志·张飞传》记有据水断桥、瞋目横矛和这句喝问；吓死夏侯杰出自小说。"
+  "summary_zh": "张飞率二十骑据守长坂桥，横矛瞪目大喝：“身是张益德也，可来共决死！”夏侯杰被吓得肝胆碎裂，坠马而死，曹军退却。史实：《三国志·张飞传》记有据水断桥、瞋目横矛和这句喝问；吓死夏侯杰出自小说。",
+  "people": [
+   "zhang-fei"
+  ]
  },
  {
   "id": "ch042-throws-the-child",
@@ -1629,7 +2095,12 @@
   "lat": 30.85,
   "lon": 111.77,
   "summary": "Zhao Yun hands over the child he has carried through the enemy army. Liu Bei throws him to the ground: for the sake of this brat I nearly lost a great general! Zhao Yun weeps that his life could never repay such a lord. Historically: invented; the saying 'Liu Bei throws his son to win hearts' grew from the novel.",
-  "summary_zh": "赵云把怀中的阿斗交给刘备，刘备接过掷于地上，说：“为汝这孺子，几损我一员大将！”赵云感激涕零。史实：并无此事，“刘备摔孩子，收买人心”的俗语正是从小说来的。"
+  "summary_zh": "赵云把怀中的阿斗交给刘备，刘备接过掷于地上，说：“为汝这孺子，几损我一员大将！”赵云感激涕零。史实：并无此事，“刘备摔孩子，收买人心”的俗语正是从小说来的。",
+  "people": [
+   "liu-bei",
+   "liu-shan",
+   "zhao-yun"
+  ]
  },
  {
   "id": "ch042-hanjin",
@@ -1645,7 +2116,11 @@
   "lat": 30.6,
   "lon": 113.0,
   "summary": "Liu Bei, cut off from Jiangling, turns east to the Han River, where Guan Yu's fleet is waiting as planned, and Liu Qi comes with ten thousand men from Jiangxia. Together they reach Xiakou.",
-  "summary_zh": "刘备南下江陵的路被截断，转向东边的汉水，与按计划率船队在汉津等候的关羽会合，江夏的刘琦也带来一万多人，一同到达夏口。"
+  "summary_zh": "刘备南下江陵的路被截断，转向东边的汉水，与按计划率船队在汉津等候的关羽会合，江夏的刘琦也带来一万多人，一同到达夏口。",
+  "people": [
+   "liu-bei",
+   "guan-yu"
+  ]
  },
  {
   "id": "ch043-debating-the-scholars",
@@ -1661,7 +2136,12 @@
   "lat": 29.7,
   "lon": 115.98,
   "summary": "Sent to Sun Quan, Zhuge Liang faces a hall of Wu advisers urging surrender and silences them one by one. Historically: Zhuge Liang did go to Chaisang and persuade Sun Quan, and the Records gives his speech; the debate with the scholars is the novel's.",
-  "summary_zh": "诸葛亮出使江东，面对满堂主张投降的东吴谋士，逐一驳倒张昭等人。史实：诸葛亮确曾到柴桑游说孙权，《三国志·诸葛亮传》记有他的说辞；舌战群儒一场出自小说。"
+  "summary_zh": "诸葛亮出使江东，面对满堂主张投降的东吴谋士，逐一驳倒张昭等人。史实：诸葛亮确曾到柴桑游说孙权，《三国志·诸葛亮传》记有他的说辞；舌战群儒一场出自小说。",
+  "people": [
+   "zhuge-liang",
+   "zhang-zhao",
+   "sun-quan"
+  ]
  },
  {
   "id": "ch043-lu-su-alone",
@@ -1677,7 +2157,11 @@
   "lat": 29.72,
   "lon": 116.0,
   "summary": "While Sun Quan's ministers urge surrender, Lu Su follows him out to the corridor: if we surrender we keep our posts and live well; if you surrender, where will you go? Lu Su's biography records it, and it is the turning point.",
-  "summary_zh": "满朝文臣都主张投降，鲁肃追到廊下对孙权说：我们投降，照样做官；将军投降，又能到哪里去呢？此语见于《三国志·鲁肃传》，是孙权决意抗曹的转折。"
+  "summary_zh": "满朝文臣都主张投降，鲁肃追到廊下对孙权说：我们投降，照样做官；将军投降，又能到哪里去呢？此语见于《三国志·鲁肃传》，是孙权决意抗曹的转折。",
+  "people": [
+   "lu-su",
+   "sun-quan"
+  ]
  },
  {
   "id": "ch044-sun-quan-decides",
@@ -1693,7 +2177,13 @@
   "lat": 29.74,
   "lon": 116.02,
   "summary": "Lu Su tells Sun Quan privately that ministers can surrender to Cao Cao and keep their posts, but a ruler cannot. Zhou Yu returns and argues that Cao Cao's army is weaker than it looks. Sun Quan draws his sword and cuts the corner off his desk: whoever speaks again of surrender will end like this table. All in the Records and its notes.",
-  "summary_zh": "鲁肃私下对孙权说，众人降曹仍不失官位，唯独主公不可。周瑜回来分析曹军虚实。孙权拔刀砍下案角：“诸将吏敢复有言当迎操者，与此案同！”这些见于《三国志》及裴注所引《江表传》。"
+  "summary_zh": "鲁肃私下对孙权说，众人降曹仍不失官位，唯独主公不可。周瑜回来分析曹军虚实。孙权拔刀砍下案角：“诸将吏敢复有言当迎操者，与此案同！”这些见于《三国志》及裴注所引《江表传》。",
+  "people": [
+   "sun-quan",
+   "cao-cao",
+   "lu-su",
+   "zhou-yu"
+  ]
  },
  {
   "id": "ch044-bronze-sparrow-poem",
@@ -1709,7 +2199,14 @@
   "lat": 29.67,
   "lon": 115.94,
   "summary": "Zhuge Liang recites Cao Zhi's 'Rhapsody on the Bronze Sparrow Terrace', in which Cao Cao vows to carry off the two Qiao sisters, one of them Zhou Yu's wife. Zhou Yu explodes. Historically: the terrace was not built until 210, and the real rhapsody contains no such line.",
-  "summary_zh": "诸葛亮诵曹植《铜雀台赋》，说曹操要“揽二乔于东南兮”，小乔正是周瑜之妻，周瑜勃然大怒，决意抗曹。史实：铜雀台到210年才建成，曹植的原赋也没有这一句，“二乔”句是小说改写。"
+  "summary_zh": "诸葛亮诵曹植《铜雀台赋》，说曹操要“揽二乔于东南兮”，小乔正是周瑜之妻，周瑜勃然大怒，决意抗曹。史实：铜雀台到210年才建成，曹植的原赋也没有这一句，“二乔”句是小说改写。",
+  "people": [
+   "zhuge-liang",
+   "zhou-yu",
+   "cao-zhi",
+   "cao-cao",
+   "qiao-sisters"
+  ]
  },
  {
   "id": "ch045-jiang-gan",
@@ -1725,7 +2222,13 @@
   "lat": 29.92,
   "lon": 113.7,
   "summary": "Cao Cao sends Zhou Yu's old schoolmate Jiang Gan to win him over. Zhou Yu gets him drunk, lets him steal a forged letter from Cao Cao's naval commanders Cai Mao and Zhang Yun, and Cao Cao executes them. Historically: Jiang Gan did visit Zhou Yu and failed to move him, as the Jiangbiao zhuan tells; there was no letter, and Cai Mao lived on in Cao Cao's service.",
-  "summary_zh": "曹操派周瑜的同窗蒋干过江劝降。周瑜假装大醉，让蒋干偷走一封伪造的蔡瑁、张允降书，曹操中计斩了自己的两员水军都督。史实：据《江表传》，蒋干确曾往见周瑜，劝降不成而返；并无盗书之事，蔡瑁也没有被杀，后来仍在曹营做官。"
+  "summary_zh": "曹操派周瑜的同窗蒋干过江劝降。周瑜假装大醉，让蒋干偷走一封伪造的蔡瑁、张允降书，曹操中计斩了自己的两员水军都督。史实：据《江表传》，蒋干确曾往见周瑜，劝降不成而返；并无盗书之事，蔡瑁也没有被杀，后来仍在曹营做官。",
+  "people": [
+   "jiang-gan",
+   "cao-cao",
+   "zhou-yu",
+   "cai-mao"
+  ]
  },
  {
   "id": "ch045-sanjiangkou",
@@ -1741,7 +2244,12 @@
   "lat": 29.9,
   "lon": 113.72,
   "summary": "The northern troops, sick and unused to boats, lose the first fight on the river; Gan Ning kills one of Cai Mao's brothers. Historically: Zhou Yu's biography says that at the first engagement Cao Cao's army was beaten and fell back to the north bank; the names are the novel's.",
-  "summary_zh": "北军不习水战，又多染疾病，江上首战失利，甘宁射杀蔡瑁之弟。史实：《三国志·周瑜传》载“初一交战，公军败退，引次江北”；具体人物出自小说。"
+  "summary_zh": "北军不习水战，又多染疾病，江上首战失利，甘宁射杀蔡瑁之弟。史实：《三国志·周瑜传》载“初一交战，公军败退，引次江北”；具体人物出自小说。",
+  "people": [
+   "gan-ning",
+   "cai-mao",
+   "zhou-yu"
+  ]
  },
  {
   "id": "ch046-borrowing-arrows",
@@ -1757,7 +2265,12 @@
   "lat": 29.92,
   "lon": 113.5,
   "summary": "Set an impossible task by Zhou Yu, Zhuge Liang sends twenty boats lined with straw toward Cao Cao's camp in a dawn fog. Cao Cao's archers fire blind, and the boats come home with a hundred thousand arrows. Historically: invented. The nearest real story is Sun Quan's, at Ruxu in 213: his ship took so many of Cao Cao's arrows on one side that it began to list, so he turned it to take arrows on the other.",
-  "summary_zh": "周瑜限期十日造十万支箭。诸葛亮趁大雾，派二十只扎满草人的船驶近曹营擂鼓呐喊，曹军乱箭齐发，满载而归，得箭十余万。史实：并无此事。最接近的真实记载是213年孙权在濡须：裴注引《魏略》说孙权的大船一侧中箭太多快要倾覆，便掉转船身用另一侧受箭。"
+  "summary_zh": "周瑜限期十日造十万支箭。诸葛亮趁大雾，派二十只扎满草人的船驶近曹营擂鼓呐喊，曹军乱箭齐发，满载而归，得箭十余万。史实：并无此事。最接近的真实记载是213年孙权在濡须：裴注引《魏略》说孙权的大船一侧中箭太多快要倾覆，便掉转船身用另一侧受箭。",
+  "people": [
+   "zhou-yu",
+   "zhuge-liang",
+   "sun-quan"
+  ]
  },
  {
   "id": "ch046-huang-gai-beaten",
@@ -1773,7 +2286,12 @@
   "lat": 29.86,
   "lon": 113.66,
   "summary": "The veteran Huang Gai and Zhou Yu stage a quarrel; Zhou Yu has him beaten half to death so that his false surrender to Cao Cao will be believed. Historically: Huang Gai did propose the fire attack and did send Cao Cao a false letter of surrender, as the Jiangbiao zhuan records; the beating is the novel's.",
-  "summary_zh": "老将黄盖与周瑜假装争执，周瑜下令将他打得皮开肉绽，好让他向曹操诈降取信。史实：据《江表传》，提出火攻、向曹操写诈降书的确是黄盖，但并无苦肉计一事。"
+  "summary_zh": "老将黄盖与周瑜假装争执，周瑜下令将他打得皮开肉绽，好让他向曹操诈降取信。史实：据《江表传》，提出火攻、向曹操写诈降书的确是黄盖，但并无苦肉计一事。",
+  "people": [
+   "huang-gai",
+   "zhou-yu",
+   "cao-cao"
+  ]
  },
  {
   "id": "ch047-chained-ships",
@@ -1789,7 +2307,13 @@
   "lat": 29.95,
   "lon": 113.45,
   "summary": "Pang Tong visits Cao Cao's camp and suggests chaining the ships together to cure his northern soldiers' seasickness. Historically: Cao Cao's ships were indeed lashed 'bow to stern', which is why Huang Gai proposed fire, but Pang Tong had nothing to do with it.",
-  "summary_zh": "庞统到曹营献策，教曹操把战船连锁起来，以免北方士兵晕船。史实：《三国志·周瑜传》载曹军战船确实“首尾相接”，黄盖因此建议火攻，但与庞统无关。"
+  "summary_zh": "庞统到曹营献策，教曹操把战船连锁起来，以免北方士兵晕船。史实：《三国志·周瑜传》载曹军战船确实“首尾相接”，黄盖因此建议火攻，但与庞统无关。",
+  "people": [
+   "pang-tong",
+   "cao-cao",
+   "zhou-yu",
+   "huang-gai"
+  ]
  },
  {
   "id": "ch047-kan-ze",
@@ -1805,7 +2329,11 @@
   "lat": 29.98,
   "lon": 113.43,
   "summary": "The scholar Kan Ze rows alone to Cao Cao's camp with Huang Gai's letter. Cao Cao sees through it and orders him killed; Kan Ze laughs at Cao Cao for missing the obvious, talks his way out, and Cao Cao believes the letter. Historically: Kan Ze was a real Wu scholar, but the errand is the novel's.",
-  "summary_zh": "阚泽独驾小舟到曹营献黄盖降书。曹操识破，喝令推出斩首，阚泽仰天大笑，讥曹操不识兵机，一番辩说，曹操反倒信了降书。史实：阚泽确是东吴学者，但献书一事出自小说。"
+  "summary_zh": "阚泽独驾小舟到曹营献黄盖降书。曹操识破，喝令推出斩首，阚泽仰天大笑，讥曹操不识兵机，一番辩说，曹操反倒信了降书。史实：阚泽确是东吴学者，但献书一事出自小说。",
+  "people": [
+   "huang-gai",
+   "cao-cao"
+  ]
  },
  {
   "id": "ch048-cao-cao-poem",
@@ -1821,7 +2349,10 @@
   "lat": 29.99,
   "lon": 113.42,
   "summary": "On a moonlit night before the battle Cao Cao feasts on his flagship, chants 'Facing wine, let us sing' with his lance across his knees, and kills an officer who calls a line ill-omened. Historically: Cao Cao did write the 'Short Song', but nothing places it at the Red Cliffs, and the killing is the novel's.",
-  "summary_zh": "决战前夜，曹操在大船上宴请众将，横槊赋诗，吟唱“对酒当歌，人生几何”，又因扬州刺史刘馥说诗句不吉而将他刺死。史实：曹操确有《短歌行》，但并无证据说作于赤壁；刺死刘馥更是虚构，刘馥208年病逝于任上。"
+  "summary_zh": "决战前夜，曹操在大船上宴请众将，横槊赋诗，吟唱“对酒当歌，人生几何”，又因扬州刺史刘馥说诗句不吉而将他刺死。史实：曹操确有《短歌行》，但并无证据说作于赤壁；刺死刘馥更是虚构，刘馥208年病逝于任上。",
+  "people": [
+   "cao-cao"
+  ]
  },
  {
   "id": "ch048-chained-fleet-drill",
@@ -1837,7 +2368,11 @@
   "lat": 29.93,
   "lon": 113.48,
   "summary": "Cao Cao watches his northern soldiers drill on ships chained together, steady as dry land. Cheng Yu warns of fire; Cao Cao laughs that in winter there is no south-east wind. Historically: the ships were lashed bow to stern, as Zhou Yu's biography says; the review and the warning are the novel's.",
-  "summary_zh": "曹操检阅铁索连环的战船，北军在船上如履平地。程昱提醒怕火攻，曹操大笑说隆冬只有西北风，哪来东南风。史实：曹军战船“首尾相接”见于《三国志·周瑜传》；检阅与对话出自小说。"
+  "summary_zh": "曹操检阅铁索连环的战船，北军在船上如履平地。程昱提醒怕火攻，曹操大笑说隆冬只有西北风，哪来东南风。史实：曹军战船“首尾相接”见于《三国志·周瑜传》；检阅与对话出自小说。",
+  "people": [
+   "cao-cao",
+   "zhou-yu"
+  ]
  },
  {
   "id": "ch049-east-wind",
@@ -1853,7 +2388,12 @@
   "lat": 29.84,
   "lon": 113.66,
   "summary": "The fire attack needs a southeast wind in winter. Zhuge Liang builds a seven-star altar, prays for three days, and the wind comes. Historically: the Records says only that 'the southeast wind was blowing hard' when Huang Gai attacked. The altar is the novel's.",
-  "summary_zh": "火攻须东南风，隆冬时节却只有西北风。诸葛亮筑七星坛作法三日，借来东南风。史实：《三国志·周瑜传》注引《江表传》只说黄盖出发时“东南风急”，并无祭风之事。"
+  "summary_zh": "火攻须东南风，隆冬时节却只有西北风。诸葛亮筑七星坛作法三日，借来东南风。史实：《三国志·周瑜传》注引《江表传》只说黄盖出发时“东南风急”，并无祭风之事。",
+  "people": [
+   "zhuge-liang",
+   "zhou-yu",
+   "huang-gai"
+  ]
  },
  {
   "id": "ch049-red-cliffs",
@@ -1869,7 +2409,11 @@
   "lat": 29.88,
   "lon": 113.62,
   "summary": "Huang Gai's fire ships, packed with oil-soaked reeds, sail into Cao Cao's fleet as if surrendering and set it ablaze; the fire spreads to the camps on shore. Cao Cao's southern campaign ends, and the division of the realm begins here. Historically: the battle and Huang Gai's fire are recorded; Cao Cao's own annals add that plague had struck his army and that he burned his remaining ships himself. Where exactly the Red Cliffs were is still argued; the map uses the site at Chibi, Hubei.",
-  "summary_zh": "黄盖以装满浸油柴草的火船诈降，冲入曹军船阵纵火，火势延烧到岸上营寨，曹军大败。曹操南征就此终结，三分天下由此开始。史实：赤壁之战与黄盖火攻均有记载；《三国志·武帝纪》另说曹军遭遇疫病，曹操自己烧船退兵。赤壁的确切地点至今有争议，本图采用湖北赤壁市说。"
+  "summary_zh": "黄盖以装满浸油柴草的火船诈降，冲入曹军船阵纵火，火势延烧到岸上营寨，曹军大败。曹操南征就此终结，三分天下由此开始。史实：赤壁之战与黄盖火攻均有记载；《三国志·武帝纪》另说曹军遭遇疫病，曹操自己烧船退兵。赤壁的确切地点至今有争议，本图采用湖北赤壁市说。",
+  "people": [
+   "huang-gai",
+   "cao-cao"
+  ]
  },
  {
   "id": "ch050-huarong",
@@ -1885,7 +2429,14 @@
   "lat": 29.75,
   "lon": 112.85,
   "summary": "Fleeing through the marshes, Cao Cao laughs three times at his enemies' lack of foresight, and each time an ambush appears. At Huarong Guan Yu, remembering past kindness, lets him pass. Historically: the Shanyang gong zaiji says Cao Cao's men struggled through the mud of the Huarong road and Liu Bei arrived too late to set the reeds on fire. Guan Yu is not in it.",
-  "summary_zh": "曹操败走，三次大笑周瑜、诸葛亮无谋，每笑一次便杀出一路伏兵。到了华容道，关羽念及旧恩，放了曹操。史实：裴注引《山阳公载记》载曹操从华容道泥泞中撤退，刘备想放火烧芦苇已经晚了一步，并无关羽截路之事。"
+  "summary_zh": "曹操败走，三次大笑周瑜、诸葛亮无谋，每笑一次便杀出一路伏兵。到了华容道，关羽念及旧恩，放了曹操。史实：裴注引《山阳公载记》载曹操从华容道泥泞中撤退，刘备想放火烧芦苇已经晚了一步，并无关羽截路之事。",
+  "people": [
+   "guan-yu",
+   "cao-cao",
+   "zhou-yu",
+   "zhuge-liang",
+   "liu-bei"
+  ]
  },
  {
   "id": "ch050-wulin-ambushes",
@@ -1901,7 +2452,13 @@
   "lat": 29.8,
   "lon": 113.2,
   "summary": "Fleeing the fire, Cao Cao laughs at Zhuge Liang for leaving the road open, and Zhao Yun charges out of the woods; he laughs again at Gourd Mouth, and Zhang Fei appears. Each laugh brings an ambush, until Huarong. Historically: invented.",
-  "summary_zh": "曹操火海逃生，在乌林笑诸葛亮不在此处设伏，话音未落赵云杀出；到葫芦口又笑，张飞杀到。每笑一次就引出一路伏兵，直到华容道。史实：并无此事。"
+  "summary_zh": "曹操火海逃生，在乌林笑诸葛亮不在此处设伏，话音未落赵云杀出；到葫芦口又笑，张飞杀到。每笑一次就引出一路伏兵，直到华容道。史实：并无此事。",
+  "people": [
+   "cao-cao",
+   "zhuge-liang",
+   "zhao-yun",
+   "zhang-fei"
+  ]
  },
  {
   "id": "ch053-hefei-208",
@@ -1917,7 +2474,13 @@
   "lat": 31.85,
   "lon": 117.25,
   "summary": "While Zhou Yu fights in the west, Sun Quan besieges Hefei for a month and withdraws after a false report of relief. The novel has Taishi Ci die of wounds here; historically Taishi Ci had died of illness in 206.",
-  "summary_zh": "周瑜西征之时，孙权亲率大军围攻合肥月余，因误信曹军援兵将至而退。小说写太史慈在此中箭身亡，史实上太史慈已于206年病逝。"
+  "summary_zh": "周瑜西征之时，孙权亲率大军围攻合肥月余，因误信曹军援兵将至而退。小说写太史慈在此中箭身亡，史实上太史慈已于206年病逝。",
+  "people": [
+   "sun-quan",
+   "zhang-liao",
+   "zhou-yu",
+   "taishi-ci"
+  ]
  },
  {
   "id": "ch053-taishi-ci-dies",
@@ -1933,7 +2496,10 @@
   "lat": 31.9,
   "lon": 117.2,
   "summary": "Lured into a trap at Hefei, Taishi Ci is shot full of arrows and dies crying that a man born into the world should carry a seven-foot sword and climb to the emperor's steps. Historically: Taishi Ci died of illness in 206, but his biography's notes give him that last cry.",
-  "summary_zh": "太史慈在合肥中计，身中数箭，临死大叫：“大丈夫生于乱世，当带三尺剑立不世之功！”史实：太史慈206年病逝，并非战死；裴注引《吴书》载其临终说“丈夫生世，当带七尺之剑，以升天子之阶”。"
+  "summary_zh": "太史慈在合肥中计，身中数箭，临死大叫：“大丈夫生于乱世，当带三尺剑立不世之功！”史实：太史慈206年病逝，并非战死；裴注引《吴书》载其临终说“丈夫生世，当带七尺之剑，以升天子之阶”。",
+  "people": [
+   "taishi-ci"
+  ]
  },
  {
   "id": "ch051-first-anger",
@@ -1949,7 +2515,14 @@
   "lat": 30.35,
   "lon": 112.2,
   "summary": "Zhou Yu besieges Cao Ren in Jiangling and takes an arrow in the side; while he fights, Zhuge Liang slips in and takes the city with a captured seal. Historically: the arrow wound is real, but Zhou Yu took Jiangling himself after a year's siege; Liu Bei only 'borrowed' it from Sun Quan the next year.",
-  "summary_zh": "周瑜围攻江陵的曹仁，右胁中了毒箭；诸葛亮趁机用缴获的兵符赚取南郡，周瑜气得箭疮迸裂。史实：周瑜中箭是真的（《三国志·周瑜传》），但江陵是周瑜苦战一年后亲自攻下的，刘备是次年才向孙权借得南郡。"
+  "summary_zh": "周瑜围攻江陵的曹仁，右胁中了毒箭；诸葛亮趁机用缴获的兵符赚取南郡，周瑜气得箭疮迸裂。史实：周瑜中箭是真的（《三国志·周瑜传》），但江陵是周瑜苦战一年后亲自攻下的，刘备是次年才向孙权借得南郡。",
+  "people": [
+   "zhuge-liang",
+   "zhou-yu",
+   "cao-ren",
+   "liu-bei",
+   "sun-quan"
+  ]
  },
  {
   "id": "ch051-zhou-yu-feigns",
@@ -1965,7 +2538,11 @@
   "lat": 30.3,
   "lon": 112.25,
   "summary": "Wounded by a poisoned arrow, Zhou Yu has it spread that he is dead; Cao Ren raids the mourning camp at night and walks into an ambush. Historically: Zhou Yu was wounded at Jiangling, but the feigned death is the novel's.",
-  "summary_zh": "周瑜中毒箭后传言已死，曹仁夜劫吴营，中了埋伏大败。史实：周瑜在江陵确实中箭，诈死诱敌出自小说。"
+  "summary_zh": "周瑜中毒箭后传言已死，曹仁夜劫吴营，中了埋伏大败。史实：周瑜在江陵确实中箭，诈死诱敌出自小说。",
+  "people": [
+   "zhou-yu",
+   "cao-ren"
+  ]
  },
  {
   "id": "ch052-guiyang",
@@ -1981,7 +2558,10 @@
   "lat": 25.8,
   "lon": 113.0,
   "summary": "The governor of Guiyang, Zhao Fan, surrenders and offers Zhao Yun his widowed sister-in-law, a famous beauty. Zhao Yun refuses. The Zhao Yun biezhuan cited in the notes tells the same story.",
-  "summary_zh": "桂阳太守赵范投降，想把美貌的寡嫂嫁给赵云，赵云坚辞不受。裴注所引《赵云别传》记载此事。"
+  "summary_zh": "桂阳太守赵范投降，想把美貌的寡嫂嫁给赵云，赵云坚辞不受。裴注所引《赵云别传》记载此事。",
+  "people": [
+   "zhao-yun"
+  ]
  },
  {
   "id": "ch052-jing-excuse",
@@ -1997,7 +2577,14 @@
   "lat": 30.08,
   "lon": 112.25,
   "summary": "Lu Su comes to demand Jingzhou back. Zhuge Liang says it belongs to Liu Qi, Liu Biao's heir, and they will give it up when Liu Qi dies; when he dies, there is always another reason. Historically: Liu Bei became governor of Jingzhou on Liu Qi's death in 209, and borrowed Nanjun from Sun Quan in 210; the excuses are the novel's.",
-  "summary_zh": "鲁肃来讨荆州，诸葛亮说荆州是刘表之子刘琦的，等刘琦死了再还；刘琦死后，又另有说辞。史实：209年刘琦死后刘备领荆州牧，210年向孙权借得南郡；这番推托出自小说。"
+  "summary_zh": "鲁肃来讨荆州，诸葛亮说荆州是刘表之子刘琦的，等刘琦死了再还；刘琦死后，又另有说辞。史实：209年刘琦死后刘备领荆州牧，210年向孙权借得南郡；这番推托出自小说。",
+  "people": [
+   "zhuge-liang",
+   "lu-su",
+   "liu-biao",
+   "liu-bei",
+   "sun-quan"
+  ]
  },
  {
   "id": "ch052-wuling",
@@ -2013,7 +2600,11 @@
   "lat": 29.0,
   "lon": 111.7,
   "summary": "Zhang Fei marches on Wuling; the governor Jin Xuan is shot down by his own officer, who opens the gates. With Changsha, Guiyang and Lingling, all four southern commanderies are Liu Bei's. Historically: Liu Bei's biography says the four governors submitted; the shot from the wall is the novel's.",
-  "summary_zh": "张飞进兵武陵，太守金旋被部将巩志射杀，巩志献城。加上长沙、桂阳、零陵，荆南四郡尽归刘备。史实：《三国志·先主传》载四郡太守皆降，城上射杀太守出自小说。"
+  "summary_zh": "张飞进兵武陵，太守金旋被部将巩志射杀，巩志献城。加上长沙、桂阳、零陵，荆南四郡尽归刘备。史实：《三国志·先主传》载四郡太守皆降，城上射杀太守出自小说。",
+  "people": [
+   "zhang-fei",
+   "liu-bei"
+  ]
  },
  {
   "id": "ch053-huang-zhong",
@@ -2029,7 +2620,13 @@
   "lat": 28.2,
   "lon": 112.97,
   "summary": "The old general Huang Zhong duels Guan Yu to a draw; when his horse stumbles Guan Yu spares him, and next day he shoots only at Guan Yu's helmet tassel. Wei Yan kills the governor and opens the gates. Historically: the Records says only that Huang Zhong joined Liu Bei when he took the southern commanderies. The duel is the novel's.",
-  "summary_zh": "老将黄忠与关羽交战不分胜负，黄忠马失前蹄，关羽不杀；次日黄忠只射关羽盔缨以报。魏延杀太守韩玄献城。史实：《三国志·黄忠传》只说刘备南定诸郡时黄忠归附，并无与关羽交锋之事。"
+  "summary_zh": "老将黄忠与关羽交战不分胜负，黄忠马失前蹄，关羽不杀；次日黄忠只射关羽盔缨以报。魏延杀太守韩玄献城。史实：《三国志·黄忠传》只说刘备南定诸郡时黄忠归附，并无与关羽交锋之事。",
+  "people": [
+   "guan-yu",
+   "huang-zhong",
+   "wei-yan",
+   "liu-bei"
+  ]
  },
  {
   "id": "ch054-ganlu-temple",
@@ -2045,7 +2642,12 @@
   "lat": 32.22,
   "lon": 119.47,
   "summary": "Zhou Yu baits a trap with Sun Quan's sister, but Sun Quan's mother inspects the groom at Ganlu Temple, likes him, and the marriage becomes real. Historically: Sun Quan did marry his sister to Liu Bei, to bind the alliance; their mother had died in 202, and the temple scene is the novel's.",
-  "summary_zh": "周瑜以孙权之妹为饵设计扣留刘备，不料吴国太在甘露寺相亲，看中刘备，弄假成真。史实：孙权确曾把妹妹嫁给刘备以巩固联盟；孙权之母吴夫人已于202年去世，甘露寺相亲是小说情节。"
+  "summary_zh": "周瑜以孙权之妹为饵设计扣留刘备，不料吴国太在甘露寺相亲，看中刘备，弄假成真。史实：孙权确曾把妹妹嫁给刘备以巩固联盟；孙权之母吴夫人已于202年去世，甘露寺相亲是小说情节。",
+  "people": [
+   "liu-bei",
+   "zhou-yu",
+   "sun-quan"
+  ]
  },
  {
   "id": "ch054-swords-in-the-chamber",
@@ -2061,7 +2663,12 @@
   "lat": 32.18,
   "lon": 119.45,
   "summary": "On the wedding night Liu Bei finds the bride's rooms full of weapons and her maids in arms; Lady Sun laughs that he, a man who has fought half his life, is afraid of swords. Historically: Fa Zheng's biography says Lady Sun kept a hundred maids who stood by with drawn swords, and Liu Bei went in trembling every time; the wedding itself took place in Jingzhou, not in Wu.",
-  "summary_zh": "洞房之夜，刘备见新娘房中刀枪林立，侍婢都佩剑侍立，孙夫人笑他“厮杀半生，尚惧兵器乎”。史实：《三国志·法正传》载孙夫人有侍婢百余人，皆亲执刀侍立，刘备每次进去都心中凛然；婚事其实是在荆州办的，并不在东吴。"
+  "summary_zh": "洞房之夜，刘备见新娘房中刀枪林立，侍婢都佩剑侍立，孙夫人笑他“厮杀半生，尚惧兵器乎”。史实：《三国志·法正传》载孙夫人有侍婢百余人，皆亲执刀侍立，刘备每次进去都心中凛然；婚事其实是在荆州办的，并不在东吴。",
+  "people": [
+   "lady-sun",
+   "liu-bei",
+   "fa-zheng"
+  ]
  },
  {
   "id": "ch055-second-anger",
@@ -2077,7 +2684,14 @@
   "lat": 30.06,
   "lon": 112.23,
   "summary": "Following Zhuge Liang's sealed instructions, Liu Bei slips away with his new wife; Zhou Yu's pursuers are beaten back, and Liu Bei's soldiers jeer: you lost a wife and an army too. Historically: Liu Bei did visit Sun Quan at Jingkou and return; Zhou Yu advised keeping him there, and Sun Quan refused. There was no chase.",
-  "summary_zh": "刘备依诸葛亮锦囊之计带孙夫人逃回荆州，周瑜追兵大败，蜀兵齐喊“周郎妙计安天下，赔了夫人又折兵”。史实：刘备确曾往京口见孙权后返回，周瑜曾建议扣留刘备，孙权未听；并无追击之事。"
+  "summary_zh": "刘备依诸葛亮锦囊之计带孙夫人逃回荆州，周瑜追兵大败，蜀兵齐喊“周郎妙计安天下，赔了夫人又折兵”。史实：刘备确曾往京口见孙权后返回，周瑜曾建议扣留刘备，孙权未听；并无追击之事。",
+  "people": [
+   "zhuge-liang",
+   "zhou-yu",
+   "liu-bei",
+   "lady-sun",
+   "sun-quan"
+  ]
  },
  {
   "id": "ch055-liulang-ford",
@@ -2093,7 +2707,13 @@
   "lat": 29.72,
   "lon": 112.4,
   "summary": "Opening Zhuge Liang's second sealed bag, Liu Bei slips away with Lady Sun, who scolds off the pursuing generals; Zhuge Liang's boats are waiting at the ford. Historically: Liu Bei did visit Sun Quan at Jingkou and come home, but there was no chase.",
-  "summary_zh": "刘备拆开诸葛亮第二个锦囊，带孙夫人逃出东吴，孙夫人喝退追兵，诸葛亮的船队早已在刘郎浦接应。史实：刘备确曾到京口见孙权后返回，但并无追击之事。"
+  "summary_zh": "刘备拆开诸葛亮第二个锦囊，带孙夫人逃出东吴，孙夫人喝退追兵，诸葛亮的船队早已在刘郎浦接应。史实：刘备确曾到京口见孙权后返回，但并无追击之事。",
+  "people": [
+   "liu-bei",
+   "zhuge-liang",
+   "lady-sun",
+   "sun-quan"
+  ]
  },
  {
   "id": "ch056-zhou-yu-dies",
@@ -2109,7 +2729,12 @@
   "lat": 29.37,
   "lon": 113.1,
   "summary": "Zhou Yu's scheme to take Jingzhou on the pretext of conquering Shu for Liu Bei is seen through; the wound bursts again and he dies crying: since you made Zhou Yu, why make Zhuge Liang too? Historically: Zhou Yu died of illness at Baqiu at thirty-six, while preparing a real campaign against Yizhou. The rivalry and the cry are the novel's; the Records describes him as generous and well-liked.",
-  "summary_zh": "周瑜假称替刘备取西川、实欲夺荆州，又被诸葛亮识破，箭疮迸裂，仰天长叹“既生瑜，何生亮”，连叫数声而亡。史实：周瑜是在筹备西取益州时病逝于巴丘的，年三十六岁。三气和临终长叹都是小说的安排，《三国志》说他“性度恢廓”，很得人心。"
+  "summary_zh": "周瑜假称替刘备取西川、实欲夺荆州，又被诸葛亮识破，箭疮迸裂，仰天长叹“既生瑜，何生亮”，连叫数声而亡。史实：周瑜是在筹备西取益州时病逝于巴丘的，年三十六岁。三气和临终长叹都是小说的安排，《三国志》说他“性度恢廓”，很得人心。",
+  "people": [
+   "zhuge-liang",
+   "zhou-yu",
+   "liu-bei"
+  ]
  },
  {
   "id": "ch056-bronze-sparrow-feast",
@@ -2125,7 +2750,10 @@
   "lat": 36.28,
   "lon": 114.3,
   "summary": "Cao Cao celebrates his new terrace at Ye with an archery contest among his generals and poems from his scholars. Historically: the terrace was built at Ye in 210; the contest is the novel's.",
-  "summary_zh": "曹操在邺城铜雀台落成时大宴文武，众将比箭夺袍，文官献诗。史实：铜雀台确于210年在邺城建成，比武夺袍是小说情节。"
+  "summary_zh": "曹操在邺城铜雀台落成时大宴文武，众将比箭夺袍，文官献诗。史实：铜雀台确于210年在邺城建成，比武夺袍是小说情节。",
+  "people": [
+   "cao-cao"
+  ]
  },
  {
   "id": "ch057-mourning-zhou-yu",
@@ -2141,7 +2769,11 @@
   "lat": 29.73,
   "lon": 115.96,
   "summary": "Zhuge Liang crosses to Wu to mourn at Zhou Yu's coffin and weeps so movingly that Wu's generals decide the two men were friends after all. Historically: there is no record of it.",
-  "summary_zh": "诸葛亮亲到柴桑吊唁，在周瑜灵前痛哭祭奠，感动得东吴诸将都以为两人原本交情深厚。史实：并无此事记载。"
+  "summary_zh": "诸葛亮亲到柴桑吊唁，在周瑜灵前痛哭祭奠，感动得东吴诸将都以为两人原本交情深厚。史实：并无此事记载。",
+  "people": [
+   "zhuge-liang",
+   "zhou-yu"
+  ]
  },
  {
   "id": "ch057-pang-tong-leiyang",
@@ -2157,7 +2789,12 @@
   "lat": 26.42,
   "lon": 112.85,
   "summary": "Liu Bei, not knowing Pang Tong's worth, makes him magistrate of a small county; he ignores his duties and is dismissed, until Lu Su writes that Pang Tong 'is not a talent for a hundred li'. All in the Records.",
-  "summary_zh": "刘备不知庞统之才，只让他做耒阳县令，庞统在县不理政事被免职。鲁肃写信说“庞士元非百里才也”，刘备才重用他。这些都见于《三国志·庞统传》。"
+  "summary_zh": "刘备不知庞统之才，只让他做耒阳县令，庞统在县不理政事被免职。鲁肃写信说“庞士元非百里才也”，刘备才重用他。这些都见于《三国志·庞统传》。",
+  "people": [
+   "pang-tong",
+   "liu-bei",
+   "lu-su"
+  ]
  },
  {
   "id": "ch058-cuts-his-beard",
@@ -2173,7 +2810,12 @@
   "lat": 34.63,
   "lon": 110.32,
   "summary": "Ma Chao's cavalry hunt Cao Cao by his red robe and long beard; he throws off the robe and cuts the beard, and Xu Chu shields him with a saddle as he scrambles into a boat. Historically: Cao Cao was nearly caught crossing the river, and Xu Chu did hold up a saddle against the arrows and pole the boat; the beard and the robe are the novel's.",
-  "summary_zh": "马超追杀曹操，喊“穿红袍的是曹操”“长髯者是曹操”，曹操急忙脱袍割须，许褚举马鞍遮箭护他上船。史实：《三国志·许褚传》载曹操渡河时险被马超追及，许褚左手举马鞍为他挡箭、右手撑船；割须弃袍出自小说。"
+  "summary_zh": "马超追杀曹操，喊“穿红袍的是曹操”“长髯者是曹操”，曹操急忙脱袍割须，许褚举马鞍遮箭护他上船。史实：《三国志·许褚传》载曹操渡河时险被马超追及，许褚左手举马鞍为他挡箭、右手撑船；割须弃袍出自小说。",
+  "people": [
+   "cao-cao",
+   "ma-chao",
+   "xu-chu"
+  ]
  },
  {
   "id": "ch058-ma-chao-rises",
@@ -2189,7 +2831,12 @@
   "lat": 34.6,
   "lon": 110.25,
   "summary": "Cao Cao lures Ma Teng to the capital and kills him; his son Ma Chao raises the northwest in revenge and takes Tong Pass. Historically: the order is the other way round. Ma Chao rebelled in 211, and Cao Cao executed Ma Teng and his family at Ye in 212 because of it.",
-  "summary_zh": "曹操诱杀马腾，其子马超起西凉兵报仇，攻占潼关。史实：因果正好相反。马超是211年先起兵反曹，次年曹操才因此在邺城诛杀了马腾全家。"
+  "summary_zh": "曹操诱杀马腾，其子马超起西凉兵报仇，攻占潼关。史实：因果正好相反。马超是211年先起兵反曹，次年曹操才因此在邺城诛杀了马腾全家。",
+  "people": [
+   "ma-chao",
+   "cao-cao",
+   "ma-teng"
+  ]
  },
  {
   "id": "ch059-blotted-letter",
@@ -2205,7 +2852,11 @@
   "lat": 34.48,
   "lon": 109.45,
   "summary": "Cao Cao talks alone with his old acquaintance Han Sui about old times, then sends him a letter full of crossings-out, as if Han Sui had edited it. Ma Chao suspects him, the alliance cracks, and Cao Cao wins. The Records tells it this way.",
-  "summary_zh": "曹操与旧识韩遂阵前单独叙旧，又送去一封涂抹改动多处的书信，好像被韩遂改过。马超起疑，联军离心，曹操乘势大破之。《三国志·武帝纪》记载如此。"
+  "summary_zh": "曹操与旧识韩遂阵前单独叙旧，又送去一封涂抹改动多处的书信，好像被韩遂改过。马超起疑，联军离心，曹操乘势大破之。《三国志·武帝纪》记载如此。",
+  "people": [
+   "cao-cao",
+   "ma-chao"
+  ]
  },
  {
   "id": "ch059-xu-chu-ma-chao",
@@ -2221,7 +2872,12 @@
   "lat": 34.55,
   "lon": 109.55,
   "summary": "Xu Chu takes off his armour and fights Ma Chao bare-chested for over two hundred bouts. Historically: the Records says that when Ma Chao came to a parley meaning to seize Cao Cao, Xu Chu stood at Cao Cao's side and glared, and Ma Chao did not dare move. There was no duel.",
-  "summary_zh": "许褚卸甲赤膊上阵，与马超大战二百余合。史实：《三国志·许褚传》载马超在阵前会谈时想突袭曹操，见许褚瞋目侍立在旁，不敢妄动；并无赤膊大战。"
+  "summary_zh": "许褚卸甲赤膊上阵，与马超大战二百余合。史实：《三国志·许褚传》载马超在阵前会谈时想突袭曹操，见许褚瞋目侍立在旁，不敢妄动；并无赤膊大战。",
+  "people": [
+   "xu-chu",
+   "ma-chao",
+   "cao-cao"
+  ]
  },
  {
   "id": "ch060-zhang-song-map",
@@ -2237,7 +2893,13 @@
   "lat": 30.1,
   "lon": 112.27,
   "summary": "Slighted by Cao Cao, Liu Zhang's envoy Zhang Song turns to Liu Bei, who treats him royally, and gives him a map of Yizhou with every road and pass. Historically: Zhang Song was snubbed by Cao Cao in 208 and urged Liu Zhang to invite Liu Bei; the envoy who actually went to Liu Bei was Fa Zheng, and the map is the novel's.",
-  "summary_zh": "张松出使许都受曹操冷遇，转而投靠礼贤下士的刘备，献上详载山川关隘的西川地图。史实：张松于208年受曹操冷落后，劝刘璋结交刘备；实际出使刘备的是法正，献图一节出自小说。"
+  "summary_zh": "张松出使许都受曹操冷遇，转而投靠礼贤下士的刘备，献上详载山川关隘的西川地图。史实：张松于208年受曹操冷落后，劝刘璋结交刘备；实际出使刘备的是法正，献图一节出自小说。",
+  "people": [
+   "cao-cao",
+   "liu-bei",
+   "liu-zhang",
+   "fa-zheng"
+  ]
  },
  {
   "id": "ch060-new-book",
@@ -2253,7 +2915,11 @@
   "lat": 34.02,
   "lon": 113.88,
   "summary": "Yang Xiu shows Zhang Song Cao Cao's new book on war; Zhang Song recites it back after one reading and says every child in Shu knows it by heart, an old text. Cao Cao, thinking he has copied the ancients, burns it. Historically: the Yibu qijiu zaji cited in the notes says Zhang Song memorised Cao Cao's book at a single reading over wine; the burning is the novel's.",
-  "summary_zh": "杨修拿出曹操新著兵书炫耀，张松看一遍就背了出来，还说这是蜀中三尺小童都会背的古书。曹操以为自己与古人暗合，把书烧了。史实：裴注引《益部耆旧杂记》载张松在酒宴间一看便能背诵曹操的兵书；焚书出自小说。"
+  "summary_zh": "杨修拿出曹操新著兵书炫耀，张松看一遍就背了出来，还说这是蜀中三尺小童都会背的古书。曹操以为自己与古人暗合，把书烧了。史实：裴注引《益部耆旧杂记》载张松在酒宴间一看便能背诵曹操的兵书；焚书出自小说。",
+  "people": [
+   "yang-xiu",
+   "cao-cao"
+  ]
  },
  {
   "id": "ch060-liu-bei-enters-shu",
@@ -2269,7 +2935,13 @@
   "lat": 31.47,
   "lon": 104.75,
   "summary": "Invited to defend Yizhou against Zhang Lu, Liu Bei marches in and feasts with Liu Zhang for over a hundred days at Fu. Pang Tong urges him to seize Liu Zhang at the banquet; he refuses, not yet.",
-  "summary_zh": "刘璋请刘备入川抵御张鲁，二人在涪城相会，欢宴百余日。庞统劝刘备在宴席上擒拿刘璋，刘备认为时机未到，没有答应。"
+  "summary_zh": "刘璋请刘备入川抵御张鲁，二人在涪城相会，欢宴百余日。庞统劝刘备在宴席上擒拿刘璋，刘备认为时机未到，没有答应。",
+  "people": [
+   "liu-bei",
+   "liu-zhang",
+   "zhang-lu",
+   "pang-tong"
+  ]
  },
  {
   "id": "ch061-river-rescue",
@@ -2285,7 +2957,14 @@
   "lat": 30.12,
   "lon": 112.32,
   "summary": "With Liu Bei away in Shu, Lady Sun sets off home to Wu and takes the boy Liu Shan with her. Zhao Yun and Zhang Fei block the river and take him back. The Zhao Yun biezhuan cited in the notes tells it.",
-  "summary_zh": "刘备入川，孙夫人要回东吴，带着阿斗登船。赵云与张飞率兵截江，夺回阿斗。裴注所引《赵云别传》记载此事。"
+  "summary_zh": "刘备入川，孙夫人要回东吴，带着阿斗登船。赵云与张飞率兵截江，夺回阿斗。裴注所引《赵云别传》记载此事。",
+  "people": [
+   "zhao-yun",
+   "liu-shan",
+   "liu-bei",
+   "lady-sun",
+   "zhang-fei"
+  ]
  },
  {
   "id": "ch062-fu-pass",
@@ -2301,7 +2980,11 @@
   "lat": 31.52,
   "lon": 104.72,
   "summary": "When Liu Zhang learns that Zhang Song has been plotting with Liu Bei and executes him, Liu Bei turns: he kills Liu Zhang's two commanders at the pass and marches on Chengdu.",
-  "summary_zh": "刘璋发觉张松暗通刘备，将其斩首。刘备与刘璋翻脸，斩了白水关守将杨怀、高沛，回兵南下攻取成都。"
+  "summary_zh": "刘璋发觉张松暗通刘备，将其斩首。刘备与刘璋翻脸，斩了白水关守将杨怀、高沛，回兵南下攻取成都。",
+  "people": [
+   "liu-zhang",
+   "liu-bei"
+  ]
  },
  {
   "id": "ch061-ruxu-letter",
@@ -2317,7 +3000,11 @@
   "lat": 31.43,
   "lon": 117.86,
   "summary": "After a month's stalemate at Ruxu, Sun Quan writes to Cao Cao: the spring floods are coming, you had better go; and on a second slip, as long as you live I cannot rest. Cao Cao says Sun Quan does not deceive him, and withdraws. The letter is in the Wuli cited in the notes.",
-  "summary_zh": "两军在濡须相持月余，孙权写信给曹操：“春水方生，公宜速去。”另附一纸：“足下不死，孤不得安。”曹操对诸将说“孙权不欺孤”，遂撤军。此信见于裴注所引《吴历》。"
+  "summary_zh": "两军在濡须相持月余，孙权写信给曹操：“春水方生，公宜速去。”另附一纸：“足下不死，孤不得安。”曹操对诸将说“孙权不欺孤”，遂撤军。此信见于裴注所引《吴历》。",
+  "people": [
+   "sun-quan",
+   "cao-cao"
+  ]
  },
  {
   "id": "ch062-huang-wei-rivalry",
@@ -2333,7 +3020,12 @@
   "lat": 30.95,
   "lon": 104.45,
   "summary": "Pang Tong assigns Huang Zhong to attack one camp before Luo; Wei Yan, wanting the glory, sets out first in the night, is ambushed, and has to be rescued by the old man he meant to outdo. Historically: invented.",
-  "summary_zh": "庞统命黄忠攻打雒城前的营寨，魏延争功，连夜抢先出兵，中了埋伏，反被老将黄忠救出。史实：并无此事。"
+  "summary_zh": "庞统命黄忠攻打雒城前的营寨，魏延争功，连夜抢先出兵，中了埋伏，反被老将黄忠救出。史实：并无此事。",
+  "people": [
+   "pang-tong",
+   "huang-zhong",
+   "wei-yan"
+  ]
  },
  {
   "id": "ch064-yang-fu",
@@ -2349,7 +3041,11 @@
   "lat": 34.75,
   "lon": 105.25,
   "summary": "Ma Chao takes Ji and kills the governor Wei Kang. Yang Fu, Wei Kang's officer, raises the countryside against him; when Ma Chao rides out to fight, the city shuts its gates behind him and kills his wife and children. He flees to Zhang Lu. Recorded in Yang Fu's biography.",
-  "summary_zh": "马超攻下冀城，杀凉州刺史韦康。韦康部下杨阜联络姜叙等人起兵讨伐，马超出城迎战，城中关闭城门，杀了他的妻儿。马超无家可归，投奔张鲁。见于《三国志·杨阜传》。"
+  "summary_zh": "马超攻下冀城，杀凉州刺史韦康。韦康部下杨阜联络姜叙等人起兵讨伐，马超出城迎战，城中关闭城门，杀了他的妻儿。马超无家可归，投奔张鲁。见于《三国志·杨阜传》。",
+  "people": [
+   "ma-chao",
+   "zhang-lu"
+  ]
  },
  {
   "id": "ch063-pang-tong-dies",
@@ -2365,7 +3061,11 @@
   "lat": 31.32,
   "lon": 104.52,
   "summary": "Riding Liu Bei's white horse, Pang Tong is mistaken for him in a narrow valley named Fallen Phoenix Slope and shot down with arrows. Historically: Pang Tong was killed by a stray arrow while leading the assault on the walls of Luo, some way south; the slope, the swapped horse and the ominous name are the novel's.",
-  "summary_zh": "庞统骑了刘备的白马，行至名叫落凤坡的狭谷，被张任伏兵当作刘备乱箭射死。史实：《三国志·庞统传》载庞统是在南边的雒城率众攻城时被流矢射中而死，年三十六；落凤坡、换马之事出自小说。"
+  "summary_zh": "庞统骑了刘备的白马，行至名叫落凤坡的狭谷，被张任伏兵当作刘备乱箭射死。史实：《三国志·庞统传》载庞统是在南边的雒城率众攻城时被流矢射中而死，年三十六；落凤坡、换马之事出自小说。",
+  "people": [
+   "pang-tong",
+   "liu-bei"
+  ]
  },
  {
   "id": "ch063-yan-yan",
@@ -2381,7 +3081,11 @@
   "lat": 29.56,
   "lon": 106.55,
   "summary": "Zhang Fei captures the old general Yan Yan, who tells him Shu has generals who lose their heads, not generals who surrender. Zhang Fei, impressed, unties him. The exchange is in the Records.",
-  "summary_zh": "张飞生擒巴郡太守严颜，喝问为何不降。严颜答：“我州但有断头将军，无有降将军也！”张飞敬其壮烈，亲解其缚。此事见于《三国志·张飞传》。"
+  "summary_zh": "张飞生擒巴郡太守严颜，喝问为何不降。严颜答：“我州但有断头将军，无有降将军也！”张飞敬其壮烈，亲解其缚。此事见于《三国志·张飞传》。",
+  "people": [
+   "zhang-fei",
+   "yan-yan"
+  ]
  },
  {
   "id": "ch064-zhang-ren",
@@ -2397,7 +3101,11 @@
   "lat": 30.93,
   "lon": 104.45,
   "summary": "Liu Zhang's commander Zhang Ren is captured at the Goose Bridge and executed, refusing to serve a second master. The Yibu qijiu zaji cited in the notes records his words.",
-  "summary_zh": "刘璋大将张任在雁桥兵败被擒，宁死不肯侍奉二主，被斩。裴注所引《益部耆旧杂记》记有其事。"
+  "summary_zh": "刘璋大将张任在雁桥兵败被擒，宁死不肯侍奉二主，被斩。裴注所引《益部耆旧杂记》记有其事。",
+  "people": [
+   "zhuge-liang",
+   "liu-zhang"
+  ]
  },
  {
   "id": "ch065-governor-of-yizhou",
@@ -2413,7 +3121,12 @@
   "lat": 30.67,
   "lon": 104.07,
   "summary": "With Ma Chao's army outside the walls, Liu Zhang surrenders Chengdu rather than see more people die. Liu Bei becomes governor of Yizhou, and the Longzhong plan is half done.",
-  "summary_zh": "马超兵临城下，刘璋不愿百姓再受战祸，开城出降。刘备自领益州牧，隆中对的规划实现了一半。"
+  "summary_zh": "马超兵临城下，刘璋不愿百姓再受战祸，开城出降。刘备自领益州牧，隆中对的规划实现了一半。",
+  "people": [
+   "liu-bei",
+   "ma-chao",
+   "liu-zhang"
+  ]
  },
  {
   "id": "ch065-ma-chao-joins",
@@ -2429,7 +3142,14 @@
   "lat": 32.43,
   "lon": 105.82,
   "summary": "Now with Zhang Lu, Ma Chao attacks Jiameng Pass and fights Zhang Fei all day and on by torchlight; Zhuge Liang sows distrust between him and Zhang Lu, and he comes over to Liu Bei. Historically: Ma Chao did leave Zhang Lu and join Liu Bei at the siege of Chengdu; the night duel with Zhang Fei is the novel's.",
-  "summary_zh": "投靠张鲁的马超攻打葭萌关，与张飞从白天战到夜里挑灯再战。诸葛亮离间马超与张鲁，马超归降刘备。史实：《三国志·马超传》载马超确是离开张鲁、在成都城下归附刘备；挑灯夜战出自小说。"
+  "summary_zh": "投靠张鲁的马超攻打葭萌关，与张飞从白天战到夜里挑灯再战。诸葛亮离间马超与张鲁，马超归降刘备。史实：《三国志·马超传》载马超确是离开张鲁、在成都城下归附刘备；挑灯夜战出自小说。",
+  "people": [
+   "ma-chao",
+   "zhang-lu",
+   "zhang-fei",
+   "zhuge-liang",
+   "liu-bei"
+  ]
  },
  {
   "id": "ch066-empress-fu",
@@ -2445,7 +3165,11 @@
   "lat": 34.03,
   "lon": 113.85,
   "summary": "Cao Cao discovers an old letter in which Empress Fu asked her father to rid the emperor of him. He has her dragged from the palace and killed, with her two sons; the emperor can only say he does not know how long he himself will live.",
-  "summary_zh": "曹操查出伏皇后当年写给父亲伏完、请求除掉曹操的书信，派华歆把皇后从夹墙中拖出处死，所生二子也被鸩杀。献帝只能说：“我亦不知命在何时！”"
+  "summary_zh": "曹操查出伏皇后当年写给父亲伏完、请求除掉曹操的书信，派华歆把皇后从夹墙中拖出处死，所生二子也被鸩杀。献帝只能说：“我亦不知命在何时！”",
+  "people": [
+   "cao-cao",
+   "emperor-xian"
+  ]
  },
  {
   "id": "ch066-single-sword",
@@ -2461,7 +3185,12 @@
   "lat": 28.6,
   "lon": 112.33,
   "summary": "Lu Su invites Guan Yu to a banquet to demand Jingzhou back. Guan Yu comes with one sword and one attendant, takes Lu Su by the hand, and walks him to the boat. Historically: the roles are reversed. Lu Su's biography says Lu Su proposed that the two commanders meet with only their swords, kept their troops a hundred paces off, and rebuked Guan Yu, who had no answer.",
-  "summary_zh": "鲁肃设宴索还荆州，关羽只带周仓一人、单刀赴会，席间挽着鲁肃的手直到江边登船而去。史实：主客正好相反。《三国志·鲁肃传》载是鲁肃约关羽各留兵马百步外、“但诸将军单刀俱会”，席间鲁肃正言责备关羽，关羽无言以对。"
+  "summary_zh": "鲁肃设宴索还荆州，关羽只带周仓一人、单刀赴会，席间挽着鲁肃的手直到江边登船而去。史实：主客正好相反。《三国志·鲁肃传》载是鲁肃约关羽各留兵马百步外、“但诸将军单刀俱会”，席间鲁肃正言责备关羽，关羽无言以对。",
+  "people": [
+   "guan-yu",
+   "lu-su",
+   "zhou-cang"
+  ]
  },
  {
   "id": "ch067-xiaoyao-ford",
@@ -2477,7 +3206,11 @@
   "lat": 31.87,
   "lon": 117.29,
   "summary": "Sun Quan besieges Hefei with a hundred thousand men. Zhang Liao charges out at dawn with eight hundred, cuts his way to Sun Quan's banner and nearly takes him; Sun Quan escapes by leaping his horse over a broken bridge. In Wu, it was said, children stopped crying at Zhang Liao's name. All in the Records.",
-  "summary_zh": "孙权率十万大军围合肥，张辽以八百勇士黎明突击，直冲孙权麾下，孙权险被擒获，靠战马跃过断桥才得脱身。江东一时“小儿闻张辽之名不敢夜啼”。这些都见于《三国志·张辽传》及裴注。"
+  "summary_zh": "孙权率十万大军围合肥，张辽以八百勇士黎明突击，直冲孙权麾下，孙权险被擒获，靠战马跃过断桥才得脱身。江东一时“小儿闻张辽之名不敢夜啼”。这些都见于《三国志·张辽传》及裴注。",
+  "people": [
+   "zhang-liao",
+   "sun-quan"
+  ]
  },
  {
   "id": "ch067-hanzhong-taken",
@@ -2493,7 +3226,12 @@
   "lat": 33.15,
   "lon": 106.55,
   "summary": "Cao Cao forces Yangping Pass and Zhang Lu, who had sealed his treasury rather than burn it, surrenders. Sima Yi urges him to push on into Shu at once; he declines, 'having got Long, why want Shu too'.",
-  "summary_zh": "曹操攻破阳平关，张鲁封存府库后出降。司马懿等劝曹操乘势取蜀，曹操说：“人苦无足，既得陇，复望蜀邪！”没有进军。"
+  "summary_zh": "曹操攻破阳平关，张鲁封存府库后出降。司马懿等劝曹操乘势取蜀，曹操说：“人苦无足，既得陇，复望蜀邪！”没有进军。",
+  "people": [
+   "cao-cao",
+   "zhang-lu",
+   "sima-yi"
+  ]
  },
  {
   "id": "ch070-wakou",
@@ -2509,7 +3247,11 @@
   "lat": 30.84,
   "lon": 106.97,
   "summary": "Cao Cao's general Zhang He raids into Ba. Zhang Fei takes a side road, traps his column in a narrow valley and routs it; Zhang He escapes on foot with a few dozen men. The Records tells it.",
-  "summary_zh": "张郃进攻巴西，张飞率精兵从小路截击，在山道狭窄处前后夹攻，大破张郃，张郃弃马攀山，仅与十余人逃回。《三国志·张飞传》有载。"
+  "summary_zh": "张郃进攻巴西，张飞率精兵从小路截击，在山道狭窄处前后夹攻，大破张郃，张郃弃马攀山，仅与十余人逃回。《三国志·张飞传》有载。",
+  "people": [
+   "zhang-fei",
+   "zhang-he"
+  ]
  },
  {
   "id": "ch068-gan-ning-raid",
@@ -2525,7 +3267,13 @@
   "lat": 31.47,
   "lon": 117.82,
   "summary": "Gan Ning gives each of a hundred men a cup of wine, drinks two bowls himself, and at night they break into Cao Cao's camp, kill dozens and come back without losing a man. Sun Quan says: Cao Cao has Zhang Liao, I have Gan Ning.",
-  "summary_zh": "甘宁挑选百余名勇士，每人赐酒一碗，自己连饮两碗，夜袭曹营，斩首数十，全身而还。孙权说：“孟德有张辽，孤有兴霸，足相敌也。”"
+  "summary_zh": "甘宁挑选百余名勇士，每人赐酒一碗，自己连饮两碗，夜袭曹营，斩首数十，全身而还。孙权说：“孟德有张辽，孤有兴霸，足相敌也。”",
+  "people": [
+   "gan-ning",
+   "sun-quan",
+   "cao-cao",
+   "zhang-liao"
+  ]
  },
  {
   "id": "ch068-king-of-wei",
@@ -2541,7 +3289,11 @@
   "lat": 36.3,
   "lon": 114.35,
   "summary": "The emperor raises Cao Cao from Duke to King of Wei, with the emperor's own regalia in all but name. Only the throne itself is left.",
-  "summary_zh": "汉献帝晋封魏公曹操为魏王，用天子的仪仗车服，只差帝位本身。"
+  "summary_zh": "汉献帝晋封魏公曹操为魏王，用天子的仪仗车服，只差帝位本身。",
+  "people": [
+   "cao-cao",
+   "emperor-xian"
+  ]
  },
  {
   "id": "ch068-zuo-ci",
@@ -2557,7 +3309,11 @@
   "lat": 36.27,
   "lon": 114.38,
   "summary": "The Taoist Zuo Ci conjures a perch from the Song River out of a bronze basin at Cao Cao's banquet, splits a cup with a hairpin, escapes every attempt to kill him and turns into a flock of sheep. Historically: the basin and the perch are already in the Book of the Later Han's chapter on magicians; the rest the novel adds. Both are legend.",
-  "summary_zh": "道士左慈在曹操宴席上从铜盘中钓出松江鲈鱼，以簪划杯，屡次逃过追杀，又化身混入羊群。史实：铜盘钓鲈鱼一事已见于《后汉书·方术列传》，其余是小说增添，两者都属传说。"
+  "summary_zh": "道士左慈在曹操宴席上从铜盘中钓出松江鲈鱼，以簪划杯，屡次逃过追杀，又化身混入羊群。史实：铜盘钓鲈鱼一事已见于《后汉书·方术列传》，其余是小说增添，两者都属传说。",
+  "people": [
+   "zuo-ci",
+   "cao-cao"
+  ]
  },
  {
   "id": "ch069-five-loyalists",
@@ -2573,7 +3329,10 @@
   "lat": 34.08,
   "lon": 113.88,
   "summary": "Geng Ji, Wei Huang, the physician Ji Ben and others set fire to the capital by night to rescue the emperor from Cao Cao, and are crushed and executed with their families.",
-  "summary_zh": "耿纪、韦晃与太医令吉本等人夜间在许都纵火起事，欲挟天子攻打曹操，兵败被杀，夷灭三族。"
+  "summary_zh": "耿纪、韦晃与太医令吉本等人夜间在许都纵火起事，欲挟天子攻打曹操，兵败被杀，夷灭三族。",
+  "people": [
+   "cao-cao"
+  ]
  },
  {
   "id": "ch069-guan-lu",
@@ -2605,7 +3364,11 @@
   "lat": 33.2,
   "lon": 106.45,
   "summary": "Mocked for his age, Huang Zhong takes Yan Yan with him and seizes Cao Cao's grain store on Tiandang Mountain with a ruse of fire. Historically: invented; the real fighting that year was round Yangping Pass.",
-  "summary_zh": "黄忠被人嫌老，与严颜同去，用计放火夺下曹军囤粮的天荡山。史实：并无此事，当年的实际战事在阳平关一带。"
+  "summary_zh": "黄忠被人嫌老，与严颜同去，用计放火夺下曹军囤粮的天荡山。史实：并无此事，当年的实际战事在阳平关一带。",
+  "people": [
+   "huang-zhong",
+   "yan-yan"
+  ]
  },
  {
   "id": "ch071-dingjun-mountain",
@@ -2621,7 +3384,12 @@
   "lat": 33.1,
   "lon": 106.68,
   "summary": "Fa Zheng picks the moment; Huang Zhong charges down from the heights with drums beating and kills Cao Cao's commander in the west, Xiahou Yuan, in a single fight. The Records tells it this way, and gives Huang Zhong the credit.",
-  "summary_zh": "法正看准时机，黄忠从高处擂鼓呐喊冲下，一战斩了曹军西线主帅夏侯渊。《三国志·黄忠传》记载如此，功劳确属黄忠。"
+  "summary_zh": "法正看准时机，黄忠从高处擂鼓呐喊冲下，一战斩了曹军西线主帅夏侯渊。《三国志·黄忠传》记载如此，功劳确属黄忠。",
+  "people": [
+   "huang-zhong",
+   "xiahou-yuan",
+   "fa-zheng"
+  ]
  },
  {
   "id": "ch071-empty-camp",
@@ -2637,7 +3405,12 @@
   "lat": 33.17,
   "lon": 106.75,
   "summary": "Caught by Cao Cao's whole army while fetching grain, Zhao Yun retreats into his camp, throws the gates open, lowers the flags and silences the drums. Cao Cao suspects an ambush and pulls back, and Zhao Yun's archers fall on him. Liu Bei calls Zhao Yun 'courage from head to foot'. The real empty-fort trick, from the Zhao Yun biezhuan.",
-  "summary_zh": "赵云接应运粮，遭曹操大军追击，退回营中，大开营门、偃旗息鼓。曹操疑有伏兵退走，赵云擂鼓、弓弩齐发追击，曹军大乱。刘备赞他“一身都是胆”。这是有据可查的“空营计”，见于裴注所引《赵云别传》。"
+  "summary_zh": "赵云接应运粮，遭曹操大军追击，退回营中，大开营门、偃旗息鼓。曹操疑有伏兵退走，赵云擂鼓、弓弩齐发追击，曹军大乱。刘备赞他“一身都是胆”。这是有据可查的“空营计”，见于裴注所引《赵云别传》。",
+  "people": [
+   "zhao-yun",
+   "cao-cao",
+   "liu-bei"
+  ]
  },
  {
   "id": "ch072-chicken-rib",
@@ -2653,7 +3426,12 @@
   "lat": 33.1,
   "lon": 106.9,
   "summary": "Stalled in Hanzhong, Cao Cao gives the night password 'chicken rib'. Yang Xiu reads it as a decision to withdraw, since a chicken rib is a pity to throw away but has no meat, and starts packing; Cao Cao has him executed for spreading defeatism. Historically: the 'chicken rib' story is in the Jiuzhou chunqiu cited in the notes, but Yang Xiu was executed later that year, back in the capital, mainly for his ties to Cao Zhi.",
-  "summary_zh": "曹操在汉中进退两难，夜间口令定为“鸡肋”。杨修说鸡肋食之无肉、弃之可惜，魏王必是要退兵了，便收拾行装。曹操以扰乱军心之罪斩了杨修。史实：“鸡肋”一事见于裴注引《九州春秋》，但杨修是当年秋天回到邺城后才被杀的，主要原因是他与曹植结党。"
+  "summary_zh": "曹操在汉中进退两难，夜间口令定为“鸡肋”。杨修说鸡肋食之无肉、弃之可惜，魏王必是要退兵了，便收拾行装。曹操以扰乱军心之罪斩了杨修。史实：“鸡肋”一事见于裴注引《九州春秋》，但杨修是当年秋天回到邺城后才被杀的，主要原因是他与曹植结党。",
+  "people": [
+   "yang-xiu",
+   "cao-cao",
+   "cao-zhi"
+  ]
  },
  {
   "id": "ch072-xie-valley-retreat",
@@ -2669,7 +3447,11 @@
   "lat": 34.2,
   "lon": 107.6,
   "summary": "Having given up Hanzhong, Cao Cao leads his army out through the Xie Valley; in the novel Wei Yan's arrow knocks out his front teeth on the way. Historically: the withdrawal is recorded; the arrow is the novel's.",
-  "summary_zh": "曹操放弃汉中，经斜谷撤军，小说写他途中被魏延一箭射落门牙。史实：撤军有记载，射落门牙出自小说。"
+  "summary_zh": "曹操放弃汉中，经斜谷撤军，小说写他途中被魏延一箭射落门牙。史实：撤军有记载，射落门牙出自小说。",
+  "people": [
+   "cao-cao",
+   "wei-yan"
+  ]
  },
  {
   "id": "ch073-king-of-hanzhong",
@@ -2685,7 +3467,15 @@
   "lat": 33.18,
   "lon": 106.62,
   "summary": "With Hanzhong in his hands, Liu Bei takes the title King of Hanzhong, the title the founder of the Han once held, and names Guan Yu, Zhang Fei, Ma Chao, Huang Zhong and Zhao Yun his leading generals.",
-  "summary_zh": "刘备夺得汉中，在沔阳设坛自称汉中王，这正是汉高祖刘邦当年的封号。他封关羽、张飞、马超、黄忠为四方将军，赵云亦受重用；“五虎上将”的名号是小说的说法。"
+  "summary_zh": "刘备夺得汉中，在沔阳设坛自称汉中王，这正是汉高祖刘邦当年的封号。他封关羽、张飞、马超、黄忠为四方将军，赵云亦受重用；“五虎上将”的名号是小说的说法。",
+  "people": [
+   "liu-bei",
+   "guan-yu",
+   "zhang-fei",
+   "ma-chao",
+   "huang-zhong",
+   "zhao-yun"
+  ]
  },
  {
   "id": "ch073-guan-yu-north",
@@ -2701,7 +3491,12 @@
   "lat": 32.01,
   "lon": 112.13,
   "summary": "As Liu Bei becomes King of Hanzhong, Guan Yu leaves Jiangling and marches up the Han River against Cao Ren at Xiangyang and Fancheng, the campaign that will make and end him.",
-  "summary_zh": "刘备进位汉中王，关羽从江陵出兵，沿汉水北上攻打据守襄阳、樊城的曹仁。这场北伐让他威震华夏，也断送了他。"
+  "summary_zh": "刘备进位汉中王，关羽从江陵出兵，沿汉水北上攻打据守襄阳、樊城的曹仁。这场北伐让他威震华夏，也断送了他。",
+  "people": [
+   "guan-yu",
+   "liu-bei",
+   "cao-ren"
+  ]
  },
  {
   "id": "ch074-seven-armies",
@@ -2717,7 +3512,12 @@
   "lat": 32.07,
   "lon": 112.15,
   "summary": "Guan Yu besieges Fancheng. Cao Cao's relief army under Yu Jin camps in low ground; Guan Yu dams the Han and breaks the dam, drowning seven armies. Yu Jin surrenders; Pang De, who had brought his own coffin to the battle, refuses and is beheaded. Historically: the flood came from heavy autumn rains that made the Han overflow; Guan Yu used it with his boats but did not break a dam.",
-  "summary_zh": "关羽围攻樊城，于禁率七军救援，屯于低洼处。关羽堵截襄江，掘堤放水，七军尽没。于禁投降，抬棺出战的庞德被擒不屈而死。史实：《三国志·关羽传》载是“秋，大霖雨，汉水泛溢，禁所督七军皆没”，关羽乘大船进攻；水是天降大雨所致，并非关羽掘堤。"
+  "summary_zh": "关羽围攻樊城，于禁率七军救援，屯于低洼处。关羽堵截襄江，掘堤放水，七军尽没。于禁投降，抬棺出战的庞德被擒不屈而死。史实：《三国志·关羽传》载是“秋，大霖雨，汉水泛溢，禁所督七军皆没”，关羽乘大船进攻；水是天降大雨所致，并非关羽掘堤。",
+  "people": [
+   "guan-yu",
+   "yu-jin",
+   "pang-de"
+  ]
  },
  {
   "id": "ch074-pang-de-coffin",
@@ -2733,7 +3533,11 @@
   "lat": 32.1,
   "lon": 112.18,
   "summary": "To prove he will not betray Cao Cao, Pang De rides out with a coffin carried behind him, fights Guan Yu for a hundred bouts and wounds him with an arrow. Captured in the flood, he refuses to kneel and is beheaded. Historically: Pang De did fight Guan Yu himself and shot him in the forehead, and died refusing to surrender; the coffin is the novel's.",
-  "summary_zh": "庞德为表决不降蜀，抬着棺材出战，与关羽大战百余合，放冷箭射中关羽。水淹七军时被擒，立而不跪，被斩。史实：《三国志·庞德传》载他亲与关羽交战，射中关羽前额，被擒后不降而死；抬棺出战出自小说。"
+  "summary_zh": "庞德为表决不降蜀，抬着棺材出战，与关羽大战百余合，放冷箭射中关羽。水淹七军时被擒，立而不跪，被斩。史实：《三国志·庞德传》载他亲与关羽交战，射中关羽前额，被擒后不降而死；抬棺出战出自小说。",
+  "people": [
+   "pang-de",
+   "guan-yu"
+  ]
  },
  {
   "id": "ch075-scraping-the-bone",
@@ -2749,7 +3553,12 @@
   "lat": 32.12,
   "lon": 112.1,
   "summary": "A poisoned arrow wounds Guan Yu's arm. The great physician Hua Tuo cuts open the flesh and scrapes the bone while Guan Yu plays chess and drinks, the scraping audible to all. Historically: the Records tells the operation and the chess and wine, but names no doctor, and places it at an earlier, unspecified time; Hua Tuo had been executed by Cao Cao about a decade before.",
-  "summary_zh": "关羽臂中毒箭，神医华佗为他割肉刮骨，关羽一边饮酒下棋，谈笑自若，刮骨之声悉悉可闻。史实：《三国志·关羽传》记有破臂刮骨、割炙饮酒、言笑自若，但医生没有留下姓名，时间也是在此之前；华佗早在约十年前就已被曹操所杀。"
+  "summary_zh": "关羽臂中毒箭，神医华佗为他割肉刮骨，关羽一边饮酒下棋，谈笑自若，刮骨之声悉悉可闻。史实：《三国志·关羽传》记有破臂刮骨、割炙饮酒、言笑自若，但医生没有留下姓名，时间也是在此之前；华佗早在约十年前就已被曹操所杀。",
+  "people": [
+   "guan-yu",
+   "hua-tuo",
+   "cao-cao"
+  ]
  },
  {
   "id": "ch075-white-robes",
@@ -2765,7 +3574,11 @@
   "lat": 30.32,
   "lon": 112.25,
   "summary": "Lü Meng hides his best troops in merchant boats, rowers dressed in white as traders, takes Guan Yu's beacon posts by surprise and walks into Jiangling and Gong'an. He forbids his men to take so much as a hat from the people. The Records tells it.",
-  "summary_zh": "吕蒙把精兵藏在商船中，令士兵身穿白衣扮作商人摇橹，奇袭关羽沿江烽火台，兵不血刃取了江陵、公安。他严令士卒不得扰民，连百姓一顶斗笠都不许拿。《三国志·吕蒙传》有载。"
+  "summary_zh": "吕蒙把精兵藏在商船中，令士兵身穿白衣扮作商人摇橹，奇袭关羽沿江烽火台，兵不血刃取了江陵、公安。他严令士卒不得扰民，连百姓一顶斗笠都不许拿。《三国志·吕蒙传》有载。",
+  "people": [
+   "lu-meng",
+   "guan-yu"
+  ]
  },
  {
   "id": "ch076-maicheng",
@@ -2781,7 +3594,11 @@
   "lat": 30.68,
   "lon": 111.92,
   "summary": "Caught between Xu Huang's relief army and the loss of his base, his soldiers deserting to their families in Jiangling, Guan Yu falls back to the small fort of Maicheng with a few hundred men.",
-  "summary_zh": "关羽前有徐晃援军，后失江陵根本，士卒因家眷在江陵纷纷逃散，只得率数百人退守小城麦城。"
+  "summary_zh": "关羽前有徐晃援军，后失江陵根本，士卒因家眷在江陵纷纷逃散，只得率数百人退守小城麦城。",
+  "people": [
+   "guan-yu",
+   "xu-huang"
+  ]
  },
  {
   "id": "ch076-xu-huang",
@@ -2797,7 +3614,12 @@
   "lat": 32.12,
   "lon": 112.1,
   "summary": "Cao Cao's general Xu Huang, an old friend of Guan Yu, breaks through his siege lines in a single charge and lifts the siege of Fancheng. Cao Cao says nothing in thirty years of war has matched it.",
-  "summary_zh": "曹操派关羽的老相识徐晃救援樊城。徐晃长驱直入，攻破关羽的围堑，解了樊城之围。曹操称赞说用兵三十余年，从未见过如此长驱直入的。"
+  "summary_zh": "曹操派关羽的老相识徐晃救援樊城。徐晃长驱直入，攻破关羽的围堑，解了樊城之围。曹操称赞说用兵三十余年，从未见过如此长驱直入的。",
+  "people": [
+   "xu-huang",
+   "cao-cao",
+   "guan-yu"
+  ]
  },
  {
   "id": "ch077-guan-yu-dies",
@@ -2813,7 +3635,12 @@
   "lat": 31.07,
   "lon": 111.68,
   "summary": "Breaking out of Maicheng, Guan Yu and his son Guan Ping are caught in an ambush at Linju by Pan Zhang's officer Ma Zhong, and Sun Quan has them beheaded. Sun Quan sends the head to Cao Cao, who buries it with honours at Luoyang.",
-  "summary_zh": "关羽父子从麦城突围，在临沮被潘璋部将马忠伏兵擒获，孙权将二人斩首。孙权把首级送给曹操，曹操以诸侯之礼葬于洛阳。"
+  "summary_zh": "关羽父子从麦城突围，在临沮被潘璋部将马忠伏兵擒获，孙权将二人斩首。孙权把首级送给曹操，曹操以诸侯之礼葬于洛阳。",
+  "people": [
+   "guan-yu",
+   "sun-quan",
+   "cao-cao"
+  ]
  },
  {
   "id": "ch077-yuquan-ghost",
@@ -2829,7 +3656,12 @@
   "lat": 30.72,
   "lon": 111.76,
   "summary": "Guan Yu's spirit appears to a monk at Jade Spring Hill crying 'give me back my head', then haunts Lü Meng to death and frightens Cao Cao. Historically: Lü Meng died of illness at the end of 219. The ghost belongs to the cult of Guan Yu that grew over the following thousand years; a temple to him still stands at Jade Spring Hill.",
-  "summary_zh": "关羽阴魂在玉泉山向普净和尚大呼“还我头来”，又附身吕蒙使其七窍流血而死，还惊吓了曹操。史实：吕蒙是219年底病逝的。显圣之说来自此后千年间逐渐兴盛的关公崇拜，玉泉山至今仍有关陵、关庙。"
+  "summary_zh": "关羽阴魂在玉泉山向普净和尚大呼“还我头来”，又附身吕蒙使其七窍流血而死，还惊吓了曹操。史实：吕蒙是219年底病逝的。显圣之说来自此后千年间逐渐兴盛的关公崇拜，玉泉山至今仍有关陵、关庙。",
+  "people": [
+   "guan-yu",
+   "lu-meng",
+   "cao-cao"
+  ]
  },
  {
   "id": "ch077-guan-yu-head",
@@ -2845,7 +3677,12 @@
   "lat": 34.68,
   "lon": 112.6,
   "summary": "Sun Quan sends Guan Yu's head to Cao Cao, to turn Liu Bei's revenge on Wei. Cao Cao sees through it and buries the head with the honours of a noble at Luoyang, where the Guanlin temple stands today.",
-  "summary_zh": "孙权把关羽首级送给曹操，想嫁祸于魏。曹操识破其意，以诸侯之礼将首级葬于洛阳城南，就是今天的关林。"
+  "summary_zh": "孙权把关羽首级送给曹操，想嫁祸于魏。曹操识破其意，以诸侯之礼将首级葬于洛阳城南，就是今天的关林。",
+  "people": [
+   "cao-cao",
+   "guan-yu",
+   "sun-quan"
+  ]
  },
  {
   "id": "ch078-cao-cao-dies",
@@ -2861,7 +3698,10 @@
   "lat": 34.72,
   "lon": 112.62,
   "summary": "Cao Cao dies at Luoyang at sixty-five, King of Wei but never emperor. His will orders a plain burial, no treasure in the tomb, and that his concubines make silk shoes to support themselves.",
-  "summary_zh": "曹操病逝于洛阳，终年六十六岁，至死只是魏王，未曾称帝。遗令薄葬，不藏金玉，让姬妾学做丝鞋维持生计，即后人所说的“分香卖履”。"
+  "summary_zh": "曹操病逝于洛阳，终年六十六岁，至死只是魏王，未曾称帝。遗令薄葬，不藏金玉，让姬妾学做丝鞋维持生计，即后人所说的“分香卖履”。",
+  "people": [
+   "cao-cao"
+  ]
  },
  {
   "id": "ch078-hua-tuo",
@@ -2877,7 +3717,12 @@
   "lat": 34.69,
   "lon": 112.58,
   "summary": "Tormented by headaches, Cao Cao sends for Hua Tuo, who proposes to open his skull with an axe after an anaesthetic; Cao Cao suspects murder and has him killed in prison. Historically: Hua Tuo was Cao Cao's physician and was executed by him about 208, for refusing to come back from leave; the skull surgery is the novel's, and so is the timing, twelve years late.",
-  "summary_zh": "曹操头风发作，召华佗医治。华佗说要先饮麻沸散，再用利斧砍开脑袋取出风涎。曹操疑他要为关羽报仇，下狱拷死。史实：华佗确为曹操治过头风，约208年因托辞不归被曹操下狱处死；开颅一说是小说附会，时间也晚了十二年。"
+  "summary_zh": "曹操头风发作，召华佗医治。华佗说要先饮麻沸散，再用利斧砍开脑袋取出风涎。曹操疑他要为关羽报仇，下狱拷死。史实：华佗确为曹操治过头风，约208年因托辞不归被曹操下狱处死；开颅一说是小说附会，时间也晚了十二年。",
+  "people": [
+   "cao-cao",
+   "hua-tuo",
+   "guan-yu"
+  ]
  },
  {
   "id": "ch079-seven-steps",
@@ -2893,7 +3738,11 @@
   "lat": 36.3,
   "lon": 114.35,
   "summary": "Cao Pi orders his brother Cao Zhi to compose a poem in seven paces or die. Cao Zhi chants: beans boiled over a fire of their own stalks, why are you in such a hurry to burn me, born of the same root? Historically: the story is first told in the Shishuo xinyu, written two centuries later, and the poem is not in Cao Zhi's collected works.",
-  "summary_zh": "曹丕令曹植七步之内作诗一首，作不出便处死。曹植应声吟道：“煮豆燃豆萁，豆在釜中泣。本是同根生，相煎何太急！”史实：此事最早见于二百年后的《世说新语》，诗也不见于曹植文集，多半是后人附会。"
+  "summary_zh": "曹丕令曹植七步之内作诗一首，作不出便处死。曹植应声吟道：“煮豆燃豆萁，豆在釜中泣。本是同根生，相煎何太急！”史实：此事最早见于二百年后的《世说新语》，诗也不见于曹植文集，多半是后人附会。",
+  "people": [
+   "cao-zhi",
+   "cao-pi"
+  ]
  },
  {
   "id": "ch079-liu-feng",
@@ -2909,7 +3758,12 @@
   "lat": 30.71,
   "lon": 104.03,
   "summary": "Liu Feng had refused Guan Yu's call for help from Shangyong, then lost the commandery when Meng Da went over to Wei. Liu Bei, on Zhuge Liang's advice, orders him to kill himself. The Records says he died sighing that he regretted not taking Meng Da's advice.",
-  "summary_zh": "刘封镇守上庸，拒绝发兵救援关羽，后又因孟达降魏而丢了上庸。刘备听从诸葛亮的建议，令他自尽。据《三国志·刘封传》，他临死叹道：“恨不用孟子度之言！”"
+  "summary_zh": "刘封镇守上庸，拒绝发兵救援关羽，后又因孟达降魏而丢了上庸。刘备听从诸葛亮的建议，令他自尽。据《三国志·刘封传》，他临死叹道：“恨不用孟子度之言！”",
+  "people": [
+   "guan-yu",
+   "liu-bei",
+   "zhuge-liang"
+  ]
  },
  {
   "id": "ch080-cao-pi-emperor",
@@ -2925,7 +3779,12 @@
   "lat": 33.85,
   "lon": 113.95,
   "summary": "Ten months after his father's death, Cao Pi has Emperor Xian abdicate in his favour on a terrace at Fanyang, after the customary three refusals. The Han, four hundred years old, ends, and Wei begins.",
-  "summary_zh": "曹操死后十个月，曹丕在繁阳筑坛，按惯例三辞三让之后接受汉献帝禅让，即皇帝位。延续四百年的汉朝至此终结，魏朝开始。"
+  "summary_zh": "曹操死后十个月，曹丕在繁阳筑坛，按惯例三辞三让之后接受汉献帝禅让，即皇帝位。延续四百年的汉朝至此终结，魏朝开始。",
+  "people": [
+   "cao-pi",
+   "cao-cao",
+   "emperor-xian"
+  ]
  },
  {
   "id": "ch080-liu-bei-emperor",
@@ -2941,7 +3800,11 @@
   "lat": 30.67,
   "lon": 104.07,
   "summary": "Hearing (falsely) that Emperor Xian has been murdered, Liu Bei takes the throne at Chengdu as emperor of the Han, claiming its continuity. Later historians call his state Shu, or Shu Han.",
-  "summary_zh": "刘备听说汉献帝已被害（其实是误传），在成都即皇帝位，国号仍为汉，以示继承汉统。后世称之为蜀或蜀汉。"
+  "summary_zh": "刘备听说汉献帝已被害（其实是误传），在成都即皇帝位，国号仍为汉，以示继承汉统。后世称之为蜀或蜀汉。",
+  "people": [
+   "liu-bei",
+   "emperor-xian"
+  ]
  },
  {
   "id": "ch081-zhang-fei-killed",
@@ -2957,7 +3820,12 @@
   "lat": 31.58,
   "lon": 105.97,
   "summary": "On the eve of the campaign against Wu, Zhang Fei, who beat his men and kept them close, is murdered in his sleep by two officers, Zhang Da and Fan Qiang, who carry his head down the river to Sun Quan. The Records says Liu Bei, told that a report had come from Zhang Fei's camp, said at once: alas, Zhang Fei is dead.",
-  "summary_zh": "伐吴前夕，张飞性情暴躁、常鞭打士卒，部将张达、范强趁他熟睡将其刺杀，带着首级顺江投奔孙权。据《三国志·张飞传》，刘备听说张飞营中有表奏来，便说：“噫！飞死矣。”"
+  "summary_zh": "伐吴前夕，张飞性情暴躁、常鞭打士卒，部将张达、范强趁他熟睡将其刺杀，带着首级顺江投奔孙权。据《三国志·张飞传》，刘备听说张飞营中有表奏来，便说：“噫！飞死矣。”",
+  "people": [
+   "zhang-fei",
+   "sun-quan",
+   "liu-bei"
+  ]
  },
  {
   "id": "ch081-liu-bei-marches",
@@ -2973,7 +3841,12 @@
   "lat": 30.83,
   "lon": 110.98,
   "summary": "Against the advice of Zhao Yun and others, Liu Bei leads the army down the Yangzi gorges to avenge Guan Yu and retake Jingzhou, and his early victories carry him to Zigui.",
-  "summary_zh": "刘备不听赵云等人劝阻，亲率大军沿长江三峡东下，为关羽报仇、夺回荆州，初战告捷，进抵秭归。"
+  "summary_zh": "刘备不听赵云等人劝阻，亲率大军沿长江三峡东下，为关羽报仇、夺回荆州，初战告捷，进抵秭归。",
+  "people": [
+   "liu-bei",
+   "zhao-yun",
+   "guan-yu"
+  ]
  },
  {
   "id": "ch082-nine-gifts",
@@ -2989,7 +3862,11 @@
   "lat": 30.4,
   "lon": 114.88,
   "summary": "To keep Wei out of the war, Sun Quan declares himself Cao Pi's vassal and accepts the title King of Wu and the nine gifts of honour. A year later, the danger past, he breaks with Wei again.",
-  "summary_zh": "为免两面受敌，孙权向曹丕称臣，受封吴王，加九锡。一年后危机过去，又与魏断绝。"
+  "summary_zh": "为免两面受敌，孙权向曹丕称臣，受封吴王，加九锡。一年后危机过去，又与魏断绝。",
+  "people": [
+   "sun-quan",
+   "cao-pi"
+  ]
  },
  {
   "id": "ch082-huang-zhong-dies",
@@ -3005,7 +3882,11 @@
   "lat": 30.58,
   "lon": 111.4,
   "summary": "Stung by Liu Bei's remark that the old generals are past it, Huang Zhong charges the Wu lines, is shot in the shoulder and dies in camp at seventy-five. Historically: Huang Zhong died of illness in 220, before the war began.",
-  "summary_zh": "刘备一句“老者无用”，黄忠不服，独闯吴营，肩中一箭，伤重死于营中，年七十五。史实：黄忠220年已病逝，没有赶上伐吴之战。"
+  "summary_zh": "刘备一句“老者无用”，黄忠不服，独闯吴营，肩中一箭，伤重死于营中，年七十五。史实：黄忠220年已病逝，没有赶上伐吴之战。",
+  "people": [
+   "huang-zhong",
+   "liu-bei"
+  ]
  },
  {
   "id": "ch083-lu-xun-commander",
@@ -3021,7 +3902,12 @@
   "lat": 30.7,
   "lon": 111.3,
   "summary": "Sun Quan gives command of the defence to Lu Xun, a young scholar the veterans despise. He refuses battle for months, letting Liu Bei's army string out its camps through the hills in the summer heat.",
-  "summary_zh": "孙权任命年轻书生陆逊为大都督，老将们多不服气。陆逊坚守不战数月，任凭刘备大军在盛夏的山林中连营数百里。"
+  "summary_zh": "孙权任命年轻书生陆逊为大都督，老将们多不服气。陆逊坚守不战数月，任凭刘备大军在盛夏的山林中连营数百里。",
+  "people": [
+   "sun-quan",
+   "lu-xun",
+   "liu-bei"
+  ]
  },
  {
   "id": "ch083-enemies-delivered",
@@ -3037,7 +3923,12 @@
   "lat": 30.52,
   "lon": 111.45,
   "summary": "Guan Yu's son Guan Xing kills Pan Zhang, who captured his father; the turncoats Mi Fang and Fu Shiren come over and are executed at Guan Yu's shrine; Wu even sends back Zhang Fei's murderers in chains. Historically: invented; Pan Zhang lived until 234.",
-  "summary_zh": "关兴斩了擒杀其父的潘璋；糜芳、傅士仁杀马忠来降，被刘备在关羽灵前处死；东吴还把杀害张飞的范疆、张达绑送回来。史实：并无此事，潘璋活到了234年。"
+  "summary_zh": "关兴斩了擒杀其父的潘璋；糜芳、傅士仁杀马忠来降，被刘备在关羽灵前处死；东吴还把杀害张飞的范疆、张达绑送回来。史实：并无此事，潘璋活到了234年。",
+  "people": [
+   "liu-bei",
+   "guan-yu",
+   "zhang-fei"
+  ]
  },
  {
   "id": "ch084-yiling",
@@ -3053,7 +3944,12 @@
   "lat": 30.55,
   "lon": 111.42,
   "summary": "When Liu Bei's men are worn down, Lu Xun has every soldier carry a bundle of reeds and fires the camps one after another. Liu Bei's army is destroyed and he escapes by night to Baidi. When Cao Pi heard that Liu Bei had strung his camps over seven hundred li, he said he would lose. Both in the Records.",
-  "summary_zh": "待蜀军疲惫，陆逊令士兵各持一把茅草，火攻蜀营，连破四十余营。刘备大败，连夜逃回白帝城。曹丕听说刘备“连营七百余里”，就断定他必败。这些都有史书记载。"
+  "summary_zh": "待蜀军疲惫，陆逊令士兵各持一把茅草，火攻蜀营，连破四十余营。刘备大败，连夜逃回白帝城。曹丕听说刘备“连营七百余里”，就断定他必败。这些都有史书记载。",
+  "people": [
+   "lu-xun",
+   "liu-bei",
+   "cao-pi"
+  ]
  },
  {
   "id": "ch084-stone-sentinel-maze",
@@ -3069,7 +3965,12 @@
   "lat": 31.0,
   "lon": 109.48,
   "summary": "Pursuing Liu Bei, Lu Xun wanders into a maze of piled stones Zhuge Liang had laid at Yufu Shoal, and is lost in a supernatural storm until Zhuge Liang's father-in-law leads him out. Historically: the stone 'eight formations' at Yufu were real and famous, Du Fu wrote a poem on them, but Lu Xun never went near them.",
-  "summary_zh": "陆逊追击刘备，误入诸葛亮在鱼腹浦用乱石堆成的八阵图，飞沙走石，困在阵中，被诸葛亮的岳父黄承彦引出。史实：鱼腹浦确有相传为诸葛亮所布的八阵图石阵遗迹，杜甫有诗咏之，但陆逊并未追到这里。"
+  "summary_zh": "陆逊追击刘备，误入诸葛亮在鱼腹浦用乱石堆成的八阵图，飞沙走石，困在阵中，被诸葛亮的岳父黄承彦引出。史实：鱼腹浦确有相传为诸葛亮所布的八阵图石阵遗迹，杜甫有诗咏之，但陆逊并未追到这里。",
+  "people": [
+   "zhuge-liang",
+   "lu-xun",
+   "liu-bei"
+  ]
  },
  {
   "id": "ch085-baidi",
@@ -3085,7 +3986,13 @@
   "lat": 31.04,
   "lon": 109.57,
   "summary": "Dying at Baidi, Liu Bei tells Zhuge Liang: your talent is ten times Cao Pi's; if my son can be helped, help him; if not, take the throne yourself. Zhuge Liang weeps that he will serve to the death. And to his son: do not leave a good deed undone because it is small, nor do an evil one because it is small. All in the Records.",
-  "summary_zh": "刘备病重于白帝城，对诸葛亮说：“君才十倍曹丕，必能安国，终定大事。若嗣子可辅，辅之；如其不才，君可自取。”诸葛亮涕泣表示竭尽忠贞，至死不渝。又告诫刘禅：“勿以恶小而为之，勿以善小而不为。”这些都见于《三国志》。"
+  "summary_zh": "刘备病重于白帝城，对诸葛亮说：“君才十倍曹丕，必能安国，终定大事。若嗣子可辅，辅之；如其不才，君可自取。”诸葛亮涕泣表示竭尽忠贞，至死不渝。又告诫刘禅：“勿以恶小而为之，勿以善小而不为。”这些都见于《三国志》。",
+  "people": [
+   "liu-bei",
+   "zhuge-liang",
+   "cao-pi",
+   "liu-shan"
+  ]
  },
  {
   "id": "ch085-five-armies",
@@ -3101,7 +4008,11 @@
   "lat": 30.64,
   "lon": 104.11,
   "summary": "Cao Pi sends five armies against Shu at once, and Zhuge Liang, without leaving his garden, turns each one back, the last by sending Deng Zhi to make peace with Wu. Historically: there was no five-pronged invasion; but Zhuge Liang did send Deng Zhi to Wu, and the alliance was restored.",
-  "summary_zh": "曹丕发五路大军伐蜀，诸葛亮闭门不出，在府中观鱼，却一一化解，最后派邓芝出使东吴，重修旧好。史实：并无五路伐蜀之事；但诸葛亮派邓芝出使东吴、恢复孙刘联盟，确有其事。"
+  "summary_zh": "曹丕发五路大军伐蜀，诸葛亮闭门不出，在府中观鱼，却一一化解，最后派邓芝出使东吴，重修旧好。史实：并无五路伐蜀之事；但诸葛亮派邓芝出使东吴、恢复孙刘联盟，确有其事。",
+  "people": [
+   "zhuge-liang",
+   "cao-pi"
+  ]
  },
  {
   "id": "ch086-qin-mi",
@@ -3133,7 +4044,10 @@
   "lat": 32.3,
   "lon": 119.45,
   "summary": "Cao Pi comes to the river with a huge fleet; Xu Sheng's fire ships burn it and Cao Pi barely escapes. Historically: Xu Sheng built a line of false walls and towers along the south bank overnight, Cao Pi looked across at hundreds of li of 'fortifications', sighed, and went home. The fire is the novel's.",
-  "summary_zh": "曹丕率水军临江伐吴，徐盛用火攻大破魏军，曹丕仅以身免。史实：据裴注引《吴录》，徐盛在南岸连夜用芦苇木架搭起绵延数百里的假城楼，曹丕望见叹道“魏虽有武骑千群，无所用也”，于是退兵；火攻出自小说。"
+  "summary_zh": "曹丕率水军临江伐吴，徐盛用火攻大破魏军，曹丕仅以身免。史实：据裴注引《吴录》，徐盛在南岸连夜用芦苇木架搭起绵延数百里的假城楼，曹丕望见叹道“魏虽有武骑千群，无所用也”，于是退兵；火攻出自小说。",
+  "people": [
+   "cao-pi"
+  ]
  },
  {
   "id": "ch087-southern-campaign",
@@ -3149,7 +4063,11 @@
   "lat": 27.9,
   "lon": 102.25,
   "summary": "The southern commanderies have risen. Zhuge Liang leads the army south himself, taking Ma Su's advice that winning hearts matters more than winning cities.",
-  "summary_zh": "南中诸郡叛乱，诸葛亮亲率大军南征。参军马谡建议“攻心为上，攻城为下”，诸葛亮采纳了这一方略。"
+  "summary_zh": "南中诸郡叛乱，诸葛亮亲率大军南征。参军马谡建议“攻心为上，攻城为下”，诸葛亮采纳了这一方略。",
+  "people": [
+   "zhuge-liang",
+   "ma-su"
+  ]
  },
  {
   "id": "ch087-first-capture",
@@ -3165,7 +4083,11 @@
   "lat": 27.3,
   "lon": 102.4,
   "summary": "Meng Huo is lured into an ambush and captured. He says he was simply caught off guard; Zhuge Liang lets him go to try again. Historically: the 'seven captures and seven releases' come from the Han-Jin chunqiu cited in the notes; the details of each are the novel's.",
-  "summary_zh": "孟获中了埋伏被擒，说是一时疏忽，不服。诸葛亮放他回去再战。史实：“七擒七纵”见于裴注引《汉晋春秋》，具体经过出自小说。"
+  "summary_zh": "孟获中了埋伏被擒，说是一时疏忽，不服。诸葛亮放他回去再战。史实：“七擒七纵”见于裴注引《汉晋春秋》，具体经过出自小说。",
+  "people": [
+   "meng-huo",
+   "zhuge-liang"
+  ]
  },
  {
   "id": "ch088-crossing-the-lu",
@@ -3181,7 +4103,11 @@
   "lat": 26.65,
   "lon": 102.85,
   "summary": "In summer heat the army crosses the Lu, whose waters are said to be poisonous by day, and Meng Huo is captured a second time. Historically: 'In the fifth month I crossed the Lu and went deep into barren land' is Zhuge Liang's own line in his memorial; the second capture belongs to the seven.",
-  "summary_zh": "盛夏时节大军渡过泸水，据说白天水中有瘴毒。孟获第二次被擒。史实：“五月渡泸，深入不毛”是诸葛亮在《出师表》中的原话；第二次擒获属于七擒故事。"
+  "summary_zh": "盛夏时节大军渡过泸水，据说白天水中有瘴毒。孟获第二次被擒。史实：“五月渡泸，深入不毛”是诸葛亮在《出师表》中的原话；第二次擒获属于七擒故事。",
+  "people": [
+   "meng-huo",
+   "zhuge-liang"
+  ]
  },
  {
   "id": "ch088-third-capture",
@@ -3197,7 +4123,11 @@
   "lat": 26.5,
   "lon": 102.8,
   "summary": "Meng Huo's brother comes with gifts to surrender, Meng Huo planning to strike in the confusion; Zhuge Liang gets the brother's men drunk and takes Meng Huo a third time. Historically: the details are the novel's.",
-  "summary_zh": "孟获派弟弟孟优带礼物诈降，想里应外合。诸葛亮将计就计，灌醉孟优部众，第三次擒住孟获。史实：具体经过出自小说。"
+  "summary_zh": "孟获派弟弟孟优带礼物诈降，想里应外合。诸葛亮将计就计，灌醉孟优部众，第三次擒住孟获。史实：具体经过出自小说。",
+  "people": [
+   "meng-huo",
+   "zhuge-liang"
+  ]
  },
  {
   "id": "ch089-dumb-springs",
@@ -3213,7 +4143,10 @@
   "lat": 25.5,
   "lon": 102.9,
   "summary": "In the far south the soldiers drink from springs that strike them dumb or kill them; a hermit, brother of the rebel king, gives them a herb to cure it. Historically: there is no record of it; the springs and the herb are the novel's.",
-  "summary_zh": "大军深入南方，士兵误饮哑泉，失声或身亡。孟获之兄孟节隐居山中，以薤叶芸香相救。史实：并无记载，哑泉与解药都是小说情节。"
+  "summary_zh": "大军深入南方，士兵误饮哑泉，失声或身亡。孟获之兄孟节隐居山中，以薤叶芸香相救。史实：并无记载，哑泉与解药都是小说情节。",
+  "people": [
+   "meng-huo"
+  ]
  },
  {
   "id": "ch089-fifth-capture",
@@ -3229,7 +4162,10 @@
   "lat": 25.3,
   "lon": 102.95,
   "summary": "Even with the poisoned springs and the help of King Duosi, Meng Huo is betrayed by his own allies and delivered to Zhuge Liang a fifth time. Historically: the details are the novel's.",
-  "summary_zh": "孟获借毒泉和朵思大王之助，仍被部下杨锋等人缚送蜀营，第五次被擒。史实：具体经过出自小说。"
+  "summary_zh": "孟获借毒泉和朵思大王之助，仍被部下杨锋等人缚送蜀营，第五次被擒。史实：具体经过出自小说。",
+  "people": [
+   "meng-huo"
+  ]
  },
  {
   "id": "ch090-seven-captures",
@@ -3245,7 +4181,12 @@
   "lat": 24.88,
   "lon": 102.62,
   "summary": "Seven times Zhuge Liang captures the southern leader Meng Huo and six times lets him go, until Meng Huo swears the south will never rebel again. Historically: the 'seven captures and seven releases' appear in the Han-Jin chunqiu cited in the notes, not in the Records itself, and many historians doubt the number; the south did in fact rebel again within a few years.",
-  "summary_zh": "诸葛亮七次擒获南中首领孟获，六次释放，孟获终于心服，发誓“南人不复反矣”。史实：“七纵七禽”见于裴注引《汉晋春秋》，陈寿《三国志》正文并无记载，史家多怀疑这个次数；而且南中此后几年内仍有反叛。"
+  "summary_zh": "诸葛亮七次擒获南中首领孟获，六次释放，孟获终于心服，发誓“南人不复反矣”。史实：“七纵七禽”见于裴注引《汉晋春秋》，陈寿《三国志》正文并无记载，史家多怀疑这个次数；而且南中此后几年内仍有反叛。",
+  "people": [
+   "meng-huo",
+   "zhuge-liang",
+   "chen-shou"
+  ]
  },
  {
   "id": "ch090-rattan-armour",
@@ -3261,7 +4202,11 @@
   "lat": 24.6,
   "lon": 102.0,
   "summary": "The king of Wuge brings warriors in rattan armour soaked in oil, which arrows cannot pierce. Zhuge Liang lures them into Panshe Valley and burns thirty thousand, and weeps that he will be punished in heaven for it. Historically: neither the kingdom nor the battle is recorded.",
-  "summary_zh": "乌戈国王兀突骨率藤甲兵来援，藤甲浸油，刀箭不入。诸葛亮诱其入盘蛇谷，火烧三万藤甲兵，事后流泪说自己必损阳寿。史实：乌戈国和此战均不见于史书。"
+  "summary_zh": "乌戈国王兀突骨率藤甲兵来援，藤甲浸油，刀箭不入。诸葛亮诱其入盘蛇谷，火烧三万藤甲兵，事后流泪说自己必损阳寿。史实：乌戈国和此战均不见于史书。",
+  "people": [
+   "meng-huo",
+   "zhuge-liang"
+  ]
  },
  {
   "id": "ch090-beasts",
@@ -3277,7 +4222,11 @@
   "lat": 24.4,
   "lon": 102.5,
   "summary": "King Mulu rides an elephant and drives tigers, leopards and wolves at the Shu army. Zhuge Liang answers with painted wooden beasts that breathe fire and smoke, and the real ones turn and flee: the sixth capture. Historically: invented.",
-  "summary_zh": "木鹿大王骑白象、驱虎豹豺狼冲阵。诸葛亮造木刻彩绘的巨兽，口吐烟火，真兽反被吓退，第六次擒孟获。史实：并无此事。"
+  "summary_zh": "木鹿大王骑白象、驱虎豹豺狼冲阵。诸葛亮造木刻彩绘的巨兽，口吐烟火，真兽反被吓退，第六次擒孟获。史实：并无此事。",
+  "people": [
+   "zhuge-liang",
+   "meng-huo"
+  ]
  },
  {
   "id": "ch091-mantou",
@@ -3293,7 +4242,10 @@
   "lat": 26.55,
   "lon": 102.9,
   "summary": "The river spirits demand forty-nine human heads before the army can cross home. Zhuge Liang has dough shaped into heads stuffed with meat and offers those instead: the novel's story of how mantou, steamed buns, were invented. Historically: a legend; the name is first explained this way in a Song dynasty book.",
-  "summary_zh": "回师至泸水，狂风大作，当地习俗要以四十九颗人头祭河神。诸葛亮命人以面裹肉，做成人头模样代替祭祀，号为“馒头”。史实：这是传说，最早见于宋代的《事物纪原》。"
+  "summary_zh": "回师至泸水，狂风大作，当地习俗要以四十九颗人头祭河神。诸葛亮命人以面裹肉，做成人头模样代替祭祀，号为“馒头”。史实：这是传说，最早见于宋代的《事物纪原》。",
+  "people": [
+   "zhuge-liang"
+  ]
  },
  {
   "id": "ch091-memorial",
@@ -3309,7 +4261,11 @@
   "lat": 30.64,
   "lon": 104.04,
   "summary": "Before leaving for the north, Zhuge Liang submits his memorial to the young emperor: the realm is in three, Yizhou is weary, this is a time of mortal danger; keep worthy men close and petty men away; I was a commoner ploughing in Nanyang when the late emperor visited me three times. The text is in the Records, and it is still learned by heart in Chinese schools.",
-  "summary_zh": "北伐出师前，诸葛亮向后主上表：“今天下三分，益州疲弊，此诚危急存亡之秋也。”劝他亲贤臣、远小人，又追述“臣本布衣，躬耕于南阳……先帝不以臣卑鄙，猥自枉屈，三顾臣于草庐之中”。全文载于《三国志·诸葛亮传》，至今仍是中学课文。"
+  "summary_zh": "北伐出师前，诸葛亮向后主上表：“今天下三分，益州疲弊，此诚危急存亡之秋也。”劝他亲贤臣、远小人，又追述“臣本布衣，躬耕于南阳……先帝不以臣卑鄙，猥自枉屈，三顾臣于草庐之中”。全文载于《三国志·诸葛亮传》，至今仍是中学课文。",
+  "people": [
+   "zhuge-liang",
+   "liu-shan"
+  ]
  },
  {
   "id": "ch092-zhao-yun-old",
@@ -3325,7 +4281,10 @@
   "lat": 33.6,
   "lon": 107.05,
   "summary": "On the first northern expedition the old Zhao Yun kills five Wei generals in one day. Historically: Zhao Yun commanded the decoy force at Ji Valley, was beaten by superior numbers, and kept his army together in retreat; no generals died at his hand.",
-  "summary_zh": "第一次北伐，年过七旬的赵云一日之内连斩魏将五员。史实：赵云率疑兵出箕谷，因兵弱敌强而失利，但收拢部众固守，没有大败；并无斩将之事。"
+  "summary_zh": "第一次北伐，年过七旬的赵云一日之内连斩魏将五员。史实：赵云率疑兵出箕谷，因兵弱敌强而失利，但收拢部众固守，没有大败；并无斩将之事。",
+  "people": [
+   "zhao-yun"
+  ]
  },
  {
   "id": "ch092-three-commanderies",
@@ -3341,7 +4300,10 @@
   "lat": 34.75,
   "lon": 105.25,
   "summary": "As Zhuge Liang marches out through Qishan, the commanderies of Nan'an, Tianshui and Anding rise against Wei and declare for him. Guanzhong is in panic.",
-  "summary_zh": "诸葛亮出祁山，南安、天水、安定三郡叛魏响应，关中震动。"
+  "summary_zh": "诸葛亮出祁山，南安、天水、安定三郡叛魏响应，关中震动。",
+  "people": [
+   "zhuge-liang"
+  ]
  },
  {
   "id": "ch093-wang-lang",
@@ -3357,7 +4319,11 @@
   "lat": 34.1,
   "lon": 105.4,
   "summary": "Between the lines the seventy-six-year-old Wei minister Wang Lang tries to argue Zhuge Liang into surrender; Zhuge Liang calls him a grey-bearded traitor and he falls dead from his horse. Historically: Wang Lang died of illness in Luoyang in 228 and never went near the front.",
-  "summary_zh": "七十六岁的魏国司徒王朗在两军阵前劝诸葛亮投降，被诸葛亮痛骂为“皓首匹夫，苍髯老贼”，气得撞死马下。史实：王朗228年病逝于洛阳，从未到过前线。"
+  "summary_zh": "七十六岁的魏国司徒王朗在两军阵前劝诸葛亮投降，被诸葛亮痛骂为“皓首匹夫，苍髯老贼”，气得撞死马下。史实：王朗228年病逝于洛阳，从未到过前线。",
+  "people": [
+   "wang-lang",
+   "zhuge-liang"
+  ]
  },
  {
   "id": "ch093-jiang-wei",
@@ -3373,7 +4339,11 @@
   "lat": 34.7,
   "lon": 105.18,
   "summary": "The young Tianshui officer Jiang Wei, distrusted by his own governor and shut out of his city, goes over to Zhuge Liang, who soon calls him the best man in Liang province. He will carry on the war after Zhuge Liang's death.",
-  "summary_zh": "天水郡年轻将领姜维被太守猜疑，进不了城，只得投奔诸葛亮。诸葛亮称赞他是“凉州上士”。诸葛亮死后，正是他继续北伐。"
+  "summary_zh": "天水郡年轻将领姜维被太守猜疑，进不了城，只得投奔诸葛亮。诸葛亮称赞他是“凉州上士”。诸葛亮死后，正是他继续北伐。",
+  "people": [
+   "jiang-wei",
+   "zhuge-liang"
+  ]
  },
  {
   "id": "ch094-meng-da",
@@ -3389,7 +4359,10 @@
   "lat": 32.25,
   "lon": 110.25,
   "summary": "Meng Da, who had gone over to Wei, plans to come back to Shu. Sima Yi does not wait for orders: he covers twelve hundred li in eight days, takes the city in sixteen and beheads him.",
-  "summary_zh": "降魏的孟达密谋反正归蜀。司马懿不待奏报，八日行军一千二百里，围城十六日破之，斩孟达。"
+  "summary_zh": "降魏的孟达密谋反正归蜀。司马懿不待奏报，八日行军一千二百里，围城十六日破之，斩孟达。",
+  "people": [
+   "sima-yi"
+  ]
  },
  {
   "id": "ch094-qiang-snow",
@@ -3405,7 +4378,10 @@
   "lat": 35.2,
   "lon": 104.3,
   "summary": "Wei calls in a Qiang army with iron-clad war carts. Zhuge Liang waits for snow, has pits dug and covered, and the heavy carts pitch into them. Historically: invented.",
-  "summary_zh": "魏国请来西羌兵助战，羌兵有铁车阵。诸葛亮等大雪降下，在雪地里挖坑设伏，铁车纷纷陷落。史实：并无此事。"
+  "summary_zh": "魏国请来西羌兵助战，羌兵有铁车阵。诸葛亮等大雪降下，在雪地里挖坑设伏，铁车纷纷陷落。史实：并无此事。",
+  "people": [
+   "zhuge-liang"
+  ]
  },
  {
   "id": "ch095-jieting",
@@ -3421,7 +4397,12 @@
   "lat": 34.95,
   "lon": 105.83,
   "summary": "Given the key pass at Jieting, Ma Su ignores his orders and his deputy Wang Ping, leaves the road and the water, and camps on the hill. Zhang He cuts off his water and routs him, and the whole campaign collapses.",
-  "summary_zh": "马谡奉命守街亭，违背诸葛亮的部署，也不听副将王平劝阻，舍弃水源和要道，屯兵山上。张郃断其汲水之道，大破蜀军，第一次北伐功败垂成。"
+  "summary_zh": "马谡奉命守街亭，违背诸葛亮的部署，也不听副将王平劝阻，舍弃水源和要道，屯兵山上。张郃断其汲水之道，大破蜀军，第一次北伐功败垂成。",
+  "people": [
+   "ma-su",
+   "zhuge-liang",
+   "zhang-he"
+  ]
  },
  {
   "id": "ch095-empty-fort",
@@ -3437,7 +4418,12 @@
   "lat": 34.2,
   "lon": 105.3,
   "summary": "With only a few thousand men in Xicheng and Sima Yi's army arriving, Zhuge Liang opens the gates, has old soldiers sweep the road, and sits on the wall playing the zither. Sima Yi, knowing him too careful to take such a risk, suspects a trap and withdraws. Historically: the story comes from Guo Chong's anecdotes in the notes, and Pei Songzhi himself refuted it: Sima Yi was then stationed far away in Jingzhou. The real empty-gate trick was Zhao Yun's on the Han River in 219.",
-  "summary_zh": "西城只剩两千五百老弱，司马懿十五万大军将至。诸葛亮大开城门，令老军洒扫街道，自己在城楼上焚香抚琴。司马懿知他一生谨慎，疑有埋伏，引兵退去。史实：此事出自裴注所引郭冲所述，裴松之当即驳斥，指出司马懿当时远在荆州宛城。真正的“空营计”是219年赵云在汉水所用。"
+  "summary_zh": "西城只剩两千五百老弱，司马懿十五万大军将至。诸葛亮大开城门，令老军洒扫街道，自己在城楼上焚香抚琴。司马懿知他一生谨慎，疑有埋伏，引兵退去。史实：此事出自裴注所引郭冲所述，裴松之当即驳斥，指出司马懿当时远在荆州宛城。真正的“空营计”是219年赵云在汉水所用。",
+  "people": [
+   "sima-yi",
+   "zhuge-liang",
+   "zhao-yun"
+  ]
  },
  {
   "id": "ch096-ma-su-executed",
@@ -3453,7 +4439,12 @@
   "lat": 33.07,
   "lon": 107.03,
   "summary": "Zhuge Liang has Ma Su executed for the loss of Jieting, weeping, and asks to be demoted three grades himself for having chosen him. Liu Bei had warned him that Ma Su's words outran his ability.",
-  "summary_zh": "诸葛亮依军法斩了马谡，挥泪不止，又上表自贬三等，承担用人不当之责。刘备生前曾告诫他：马谡言过其实，不可大用。"
+  "summary_zh": "诸葛亮依军法斩了马谡，挥泪不止，又上表自贬三等，承担用人不当之责。刘备生前曾告诫他：马谡言过其实，不可大用。",
+  "people": [
+   "zhuge-liang",
+   "ma-su",
+   "liu-bei"
+  ]
  },
  {
   "id": "ch096-shiting",
@@ -3469,7 +4460,10 @@
   "lat": 30.9,
   "lon": 116.95,
   "summary": "To convince Wei that his defection is real, the Wu governor Zhou Fang cuts off his hair in front of the envoys. Cao Xiu marches deep into Wu to receive him and Lu Xun crushes him at Shiting.",
-  "summary_zh": "东吴鄱阳太守周鲂诈降，为取信于魏，当着使者的面剪下头发谢罪。曹休率军深入接应，在石亭被陆逊大败。"
+  "summary_zh": "东吴鄱阳太守周鲂诈降，为取信于魏，当着使者的面剪下头发谢罪。曹休率军深入接应，在石亭被陆逊大败。",
+  "people": [
+   "lu-xun"
+  ]
  },
  {
   "id": "ch097-zhao-yun-dies",
@@ -3485,7 +4479,12 @@
   "lat": 30.7,
   "lon": 104.05,
   "summary": "As Zhuge Liang prepares to march again, word comes that Zhao Yun has died. Zhuge Liang stamps and weeps that he has lost an arm. Historically: Zhao Yun died in 229, a year later than the novel has it; Liu Bei's praise, 'courage from head to foot', is from the Zhao Yun biezhuan.",
-  "summary_zh": "诸葛亮正准备再次北伐，传来赵云病故的消息，诸葛亮跌足痛哭，说“国家损一栋梁，吾去一臂也”。史实：赵云卒于229年，比小说晚一年；刘备称赞他“一身都是胆”，见于裴注引《赵云别传》。"
+  "summary_zh": "诸葛亮正准备再次北伐，传来赵云病故的消息，诸葛亮跌足痛哭，说“国家损一栋梁，吾去一臂也”。史实：赵云卒于229年，比小说晚一年；刘备称赞他“一身都是胆”，见于裴注引《赵云别传》。",
+  "people": [
+   "zhao-yun",
+   "zhuge-liang",
+   "liu-bei"
+  ]
  },
  {
   "id": "ch097-second-memorial",
@@ -3501,7 +4500,10 @@
   "lat": 33.12,
   "lon": 107.0,
   "summary": "Zhuge Liang submits a second memorial before marching again, ending: I shall bend my back to the task until death. Historically: the 'Later Memorial' is not in Zhuge Liang's collected works and is known only from a later copy cited in the notes; its authenticity has been argued over for centuries.",
-  "summary_zh": "诸葛亮再次北伐前又上一表，末句为“鞠躬尽瘁，死而后已”。史实：《后出师表》不见于《诸葛亮集》，只靠裴注引张俨《默记》流传下来，其真伪千百年来争论不休。"
+  "summary_zh": "诸葛亮再次北伐前又上一表，末句为“鞠躬尽瘁，死而后已”。史实：《后出师表》不见于《诸葛亮集》，只靠裴注引张俨《默记》流传下来，其真伪千百年来争论不休。",
+  "people": [
+   "zhuge-liang"
+  ]
  },
  {
   "id": "ch097-jiang-wei-letter",
@@ -3517,7 +4519,10 @@
   "lat": 34.22,
   "lon": 106.9,
   "summary": "Jiang Wei sends Cao Zhen a secret letter offering to come back to Wei and open the Shu lines; Cao Zhen marches to meet him and into an ambush. Historically: invented.",
-  "summary_zh": "姜维写密信给曹真，诈称愿意反正归魏、里应外合。曹真信以为真，领兵接应，中了埋伏。史实：并无此事。"
+  "summary_zh": "姜维写密信给曹真，诈称愿意反正归魏、里应外合。曹真信以为真，领兵接应，中了埋伏。史实：并无此事。",
+  "people": [
+   "jiang-wei"
+  ]
  },
  {
   "id": "ch098-chencang",
@@ -3533,7 +4538,10 @@
   "lat": 34.37,
   "lon": 107.15,
   "summary": "Zhuge Liang besieges Chencang, and in the novel takes it after its defender Hao Zhao falls ill. Historically: Hao Zhao held Chencang with a thousand men against every siege engine Zhuge Liang had for over twenty days, and Zhuge Liang withdrew when his food ran out.",
-  "summary_zh": "诸葛亮围攻陈仓，小说写守将郝昭病重时诸葛亮破城。史实：郝昭以千余人坚守陈仓，诸葛亮云梯、冲车、地道轮番进攻二十余日不能下，粮尽退兵。"
+  "summary_zh": "诸葛亮围攻陈仓，小说写守将郝昭病重时诸葛亮破城。史实：郝昭以千余人坚守陈仓，诸葛亮云梯、冲车、地道轮番进攻二十余日不能下，粮尽退兵。",
+  "people": [
+   "zhuge-liang"
+  ]
  },
  {
   "id": "ch098-wang-shuang",
@@ -3549,7 +4557,10 @@
   "lat": 34.27,
   "lon": 106.98,
   "summary": "As Shu pulls back from Chencang, the Wei cavalry officer Wang Shuang gives chase and is killed. The Records names him.",
-  "summary_zh": "蜀军从陈仓撤退，魏将王双率骑兵追击，被诸葛亮击斩。《三国志·诸葛亮传》记有其名。"
+  "summary_zh": "蜀军从陈仓撤退，魏将王双率骑兵追击，被诸葛亮击斩。《三国志·诸葛亮传》记有其名。",
+  "people": [
+   "zhuge-liang"
+  ]
  },
  {
   "id": "ch098-sun-quan-emperor",
@@ -3565,7 +4576,10 @@
   "lat": 30.4,
   "lon": 114.88,
   "summary": "Sun Quan takes the title of emperor at Wuchang and soon moves his capital to Jianye. Shu, rather than break the alliance, sends congratulations: now there are three emperors.",
-  "summary_zh": "孙权在武昌即皇帝位，不久迁都建业。蜀汉为保全联盟，遣使祝贺。至此三国皆已称帝。"
+  "summary_zh": "孙权在武昌即皇帝位，不久迁都建业。蜀汉为保全联盟，遣使祝贺。至此三国皆已称帝。",
+  "people": [
+   "sun-quan"
+  ]
  },
  {
   "id": "ch099-wudu-yinping",
@@ -3581,7 +4595,10 @@
   "lat": 33.75,
   "lon": 105.7,
   "summary": "On the third expedition Chen Shi takes Wudu and Yinping, and Zhuge Liang drives off the Wei relief army. The only lasting territorial gain of all the northern campaigns.",
-  "summary_zh": "第三次北伐，陈式攻取武都、阴平二郡，诸葛亮击退魏国援军。这是历次北伐中唯一长期守住的战果。"
+  "summary_zh": "第三次北伐，陈式攻取武都、阴平二郡，诸葛亮击退魏国援军。这是历次北伐中唯一长期守住的战果。",
+  "people": [
+   "zhuge-liang"
+  ]
  },
  {
   "id": "ch099-sima-yi-han-river",
@@ -3597,7 +4614,11 @@
   "lat": 32.68,
   "lon": 109.0,
   "summary": "Wei strikes back: Cao Zhen through the Ziwu Valley, Zhang He through the Xie Valley, Sima Yi up the Han River from Wan. Thirty days of rain end it before the armies meet.",
-  "summary_zh": "魏国三路伐蜀：曹真出子午谷，张郃出斜谷，司马懿从宛城溯汉水西上。连降三十多天大雨，各路未及交战便撤回。"
+  "summary_zh": "魏国三路伐蜀：曹真出子午谷，张郃出斜谷，司马懿从宛城溯汉水西上。连降三十多天大雨，各路未及交战便撤回。",
+  "people": [
+   "sima-yi",
+   "zhang-he"
+  ]
  },
  {
   "id": "ch100-cao-zhen-rains",
@@ -3613,7 +4634,10 @@
   "lat": 33.75,
   "lon": 108.7,
   "summary": "Wei invades Shu by three roads; the rain falls for thirty days, the roads wash out, and the armies turn back. In the novel Zhuge Liang then writes Cao Zhen a mocking letter that kills him with rage. Historically: the rains and the retreat are recorded; Cao Zhen died of illness the next year.",
-  "summary_zh": "曹真等率魏军三路伐蜀，连降大雨三十余日，栈道断绝，只得撤兵。小说又写诸葛亮致书羞辱曹真，将他活活气死。史实：大雨退兵有记载；曹真是次年病逝的。"
+  "summary_zh": "曹真等率魏军三路伐蜀，连降大雨三十余日，栈道断绝，只得撤兵。小说又写诸葛亮致书羞辱曹真，将他活活气死。史实：大雨退兵有记载；曹真是次年病逝的。",
+  "people": [
+   "zhuge-liang"
+  ]
  },
  {
   "id": "ch100-battle-formations",
@@ -3629,7 +4653,11 @@
   "lat": 34.15,
   "lon": 105.45,
   "summary": "Sima Yi challenges Zhuge Liang to a contest of battle formations. Zhuge Liang names each of Sima Yi's at a glance, then lays out his own Eight Trigrams formation, and Sima Yi's officers go in and are captured. Historically: invented.",
-  "summary_zh": "司马懿与诸葛亮斗阵法，诸葛亮一眼识破对方阵名，又摆出八卦阵，魏将闯入阵中纷纷被擒。史实：并无此事。"
+  "summary_zh": "司马懿与诸葛亮斗阵法，诸葛亮一眼识破对方阵名，又摆出八卦阵，魏将闯入阵中纷纷被擒。史实：并无此事。",
+  "people": [
+   "sima-yi",
+   "zhuge-liang"
+  ]
  },
  {
   "id": "ch101-zhang-he",
@@ -3645,7 +4673,11 @@
   "lat": 34.35,
   "lon": 105.55,
   "summary": "Ordered by Sima Yi to pursue the retreating Shu army against his own judgement, the veteran Zhang He is ambushed at Mumen and killed by an arrow in the knee.",
-  "summary_zh": "司马懿令张郃追击撤退的蜀军，张郃认为不宜追击而被迫出兵，在木门道遭蜀军伏击，右膝中箭身亡。"
+  "summary_zh": "司马懿令张郃追击撤退的蜀军，张郃认为不宜追击而被迫出兵，在木门道遭蜀军伏击，右膝中箭身亡。",
+  "people": [
+   "zhang-he",
+   "sima-yi"
+  ]
  },
  {
   "id": "ch101-shanggui-wheat",
@@ -3661,7 +4693,11 @@
   "lat": 34.58,
   "lon": 105.7,
   "summary": "Short of food, Zhuge Liang harvests the Wei wheat at Shanggui while his men, dressed as spirits, frighten Sima Yi's scouts. Historically: the wheat harvest at Shanggui is recorded; the disguises are the novel's.",
-  "summary_zh": "蜀军缺粮，诸葛亮到上邽抢割魏国麦子，又让士兵扮作天神，吓退司马懿的探马。史实：上邽割麦有记载，装神弄鬼是小说情节。"
+  "summary_zh": "蜀军缺粮，诸葛亮到上邽抢割魏国麦子，又让士兵扮作天神，吓退司马懿的探马。史实：上邽割麦有记载，装神弄鬼是小说情节。",
+  "people": [
+   "zhuge-liang",
+   "sima-yi"
+  ]
  },
  {
   "id": "ch102-wooden-oxen",
@@ -3677,7 +4713,11 @@
   "lat": 34.0,
   "lon": 107.4,
   "summary": "To carry grain over the mountain roads Zhuge Liang builds the 'wooden ox' and 'gliding horse', and later tricks Sima Yi with ones that stop when a hidden tongue is twisted. Historically: the transport machines are recorded, used in 231 and 234; how they worked is unknown. The trick is the novel's.",
-  "summary_zh": "为在蜀道运粮，诸葛亮造木牛流马；小说又写他让司马懿仿造，再扭转牛舌使其不能行动，劫走魏粮。史实：木牛、流马见于《三国志·诸葛亮传》，分别用于231年和234年，构造早已失传；扭舌劫粮出自小说。"
+  "summary_zh": "为在蜀道运粮，诸葛亮造木牛流马；小说又写他让司马懿仿造，再扭转牛舌使其不能行动，劫走魏粮。史实：木牛、流马见于《三国志·诸葛亮传》，分别用于231年和234年，构造早已失传；扭舌劫粮出自小说。",
+  "people": [
+   "zhuge-liang",
+   "sima-yi"
+  ]
  },
  {
   "id": "ch102-north-plain",
@@ -3693,7 +4733,11 @@
   "lat": 34.35,
   "lon": 107.5,
   "summary": "Guo Huai sees that if Zhuge Liang crosses the Wei and takes the northern plain he can cut the road to the west, and seizes it first. The campaign settles into a stalemate across the river.",
-  "summary_zh": "郭淮看出诸葛亮若渡渭水占据北原，就能隔断陇右通道，抢先屯兵北原。两军从此隔着渭水对峙。"
+  "summary_zh": "郭淮看出诸葛亮若渡渭水占据北原，就能隔断陇右通道，抢先屯兵北原。两军从此隔着渭水对峙。",
+  "people": [
+   "sima-yi",
+   "zhuge-liang"
+  ]
  },
  {
   "id": "ch103-shangfang-valley",
@@ -3709,7 +4753,11 @@
   "lat": 34.25,
   "lon": 107.5,
   "summary": "Zhuge Liang lures Sima Yi and his sons into a valley and sets it alight; a sudden downpour puts out the fire and they escape. Zhuge Liang sighs: man proposes, heaven disposes. Historically: there is no record of it.",
-  "summary_zh": "诸葛亮诱司马懿父子进入上方谷，四面火起，眼看全军覆没，忽然天降大雨浇灭大火，司马懿得以逃脱。诸葛亮叹道：“谋事在人，成事在天。”史实：并无此事记载。"
+  "summary_zh": "诸葛亮诱司马懿父子进入上方谷，四面火起，眼看全军覆没，忽然天降大雨浇灭大火，司马懿得以逃脱。诸葛亮叹道：“谋事在人，成事在天。”史实：并无此事记载。",
+  "people": [
+   "zhuge-liang",
+   "sima-yi"
+  ]
  },
  {
   "id": "ch103-seven-lamps",
@@ -3725,7 +4773,11 @@
   "lat": 34.31,
   "lon": 107.63,
   "summary": "Falling ill, Zhuge Liang lights forty-nine lamps around his tent to pray for twelve more years; if the main lamp stays lit for seven days he will live. On the sixth night Wei Yan bursts in and knocks it out. Historically: invented.",
-  "summary_zh": "诸葛亮病重，在帐中点四十九盏灯祈禳北斗，若主灯七日不灭，可延寿一纪。第六夜魏延闯入帐中报信，扑灭了主灯。史实：并无此事。"
+  "summary_zh": "诸葛亮病重，在帐中点四十九盏灯祈禳北斗，若主灯七日不灭，可延寿一纪。第六夜魏延闯入帐中报信，扑灭了主灯。史实：并无此事。",
+  "people": [
+   "zhuge-liang",
+   "wei-yan"
+  ]
  },
  {
   "id": "ch104-wuzhang",
@@ -3741,7 +4793,11 @@
   "lat": 34.28,
   "lon": 107.65,
   "summary": "After a hundred days facing Sima Yi across the Wei River, Zhuge Liang dies in camp at fifty-four. The army withdraws in good order, and when Sima Yi pursues and the Shu banners turn to face him, he flees: the people said 'a dead Zhuge put a living Zhongda to flight'. The saying is recorded in the Han-Jin chunqiu.",
-  "summary_zh": "诸葛亮与司马懿在渭水相持百余日，病逝于五丈原军中，年五十四岁。蜀军有序撤退，司马懿追来，蜀军反旗鸣鼓作势迎战，司马懿急忙退走。百姓编出谚语：“死诸葛走生仲达。”此语见于裴注引《汉晋春秋》。"
+  "summary_zh": "诸葛亮与司马懿在渭水相持百余日，病逝于五丈原军中，年五十四岁。蜀军有序撤退，司马懿追来，蜀军反旗鸣鼓作势迎战，司马懿急忙退走。百姓编出谚语：“死诸葛走生仲达。”此语见于裴注引《汉晋春秋》。",
+  "people": [
+   "zhuge-liang",
+   "sima-yi"
+  ]
  },
  {
   "id": "ch104-wooden-statue",
@@ -3757,7 +4813,11 @@
   "lat": 34.2,
   "lon": 107.55,
   "summary": "Sima Yi pursues the retreating Shu army; it turns, and in the middle sits Zhuge Liang in his carriage. Sima Yi flees, feeling for his head. It was a wooden statue. Historically: the Han-Jin chunqiu says the Shu army turned its banners and beat its drums, and Sima Yi fell back; the statue is the novel's.",
-  "summary_zh": "司马懿追击撤退的蜀军，蜀军忽然回旗返鼓，中间推出诸葛亮端坐车上。司马懿大惊而逃，一路摸着脑袋问“吾有头否”。那是一尊木像。史实：裴注引《汉晋春秋》载蜀军反旗鸣鼓作势，司马懿退走；木像出自小说。"
+  "summary_zh": "司马懿追击撤退的蜀军，蜀军忽然回旗返鼓，中间推出诸葛亮端坐车上。司马懿大惊而逃，一路摸着脑袋问“吾有头否”。那是一尊木像。史实：裴注引《汉晋春秋》载蜀军反旗鸣鼓作势，司马懿退走；木像出自小说。",
+  "people": [
+   "sima-yi",
+   "zhuge-liang"
+  ]
  },
  {
   "id": "ch105-wei-yan",
@@ -3773,7 +4833,12 @@
   "lat": 33.2,
   "lon": 106.95,
   "summary": "Wei Yan refuses to retreat under Yang Yi and turns on him. Riding out, he shouts three times 'who dares kill me?', and Ma Dai, following Zhuge Liang's sealed instructions, answers 'I dare!' and cuts him down. Historically: Wei Yan's feud with Yang Yi, his burning of the plank roads and his death at Ma Dai's hands are recorded; the sealed bag and the shout are the novel's. Chen Shou thought Wei Yan meant to fight Yang Yi, not to defect.",
-  "summary_zh": "魏延不服杨仪统领，率部烧断栈道相攻。他在阵前连喊三声“谁敢杀我”，马岱依诸葛亮锦囊之计应声“吾敢杀汝”，一刀斩之。史实：魏延与杨仪相争、烧绝栈道、被马岱追斩都有记载；锦囊与喊话出自小说。陈寿认为魏延只是想除掉杨仪，并无投魏之意。"
+  "summary_zh": "魏延不服杨仪统领，率部烧断栈道相攻。他在阵前连喊三声“谁敢杀我”，马岱依诸葛亮锦囊之计应声“吾敢杀汝”，一刀斩之。史实：魏延与杨仪相争、烧绝栈道、被马岱追斩都有记载；锦囊与喊话出自小说。陈寿认为魏延只是想除掉杨仪，并无投魏之意。",
+  "people": [
+   "wei-yan",
+   "zhuge-liang",
+   "chen-shou"
+  ]
  },
  {
   "id": "ch105-dew-plate",
@@ -3805,7 +4870,11 @@
   "lat": 41.27,
   "lon": 123.17,
   "summary": "The Liaodong warlord Gongsun Yuan proclaims himself king. Sima Yi marches four thousand li, waits out the summer rains, takes Xiangping and kills him and every man over fifteen in the city.",
-  "summary_zh": "辽东公孙渊自立为燕王。司马懿远征四千里，熬过夏季大雨，攻破襄平，斩公孙渊，屠杀城中十五岁以上男子七千余人。"
+  "summary_zh": "辽东公孙渊自立为燕王。司马懿远征四千里，熬过夏季大雨，攻破襄平，斩公孙渊，屠杀城中十五岁以上男子七千余人。",
+  "people": [
+   "gongsun-yuan",
+   "sima-yi"
+  ]
  },
  {
   "id": "ch106-feigned-illness",
@@ -3821,7 +4890,10 @@
   "lat": 34.72,
   "lon": 112.62,
   "summary": "Pushed aside by the regent Cao Shuang, Sima Yi receives Cao Shuang's man Li Sheng in bed, mishears every word, and dribbles porridge down his chest. Li Sheng reports that the old man is finished. The scene is in the Book of Jin.",
-  "summary_zh": "司马懿被大将军曹爽架空，曹爽心腹李胜来探病，司马懿装作耳聋糊涂，喝粥时汤水流满前襟。李胜回报说司马懿已不足为虑。此事载于《晋书·宣帝纪》。"
+  "summary_zh": "司马懿被大将军曹爽架空，曹爽心腹李胜来探病，司马懿装作耳聋糊涂，喝粥时汤水流满前襟。李胜回报说司马懿已不足为虑。此事载于《晋书·宣帝纪》。",
+  "people": [
+   "sima-yi"
+  ]
  },
  {
   "id": "ch107-gaopingling",
@@ -3837,7 +4909,10 @@
   "lat": 34.4,
   "lon": 112.55,
   "summary": "When Cao Shuang takes the young emperor out of the city to visit the imperial tomb, Sima Yi seizes Luoyang. Promised his life and fortune, Cao Shuang gives up; he and his family are executed days later. From now on Wei belongs to the Sima.",
-  "summary_zh": "曹爽陪少帝曹芳出城拜谒高平陵，司马懿趁机关闭城门，控制洛阳。曹爽得到保全性命的承诺后交出兵权，数日后即被夷灭三族。从此魏国大权归于司马氏。"
+  "summary_zh": "曹爽陪少帝曹芳出城拜谒高平陵，司马懿趁机关闭城门，控制洛阳。曹爽得到保全性命的承诺后交出兵权，数日后即被夷灭三族。从此魏国大权归于司马氏。",
+  "people": [
+   "sima-yi"
+  ]
  },
  {
   "id": "ch107-niutou",
@@ -3853,7 +4928,10 @@
   "lat": 34.45,
   "lon": 104.2,
   "summary": "Jiang Wei's first independent campaign into Yong province ends when Guo Huai cuts his road back at Niutou Mountain.",
-  "summary_zh": "姜维首次独立北伐雍州，被郭淮在牛头山截断退路，无功而返。"
+  "summary_zh": "姜维首次独立北伐雍州，被郭淮在牛头山截断退路，无功而返。",
+  "people": [
+   "jiang-wei"
+  ]
  },
  {
   "id": "ch108-dongxing",
@@ -3885,7 +4963,10 @@
   "lat": 32.08,
   "lon": 118.78,
   "summary": "Zhuge Ke, the Wu regent and Zhuge Liang's nephew, comes back from a disastrous campaign and is murdered at a palace banquet by Sun Jun.",
-  "summary_zh": "东吴权臣诸葛恪（诸葛亮之侄、诸葛瑾之子）北伐新城大败而归，在宫中宴席上被孙峻伏兵杀死。"
+  "summary_zh": "东吴权臣诸葛恪（诸葛亮之侄、诸葛瑾之子）北伐新城大败而归，在宫中宴席上被孙峻伏兵杀死。",
+  "people": [
+   "zhuge-liang"
+  ]
  },
  {
   "id": "ch109-tielong",
@@ -3901,7 +4982,11 @@
   "lat": 34.7,
   "lon": 103.8,
   "summary": "Jiang Wei traps Sima Zhao on a waterless mountain; Sima Zhao prays and a spring gushes out, and he is rescued. Historically: invented.",
-  "summary_zh": "姜维把司马昭围困在缺水的铁笼山上，司马昭拜泉求水，泉水涌出，后被救出。史实：并无此事。"
+  "summary_zh": "姜维把司马昭围困在缺水的铁笼山上，司马昭拜泉求水，泉水涌出，后被救出。史实：并无此事。",
+  "people": [
+   "jiang-wei",
+   "sima-zhao"
+  ]
  },
  {
   "id": "ch109-cao-fang-deposed",
@@ -3933,7 +5018,10 @@
   "lat": 35.4,
   "lon": 103.85,
   "summary": "Jiang Wei wins his greatest victory, killing tens of thousands of Wei soldiers on the Tao River, and besieges Didao, but has to fall back when relief comes.",
-  "summary_zh": "姜维在洮水西岸大破魏军，斩杀数万人，这是他北伐中最大的一次胜利，随后围攻狄道，因魏援军赶到而撤退。"
+  "summary_zh": "姜维在洮水西岸大破魏军，斩杀数万人，这是他北伐中最大的一次胜利，随后围攻狄道，因魏援军赶到而撤退。",
+  "people": [
+   "jiang-wei"
+  ]
  },
  {
   "id": "ch110-wen-yang",
@@ -3965,7 +5053,11 @@
   "lat": 34.45,
   "lon": 105.5,
   "summary": "Deng Ai anticipates Jiang Wei's route and destroys his army at Duangu; Shu's strength never recovers.",
-  "summary_zh": "邓艾预判姜维进军路线，在段谷大破蜀军，蜀汉元气大伤，从此一蹶不振。"
+  "summary_zh": "邓艾预判姜维进军路线，在段谷大破蜀军，蜀汉元气大伤，从此一蹶不振。",
+  "people": [
+   "deng-ai",
+   "jiang-wei"
+  ]
  },
  {
   "id": "ch111-zhuge-dan",
@@ -3981,7 +5073,10 @@
   "lat": 32.57,
   "lon": 116.78,
   "summary": "Zhuge Dan, governor in the east and a kinsman of Zhuge Liang, rises against Sima Zhao with Wu's help. Sima Zhao besieges Shouchun with the emperor and the empress dowager in his train, so that no one can act behind his back.",
-  "summary_zh": "镇东大将军诸葛诞在寿春起兵讨伐司马昭，东吴派兵援助。司马昭挟持皇帝和太后随军亲征，防止后方生变，率大军围攻寿春。"
+  "summary_zh": "镇东大将军诸葛诞在寿春起兵讨伐司马昭，东吴派兵援助。司马昭挟持皇帝和太后随军亲征，防止后方生变，率大军围攻寿春。",
+  "people": [
+   "sima-zhao"
+  ]
  },
  {
   "id": "ch112-changcheng",
@@ -3997,7 +5092,11 @@
   "lat": 34.05,
   "lon": 108.2,
   "summary": "While Wei is busy with Zhuge Dan's rising, Jiang Wei comes out through the Luo Valley to the grain stores at Changcheng, but Sima Wang and Deng Ai hold firm and he withdraws.",
-  "summary_zh": "趁魏国忙于平定诸葛诞，姜维出骆谷，直逼长城囤粮处，司马望、邓艾坚守不战，姜维只得撤回。"
+  "summary_zh": "趁魏国忙于平定诸葛诞，姜维出骆谷，直逼长城囤粮处，司马望、邓艾坚守不战，姜维只得撤回。",
+  "people": [
+   "jiang-wei",
+   "deng-ai"
+  ]
  },
  {
   "id": "ch112-shouchun-falls",
@@ -4045,7 +5144,12 @@
   "lat": 34.08,
   "lon": 105.42,
   "summary": "Deng Ai challenges Jiang Wei to a contest of formations and Jiang Wei, who learned from Zhuge Liang, wins it. Historically: invented.",
-  "summary_zh": "邓艾与姜维斗阵，姜维得诸葛亮真传，以八阵之法取胜。史实：并无此事。"
+  "summary_zh": "邓艾与姜维斗阵，姜维得诸葛亮真传，以八阵之法取胜。史实：并无此事。",
+  "people": [
+   "jiang-wei",
+   "deng-ai",
+   "zhuge-liang"
+  ]
  },
  {
   "id": "ch114-cao-mao",
@@ -4061,7 +5165,10 @@
   "lat": 34.69,
   "lon": 112.64,
   "summary": "'Sima Zhao's heart is known to every man in the street', says the nineteen-year-old emperor Cao Mao, and leads a few hundred palace servants out to attack him. One of Sima Zhao's officers runs him through with a spear in the street. The saying is in the Han-Jin chunqiu.",
-  "summary_zh": "十九岁的魏帝曹髦说“司马昭之心，路人所知也”，亲率宫中数百僮仆出宫讨伐司马昭，在南阙下被司马昭部下成济一戈刺穿胸膛而死。这句话见于裴注引《汉晋春秋》。"
+  "summary_zh": "十九岁的魏帝曹髦说“司马昭之心，路人所知也”，亲率宫中数百僮仆出宫讨伐司马昭，在南阙下被司马昭部下成济一戈刺穿胸膛而死。这句话见于裴注引《汉晋春秋》。",
+  "people": [
+   "sima-zhao"
+  ]
  },
  {
   "id": "ch114-abandoned-grain",
@@ -4077,7 +5184,10 @@
   "lat": 34.15,
   "lon": 105.35,
   "summary": "Jiang Wei leaves a train of grain carts as bait; the Wei troops rush to seize it and are cut to pieces. Historically: invented.",
-  "summary_zh": "姜维故意丢弃粮车，魏军争抢粮草，被伏兵冲杀。史实：并无此事。"
+  "summary_zh": "姜维故意丢弃粮车，魏军争抢粮草，被伏兵冲杀。史实：并无此事。",
+  "people": [
+   "jiang-wei"
+  ]
  },
  {
   "id": "ch115-tazhong",
@@ -4093,7 +5203,10 @@
   "lat": 34.05,
   "lon": 103.6,
   "summary": "With the eunuch Huang Hao in favour at court and his own campaigns blamed for Shu's exhaustion, Jiang Wei withdraws to farm with his army at Tazhong, far from Chengdu.",
-  "summary_zh": "宦官黄皓得宠专权，姜维屡次北伐也遭朝臣非议。他为避祸，率军到远离成都的沓中屯田。"
+  "summary_zh": "宦官黄皓得宠专权，姜维屡次北伐也遭朝臣非议。他为避祸，率军到远离成都的沓中屯田。",
+  "people": [
+   "jiang-wei"
+  ]
  },
  {
   "id": "ch115-huang-hao",
@@ -4109,7 +5222,11 @@
   "lat": 30.69,
   "lon": 104.08,
   "summary": "The eunuch Huang Hao runs the court. Jiang Wei asks Liu Shan to execute him; Liu Shan refuses, and Jiang Wei, fearing for himself, takes his army off to farm at Tazhong. Jiang Wei's biography records it.",
-  "summary_zh": "宦官黄皓专权，姜维奏请后主诛杀黄皓，后主不许。姜维怕遭陷害，率军到沓中屯田避祸。见于《三国志·姜维传》。"
+  "summary_zh": "宦官黄皓专权，姜维奏请后主诛杀黄皓，后主不许。姜维怕遭陷害，率军到沓中屯田避祸。见于《三国志·姜维传》。",
+  "people": [
+   "liu-shan",
+   "jiang-wei"
+  ]
  },
  {
   "id": "ch116-zhong-hui",
@@ -4125,7 +5242,12 @@
   "lat": 33.0,
   "lon": 106.9,
   "summary": "Sima Zhao sends three armies against Shu. Zhong Hui pours through Hanzhong with a hundred thousand men, and on the way pays his respects at Zhuge Liang's tomb on Mount Dingjun, forbidding his soldiers to cut wood near it. The novel has Zhuge Liang's ghost appear to him there.",
-  "summary_zh": "司马昭三路伐蜀，钟会率十余万大军经汉中南下，途中到定军山祭拜诸葛亮墓，下令士兵不得在墓旁砍柴放牧。小说又写诸葛亮在此显圣，嘱他勿伤百姓。"
+  "summary_zh": "司马昭三路伐蜀，钟会率十余万大军经汉中南下，途中到定军山祭拜诸葛亮墓，下令士兵不得在墓旁砍柴放牧。小说又写诸葛亮在此显圣，嘱他勿伤百姓。",
+  "people": [
+   "zhong-hui",
+   "sima-zhao",
+   "zhuge-liang"
+  ]
  },
  {
   "id": "ch116-dingjun-ghost",
@@ -4141,7 +5263,11 @@
   "lat": 33.08,
   "lon": 106.66,
   "summary": "Zhong Hui, offering sacrifice at Zhuge Liang's tomb, sees the ghost of the chancellor, who asks him to spare the people of Shu. Historically: Zhong Hui did sacrifice at the tomb and forbade his soldiers to cut wood near it; the ghost is the novel's.",
-  "summary_zh": "钟会到定军山诸葛亮墓前祭拜，忽见武侯显圣，嘱他入川后勿伤百姓。史实：钟会确曾祭拜诸葛亮墓，并下令士兵不得在墓旁砍柴放牧；显圣出自小说。"
+  "summary_zh": "钟会到定军山诸葛亮墓前祭拜，忽见武侯显圣，嘱他入川后勿伤百姓。史实：钟会确曾祭拜诸葛亮墓，并下令士兵不得在墓旁砍柴放牧；显圣出自小说。",
+  "people": [
+   "zhong-hui",
+   "zhuge-liang"
+  ]
  },
  {
   "id": "ch117-yinping",
@@ -4157,7 +5283,12 @@
   "lat": 32.6,
   "lon": 104.6,
   "summary": "With Jiang Wei holding Zhong Hui at Jiange, Deng Ai takes a column through seven hundred li of roadless mountains, cutting paths and bridging gorges; at one cliff he wraps himself in a felt blanket and rolls down. The Records tells it.",
-  "summary_zh": "姜维在剑阁挡住钟会，邓艾率偏师从阴平小道穿越七百余里无人山区，凿山开路、架桥过涧，到了险绝之处，邓艾用毛毡裹住身体，翻滚而下。《三国志·邓艾传》有载。"
+  "summary_zh": "姜维在剑阁挡住钟会，邓艾率偏师从阴平小道穿越七百余里无人山区，凿山开路、架桥过涧，到了险绝之处，邓艾用毛毡裹住身体，翻滚而下。《三国志·邓艾传》有载。",
+  "people": [
+   "deng-ai",
+   "jiang-wei",
+   "zhong-hui"
+  ]
  },
  {
   "id": "ch117-mianzhu",
@@ -4173,7 +5304,11 @@
   "lat": 31.35,
   "lon": 104.2,
   "summary": "Zhuge Liang's son Zhuge Zhan and grandson Zhuge Shang refuse Deng Ai's offer to make them kings and die fighting at Mianzhu, the last army between Deng Ai and Chengdu.",
-  "summary_zh": "诸葛亮之子诸葛瞻、孙诸葛尚拒绝邓艾封王的劝降，在绵竹力战而死。这是邓艾与成都之间的最后一道防线。"
+  "summary_zh": "诸葛亮之子诸葛瞻、孙诸葛尚拒绝邓艾封王的劝降，在绵竹力战而死。这是邓艾与成都之间的最后一道防线。",
+  "people": [
+   "zhuge-liang",
+   "deng-ai"
+  ]
  },
  {
   "id": "ch118-shu-falls",
@@ -4189,7 +5324,11 @@
   "lat": 30.67,
   "lon": 104.07,
   "summary": "Liu Shan surrenders to Deng Ai. His son Liu Chen, Prince of Beidi, who wanted to fight to the last, goes to Liu Bei's temple, kills his wife and children and then himself. The Han-Jin chunqiu records it.",
-  "summary_zh": "后主刘禅出城向邓艾投降。其子北地王刘谌主张背城一战，劝阻不成，到昭烈庙中痛哭，先杀妻儿，然后自杀。此事见于裴注引《汉晋春秋》。"
+  "summary_zh": "后主刘禅出城向邓艾投降。其子北地王刘谌主张背城一战，劝阻不成，到昭烈庙中痛哭，先杀妻儿，然后自杀。此事见于裴注引《汉晋春秋》。",
+  "people": [
+   "liu-shan",
+   "deng-ai"
+  ]
  },
  {
   "id": "ch118-deng-ai-cage",
@@ -4205,7 +5344,11 @@
   "lat": 30.72,
   "lon": 104.03,
   "summary": "Deng Ai, conqueror of Shu, behaves as if he were its king; Zhong Hui, jealous, reports him as a rebel, and Deng Ai is arrested and sent east in a cage cart. Recorded in both men's biographies.",
-  "summary_zh": "灭蜀首功的邓艾在成都承制拜官，有些专擅；钟会忌其功劳，诬告他谋反，邓艾被收捕，装入槛车押往洛阳。见于《三国志》邓艾、钟会传。"
+  "summary_zh": "灭蜀首功的邓艾在成都承制拜官，有些专擅；钟会忌其功劳，诬告他谋反，邓艾被收捕，装入槛车押往洛阳。见于《三国志》邓艾、钟会传。",
+  "people": [
+   "deng-ai",
+   "zhong-hui"
+  ]
  },
  {
   "id": "ch119-zhong-hui-revolt",
@@ -4221,7 +5364,13 @@
   "lat": 30.7,
   "lon": 104.1,
   "summary": "Jiang Wei surrenders to Zhong Hui and urges him to rebel against Sima Zhao, meaning to kill him afterwards and restore Shu. Zhong Hui's own soldiers mutiny and kill them both. Jiang Wei's secret letter to Liu Shan, 'endure a few days' humiliation, I will make the state safe again', is quoted in the notes.",
-  "summary_zh": "姜维投降钟会，怂恿他据蜀反叛司马昭，暗中打算事成后杀掉钟会、恢复蜀汉。结果魏军兵变，钟会、姜维都死于乱军之中。姜维给刘禅的密信“愿陛下忍数日之辱，臣欲使社稷危而复安”，见于裴注所引《华阳国志》。"
+  "summary_zh": "姜维投降钟会，怂恿他据蜀反叛司马昭，暗中打算事成后杀掉钟会、恢复蜀汉。结果魏军兵变，钟会、姜维都死于乱军之中。姜维给刘禅的密信“愿陛下忍数日之辱，臣欲使社稷危而复安”，见于裴注所引《华阳国志》。",
+  "people": [
+   "jiang-wei",
+   "zhong-hui",
+   "sima-zhao",
+   "liu-shan"
+  ]
  },
  {
   "id": "ch119-happy-here",
@@ -4237,7 +5386,11 @@
   "lat": 34.76,
   "lon": 112.6,
   "summary": "At a banquet in Luoyang Sima Zhao has Shu music played; Liu Shan's old officials weep, Liu Shan laughs. Asked whether he misses Shu, he says: I am happy here, I do not miss Shu. The Han-Jin chunqiu records the exchange.",
-  "summary_zh": "司马昭在洛阳设宴，命人演奏蜀地乐曲，旧蜀臣都伤心落泪，刘禅却嬉笑自若。司马昭问他是否思念蜀国，刘禅答：“此间乐，不思蜀。”此事见于裴注引《汉晋春秋》。"
+  "summary_zh": "司马昭在洛阳设宴，命人演奏蜀地乐曲，旧蜀臣都伤心落泪，刘禅却嬉笑自若。司马昭问他是否思念蜀国，刘禅答：“此间乐，不思蜀。”此事见于裴注引《汉晋春秋》。",
+  "people": [
+   "sima-zhao",
+   "liu-shan"
+  ]
  },
  {
   "id": "ch119-deng-ai-killed",
@@ -4253,7 +5406,11 @@
   "lat": 31.35,
   "lon": 104.2,
   "summary": "After Zhong Hui's revolt fails, Deng Ai's men go after the cart to free him; Wei Guan, who had arrested him, sends Tian Xu to kill him and his son on the road.",
-  "summary_zh": "钟会之乱平定后，邓艾部下追赶槛车想救回邓艾，监军卫瓘怕他报复，派田续在绵竹以西追杀了邓艾父子。"
+  "summary_zh": "钟会之乱平定后，邓艾部下追赶槛车想救回邓艾，监军卫瓘怕他报复，派田续在绵竹以西追杀了邓艾父子。",
+  "people": [
+   "deng-ai",
+   "zhong-hui"
+  ]
  },
  {
   "id": "ch119-jin-founded",
@@ -4269,7 +5426,12 @@
   "lat": 34.71,
   "lon": 112.68,
   "summary": "Sima Zhao dies, and his son Sima Yan has the last Wei emperor abdicate to him, on a terrace, after three refusals, exactly as Cao Pi had done to the Han forty-five years before. The novel's chapter title calls it drawing a gourd from the same pattern.",
-  "summary_zh": "司马昭死后，其子司马炎逼魏元帝曹奂禅位，筑坛受禅，三辞三让，与四十五年前曹丕代汉如出一辙。小说回目称之为“依样画葫芦”。"
+  "summary_zh": "司马昭死后，其子司马炎逼魏元帝曹奂禅位，筑坛受禅，三辞三让，与四十五年前曹丕代汉如出一辙。小说回目称之为“依样画葫芦”。",
+  "people": [
+   "sima-zhao",
+   "sima-yan",
+   "cao-pi"
+  ]
  },
  {
   "id": "ch120-sun-hao",
@@ -4285,7 +5447,10 @@
   "lat": 32.07,
   "lon": 118.78,
   "summary": "The last Wu emperor, Sun Hao, drinks, builds palaces, and has ministers' faces flayed and eyes gouged out. Wu's best men are killed or flee, and its people wait for Jin. Recorded in Sun Hao's biography.",
-  "summary_zh": "吴国末帝孙皓荒淫残暴，大兴土木，动辄剥人面皮、凿人眼睛。忠臣或被杀或出逃，百姓离心，只等晋军到来。见于《三国志·孙皓传》。"
+  "summary_zh": "吴国末帝孙皓荒淫残暴，大兴土木，动辄剥人面皮、凿人眼睛。忠臣或被杀或出逃，百姓离心，只等晋军到来。见于《三国志·孙皓传》。",
+  "people": [
+   "sun-hao"
+  ]
  },
  {
   "id": "ch120-yang-hu-lu-kang",
@@ -4301,7 +5466,12 @@
   "lat": 32.05,
   "lon": 112.15,
   "summary": "The Jin commander Yang Hu and the Wu commander Lu Kang face each other across the border and treat each other with honour: Lu Kang drinks Yang Hu's wine without fear of poison, Yang Hu takes Lu Kang's medicine. Dying, Yang Hu recommends Du Yu to finish the conquest of Wu. The Book of Jin tells it.",
-  "summary_zh": "晋将羊祜与吴将陆抗隔境对峙，彼此以礼相待：陆抗饮羊祜送来的酒毫不疑心，羊祜服陆抗送来的药也不怀疑。羊祜临终举荐杜预接替他完成灭吴大业。此事见于《晋书·羊祜传》。"
+  "summary_zh": "晋将羊祜与吴将陆抗隔境对峙，彼此以礼相待：陆抗饮羊祜送来的酒毫不疑心，羊祜服陆抗送来的药也不怀疑。羊祜临终举荐杜预接替他完成灭吴大业。此事见于《晋书·羊祜传》。",
+  "people": [
+   "yang-hu",
+   "lu-kang",
+   "du-yu"
+  ]
  },
  {
   "id": "ch120-wu-falls",
@@ -4317,7 +5487,11 @@
   "lat": 32.05,
   "lon": 118.8,
   "summary": "Wang Jun reaches Jianye and the last Wu emperor, Sun Hao, comes out bound with his coffin behind him. Ninety-six years after the Yellow Turbans, the realm is one again. The novel ends with its opening thought: the empire, long divided, must unite; long united, must divide.",
-  "summary_zh": "王濬楼船抵达建业，吴帝孙皓面缚舆榇出降。自黄巾起义算起九十六年，天下重归一统。小说以开篇那句话收尾：“天下大势，分久必合，合久必分。”"
+  "summary_zh": "王濬楼船抵达建业，吴帝孙皓面缚舆榇出降。自黄巾起义算起九十六年，天下重归一统。小说以开篇那句话收尾：“天下大势，分久必合，合久必分。”",
+  "people": [
+   "sun-hao",
+   "wang-jun"
+  ]
  },
  {
   "id": "ch120-wang-jun-fleet",
@@ -4333,7 +5507,10 @@
   "lat": 30.75,
   "lon": 111.2,
   "summary": "Wang Jun's great warships, built in Yizhou for seven years, sail down the Yangzi. Wu has chained the gorges with iron and planted iron spikes in the river; Wang Jun sends rafts ahead to catch the spikes and burns through the chains with torches soaked in oil.",
-  "summary_zh": "王濬在益州造楼船七年，率水军顺江东下。东吴在江中暗设铁锥、横江拉起铁锁，王濬先放木筏冲走铁锥，再用灌满麻油的火炬烧断铁锁，一路势如破竹。"
+  "summary_zh": "王濬在益州造楼船七年，率水军顺江东下。东吴在江中暗设铁锥、横江拉起铁锁，王濬先放木筏冲走铁锥，再用灌满麻油的火炬烧断铁锁，一路势如破竹。",
+  "people": [
+   "wang-jun"
+  ]
  },
  {
   "id": "ch120-splitting-bamboo",
@@ -4349,6 +5526,9 @@
   "lat": 30.35,
   "lon": 112.2,
   "summary": "Du Yu takes Jiangling; when officers urge waiting out the summer floods, he answers that the army's momentum is like splitting bamboo: after the first few joints, the rest open of themselves. The phrase is from his biography in the Book of Jin.",
-  "summary_zh": "杜预攻克江陵。有人主张等过了夏季水涨再进兵，杜预说：“今兵威已振，譬如破竹，数节之后，皆迎刃而解。”“势如破竹”一语即出于此，见于《晋书·杜预传》。"
+  "summary_zh": "杜预攻克江陵。有人主张等过了夏季水涨再进兵，杜预说：“今兵威已振，譬如破竹，数节之后，皆迎刃而解。”“势如破竹”一语即出于此，见于《晋书·杜预传》。",
+  "people": [
+   "du-yu"
+  ]
  }
 ]

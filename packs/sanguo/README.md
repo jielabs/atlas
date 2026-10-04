@@ -33,7 +33,9 @@ The chip at the top left switches between this pack, Journey to the West and the
 | Borders | 17 maps: the atlas's Eastern Han map for 184–190, then sixteen warlord and Three Kingdoms maps from 191 to 280, grown from the seats of 109 Eastern Han commanderies |
 | Army movements | 60 marches, coloured by side and pointed with arrowheads, each shown in its own years: the coalition against Dong Zhuo, Guandu and the march beyond the Wall, Changban and the Red Cliffs, the taking of Shu and Hanzhong, Fancheng and the fall of Jingzhou, Yiling, the southern campaign, the five northern expeditions and Wei's answers, Liaodong, Jiang Wei, the conquest of Shu and of Wu |
 | Tours | 23, 252 steps; in 87 of them an army marches across the map as the camera flies. **Battles:** `anti-dong`, `guandu`, `changban`, `red-cliffs`, `tongguan`, `into-shu`, `hanzhong`, `fall-of-jingzhou`, `yiling`, `southern-campaign`, `northern-expeditions`, `fall-of-shu`, `fall-of-wu`. **People:** `cao-cao`, `liu-bei`, `guan-yu`, `zhuge-liang`, `zhao-yun`, `lu-bu`, `sun-family`, `sima-yi`, `jiang-wei`. **Overview:** `road-to-unity`. Every step is tagged 【正史】, 【演义加工】 or 【虚构】 |
-| Layers | 行军路线 (the army movements), 正史·演义·虚构 (the coloured disc under each event marker), 都城 (capitals with their years), 过五关路线 (Guan Yu's fictional ride) |
+| Rulers | 48 reigns in 17 countries: the Han, Wei, Shu Han, Wu and Jin, and the warlord houses and provinces (河北袁氏, 徐州, 荆州, 益州, 江东孙氏, 辽东公孙氏...). The reigning ruler shows under the Han, Wei, Shu Han, Wu, Jin and Liaodong labels on the map; picking a reign in the Rulers tab narrows the timeline to it |
+| People | 93 of the novel's cast, from 刘关张 and 曹操 to 貂蝉 and 陈寿, each on the map from the first event that names them until their death, where the novel most often puts them. A card lists their events; 263 of the 272 events link the people they name, by name or by-name (孔明, 云长, 阿斗...), and show them as chips in the story |
+| Layers | 行军路线 (the army movements), 正史·演义·虚构 (the coloured disc under each event marker), 都城 (capitals with their years), 过五关路线 (Guan Yu's fictional ride), and the engine's 君主 and 人物 |
 
 ## How true each episode is
 
@@ -62,6 +64,9 @@ rather than survey it.
   event explains itself and that every chapter has an event.
 - Borders: edit `tools/sanguo/states.json` (one line per change of hands) and run
   `python3 tools/sanguo/build_borders.py` (needs shapely). Then add the map to the era in `eras.json`.
+- Rulers and people: edit the tables in `tools/sanguo/build_people.py` and run it. It writes `people.json` (the
+  pack's `data.people`) and sets each event's `people` from the names in its Chinese text; a by-name goes in the
+  person's list.
 - `python3 tools/sanguo/build_layers.py` rebuilds the capitals, the five passes and the army movements. A march is
   one line in its `CAMPAIGNS` table: a side, its years, its chapters, and the places it passes through by name (from
   the `P` table of Han sites). A tour step names marches in `"route": [...]` and `plugins/campaigns.js` animates them.
@@ -112,3 +117,6 @@ file from `build_site.py --pages` caches the tile archives for 30 days and types
 - During some tour steps the engine's auto-layers chip may name layers (Armies, Passes) a pack shown alone does not
   have.
 - The interface still says `年` / `CE`; here that is correct, since the years are real.
+- A person is linked to every event whose Chinese text names them, historical notes included, so a card can list
+  an episode where they are only mentioned. People whose novel role outlives the histories (华佗 in 219) show in the
+  novel's years.

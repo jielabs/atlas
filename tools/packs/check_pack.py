@@ -171,6 +171,47 @@ if RULE.get("routes"):
         for line in (f["geometry"]["coordinates"] if gt == "MultiLineString" else [f.get("geometry", {}).get("coordinates", [])]):
             for x, y in line: inbox(x, y, fw)
 
+# ---- rulers and people (data.people, as in the atlas's data/layers/<era>.json) ----------------------------------
+# Person fields app.js knows (its `fields` labels); the marker colour and the People tab's groups follow them.
+FIELDS = {"general", "statesman", "strategist", "thinker", "poet", "writer", "historian", "scientist", "physician",
+          "engineer", "artist", "religious", "explorer", "scholar", "other"}
+pids, reigns = set(), 0
+if (m.get("data") or {}).get("people"):
+    pp = load(m["data"]["people"]) or {}
+    pols = pp.get("polities") or {}
+    for k, v in pols.items():
+        if not str(v.get("name_zh", "")).strip(): err(f"people: polity {k!r} has no name_zh")
+    for k, lst in (pp.get("rulers") or {}).items():
+        if k not in pols: err(f"people: rulers of {k!r}, which is not in polities")
+        for j, r in enumerate(lst):
+            rw = f"people: {k} ruler {j + 1}"
+            pair(r, "name", rw)
+            if r.get("title") or r.get("title_zh"): pair(r, "title", rw)
+            if not (isinstance(r.get("from"), int) and isinstance(r.get("to"), int) and r["from"] <= r["to"]):
+                err(f"{rw}: needs integer from <= to")
+            elif r["to"] < START or r["from"] > END: warn(f"{rw}: reign {r['from']}-{r['to']} is outside {START}-{END}")
+            reigns += 1
+    for j, q in enumerate(pp.get("people") or []):
+        qw = f"people: {q.get('id', j)}"
+        if not re.fullmatch(r"[a-z0-9-]+", str(q.get("id", ""))): err(f"{qw}: id must match [a-z0-9-]+")
+        elif q["id"] in pids: err(f"{qw}: duplicate id")
+        pids.add(q.get("id"))
+        pair(q, "name", qw); pair(q, "place", qw); pair(q, "known_for", qw)
+        if q.get("field") not in FIELDS: err(f"{qw}: field {q.get('field')!r} is not one of {sorted(FIELDS)}")
+        inbox(q.get("lon"), q.get("lat"), qw)
+        born, died, show = q.get("born"), q.get("died"), q.get("show")
+        if show is not None and not (isinstance(show, list) and len(show) == 2 and all(isinstance(x, int) for x in show) and show[0] <= show[1]):
+            err(f"{qw}: show must be [from, to]")
+        if died is None and show is None: err(f"{qw}: needs died or show, or the engine cannot place them in time")
+        if isinstance(born, int) and isinstance(died, int) and born > died: err(f"{qw}: born after died")
+        a, b = show or [born if born is not None else (died or 0) - 40, died if died is not None else END]
+        if b < START or a > END: err(f"{qw}: lived {a}-{b}, outside {START}-{END}")
+named = {}
+for ev in events:
+    for q in ev.get("people", []):
+        if q not in pids: err(f"event {ev.get('id')}: person {q!r} is not in {(m.get('data') or {}).get('people') or 'data.people'}")
+        named[q] = named.get(q, 0) + 1
+
 # ---- tours ----------------------------------------------------------------
 tours = load("tours.json") or []
 if not isinstance(tours, list): err("tours.json: must be a list"); tours = []
@@ -235,6 +276,11 @@ if events and RULE.get("chapters"):
     have = {ev.get(ck) for ev in events}
     gaps = [c for c in range(c0, c1 + 1) if c not in have]
     print(f"chapters with no event: {len(gaps)}" + (f" -> {gaps}" if 0 < len(gaps) <= 40 else ""))
+
+if pids:
+    lone = sorted(pids - set(named))
+    print(f"rulers and people: {reigns} reigns, {len(pids)} people; {sum(1 for ev in events if ev.get('people'))} of "
+          f"{len(events)} events name someone" + (f"; named by no event: {', '.join(lone)}" if lone else ""))
 
 for w in warnings: print(f"WARN  {w}")
 for e in errors: print(f"ERROR {e}")

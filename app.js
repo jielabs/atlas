@@ -105,7 +105,7 @@ const UI = {
     units: { infantry: "步兵", cavalry: "骑兵", chariots: "战车", archers: "弓兵", crossbows: "弩兵", navy: "水军", siege: "攻城", firearms: "火器", artillery: "火炮", elephants: "象兵" },
     kinds: { campaign: "进军", journey: "行程", trade: "商路", canal: "运河", wall: "长城" }, exchange: "交流", spread: "传播", spreadGroups: { faith: "宗教传播", tech: "技术传播", crop: "作物传播" }, arrived: (y) => `${y}传到`, set_out: (y) => `${y}起`, world_t: "世界", worldHead: "同一年的世界", goRegion: "切换地区", allWorld: "全球", worldHint: "点击地区，地图和时间轴切换过去；点击事件阅读详情", noWorldEv: "前后几十年没有收录的大事", elsewhere: "同时期的世界", hideStrip: "隐藏", showStrip: "在时间轴上方显示同时期的世界",
     people_l: "人物", cmp: { one: "对比", open: "两地对比", sync: "同步视角", openTime: "两时对比", place: "两地", time: "两时", period: "时期", year: "年份", close: "关闭对比", pick: "对比地区", rulers: "君主", events: "前后大事", none: "前后几十年没有收录的大事" }, lasted: (n) => `共${n}年`, close: "关闭", search: "搜索", share: "分享这个视图", tours: "导览", toursHead: "导览 · 跟着地图读历史", tourStory: "读这段故事", tourBack: "返回导览", tourPrev: "上一步", tourNext: "下一步", tourPlay: "自动播放", tourPause: "暂停", tourEnd: "结束导览", tourDone: "导览结束", tourSteps: (n) => `${n} 站`, tourCount: (n) => `${n} 条导览`, tourAt: (n) => `第${n}站`, toursHere: "本时期导览", toursOther: "其他时期", noTours: "本时期还没有导览", tourHint: "点击一条导览，地图会跟着故事移动", linkCopied: "链接已复制，可以发给别人", linkCopy: "复制这个链接：", searchPh: "搜索导览、事件、人物、君主、城市或年份（如 755、前221）", autoLayers: "自动图层", autoHint: "打开事件或导览时，自动显示相关图层，自动打开的图层标为虚线", autoOn: "已自动显示", autoAlso: "相关图层", sgroups: { time: "时间", era: "朝代", tour: "导览", event: "事件", person: "人物", ruler: "君主", city: "城市" }, noResults: "没有找到相关内容", jumpYear: "跳到这一年", capitals: "都城·人口", faith: "宗教思想", inventions: "发明", passes: "关隘", roads: "官道", walls: "长城", wallBy: "修筑", wallLen: (n) => `约${n.toLocaleString()}公里`, ruin: "已废弃，现为遗迹", clans: "豪族", ckinds: { gentry: "门阀士族", bloc: "地域集团", military: "军事集团", faction: "朋党", merchant: "商帮" }, seats: "郡望/根据地", families: "代表家族", members: "代表人物", drafted: "AI 整理，未经核对", cityEvents: (n) => `城中大事（${n}）· 点击跳转`,  personEvents: (n) => `相关事件（${n}）· 点击跳转`, pranks: { capital: "都城", secondary: "陪都", major: "重要城市", port: "港口", frontier: "军事重镇" }, rkinds: { imperial: "驰道", post: "驿道", trade: "商道" }, via: "途经", inUse: "使用年代",
-    fields: { general: "军事家", statesman: "政治家", thinker: "思想家", poet: "诗人", writer: "文学家", historian: "史学家", scientist: "科学家", physician: "医学家", engineer: "工程师", artist: "艺术家", religious: "宗教人物", explorer: "旅行家", scholar: "学者" },
+    fields: { general: "军事家", statesman: "政治家", thinker: "思想家", poet: "诗人", writer: "文学家", historian: "史学家", scientist: "科学家", physician: "医学家", engineer: "工程师", artist: "艺术家", religious: "宗教人物", explorer: "旅行家", scholar: "学者", strategist: "谋士", other: "其他" },
     faiths: { buddhist: "佛教", daoist: "道教", confucian: "儒家", islam: "伊斯兰教", christian: "基督教", thought: "思想", other: "其他" },
     ifields: { craft: "工艺", writing: "文字", printing: "印刷", metallurgy: "冶金", military: "军事", astronomy: "天文", math: "数学", medicine: "医学", agriculture: "农业", navigation: "航海", engineering: "工程", money: "货币" },
     pop: "人口", popOf: (m, y, k) => { const w = Math.round(m * 100); return `${k === "estimate" ? "估计约" : "约"}${w >= 10000 ? (w / 10000).toFixed(1).replace(/\.0$/, "") + "亿" : w + "万"}（${y}）`; },
@@ -129,7 +129,7 @@ const UI = {
     units: { infantry: "Infantry", cavalry: "Cavalry", chariots: "Chariots", archers: "Archers", crossbows: "Crossbows", navy: "Navy", siege: "Siege", firearms: "Firearms", artillery: "Artillery", elephants: "Elephants" },
     kinds: { campaign: "Campaign", journey: "Journey", trade: "Trade route", canal: "Canal", wall: "Wall" }, exchange: "Exchange", spread: "Spread", spreadGroups: { faith: "Faith spreads", tech: "Technique spreads", crop: "Crop spreads" }, arrived: (y) => `arrived ${y}`, set_out: (y) => `from ${y}`, world_t: "World", worldHead: "The world this year", goRegion: "Go to region", allWorld: "Whole world", worldHint: "Click a region to move the map and timeline there; click an event to read it", noWorldEv: "No major events recorded within a few decades", elsewhere: "Elsewhere", hideStrip: "Hide", showStrip: "Show other regions above the timeline",
     people_l: "People", cmp: { one: "Compare", open: "Compare regions", sync: "Sync view", openTime: "Compare times", place: "Two places", time: "Two times", period: "Period", year: "Year", close: "Close compare", pick: "Compare with", rulers: "Rulers", events: "Around this year", none: "No major events recorded within a few decades" }, lasted: (n) => `${n} years`, close: "Close", search: "Search", share: "Share this view", tours: "Tours", toursHead: "Guided tours", tourStory: "Read the story", tourBack: "Back to the tour", tourPrev: "Back", tourNext: "Next", tourPlay: "Play", tourPause: "Pause", tourEnd: "End tour", tourDone: "End of tour", tourSteps: (n) => `${n} stops`, tourCount: (n) => `${n} tour${n === 1 ? "" : "s"}`, tourAt: (n) => `Stop ${n}`, toursHere: "Tours for this period", toursOther: "Other periods", noTours: "No tours for this period yet", tourHint: "Pick a tour and the map follows the story", linkCopied: "Link copied", linkCopy: "Copy this link:", searchPh: "Search tours, events, people, rulers, cities or a year (755, 221 BC)", autoLayers: "Auto layers", autoHint: "Reading an event or a tour stop switches on the layers it needs; those get a dashed outline", autoOn: "Switched on for this", autoAlso: "Related layers", sgroups: { time: "Year", era: "Periods", tour: "Tours", event: "Events", person: "People", ruler: "Rulers", city: "Cities" }, noResults: "Nothing found", jumpYear: "Go to this year", capitals: "Capitals", faith: "Faith", inventions: "Inventions", passes: "Passes", roads: "Roads", walls: "Great Walls", wallBy: "Built by", wallLen: (n) => `about ${n.toLocaleString()} km`, ruin: "Abandoned; ruins remain", clans: "Elites", ckinds: { gentry: "Great clans", bloc: "Regional bloc", military: "Military clique", faction: "Court faction", merchant: "Merchant guild" }, seats: "Home seats", families: "Families", members: "Key figures", drafted: "AI-drafted, not source-checked", cityEvents: (n) => `Events here (${n}) · click to jump`, personEvents: (n) => `Related events (${n}) · click to jump`, pranks: { capital: "Capital", secondary: "Secondary capital", major: "Major city", port: "Port", frontier: "Military stronghold" }, rkinds: { imperial: "Imperial highway", post: "Post road", trade: "Trade road" }, via: "Via", inUse: "In use",
-    fields: { general: "Military", statesman: "Statesman", thinker: "Thinker", poet: "Poet", writer: "Writer", historian: "Historian", scientist: "Scientist", physician: "Physician", engineer: "Engineer", artist: "Artist", religious: "Religious figure", explorer: "Traveller", scholar: "Scholar" },
+    fields: { general: "Military", statesman: "Statesman", thinker: "Thinker", poet: "Poet", writer: "Writer", historian: "Historian", scientist: "Scientist", physician: "Physician", engineer: "Engineer", artist: "Artist", religious: "Religious figure", explorer: "Traveller", scholar: "Scholar", strategist: "Strategist", other: "Other" },
     faiths: { buddhist: "Buddhism", daoist: "Daoism", confucian: "Confucianism", islam: "Islam", christian: "Christianity", thought: "Thought", other: "Other" },
     ifields: { craft: "Craft", writing: "Writing", printing: "Printing", metallurgy: "Metalwork", military: "Military", astronomy: "Astronomy", math: "Mathematics", medicine: "Medicine", agriculture: "Farming", navigation: "Navigation", engineering: "Engineering", money: "Money" },
     pop: "Population", popOf: (m, y, k) => `${k === "estimate" ? "c. " : ""}${m} million (${y})`,
@@ -519,10 +519,12 @@ function addPack(manifest, eras, worldIndex, only) {
   const id = manifest.id;
   // A period may bring its own border maps (`snapshots`, paths relative to the manifest). They are drawn like the
   // atlas's dynasty maps: inside the East Asia window, with the outer world map around them, and the file's own
-  // `focus` flags unless the period names its focus. Other periods use the world border maps.
-  const list = eras.eras.map((e) => e.snapshots?.length
+  // `focus` flags unless the period names its focus. Other periods use the world border maps. When the pack brings
+  // rulers and people (data.people), each period takes from them what touches its years (packPeriod).
+  const people = !!manifest.data.people;
+  const list = eras.eras.map((e) => ({ ...(e.snapshots?.length
     ? { ...e, region: id, packMaps: true, focus: e.focus || null, snapshots: e.snapshots.map((s) => ({ ...s, borders: packPath(s.borders) })) }
-    : { ...e, region: id, worldMaps: true, focus: e.focus || [], snapshots: worldSnaps(e.start, e.end) });
+    : { ...e, region: id, worldMaps: true, focus: e.focus || [], snapshots: worldSnaps(e.start, e.end) }), layers: people, packPeople: people }));
   const R = manifest.region || {};
   const [[w, so], [ea, n]] = R.bounds || [[-180, -85], [180, 85]];
   const region = { id, name: manifest.name, name_zh: manifest.name_zh || manifest.name, color: manifest.color, eras: list,
@@ -1177,11 +1179,21 @@ function renderPolityLabels(gj) {
 const eraYears = (e) => e.end - e.start + 1 - (e.start < 0 && e.end > 0 ? 1 : 0);
 function loadLayers(era) {
   if (!era.layers) return Promise.resolve({});
+  if (era.packPeople) return (state.layers["pack:" + era.id] ||= Promise.resolve(packPeriod(era)));
   // Periods of the other world regions share one file per region (the artifact caps its file count).
   if (!state.layers[era.id]) state.layers[era.id] = era.worldMaps
     ? (state.layers["world-" + era.region] ||= loadJSON(`data/layers/world-${era.region}.json`).catch(() => ({}))).then((b) => b[era.id] || {})
     : loadJSON(`data/layers/${era.id}.json`).catch(() => ({}));
   return state.layers[era.id];
+}
+
+// The open pack's rulers and people (manifest data.people: polities, rulers and people as in data/layers/<era>.json,
+// for the whole pack) for one of its periods: the reigns and lives that touch its years.
+function packPeriod(era) {
+  const P = state.pack.people || {}, touches = ([a, b]) => a <= era.end && b >= era.start;
+  const rulers = Object.fromEntries(Object.entries(P.rulers || {})
+    .map(([k, list]) => [k, list.filter((r) => touches([r.from, r.to]))]).filter(([, list]) => list.length));
+  return { polities: P.polities || {}, rulers, people: (P.people || []).filter((p) => touches(personSpan(p))) };
 }
 
 function rulerAt(name, year) {
@@ -2447,7 +2459,7 @@ function renderRulers() {
 /* ---------- ledger: famous people of the period; picking one flies to where they lived and opens their card ---------- */
 
 const PGROUP = { general: "mil", statesman: "pol", thinker: "cul", poet: "cul", writer: "cul", historian: "cul", scholar: "cul", religious: "cul",
-  artist: "art", scientist: "sci", physician: "sci", engineer: "sci", explorer: "sci" };
+  strategist: "mil", artist: "art", scientist: "sci", physician: "sci", engineer: "sci", explorer: "sci" };
 function renderPeopleTab() {
   const box = $("people");
   const all = [...(state.layerData?.people || [])].sort((a, b) => personSpan(a)[0] - personSpan(b)[0]);
@@ -2531,7 +2543,7 @@ function renderList() {
 }
 
 function loadDetails(era) {
-  if (!era.layers || era.worldMaps) return Promise.resolve({});
+  if (!era.layers || era.worldMaps || era.packPeople) return Promise.resolve({});
   if (!state.details[era.id]) state.details[era.id] = loadJSON(`data/details/${era.id}.json`).catch(() => ({}));
   return state.details[era.id];
 }
@@ -2592,7 +2604,8 @@ async function renderStory() {
   if (state.selected !== ev.id || !state.reading) return;
   const d = all[ev.id];
   const body = box.querySelector(".story-body");
-  const layer = home ? await loadLayers(home) : {};
+  const own = ev.region === state.pack?.manifest.id && state.regionById[ev.region]?.eras.find((e) => ev.year >= e.start && ev.year <= e.end);
+  const layer = home || own ? await loadLayers(home || own) : {};
   if (state.selected !== ev.id || !state.reading) return;
   const tags = linkTags(ev, layer);
   if (!d) { body.innerHTML = tags + `<p class="muted">${t("noStory")}</p>` + checkNote(ev) + links(ev, d); return; }
@@ -3264,10 +3277,12 @@ async function init() {
   const plugins = importPlugins();
   plugins.forEach((p) => p.catch(() => {}));  // reported once the map is up
   const pack = state.pack?.manifest, only = state.pack?.only;
-  const [eras, events, places, packEras, packEvents] = await Promise.all([
+  const [eras, events, places, packEras, packEvents, packPeople] = await Promise.all([
     only ? { eras: [] } : loadJSON("data/eras.json"), only ? [] : loadJSON("data/events.json"), only ? [] : loadJSON("data/places.json"),
     pack && packFile("eras"), pack && packFile("events"),
+    pack?.data.people && packFile("people").catch((e) => { console.warn(e.message); return null; }),
   ]);
+  if (pack) state.pack.people = packPeople || null;
   // The atlas's own overlays (population, faith, inventions, passes, roads, clans, walls, exchange) stay out of a pack shown alone.
   if (!only) {
     state.overlays = await loadJSON("data/overlays.json").catch(() => state.overlays);
@@ -3289,8 +3304,12 @@ async function init() {
     state.year = pack.region?.view?.year ?? packEras.eras[0]?.start ?? state.year;
   }
   if (only) {
-    // The per-period layers (rulers, armies, people...) and the atlas's overlays are not part of a pack yet.
-    for (const el of document.querySelectorAll(".era-layers .chip.layer, #tab-rulers, #tab-people")) el.hidden = true;
+    // The atlas's overlays are not part of a pack shown alone; of the per-period layers, only the rulers and people
+    // the pack brings (data.people) are.
+    const P = state.pack.people || {}, own = { rulers: !!Object.keys(P.rulers || {}).length, people: !!P.people?.length };
+    for (const el of document.querySelectorAll(".era-layers .chip.layer")) el.hidden = !own[el.id.slice(2)];
+    $("tab-rulers").hidden = !own.rulers;
+    $("tab-people").hidden = !own.people;
     if (!places.length) $("t-places").hidden = true;
     for (const g of document.querySelectorAll(".era-layers .lg")) g.hidden = ![...g.querySelectorAll(".chip")].some((c) => !c.hidden);
   }
@@ -3298,7 +3317,7 @@ async function init() {
   state.places = places;
   buildScale();
   const cam = loadView();
-  if (only && !["events", "tours"].includes(state.tab)) state.tab = "events";
+  if (only && (!["events", "tours", "rulers", "people"].includes(state.tab) || $("tab-" + state.tab).hidden)) state.tab = "events";
 
   map = new maplibregl.Map({
     container: "map",

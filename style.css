@@ -726,6 +726,8 @@ html:lang(en) .mk-clan span { font-family: var(--font-body); }
 .pp-groups .chip { font-size: 11px; padding: 2px 8px; }
 .mk-person.f-general i { background: #8a2f1c; }
 .mk-person.f-statesman i { background: #1f5c4e; }
+.mk-person.f-strategist i { background: #3c5a86; }
+.mk-person.f-other i { background: #7a6a5a; }
 
 /* Great Walls (长城) */
 .mk-wall { color: #5a4030; border-color: rgba(90, 64, 48, 0.5); background: rgba(239, 226, 194, 0.9); }

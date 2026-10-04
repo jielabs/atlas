@@ -108,3 +108,21 @@ places it.
 - chunk R6, round 2: battle tours: 13 tours of the great battles, 118 steps, each army movement a route the plugin marches out: the lords against Dong Zhuo, Guandu, Changban, the Red Cliffs (rewritten with the fleets and the flight), Tong Pass, the taking of Shu, Hanzhong, Guan Yu's last campaign, Yiling, the southern campaign, the northern expeditions, the fall of Shu and the fall of Wu. A step that names routes is centred on them. (events total 272)
 - chunk R7, round 2: character and long tours: Six new tours (Cao Cao, the three generations of the Sun, Zhao Yun, Lü Bu, Sima Yi, Jiang Wei) and four rewritten with marches (Guan Yu, Zhuge Liang, Liu Bei, the road to unity). (events total 272)
 - chunk R8, round 2: README, browser check: README describes the 272 events, 60 army movements and 23 tours (87 steps with a march), and how to add a march. Checked in headless Chrome: routes and arrows show in their years, tour steps march their routes and clear on the next step, three fleets at once at the Red Cliffs, no console errors. (events total 272)
+
+## Round 3: rulers and people
+
+A pack shown alone hid the Rulers and People tabs, because only the atlas's own periods had that data. The engine
+now takes it from a pack (`data.people`: `polities`, `rulers` and `people` as in `data/layers/<era>.json`, for the
+whole pack, each period getting what touches its years) and keeps the tabs and switches when it is there.
+
+- `people.json`, built by `tools/sanguo/build_people.py` from its tables: 17 countries (东汉, 曹魏, 蜀汉, 孙吴, 西晋 and
+  twelve warlord houses and provinces), 48 reigns, 93 people of the novel's cast. Each person shows from the first
+  event that names them until their death (or for the novel's years when it keeps them alive longer), placed where
+  the novel puts them, with a note where history disagrees.
+- Events carry `people`: everyone their Chinese title or summary names, by name or by-name (孔明, 云长, 阿斗...).
+- The site build ships the atlas's portraits of the same people (36, public domain).
+
+- [x] **P1. engine: rulers and people from a pack**
+- [x] **P2. people.json and event links**
+- [x] **P3. validate, browser check, docs**
+- chunk P1-P3, round 3: rulers and people: 48 reigns in 17 countries, 93 people, 263 of 272 events linked to the people they name; reigning rulers under the Han, Wei, Shu Han, Wu, Jin and Liaodong labels; the strategist and other person fields; portraits in the site build. Checked in headless Chrome in Chinese, English and at phone width: both tabs and their map switches show, picking a reign narrows the timeline, person cards list their events, stories show their people, search finds people and rulers, no console errors. (events total 272)
