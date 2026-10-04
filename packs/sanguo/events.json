@@ -2320,6 +2320,38 @@
   "summary_zh": "两军在濡须相持月余，孙权写信给曹操：“春水方生，公宜速去。”另附一纸：“足下不死，孤不得安。”曹操对诸将说“孙权不欺孤”，遂撤军。此信见于裴注所引《吴历》。"
  },
  {
+  "id": "ch062-huang-wei-rivalry",
+  "year": 213,
+  "chapter": 62,
+  "level": 3,
+  "category": "war",
+  "truth": "fiction",
+  "title": "Huang Zhong and Wei Yan race for the credit",
+  "title_zh": "攻雒城黄魏争功",
+  "place": "Luo",
+  "place_zh": "雒城",
+  "lat": 30.95,
+  "lon": 104.45,
+  "summary": "Pang Tong assigns Huang Zhong to attack one camp before Luo; Wei Yan, wanting the glory, sets out first in the night, is ambushed, and has to be rescued by the old man he meant to outdo. Historically: invented.",
+  "summary_zh": "庞统命黄忠攻打雒城前的营寨，魏延争功，连夜抢先出兵，中了埋伏，反被老将黄忠救出。史实：并无此事。"
+ },
+ {
+  "id": "ch064-yang-fu",
+  "year": 213,
+  "chapter": 64,
+  "level": 3,
+  "category": "war",
+  "truth": "history",
+  "title": "Yang Fu turns Ji against Ma Chao",
+  "title_zh": "杨阜借兵破马超",
+  "place": "Ji, Tianshui",
+  "place_zh": "天水冀城（今甘肃甘谷）",
+  "lat": 34.75,
+  "lon": 105.25,
+  "summary": "Ma Chao takes Ji and kills the governor Wei Kang. Yang Fu, Wei Kang's officer, raises the countryside against him; when Ma Chao rides out to fight, the city shuts its gates behind him and kills his wife and children. He flees to Zhang Lu. Recorded in Yang Fu's biography.",
+  "summary_zh": "马超攻下冀城，杀凉州刺史韦康。韦康部下杨阜联络姜叙等人起兵讨伐，马超出城迎战，城中关闭城门，杀了他的妻儿。马超无家可归，投奔张鲁。见于《三国志·杨阜传》。"
+ },
+ {
   "id": "ch063-pang-tong-dies",
   "year": 214,
   "chapter": 63,
@@ -2328,12 +2360,12 @@
   "truth": "embellished",
   "title": "Pang Tong dies at Fallen Phoenix Slope",
   "title_zh": "庞统落凤坡中箭",
-  "place": "Luo (the novel: Fallen Phoenix Slope)",
-  "place_zh": "雒城（今四川广汉），小说作落凤坡",
-  "lat": 30.98,
-  "lon": 104.4,
-  "summary": "Riding Liu Bei's white horse, Pang Tong is mistaken for him in a narrow valley named Fallen Phoenix Slope and shot down with arrows. Historically: Pang Tong was killed by a stray arrow while leading the assault on the walls of Luo; the slope, the swapped horse and the ominous name are the novel's.",
-  "summary_zh": "庞统骑了刘备的白马，行至名叫落凤坡的狭谷，被张任伏兵当作刘备乱箭射死。史实：《三国志·庞统传》载庞统率众攻雒城时被流矢射中而死，年三十六；落凤坡、换马之事出自小说。"
+  "place": "Fallen Phoenix Slope",
+  "place_zh": "落凤坡（今四川德阳罗江，小说之说）",
+  "lat": 31.32,
+  "lon": 104.52,
+  "summary": "Riding Liu Bei's white horse, Pang Tong is mistaken for him in a narrow valley named Fallen Phoenix Slope and shot down with arrows. Historically: Pang Tong was killed by a stray arrow while leading the assault on the walls of Luo, some way south; the slope, the swapped horse and the ominous name are the novel's.",
+  "summary_zh": "庞统骑了刘备的白马，行至名叫落凤坡的狭谷，被张任伏兵当作刘备乱箭射死。史实：《三国志·庞统传》载庞统是在南边的雒城率众攻城时被流矢射中而死，年三十六；落凤坡、换马之事出自小说。"
  },
  {
   "id": "ch063-yan-yan",
@@ -2496,6 +2528,22 @@
   "summary_zh": "甘宁挑选百余名勇士，每人赐酒一碗，自己连饮两碗，夜袭曹营，斩首数十，全身而还。孙权说：“孟德有张辽，孤有兴霸，足相敌也。”"
  },
  {
+  "id": "ch068-king-of-wei",
+  "year": 216,
+  "chapter": 68,
+  "level": 2,
+  "category": "politics",
+  "truth": "history",
+  "title": "Cao Cao becomes King of Wei",
+  "title_zh": "曹操进位魏王",
+  "place": "Ye",
+  "place_zh": "邺城",
+  "lat": 36.3,
+  "lon": 114.35,
+  "summary": "The emperor raises Cao Cao from Duke to King of Wei, with the emperor's own regalia in all but name. Only the throne itself is left.",
+  "summary_zh": "汉献帝晋封魏公曹操为魏王，用天子的仪仗车服，只差帝位本身。"
+ },
+ {
   "id": "ch068-zuo-ci",
   "year": 216,
   "chapter": 68,
@@ -2526,6 +2574,38 @@
   "lon": 113.88,
   "summary": "Geng Ji, Wei Huang, the physician Ji Ben and others set fire to the capital by night to rescue the emperor from Cao Cao, and are crushed and executed with their families.",
   "summary_zh": "耿纪、韦晃与太医令吉本等人夜间在许都纵火起事，欲挟天子攻打曹操，兵败被杀，夷灭三族。"
+ },
+ {
+  "id": "ch069-guan-lu",
+  "year": 218,
+  "chapter": 69,
+  "level": 3,
+  "category": "culture",
+  "truth": "embellished",
+  "title": "Guan Lu reads the signs",
+  "title_zh": "卜周易管辂知机",
+  "place": "Ye",
+  "place_zh": "邺城",
+  "lat": 36.28,
+  "lon": 114.32,
+  "summary": "The diviner Guan Lu foretells, in riddles, the loss of Hanzhong and a fire in the capital, and both come true. Historically: Guan Lu was a real and famous diviner with his own biography in the Records; these prophecies are the novel's.",
+  "summary_zh": "术士管辂以隐语预言汉中将失、许都将有火灾，后来一一应验。史实：管辂确是当时著名的术士，《三国志·方技传》有传，但这些预言出自小说。"
+ },
+ {
+  "id": "ch070-tiandang",
+  "year": 218,
+  "chapter": 70,
+  "level": 3,
+  "category": "war",
+  "truth": "fiction",
+  "title": "Old Huang Zhong takes Tiandang Mountain",
+  "title_zh": "老黄忠计夺天荡山",
+  "place": "Tiandang Mountain",
+  "place_zh": "天荡山（今陕西勉县）",
+  "lat": 33.2,
+  "lon": 106.45,
+  "summary": "Mocked for his age, Huang Zhong takes Yan Yan with him and seizes Cao Cao's grain store on Tiandang Mountain with a ruse of fire. Historically: invented; the real fighting that year was round Yangping Pass.",
+  "summary_zh": "黄忠被人嫌老，与严颜同去，用计放火夺下曹军囤粮的天荡山。史实：并无此事，当年的实际战事在阳平关一带。"
  },
  {
   "id": "ch071-dingjun-mountain",
@@ -2576,6 +2656,22 @@
   "summary_zh": "曹操在汉中进退两难，夜间口令定为“鸡肋”。杨修说鸡肋食之无肉、弃之可惜，魏王必是要退兵了，便收拾行装。曹操以扰乱军心之罪斩了杨修。史实：“鸡肋”一事见于裴注引《九州春秋》，但杨修是当年秋天回到邺城后才被杀的，主要原因是他与曹植结党。"
  },
  {
+  "id": "ch072-xie-valley-retreat",
+  "year": 219,
+  "chapter": 72,
+  "level": 2,
+  "category": "war",
+  "truth": "embellished",
+  "title": "Cao Cao falls back through the Xie Valley",
+  "title_zh": "曹阿瞒兵退斜谷",
+  "place": "Xie Valley",
+  "place_zh": "斜谷（今陕西眉县西南）",
+  "lat": 34.2,
+  "lon": 107.6,
+  "summary": "Having given up Hanzhong, Cao Cao leads his army out through the Xie Valley; in the novel Wei Yan's arrow knocks out his front teeth on the way. Historically: the withdrawal is recorded; the arrow is the novel's.",
+  "summary_zh": "曹操放弃汉中，经斜谷撤军，小说写他途中被魏延一箭射落门牙。史实：撤军有记载，射落门牙出自小说。"
+ },
+ {
   "id": "ch073-king-of-hanzhong",
   "year": 219,
   "chapter": 73,
@@ -2592,6 +2688,22 @@
   "summary_zh": "刘备夺得汉中，在沔阳设坛自称汉中王，这正是汉高祖刘邦当年的封号。他封关羽、张飞、马超、黄忠为四方将军，赵云亦受重用；“五虎上将”的名号是小说的说法。"
  },
  {
+  "id": "ch073-guan-yu-north",
+  "year": 219,
+  "chapter": 73,
+  "level": 2,
+  "category": "war",
+  "truth": "history",
+  "title": "Guan Yu marches north on Xiangyang",
+  "title_zh": "云长攻拔襄阳郡",
+  "place": "Xiangyang",
+  "place_zh": "襄阳",
+  "lat": 32.01,
+  "lon": 112.13,
+  "summary": "As Liu Bei becomes King of Hanzhong, Guan Yu leaves Jiangling and marches up the Han River against Cao Ren at Xiangyang and Fancheng, the campaign that will make and end him.",
+  "summary_zh": "刘备进位汉中王，关羽从江陵出兵，沿汉水北上攻打据守襄阳、樊城的曹仁。这场北伐让他威震华夏，也断送了他。"
+ },
+ {
   "id": "ch074-seven-armies",
   "year": 219,
   "chapter": 74,
@@ -2606,6 +2718,22 @@
   "lon": 112.15,
   "summary": "Guan Yu besieges Fancheng. Cao Cao's relief army under Yu Jin camps in low ground; Guan Yu dams the Han and breaks the dam, drowning seven armies. Yu Jin surrenders; Pang De, who had brought his own coffin to the battle, refuses and is beheaded. Historically: the flood came from heavy autumn rains that made the Han overflow; Guan Yu used it with his boats but did not break a dam.",
   "summary_zh": "关羽围攻樊城，于禁率七军救援，屯于低洼处。关羽堵截襄江，掘堤放水，七军尽没。于禁投降，抬棺出战的庞德被擒不屈而死。史实：《三国志·关羽传》载是“秋，大霖雨，汉水泛溢，禁所督七军皆没”，关羽乘大船进攻；水是天降大雨所致，并非关羽掘堤。"
+ },
+ {
+  "id": "ch074-pang-de-coffin",
+  "year": 219,
+  "chapter": 74,
+  "level": 3,
+  "category": "war",
+  "truth": "embellished",
+  "title": "Pang De brings his coffin to the battle",
+  "title_zh": "庞令明抬榇决死战",
+  "place": "Fancheng",
+  "place_zh": "樊城",
+  "lat": 32.1,
+  "lon": 112.18,
+  "summary": "To prove he will not betray Cao Cao, Pang De rides out with a coffin carried behind him, fights Guan Yu for a hundred bouts and wounds him with an arrow. Captured in the flood, he refuses to kneel and is beheaded. Historically: Pang De did fight Guan Yu himself and shot him in the forehead, and died refusing to surrender; the coffin is the novel's.",
+  "summary_zh": "庞德为表决不降蜀，抬着棺材出战，与关羽大战百余合，放冷箭射中关羽。水淹七军时被擒，立而不跪，被斩。史实：《三国志·庞德传》载他亲与关羽交战，射中关羽前额，被擒后不降而死；抬棺出战出自小说。"
  },
  {
   "id": "ch075-scraping-the-bone",
@@ -2656,6 +2784,22 @@
   "summary_zh": "关羽前有徐晃援军，后失江陵根本，士卒因家眷在江陵纷纷逃散，只得率数百人退守小城麦城。"
  },
  {
+  "id": "ch076-xu-huang",
+  "year": 219,
+  "chapter": 76,
+  "level": 2,
+  "category": "war",
+  "truth": "history",
+  "title": "Xu Huang breaks the siege of Fancheng",
+  "title_zh": "徐公明大战沔水",
+  "place": "Fancheng",
+  "place_zh": "樊城以北",
+  "lat": 32.12,
+  "lon": 112.1,
+  "summary": "Cao Cao's general Xu Huang, an old friend of Guan Yu, breaks through his siege lines in a single charge and lifts the siege of Fancheng. Cao Cao says nothing in thirty years of war has matched it.",
+  "summary_zh": "曹操派关羽的老相识徐晃救援樊城。徐晃长驱直入，攻破关羽的围堑，解了樊城之围。曹操称赞说用兵三十余年，从未见过如此长驱直入的。"
+ },
+ {
   "id": "ch077-guan-yu-dies",
   "year": 219,
   "chapter": 77,
@@ -2686,6 +2830,22 @@
   "lon": 111.76,
   "summary": "Guan Yu's spirit appears to a monk at Jade Spring Hill crying 'give me back my head', then haunts Lü Meng to death and frightens Cao Cao. Historically: Lü Meng died of illness at the end of 219. The ghost belongs to the cult of Guan Yu that grew over the following thousand years; a temple to him still stands at Jade Spring Hill.",
   "summary_zh": "关羽阴魂在玉泉山向普净和尚大呼“还我头来”，又附身吕蒙使其七窍流血而死，还惊吓了曹操。史实：吕蒙是219年底病逝的。显圣之说来自此后千年间逐渐兴盛的关公崇拜，玉泉山至今仍有关陵、关庙。"
+ },
+ {
+  "id": "ch077-guan-yu-head",
+  "year": 220,
+  "chapter": 77,
+  "level": 3,
+  "category": "politics",
+  "truth": "history",
+  "title": "Cao Cao buries Guan Yu's head",
+  "title_zh": "曹操葬关羽首级",
+  "place": "Luoyang",
+  "place_zh": "洛阳",
+  "lat": 34.68,
+  "lon": 112.6,
+  "summary": "Sun Quan sends Guan Yu's head to Cao Cao, to turn Liu Bei's revenge on Wei. Cao Cao sees through it and buries the head with the honours of a noble at Luoyang, where the Guanlin temple stands today.",
+  "summary_zh": "孙权把关羽首级送给曹操，想嫁祸于魏。曹操识破其意，以诸侯之礼将首级葬于洛阳城南，就是今天的关林。"
  },
  {
   "id": "ch078-cao-cao-dies",
@@ -2832,6 +2992,22 @@
   "summary_zh": "为免两面受敌，孙权向曹丕称臣，受封吴王，加九锡。一年后危机过去，又与魏断绝。"
  },
  {
+  "id": "ch082-huang-zhong-dies",
+  "year": 222,
+  "chapter": 82,
+  "level": 3,
+  "category": "war",
+  "truth": "fiction",
+  "title": "Old Huang Zhong falls in the war on Wu",
+  "title_zh": "黄忠战死猇亭",
+  "place": "Xiaoting",
+  "place_zh": "猇亭",
+  "lat": 30.58,
+  "lon": 111.4,
+  "summary": "Stung by Liu Bei's remark that the old generals are past it, Huang Zhong charges the Wu lines, is shot in the shoulder and dies in camp at seventy-five. Historically: Huang Zhong died of illness in 220, before the war began.",
+  "summary_zh": "刘备一句“老者无用”，黄忠不服，独闯吴营，肩中一箭，伤重死于营中，年七十五。史实：黄忠220年已病逝，没有赶上伐吴之战。"
+ },
+ {
   "id": "ch083-lu-xun-commander",
   "year": 222,
   "chapter": 83,
@@ -2846,6 +3022,22 @@
   "lon": 111.3,
   "summary": "Sun Quan gives command of the defence to Lu Xun, a young scholar the veterans despise. He refuses battle for months, letting Liu Bei's army string out its camps through the hills in the summer heat.",
   "summary_zh": "孙权任命年轻书生陆逊为大都督，老将们多不服气。陆逊坚守不战数月，任凭刘备大军在盛夏的山林中连营数百里。"
+ },
+ {
+  "id": "ch083-enemies-delivered",
+  "year": 222,
+  "chapter": 83,
+  "level": 2,
+  "category": "war",
+  "truth": "fiction",
+  "title": "Liu Bei gets his enemies at Xiaoting",
+  "title_zh": "战猇亭先主得仇人",
+  "place": "Xiaoting",
+  "place_zh": "猇亭",
+  "lat": 30.52,
+  "lon": 111.45,
+  "summary": "Guan Yu's son Guan Xing kills Pan Zhang, who captured his father; the turncoats Mi Fang and Fu Shiren come over and are executed at Guan Yu's shrine; Wu even sends back Zhang Fei's murderers in chains. Historically: invented; Pan Zhang lived until 234.",
+  "summary_zh": "关兴斩了擒杀其父的潘璋；糜芳、傅士仁杀马忠来降，被刘备在关羽灵前处死；东吴还把杀害张飞的范疆、张达绑送回来。史实：并无此事，潘璋活到了234年。"
  },
  {
   "id": "ch084-yiling",
@@ -2960,6 +3152,22 @@
   "summary_zh": "南中诸郡叛乱，诸葛亮亲率大军南征。参军马谡建议“攻心为上，攻城为下”，诸葛亮采纳了这一方略。"
  },
  {
+  "id": "ch087-first-capture",
+  "year": 225,
+  "chapter": 87,
+  "level": 3,
+  "category": "war",
+  "truth": "fiction",
+  "title": "Meng Huo captured the first time",
+  "title_zh": "抗天兵蛮王初受执",
+  "place": "South of Yuexi",
+  "place_zh": "越巂以南",
+  "lat": 27.3,
+  "lon": 102.4,
+  "summary": "Meng Huo is lured into an ambush and captured. He says he was simply caught off guard; Zhuge Liang lets him go to try again. Historically: the 'seven captures and seven releases' come from the Han-Jin chunqiu cited in the notes; the details of each are the novel's.",
+  "summary_zh": "孟获中了埋伏被擒，说是一时疏忽，不服。诸葛亮放他回去再战。史实：“七擒七纵”见于裴注引《汉晋春秋》，具体经过出自小说。"
+ },
+ {
   "id": "ch088-crossing-the-lu",
   "year": 225,
   "chapter": 88,
@@ -2976,6 +3184,22 @@
   "summary_zh": "盛夏时节大军渡过泸水，据说白天水中有瘴毒。孟获第二次被擒。史实：“五月渡泸，深入不毛”是诸葛亮在《出师表》中的原话；第二次擒获属于七擒故事。"
  },
  {
+  "id": "ch088-third-capture",
+  "year": 225,
+  "chapter": 88,
+  "level": 3,
+  "category": "war",
+  "truth": "fiction",
+  "title": "Meng Huo's false surrender, the third capture",
+  "title_zh": "识诈降三擒孟获",
+  "place": "The Lu River",
+  "place_zh": "泸水",
+  "lat": 26.5,
+  "lon": 102.8,
+  "summary": "Meng Huo's brother comes with gifts to surrender, Meng Huo planning to strike in the confusion; Zhuge Liang gets the brother's men drunk and takes Meng Huo a third time. Historically: the details are the novel's.",
+  "summary_zh": "孟获派弟弟孟优带礼物诈降，想里应外合。诸葛亮将计就计，灌醉孟优部众，第三次擒住孟获。史实：具体经过出自小说。"
+ },
+ {
   "id": "ch089-dumb-springs",
   "year": 225,
   "chapter": 89,
@@ -2990,6 +3214,22 @@
   "lon": 102.9,
   "summary": "In the far south the soldiers drink from springs that strike them dumb or kill them; a hermit, brother of the rebel king, gives them a herb to cure it. Historically: there is no record of it; the springs and the herb are the novel's.",
   "summary_zh": "大军深入南方，士兵误饮哑泉，失声或身亡。孟获之兄孟节隐居山中，以薤叶芸香相救。史实：并无记载，哑泉与解药都是小说情节。"
+ },
+ {
+  "id": "ch089-fifth-capture",
+  "year": 225,
+  "chapter": 89,
+  "level": 3,
+  "category": "war",
+  "truth": "fiction",
+  "title": "The fifth capture",
+  "title_zh": "南蛮王五次遭擒",
+  "place": "The far south",
+  "place_zh": "南中腹地",
+  "lat": 25.3,
+  "lon": 102.95,
+  "summary": "Even with the poisoned springs and the help of King Duosi, Meng Huo is betrayed by his own allies and delivered to Zhuge Liang a fifth time. Historically: the details are the novel's.",
+  "summary_zh": "孟获借毒泉和朵思大王之助，仍被部下杨锋等人缚送蜀营，第五次被擒。史实：具体经过出自小说。"
  },
  {
   "id": "ch090-seven-captures",
@@ -3022,6 +3262,22 @@
   "lon": 102.0,
   "summary": "The king of Wuge brings warriors in rattan armour soaked in oil, which arrows cannot pierce. Zhuge Liang lures them into Panshe Valley and burns thirty thousand, and weeps that he will be punished in heaven for it. Historically: neither the kingdom nor the battle is recorded.",
   "summary_zh": "乌戈国王兀突骨率藤甲兵来援，藤甲浸油，刀箭不入。诸葛亮诱其入盘蛇谷，火烧三万藤甲兵，事后流泪说自己必损阳寿。史实：乌戈国和此战均不见于史书。"
+ },
+ {
+  "id": "ch090-beasts",
+  "year": 225,
+  "chapter": 90,
+  "level": 3,
+  "category": "war",
+  "truth": "fiction",
+  "title": "Wooden beasts against wild beasts",
+  "title_zh": "驱巨兽六破蛮兵",
+  "place": "The far south",
+  "place_zh": "南中（木鹿大王）",
+  "lat": 24.4,
+  "lon": 102.5,
+  "summary": "King Mulu rides an elephant and drives tigers, leopards and wolves at the Shu army. Zhuge Liang answers with painted wooden beasts that breathe fire and smoke, and the real ones turn and flee: the sixth capture. Historically: invented.",
+  "summary_zh": "木鹿大王骑白象、驱虎豹豺狼冲阵。诸葛亮造木刻彩绘的巨兽，口吐烟火，真兽反被吓退，第六次擒孟获。史实：并无此事。"
  },
  {
   "id": "ch091-mantou",
