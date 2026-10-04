@@ -1232,6 +1232,22 @@
   "summary_zh": "刘备在汝南被曹操击败，南投同宗荆州牧刘表，刘表让他屯驻新野，防备北方。他在荆州一待就是七年。"
  },
  {
+  "id": "ch032-yuan-brothers",
+  "year": 203,
+  "chapter": 32,
+  "level": 3,
+  "category": "politics",
+  "truth": "history",
+  "title": "Yuan Tan and Yuan Shang turn on each other",
+  "title_zh": "袁谭袁尚兄弟相争",
+  "place": "Liyang",
+  "place_zh": "黎阳（今河南浚县）",
+  "lat": 35.68,
+  "lon": 114.55,
+  "summary": "Yuan Shao dies having named his youngest son Yuan Shang heir over the eldest, Yuan Tan. The brothers go to war with each other, and Yuan Tan even asks Cao Cao for help, which is all Cao Cao needs.",
+  "summary_zh": "袁绍死前废长立幼，以幼子袁尚为嗣。长子袁谭不服，兄弟相攻，袁谭甚至向曹操求援，给了曹操各个击破的机会。"
+ },
+ {
   "id": "ch032-ye-taken",
   "year": 204,
   "chapter": 32,
@@ -1264,6 +1280,22 @@
   "summary_zh": "邺城破时，曹丕在袁府中见到袁熙之妻甄氏，纳为己妻。她后来生下魏明帝曹叡。"
  },
  {
+  "id": "ch034-thigh-flesh",
+  "year": 206,
+  "chapter": 34,
+  "level": 3,
+  "category": "society",
+  "truth": "history",
+  "title": "Liu Bei weeps for the flesh on his thighs",
+  "title_zh": "髀肉之叹",
+  "place": "Jingzhou",
+  "place_zh": "荆州（刘表座上）",
+  "lat": 32.03,
+  "lon": 112.14,
+  "summary": "Returning from the privy at a banquet with Liu Biao, Liu Bei is in tears: he has not been in the saddle for so long that the flesh has grown back on his thighs, the years are passing, and he has achieved nothing. The Jiuzhou chunqiu cited in the notes records it.",
+  "summary_zh": "刘备在刘表席间如厕回来，泪流满面。他说自己久不骑马，大腿内侧又长出了肉，日月如梭，人将老去，却功业未建。此事见于裴注引《九州春秋》。"
+ },
+ {
   "id": "ch033-white-wolf-mountain",
   "year": 207,
   "chapter": 33,
@@ -1294,6 +1326,22 @@
   "lon": 112.13,
   "summary": "Warned that Liu Biao's in-laws mean to kill him at a banquet, Liu Bei rides out and comes up against the Tan Stream. His horse Dilu, said to bring bad luck to its master, leaps three zhang across and saves him. Historically: the leap is told in the Shiyu cited in the notes, and the commentator Sun Sheng called it a fabrication.",
   "summary_zh": "刘备得知蔡瑁要在宴上害他，骑马逃出，被檀溪拦住去路。人说妨主的的卢马一跃三丈，跳过檀溪救了他。史实：此事出自裴注所引《世语》，孙盛已指其为虚妄之言。"
+ },
+ {
+  "id": "ch034-behind-the-screen",
+  "year": 207,
+  "chapter": 34,
+  "level": 3,
+  "category": "politics",
+  "truth": "embellished",
+  "title": "Lady Cai listens behind the screen",
+  "title_zh": "蔡夫人隔屏听密语",
+  "place": "Xiangyang",
+  "place_zh": "襄阳",
+  "lat": 32.0,
+  "lon": 112.11,
+  "summary": "Liu Biao asks Liu Bei whether to make his elder or younger son heir; Liu Bei advises the elder. Lady Cai, mother of the younger, hears it from behind a screen and from then on plots Liu Bei's death. Historically: the quarrel over Liu Biao's succession was real; the listening behind the screen is the novel's.",
+  "summary_zh": "刘表问刘备该立长子刘琦还是幼子刘琮，刘备主张立长。刘琮之母蔡夫人在屏风后偷听，从此与蔡瑁合谋要害刘备。史实：刘表立嗣之争确有其事，隔屏偷听出自小说。"
  },
  {
   "id": "ch035-water-mirror",
@@ -1344,6 +1392,22 @@
   "summary_zh": "曹操以伪造的母亲书信骗走徐庶，徐庶临行回马，向刘备举荐诸葛亮。史实：《三国志·诸葛亮传》载徐庶荐诸葛亮时仍在刘备帐下；他离开刘备是在208年长坂兵败、母亲被曹军所获之后。"
  },
  {
+  "id": "ch036-fancheng-ruse",
+  "year": 207,
+  "chapter": 36,
+  "level": 3,
+  "category": "war",
+  "truth": "fiction",
+  "title": "Shan Fu takes Fancheng by a ruse",
+  "title_zh": "玄德用计袭樊城",
+  "place": "Fancheng",
+  "place_zh": "樊城",
+  "lat": 32.09,
+  "lon": 112.17,
+  "summary": "While Cao Ren is out fighting, Shan Fu sends Guan Yu to take his base at Fancheng behind him. Cao Ren learns the name of the strategist who beat him and Cao Cao realises it is Xu Shu. Historically: invented.",
+  "summary_zh": "单福趁曹仁出战，派关羽袭取其根据地樊城。曹仁战败，曹操打听得这位军师正是徐庶。史实：并无此事。"
+ },
+ {
   "id": "ch037-three-visits",
   "year": 207,
   "chapter": 37,
@@ -1358,6 +1422,22 @@
   "lon": 112.04,
   "summary": "Liu Bei goes three times to Zhuge Liang's cottage in the hills, the third time in snow, and waits on the steps while he sleeps. Historically: the visits are real; Zhuge Liang himself wrote in his memorial that Liu Bei 'visited me three times in my thatched cottage'. The snow and the waiting are the novel's.",
   "summary_zh": "刘备三顾诸葛亮的茅庐，第三次冒雪而去，站在阶下等候他午睡醒来。史实：三顾确有其事，诸葛亮在《出师表》中亲笔写道“三顾臣于草庐之中”；风雪与立候是小说的渲染。"
+ },
+ {
+  "id": "ch037-first-visits",
+  "year": 207,
+  "chapter": 37,
+  "level": 3,
+  "category": "society",
+  "truth": "fiction",
+  "title": "The first two visits",
+  "title_zh": "一顾二顾茅庐",
+  "place": "Longzhong",
+  "place_zh": "隆中",
+  "lat": 32.05,
+  "lon": 112.0,
+  "summary": "On the first visit the boy says the master is out; on the second, in wind and snow, Liu Bei meets one after another Zhuge Liang's friends, his brother and his father-in-law, each of whom he takes for Zhuge Liang. Historically: the visits are real, but these meetings are the novel's.",
+  "summary_zh": "第一次去，书童说先生出门了；第二次冒着风雪去，刘备先后遇到崔州平、石广元、孟公威、诸葛均和黄承彦，每次都以为见到了诸葛亮。史实：三顾确有其事，这些相遇出自小说。"
  },
  {
   "id": "ch038-longzhong-plan",
@@ -1408,6 +1488,22 @@
   "summary_zh": "诸葛亮初到，关张不服。他在博望坡设伏，诱夏侯惇进入狭谷，纵火大破曹军，众将从此心服。史实：博望之战确有其事，但发生在202年，比诸葛亮出山早了五年，《三国志·先主传》记作刘备亲自设伏。"
  },
  {
+  "id": "ch039-upstairs",
+  "year": 208,
+  "chapter": 39,
+  "level": 2,
+  "category": "politics",
+  "truth": "history",
+  "title": "Liu Qi takes away the ladder",
+  "title_zh": "上楼去梯",
+  "place": "Xiangyang",
+  "place_zh": "襄阳",
+  "lat": 31.98,
+  "lon": 112.12,
+  "summary": "Liu Biao's elder son Liu Qi, afraid of his stepmother, leads Zhuge Liang up into a tower and has the ladder taken away: now no one can hear. Zhuge Liang reminds him of the prince who died at home and the one who lived because he went abroad, and Liu Qi asks to command Jiangxia. Zhuge Liang's biography tells it.",
+  "summary_zh": "刘表长子刘琦畏惧继母迫害，请诸葛亮登上高楼，命人撤去梯子，求他献计。诸葛亮说：“君不见申生在内而危，重耳在外而安乎？”刘琦于是请求出镇江夏。此事见于《三国志·诸葛亮传》。"
+ },
+ {
   "id": "ch040-xinye-fire",
   "year": 208,
   "chapter": 40,
@@ -1438,6 +1534,22 @@
   "lon": 112.15,
   "summary": "Liu Biao dies as Cao Cao marches south. His young son Liu Cong, steered by his mother's family, surrenders the whole province without a fight, and does not tell Liu Bei until Cao Cao is near.",
   "summary_zh": "曹操南下之际刘表病死，幼子刘琮在蔡氏一族撺掇下不战而降，直到曹军将至才派人告知刘备。"
+ },
+ {
+  "id": "ch040-kong-rong",
+  "year": 208,
+  "chapter": 40,
+  "level": 3,
+  "category": "politics",
+  "truth": "history",
+  "title": "Kong Rong is executed",
+  "title_zh": "孔融被杀",
+  "place": "Xu",
+  "place_zh": "许都",
+  "lat": 34.01,
+  "lon": 113.84,
+  "summary": "The scholar Kong Rong, a descendant of Confucius who had mocked Cao Cao for years, is executed with his family as Cao Cao marches south. His young children are said to have been playing a game and to have gone on with it calmly when the soldiers came: under an overturned nest, how could the eggs stay whole?",
+  "summary_zh": "孔子后人孔融多年来屡屡讥讽曹操，曹操南征前将他满门处死。相传他的两个幼子正在下棋，从容不迫地说：“安有巢毁而卵不破乎？”"
  },
  {
   "id": "ch041-zhao-yun-changban",
@@ -1472,6 +1584,22 @@
   "summary_zh": "十余万百姓追随刘备南撤，辎重车辆数千，日行仅十余里。有人劝他弃民速走，刘备说：“夫济大事必以人为本，今人归吾，吾何忍弃去！”《三国志·先主传》记载相同。"
  },
  {
+  "id": "ch041-lady-mi",
+  "year": 208,
+  "chapter": 41,
+  "level": 3,
+  "category": "society",
+  "truth": "fiction",
+  "title": "Lady Mi throws herself into a well",
+  "title_zh": "糜夫人投井",
+  "place": "Changban",
+  "place_zh": "长坂坡",
+  "lat": 30.81,
+  "lon": 111.74,
+  "summary": "Wounded and unable to ride, Lady Mi hands the infant Liu Shan to Zhao Yun and throws herself into a dry well so that he will not stay behind for her; Zhao Yun pulls down a wall to cover it. Historically: the sources say nothing of Lady Mi at Changban; it was Lady Gan, Liu Shan's mother, whom Zhao Yun saved.",
+  "summary_zh": "糜夫人身负重伤不能上马，把阿斗托付给赵云，投枯井而死，免得赵云为她耽误；赵云推倒土墙掩住井口。史实：史书并无糜夫人死于长坂的记载，赵云救下的是阿斗的生母甘夫人。"
+ },
+ {
   "id": "ch042-changban-bridge",
   "year": 208,
   "chapter": 42,
@@ -1488,6 +1616,38 @@
   "summary_zh": "张飞率二十骑据守长坂桥，横矛瞪目大喝：“身是张益德也，可来共决死！”夏侯杰被吓得肝胆碎裂，坠马而死，曹军退却。史实：《三国志·张飞传》记有据水断桥、瞋目横矛和这句喝问；吓死夏侯杰出自小说。"
  },
  {
+  "id": "ch042-throws-the-child",
+  "year": 208,
+  "chapter": 42,
+  "level": 2,
+  "category": "society",
+  "truth": "fiction",
+  "title": "Liu Bei throws down his son",
+  "title_zh": "刘备摔阿斗",
+  "place": "Changban",
+  "place_zh": "长坂坡",
+  "lat": 30.85,
+  "lon": 111.77,
+  "summary": "Zhao Yun hands over the child he has carried through the enemy army. Liu Bei throws him to the ground: for the sake of this brat I nearly lost a great general! Zhao Yun weeps that his life could never repay such a lord. Historically: invented; the saying 'Liu Bei throws his son to win hearts' grew from the novel.",
+  "summary_zh": "赵云把怀中的阿斗交给刘备，刘备接过掷于地上，说：“为汝这孺子，几损我一员大将！”赵云感激涕零。史实：并无此事，“刘备摔孩子，收买人心”的俗语正是从小说来的。"
+ },
+ {
+  "id": "ch042-hanjin",
+  "year": 208,
+  "chapter": 42,
+  "level": 2,
+  "category": "war",
+  "truth": "history",
+  "title": "Guan Yu's fleet waits at the Han ford",
+  "title_zh": "刘豫州败走汉津口",
+  "place": "The Han ford",
+  "place_zh": "汉津（今湖北天门、潜江一带）",
+  "lat": 30.6,
+  "lon": 113.0,
+  "summary": "Liu Bei, cut off from Jiangling, turns east to the Han River, where Guan Yu's fleet is waiting as planned, and Liu Qi comes with ten thousand men from Jiangxia. Together they reach Xiakou.",
+  "summary_zh": "刘备南下江陵的路被截断，转向东边的汉水，与按计划率船队在汉津等候的关羽会合，江夏的刘琦也带来一万多人，一同到达夏口。"
+ },
+ {
   "id": "ch043-debating-the-scholars",
   "year": 208,
   "chapter": 43,
@@ -1502,6 +1662,22 @@
   "lon": 115.98,
   "summary": "Sent to Sun Quan, Zhuge Liang faces a hall of Wu advisers urging surrender and silences them one by one. Historically: Zhuge Liang did go to Chaisang and persuade Sun Quan, and the Records gives his speech; the debate with the scholars is the novel's.",
   "summary_zh": "诸葛亮出使江东，面对满堂主张投降的东吴谋士，逐一驳倒张昭等人。史实：诸葛亮确曾到柴桑游说孙权，《三国志·诸葛亮传》记有他的说辞；舌战群儒一场出自小说。"
+ },
+ {
+  "id": "ch043-lu-su-alone",
+  "year": 208,
+  "chapter": 43,
+  "level": 2,
+  "category": "politics",
+  "truth": "history",
+  "title": "Lu Su: anyone may surrender but you",
+  "title_zh": "鲁子敬力排众议",
+  "place": "Chaisang",
+  "place_zh": "柴桑",
+  "lat": 29.72,
+  "lon": 116.0,
+  "summary": "While Sun Quan's ministers urge surrender, Lu Su follows him out to the corridor: if we surrender we keep our posts and live well; if you surrender, where will you go? Lu Su's biography records it, and it is the turning point.",
+  "summary_zh": "满朝文臣都主张投降，鲁肃追到廊下对孙权说：我们投降，照样做官；将军投降，又能到哪里去呢？此语见于《三国志·鲁肃传》，是孙权决意抗曹的转折。"
  },
  {
   "id": "ch044-sun-quan-decides",
@@ -1552,6 +1728,22 @@
   "summary_zh": "曹操派周瑜的同窗蒋干过江劝降。周瑜假装大醉，让蒋干偷走一封伪造的蔡瑁、张允降书，曹操中计斩了自己的两员水军都督。史实：据《江表传》，蒋干确曾往见周瑜，劝降不成而返；并无盗书之事，蔡瑁也没有被杀，后来仍在曹营做官。"
  },
  {
+  "id": "ch045-sanjiangkou",
+  "year": 208,
+  "chapter": 45,
+  "level": 3,
+  "category": "war",
+  "truth": "embellished",
+  "title": "The first clash at Sanjiangkou",
+  "title_zh": "三江口初战",
+  "place": "Sanjiangkou",
+  "place_zh": "三江口（赤壁附近）",
+  "lat": 29.9,
+  "lon": 113.72,
+  "summary": "The northern troops, sick and unused to boats, lose the first fight on the river; Gan Ning kills one of Cai Mao's brothers. Historically: Zhou Yu's biography says that at the first engagement Cao Cao's army was beaten and fell back to the north bank; the names are the novel's.",
+  "summary_zh": "北军不习水战，又多染疾病，江上首战失利，甘宁射杀蔡瑁之弟。史实：《三国志·周瑜传》载“初一交战，公军败退，引次江北”；具体人物出自小说。"
+ },
+ {
   "id": "ch046-borrowing-arrows",
   "year": 208,
   "chapter": 46,
@@ -1600,6 +1792,22 @@
   "summary_zh": "庞统到曹营献策，教曹操把战船连锁起来，以免北方士兵晕船。史实：《三国志·周瑜传》载曹军战船确实“首尾相接”，黄盖因此建议火攻，但与庞统无关。"
  },
  {
+  "id": "ch047-kan-ze",
+  "year": 208,
+  "chapter": 47,
+  "level": 3,
+  "category": "diplomacy",
+  "truth": "fiction",
+  "title": "Kan Ze carries the false surrender",
+  "title_zh": "阚泽密献诈降书",
+  "place": "Wulin",
+  "place_zh": "乌林曹营",
+  "lat": 29.98,
+  "lon": 113.43,
+  "summary": "The scholar Kan Ze rows alone to Cao Cao's camp with Huang Gai's letter. Cao Cao sees through it and orders him killed; Kan Ze laughs at Cao Cao for missing the obvious, talks his way out, and Cao Cao believes the letter. Historically: Kan Ze was a real Wu scholar, but the errand is the novel's.",
+  "summary_zh": "阚泽独驾小舟到曹营献黄盖降书。曹操识破，喝令推出斩首，阚泽仰天大笑，讥曹操不识兵机，一番辩说，曹操反倒信了降书。史实：阚泽确是东吴学者，但献书一事出自小说。"
+ },
+ {
   "id": "ch048-cao-cao-poem",
   "year": 208,
   "chapter": 48,
@@ -1614,6 +1822,22 @@
   "lon": 113.42,
   "summary": "On a moonlit night before the battle Cao Cao feasts on his flagship, chants 'Facing wine, let us sing' with his lance across his knees, and kills an officer who calls a line ill-omened. Historically: Cao Cao did write the 'Short Song', but nothing places it at the Red Cliffs, and the killing is the novel's.",
   "summary_zh": "决战前夜，曹操在大船上宴请众将，横槊赋诗，吟唱“对酒当歌，人生几何”，又因扬州刺史刘馥说诗句不吉而将他刺死。史实：曹操确有《短歌行》，但并无证据说作于赤壁；刺死刘馥更是虚构，刘馥208年病逝于任上。"
+ },
+ {
+  "id": "ch048-chained-fleet-drill",
+  "year": 208,
+  "chapter": 48,
+  "level": 3,
+  "category": "war",
+  "truth": "embellished",
+  "title": "Cao Cao reviews his chained fleet",
+  "title_zh": "锁战船北军用武",
+  "place": "Wulin",
+  "place_zh": "乌林",
+  "lat": 29.93,
+  "lon": 113.48,
+  "summary": "Cao Cao watches his northern soldiers drill on ships chained together, steady as dry land. Cheng Yu warns of fire; Cao Cao laughs that in winter there is no south-east wind. Historically: the ships were lashed bow to stern, as Zhou Yu's biography says; the review and the warning are the novel's.",
+  "summary_zh": "曹操检阅铁索连环的战船，北军在船上如履平地。程昱提醒怕火攻，曹操大笑说隆冬只有西北风，哪来东南风。史实：曹军战船“首尾相接”见于《三国志·周瑜传》；检阅与对话出自小说。"
  },
  {
   "id": "ch049-east-wind",
@@ -1664,6 +1888,22 @@
   "summary_zh": "曹操败走，三次大笑周瑜、诸葛亮无谋，每笑一次便杀出一路伏兵。到了华容道，关羽念及旧恩，放了曹操。史实：裴注引《山阳公载记》载曹操从华容道泥泞中撤退，刘备想放火烧芦苇已经晚了一步，并无关羽截路之事。"
  },
  {
+  "id": "ch050-wulin-ambushes",
+  "year": 208,
+  "chapter": 50,
+  "level": 3,
+  "category": "war",
+  "truth": "fiction",
+  "title": "Ambushes at Wulin and Gourd Mouth",
+  "title_zh": "乌林葫芦口伏兵",
+  "place": "West of Wulin",
+  "place_zh": "乌林以西葫芦口",
+  "lat": 29.8,
+  "lon": 113.2,
+  "summary": "Fleeing the fire, Cao Cao laughs at Zhuge Liang for leaving the road open, and Zhao Yun charges out of the woods; he laughs again at Gourd Mouth, and Zhang Fei appears. Each laugh brings an ambush, until Huarong. Historically: invented.",
+  "summary_zh": "曹操火海逃生，在乌林笑诸葛亮不在此处设伏，话音未落赵云杀出；到葫芦口又笑，张飞杀到。每笑一次就引出一路伏兵，直到华容道。史实：并无此事。"
+ },
+ {
   "id": "ch053-hefei-208",
   "year": 208,
   "chapter": 53,
@@ -1678,6 +1918,22 @@
   "lon": 117.25,
   "summary": "While Zhou Yu fights in the west, Sun Quan besieges Hefei for a month and withdraws after a false report of relief. The novel has Taishi Ci die of wounds here; historically Taishi Ci had died of illness in 206.",
   "summary_zh": "周瑜西征之时，孙权亲率大军围攻合肥月余，因误信曹军援兵将至而退。小说写太史慈在此中箭身亡，史实上太史慈已于206年病逝。"
+ },
+ {
+  "id": "ch053-taishi-ci-dies",
+  "year": 208,
+  "chapter": 53,
+  "level": 3,
+  "category": "war",
+  "truth": "fiction",
+  "title": "Taishi Ci dies at Hefei",
+  "title_zh": "太史慈战死合肥",
+  "place": "Hefei",
+  "place_zh": "合肥",
+  "lat": 31.9,
+  "lon": 117.2,
+  "summary": "Lured into a trap at Hefei, Taishi Ci is shot full of arrows and dies crying that a man born into the world should carry a seven-foot sword and climb to the emperor's steps. Historically: Taishi Ci died of illness in 206, but his biography's notes give him that last cry.",
+  "summary_zh": "太史慈在合肥中计，身中数箭，临死大叫：“大丈夫生于乱世，当带三尺剑立不世之功！”史实：太史慈206年病逝，并非战死；裴注引《吴书》载其临终说“丈夫生世，当带七尺之剑，以升天子之阶”。"
  },
  {
   "id": "ch051-first-anger",
@@ -1696,6 +1952,22 @@
   "summary_zh": "周瑜围攻江陵的曹仁，右胁中了毒箭；诸葛亮趁机用缴获的兵符赚取南郡，周瑜气得箭疮迸裂。史实：周瑜中箭是真的（《三国志·周瑜传》），但江陵是周瑜苦战一年后亲自攻下的，刘备是次年才向孙权借得南郡。"
  },
  {
+  "id": "ch051-zhou-yu-feigns",
+  "year": 209,
+  "chapter": 51,
+  "level": 3,
+  "category": "war",
+  "truth": "fiction",
+  "title": "Zhou Yu feigns death to trap Cao Ren",
+  "title_zh": "周瑜诈死诱曹仁",
+  "place": "Jiangling",
+  "place_zh": "江陵",
+  "lat": 30.3,
+  "lon": 112.25,
+  "summary": "Wounded by a poisoned arrow, Zhou Yu has it spread that he is dead; Cao Ren raids the mourning camp at night and walks into an ambush. Historically: Zhou Yu was wounded at Jiangling, but the feigned death is the novel's.",
+  "summary_zh": "周瑜中毒箭后传言已死，曹仁夜劫吴营，中了埋伏大败。史实：周瑜在江陵确实中箭，诈死诱敌出自小说。"
+ },
+ {
   "id": "ch052-guiyang",
   "year": 209,
   "chapter": 52,
@@ -1710,6 +1982,38 @@
   "lon": 113.0,
   "summary": "The governor of Guiyang, Zhao Fan, surrenders and offers Zhao Yun his widowed sister-in-law, a famous beauty. Zhao Yun refuses. The Zhao Yun biezhuan cited in the notes tells the same story.",
   "summary_zh": "桂阳太守赵范投降，想把美貌的寡嫂嫁给赵云，赵云坚辞不受。裴注所引《赵云别传》记载此事。"
+ },
+ {
+  "id": "ch052-jing-excuse",
+  "year": 209,
+  "chapter": 52,
+  "level": 3,
+  "category": "diplomacy",
+  "truth": "fiction",
+  "title": "Zhuge Liang puts off Lu Su",
+  "title_zh": "诸葛亮智辞鲁肃",
+  "place": "Gong'an",
+  "place_zh": "公安",
+  "lat": 30.08,
+  "lon": 112.25,
+  "summary": "Lu Su comes to demand Jingzhou back. Zhuge Liang says it belongs to Liu Qi, Liu Biao's heir, and they will give it up when Liu Qi dies; when he dies, there is always another reason. Historically: Liu Bei became governor of Jingzhou on Liu Qi's death in 209, and borrowed Nanjun from Sun Quan in 210; the excuses are the novel's.",
+  "summary_zh": "鲁肃来讨荆州，诸葛亮说荆州是刘表之子刘琦的，等刘琦死了再还；刘琦死后，又另有说辞。史实：209年刘琦死后刘备领荆州牧，210年向孙权借得南郡；这番推托出自小说。"
+ },
+ {
+  "id": "ch052-wuling",
+  "year": 209,
+  "chapter": 52,
+  "level": 3,
+  "category": "war",
+  "truth": "embellished",
+  "title": "Zhang Fei takes Wuling",
+  "title_zh": "张飞取武陵",
+  "place": "Wuling",
+  "place_zh": "武陵郡临沅（今湖南常德）",
+  "lat": 29.0,
+  "lon": 111.7,
+  "summary": "Zhang Fei marches on Wuling; the governor Jin Xuan is shot down by his own officer, who opens the gates. With Changsha, Guiyang and Lingling, all four southern commanderies are Liu Bei's. Historically: Liu Bei's biography says the four governors submitted; the shot from the wall is the novel's.",
+  "summary_zh": "张飞进兵武陵，太守金旋被部将巩志射杀，巩志献城。加上长沙、桂阳、零陵，荆南四郡尽归刘备。史实：《三国志·先主传》载四郡太守皆降，城上射杀太守出自小说。"
  },
  {
   "id": "ch053-huang-zhong",
@@ -1744,6 +2048,22 @@
   "summary_zh": "周瑜以孙权之妹为饵设计扣留刘备，不料吴国太在甘露寺相亲，看中刘备，弄假成真。史实：孙权确曾把妹妹嫁给刘备以巩固联盟；孙权之母吴夫人已于202年去世，甘露寺相亲是小说情节。"
  },
  {
+  "id": "ch054-swords-in-the-chamber",
+  "year": 209,
+  "chapter": 54,
+  "level": 3,
+  "category": "society",
+  "truth": "embellished",
+  "title": "Swords in the bridal chamber",
+  "title_zh": "孙夫人房中刀剑",
+  "place": "Jingkou",
+  "place_zh": "京口（今江苏镇江）",
+  "lat": 32.18,
+  "lon": 119.45,
+  "summary": "On the wedding night Liu Bei finds the bride's rooms full of weapons and her maids in arms; Lady Sun laughs that he, a man who has fought half his life, is afraid of swords. Historically: Fa Zheng's biography says Lady Sun kept a hundred maids who stood by with drawn swords, and Liu Bei went in trembling every time; the wedding itself took place in Jingzhou, not in Wu.",
+  "summary_zh": "洞房之夜，刘备见新娘房中刀枪林立，侍婢都佩剑侍立，孙夫人笑他“厮杀半生，尚惧兵器乎”。史实：《三国志·法正传》载孙夫人有侍婢百余人，皆亲执刀侍立，刘备每次进去都心中凛然；婚事其实是在荆州办的，并不在东吴。"
+ },
+ {
   "id": "ch055-second-anger",
   "year": 210,
   "chapter": 55,
@@ -1758,6 +2078,22 @@
   "lon": 112.23,
   "summary": "Following Zhuge Liang's sealed instructions, Liu Bei slips away with his new wife; Zhou Yu's pursuers are beaten back, and Liu Bei's soldiers jeer: you lost a wife and an army too. Historically: Liu Bei did visit Sun Quan at Jingkou and return; Zhou Yu advised keeping him there, and Sun Quan refused. There was no chase.",
   "summary_zh": "刘备依诸葛亮锦囊之计带孙夫人逃回荆州，周瑜追兵大败，蜀兵齐喊“周郎妙计安天下，赔了夫人又折兵”。史实：刘备确曾往京口见孙权后返回，周瑜曾建议扣留刘备，孙权未听；并无追击之事。"
+ },
+ {
+  "id": "ch055-liulang-ford",
+  "year": 210,
+  "chapter": 55,
+  "level": 3,
+  "category": "war",
+  "truth": "fiction",
+  "title": "Liu Bei escapes home with his bride",
+  "title_zh": "刘郎浦脱身",
+  "place": "Liulang Ford",
+  "place_zh": "刘郎浦（今湖北石首）",
+  "lat": 29.72,
+  "lon": 112.4,
+  "summary": "Opening Zhuge Liang's second sealed bag, Liu Bei slips away with Lady Sun, who scolds off the pursuing generals; Zhuge Liang's boats are waiting at the ford. Historically: Liu Bei did visit Sun Quan at Jingkou and come home, but there was no chase.",
+  "summary_zh": "刘备拆开诸葛亮第二个锦囊，带孙夫人逃出东吴，孙夫人喝退追兵，诸葛亮的船队早已在刘郎浦接应。史实：刘备确曾到京口见孙权后返回，但并无追击之事。"
  },
  {
   "id": "ch056-zhou-yu-dies",
@@ -1902,6 +2238,22 @@
   "lon": 112.27,
   "summary": "Slighted by Cao Cao, Liu Zhang's envoy Zhang Song turns to Liu Bei, who treats him royally, and gives him a map of Yizhou with every road and pass. Historically: Zhang Song was snubbed by Cao Cao in 208 and urged Liu Zhang to invite Liu Bei; the envoy who actually went to Liu Bei was Fa Zheng, and the map is the novel's.",
   "summary_zh": "张松出使许都受曹操冷遇，转而投靠礼贤下士的刘备，献上详载山川关隘的西川地图。史实：张松于208年受曹操冷落后，劝刘璋结交刘备；实际出使刘备的是法正，献图一节出自小说。"
+ },
+ {
+  "id": "ch060-new-book",
+  "year": 211,
+  "chapter": 60,
+  "level": 3,
+  "category": "culture",
+  "truth": "embellished",
+  "title": "Zhang Song recites Cao Cao's new book",
+  "title_zh": "张永年反难杨修",
+  "place": "Xu",
+  "place_zh": "许都",
+  "lat": 34.02,
+  "lon": 113.88,
+  "summary": "Yang Xiu shows Zhang Song Cao Cao's new book on war; Zhang Song recites it back after one reading and says every child in Shu knows it by heart, an old text. Cao Cao, thinking he has copied the ancients, burns it. Historically: the Yibu qijiu zaji cited in the notes says Zhang Song memorised Cao Cao's book at a single reading over wine; the burning is the novel's.",
+  "summary_zh": "杨修拿出曹操新著兵书炫耀，张松看一遍就背了出来，还说这是蜀中三尺小童都会背的古书。曹操以为自己与古人暗合，把书烧了。史实：裴注引《益部耆旧杂记》载张松在酒宴间一看便能背诵曹操的兵书；焚书出自小说。"
  },
  {
   "id": "ch060-liu-bei-enters-shu",
