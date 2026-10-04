@@ -58,8 +58,9 @@ if os.path.exists(OUT):
 os.makedirs(OUT)
 
 # The page and its assets.
-for p in ["app.js", "style.css", "vendor/maplibre-gl.css", "LICENSE",
-          "docs/img/favicon.svg", "docs/img/icon-32.png", "docs/img/icon-180.png"]:
+for p in ["app.js", "style.css", "vendor/maplibre-gl.css", "LICENSE", "sw.js",
+          "docs/img/favicon.svg", "docs/img/icon-32.png", "docs/img/app-180.png", "docs/img/app-512.png",
+          "docs/img/app-maskable-512.png"]:
     copy(p)
 manifest = json.load(open(src(f"{PACK}/manifest.json"), encoding="utf-8"))
 html = open(src("index.html"), encoding="utf-8").read()
@@ -87,6 +88,13 @@ manifest.pop("library", None)
 if args.env == "dev":
     manifest["name"] += " · dev"
     manifest["name_zh"] += " · dev"
+# The Home Screen app (manifest.webmanifest, sw.js) carries the book's name; the offline cache keeps what was viewed.
+app = json.load(open(src("manifest.webmanifest"), encoding="utf-8"))
+base_zh, base_en = manifest["name_zh"].removesuffix(" · dev"), manifest["name"].removesuffix(" · dev")
+dev = " (dev)" if args.env == "dev" else ""
+app.update(name=f"{base_zh} · {base_en}{dev}", short_name=base_zh + (" dev" if dev else ""),
+           description=manifest.get("note") or manifest["name"], lang="zh-CN")
+write("manifest.webmanifest", json.dumps(app, ensure_ascii=False, indent=2) + "\n")
 write(f"{PACK}/manifest.json", json.dumps(manifest, ensure_ascii=False, indent=2) + "\n")
 
 # Border maps the pack's periods name outside the pack (the atlas's Eastern Han map), and the outer world maps

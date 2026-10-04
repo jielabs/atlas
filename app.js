@@ -90,9 +90,10 @@ const UI = {
   zh: {
     title: "历代地图", events: "事件", hide: "收起", show: "展开", t3d: "3D 地形", sat: "卫星影像", neighbours: "周边政权", cities: "城市", geo: "山川",
     other: "English", map: "地图：", count: (n, era) => `${era} · ${n} 件`, countWin: (n) => `本时段 · ${n} 件`,
-    fc: { ok: "已与维基百科/维基数据核对年份", fixed: "已更正", doubt: "存疑", none: "AI 撰写，尚未核对" }, back: "返回列表", prev: "上一件", next: "下一件", why: "历史意义", people: "相关人物", wiki: "维基百科", wikiOther: "English Wikipedia",
+    fc: { ok: "已与维基百科/维基数据核对年份", fixed: "已更正", doubt: "存疑", none: "AI 撰写，尚未核对" },
+    sm: { ok: "简介已与维基百科对照（AI 审读）", fixed: "简介已更正", doubt: "简介存疑" }, back: "返回列表", prev: "上一件", next: "下一件", why: "历史意义", people: "相关人物", wiki: "维基百科", wikiOther: "English Wikipedia",
     more: "阅读详情 →", loading: "正在载入…", noStory: "这件事的详细介绍还在编写中。",
-    notePack: "疆域为近似示意，取自开源 historical-basemaps 数据集。地形、海岸线和河流均为现代地理。",
+    notePack: "疆域为近似示意，取自开源 Cliopatria（Seshat）与 historical-basemaps 数据集。地形、海岸线和河流均为现代地理。",
     note: "疆域为近似示意：取自开源 historical-basemaps 数据集，并参照谭其骧《中国历史地图集》人工修订。地形、海岸线和河流均为现代地理。",
     zooms: ["全部", "朝代", "数十年"], country: "国家", reignLen: (n) => `${n}年`, rulerCount: (n) => `${n} 位`, noRulers: "本时期暂无君主资料", worldMap: (y) => `${y}前后的世界`, worldName: "世界 · 公元纪年", noRegionEvents: "这个地区的事件还在整理中，下一步加入。现在可以看各时期的疆域。", noPeople: "本时期暂无人物资料", peopleHint: "点击人物，地图飞到其居所并显示生平", pgroups: { all: "全部", mil: "军事", pol: "政治", cul: "思想文学", art: "艺术", sci: "科技" }, scopeHint: "点击君主，时间轴缩放到其在位期间", zoomIn: "放大时间轴", zoomOut: "缩小时间轴", earlier: "向前", later: "向后",
     hint: ["点击朝代跳转 · 按 + 放大时间轴", (era) => `${era} · 每一段是一幅地图`, (era) => `${era} · 数十年视图`],
@@ -102,8 +103,8 @@ const UI = {
     reign: (a, b) => `${a}–${b}年在位`, troops: "兵力", unknown: "不详", losses: "伤亡",
     result: { won: "胜", lost: "败", draw: "平" },
     units: { infantry: "步兵", cavalry: "骑兵", chariots: "战车", archers: "弓兵", crossbows: "弩兵", navy: "水军", siege: "攻城", firearms: "火器", artillery: "火炮", elephants: "象兵" },
-    kinds: { campaign: "进军", journey: "行程", trade: "商路", canal: "运河", wall: "长城" }, exchange: "交流", spread: "传播", spreadGroups: { faith: "宗教传播", tech: "技术传播", crop: "作物传播" }, arrived: (y) => `${y}传到`, set_out: (y) => `${y}起`, world_t: "世界", worldHead: "同一年的世界", goRegion: "切换地区", allWorld: "全球", worldHint: "点击地区，地图和时间轴切换过去；点击事件阅读详情", noWorldEv: "前后几十年没有收录的大事",
-    people_l: "人物", lasted: (n) => `共${n}年`, close: "关闭", search: "搜索", share: "分享这个视图", tours: "导览", toursHead: "导览 · 跟着地图读历史", tourStory: "读这段故事", tourBack: "返回导览", tourPrev: "上一步", tourNext: "下一步", tourPlay: "自动播放", tourPause: "暂停", tourEnd: "结束导览", tourDone: "导览结束", tourSteps: (n) => `${n} 站`, tourCount: (n) => `${n} 条导览`, tourAt: (n) => `第${n}站`, toursHere: "本时期导览", toursOther: "其他时期", noTours: "本时期还没有导览", tourHint: "点击一条导览，地图会跟着故事移动", linkCopied: "链接已复制，可以发给别人", linkCopy: "复制这个链接：", searchPh: "搜索导览、事件、人物、君主、城市或年份（如 755、前221）", autoLayers: "自动图层", autoHint: "打开事件或导览时，自动显示相关图层，自动打开的图层标为虚线", autoOn: "已自动显示", autoAlso: "相关图层", sgroups: { time: "时间", era: "朝代", tour: "导览", event: "事件", person: "人物", ruler: "君主", city: "城市" }, noResults: "没有找到相关内容", jumpYear: "跳到这一年", capitals: "都城·人口", faith: "宗教思想", inventions: "发明", passes: "关隘", roads: "官道", walls: "长城", wallBy: "修筑", wallLen: (n) => `约${n.toLocaleString()}公里`, ruin: "已废弃，现为遗迹", clans: "豪族", ckinds: { gentry: "门阀士族", bloc: "地域集团", military: "军事集团", faction: "朋党", merchant: "商帮" }, seats: "郡望/根据地", families: "代表家族", members: "代表人物", drafted: "AI 整理，未经核对", cityEvents: (n) => `城中大事（${n}）· 点击跳转`,  personEvents: (n) => `相关事件（${n}）· 点击跳转`, pranks: { capital: "都城", secondary: "陪都", major: "重要城市", port: "港口", frontier: "军事重镇" }, rkinds: { imperial: "驰道", post: "驿道", trade: "商道" }, via: "途经", inUse: "使用年代",
+    kinds: { campaign: "进军", journey: "行程", trade: "商路", canal: "运河", wall: "长城" }, exchange: "交流", spread: "传播", spreadGroups: { faith: "宗教传播", tech: "技术传播", crop: "作物传播" }, arrived: (y) => `${y}传到`, set_out: (y) => `${y}起`, world_t: "世界", worldHead: "同一年的世界", goRegion: "切换地区", allWorld: "全球", worldHint: "点击地区，地图和时间轴切换过去；点击事件阅读详情", noWorldEv: "前后几十年没有收录的大事", elsewhere: "同时期的世界", hideStrip: "隐藏", showStrip: "在时间轴上方显示同时期的世界",
+    people_l: "人物", cmp: { one: "对比", open: "两地对比", sync: "同步视角", openTime: "两时对比", place: "两地", time: "两时", period: "时期", year: "年份", close: "关闭对比", pick: "对比地区", rulers: "君主", events: "前后大事", none: "前后几十年没有收录的大事" }, lasted: (n) => `共${n}年`, close: "关闭", search: "搜索", share: "分享这个视图", tours: "导览", toursHead: "导览 · 跟着地图读历史", tourStory: "读这段故事", tourBack: "返回导览", tourPrev: "上一步", tourNext: "下一步", tourPlay: "自动播放", tourPause: "暂停", tourEnd: "结束导览", tourDone: "导览结束", tourSteps: (n) => `${n} 站`, tourCount: (n) => `${n} 条导览`, tourAt: (n) => `第${n}站`, toursHere: "本时期导览", toursOther: "其他时期", noTours: "本时期还没有导览", tourHint: "点击一条导览，地图会跟着故事移动", linkCopied: "链接已复制，可以发给别人", linkCopy: "复制这个链接：", searchPh: "搜索导览、事件、人物、君主、城市或年份（如 755、前221）", autoLayers: "自动图层", autoHint: "打开事件或导览时，自动显示相关图层，自动打开的图层标为虚线", autoOn: "已自动显示", autoAlso: "相关图层", sgroups: { time: "时间", era: "朝代", tour: "导览", event: "事件", person: "人物", ruler: "君主", city: "城市" }, noResults: "没有找到相关内容", jumpYear: "跳到这一年", capitals: "都城·人口", faith: "宗教思想", inventions: "发明", passes: "关隘", roads: "官道", walls: "长城", wallBy: "修筑", wallLen: (n) => `约${n.toLocaleString()}公里`, ruin: "已废弃，现为遗迹", clans: "豪族", ckinds: { gentry: "门阀士族", bloc: "地域集团", military: "军事集团", faction: "朋党", merchant: "商帮" }, seats: "郡望/根据地", families: "代表家族", members: "代表人物", drafted: "AI 整理，未经核对", cityEvents: (n) => `城中大事（${n}）· 点击跳转`,  personEvents: (n) => `相关事件（${n}）· 点击跳转`, pranks: { capital: "都城", secondary: "陪都", major: "重要城市", port: "港口", frontier: "军事重镇" }, rkinds: { imperial: "驰道", post: "驿道", trade: "商道" }, via: "途经", inUse: "使用年代",
     fields: { general: "军事家", statesman: "政治家", thinker: "思想家", poet: "诗人", writer: "文学家", historian: "史学家", scientist: "科学家", physician: "医学家", engineer: "工程师", artist: "艺术家", religious: "宗教人物", explorer: "旅行家", scholar: "学者" },
     faiths: { buddhist: "佛教", daoist: "道教", confucian: "儒家", islam: "伊斯兰教", christian: "基督教", thought: "思想", other: "其他" },
     ifields: { craft: "工艺", writing: "文字", printing: "印刷", metallurgy: "冶金", military: "军事", astronomy: "天文", math: "数学", medicine: "医学", agriculture: "农业", navigation: "航海", engineering: "工程", money: "货币" },
@@ -113,9 +114,10 @@ const UI = {
   en: {
     title: "Atlas", events: "Events", hide: "Hide", show: "Show", t3d: "3D terrain", sat: "Satellite", neighbours: "Neighbours", cities: "Cities", geo: "Landscape",
     other: "中文", map: "Map: ", count: (n, era) => `${n} in ${era}`, countWin: (n) => `${n} in view`,
-    fc: { ok: "Years checked against Wikipedia/Wikidata", fixed: "Corrected", doubt: "Doubtful", none: "AI-drafted, not yet checked" }, back: "All events", prev: "Previous", next: "Next", why: "Why it matters", people: "People", wiki: "Wikipedia", wikiOther: "中文维基百科",
+    fc: { ok: "Years checked against Wikipedia/Wikidata", fixed: "Corrected", doubt: "Doubtful", none: "AI-drafted, not yet checked" },
+    sm: { ok: "Summary compared with Wikipedia (AI review)", fixed: "Summary corrected", doubt: "Summary doubtful" }, back: "All events", prev: "Previous", next: "Next", why: "Why it matters", people: "People", wiki: "Wikipedia", wikiOther: "中文维基百科",
     more: "Read the story →", loading: "Loading…", noStory: "The full story for this event is still being written.",
-    notePack: "Borders are approximate, from the open historical-basemaps dataset. Terrain, coastlines and rivers are modern.",
+    notePack: "Borders are approximate, from the open Cliopatria (Seshat) and historical-basemaps datasets. Terrain, coastlines and rivers are modern.",
     note: "Borders are approximate: from the open historical-basemaps dataset, revised by hand after Tan Qixiang's Historical Atlas of China. Terrain, coastlines and rivers are modern.",
     zooms: ["All", "Dynasty", "Decades"], country: "Country", reignLen: (n) => `${n} yr${n > 1 ? "s" : ""}`, rulerCount: (n) => `${n} rulers`, noPeople: "No famous people listed for this period", peopleHint: "Click a person to fly to where they lived and read about them", pgroups: { all: "All", mil: "Military", pol: "Politics", cul: "Thought & letters", art: "Arts", sci: "Science" }, noRulers: "No rulers recorded for this period", worldMap: (y) => `the world around ${y}`, worldName: "World · calendar years", noRegionEvents: "Events for this region are still being written. For now you can follow its borders through the periods.", scopeHint: "Pick a ruler to narrow the timeline to their reign", zoomIn: "Zoom in", zoomOut: "Zoom out", earlier: "Earlier", later: "Later",
     hint: ["Click a dynasty to jump · + to zoom in", (era) => `${era} · each segment is one map`, (era) => `${era} · decades view`],
@@ -125,8 +127,8 @@ const UI = {
     reign: (a, b) => `r. ${a}–${b}`, troops: "Troops", unknown: "unknown", losses: "Losses",
     result: { won: "Won", lost: "Lost", draw: "Draw" },
     units: { infantry: "Infantry", cavalry: "Cavalry", chariots: "Chariots", archers: "Archers", crossbows: "Crossbows", navy: "Navy", siege: "Siege", firearms: "Firearms", artillery: "Artillery", elephants: "Elephants" },
-    kinds: { campaign: "Campaign", journey: "Journey", trade: "Trade route", canal: "Canal", wall: "Wall" }, exchange: "Exchange", spread: "Spread", spreadGroups: { faith: "Faith spreads", tech: "Technique spreads", crop: "Crop spreads" }, arrived: (y) => `arrived ${y}`, set_out: (y) => `from ${y}`, world_t: "World", worldHead: "The world this year", goRegion: "Go to region", allWorld: "Whole world", worldHint: "Click a region to move the map and timeline there; click an event to read it", noWorldEv: "No major events recorded within a few decades",
-    people_l: "People", lasted: (n) => `${n} years`, close: "Close", search: "Search", share: "Share this view", tours: "Tours", toursHead: "Guided tours", tourStory: "Read the story", tourBack: "Back to the tour", tourPrev: "Back", tourNext: "Next", tourPlay: "Play", tourPause: "Pause", tourEnd: "End tour", tourDone: "End of tour", tourSteps: (n) => `${n} stops`, tourCount: (n) => `${n} tour${n === 1 ? "" : "s"}`, tourAt: (n) => `Stop ${n}`, toursHere: "Tours for this period", toursOther: "Other periods", noTours: "No tours for this period yet", tourHint: "Pick a tour and the map follows the story", linkCopied: "Link copied", linkCopy: "Copy this link:", searchPh: "Search tours, events, people, rulers, cities or a year (755, 221 BC)", autoLayers: "Auto layers", autoHint: "Reading an event or a tour stop switches on the layers it needs; those get a dashed outline", autoOn: "Switched on for this", autoAlso: "Related layers", sgroups: { time: "Year", era: "Periods", tour: "Tours", event: "Events", person: "People", ruler: "Rulers", city: "Cities" }, noResults: "Nothing found", jumpYear: "Go to this year", capitals: "Capitals", faith: "Faith", inventions: "Inventions", passes: "Passes", roads: "Roads", walls: "Great Walls", wallBy: "Built by", wallLen: (n) => `about ${n.toLocaleString()} km`, ruin: "Abandoned; ruins remain", clans: "Elites", ckinds: { gentry: "Great clans", bloc: "Regional bloc", military: "Military clique", faction: "Court faction", merchant: "Merchant guild" }, seats: "Home seats", families: "Families", members: "Key figures", drafted: "AI-drafted, not source-checked", cityEvents: (n) => `Events here (${n}) · click to jump`, personEvents: (n) => `Related events (${n}) · click to jump`, pranks: { capital: "Capital", secondary: "Secondary capital", major: "Major city", port: "Port", frontier: "Military stronghold" }, rkinds: { imperial: "Imperial highway", post: "Post road", trade: "Trade road" }, via: "Via", inUse: "In use",
+    kinds: { campaign: "Campaign", journey: "Journey", trade: "Trade route", canal: "Canal", wall: "Wall" }, exchange: "Exchange", spread: "Spread", spreadGroups: { faith: "Faith spreads", tech: "Technique spreads", crop: "Crop spreads" }, arrived: (y) => `arrived ${y}`, set_out: (y) => `from ${y}`, world_t: "World", worldHead: "The world this year", goRegion: "Go to region", allWorld: "Whole world", worldHint: "Click a region to move the map and timeline there; click an event to read it", noWorldEv: "No major events recorded within a few decades", elsewhere: "Elsewhere", hideStrip: "Hide", showStrip: "Show other regions above the timeline",
+    people_l: "People", cmp: { one: "Compare", open: "Compare regions", sync: "Sync view", openTime: "Compare times", place: "Two places", time: "Two times", period: "Period", year: "Year", close: "Close compare", pick: "Compare with", rulers: "Rulers", events: "Around this year", none: "No major events recorded within a few decades" }, lasted: (n) => `${n} years`, close: "Close", search: "Search", share: "Share this view", tours: "Tours", toursHead: "Guided tours", tourStory: "Read the story", tourBack: "Back to the tour", tourPrev: "Back", tourNext: "Next", tourPlay: "Play", tourPause: "Pause", tourEnd: "End tour", tourDone: "End of tour", tourSteps: (n) => `${n} stops`, tourCount: (n) => `${n} tour${n === 1 ? "" : "s"}`, tourAt: (n) => `Stop ${n}`, toursHere: "Tours for this period", toursOther: "Other periods", noTours: "No tours for this period yet", tourHint: "Pick a tour and the map follows the story", linkCopied: "Link copied", linkCopy: "Copy this link:", searchPh: "Search tours, events, people, rulers, cities or a year (755, 221 BC)", autoLayers: "Auto layers", autoHint: "Reading an event or a tour stop switches on the layers it needs; those get a dashed outline", autoOn: "Switched on for this", autoAlso: "Related layers", sgroups: { time: "Year", era: "Periods", tour: "Tours", event: "Events", person: "People", ruler: "Rulers", city: "Cities" }, noResults: "Nothing found", jumpYear: "Go to this year", capitals: "Capitals", faith: "Faith", inventions: "Inventions", passes: "Passes", roads: "Roads", walls: "Great Walls", wallBy: "Built by", wallLen: (n) => `about ${n.toLocaleString()} km`, ruin: "Abandoned; ruins remain", clans: "Elites", ckinds: { gentry: "Great clans", bloc: "Regional bloc", military: "Military clique", faction: "Court faction", merchant: "Merchant guild" }, seats: "Home seats", families: "Families", members: "Key figures", drafted: "AI-drafted, not source-checked", cityEvents: (n) => `Events here (${n}) · click to jump`, personEvents: (n) => `Related events (${n}) · click to jump`, pranks: { capital: "Capital", secondary: "Secondary capital", major: "Major city", port: "Port", frontier: "Military stronghold" }, rkinds: { imperial: "Imperial highway", post: "Post road", trade: "Trade road" }, via: "Via", inUse: "In use",
     fields: { general: "Military", statesman: "Statesman", thinker: "Thinker", poet: "Poet", writer: "Writer", historian: "Historian", scientist: "Scientist", physician: "Physician", engineer: "Engineer", artist: "Artist", religious: "Religious figure", explorer: "Traveller", scholar: "Scholar" },
     faiths: { buddhist: "Buddhism", daoist: "Daoism", confucian: "Confucianism", islam: "Islam", christian: "Christianity", thought: "Thought", other: "Other" },
     ifields: { craft: "Craft", writing: "Writing", printing: "Printing", metallurgy: "Metalwork", military: "Military", astronomy: "Astronomy", math: "Mathematics", medicine: "Medicine", agriculture: "Farming", navigation: "Navigation", engineering: "Engineering", money: "Money" },
@@ -136,7 +138,15 @@ const UI = {
 };
 const t = (k) => UI[state.lang][k];
 const zh = () => state.lang === "zh";
+// Languages offered in the language menu: `short` labels the corner button, `name` is the language's own name.
+// Adding one means adding it here plus its strings and data fields (text falls back to English where missing).
+const LANGS = [
+  { id: "zh", short: "中文", name: "简体中文", html: "zh-CN" },
+  { id: "en", short: "EN", name: "English", html: "en" },
+];
+const langOk = (l) => LANGS.some((x) => x.id === l);
 // Pick the field for the current language, falling back to the other one.
+const cmp = { sync: true, on: false, region: null, map: null, marks: [], key: "" }; // compare view: second map and its region
 const tx = (o, k) => (zh() ? o[k + "_zh"] || o[k] : o[k] || o[k + "_zh"]) || "";
 const titleOf = (o) => (zh() ? o.title_zh || o.title : o.title);
 const nameOf = (o) => (zh() ? o.name_zh || o.name : o.name);
@@ -155,14 +165,15 @@ function fmtYearParts(y) {
 const esc = (s) => String(s ?? "").replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[c]);
 
 function applyLang() {
-  document.documentElement.lang = zh() ? "zh-CN" : "en";
+  const L = LANGS.find((x) => x.id === state.lang) || LANGS[0];
+  document.documentElement.lang = L.html;
   // A pack shown alone is its own site: the tab shows its name.
   document.title = state.pack?.only ? tx(state.pack.manifest, "name") || t("title") : t("title");
   document.querySelectorAll("[data-i18n]").forEach((el) => (el.textContent = t(el.dataset.i18n)));
   // A pack's own note replaces the China borders note.
   if (state.pack?.only) document.querySelector('[data-i18n="note"]').textContent = tx(state.pack.manifest, "note") || t("notePack");
   document.querySelectorAll("[data-i18n-title]").forEach((el) => { el.title = t(el.dataset.i18nTitle); el.setAttribute("aria-label", el.title); });
-  $("lang").querySelectorAll("[data-lang]").forEach((b) => b.setAttribute("aria-pressed", String(b.dataset.lang === state.lang)));
+  $("lang-name").textContent = L.short;
   $("zoom-in").setAttribute("aria-label", t("zoomIn"));
   $("zoom-out").setAttribute("aria-label", t("zoomOut"));
   $("pan-prev").setAttribute("aria-label", t("earlier"));
@@ -191,6 +202,7 @@ async function setLang(lang) {
   renderPlaces();
   renderGeo();
   renderLedger();
+  updateCompare(true);
   emit("lang", { lang });
 }
 
@@ -928,12 +940,14 @@ async function setYear(year, opts = {}) {
   $("era-snap").hidden = !label;
   document.querySelectorAll(".band.snap").forEach((b) => b.classList.toggle("current", b.dataset.path === snap.borders && +b.dataset.from === snap.from));
   await setMaps(era, state.year);
+  updateCompare();
   renderEventStates();
   renderPlaces();
   renderOverlays();
   renderOldGeo();
   renderPackLayers();
   emit("year", { year: state.year, era: era.id, eraChanged });
+  renderWorldStrip();
 }
 
 function setEra(era, quiet) {
@@ -941,6 +955,10 @@ function setEra(era, quiet) {
   const seal = $("era-glyph");
   seal.textContent = era.seal || era.glyph;
   seal.classList.toggle("double", (era.seal || era.glyph).length > 1);
+  const civ = era.region === "world" ? { seal: "#56606a" } : state.regionById[era.region];
+  const color = era.region === "china" ? null : era.color || civ?.seal || civ?.color;
+  seal.classList.toggle("civ", !!color);
+  if (color) seal.style.setProperty("--seal", color); else seal.style.removeProperty("--seal");
   $("era-name").textContent = zh() ? era.name_zh : era.name;
   // Each piece wraps whole: other-language name, span of years, length.
   const region = state.regionById[era.region];
@@ -967,15 +985,15 @@ function setEra(era, quiet) {
 // world map with East Asia cut out; otherwise the whole world map. Polities named in the period's `focus` list
 // are drawn as the main states; China's own periods keep the dynasty map's focus.
 const rawBorders = (path) => state.raw[path] || (state.raw[path] = loadBorders(path));
-async function setMaps(era, year) {
+function bordersKey(era, year, mode) {
   const ce = era.packMaps ? era : state.chinaEras.find((e) => !e.worldMaps && year >= e.start && year <= e.end);
   const china = ce ? snapshotFor(ce, year).borders : null;
   const w = worldAt(year);
   const world = w ? (china ? w.outer : w.full) : null;
-  const focus = era.focus || (state.mode === "china" || era.packMaps ? null : []);
-  const key = [china, world, focus ? focus.join("|") : "*"].join("§");
-  if (key === state.snapshot) return;
-  state.snapshot = key;
+  const focus = era.focus || (mode === "china" || era.packMaps ? null : []);
+  return { key: [china, world, focus ? focus.join("|") : "*"].join("§"), china, world, focus };
+}
+async function bordersFor({ key, china, world, focus }) {
   if (!state.borders[key]) {
     const [a, b] = await Promise.all([china && rawBorders(china), world && rawBorders(world).catch(() => null)]);
     const fs = new Set(focus || []);
@@ -983,9 +1001,152 @@ async function setMaps(era, year) {
     state.borders[key] = { type: "FeatureCollection",
       features: focus ? feats.map((f) => ({ ...f, properties: { ...f.properties, focus: fs.has(f.properties.name) } })) : feats };
   }
+  return state.borders[key];
+}
+async function setMaps(era, year) {
+  const spec = bordersKey(era, year, state.mode), key = spec.key;
+  if (key === state.snapshot) return;
+  state.snapshot = key;
+  await bordersFor(spec);
   if (state.snapshot !== key) return; // a newer request won
-  map.getSource("borders")?.setData(state.borders[key]);
+  const prev = state.shownBorders;
+  state.shownBorders = state.borders[key];
   renderPolityLabels(state.borders[key]);
+  // While playing, the old map turns into the new one; otherwise it simply switches.
+  const shown = ["focus-fill", "neighbour-fill"].some((id) => map.getLayer(id) && map.getLayoutProperty(id, "visibility") !== "none");
+  if (state.playing && prev && shown && !matchMedia("(prefers-reduced-motion: reduce)").matches && morphBorders(prev, state.borders[key])) return;
+  endMorph();
+  map.getSource("borders")?.setData(state.borders[key]);
+}
+
+/* ---------- border morph: during playback each territory change spreads outward from the side that gains it ---------- */
+// Both maps are drawn onto a grid over the area that changed; every changed cell flips from its old owner to its
+// new one at a time set by how far it lies from the new owner's existing land, so conquests advance as a front.
+// The grid is shown as a canvas layer for the length of the morph, then the vector borders take over again.
+let morph = null;
+const MORPH_MS = 800, MORPH_CELLS = 640;
+const geomSig = (f) => { const g = f.geometry, c = g.type === "Polygon" ? g.coordinates[0] : g.coordinates[0]?.[0]; return `${f.properties.name}|${g.coordinates.length}|${c?.length}|${c?.[0]}`; };
+function endMorph() {
+  if (!morph) return;
+  cancelAnimationFrame(morph.raf);
+  if (map.getLayer("morph")) map.removeLayer("morph");
+  if (map.getSource("morph")) map.removeSource("morph");
+  morph = null;
+}
+function morphBorders(A, B) {
+  endMorph();
+  const keep = (f) => f.geometry && (f.properties.focus || state.showNeighbours);
+  const sigA = new Set(A.features.filter(keep).map(geomSig)), sigB = new Set(B.features.filter(keep).map(geomSig));
+  const all = [...A.features.filter((f) => keep(f) && !sigB.has(geomSig(f))), ...B.features.filter((f) => keep(f) && !sigA.has(geomSig(f)))];
+  // The story is in the main states: they morph; neighbours that changed simply switch.
+  const main = (f) => f.properties.focus || f.properties.kind === "state";
+  const changed = all.some(main) ? all.filter(main) : all;
+  if (!changed.length) return false;
+  // Area to animate: everything that changed, padded a little, kept within the Mercator range.
+  let w = 180, e = -180, so = 85, n = -85;
+  const walk = (c) => { if (typeof c[0] === "number") { w = Math.min(w, c[0]); e = Math.max(e, c[0]); so = Math.min(so, c[1]); n = Math.max(n, c[1]); } else c.forEach(walk); };
+  changed.forEach((f) => walk(f.geometry.coordinates));
+  if (e - w > 200 || e <= w) return false;
+  const pad = Math.max(0.5, (e - w) * 0.04);
+  w = Math.max(-180, w - pad); e = Math.min(180, e + pad); so = Math.max(-84, so - pad); n = Math.min(84, n + pad);
+  const my = (lat) => Math.log(Math.tan(Math.PI / 4 + (lat * Math.PI) / 360));
+  const mN = my(n), mS = my(so);
+  const aspect = (mN - mS) / (((e - w) * Math.PI) / 180);
+  const W = aspect > 1 ? Math.max(8, Math.round(MORPH_CELLS / aspect)) : MORPH_CELLS, H = aspect > 1 ? MORPH_CELLS : Math.max(8, Math.round(MORPH_CELLS * aspect));
+  const px = (lon) => ((lon - w) / (e - w)) * W, py = (lat) => ((mN - my(Math.max(-84, Math.min(84, lat)))) / (mN - mS)) * H;
+
+  // Owners: one table of names for both maps; colour and focus come from each map's own feature.
+  const names = [], idx = new Map(), look = [new Map(), new Map()];
+  const ownerOf = (f, side) => {
+    const nm = f.properties.name || "";
+    if (!idx.has(nm)) { idx.set(nm, names.length); names.push(nm); }
+    look[side].set(idx.get(nm), f.properties);
+    return idx.get(nm);
+  };
+  const raster = (gj, side) => {
+    const cv = document.createElement("canvas"); cv.width = W; cv.height = H;
+    const g = cv.getContext("2d", { willReadFrequently: true });
+    gj.features.forEach((f) => {
+      if (!keep(f)) return;
+      const id = ownerOf(f, side) + 1;
+      g.fillStyle = `rgb(${id & 255},${(id >> 8) & 255},${id >> 16})`;
+      g.beginPath();
+      const polys = f.geometry.type === "Polygon" ? [f.geometry.coordinates] : f.geometry.coordinates;
+      for (const poly of polys) for (const ring of poly) ring.forEach(([x, y], i) => (i ? g.lineTo(px(x), py(y)) : g.moveTo(px(x), py(y))));
+      g.fill("evenodd");
+    });
+    const d = g.getImageData(0, 0, W, H).data, own = new Int32Array(W * H);
+    for (let i = 0; i < W * H; i++) {
+      // Anti-aliased edge pixels blend two ids: they take the owner of the pixel to their left.
+      own[i] = d[i * 4 + 3] < 128 ? -1 : d[i * 4] + (d[i * 4 + 1] << 8) + (d[i * 4 + 2] << 16) - 1;
+      if (own[i] >= names.length || (d[i * 4 + 3] > 0 && d[i * 4 + 3] < 255)) own[i] = i % W ? own[i - 1] : -1;
+    }
+    return own;
+  };
+  const oa = raster(A, 0), ob = raster(B, 1);
+
+  // Flip times: a breadth-first front from each new owner's unchanged land through the cells it gains.
+  const N = W * H, dist = new Float32Array(N).fill(-1), q = new Int32Array(N);
+  let qh = 0, qt = 0;
+  const nb = (i, fn) => { const x = i % W; if (x) fn(i - 1); if (x < W - 1) fn(i + 1); if (i >= W) fn(i - W); if (i < N - W) fn(i + W); };
+  for (let i = 0; i < N; i++) if (oa[i] !== ob[i]) nb(i, (j) => { if (dist[i] < 0 && oa[j] === ob[j] && oa[j] === ob[i]) { dist[i] = 1; q[qt++] = i; } });
+  while (qh < qt) { const i = q[qh++]; nb(i, (j) => { if (dist[j] < 0 && oa[j] !== ob[j] && ob[j] === ob[i]) { dist[j] = dist[i] + 1; q[qt++] = j; } }); }
+  let max = 1;
+  for (let i = 0; i < N; i++) if (dist[i] > max) max = dist[i];
+  // Land with no neighbour to grow from (a new state, an island) fades in across the morph instead.
+  for (let i = 0; i < N; i++) if (oa[i] !== ob[i]) dist[i] = dist[i] < 0 ? 0.15 + 0.7 * ((i * 2654435761) % 1000) / 1000 : dist[i] / max;
+
+  // Colours as the vector layers paint them.
+  const hex = (h) => [parseInt(h.slice(1, 3), 16), parseInt(h.slice(3, 5), 16), parseInt(h.slice(5, 7), 16)];
+  const paint = (p) => {
+    const c = hex(p.color && /^#[0-9a-f]{6}$/i.test(p.color) ? p.color : p.focus ? "#2c7a68" : "#6b5a7a");
+    const a = p.focus ? (p.color ? 0.34 : 0.2) : p.name_zh ? 0.2 : 0.07;
+    return [...c, Math.round(a * 255)];
+  };
+  // Only owners whose shape changes are drawn here; the rest stay on the vector layers throughout.
+  const moved = [new Set(), new Set()];
+  changed.forEach((f) => { const k = idx.get(f.properties.name || ""); if (k !== undefined) { moved[0].add(k); moved[1].add(k); } });
+  const col = [new Map(), new Map()];
+  for (const s of [0, 1]) for (const [k, p] of look[s]) col[s].set(k, { fill: paint(p), focus: !!p.focus });
+
+  const cv = document.createElement("canvas"); cv.width = W; cv.height = H;
+  const g = cv.getContext("2d"), img = g.createImageData(W, H), px8 = img.data;
+  const cur = new Int32Array(N), side = new Uint8Array(N);
+  const draw = (p) => {
+    for (let i = 0; i < N; i++) { const b = oa[i] === ob[i] || dist[i] <= p; cur[i] = b ? ob[i] : oa[i]; side[i] = b ? 1 : 0; }
+    for (let i = 0; i < N; i++) {
+      const o = cur[i], k = i * 4;
+      if (o < 0 || !moved[side[i]].has(o)) { px8[k + 3] = 0; continue; }
+      const c = col[side[i]].get(o) || col[1 - side[i]].get(o);
+      // A cell beside a different owner is drawn as border: red round the main state, dusky between neighbours.
+      const x = i % W, edge = (x < W - 1 && cur[i + 1] !== o) || (i < N - W && cur[i + W] !== o) || (x && cur[i - 1] !== o) || (i >= W && cur[i - W] !== o);
+      if (edge) { const f = c.focus; px8[k] = f ? 185 : 75; px8[k + 1] = f ? 58 : 64; px8[k + 2] = f ? 38 : 88; px8[k + 3] = f ? 230 : 140; }
+      else { px8[k] = c.fill[0]; px8[k + 1] = c.fill[1]; px8[k + 2] = c.fill[2]; px8[k + 3] = c.fill[3]; }
+    }
+    g.putImageData(img, 0, 0);
+  };
+  draw(0);
+
+  // Swap in the canvas: the vector borders keep only what lies outside the animated area (unchanged anyway).
+  const coords = [[w, n], [e, n], [e, so], [w, so]];
+  map.addSource("morph", { type: "canvas", canvas: cv, coordinates: coords, animate: true });
+  map.addLayer({ id: "morph", type: "raster", source: "morph", paint: { "raster-opacity": 1, "raster-fade-duration": 0, "raster-resampling": "nearest" } }, "hl-fill");
+  map.getSource("borders")?.setData({ type: "FeatureCollection", features: B.features.filter((f) => !keep(f) || sigA.has(geomSig(f)) || !moved[1].has(idx.get(f.properties.name || ""))) });
+  const t0 = performance.now();
+  morph = { raf: 0 };
+  const tick = () => {
+    const t = Math.min(1, (performance.now() - t0) / MORPH_MS), ease = t < 0.5 ? 2 * t * t : 1 - (2 - 2 * t) ** 2 / 2;
+    draw(ease);
+    // With 3D terrain the map drapes layers through cached textures: drop them so the new frame shows.
+    (map.terrain?.tileManager || map.terrain?.sourceCache)?.freeRtt?.();
+    map.triggerRepaint();
+    if (t < 1) { morph.raf = requestAnimationFrame(tick); return; }
+    map.getSource("borders")?.setData(B);
+    // Let the vector borders paint before the canvas goes.
+    morph.raf = requestAnimationFrame(() => requestAnimationFrame(endMorph));
+  };
+  morph.raf = requestAnimationFrame(tick);
+  return true;
 }
 
 function renderPolityLabels(gj) {
@@ -1899,6 +2060,35 @@ function renderLedger() {
 
 /* ---------- ledger: the same year in every region ---------- */
 
+// Over the timeline: a few headline events from other regions near the current year, one per region, so links
+// across civilisations show while scrubbing. Click one to read it (the map moves there); × hides the strip.
+let stripKey = "";
+function renderWorldStrip() {
+  const box = $("world-strip");
+  let off = false;
+  try { off = localStorage.getItem("atlas-wstrip") === "0"; } catch {}
+  if (off || !state.regions?.length || state.tour || cmp.on) { box.hidden = true; stripKey = ""; return; }
+  const y = state.year, here = state.mode;
+  const key = `${y}|${here}|${state.lang}`;
+  if (key === stripKey) return;
+  stripKey = key;
+  const win = Math.max(10, Math.min(40, Math.round((state.era?.end - state.era?.start || 100) / 8)));
+  const best = new Map();
+  for (const ev of state.events) {
+    const r = ev.region || "china";
+    if (r === here || ev.level > 2 || Math.abs(ev.year - y) > win) continue;
+    const score = ev.level * win + Math.abs(ev.year - y);
+    if (!best.has(r) || score < best.get(r).score) best.set(r, { ev, score });
+  }
+  const picks = [...best.values()].sort((a, b) => a.score - b.score).slice(0, 4).map((x) => x.ev).sort((a, b) => a.year - b.year);
+  if (!picks.length) { box.hidden = true; return; }
+  box.hidden = false;
+  box.innerHTML = `<span class="ws-head">${esc(t("elsewhere"))}</span>` + picks.map((ev) => {
+    const r = state.regionById[ev.region || "china"];
+    return `<button type="button" data-ev="${esc(ev.id)}" style="--rc:${esc(r?.seal || r?.color || "#888")}" title="${esc(tx(ev, "summary"))}"><i></i><b>${esc(r ? (zh() ? r.short_zh || r.name_zh : r.short || r.name) : "")}</b><span>${fmtYear(ev.year)}</span> ${esc(zh() ? ev.title_zh || ev.title : ev.title)}</button>`;
+  }).join("") + `<button type="button" class="ws-x" aria-label="${esc(t("hideStrip"))}" title="${esc(t("hideStrip"))}">×</button>`;
+}
+
 function regionEra(r, y) { return r.eras.find((e) => y >= e.start && y <= e.end); }
 function renderWorldTab() {
   const box = $("world"), y = state.year;
@@ -1917,7 +2107,13 @@ function renderWorldTab() {
       ${evs.length ? `<ul class="wd-ev">${evs.map((ev) => `<li><button type="button" data-ev="${esc(ev.id)}"><span>${fmtYear(ev.year)}</span> ${esc(zh() ? ev.title_zh || ev.title : ev.title)}</button></li>`).join("")}</ul>`
         : `<p class="wd-none">${t("noWorldEv")}</p>`}</li>`;
   });
-  box.innerHTML = `<p class="rl-hint">${t("worldHint")}</p><ol class="wd-list">${rows.join("")}</ol>`;
+  let stripOff = false;
+  try { stripOff = localStorage.getItem("atlas-wstrip") === "0"; } catch {}
+  box.innerHTML = `<p class="rl-hint">${t("worldHint")}</p>` + (stripOff ? `<button type="button" class="chip ws-on" id="ws-on">${esc(t("showStrip"))}</button>` : "") + `<ol class="wd-list">${rows.join("")}</ol>`;
+  $("ws-on")?.addEventListener("click", () => {
+    try { localStorage.removeItem("atlas-wstrip"); } catch {}
+    box.dataset.key = ""; renderWorldTab(); renderWorldStrip();
+  });
   box.querySelectorAll(".wd-head").forEach((b) => b.addEventListener("click", () => goRegion(b.dataset.r)));
   box.querySelectorAll("[data-ev]").forEach((b) => b.addEventListener("click", () => openStory(b.dataset.ev)));
   // Who ruled where: the main countries with a ruler this year, filled in as each region's layer file arrives.
@@ -1950,8 +2146,22 @@ function goRegion(id) {
 function renderRegionBtn() {
   const r = state.regionById[state.mode];
   $("region-name").textContent = r ? (zh() ? r.short_zh || r.name_zh : r.short || r.name) : t("allWorld");
-  $("region-btn").hidden = state.regions.length < 2 && !state.library?.length;
+  $("region-btn").hidden = state.regions.length < 2 && !state.library?.length && !state.pack?.only;
 }
+function toggleLangPop(open) {
+  const pop = $("lang-pop"), btn = $("lang");
+  open ??= pop.hidden;
+  pop.hidden = !open;
+  btn.setAttribute("aria-expanded", open);
+  if (!open) return;
+  pop.innerHTML = LANGS.map((l) => `<button type="button" role="menuitemradio" aria-checked="${l.id === state.lang}" data-lang="${l.id}" lang="${l.html}"><b>${esc(l.name)}</b><svg viewBox="0 0 12 12" aria-hidden="true"><path d="M2.5 6.5l2.3 2.2L9.5 3.5" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></button>`).join("");
+  // Placed under the button, inside the panel that holds both.
+  const r = btn.getBoundingClientRect(), o = pop.offsetParent.getBoundingClientRect();
+  pop.style.top = `${r.bottom - o.top + 6}px`;
+  pop.style.right = `${Math.max(0, o.right - r.right)}px`;
+  pop.querySelector('[aria-checked="true"]')?.focus();
+}
+
 function toggleRegionPop(open) {
   const pop = $("region-pop"), btn = $("region-btn");
   open ??= pop.hidden;
@@ -1971,8 +2181,12 @@ function toggleRegionPop(open) {
     }));
     return;
   }
+  // A single region (a pack shown alone) has no whole-world view to offer, and compares only across time.
+  const single = state.regions.length < 2;
   pop.innerHTML = state.regions.map((r) => { const era = regionEra(r, y); return row(r.id, r.color || "#888", zh() ? r.short_zh || r.name_zh : r.short || r.name, era ? nameOf(era) : "", nameOf(r)); }).join("")
-    + row("world", "#777", t("allWorld"), fmtYear(y));
+    + (single ? "" : row("world", "#777", t("allWorld"), fmtYear(y)))
+    + `<button type="button" role="menuitem" class="rp-cmp" id="rp-cmp"><svg viewBox="0 0 16 16" aria-hidden="true"><rect x="1.5" y="3" width="5.5" height="10" rx="1"/><rect x="9" y="3" width="5.5" height="10" rx="1"/></svg>${esc(t("cmp").one)}</button>`;
+  $("rp-cmp").addEventListener("click", () => { toggleRegionPop(false); openCompare(null, single ? "time" : undefined); });
   pop.querySelectorAll("[data-r]").forEach((b) => b.addEventListener("click", () => {
     toggleRegionPop(false);
     if (b.dataset.r !== "world") return goRegion(b.dataset.r);
@@ -1980,6 +2194,199 @@ function toggleRegionPop(open) {
     map.flyTo({ center: [60, 30], zoom: innerWidth <= 720 ? 0.6 : 1.4, pitch: 0, bearing: 0, duration: 1400 });
     renderLedger();
   }));
+}
+
+function setLean(on, remember) {
+  state.lean = on;
+  document.querySelector(".era").classList.toggle("lean", on);
+  if (innerWidth > 720) $("era-more").setAttribute("aria-expanded", String(!on));
+  if (remember) try { localStorage.setItem("atlas-lean", on ? "1" : "0"); } catch {}
+}
+
+/* ---------- compare: a second map of another region at the same year, side by side (top and bottom on phones) ---------- */
+
+// Two kinds: another region at the same year ("region"), or the same view at another year ("time"), the two
+// cameras moving together.
+const cmpYear = () => (cmp.kind === "time" ? cmp.year : state.year);
+function openCompare(id, kind = cmp.kind || "region") {
+  cmp.kind = kind;
+  if (kind === "time") {
+    cmp.region = state.regionById[state.mode] || state.regionById[state.home] || state.regions[0];
+    // Start one period back (or forward from the first).
+    const eras = cmp.region.eras, i = eras.findIndex((e) => state.year >= e.start && state.year <= e.end);
+    const other = eras[i - 1] || eras[i + 1] || eras[0];
+    if (cmp.year == null || cmp.yearRegion !== cmp.region.id) cmp.year = Math.round((other.start + other.end) / 2) || 1;
+    cmp.yearRegion = cmp.region.id;
+  } else cmp.region = state.regionById[id] || (cmp.region?.id !== state.mode && cmp.region) ||
+    state.regionById[state.mode === "china" ? "europe" : "china"] || state.regions.find((r) => r.id !== state.mode);
+  if (!cmp.region) return;
+  if (!cmp.on) { cmp.wasLean = state.lean; setLean(true); }
+  cmp.on = true;
+  document.body.classList.add("comparing");
+  $("map2").hidden = $("cmp-card").hidden = false;
+  map.resize();
+  if (!cmp.map) {
+    cmp.map = new maplibregl.Map({ container: "map2", style: buildStyle(), center: [10, 45], zoom: 3, minZoom: 1.2, maxZoom: 9, attributionControl: false });
+    cmp.map.on("load", () => {
+      const sat = state.showSat;
+      cmp.map.setLayoutProperty("satellite", "visibility", sat ? "visible" : "none");
+      cmp.map.setPaintProperty("bg", "background-color", sat ? "#1d4f86" : "#9db8bf");
+      cmp.map.setPaintProperty("lakes", "fill-opacity", sat ? 0 : 0.9);
+      if (!state.showGeo) for (const l of ["rivers", "rivers-minor", "lakes"]) cmp.map.setLayoutProperty(l, "visibility", "none");
+      cmp.loaded = true;
+      compareTerrain();
+      fitCompare();
+      updateCompare(true);
+    });
+    let t0;
+    cmp.map.on("move", () => { clearTimeout(t0); t0 = setTimeout(declutterCompare, 120); syncCamera(cmp.map, map); });
+    map.on("move", () => syncCamera(map, cmp.map));
+    cmp.map.on("moveend", declutterCompare);
+  } else cmp.map.resize();
+  fitCompare();
+  setTimeout(() => cmp.loaded && declutterCompare(), 300);
+  updateCompare(true);
+}
+function closeCompare() {
+  cmp.on = false;
+  setLean(!!cmp.wasLean);
+  document.body.classList.remove("comparing");
+  $("map2").hidden = $("cmp-card").hidden = true;
+  cmp.popup?.remove();
+  map.resize();
+}
+// In "time" mode the two maps show the same place: whichever is moved, the other follows (flat, centre and zoom).
+// With "sync view" on, also rotation and tilt (and the second map gets the same 3D relief).
+function syncCamera(from, to) {
+  if (!cmp.on || cmp.kind !== "time" || !cmp.sync || cmp.syncing || !to) return;
+  cmp.syncing = true;
+  to.jumpTo({ center: from.getCenter(), zoom: from.getZoom(), bearing: from.getBearing(), pitch: from.getPitch(), padding: from.getPadding(), ...(from.getCenterElevation ? { elevation: from.getCenterElevation() } : {}) });
+  if (from.terrain && to.terrain) to.terrain.exaggeration = from.terrain.exaggeration;
+  cmp.syncing = false;
+}
+function compareTerrain() {
+  if (!cmp.loaded) return;
+  const want = cmp.kind === "time" && cmp.sync && !!map.terrain;
+  if (want && !cmp.map.terrain) cmp.map.setTerrain({ source: "dem-terrain", exaggeration: map.terrain.exaggeration });
+  else if (!want && cmp.map.terrain) { cmp.map.setTerrain(null); cmp.map.easeTo({ pitch: 0, bearing: 0, duration: 300 }); }
+}
+function fitCompare() {
+  const r = cmp.region;
+  if (cmp.kind === "time") { if (cmp.map) { cmp.syncing = false; compareTerrain(); syncCamera(map, cmp.map); } return; }
+  compareTerrain();
+  if (!cmp.map || !r?.polygon?.length) return;
+  const phone = innerWidth <= 720;
+  cmp.map.fitBounds(polyBounds(r.polygon), { padding: { top: phone ? 90 : 150, bottom: phone ? 110 : 130, left: 30, right: 30 }, maxZoom: 5, duration: 0 });
+}
+async function updateCompare(force) {
+  if (!cmp.on) return;
+  const r = cmp.region, y = cmpYear(), era = regionEra(r, y);
+  renderCompareCard(era);
+  if (!cmp.loaded || !era) return;
+  const spec = bordersKey(era, y, r.id), key = spec.key + "|" + state.lang;
+  if (key === cmp.key && !force) return renderCompareEvents(era);
+  cmp.key = key;
+  const gj = await bordersFor(spec);
+  if (cmp.key !== key) return;
+  cmp.map.getSource("borders")?.setData(gj);
+  cmp.marks.forEach((m) => m.remove());
+  cmp.marks = [];
+  for (const f of gj.features) {
+    const p = f.properties;
+    if (!p.label || (!p.focus && (p.area < (p.name_zh ? 6 : 25) || p.nolabel))) continue;
+    const el = document.createElement("div");
+    el.className = "mk-polity" + (p.focus ? " focus" : p.name_zh ? " neighbour" : "");
+    if (zh()) el.innerHTML = p.name_zh ? esc(p.name_zh) : `<small>${esc(p.name)}</small>`;
+    else el.innerHTML = `<span>${esc(p.name)}</span>`;
+    const m = new maplibregl.Marker({ element: el }).setLngLat(p.label).addTo(cmp.map);
+    Object.assign(m, { focus: !!p.focus, area: p.area || 0, lat: p.label[1] });
+    cmp.marks.push(m);
+  }
+  renderCompareEvents(era);
+  requestAnimationFrame(() => requestAnimationFrame(declutterCompare)); // once the new labels are laid out
+}
+// Country names on the second map: main states first, then by size; small or overlapping names hide.
+function declutterCompare() {
+  const ppd = (512 * 2 ** cmp.map.getZoom()) / 360, kept = [];
+  for (const m of [...cmp.marks].sort((a, b) => b.focus - a.focus || b.area - a.area)) {
+    const el = m.getElement();
+    el.classList.remove("dc-hide");
+    const r = el.getBoundingClientRect();
+    if (!r.width) continue;
+    const onScreen = m.area * ppd * ppd * Math.cos((m.lat * Math.PI) / 180);
+    if ((!m.focus && onScreen < r.width * r.height * 2.5) || kept.some((k) => r.left < k.right + 4 && r.right > k.left - 4 && r.top < k.bottom + 2 && r.bottom > k.top - 2))
+      el.classList.add("dc-hide");
+    else kept.push(r);
+  }
+}
+// The region's events nearest the year (major ones first), as numbered dots on the second map and a list on its card.
+function compareEvents(era) {
+  const r = cmp.region, y = cmpYear();
+  return state.events.filter((ev) => ((ev.region || state.home) === r.id || ev.also?.includes(r.id)) && (ev.level || 1) <= 2 && Math.abs(ev.year - y) <= 40)
+    .sort((a, b) => Math.abs(a.year - y) - Math.abs(b.year - y) || a.level - b.level).slice(0, 4).sort((a, b) => a.year - b.year);
+}
+function renderCompareEvents(era) {
+  cmp.evMarks?.forEach((m) => m.remove());
+  cmp.evMarks = compareEvents(era).map((ev, i) => {
+    const el = document.createElement("button");
+    el.type = "button";
+    el.className = "cmp-dot";
+    el.textContent = i + 1;
+    el.title = evTitleText(ev);
+    el.addEventListener("click", (e) => { e.stopPropagation(); compareEventPopup(ev); });
+    return new maplibregl.Marker({ element: el }).setLngLat([ev.lon, ev.lat]).addTo(cmp.map);
+  });
+}
+const evTitleText = (ev) => zh() ? ev.title_zh || ev.title : ev.title;
+function compareEventPopup(ev) {
+  cmp.popup?.remove();
+  cmp.popup = new maplibregl.Popup({ className: "atlas-pop", maxWidth: "300px", offset: 14, focusAfterOpen: false }).setLngLat([ev.lon, ev.lat])
+    .setHTML(`<div class="pc-kind">${fmtYear(ev.year, ev.circa)} · ${esc(tx(ev, "place"))}</div><h4>${esc(evTitleText(ev))}</h4><p>${esc(tx(ev, "summary"))}</p>`)
+    .addTo(cmp.map);
+}
+function renderCompareCard(era) {
+  const box = $("cmp-card"), r = cmp.region, C = t("cmp"), y = cmpYear(), time = cmp.kind === "time";
+  const opts = state.regions.map((x) => `<option value="${esc(x.id)}"${x === r ? " selected" : ""}>${esc(zh() ? x.short_zh || x.name_zh : x.short || x.name)}</option>`).join("");
+  const evs = era ? compareEvents(era) : [];
+  const kindBtn = (k, label) => `<button type="button" data-kind="${k}" aria-pressed="${cmp.kind === k}">${esc(label)}</button>`;
+  // "time": pick a period of this region, then a year inside it.
+  const picker = time
+    ? `<select id="cmp-era" aria-label="${esc(C.period)}">${r.eras.map((e) => `<option value="${esc(e.id)}"${e === era ? " selected" : ""}>${esc(nameOf(e))}</option>`).join("")}</select>`
+    : `<select id="cmp-pick" aria-label="${esc(C.pick)}">${opts}</select>`;
+  const syncBtn = time ? `<button type="button" class="chip cmp-sync" id="cmp-sync" aria-pressed="${cmp.sync}">${esc(C.sync)}</button>` : "";
+  const slider = time && era ? `<input type="range" id="cmp-year" min="${era.start}" max="${era.end}" value="${y}" aria-label="${esc(C.year)}">` : "";
+  box.innerHTML = `<div class="cmp-top"><div class="cmp-kind">${state.regions.length > 1 ? kindBtn("region", C.place) : ""}${kindBtn("time", C.time)}</div>
+      <button type="button" class="chip search-open" id="cmp-close" aria-label="${esc(C.close)}" title="${esc(C.close)}">×</button></div>
+    <div class="cmp-top">${picker}${syncBtn}</div>${slider}
+    <div class="cmp-era"><b>${esc(era ? nameOf(era) : "")}</b><span>${fmtYear(y)}</span></div>
+    <p class="cmp-rulers" id="cmp-rulers"></p>
+    ${evs.length ? `<ol class="cmp-ev">${evs.map((ev, i) => `<li><button type="button" data-ev="${esc(ev.id)}"><i>${i + 1}</i><span>${fmtYear(ev.year, ev.circa)}</span> ${esc(evTitleText(ev))}</button></li>`).join("")}</ol>`
+      : `<p class="cmp-none">${esc(C.none)}</p>`}`;
+  $("cmp-sync")?.addEventListener("click", () => { cmp.sync = !cmp.sync; compareTerrain(); syncCamera(map, cmp.map); renderCompareCard(era); });
+  $("cmp-pick")?.addEventListener("change", (e) => { cmp.region = state.regionById[e.target.value]; cmp.key = ""; fitCompare(); updateCompare(true); });
+  $("cmp-era")?.addEventListener("change", (e) => { const x = r.eras.find((x) => x.id === e.target.value); cmp.year = Math.round((x.start + x.end) / 2) || x.start; updateCompare(); });
+  $("cmp-year")?.addEventListener("input", (e) => { cmp.year = +e.target.value || (e.target.value < 0 ? -1 : 1); box.querySelector(".cmp-era span").textContent = fmtYear(cmp.year); });
+  $("cmp-year")?.addEventListener("change", () => updateCompare());
+  box.querySelectorAll("[data-kind]").forEach((b) => b.addEventListener("click", () => { if (b.dataset.kind !== cmp.kind) { cmp.key = ""; openCompare(null, b.dataset.kind); } }));
+  $("cmp-close").addEventListener("click", closeCompare);
+  box.querySelectorAll("[data-ev]").forEach((b) => b.addEventListener("click", () => {
+    const ev = state.events.find((x) => x.id === b.dataset.ev);
+    cmp.map?.flyTo({ center: [ev.lon, ev.lat], zoom: Math.max(cmp.map.getZoom(), 4.5), duration: 900 });
+    compareEventPopup(ev);
+  }));
+  // Who ruled there: the main countries with a ruler this year.
+  if (era?.layers) loadLayers(era).then((L) => {
+    if (cmp.region !== r || cmpYear() !== y || !$("cmp-rulers")) return;
+    const pol = L.polities || {};
+    const names = Object.keys(L.rulers || {}).sort((a, b) => !!pol[b]?.focus - !!pol[a]?.focus);
+    const out = [];
+    for (const n of names) {
+      const x = (L.rulers[n] || []).findLast((x) => y >= x.from && y <= x.to);
+      if (x) out.push(`${esc(zh() ? pol[n]?.name_zh || n : n)}：${esc(rulerText(x)[0])}`);
+      if (out.length === 2) break;
+    }
+    $("cmp-rulers").innerHTML = out.join(" · ");
+  });
 }
 
 /* ---------- ledger: rulers of one country; picking one narrows the timeline to the reign ---------- */
@@ -2235,7 +2642,10 @@ function checkNote(x) {
   const c = x?.check, s = c?.s || "none", L = t("fc");
   const note = c ? tx(c, "n") : "";
   const icon = { ok: "✓", fixed: "✎", doubt: "?", none: "·" }[s];
-  return `<p class="fc fc-${s}"><b>${icon}</b> ${esc(L[s])}${note ? `${zh() ? "：" : ": "}${esc(note)}` : ""}</p>`;
+  const line = (cls, ic, label, n) => `<p class="fc fc-${cls}"><b>${ic}</b> ${esc(label)}${n ? `${zh() ? "：" : ": "}${esc(n)}` : ""}</p>`;
+  // Events also carry the summary review (`sum`).
+  const m = x?.sum;
+  return line(s, icon, L[s], note) + (m ? line(m.s, { ok: "✓", fixed: "✎", doubt: "?" }[m.s], t("sm")[m.s], tx(m, "n")) : "");
 }
 function checkMark(x) {
   const s = x?.check?.s;
@@ -2768,8 +3178,6 @@ function saveView() {
     const view = { year: state.year, zoom: state.zoom, win: state.win, tab: state.tab,
       cam: { center: [+c.lng.toFixed(3), +c.lat.toFixed(3)], zoom: +map.getZoom().toFixed(2), pitch: Math.round(map.getPitch()), bearing: Math.round(map.getBearing()) } };
     try { localStorage.setItem(viewKey(), JSON.stringify(view)); } catch {}
-    // The address keeps the same view, so it can be copied or bookmarked.
-    try { history.replaceState(null, "", "#" + viewHash()); } catch {}
   }, 500);
 }
 
@@ -2784,7 +3192,7 @@ function viewHash() {
   if (state.tab !== "events") q.set("t", state.tab);
   if (state.reading && state.selected) q.set("e", state.selected);
   if (state.tour) { q.set("tour", state.tour.id); q.set("s", state.tour.i + 1); }
-  if (state.lang === "en") q.set("l", "en");
+  if (state.lang !== "zh") q.set("l", state.lang);
   return q.toString();
 }
 function readHash() {
@@ -2817,8 +3225,10 @@ function loadView() {
   let v = null, tg = null;
   try { v = JSON.parse(localStorage.getItem(viewKey()) || "null"); tg = JSON.parse(localStorage.getItem("atlas-toggles") || "null"); } catch {}
   if (tg) for (const k of ["show3d", "showNeighbours", "showPlaces", "showGeo"]) if (typeof tg[k] === "boolean") state[k] = tg[k];
-  // A shared link wins over the remembered view.
+  // A shared link wins over the remembered view. The address is then cleaned, so a bookmark or a Home Screen
+  // icon made later opens the site as usual (the share button builds a link to the current view).
   const link = readHash();
+  if (location.hash) try { history.replaceState(null, "", location.pathname + location.search); } catch {}
   if (link?.tour) state.pendingTour = [link.tour, link.step - 1];
   if (link && typeof link.year === "number") {
     v = { ...link, zoom: 0 };
@@ -2831,15 +3241,20 @@ function loadView() {
   return v.cam && Array.isArray(v.cam.center) ? v.cam : null;
 }
 
+// Home Screen app: a service worker keeps what has been viewed for offline use (not inside embeds or the preview).
+if ("serviceWorker" in navigator && location.protocol === "https:" && !/[?&]embed=1/.test(location.search) && !location.hostname.endsWith("claude.ai") && !location.hostname.endsWith("claudeusercontent.com"))
+  addEventListener("load", () => navigator.serviceWorker.register("sw.js").catch(() => {}));
+
 async function init() {
-  try { state.lang = localStorage.getItem("atlas-lang") === "en" ? "en" : "zh"; } catch {}
+  try { const l = localStorage.getItem("atlas-lang"); if (langOk(l)) state.lang = l; } catch {}
   try { const f = JSON.parse(localStorage.getItem("atlas-events") || "null"); if (f) { state.detail = f.detail || 2; state.cats = f.cats || []; } } catch {}
   try { state.showSat = localStorage.getItem("atlas-look") !== "relief"; } catch {}
   const q = new URLSearchParams(location.search).get("lang");
-  if (q === "en" || q === "zh") state.lang = q;
-  if (new URLSearchParams(location.hash.slice(1)).get("l") === "en") state.lang = "en";
+  if (langOk(q)) state.lang = q;
+  const hl = new URLSearchParams(location.hash.slice(1)).get("l");
+  if (langOk(hl)) state.lang = hl;
   // A link pasted into the same tab only changes the hash: start again from it.
-  addEventListener("hashchange", () => { if (map && location.hash.slice(1) !== viewHash()) location.reload(); });
+  addEventListener("hashchange", () => { if (map && location.hash.length > 1) location.reload(); });
   if (PACK_URL) {
     state.pack = await openPack(PACK_URL);
     state.selected = null;
@@ -2894,7 +3309,7 @@ async function init() {
   });
   map.addControl(new maplibregl.NavigationControl({ visualizePitch: true }), "bottom-left");
   map.addControl(new maplibregl.AttributionControl({ compact: true,
-    customAttribution: "Terrain: Mapzen/AWS Terrain Tiles · Borders: historical-basemaps (GPL-3.0)" + (pack?.attribution ? ` · ${esc(pack.attribution)}` : "") }), "bottom-left");
+    customAttribution: "Terrain: Mapzen/AWS Terrain Tiles · Borders: Cliopatria/Seshat (CC BY 4.0), historical-basemaps (GPL-3.0)" + (pack?.attribution ? ` · ${esc(pack.attribution)}` : "") }), "bottom-left");
   // MapLibre opens the compact attribution on wide screens; start it folded to the "i" button.
   const foldAttribution = () => document.querySelector(".maplibregl-ctrl-attrib")?.classList.remove("maplibregl-compact-show");
   map.once("load", foldAttribution);
@@ -3008,7 +3423,25 @@ async function init() {
     const y = posToYear(((e.clientX - r.left) / r.width) * SLIDER_MAX);
     setZoom(state.zoom + (e.deltaY < 0 ? 1 : -1), e.deltaY < 0 ? y : state.year);
   }, { passive: false });
-  $("lang").addEventListener("click", (e) => { const l = e.target.closest("[data-lang]")?.dataset.lang; if (l && l !== state.lang) setLang(l); });
+  $("world-strip").addEventListener("click", (e) => {
+    if (e.target.closest(".ws-x")) {
+      try { localStorage.setItem("atlas-wstrip", "0"); } catch {}
+      $("world").dataset.key = "";
+      if (state.tab === "world") renderWorldTab();
+      return renderWorldStrip();
+    }
+    const id = e.target.closest("[data-ev]")?.dataset.ev;
+    if (id) openStory(id);
+  });
+  $("lang").addEventListener("click", (e) => { e.stopPropagation(); toggleLangPop(); });
+  $("lang-pop").addEventListener("click", (e) => {
+    const l = e.target.closest("[data-lang]")?.dataset.lang;
+    toggleLangPop(false);
+    if (l && l !== state.lang) setLang(l);
+  });
+  document.addEventListener("click", (e) => { if (!$("lang-pop").hidden && !e.target.closest("#lang-pop")) toggleLangPop(false); });
+  document.addEventListener("keydown", (e) => { if (e.key === "Escape" && !$("lang-pop").hidden) { toggleLangPop(false); $("lang").focus(); } });
+  addEventListener("resize", () => toggleLangPop(false));
   toggle("t-3d", "show3d", () => {
     state.terrainExag = null;
     if (state.show3d) setTerrainForZoom(); else map.setTerrain(null);
@@ -3098,7 +3531,9 @@ async function init() {
   if (phone.matches) collapseLedger(true);
   // Phone: tools and layer switches sit behind one button; the sheet and era bar size themselves to the timeline.
   const openEra = (o) => { $("era-more").setAttribute("aria-expanded", String(o)); document.querySelector(".era").classList.toggle("open", o); };
-  $("era-more").addEventListener("click", () => openEra(!document.querySelector(".era").classList.contains("open")));
+  // On wide screens the same button folds the layer switches and period notes away (remembered).
+  $("era-more").addEventListener("click", () => phone.matches ? openEra(!document.querySelector(".era").classList.contains("open")) : setLean(!state.lean, true));
+  try { setLean(localStorage.getItem("atlas-lean") === "1"); } catch { setLean(false); }
   map.on("click", () => { if (phone.matches) openEra(false); });
   new ResizeObserver(() => {
     document.documentElement.style.setProperty("--rail-h", document.querySelector(".rail").offsetHeight + "px");
