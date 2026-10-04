@@ -156,140 +156,6 @@
   ]
  },
  {
-  "id": "red-cliffs",
-  "era": "red-cliffs",
-  "start": 208,
-  "end": 208,
-  "path": false,
-  "title": "The Red Cliffs, history and invention",
-  "title_zh": "赤壁：正史与演义",
-  "summary": "Eleven steps through the most famous campaign in Chinese fiction. Watch the colours under the markers: one battle that is history, surrounded by stratagems that are not.",
-  "summary_zh": "十一步走完中国小说中最著名的一场战役。留意标记下的颜色：一场真实的大战，四周环绕着一连串虚构的计谋。",
-  "steps": [
-   {
-    "year": 208,
-    "at": [
-     111.78,
-     30.82
-    ],
-    "zoom": 7,
-    "event": "ch041-zhao-yun-changban",
-    "text": "[Embellished] Changban: Zhao Yun saves the infant heir.",
-    "text_zh": "【演义加工】长坂坡，赵云救出幼主。"
-   },
-   {
-    "year": 208,
-    "at": [
-     111.83,
-     30.79
-    ],
-    "zoom": 7,
-    "event": "ch042-changban-bridge",
-    "text": "[Embellished] Zhang Fei holds the bridge with a glare.",
-    "text_zh": "【演义加工】张飞据水断桥，瞋目横矛。"
-   },
-   {
-    "year": 208,
-    "at": [
-     115.98,
-     29.7
-    ],
-    "zoom": 6.5,
-    "event": "ch043-debating-the-scholars",
-    "text": "[Embellished] Zhuge Liang argues down Wu's advisers.",
-    "text_zh": "【演义加工】诸葛亮舌战群儒。"
-   },
-   {
-    "year": 208,
-    "at": [
-     116.02,
-     29.74
-    ],
-    "zoom": 6.5,
-    "event": "ch044-sun-quan-decides",
-    "text": "[History] Sun Quan cuts the table: no more talk of surrender.",
-    "text_zh": "【正史】孙权拔刀斫案，决意抗曹。"
-   },
-   {
-    "year": 208,
-    "at": [
-     113.7,
-     29.92
-    ],
-    "zoom": 7,
-    "event": "ch045-jiang-gan",
-    "text": "[Fiction] Jiang Gan and the forged letter.",
-    "text_zh": "【虚构】蒋干盗书。"
-   },
-   {
-    "year": 208,
-    "at": [
-     113.5,
-     29.92
-    ],
-    "zoom": 7,
-    "event": "ch046-borrowing-arrows",
-    "text": "[Fiction] A hundred thousand arrows borrowed in the fog.",
-    "text_zh": "【虚构】草船借箭。"
-   },
-   {
-    "year": 208,
-    "at": [
-     113.66,
-     29.86
-    ],
-    "zoom": 7,
-    "event": "ch046-huang-gai-beaten",
-    "text": "[Fiction] Huang Gai takes the beating.",
-    "text_zh": "【虚构】黄盖受苦肉计。"
-   },
-   {
-    "year": 208,
-    "at": [
-     113.45,
-     29.95
-    ],
-    "zoom": 7,
-    "event": "ch047-chained-ships",
-    "text": "[Fiction] Pang Tong talks Cao Cao into chaining his ships.",
-    "text_zh": "【虚构】庞统献连环计。"
-   },
-   {
-    "year": 208,
-    "at": [
-     113.66,
-     29.84
-    ],
-    "zoom": 7,
-    "event": "ch049-east-wind",
-    "text": "[Fiction] The east wind called down from the seven-star altar.",
-    "text_zh": "【虚构】七星坛借东风。"
-   },
-   {
-    "year": 208,
-    "at": [
-     113.62,
-     29.88
-    ],
-    "zoom": 7,
-    "event": "ch049-red-cliffs",
-    "text": "[History] Fire at the Red Cliffs. The battle is real; so is Huang Gai's fire.",
-    "text_zh": "【正史】火烧赤壁。大战与黄盖火攻都是真的。"
-   },
-   {
-    "year": 208,
-    "at": [
-     112.85,
-     29.75
-    ],
-    "zoom": 6.5,
-    "event": "ch050-huarong",
-    "text": "[Fiction] Huarong, and Cao Cao's escape.",
-    "text_zh": "【虚构】华容道，曹操逃脱。"
-   }
-  ]
- },
- {
   "id": "zhuge-liang",
   "era": "expeditions",
   "start": 207,
@@ -809,6 +675,1591 @@
     "event": "ch120-wu-falls",
     "text": "[History] 280: Wu surrenders; the realm is one.",
     "text_zh": "【正史】280年：吴国投降，天下一统。"
+   }
+  ]
+ },
+ {
+  "id": "anti-dong",
+  "era": "dong-zhuo",
+  "start": 189,
+  "end": 192,
+  "path": false,
+  "title": "The lords against Dong Zhuo",
+  "title_zh": "群雄讨董",
+  "summary": "From Cao Cao's forged summons to Lü Bu's spear: the coalition, the passes, the burning of Luoyang and the chain of stratagems.",
+  "summary_zh": "从曹操发矫诏到吕布刺董：联军会盟、虎牢关下、火烧洛阳、连环计。",
+  "steps": [
+   {
+    "year": 189,
+    "at": [
+     113.98,
+     34.72
+    ],
+    "zoom": 6,
+    "event": "ch004-cao-cao-flees",
+    "text": "[Embellished] Cao Cao's dagger fails and he flees Luoyang.",
+    "text_zh": "【演义加工】献刀不成，曹操逃出洛阳。"
+   },
+   {
+    "year": 190,
+    "at": [
+     114.2,
+     35.25
+    ],
+    "zoom": 6,
+    "event": "ch005-eastern-alliance",
+    "text": "[Embellished] Eighteen lords meet at Suanzao and choose Yuan Shao.",
+    "text_zh": "【演义加工】十八路诸侯会盟酸枣，推袁绍为盟主。"
+   },
+   {
+    "year": 190,
+    "at": [
+     113.7,
+     35.03
+    ],
+    "zoom": 7,
+    "event": "ch005-hua-xiong",
+    "text": "[Fiction] The lords advance on the passes; Hua Xiong falls before the wine cools.",
+    "text_zh": "【虚构】联军进逼关隘，关羽温酒斩华雄。",
+    "route": [
+     "lords-advance"
+    ]
+   },
+   {
+    "year": 190,
+    "at": [
+     113.25,
+     34.82
+    ],
+    "zoom": 7,
+    "event": "ch005-three-heroes-vs-lu-bu",
+    "text": "[Fiction] Three heroes against Lü Bu at Hulao Pass.",
+    "text_zh": "【虚构】虎牢关前三英战吕布。"
+   },
+   {
+    "year": 190,
+    "at": [
+     110.78,
+     34.5
+    ],
+    "zoom": 5.4,
+    "event": "ch006-burns-luoyang",
+    "text": "[History] Dong Zhuo burns Luoyang and drags the court west.",
+    "text_zh": "【正史】董卓火烧洛阳，挟天子西迁长安。",
+    "route": [
+     "dong-zhuo-west"
+    ]
+   },
+   {
+    "year": 190,
+    "at": [
+     113.79,
+     35.02
+    ],
+    "zoom": 6.5,
+    "event": "ch006-bianshui",
+    "text": "[History] Cao Cao alone pursues, and is beaten on the Bian.",
+    "text_zh": "【正史】唯曹操追击，汴水兵败。",
+    "route": [
+     "cao-bianshui"
+    ]
+   },
+   {
+    "year": 191,
+    "at": [
+     112.76,
+     34.22
+    ],
+    "zoom": 6,
+    "event": "ch006-imperial-seal",
+    "text": "[Embellished] Sun Jian reaches the ruins first and finds the jade seal.",
+    "text_zh": "【演义加工】孙坚率先进入洛阳废墟，得传国玉玺。",
+    "route": [
+     "sun-jian-luoyang"
+    ]
+   },
+   {
+    "year": 192,
+    "at": [
+     108.92,
+     34.29
+    ],
+    "zoom": 6.5,
+    "event": "ch008-diaochan",
+    "text": "[Fiction] In Chang'an, Wang Yun's chain of stratagems.",
+    "text_zh": "【虚构】长安城中，王允巧使连环计。"
+   },
+   {
+    "year": 192,
+    "at": [
+     108.88,
+     34.31
+    ],
+    "zoom": 7,
+    "event": "ch008-phoenix-pavilion",
+    "text": "[Embellished] The halberd in the Phoenix Pavilion.",
+    "text_zh": "【演义加工】凤仪亭掷戟。"
+   },
+   {
+    "year": 192,
+    "at": [
+     108.94,
+     34.27
+    ],
+    "zoom": 6.5,
+    "event": "ch009-dong-zhuo-killed",
+    "text": "[History] Lü Bu kills Dong Zhuo.",
+    "text_zh": "【正史】吕布诛董卓。"
+   }
+  ]
+ },
+ {
+  "id": "guandu",
+  "era": "guandu",
+  "start": 200,
+  "end": 207,
+  "path": false,
+  "title": "The battle of Guandu",
+  "title_zh": "官渡之战",
+  "summary": "Yuan Shao comes south with a hundred thousand men; Cao Cao holds the river line with a fraction of that, and wins with one night raid.",
+  "summary_zh": "袁绍十万大军南下，曹操以寡敌众，凭一次夜袭乌巢反败为胜。",
+  "steps": [
+   {
+    "year": 200,
+    "at": [
+     114.33,
+     36.32
+    ],
+    "zoom": 6,
+    "event": "ch022-chen-lin",
+    "text": "[Embellished] Chen Lin's proclamation: the war of words first.",
+    "text_zh": "【演义加工】陈琳檄文，先打一场笔墨之战。"
+   },
+   {
+    "year": 200,
+    "at": [
+     114.25,
+     35.16
+    ],
+    "zoom": 6.4,
+    "event": "ch025-yan-liang",
+    "text": "[History] Yuan Shao's army comes south; Guan Yu kills Yan Liang at Baima.",
+    "text_zh": "【正史】袁绍大军南下，关羽白马斩颜良。",
+    "route": [
+     "yuan-south",
+     "cao-guandu"
+    ]
+   },
+   {
+    "year": 200,
+    "at": [
+     114.2,
+     35.15
+    ],
+    "zoom": 6.6,
+    "event": "ch026-wen-chou",
+    "text": "[Fiction] Wen Chou falls at Yanjin.",
+    "text_zh": "【虚构】延津诛文丑。"
+   },
+   {
+    "year": 200,
+    "at": [
+     113.9,
+     34.07
+    ],
+    "zoom": 6.4,
+    "event": "ch026-seals-the-gifts",
+    "text": "[History] Guan Yu seals the gifts and leaves to find Liu Bei.",
+    "text_zh": "【正史】关羽挂印封金，辞曹寻兄。"
+   },
+   {
+    "year": 200,
+    "at": [
+     114.05,
+     34.78
+    ],
+    "zoom": 6.6,
+    "event": "ch030-guandu",
+    "text": "[History] Months of stalemate at Guandu; Cao Cao's grain runs low.",
+    "text_zh": "【正史】官渡相持数月，曹军粮尽。"
+   },
+   {
+    "year": 200,
+    "at": [
+     114.08,
+     34.82
+    ],
+    "zoom": 7,
+    "event": "ch030-xu-you-barefoot",
+    "text": "[History] Xu You comes over; Cao Cao runs out barefoot.",
+    "text_zh": "【正史】许攸来投，曹操跣足出迎。"
+   },
+   {
+    "year": 200,
+    "at": [
+     114.23,
+     34.92
+    ],
+    "zoom": 7,
+    "event": "ch030-wuchao",
+    "text": "[History] The night raid on Wuchao: Yuan Shao's grain burns.",
+    "text_zh": "【正史】夜袭乌巢，火烧袁军粮草。",
+    "route": [
+     "wuchao-raid"
+    ]
+   },
+   {
+    "year": 200,
+    "at": [
+     114.12,
+     34.9
+    ],
+    "zoom": 6.8,
+    "event": "ch030-ju-shou",
+    "text": "[History] Yuan Shao's army collapses; Ju Shou dies unbowed.",
+    "text_zh": "【正史】袁军崩溃，沮授不屈而死。"
+   },
+   {
+    "year": 201,
+    "at": [
+     115.75,
+     36.15
+    ],
+    "zoom": 6.2,
+    "event": "ch031-cangting",
+    "text": "[History] Cangting: Yuan Shao beaten again.",
+    "text_zh": "【正史】仓亭再败袁绍。"
+   },
+   {
+    "year": 204,
+    "at": [
+     115.38,
+     36.41
+    ],
+    "zoom": 5.6,
+    "event": "ch032-ye-taken",
+    "text": "[History] The Yuan brothers quarrel; Cao Cao floods Ye and takes the north.",
+    "text_zh": "【正史】袁氏兄弟相争，曹操水灌邺城，平定河北。",
+    "route": [
+     "cao-north"
+    ]
+   },
+   {
+    "year": 207,
+    "at": [
+     117.38,
+     38.95
+    ],
+    "zoom": 5.2,
+    "event": "ch033-white-wolf-mountain",
+    "text": "[History] Beyond the Wall to White Wolf Mountain.",
+    "text_zh": "【正史】远征塞外，白狼山破乌桓。",
+    "route": [
+     "wuhuan"
+    ]
+   }
+  ]
+ },
+ {
+  "id": "changban",
+  "era": "red-cliffs",
+  "start": 208,
+  "end": 208,
+  "path": false,
+  "title": "Flight from Xinye: Changban",
+  "title_zh": "长坂坡：刘备南撤",
+  "summary": "Cao Cao comes south, Jingzhou surrenders, and Liu Bei flees with a hundred thousand people; Zhao Yun and Zhang Fei hold the road.",
+  "summary_zh": "曹操南下，荆州投降，刘备携十万百姓南撤，赵云、张飞断后。",
+  "steps": [
+   {
+    "year": 208,
+    "at": [
+     112.16,
+     31.68
+    ],
+    "zoom": 6,
+    "event": "ch040-cong-surrenders",
+    "text": "[History] Liu Cong surrenders Jingzhou without a fight.",
+    "text_zh": "【正史】刘琮不战而降。",
+    "route": [
+     "cao-south"
+    ]
+   },
+   {
+    "year": 208,
+    "at": [
+     112.39,
+     32.49
+    ],
+    "zoom": 7,
+    "event": "ch040-xinye-fire",
+    "text": "[Fiction] Zhuge Liang burns Xinye behind him.",
+    "text_zh": "【虚构】诸葛亮火烧新野。"
+   },
+   {
+    "year": 208,
+    "at": [
+     113.03,
+     31.31
+    ],
+    "zoom": 6,
+    "event": "ch041-crossing-with-the-people",
+    "text": "[History] A hundred thousand people follow Liu Bei south.",
+    "text_zh": "【正史】十万百姓随刘备南撤。",
+    "route": [
+     "liu-bei-flight"
+    ]
+   },
+   {
+    "year": 208,
+    "at": [
+     111.78,
+     30.82
+    ],
+    "zoom": 7.2,
+    "event": "ch041-zhao-yun-changban",
+    "text": "[Embellished] Cao Cao's cavalry catch them at Changban; Zhao Yun rides back for the heir.",
+    "text_zh": "【演义加工】曹军铁骑追至长坂，赵云单骑救主。"
+   },
+   {
+    "year": 208,
+    "at": [
+     111.74,
+     30.81
+    ],
+    "zoom": 7.4,
+    "event": "ch041-lady-mi",
+    "text": "[Fiction] Lady Mi's well.",
+    "text_zh": "【虚构】糜夫人投井。"
+   },
+   {
+    "year": 208,
+    "at": [
+     111.77,
+     30.85
+    ],
+    "zoom": 7.4,
+    "event": "ch042-throws-the-child",
+    "text": "[Fiction] Liu Bei throws down his son.",
+    "text_zh": "【虚构】刘备摔阿斗。"
+   },
+   {
+    "year": 208,
+    "at": [
+     111.83,
+     30.79
+    ],
+    "zoom": 7.4,
+    "event": "ch042-changban-bridge",
+    "text": "[Embellished] Zhang Fei holds the bridge.",
+    "text_zh": "【演义加工】张飞大闹长坂桥。"
+   },
+   {
+    "year": 208,
+    "at": [
+     113.0,
+     30.6
+    ],
+    "zoom": 6.5,
+    "event": "ch042-hanjin",
+    "text": "[History] Guan Yu's fleet at the Han ford, and on to Xiakou.",
+    "text_zh": "【正史】汉津口关羽接应，退往夏口。"
+   }
+  ]
+ },
+ {
+  "id": "red-cliffs",
+  "era": "red-cliffs",
+  "start": 208,
+  "end": 208,
+  "path": false,
+  "title": "The Red Cliffs",
+  "title_zh": "赤壁之战",
+  "summary": "The most famous campaign in Chinese fiction: the embassy, the stratagems, the fire and the flight. Watch the colours under the markers: one battle that is history, ringed with schemes that are not.",
+  "summary_zh": "中国小说中最著名的战役：出使、连环妙计、火烧赤壁、败走华容。留意标记下的颜色：一场真实的大战，四周环绕着虚构的计谋。",
+  "steps": [
+   {
+    "year": 208,
+    "at": [
+     115.98,
+     29.7
+    ],
+    "zoom": 6.2,
+    "event": "ch043-debating-the-scholars",
+    "text": "[Embellished] Zhuge Liang argues down Wu's scholars.",
+    "text_zh": "【演义加工】诸葛亮舌战群儒。"
+   },
+   {
+    "year": 208,
+    "at": [
+     116.0,
+     29.72
+    ],
+    "zoom": 6.4,
+    "event": "ch043-lu-su-alone",
+    "text": "[History] Lu Su: anyone may surrender but you.",
+    "text_zh": "【正史】鲁肃力排众议。"
+   },
+   {
+    "year": 208,
+    "at": [
+     116.02,
+     29.74
+    ],
+    "zoom": 6.4,
+    "event": "ch044-sun-quan-decides",
+    "text": "[History] Sun Quan cuts the table.",
+    "text_zh": "【正史】孙权拔刀斫案。"
+   },
+   {
+    "year": 208,
+    "at": [
+     114.09,
+     30.12
+    ],
+    "zoom": 6.2,
+    "event": "ch045-sanjiangkou",
+    "text": "[Embellished] Cao Cao's fleet comes down the river; Zhou Yu sails up to meet it.",
+    "text_zh": "【演义加工】曹军顺江东下，周瑜溯江西上迎敌。",
+    "route": [
+     "cao-downriver",
+     "zhou-yu-west",
+     "liu-bei-chibi"
+    ]
+   },
+   {
+    "year": 208,
+    "at": [
+     113.7,
+     29.92
+    ],
+    "zoom": 7,
+    "event": "ch045-jiang-gan",
+    "text": "[Fiction] Jiang Gan and the forged letter.",
+    "text_zh": "【虚构】群英会蒋干中计。"
+   },
+   {
+    "year": 208,
+    "at": [
+     113.5,
+     29.92
+    ],
+    "zoom": 7.2,
+    "event": "ch046-borrowing-arrows",
+    "text": "[Fiction] A hundred thousand arrows borrowed in the fog.",
+    "text_zh": "【虚构】草船借箭。"
+   },
+   {
+    "year": 208,
+    "at": [
+     113.66,
+     29.86
+    ],
+    "zoom": 7.2,
+    "event": "ch046-huang-gai-beaten",
+    "text": "[Fiction] Huang Gai takes the beating.",
+    "text_zh": "【虚构】黄盖受苦肉计。"
+   },
+   {
+    "year": 208,
+    "at": [
+     113.45,
+     29.95
+    ],
+    "zoom": 7,
+    "event": "ch047-chained-ships",
+    "text": "[Fiction] Pang Tong talks Cao Cao into chaining his ships.",
+    "text_zh": "【虚构】庞统献连环计。"
+   },
+   {
+    "year": 208,
+    "at": [
+     113.42,
+     29.99
+    ],
+    "zoom": 7,
+    "event": "ch048-cao-cao-poem",
+    "text": "[Embellished] Cao Cao's song on the moonlit river.",
+    "text_zh": "【演义加工】曹操横槊赋诗。"
+   },
+   {
+    "year": 208,
+    "at": [
+     113.66,
+     29.84
+    ],
+    "zoom": 7.2,
+    "event": "ch049-east-wind",
+    "text": "[Fiction] The east wind from the seven-star altar.",
+    "text_zh": "【虚构】七星坛借东风。"
+   },
+   {
+    "year": 208,
+    "at": [
+     113.62,
+     29.88
+    ],
+    "zoom": 7,
+    "event": "ch049-red-cliffs",
+    "text": "[History] Fire at the Red Cliffs.",
+    "text_zh": "【正史】火烧赤壁。"
+   },
+   {
+    "year": 208,
+    "at": [
+     112.99,
+     31.89
+    ],
+    "zoom": 6.4,
+    "event": "ch050-wulin-ambushes",
+    "text": "[Fiction] Cao Cao flees; every laugh brings an ambush.",
+    "text_zh": "【虚构】曹操败走，三笑引出伏兵。",
+    "route": [
+     "huarong-retreat"
+    ]
+   },
+   {
+    "year": 208,
+    "at": [
+     112.85,
+     29.75
+    ],
+    "zoom": 6.8,
+    "event": "ch050-huarong",
+    "text": "[Fiction] Huarong: Guan Yu lets him go.",
+    "text_zh": "【虚构】华容道义释曹操。"
+   }
+  ]
+ },
+ {
+  "id": "tongguan",
+  "era": "three-way",
+  "start": 211,
+  "end": 211,
+  "path": false,
+  "title": "Tong Pass: Ma Chao against Cao Cao",
+  "title_zh": "潼关之战",
+  "summary": "Ma Chao brings the northwest to Tong Pass; Cao Cao loses his beard and robe, crosses the river behind him, and wins with a blotted letter.",
+  "summary_zh": "马超起关西之兵进据潼关；曹操割须弃袍，北渡黄河迂回，一封涂改的书信离间马韩。",
+  "steps": [
+   {
+    "year": 211,
+    "at": [
+     107.75,
+     34.51
+    ],
+    "zoom": 5.6,
+    "event": "ch058-ma-chao-rises",
+    "text": "[Embellished] Ma Chao marches on Tong Pass.",
+    "text_zh": "【演义加工】马超兴兵潼关。",
+    "route": [
+     "ma-chao-east"
+    ]
+   },
+   {
+    "year": 211,
+    "at": [
+     111.92,
+     35.4
+    ],
+    "zoom": 6,
+    "event": "ch058-cuts-his-beard",
+    "text": "[Embellished] Cao Cao comes west; at the river he cuts his beard and throws off his robe.",
+    "text_zh": "【演义加工】曹操西征，渡河时割须弃袍。",
+    "route": [
+     "cao-tongguan"
+    ]
+   },
+   {
+    "year": 211,
+    "at": [
+     109.55,
+     34.55
+    ],
+    "zoom": 7,
+    "event": "ch059-xu-chu-ma-chao",
+    "text": "[Embellished] Xu Chu strips to fight Ma Chao.",
+    "text_zh": "【演义加工】许褚裸衣斗马超。"
+   },
+   {
+    "year": 211,
+    "at": [
+     109.45,
+     34.48
+    ],
+    "zoom": 7,
+    "event": "ch059-blotted-letter",
+    "text": "[History] The blotted letter.",
+    "text_zh": "【正史】曹操抹书间韩遂。"
+   }
+  ]
+ },
+ {
+  "id": "into-shu",
+  "era": "three-way",
+  "start": 211,
+  "end": 214,
+  "path": false,
+  "title": "Liu Bei takes Shu",
+  "title_zh": "刘备取西川",
+  "summary": "Invited in as a guest, Liu Bei turns on his host: Fu, Fallen Phoenix Slope, Yan Yan, Zhang Ren, Ma Chao, and Chengdu.",
+  "summary_zh": "应邀入川作客，反客为主：涪城之会、落凤坡、义释严颜、捉张任、收马超，终取成都。",
+  "steps": [
+   {
+    "year": 211,
+    "at": [
+     112.27,
+     30.1
+    ],
+    "zoom": 6,
+    "event": "ch060-zhang-song-map",
+    "text": "[Embellished] Zhang Song brings the map of Shu.",
+    "text_zh": "【演义加工】张松献西川图。"
+   },
+   {
+    "year": 212,
+    "at": [
+     108.49,
+     30.99
+    ],
+    "zoom": 5.4,
+    "event": "ch060-liu-bei-enters-shu",
+    "text": "[History] Up the gorges to meet Liu Zhang at Fu.",
+    "text_zh": "【正史】溯江入川，涪城会刘璋。",
+    "route": [
+     "into-shu"
+    ]
+   },
+   {
+    "year": 212,
+    "at": [
+     104.72,
+     31.52
+    ],
+    "zoom": 6.6,
+    "event": "ch062-fu-pass",
+    "text": "[History] Liu Bei turns on his host.",
+    "text_zh": "【正史】斩杨怀、高沛，反戈一击。"
+   },
+   {
+    "year": 214,
+    "at": [
+     104.52,
+     31.32
+    ],
+    "zoom": 7,
+    "event": "ch063-pang-tong-dies",
+    "text": "[Embellished] Pang Tong dies at Fallen Phoenix Slope.",
+    "text_zh": "【演义加工】庞统殒命落凤坡。"
+   },
+   {
+    "year": 214,
+    "at": [
+     105.31,
+     30.99
+    ],
+    "zoom": 6,
+    "event": "ch063-yan-yan",
+    "text": "[History] Zhang Fei comes up the river and spares Yan Yan.",
+    "text_zh": "【正史】张飞溯江而上，义释严颜。",
+    "route": [
+     "take-chengdu"
+    ]
+   },
+   {
+    "year": 214,
+    "at": [
+     104.45,
+     30.93
+    ],
+    "zoom": 7,
+    "event": "ch064-zhang-ren",
+    "text": "[History] Zhang Ren is captured at the Goose Bridge.",
+    "text_zh": "【正史】雁桥捉张任。"
+   },
+   {
+    "year": 214,
+    "at": [
+     105.82,
+     32.43
+    ],
+    "zoom": 6.6,
+    "event": "ch065-ma-chao-joins",
+    "text": "[Embellished] Ma Chao comes over.",
+    "text_zh": "【演义加工】马超归降。"
+   },
+   {
+    "year": 214,
+    "at": [
+     104.07,
+     30.67
+    ],
+    "zoom": 6.6,
+    "event": "ch065-governor-of-yizhou",
+    "text": "[History] Chengdu surrenders.",
+    "text_zh": "【正史】刘璋出降，刘备领益州牧。"
+   }
+  ]
+ },
+ {
+  "id": "hanzhong",
+  "era": "three-way",
+  "start": 215,
+  "end": 219,
+  "path": false,
+  "title": "The struggle for Hanzhong",
+  "title_zh": "汉中之战",
+  "summary": "Cao Cao takes Hanzhong from Zhang Lu; Liu Bei takes it from Cao Cao. Mount Dingjun, the empty camp, and 'chicken rib'.",
+  "summary_zh": "曹操从张鲁手中夺得汉中，刘备又从曹操手中夺走：定军山、空营计、鸡肋。",
+  "steps": [
+   {
+    "year": 215,
+    "at": [
+     107.44,
+     33.72
+    ],
+    "zoom": 5.8,
+    "event": "ch067-hanzhong-taken",
+    "text": "[History] Cao Cao takes Hanzhong.",
+    "text_zh": "【正史】曹操平定汉中。",
+    "route": [
+     "cao-hanzhong"
+    ]
+   },
+   {
+    "year": 215,
+    "at": [
+     106.97,
+     30.84
+    ],
+    "zoom": 6,
+    "event": "ch070-wakou",
+    "text": "[History] Zhang Fei beats Zhang He at Wakou.",
+    "text_zh": "【正史】张飞智取瓦口隘。"
+   },
+   {
+    "year": 218,
+    "at": [
+     105.38,
+     31.91
+    ],
+    "zoom": 6.8,
+    "event": "ch070-tiandang",
+    "text": "[Fiction] Huang Zhong takes Tiandang Mountain.",
+    "text_zh": "【虚构】黄忠计夺天荡山。",
+    "route": [
+     "liu-hanzhong"
+    ]
+   },
+   {
+    "year": 219,
+    "at": [
+     106.68,
+     33.1
+    ],
+    "zoom": 7,
+    "event": "ch071-dingjun-mountain",
+    "text": "[History] Mount Dingjun: Huang Zhong kills Xiahou Yuan.",
+    "text_zh": "【正史】定军山黄忠斩夏侯渊。"
+   },
+   {
+    "year": 219,
+    "at": [
+     107.75,
+     33.71
+    ],
+    "zoom": 7,
+    "event": "ch071-empty-camp",
+    "text": "[History] Cao Cao comes himself; Zhao Yun's open gate on the Han River.",
+    "text_zh": "【正史】曹操亲至，赵云汉水空营退敌。",
+    "route": [
+     "cao-hanzhong-219"
+    ]
+   },
+   {
+    "year": 219,
+    "at": [
+     106.9,
+     33.1
+    ],
+    "zoom": 6.6,
+    "event": "ch072-chicken-rib",
+    "text": "[Embellished] 'Chicken rib'.",
+    "text_zh": "【演义加工】鸡肋。"
+   },
+   {
+    "year": 219,
+    "at": [
+     107.6,
+     34.2
+    ],
+    "zoom": 6.4,
+    "event": "ch072-xie-valley-retreat",
+    "text": "[Embellished] Cao Cao falls back through the Xie Valley.",
+    "text_zh": "【演义加工】曹操兵退斜谷。"
+   },
+   {
+    "year": 219,
+    "at": [
+     106.62,
+     33.18
+    ],
+    "zoom": 6.6,
+    "event": "ch073-king-of-hanzhong",
+    "text": "[History] Liu Bei, King of Hanzhong.",
+    "text_zh": "【正史】刘备进位汉中王。"
+   }
+  ]
+ },
+ {
+  "id": "fall-of-jingzhou",
+  "era": "three-way",
+  "start": 215,
+  "end": 220,
+  "path": false,
+  "title": "Guan Yu's last campaign",
+  "title_zh": "关羽北伐与荆州之失",
+  "summary": "At the height of his fame Guan Yu floods seven armies; within months Jingzhou is gone and so is he.",
+  "summary_zh": "关羽水淹七军，威震华夏；数月之间，荆州失守，身死临沮。",
+  "steps": [
+   {
+    "year": 215,
+    "at": [
+     112.33,
+     28.6
+    ],
+    "zoom": 6.4,
+    "event": "ch066-single-sword",
+    "text": "[Embellished] The single-sword meeting with Lu Su.",
+    "text_zh": "【演义加工】单刀赴会。"
+   },
+   {
+    "year": 219,
+    "at": [
+     112.16,
+     31.21
+    ],
+    "zoom": 6,
+    "event": "ch073-guan-yu-north",
+    "text": "[History] Guan Yu marches north on Xiangyang and Fancheng.",
+    "text_zh": "【正史】关羽北伐襄樊。",
+    "route": [
+     "guan-yu-north"
+    ]
+   },
+   {
+    "year": 219,
+    "at": [
+     112.18,
+     32.1
+    ],
+    "zoom": 7,
+    "event": "ch074-pang-de-coffin",
+    "text": "[Embellished] Pang De brings his coffin.",
+    "text_zh": "【演义加工】庞德抬榇决死战。"
+   },
+   {
+    "year": 219,
+    "at": [
+     112.15,
+     32.07
+    ],
+    "zoom": 7,
+    "event": "ch074-seven-armies",
+    "text": "[Embellished] Seven armies drowned.",
+    "text_zh": "【演义加工】水淹七军。"
+   },
+   {
+    "year": 219,
+    "at": [
+     112.1,
+     32.12
+    ],
+    "zoom": 7.2,
+    "event": "ch075-scraping-the-bone",
+    "text": "[Embellished] Scraping the bone.",
+    "text_zh": "【演义加工】刮骨疗毒。"
+   },
+   {
+    "year": 219,
+    "at": [
+     114.05,
+     30.02
+    ],
+    "zoom": 6,
+    "event": "ch075-white-robes",
+    "text": "[History] Lü Meng crosses in white and takes Jiangling behind him.",
+    "text_zh": "【正史】吕蒙白衣渡江，袭取江陵。",
+    "route": [
+     "lu-meng"
+    ]
+   },
+   {
+    "year": 219,
+    "at": [
+     112.34,
+     32.53
+    ],
+    "zoom": 6.6,
+    "event": "ch076-xu-huang",
+    "text": "[History] Xu Huang breaks the siege.",
+    "text_zh": "【正史】徐晃解樊城之围。",
+    "route": [
+     "xu-huang-relief"
+    ]
+   },
+   {
+    "year": 219,
+    "at": [
+     111.92,
+     31.38
+    ],
+    "zoom": 6.2,
+    "event": "ch076-maicheng",
+    "text": "[History] Retreat to Maicheng.",
+    "text_zh": "【正史】败走麦城。",
+    "route": [
+     "guan-yu-retreat"
+    ]
+   },
+   {
+    "year": 219,
+    "at": [
+     111.68,
+     31.07
+    ],
+    "zoom": 6.6,
+    "event": "ch077-guan-yu-dies",
+    "text": "[History] Captured at Linju.",
+    "text_zh": "【正史】临沮被擒，父子遇害。"
+   },
+   {
+    "year": 220,
+    "at": [
+     112.6,
+     34.68
+    ],
+    "zoom": 6,
+    "event": "ch077-guan-yu-head",
+    "text": "[History] His head buried at Luoyang.",
+    "text_zh": "【正史】首级葬于洛阳。"
+   }
+  ]
+ },
+ {
+  "id": "yiling",
+  "era": "three-states",
+  "start": 221,
+  "end": 223,
+  "path": false,
+  "title": "Yiling: Liu Bei's revenge",
+  "title_zh": "夷陵之战",
+  "summary": "Liu Bei marches down the gorges to avenge Guan Yu and is burned out by a young scholar; he dies at Baidi.",
+  "summary_zh": "刘备为关羽报仇，顺江东下，却被书生陆逊火烧连营，终于白帝托孤。",
+  "steps": [
+   {
+    "year": 221,
+    "at": [
+     105.97,
+     31.58
+    ],
+    "zoom": 6.4,
+    "event": "ch081-zhang-fei-killed",
+    "text": "[History] Zhang Fei is murdered on the eve of the war.",
+    "text_zh": "【正史】出兵前夕张飞遇害。"
+   },
+   {
+    "year": 221,
+    "at": [
+     107.75,
+     30.3
+    ],
+    "zoom": 5.6,
+    "event": "ch081-liu-bei-marches",
+    "text": "[History] Liu Bei marches down the gorges.",
+    "text_zh": "【正史】刘备东征孙吴。",
+    "route": [
+     "yiling-advance"
+    ]
+   },
+   {
+    "year": 221,
+    "at": [
+     114.88,
+     30.4
+    ],
+    "zoom": 6,
+    "event": "ch082-nine-gifts",
+    "text": "[History] Sun Quan bows to Wei to protect his back.",
+    "text_zh": "【正史】孙权降魏受九锡。"
+   },
+   {
+    "year": 222,
+    "at": [
+     111.4,
+     30.58
+    ],
+    "zoom": 7,
+    "event": "ch082-huang-zhong-dies",
+    "text": "[Fiction] Old Huang Zhong falls.",
+    "text_zh": "【虚构】黄忠战死。"
+   },
+   {
+    "year": 222,
+    "at": [
+     111.45,
+     30.52
+    ],
+    "zoom": 7,
+    "event": "ch083-enemies-delivered",
+    "text": "[Fiction] Liu Bei gets his enemies.",
+    "text_zh": "【虚构】猇亭得仇人。"
+   },
+   {
+    "year": 222,
+    "at": [
+     111.3,
+     30.7
+    ],
+    "zoom": 6.6,
+    "event": "ch083-lu-xun-commander",
+    "text": "[History] The scholar Lu Xun takes command and waits.",
+    "text_zh": "【正史】陆逊拜大将，坚守不战。"
+   },
+   {
+    "year": 222,
+    "at": [
+     111.36,
+     30.62
+    ],
+    "zoom": 6.8,
+    "event": "ch084-yiling",
+    "text": "[History] Fire along seven hundred li.",
+    "text_zh": "【正史】火烧连营七百里。",
+    "route": [
+     "lu-xun-fire"
+    ]
+   },
+   {
+    "year": 222,
+    "at": [
+     110.5,
+     30.8
+    ],
+    "zoom": 6.4,
+    "event": "ch084-stone-sentinel-maze",
+    "text": "[Fiction] Liu Bei flees; Lu Xun is lost in the stone maze.",
+    "text_zh": "【虚构】刘备败走，陆逊误入八阵图。",
+    "route": [
+     "yiling-retreat"
+    ]
+   },
+   {
+    "year": 223,
+    "at": [
+     109.57,
+     31.04
+    ],
+    "zoom": 7,
+    "event": "ch085-baidi",
+    "text": "[History] Baidi: Liu Bei entrusts his son to Zhuge Liang.",
+    "text_zh": "【正史】白帝城托孤。"
+   }
+  ]
+ },
+ {
+  "id": "southern-campaign",
+  "era": "expeditions",
+  "start": 225,
+  "end": 225,
+  "path": false,
+  "title": "Seven times Meng Huo",
+  "title_zh": "七擒孟获",
+  "summary": "Zhuge Liang marches into the far south and wins hearts as well as battles: poisoned springs, wild beasts, rattan armour.",
+  "summary_zh": "诸葛亮南征，攻心为上：哑泉毒水、猛兽助阵、藤甲兵，七擒七纵。",
+  "steps": [
+   {
+    "year": 225,
+    "at": [
+     103.42,
+     27.77
+    ],
+    "zoom": 5.2,
+    "event": "ch087-southern-campaign",
+    "text": "[History] The army marches south.",
+    "text_zh": "【正史】丞相大兴师南征。",
+    "route": [
+     "southern-campaign"
+    ]
+   },
+   {
+    "year": 225,
+    "at": [
+     102.4,
+     27.3
+    ],
+    "zoom": 6.6,
+    "event": "ch087-first-capture",
+    "text": "[Fiction] The first capture.",
+    "text_zh": "【虚构】一擒孟获。"
+   },
+   {
+    "year": 225,
+    "at": [
+     102.85,
+     26.65
+    ],
+    "zoom": 6.8,
+    "event": "ch088-crossing-the-lu",
+    "text": "[Embellished] Across the Lu in the fifth month.",
+    "text_zh": "【演义加工】五月渡泸。"
+   },
+   {
+    "year": 225,
+    "at": [
+     102.8,
+     26.5
+    ],
+    "zoom": 6.8,
+    "event": "ch088-third-capture",
+    "text": "[Fiction] A false surrender, the third capture.",
+    "text_zh": "【虚构】识诈降，三擒孟获。"
+   },
+   {
+    "year": 225,
+    "at": [
+     102.9,
+     25.5
+    ],
+    "zoom": 6.6,
+    "event": "ch089-dumb-springs",
+    "text": "[Fiction] The poisoned springs.",
+    "text_zh": "【虚构】哑泉毒水。"
+   },
+   {
+    "year": 225,
+    "at": [
+     102.5,
+     24.4
+    ],
+    "zoom": 6.6,
+    "event": "ch090-beasts",
+    "text": "[Fiction] Wooden beasts against wild ones.",
+    "text_zh": "【虚构】驱巨兽六破蛮兵。"
+   },
+   {
+    "year": 225,
+    "at": [
+     102.0,
+     24.6
+    ],
+    "zoom": 6.6,
+    "event": "ch090-rattan-armour",
+    "text": "[Fiction] The rattan-armoured army burns.",
+    "text_zh": "【虚构】火烧藤甲兵。"
+   },
+   {
+    "year": 225,
+    "at": [
+     102.62,
+     24.88
+    ],
+    "zoom": 6.4,
+    "event": "ch090-seven-captures",
+    "text": "[Embellished] The seventh capture: the south will not rebel again.",
+    "text_zh": "【演义加工】七擒孟获，南人不复反矣。"
+   },
+   {
+    "year": 225,
+    "at": [
+     102.9,
+     26.55
+    ],
+    "zoom": 6.6,
+    "event": "ch091-mantou",
+    "text": "[Fiction] Heads of dough for the river spirits.",
+    "text_zh": "【虚构】泸水祭，以面为首。"
+   }
+  ]
+ },
+ {
+  "id": "northern-expeditions",
+  "era": "expeditions",
+  "start": 227,
+  "end": 234,
+  "path": false,
+  "title": "Out through Qishan: the northern expeditions",
+  "title_zh": "六出祁山",
+  "summary": "Five campaigns north from Hanzhong, and Wei's answers to each: Jieting, the empty fort, Chencang, Shanggui, and the Wuzhang plains.",
+  "summary_zh": "自汉中五次北伐，魏军一一应对：街亭、空城、陈仓、上邽割麦、五丈原。",
+  "steps": [
+   {
+    "year": 227,
+    "at": [
+     104.04,
+     30.64
+    ],
+    "zoom": 6,
+    "event": "ch091-memorial",
+    "text": "[History] The memorial on leaving.",
+    "text_zh": "【正史】上《出师表》。"
+   },
+   {
+    "year": 228,
+    "at": [
+     106.15,
+     34.01
+    ],
+    "zoom": 6,
+    "event": "ch092-three-commanderies",
+    "text": "[History] Out through Qishan; three commanderies go over.",
+    "text_zh": "【正史】出祁山，三郡响应。",
+    "route": [
+     "expedition-1",
+     "zhao-yun-decoy"
+    ]
+   },
+   {
+    "year": 228,
+    "at": [
+     105.18,
+     34.7
+    ],
+    "zoom": 6.8,
+    "event": "ch093-jiang-wei",
+    "text": "[History] Jiang Wei comes over.",
+    "text_zh": "【正史】姜维归降。"
+   },
+   {
+    "year": 228,
+    "at": [
+     111.39,
+     32.62
+    ],
+    "zoom": 6.2,
+    "event": "ch094-meng-da",
+    "text": "[History] Sima Yi's lightning march on Meng Da.",
+    "text_zh": "【正史】司马懿奔袭孟达。",
+    "route": [
+     "sima-yi-meng-da"
+    ]
+   },
+   {
+    "year": 228,
+    "at": [
+     107.38,
+     34.61
+    ],
+    "zoom": 6.2,
+    "event": "ch095-jieting",
+    "text": "[History] Zhang He reaches Jieting; Ma Su has left the water.",
+    "text_zh": "【正史】张郃驰援街亭，马谡失守。",
+    "route": [
+     "zhang-he-jieting"
+    ]
+   },
+   {
+    "year": 228,
+    "at": [
+     105.3,
+     34.2
+    ],
+    "zoom": 7,
+    "event": "ch095-empty-fort",
+    "text": "[Fiction] The empty fort.",
+    "text_zh": "【虚构】空城计。"
+   },
+   {
+    "year": 228,
+    "at": [
+     107.03,
+     33.07
+    ],
+    "zoom": 6.4,
+    "event": "ch096-ma-su-executed",
+    "text": "[History] Ma Su executed, in tears.",
+    "text_zh": "【正史】挥泪斩马谡。"
+   },
+   {
+    "year": 228,
+    "at": [
+     107.06,
+     33.72
+    ],
+    "zoom": 6.6,
+    "event": "ch098-chencang",
+    "text": "[Embellished] Second expedition: Chencang.",
+    "text_zh": "【演义加工】二出祁山，攻陈仓。",
+    "route": [
+     "expedition-2"
+    ]
+   },
+   {
+    "year": 229,
+    "at": [
+     105.86,
+     33.35
+    ],
+    "zoom": 6.2,
+    "event": "ch099-wudu-yinping",
+    "text": "[History] Third: Wudu and Yinping.",
+    "text_zh": "【正史】三出，取武都、阴平。",
+    "route": [
+     "expedition-3"
+    ]
+   },
+   {
+    "year": 231,
+    "at": [
+     106.22,
+     33.83
+    ],
+    "zoom": 6.2,
+    "event": "ch101-shanggui-wheat",
+    "text": "[Embellished] Fourth: the wheat at Shanggui, Zhang He at Mumen.",
+    "text_zh": "【演义加工】四出，割上邽之麦，木门道射杀张郃。",
+    "route": [
+     "expedition-4"
+    ]
+   },
+   {
+    "year": 234,
+    "at": [
+     107.3,
+     33.67
+    ],
+    "zoom": 6.2,
+    "event": "ch102-wooden-oxen",
+    "text": "[Embellished] Fifth: up the Xie valley with the wooden oxen.",
+    "text_zh": "【演义加工】五出斜谷，木牛流马运粮。",
+    "route": [
+     "expedition-5"
+    ]
+   },
+   {
+    "year": 234,
+    "at": [
+     107.5,
+     34.25
+    ],
+    "zoom": 7,
+    "event": "ch103-shangfang-valley",
+    "text": "[Fiction] Rain saves Sima Yi at Shangfang Valley.",
+    "text_zh": "【虚构】上方谷，大雨救司马懿。"
+   },
+   {
+    "year": 234,
+    "at": [
+     107.65,
+     34.28
+    ],
+    "zoom": 7,
+    "event": "ch104-wuzhang",
+    "text": "[History] The star falls at Wuzhang.",
+    "text_zh": "【正史】星落五丈原。"
+   }
+  ]
+ },
+ {
+  "id": "fall-of-shu",
+  "era": "sima",
+  "start": 262,
+  "end": 264,
+  "path": false,
+  "title": "The fall of Shu",
+  "title_zh": "魏灭蜀",
+  "summary": "Wei comes by two roads: Zhong Hui is held at Jiange, Deng Ai goes round through seven hundred li of wilderness, and Shu surrenders.",
+  "summary_zh": "魏军两路伐蜀：钟会被阻剑阁，邓艾偷渡阴平七百里，蜀汉投降。",
+  "steps": [
+   {
+    "year": 262,
+    "at": [
+     103.6,
+     34.05
+    ],
+    "zoom": 5.8,
+    "event": "ch115-tazhong",
+    "text": "[History] Jiang Wei farming at Tazhong, far from court.",
+    "text_zh": "【正史】姜维沓中屯田避祸。"
+   },
+   {
+    "year": 263,
+    "at": [
+     106.27,
+     33.28
+    ],
+    "zoom": 5.4,
+    "event": "ch116-zhong-hui",
+    "text": "[History] Zhong Hui pours through Hanzhong; Jiang Wei races back to Jiange.",
+    "text_zh": "【正史】钟会大军经汉中南下，姜维退守剑阁。",
+    "route": [
+     "zhong-hui",
+     "jiang-wei-jiange"
+    ]
+   },
+   {
+    "year": 263,
+    "at": [
+     106.66,
+     33.08
+    ],
+    "zoom": 7,
+    "event": "ch116-dingjun-ghost",
+    "text": "[Fiction] Zhong Hui at Zhuge Liang's tomb.",
+    "text_zh": "【虚构】钟会祭武侯墓。"
+   },
+   {
+    "year": 263,
+    "at": [
+     104.17,
+     33.03
+    ],
+    "zoom": 5.6,
+    "event": "ch117-yinping",
+    "text": "[History] Deng Ai through the Yinping wilderness.",
+    "text_zh": "【正史】邓艾偷渡阴平。",
+    "route": [
+     "deng-ai"
+    ]
+   },
+   {
+    "year": 263,
+    "at": [
+     104.2,
+     31.35
+    ],
+    "zoom": 6.6,
+    "event": "ch117-mianzhu",
+    "text": "[History] Zhuge Zhan dies at Mianzhu.",
+    "text_zh": "【正史】诸葛瞻战死绵竹。"
+   },
+   {
+    "year": 263,
+    "at": [
+     104.07,
+     30.67
+    ],
+    "zoom": 6.6,
+    "event": "ch118-shu-falls",
+    "text": "[History] Liu Shan surrenders; Liu Chen dies in the temple.",
+    "text_zh": "【正史】刘禅出降，北地王哭庙。"
+   },
+   {
+    "year": 264,
+    "at": [
+     104.03,
+     30.72
+    ],
+    "zoom": 6.6,
+    "event": "ch118-deng-ai-cage",
+    "text": "[History] Deng Ai carried off in a cage.",
+    "text_zh": "【正史】邓艾被槛车押解。"
+   },
+   {
+    "year": 264,
+    "at": [
+     104.1,
+     30.7
+    ],
+    "zoom": 6.6,
+    "event": "ch119-zhong-hui-revolt",
+    "text": "[History] Jiang Wei's last scheme.",
+    "text_zh": "【正史】姜维假投降，钟会之乱。"
+   },
+   {
+    "year": 264,
+    "at": [
+     112.6,
+     34.76
+    ],
+    "zoom": 6,
+    "event": "ch119-happy-here",
+    "text": "[History] 'I am happy here.'",
+    "text_zh": "【正史】乐不思蜀。"
+   }
+  ]
+ },
+ {
+  "id": "fall-of-wu",
+  "era": "jin",
+  "start": 265,
+  "end": 280,
+  "path": false,
+  "title": "All under Jin",
+  "title_zh": "三分归晋",
+  "summary": "Jin finishes it: Yang Hu and Lu Kang's border, Du Yu's bamboo, Wang Jun's fleet, and Sun Hao's surrender.",
+  "summary_zh": "晋灭吴：羊陆之交、杜预破竹、王濬楼船、孙皓出降。",
+  "steps": [
+   {
+    "year": 265,
+    "at": [
+     112.68,
+     34.71
+    ],
+    "zoom": 5.6,
+    "event": "ch119-jin-founded",
+    "text": "[History] Sima Yan founds Jin.",
+    "text_zh": "【正史】司马炎代魏建晋。"
+   },
+   {
+    "year": 272,
+    "at": [
+     112.15,
+     32.05
+    ],
+    "zoom": 6.2,
+    "event": "ch120-yang-hu-lu-kang",
+    "text": "[History] Yang Hu and Lu Kang.",
+    "text_zh": "【正史】羊陆之交。"
+   },
+   {
+    "year": 270,
+    "at": [
+     118.78,
+     32.07
+    ],
+    "zoom": 6,
+    "event": "ch120-sun-hao",
+    "text": "[History] Sun Hao's cruelty.",
+    "text_zh": "【正史】孙皓暴政。"
+   },
+   {
+    "year": 280,
+    "at": [
+     111.44,
+     31.06
+    ],
+    "zoom": 4.8,
+    "event": "ch120-wang-jun-fleet",
+    "text": "[History] Jin comes by land and water; Wang Jun's fleet sails the whole Yangzi.",
+    "text_zh": "【正史】晋军水陆并进，王濬楼船顺江东下。",
+    "route": [
+     "wang-jun",
+     "du-yu",
+     "wang-hun"
+    ]
+   },
+   {
+    "year": 280,
+    "at": [
+     112.2,
+     30.35
+    ],
+    "zoom": 6.4,
+    "event": "ch120-splitting-bamboo",
+    "text": "[History] Du Yu: like splitting bamboo.",
+    "text_zh": "【正史】杜预势如破竹。"
+   },
+   {
+    "year": 280,
+    "at": [
+     118.8,
+     32.05
+    ],
+    "zoom": 6.2,
+    "event": "ch120-wu-falls",
+    "text": "[History] Sun Hao surrenders. Long divided, the realm is one.",
+    "text_zh": "【正史】孙皓出降，分久必合。"
    }
   ]
  }
