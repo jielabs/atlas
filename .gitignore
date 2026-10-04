@@ -5,3 +5,4 @@ node_modules/
 tools/.cache/terrain.*
 tools/.cache/hb/
 dist/
+.wrangler/

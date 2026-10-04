@@ -1,6 +1,6 @@
 """Build a stand-alone static site that shows only the Three Kingdoms pack.
 
-Usage: python3 tools/sanguo/build_site.py [--tiles full|lean] [--out dist/atlas]
+Usage: python3 tools/sanguo/build_site.py [--tiles full|lean] [--out dist/atlas] [--pages]
 
 The engine needs only a small part of the atlas to run one pack shown alone: the page, the world maps around the
 pack's East Asia window for its years, the river and landscape names, and the elevation and imagery tiles. This
@@ -12,6 +12,9 @@ app.js already does when it can reach them (LIVE).
 
 The root address opens the pack: index.html names it in <html data-pack data-packonly>, so the address stays
 clean. The manifest's library is dropped, since the site has one book.
+
+--pages adds a _headers file for Cloudflare Pages, which does there what the nginx site in tools/sanguo/nginx/ does:
+tile archives cached for 30 days, .geojson given its type. Pages already revalidates everything else on each load.
 """
 import argparse, gzip, json, math, os, re, shutil
 
@@ -24,6 +27,7 @@ LEAN_MAX_ZOOM = 5
 ap = argparse.ArgumentParser()
 ap.add_argument("--tiles", choices=["full", "lean"], default="full")
 ap.add_argument("--out", default="dist/atlas")
+ap.add_argument("--pages", action="store_true", help="add a _headers file for Cloudflare Pages")
 args = ap.parse_args()
 OUT = os.path.join(ROOT, args.out)
 
@@ -120,6 +124,10 @@ for d in ["tiles/pack", "tiles/sat"]:
         else:
             dropped += 1
 
+
+if args.pages:
+    write("_headers", "/tiles/*\n  Cache-Control: public, max-age=2592000\n"
+                      "/*.geojson\n  Content-Type: application/geo+json\n")
 
 # Report.
 def size(path):

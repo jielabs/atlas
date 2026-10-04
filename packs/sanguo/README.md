@@ -57,16 +57,18 @@ The discs follow the event markers exactly, including the detail and topic filte
 
 ## Publishing
 
-The pack is published as a stand-alone site at <https://atlas.yangjie.org/>. The name is proxied by Cloudflare
-(SSL mode Full, or Full (strict)); the origin is nginx on the VPS `dev`, with a Let's Encrypt certificate issued and
-renewed through the webroot `/var/www/acme`, so renewal works whether or not Cloudflare redirects HTTP to HTTPS.
-The nginx site is kept in `tools/sanguo/nginx/`.
+The pack is published as a stand-alone site in two places, from the same build (`tools/sanguo/build_site.py`, 150 MB
+with all tiles for the region). The page names the pack in `<html data-pack>`, so the address stays clean.
 
-`tools/sanguo/deploy.sh` checks the pack, builds `dist/atlas` with `tools/sanguo/build_site.py` (150 MB with all
-tiles for the region) and copies it with rsync. The page names the pack in `<html data-pack>`, so the address
-stays `https://atlas.yangjie.org/`.
+**<https://sanguo.yangjie.org/>, on Cloudflare.** Workers static assets (`tools/sanguo/wrangler.jsonc`): no server
+and no Worker code; Cloudflare serves the files from its edge (brotli, the `_headers` file written by
+`build_site.py --pages` for tile caching and the `.geojson` type) and keeps the custom domain's DNS record and
+certificate. Publish with `tools/sanguo/deploy_cloudflare.sh` after `npx wrangler login` once.
 
-On the server itself (the build needs only Python 3 and rsync):
+**<https://atlas.yangjie.org/>, on the VPS.** Proxied by Cloudflare (SSL mode Full, or Full (strict)) to nginx on
+the VPS `dev`; Let's Encrypt certificate issued and renewed through the webroot `/var/www/acme`; the nginx site is
+in `tools/sanguo/nginx/`. Publish with `tools/sanguo/deploy.sh` from a workstation, or on the server itself (needs
+only Python 3 and rsync):
 
 ```sh
 git clone --depth 1 -b sanguo git@github.com:jielabs/atlas.git && cd atlas
