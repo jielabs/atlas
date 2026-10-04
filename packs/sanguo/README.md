@@ -29,10 +29,11 @@ The chip at the top left switches between this pack, Journey to the West and the
 | | |
 | --- | --- |
 | Eras | 10, real years 184–280: 黄巾之乱 · 董卓乱政 · 群雄割据 · 官渡与北定 · 赤壁之战 · 三分天下 · 三国鼎立 · 诸葛北伐 · 司马专权 · 三分归晋 |
-| Events | 193, at least one in every chapter. 113 history, 53 embellished, 27 invented; every embellished or invented one ends with a 史实 / *Historically* note saying what the sources record |
+| Events | 272, at least two in every chapter (the two halves of its couplet title) and more where the novel is busiest. The novel leads: an episode is here because the novel tells it, and placed where the novel places it. 146 history, 71 embellished, 55 invented; every embellished or invented one ends with a 史实 / *Historically* note saying what the sources record |
 | Borders | 17 maps: the atlas's Eastern Han map for 184–190, then sixteen warlord and Three Kingdoms maps from 191 to 280, grown from the seats of 109 Eastern Han commanderies |
-| Tours | `guan-yu`, `red-cliffs`, `zhuge-liang`, `liu-bei`, `road-to-unity`; every step is tagged 【正史】, 【演义加工】 or 【虚构】 |
-| Layers | 正史·演义·虚构 (the coloured disc under each event marker), 都城 (capitals with their years), 过五关路线 (Guan Yu's fictional ride), 诸葛北伐 (the five northern campaigns) |
+| Army movements | 60 marches, coloured by side and pointed with arrowheads, each shown in its own years: the coalition against Dong Zhuo, Guandu and the march beyond the Wall, Changban and the Red Cliffs, the taking of Shu and Hanzhong, Fancheng and the fall of Jingzhou, Yiling, the southern campaign, the five northern expeditions and Wei's answers, Liaodong, Jiang Wei, the conquest of Shu and of Wu |
+| Tours | 23, 252 steps; in 87 of them an army marches across the map as the camera flies. **Battles:** `anti-dong`, `guandu`, `changban`, `red-cliffs`, `tongguan`, `into-shu`, `hanzhong`, `fall-of-jingzhou`, `yiling`, `southern-campaign`, `northern-expeditions`, `fall-of-shu`, `fall-of-wu`. **People:** `cao-cao`, `liu-bei`, `guan-yu`, `zhuge-liang`, `zhao-yun`, `lu-bu`, `sun-family`, `sima-yi`, `jiang-wei`. **Overview:** `road-to-unity`. Every step is tagged 【正史】, 【演义加工】 or 【虚构】 |
+| Layers | 行军路线 (the army movements), 正史·演义·虚构 (the coloured disc under each event marker), 都城 (capitals with their years), 过五关路线 (Guan Yu's fictional ride) |
 
 ## How true each episode is
 
@@ -45,6 +46,14 @@ The chip at the top left switches between this pack, Journey to the West and the
 The discs follow the event markers exactly, including the detail and topic filters, because a small plugin
 (`plugins/truth.js`) recomputes them with the engine's own rules.
 
+## Army movements
+
+`plugins/campaigns.js` draws `layers/campaigns.geojson`: each march as a line in its side's colour (曹魏 blue, 蜀汉
+green, 孙吴 red, 袁绍 purple, 吕布 orange, 董卓 plum, 晋 slate) with arrowheads in the direction of march, shown only in
+the years it happened. When a tour step names marches, they are drawn out from start to finish while the camera
+flies, and stay highlighted until the next step. The lines join the places the novel names, so they sketch a route
+rather than survey it.
+
 ## Changing it
 
 - Events, tours and eras are plain JSON. The contract is in [PROGRESS.md](PROGRESS.md): real `year`, `chapter`
@@ -53,7 +62,9 @@ The discs follow the event markers exactly, including the detail and topic filte
   event explains itself and that every chapter has an event.
 - Borders: edit `tools/sanguo/states.json` (one line per change of hands) and run
   `python3 tools/sanguo/build_borders.py` (needs shapely). Then add the map to the era in `eras.json`.
-- `python3 tools/sanguo/build_layers.py` rebuilds the capitals, the five passes and the expeditions.
+- `python3 tools/sanguo/build_layers.py` rebuilds the capitals, the five passes and the army movements. A march is
+  one line in its `CAMPAIGNS` table: a side, its years, its chapters, and the places it passes through by name (from
+  the `P` table of Han sites). A tour step names marches in `"route": [...]` and `plugins/campaigns.js` animates them.
 
 ## Publishing
 
