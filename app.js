@@ -153,7 +153,8 @@ const esc = (s) => String(s ?? "").replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<
 
 function applyLang() {
   document.documentElement.lang = zh() ? "zh-CN" : "en";
-  document.title = t("title");
+  // A pack shown alone is its own site: the tab shows its name.
+  document.title = state.pack?.only ? tx(state.pack.manifest, "name") || t("title") : t("title");
   document.querySelectorAll("[data-i18n]").forEach((el) => (el.textContent = t(el.dataset.i18n)));
   // A pack's own note replaces the China borders note.
   if (state.pack?.only) document.querySelector('[data-i18n="note"]').textContent = tx(state.pack.manifest, "note") || t("notePack");
