@@ -212,6 +212,43 @@ for ev in events:
         if q not in pids: err(f"event {ev.get('id')}: person {q!r} is not in {(m.get('data') or {}).get('people') or 'data.people'}")
         named[q] = named.get(q, 0) + 1
 
+# ---- stories (data.details, as in the atlas's data/details/<era>.json) and pictures (data.illustrations) ----------
+details = {}
+if (m.get("data") or {}).get("details"):
+    details = load(m["data"]["details"]) or {}
+    truth = {ev.get("id"): ev.get((RULE.get("field") or ("",))[0]) for ev in events}
+    for k, d in details.items():
+        dw = f"details: {k}"
+        if k not in ids: err(f"{dw}: no such event")
+        st, sz = d.get("story"), d.get("story_zh")
+        if not (isinstance(st, list) and isinstance(sz, list) and st and len(st) == len(sz) and all(str(x).strip() for x in st + sz)):
+            err(f"{dw}: story and story_zh must be lists of paragraphs of the same length"); continue
+        if d.get("why") or d.get("why_zh"): pair(d, "why", dw)
+        if d.get("quote") is not None and not str(d["quote"].get("zh", "")).strip(): err(f"{dw}: quote needs zh")
+        for q in d.get("people", []): pair(q, "name", f"{dw} people")
+        if RULE.get("notes"):
+            zh_note, en_note = sz[-1].startswith("史实："), st[-1].startswith("Historically:")
+            if zh_note != en_note: err(f"{dw}: the last paragraphs must both, or neither, be the 史实 / Historically note")
+            if (truth.get(k) in RULE["notes"]) != zh_note:
+                err(f"{dw}: an event marked {truth.get(k)} {'needs' if truth.get(k) in RULE['notes'] else 'must not end with'} a 史实 paragraph")
+pics = {}
+if (m.get("data") or {}).get("illustrations"):
+    ipath = m["data"]["illustrations"]
+    idx = load(ipath) or {}
+    idir = os.path.dirname(ipath)
+    imgs, bucket_cache = idx.get("images") or {}, {}
+    for k, iid in (idx.get("keys") or {}).items():
+        kind, _, oid = k.partition(":")
+        if not ((kind == "e" and oid in ids) or (kind == "p" and oid in pids)):
+            err(f"illustrations: key {k} names no event or person")
+        im = imgs.get(iid)
+        if not im: err(f"illustrations: key {k} points at missing image {iid}"); continue
+        if not im.get("license"): err(f"illustrations: image {iid} has no license")
+        b = im.get("b")
+        if b not in bucket_cache: bucket_cache[b] = load(os.path.join(idir, f"{b}.json")) or {}
+        if iid not in bucket_cache[b]: err(f"illustrations: image {iid} is not in bucket {b}")
+        pics[kind] = pics.get(kind, 0) + 1
+
 # ---- tours ----------------------------------------------------------------
 tours = load("tours.json") or []
 if not isinstance(tours, list): err("tours.json: must be a list"); tours = []
@@ -281,6 +318,16 @@ if pids:
     lone = sorted(pids - set(named))
     print(f"rulers and people: {reigns} reigns, {len(pids)} people; {sum(1 for ev in events if ev.get('people'))} of "
           f"{len(events)} events name someone" + (f"; named by no event: {', '.join(lone)}" if lone else ""))
+
+if details:
+    lv = {}
+    for ev in events:
+        if ev.get("id") in details: lv[ev.get("level")] = lv.get(ev.get("level"), 0) + 1
+    tot = {}
+    for ev in events: tot[ev.get("level")] = tot.get(ev.get("level"), 0) + 1
+    print(f"stories: {len(details)} of {len(events)} events (" + ", ".join(f"level {k} {lv.get(k, 0)}/{tot[k]}" for k in sorted(tot)) + ")")
+if pics:
+    print(f"pictures: {pics.get('p', 0)} people, {pics.get('e', 0)} events")
 
 for w in warnings: print(f"WARN  {w}")
 for e in errors: print(f"ERROR {e}")

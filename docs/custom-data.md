@@ -55,6 +55,7 @@ my-pack/
 | `data.eras`, `data.events` | Required. Paths relative to the manifest. |
 | `data.tours` | Optional guided tours. |
 | `data.people` | Optional rulers and famous people (see [people.json](#peoplejson-rulers-and-people)). |
+| `data.details`, `data.illustrations` | Optional stories and pictures for events and people (see [Stories and pictures](#stories-and-pictures)). |
 | `region.polygon` | Outline `[[lon, lat], ...]`. While the map is mostly inside it, the timeline shows the pack's periods. `region.bounds` (`[[west, south], [east, north]]`) is used as a box when there is no polygon. |
 | `region.view` | First view when there is no link and no remembered view: `center`, `zoom`, `year`. |
 | `range` | `{start, end}`: the years the pack's periods cover. Negative years are BCE. |
@@ -127,6 +128,7 @@ the era card. The Three Kingdoms pack builds its maps from commandery seats with
 | `title`, `place`, `summary` (+ `_zh`) | Text for the list, the map card and the story view. |
 | `refs` | Optional, for the manifest's `refs` link. |
 | `people` | Optional ids from `data.people`: the story shows them as chips, and each person's card lists their events. |
+| `source`, `source_zh` | Optional Wikipedia pages, linked under the story. |
 
 ## tours.json: guided tours
 
@@ -165,6 +167,18 @@ their map switches, which it otherwise hides.
 | `polities` | Countries by key: `name_zh`, and `focus` for the main ones (listed first). A key that is also a `name` on the period's border map puts the reigning ruler under that label. |
 | `rulers` | Reigns by country key: `name`, `title` (+ `_zh`), `from`, `to`, optional `circa`. In a handover year the later reign wins. |
 | `people` | `id`, `name`, `born`, `died`, `field` (`general`, `statesman`, `strategist`, `thinker`, `poet`, `writer`, `historian`, `scholar`, `religious`, `artist`, `scientist`, `physician`, `engineer`, `explorer` or `other`), `place`, `lat`, `lon`, `known_for` (+ `_zh`). The marker shows for the life, or for `show: [from, to]` when given; a person with no `died` needs `show`. |
+
+## Stories and pictures
+
+`data.details` is one file of longer stories, keyed by event id, in the format of the atlas's `data/details/<era>.json`:
+`story` and `story_zh` (lists of paragraphs), `why` (+ `_zh`), an optional `quote` (`zh`, `en`, `from`) and `people`
+(`name`, `role` + `_zh`). Opening an event shows its story under the summary; an event without one shows the summary
+alone.
+
+`data.illustrations` is a picture index in the format of the atlas's `data/illustrations.json`: `keys` maps
+`"e:<event id>"` and `"p:<person id>"` to an image id, and `images` gives each image its bucket `b`, size, credit
+(`artist`, `license`, `url` of the file page) and `page`. The pictures themselves are data URLs in `<b>.json` beside the
+index, loaded when first needed. The pack's index wins over the atlas's on the same key.
 
 ## A shelf of packs
 

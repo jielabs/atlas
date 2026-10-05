@@ -39,7 +39,9 @@
     "eras": "eras.json",
     "events": "events.json",
     "tours": "tours.json",
-    "people": "people.json"
+    "people": "people.json",
+    "illustrations": "illustrations/index.json",
+    "details": "details.json"
   },
   "library": "../index.json",
   "layers": [

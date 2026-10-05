@@ -35,6 +35,8 @@ The chip at the top left switches between this pack, Journey to the West and the
 | Tours | 23, 252 steps; in 87 of them an army marches across the map as the camera flies. **Battles:** `anti-dong`, `guandu`, `changban`, `red-cliffs`, `tongguan`, `into-shu`, `hanzhong`, `fall-of-jingzhou`, `yiling`, `southern-campaign`, `northern-expeditions`, `fall-of-shu`, `fall-of-wu`. **People:** `cao-cao`, `liu-bei`, `guan-yu`, `zhuge-liang`, `zhao-yun`, `lu-bu`, `sun-family`, `sima-yi`, `jiang-wei`. **Overview:** `road-to-unity`. Every step is tagged 【正史】, 【演义加工】 or 【虚构】 |
 | Rulers | 48 reigns in 17 countries: the Han, Wei, Shu Han, Wu and Jin, and the warlord houses and provinces (河北袁氏, 徐州, 荆州, 益州, 江东孙氏, 辽东公孙氏...). The reigning ruler shows under the Han, Wei, Shu Han, Wu, Jin and Liaodong labels on the map; picking a reign in the Rulers tab narrows the timeline to it |
 | People | 93 of the novel's cast, from 刘关张 and 曹操 to 貂蝉 and 陈寿, each on the map from the first event that names them until their death, where the novel most often puts them. A card lists their events; 263 of the 272 events link the people they name, by name or by-name (孔明, 云长, 阿斗...), and show them as chips in the story |
+| Stories | 153, one for every key and major event (levels 1 and 2): two or three paragraphs telling the episode as the novel does, in more depth than the summary, a 史实 / *Historically* paragraph for anything embellished or invented, why it matters, the people in it, and for 88 of them a line from the novel. The 119 minor events show their summary alone |
+| Pictures | 86 of the 93 people and 70 events, from Wikipedia and Wikimedia Commons, all public domain or Creative Commons and credited under the picture: Qing portraits of the cast, Tang and Ming portraits of the emperors, illustrations of the 1591 edition of the novel, the Long Corridor paintings of the Summer Palace, battle maps and photographs of the sites. People and events with a page also link to Wikipedia |
 | Layers | 行军路线 (the army movements), 正史·演义·虚构 (the coloured disc under each event marker), 都城 (capitals with their years), 过五关路线 (Guan Yu's fictional ride), and the engine's 君主 and 人物 |
 
 ## How true each episode is
@@ -64,6 +66,11 @@ rather than survey it.
   event explains itself and that every chapter has an event.
 - Borders: edit `tools/sanguo/states.json` (one line per change of hands) and run
   `python3 tools/sanguo/build_borders.py` (needs shapely). Then add the map to the era in `eras.json`.
+- Stories are plain JSON in `details.json`, keyed by event id; `check_pack.py` checks that each embellished or
+  invented one ends with its 史实 paragraph.
+- Pictures and Wikipedia links: `tools/sanguo/fetch_images.py` (needs Pillow and access to Wikipedia) matches each
+  person and main event to a page, takes its lead image if the licence is free (or a picture picked by hand in its
+  `FILES` table), and writes `illustrations/`; then run `build_people.py` to carry the links over.
 - Rulers and people: edit the tables in `tools/sanguo/build_people.py` and run it. It writes `people.json` (the
   pack's `data.people`) and sets each event's `people` from the names in its Chinese text; a by-name goes in the
   person's list.
@@ -109,7 +116,7 @@ file from `build_site.py --pages` caches the tile archives for 30 days and types
   the map shows the last one.
 - The truth marks are judgements about a novel that mixes sources freely; where historians disagree (the seven
   captures of Meng Huo, the second memorial) the note says so.
-- Summaries and historical notes were drafted with an AI model from general knowledge of the novel, the *Records*
+- Stories, summaries and historical notes were drafted with an AI model from general knowledge of the novel, the *Records*
   with Pei Songzhi's notes, the *Book of the Later Han* and the *Book of Jin*, and have not been checked line by
   line against the texts.
 - In the decades zoom the engine narrows the event window further than the discs do, so a few extra discs can

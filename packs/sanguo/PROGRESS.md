@@ -126,3 +126,15 @@ whole pack, each period getting what touches its years) and keeps the tabs and s
 - [x] **P2. people.json and event links**
 - [x] **P3. validate, browser check, docs**
 - chunk P1-P3, round 3: rulers and people: 48 reigns in 17 countries, 93 people, 263 of 272 events linked to the people they name; reigning rulers under the Han, Wei, Shu Han, Wu, Jin and Liaodong labels; the strategist and other person fields; portraits in the site build. Checked in headless Chrome in Chinese, English and at phone width: both tabs and their map switches show, picking a reign narrows the timeline, person cards list their events, stories show their people, search finds people and rulers, no console errors. (events total 272)
+
+## Round 4: stories and pictures
+
+Opening an event showed "the full story is still being written": the engine read stories and pictures only from the
+atlas's own files. A pack can now bring both (`data.details`, `data.illustrations`, in the atlas's formats), and a
+pack event without a story shows its summary alone.
+
+- [x] **S1. engine: stories and pictures from a pack**
+- [x] **S2. pictures and Wikipedia links** (`tools/sanguo/fetch_images.py`)
+- [x] **S3. stories for the 153 key and major events** (six batches written in parallel, each checked)
+- [x] **S4. validate, browser check, docs**
+- chunk S1-S4, round 4: stories and pictures: 153 stories (all level 1 and 2 events), 88 with a line from the novel, each embellished or invented one ending with its 史实 paragraph; 86 portraits and 70 event pictures (free licences, credited), Wikipedia links for all 93 people and 88 events. Checking the stories against the sources corrected nine summaries (Wei Yan's shout, Zhao Yun's five generals, Yang Xiu, the bone-scraping, Xiaoyao Ford, Zhang Song's map, the three visits, the fireflies at Beimang, the novel's last lines) and moved the meeting at Fu to 211. (events total 272)

@@ -588,7 +588,7 @@ function libraryHref(p) {
   q.set("lang", state.lang);
   return `${location.pathname}?${q}`;
 }
-// A file of the open pack by its manifest key (eras, events, tours, places).
+// A file of the open pack by its manifest key (eras, events, tours, people, details, illustrations).
 function packFile(key) {
   const path = state.pack.manifest.data[key];
   if (!path) return Promise.reject(new Error(`The pack has no ${key}.`));
@@ -1287,23 +1287,34 @@ function showCard(lngLat, html) {
 }
 /* ---------- illustrations ---------- */
 // data/illustrations.json maps "p:<person id>" / "e:<event id>" to an image; the pictures themselves sit in data/img/<bucket>.json
-// as data URLs (the hosted page cannot load images from other sites). Built by tools/pack_illustrations.py.
+// as data URLs (the hosted page cannot load images from other sites). Built by tools/pack_illustrations.py. A pack may
+// bring its own index in the same format (manifest data.illustrations, buckets beside it), which wins on the same key.
 let illuIndex = null;
 const illuBuckets = {};
+async function packIllustrations() {
+  const path = state.pack?.manifest.data.illustrations;
+  if (!path) return { keys: {}, images: {} };
+  const idx = await packFile("illustrations").catch(() => ({ keys: {}, images: {} }));
+  const dir = path.replace(/[^/]*$/, "");
+  for (const im of Object.values(idx.images || {})) im.bucket = packPath(`${dir}${im.b}.json`);
+  return { keys: idx.keys || {}, images: idx.images || {} };
+}
 function illuSlot(key) {
   return `<figure class="illu" data-illu="${esc(key)}" hidden></figure>`;
 }
 async function fillIllus(root) {
   const slots = [...root.querySelectorAll("figure[data-illu]:not(.done)")];
   if (!slots.length) return;
-  illuIndex ||= loadJSON("data/illustrations.json").catch(() => ({ keys: {}, images: {} }));
+  illuIndex ||= Promise.all([loadJSON("data/illustrations.json").catch(() => ({ keys: {}, images: {} })), packIllustrations()])
+    .then(([a, p]) => ({ keys: { ...a.keys, ...p.keys }, images: { ...a.images, ...p.images } }));
   const idx = await illuIndex;
   for (const fig of slots) {
     fig.classList.add("done");
     const id = idx.keys[fig.dataset.illu], im = idx.images[id];
     if (!im) continue;
-    illuBuckets[im.b] ||= loadJSON(`data/img/${im.b}.json`).catch(() => ({}));
-    const src = (await illuBuckets[im.b])[id];
+    const bucket = im.bucket || `data/img/${im.b}.json`;
+    illuBuckets[bucket] ||= loadJSON(bucket).catch(() => ({}));
+    const src = (await illuBuckets[bucket])[id];
     if (!src) continue;
     const credit = [im.artist, im.license].filter(Boolean).join(" · ");
     fig.innerHTML = `<img src="${src}" alt="${esc(im.page)}" style="aspect-ratio:${im.w}/${im.h}">` +
@@ -2542,6 +2553,11 @@ function renderList() {
   list.querySelector(".selected")?.scrollIntoView({ block: "nearest" });
 }
 
+// The open pack's stories (manifest data.details: {event id: {story, story_zh, why, quote, people...}}, as in
+// data/details/<era>.json). A pack event without one shows its summary, which is the pack's own text.
+function packDetails() {
+  return (state.packDetails ||= state.pack.manifest.data.details ? packFile("details").catch(() => ({})) : Promise.resolve({}));
+}
 function loadDetails(era) {
   if (!era.layers || era.worldMaps || era.packPeople) return Promise.resolve({});
   if (!state.details[era.id]) state.details[era.id] = loadJSON(`data/details/${era.id}.json`).catch(() => ({}));
@@ -2600,15 +2616,15 @@ async function renderStory() {
     }
   };
   const home = (ev.region || "china") === "china" && state.chinaEras.find((e) => ev.year >= e.start && ev.year <= e.end);
-  const all = home ? await loadDetails(home) : {};
+  const own = ev.region === state.pack?.manifest.id && state.regionById[ev.region]?.eras.find((e) => ev.year >= e.start && ev.year <= e.end);
+  const all = home ? await loadDetails(home) : own ? await packDetails() : {};
   if (state.selected !== ev.id || !state.reading) return;
   const d = all[ev.id];
   const body = box.querySelector(".story-body");
-  const own = ev.region === state.pack?.manifest.id && state.regionById[ev.region]?.eras.find((e) => ev.year >= e.start && ev.year <= e.end);
   const layer = home || own ? await loadLayers(home || own) : {};
   if (state.selected !== ev.id || !state.reading) return;
   const tags = linkTags(ev, layer);
-  if (!d) { body.innerHTML = tags + `<p class="muted">${t("noStory")}</p>` + checkNote(ev) + links(ev, d); return; }
+  if (!d) { body.innerHTML = tags + (own ? "" : `<p class="muted">${t("noStory")}</p>`) + checkNote(ev) + links(ev, d); return; }
   const story = (zh() ? d.story_zh : d.story) || d.story || [];
   let html = story.map((p) => `<p>${esc(p)}</p>`).join("");
   if (d.quote?.zh) {

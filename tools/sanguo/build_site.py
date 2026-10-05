@@ -74,16 +74,9 @@ write("index.html", html)
 for p in ["data/regions.json", "data/world/index.json", "data/geo/rivers.geojson", "data/geo/lakes.geojson",
           "data/geo/old-rivers.geojson", "data/geo/features.json"]:
     copy(p)
-# The illustration index a story or a person's card reads: the atlas's portraits of the pack's people (same id), with
-# the picture buckets cut down to them. The pack's events have no pictures of their own.
-idx = json.load(open(src("data/illustrations.json"), encoding="utf-8"))
-people = json.load(open(src(f"{PACK}/people.json"), encoding="utf-8"))["people"] if manifest["data"].get("people") else []
-keys = {f"p:{q['id']}": idx["keys"][f"p:{q['id']}"] for q in people if f"p:{q['id']}" in idx["keys"]}
-images = {i: idx["images"][i] for i in set(keys.values())}
-for b in sorted({im["b"] for im in images.values()}):
-    bucket = json.load(open(src(f"data/img/{b}.json"), encoding="utf-8"))
-    write(f"data/img/{b}.json", json.dumps({i: bucket[i] for i, im in images.items() if im["b"] == b and i in bucket}))
-write("data/illustrations.json", json.dumps({"keys": keys, "images": images}, ensure_ascii=False))
+# The atlas's illustration index, which the engine always reads: empty, since the pack brings its own pictures
+# (data.illustrations) and the atlas's would only add weight.
+write("data/illustrations.json", json.dumps({"keys": {}, "images": {}}))
 
 # The pack, without the shelf and without its working notes.
 eras = json.load(open(src(f"{PACK}/eras.json"), encoding="utf-8"))

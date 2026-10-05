@@ -1,0 +1,701 @@
+{
+ "p:liu-bei": {
+  "en": "https://en.wikipedia.org/wiki/Liu_Bei",
+  "zh": "https://zh.wikipedia.org/wiki/%E5%88%98%E5%A4%87"
+ },
+ "p:guan-yu": {
+  "en": "https://en.wikipedia.org/wiki/Guan_Yu",
+  "zh": "https://zh.wikipedia.org/wiki/%E5%85%B3%E7%BE%BD"
+ },
+ "p:zhang-fei": {
+  "en": "https://en.wikipedia.org/wiki/Zhang_Fei",
+  "zh": "https://zh.wikipedia.org/wiki/%E5%BC%A0%E9%A3%9E"
+ },
+ "p:zhao-yun": {
+  "en": "https://en.wikipedia.org/wiki/Zhao_Yun",
+  "zh": "https://zh.wikipedia.org/wiki/%E8%B5%B5%E4%BA%91"
+ },
+ "p:zhuge-liang": {
+  "en": "https://en.wikipedia.org/wiki/Zhuge_Liang",
+  "zh": "https://zh.wikipedia.org/wiki/%E8%AF%B8%E8%91%9B%E4%BA%AE"
+ },
+ "p:pang-tong": {
+  "en": "https://en.wikipedia.org/wiki/Pang_Tong",
+  "zh": "https://zh.wikipedia.org/wiki/%E5%BA%9E%E7%BB%9F"
+ },
+ "p:xu-shu": {
+  "en": "https://en.wikipedia.org/wiki/Xu_Shu",
+  "zh": "https://zh.wikipedia.org/wiki/%E5%BE%90%E5%BA%B6"
+ },
+ "p:fa-zheng": {
+  "en": "https://en.wikipedia.org/wiki/Fa_Zheng",
+  "zh": "https://zh.wikipedia.org/wiki/%E6%B3%95%E6%AD%A3"
+ },
+ "p:ma-chao": {
+  "en": "https://en.wikipedia.org/wiki/Ma_Chao",
+  "zh": "https://zh.wikipedia.org/wiki/%E9%A9%AC%E8%B6%85"
+ },
+ "p:huang-zhong": {
+  "en": "https://en.wikipedia.org/wiki/Huang_Zhong",
+  "zh": "https://zh.wikipedia.org/wiki/%E9%BB%84%E5%BF%A0"
+ },
+ "p:wei-yan": {
+  "en": "https://en.wikipedia.org/wiki/Wei_Yan",
+  "zh": "https://zh.wikipedia.org/wiki/%E9%AD%8F%E5%BB%B6"
+ },
+ "p:jiang-wei": {
+  "en": "https://en.wikipedia.org/wiki/Jiang_Wei",
+  "zh": "https://zh.wikipedia.org/wiki/%E5%A7%9C%E7%BB%B4"
+ },
+ "p:liu-shan": {
+  "en": "https://en.wikipedia.org/wiki/Liu_Shan",
+  "zh": "https://zh.wikipedia.org/wiki/%E5%88%98%E7%A6%85"
+ },
+ "p:ma-su": {
+  "en": "https://en.wikipedia.org/wiki/Ma_Su",
+  "zh": "https://zh.wikipedia.org/wiki/%E9%A9%AC%E8%B0%A1"
+ },
+ "p:guan-ping": {
+  "en": "https://en.wikipedia.org/wiki/Guan_Ping",
+  "zh": "https://zh.wikipedia.org/wiki/%E9%97%9C%E5%B9%B3"
+ },
+ "p:zhou-cang": {
+  "en": "https://en.wikipedia.org/wiki/Zhou_Cang",
+  "zh": "https://zh.wikipedia.org/wiki/%E5%91%A8%E5%80%89"
+ },
+ "p:meng-huo": {
+  "en": "https://en.wikipedia.org/wiki/Meng_Huo",
+  "zh": "https://zh.wikipedia.org/wiki/%E5%AD%9F%E7%8D%B2"
+ },
+ "p:jiang-wan": {
+  "en": "https://en.wikipedia.org/wiki/Jiang_Wan",
+  "zh": "https://zh.wikipedia.org/wiki/%E8%94%A3%E7%90%AC"
+ },
+ "p:lady-sun": {
+  "en": "https://en.wikipedia.org/wiki/Lady_Sun"
+ },
+ "p:lady-mi": {
+  "en": "https://en.wikipedia.org/wiki/Lady_Mi",
+  "zh": "https://zh.wikipedia.org/wiki/%E9%BA%8B%E5%A4%AB%E4%BA%BA"
+ },
+ "p:yan-yan": {
+  "en": "https://en.wikipedia.org/wiki/Yan_Yan_%28Three_Kingdoms%29",
+  "zh": "https://zh.wikipedia.org/wiki/%E5%9A%B4%E9%A1%8F"
+ },
+ "p:cao-cao": {
+  "en": "https://en.wikipedia.org/wiki/Cao_Cao",
+  "zh": "https://zh.wikipedia.org/wiki/%E6%9B%B9%E6%93%8D"
+ },
+ "p:cao-pi": {
+  "en": "https://en.wikipedia.org/wiki/Cao_Pi",
+  "zh": "https://zh.wikipedia.org/wiki/%E6%9B%B9%E4%B8%95"
+ },
+ "p:cao-zhi": {
+  "en": "https://en.wikipedia.org/wiki/Cao_Zhi",
+  "zh": "https://zh.wikipedia.org/wiki/%E6%9B%B9%E6%A4%8D"
+ },
+ "p:xun-yu": {
+  "en": "https://en.wikipedia.org/wiki/Xun_Yu",
+  "zh": "https://zh.wikipedia.org/wiki/%E8%8D%80%E5%BD%A7"
+ },
+ "p:guo-jia": {
+  "en": "https://en.wikipedia.org/wiki/Guo_Jia",
+  "zh": "https://zh.wikipedia.org/wiki/%E9%83%AD%E5%98%89"
+ },
+ "p:jia-xu": {
+  "en": "https://en.wikipedia.org/wiki/Jia_Xu",
+  "zh": "https://zh.wikipedia.org/wiki/%E8%B4%BE%E8%AF%A9"
+ },
+ "p:sima-yi": {
+  "en": "https://en.wikipedia.org/wiki/Sima_Yi",
+  "zh": "https://zh.wikipedia.org/wiki/%E5%8F%B8%E9%A9%AC%E6%87%BF"
+ },
+ "p:xiahou-dun": {
+  "en": "https://en.wikipedia.org/wiki/Xiahou_Dun",
+  "zh": "https://zh.wikipedia.org/wiki/%E5%A4%8F%E4%BE%AF%E6%83%87"
+ },
+ "p:xiahou-yuan": {
+  "en": "https://en.wikipedia.org/wiki/Xiahou_Yuan",
+  "zh": "https://zh.wikipedia.org/wiki/%E5%A4%8F%E4%BE%AF%E6%B8%8A"
+ },
+ "p:cao-ren": {
+  "en": "https://en.wikipedia.org/wiki/Cao_Ren",
+  "zh": "https://zh.wikipedia.org/wiki/%E6%9B%B9%E4%BB%81"
+ },
+ "p:zhang-liao": {
+  "en": "https://en.wikipedia.org/wiki/Zhang_Liao",
+  "zh": "https://zh.wikipedia.org/wiki/%E5%BC%B5%E9%81%BC"
+ },
+ "p:xu-huang": {
+  "en": "https://en.wikipedia.org/wiki/Xu_Huang",
+  "zh": "https://zh.wikipedia.org/wiki/%E5%BE%90%E6%99%83"
+ },
+ "p:zhang-he": {
+  "en": "https://en.wikipedia.org/wiki/Zhang_He",
+  "zh": "https://zh.wikipedia.org/wiki/%E5%BC%B5%E9%83%83"
+ },
+ "p:dian-wei": {
+  "en": "https://en.wikipedia.org/wiki/Dian_Wei",
+  "zh": "https://zh.wikipedia.org/wiki/%E5%85%B8%E9%9F%A6"
+ },
+ "p:xu-chu": {
+  "en": "https://en.wikipedia.org/wiki/Xu_Chu",
+  "zh": "https://zh.wikipedia.org/wiki/%E8%AE%B8%E8%A4%9A"
+ },
+ "p:pang-de": {
+  "en": "https://en.wikipedia.org/wiki/Pang_De",
+  "zh": "https://zh.wikipedia.org/wiki/%E9%BE%90%E5%BE%B7"
+ },
+ "p:yu-jin": {
+  "en": "https://en.wikipedia.org/wiki/Yu_Jin",
+  "zh": "https://zh.wikipedia.org/wiki/%E4%BA%8E%E7%A6%81"
+ },
+ "p:deng-ai": {
+  "en": "https://en.wikipedia.org/wiki/Deng_Ai",
+  "zh": "https://zh.wikipedia.org/wiki/%E9%82%93%E8%89%BE"
+ },
+ "p:zhong-hui": {
+  "en": "https://en.wikipedia.org/wiki/Zhong_Hui",
+  "zh": "https://zh.wikipedia.org/wiki/%E9%8D%BE%E6%9C%83"
+ },
+ "p:sima-zhao": {
+  "en": "https://en.wikipedia.org/wiki/Sima_Zhao",
+  "zh": "https://zh.wikipedia.org/wiki/%E5%8F%B8%E9%A9%AC%E6%98%AD"
+ },
+ "p:sima-yan": {
+  "en": "https://en.wikipedia.org/wiki/Emperor_Wu_of_Jin",
+  "zh": "https://zh.wikipedia.org/wiki/%E5%8F%B8%E9%A6%AC%E7%82%8E"
+ },
+ "p:yang-xiu": {
+  "zh": "https://zh.wikipedia.org/wiki/%E6%A5%8A%E4%BF%AE"
+ },
+ "p:cai-yan": {
+  "en": "https://en.wikipedia.org/wiki/Cai_Yan",
+  "zh": "https://zh.wikipedia.org/wiki/%E8%94%A1%E6%96%87%E5%A7%AC"
+ },
+ "p:hua-tuo": {
+  "en": "https://en.wikipedia.org/wiki/Hua_Tuo",
+  "zh": "https://zh.wikipedia.org/wiki/%E5%8D%8E%E4%BD%97"
+ },
+ "p:kong-rong": {
+  "en": "https://en.wikipedia.org/wiki/Kong_Rong",
+  "zh": "https://zh.wikipedia.org/wiki/%E5%AD%94%E8%9E%8D"
+ },
+ "p:mi-heng": {
+  "en": "https://en.wikipedia.org/wiki/Mi_Heng",
+  "zh": "https://zh.wikipedia.org/wiki/%E7%A5%A2%E8%A1%A1"
+ },
+ "p:chen-lin": {
+  "en": "https://en.wikipedia.org/wiki/Chen_Lin_%28Han_dynasty%29",
+  "zh": "https://zh.wikipedia.org/wiki/%E9%99%B3%E7%90%B3_%28%E6%9D%B1%E6%BC%A2%29"
+ },
+ "p:zuo-ci": {
+  "en": "https://en.wikipedia.org/wiki/Zuo_Ci",
+  "zh": "https://zh.wikipedia.org/wiki/%E5%B7%A6%E6%85%88"
+ },
+ "p:wang-lang": {
+  "en": "https://en.wikipedia.org/wiki/Wang_Lang_%28Cao_Wei%29"
+ },
+ "p:cai-mao": {
+  "en": "https://en.wikipedia.org/wiki/Cai_Mao",
+  "zh": "https://zh.wikipedia.org/wiki/%E8%94%A1%E7%91%81"
+ },
+ "p:jiang-gan": {
+  "en": "https://en.wikipedia.org/wiki/Jiang_Gan",
+  "zh": "https://zh.wikipedia.org/wiki/%E8%94%A3%E5%B9%B9"
+ },
+ "p:emperor-xian": {
+  "en": "https://en.wikipedia.org/wiki/Emperor_Xian_of_Han",
+  "zh": "https://zh.wikipedia.org/wiki/%E6%B1%89%E7%8C%AE%E5%B8%9D"
+ },
+ "p:sun-jian": {
+  "en": "https://en.wikipedia.org/wiki/Sun_Jian",
+  "zh": "https://zh.wikipedia.org/wiki/%E5%AD%99%E5%9D%9A"
+ },
+ "p:sun-ce": {
+  "en": "https://en.wikipedia.org/wiki/Sun_Ce",
+  "zh": "https://zh.wikipedia.org/wiki/%E5%AD%99%E7%AD%96"
+ },
+ "p:sun-quan": {
+  "en": "https://en.wikipedia.org/wiki/Sun_Quan",
+  "zh": "https://zh.wikipedia.org/wiki/%E5%AD%99%E6%9D%83"
+ },
+ "p:zhou-yu": {
+  "en": "https://en.wikipedia.org/wiki/Zhou_Yu",
+  "zh": "https://zh.wikipedia.org/wiki/%E5%91%A8%E7%91%9C"
+ },
+ "p:lu-su": {
+  "en": "https://en.wikipedia.org/wiki/Lu_Su",
+  "zh": "https://zh.wikipedia.org/wiki/%E9%B2%81%E8%82%83"
+ },
+ "p:lu-meng": {
+  "en": "https://en.wikipedia.org/wiki/L%C3%BC_Meng",
+  "zh": "https://zh.wikipedia.org/wiki/%E5%90%95%E8%92%99"
+ },
+ "p:lu-xun": {
+  "en": "https://en.wikipedia.org/wiki/Lu_Xun_%28Eastern_Wu%29",
+  "zh": "https://zh.wikipedia.org/wiki/%E9%99%B8%E9%81%9C"
+ },
+ "p:huang-gai": {
+  "en": "https://en.wikipedia.org/wiki/Huang_Gai",
+  "zh": "https://zh.wikipedia.org/wiki/%E9%BB%83%E8%93%8B"
+ },
+ "p:gan-ning": {
+  "en": "https://en.wikipedia.org/wiki/Gan_Ning",
+  "zh": "https://zh.wikipedia.org/wiki/%E7%94%98%E5%AE%81"
+ },
+ "p:taishi-ci": {
+  "en": "https://en.wikipedia.org/wiki/Taishi_Ci",
+  "zh": "https://zh.wikipedia.org/wiki/%E5%A4%AA%E5%8F%B2%E6%85%88"
+ },
+ "p:zhang-zhao": {
+  "en": "https://en.wikipedia.org/wiki/Zhang_Zhao_%28Eastern_Wu%29"
+ },
+ "p:qiao-sisters": {
+  "en": "https://en.wikipedia.org/wiki/Two_Qiaos",
+  "zh": "https://zh.wikipedia.org/wiki/%E4%BA%8C%E6%A1%A5"
+ },
+ "p:lu-kang": {
+  "en": "https://en.wikipedia.org/wiki/Lu_Kang_%28Eastern_Wu%29",
+  "zh": "https://zh.wikipedia.org/wiki/%E9%99%B8%E6%8A%97"
+ },
+ "p:sun-hao": {
+  "en": "https://en.wikipedia.org/wiki/Sun_Hao",
+  "zh": "https://zh.wikipedia.org/wiki/%E5%AD%99%E7%9A%93"
+ },
+ "p:yu-ji": {
+  "zh": "https://zh.wikipedia.org/wiki/%E4%BA%8E%E5%90%89"
+ },
+ "p:dong-zhuo": {
+  "en": "https://en.wikipedia.org/wiki/Dong_Zhuo",
+  "zh": "https://zh.wikipedia.org/wiki/%E8%91%A3%E5%8D%93"
+ },
+ "p:lu-bu": {
+  "en": "https://en.wikipedia.org/wiki/L%C3%BC_Bu",
+  "zh": "https://zh.wikipedia.org/wiki/%E5%90%95%E5%B8%83"
+ },
+ "p:diao-chan": {
+  "en": "https://en.wikipedia.org/wiki/Diaochan",
+  "zh": "https://zh.wikipedia.org/wiki/%E8%B2%82%E8%9D%89"
+ },
+ "p:wang-yun": {
+  "en": "https://en.wikipedia.org/wiki/Wang_Yun_%28Han_dynasty%29",
+  "zh": "https://zh.wikipedia.org/wiki/%E7%8E%8B%E5%85%81"
+ },
+ "p:yuan-shao": {
+  "en": "https://en.wikipedia.org/wiki/Yuan_Shao",
+  "zh": "https://zh.wikipedia.org/wiki/%E8%A2%81%E7%BB%8D"
+ },
+ "p:yuan-shu": {
+  "en": "https://en.wikipedia.org/wiki/Yuan_Shu",
+  "zh": "https://zh.wikipedia.org/wiki/%E8%A2%81%E6%9C%AF"
+ },
+ "p:liu-biao": {
+  "en": "https://en.wikipedia.org/wiki/Liu_Biao",
+  "zh": "https://zh.wikipedia.org/wiki/%E5%88%98%E8%A1%A8"
+ },
+ "p:liu-zhang": {
+  "en": "https://en.wikipedia.org/wiki/Liu_Zhang_%28warlord%29",
+  "zh": "https://zh.wikipedia.org/wiki/%E5%8A%89%E7%92%8B"
+ },
+ "p:zhang-lu": {
+  "en": "https://en.wikipedia.org/wiki/Zhang_Lu_%28Han_dynasty%29",
+  "zh": "https://zh.wikipedia.org/wiki/%E5%BC%A0%E9%B2%81"
+ },
+ "p:zhang-jiao": {
+  "en": "https://en.wikipedia.org/wiki/Zhang_Jue",
+  "zh": "https://zh.wikipedia.org/wiki/%E5%BC%B5%E8%A7%92"
+ },
+ "p:gongsun-zan": {
+  "en": "https://en.wikipedia.org/wiki/Gongsun_Zan",
+  "zh": "https://zh.wikipedia.org/wiki/%E5%85%AC%E5%AD%99%E7%93%92"
+ },
+ "p:ma-teng": {
+  "en": "https://en.wikipedia.org/wiki/Ma_Teng",
+  "zh": "https://zh.wikipedia.org/wiki/%E9%A6%AC%E9%A8%B0"
+ },
+ "p:tao-qian": {
+  "en": "https://en.wikipedia.org/wiki/Tao_Qian_%28Han_dynasty%29",
+  "zh": "https://zh.wikipedia.org/wiki/%E9%99%B6%E8%AC%99"
+ },
+ "p:he-jin": {
+  "en": "https://en.wikipedia.org/wiki/He_Jin",
+  "zh": "https://zh.wikipedia.org/wiki/%E4%BD%95%E8%BF%9B"
+ },
+ "p:sima-hui": {
+  "en": "https://en.wikipedia.org/wiki/Sima_Hui",
+  "zh": "https://zh.wikipedia.org/wiki/%E5%8F%B8%E9%A9%AC%E5%BE%BD"
+ },
+ "p:hua-xiong": {
+  "en": "https://en.wikipedia.org/wiki/Hua_Xiong",
+  "zh": "https://zh.wikipedia.org/wiki/%E5%8D%8E%E9%9B%84"
+ },
+ "p:yan-liang": {
+  "en": "https://en.wikipedia.org/wiki/Yan_Liang",
+  "zh": "https://zh.wikipedia.org/wiki/%E9%A2%9C%E8%89%AF"
+ },
+ "p:wen-chou": {
+  "en": "https://en.wikipedia.org/wiki/Wen_Chou",
+  "zh": "https://zh.wikipedia.org/wiki/%E6%96%87%E9%86%9C"
+ },
+ "p:chen-gong": {
+  "en": "https://en.wikipedia.org/wiki/Chen_Gong",
+  "zh": "https://zh.wikipedia.org/wiki/%E9%99%88%E5%AE%AB"
+ },
+ "p:xu-you": {
+  "en": "https://en.wikipedia.org/wiki/Xu_You_%28Han_dynasty%29",
+  "zh": "https://zh.wikipedia.org/wiki/%E8%A8%B1%E6%94%B8"
+ },
+ "p:gongsun-yuan": {
+  "en": "https://en.wikipedia.org/wiki/Gongsun_Yuan",
+  "zh": "https://zh.wikipedia.org/wiki/%E5%85%AC%E5%AD%AB%E6%B7%B5"
+ },
+ "p:yang-hu": {
+  "en": "https://en.wikipedia.org/wiki/Yang_Hu",
+  "zh": "https://zh.wikipedia.org/wiki/%E7%BE%8A%E7%A5%9C"
+ },
+ "p:du-yu": {
+  "en": "https://en.wikipedia.org/wiki/Du_Yu",
+  "zh": "https://zh.wikipedia.org/wiki/%E6%9D%9C%E9%A2%84"
+ },
+ "p:wang-jun": {
+  "en": "https://en.wikipedia.org/wiki/Wang_Jun_%28Jin_dynasty%29",
+  "zh": "https://zh.wikipedia.org/wiki/%E7%8E%8B%E6%BF%AC"
+ },
+ "p:chen-shou": {
+  "en": "https://en.wikipedia.org/wiki/Chen_Shou",
+  "zh": "https://zh.wikipedia.org/wiki/%E9%99%88%E5%AF%BF"
+ },
+ "e:ch001-peach-garden": {
+  "en": "https://en.wikipedia.org/wiki/Oath_of_the_Peach_Garden",
+  "zh": "https://zh.wikipedia.org/wiki/%E6%A1%83%E5%9C%92%E4%B8%89%E7%B5%90%E7%BE%A9"
+ },
+ "e:ch001-yellow-turbans": {
+  "en": "https://en.wikipedia.org/wiki/Yellow_Turban_Rebellion",
+  "zh": "https://zh.wikipedia.org/wiki/%E9%BB%83%E5%B7%BE%E4%B9%8B%E4%BA%82"
+ },
+ "e:ch001-changshe": {
+  "zh": "https://zh.wikipedia.org/wiki/%E9%95%BF%E7%A4%BE%E4%B9%8B%E6%88%98"
+ },
+ "e:ch002-he-jin": {
+  "en": "https://en.wikipedia.org/wiki/Ten_Attendants",
+  "zh": "https://zh.wikipedia.org/wiki/%E5%8D%81%E5%B8%B8%E4%BE%8D"
+ },
+ "e:ch003-red-hare": {
+  "en": "https://en.wikipedia.org/wiki/Red_Hare",
+  "zh": "https://zh.wikipedia.org/wiki/%E8%B5%A4%E5%85%94%E9%A9%AC"
+ },
+ "e:ch004-dethrones-emperor": {
+  "en": "https://en.wikipedia.org/wiki/Liu_Bian",
+  "zh": "https://zh.wikipedia.org/wiki/%E5%8A%89%E8%BE%AF"
+ },
+ "e:ch004-cao-cao-flees": {
+  "en": "https://en.wikipedia.org/wiki/L%C3%BC_Boshe",
+  "zh": "https://zh.wikipedia.org/wiki/%E5%91%82%E4%BC%AF%E5%A5%A2"
+ },
+ "e:ch005-eastern-alliance": {
+  "en": "https://en.wikipedia.org/wiki/Campaign_against_Dong_Zhuo",
+  "zh": "https://zh.wikipedia.org/wiki/%E8%A8%8E%E4%BC%90%E8%91%A3%E5%8D%93%E4%B9%8B%E6%88%B0"
+ },
+ "e:ch005-hua-xiong": {
+  "en": "https://en.wikipedia.org/wiki/Hua_Xiong",
+  "zh": "https://zh.wikipedia.org/wiki/%E5%8D%8E%E9%9B%84"
+ },
+ "e:ch005-three-heroes-vs-lu-bu": {
+  "en": "https://en.wikipedia.org/wiki/Battle_of_Hulao",
+  "zh": "https://zh.wikipedia.org/wiki/%E8%99%8E%E7%89%A2%E5%85%B3%E4%B9%8B%E6%88%98"
+ },
+ "e:ch007-jieqiao": {
+  "en": "https://en.wikipedia.org/wiki/Battle_of_Jieqiao",
+  "zh": "https://zh.wikipedia.org/wiki/%E7%95%8C%E6%A9%8B%E4%B9%8B%E6%88%B0"
+ },
+ "e:ch007-sun-jian-dies": {
+  "en": "https://en.wikipedia.org/wiki/Battle_of_Xiangyang_%28191%29"
+ },
+ "e:ch008-diaochan": {
+  "en": "https://en.wikipedia.org/wiki/Diaochan",
+  "zh": "https://zh.wikipedia.org/wiki/%E9%80%A3%E7%92%B0%E8%A8%88"
+ },
+ "e:ch008-phoenix-pavilion": {},
+ "e:ch009-li-jue-guo-si": {
+  "zh": "https://zh.wikipedia.org/wiki/%E6%9D%8E%E5%82%95"
+ },
+ "e:ch010-xuzhou-massacre": {
+  "en": "https://en.wikipedia.org/wiki/Cao_Cao%27s_invasion_of_Xu_Province",
+  "zh": "https://zh.wikipedia.org/wiki/%E6%9B%B9%E6%93%8D%E6%94%BB%E5%BE%90%E5%B7%9E%E4%B9%8B%E6%88%98"
+ },
+ "e:ch011-puyang": {
+  "en": "https://en.wikipedia.org/wiki/Battle_of_Yan_Province",
+  "zh": "https://zh.wikipedia.org/wiki/%E5%85%96%E5%B7%9E%E4%B9%8B%E6%88%98"
+ },
+ "e:ch015-taishi-ci": {
+  "en": "https://en.wikipedia.org/wiki/Taishi_Ci",
+  "zh": "https://zh.wikipedia.org/wiki/%E5%A4%AA%E5%8F%B2%E6%85%88"
+ },
+ "e:ch015-sun-ce-east": {
+  "en": "https://en.wikipedia.org/wiki/Sun_Ce%27s_conquests_in_Jiangdong"
+ },
+ "e:ch016-halberd-shot": {
+  "zh": "https://zh.wikipedia.org/wiki/%E5%90%95%E5%B8%83"
+ },
+ "e:ch016-wancheng": {
+  "en": "https://en.wikipedia.org/wiki/War_between_Cao_Cao_and_Zhang_Xiu",
+  "zh": "https://zh.wikipedia.org/wiki/%E6%9B%B9%E6%93%8D%E4%B8%8E%E5%BC%A0%E7%BB%A3%E7%9A%84%E6%88%98%E4%BA%89"
+ },
+ "e:ch017-yuan-shu-emperor": {
+  "en": "https://en.wikipedia.org/wiki/Yuan_Shu",
+  "zh": "https://zh.wikipedia.org/wiki/%E8%A2%81%E6%9C%AF"
+ },
+ "e:ch019-white-gate-tower": {
+  "en": "https://en.wikipedia.org/wiki/Battle_of_Xiapi",
+  "zh": "https://zh.wikipedia.org/wiki/%E4%B8%8B%E9%82%B3%E4%B9%8B%E6%88%B0"
+ },
+ "e:ch020-belt-edict": {},
+ "e:ch021-heroes-over-wine": {},
+ "e:ch022-chen-lin": {
+  "en": "https://en.wikipedia.org/wiki/Chen_Lin_%28Han_dynasty%29",
+  "zh": "https://zh.wikipedia.org/wiki/%E9%99%B3%E7%90%B3_%28%E6%9D%B1%E6%BC%A2%29"
+ },
+ "e:ch025-yan-liang": {
+  "en": "https://en.wikipedia.org/wiki/Battle_of_Boma",
+  "zh": "https://zh.wikipedia.org/wiki/%E7%99%BD%E9%A9%AC%E4%B9%8B%E6%88%98"
+ },
+ "e:ch026-wen-chou": {
+  "en": "https://en.wikipedia.org/wiki/Battle_of_Yan_Ford",
+  "zh": "https://zh.wikipedia.org/wiki/%E5%BB%B6%E6%B4%A5%E4%B9%8B%E6%88%98"
+ },
+ "e:ch027-five-passes": {
+  "zh": "https://zh.wikipedia.org/wiki/%E8%BF%87%E4%BA%94%E5%85%B3%E6%96%A9%E5%85%AD%E5%B0%86"
+ },
+ "e:ch029-sun-ce-dies": {
+  "zh": "https://zh.wikipedia.org/wiki/%E4%BA%8E%E5%90%89"
+ },
+ "e:ch030-guandu": {
+  "en": "https://en.wikipedia.org/wiki/Battle_of_Guandu",
+  "zh": "https://zh.wikipedia.org/wiki/%E5%AE%98%E6%B8%A1%E4%B9%8B%E6%88%98"
+ },
+ "e:ch032-ye-taken": {
+  "en": "https://en.wikipedia.org/wiki/Battle_of_Ye",
+  "zh": "https://zh.wikipedia.org/wiki/%E9%82%BA%E5%9F%8E%E4%B9%8B%E6%88%98"
+ },
+ "e:ch033-white-wolf-mountain": {
+  "en": "https://en.wikipedia.org/wiki/Battle_of_White_Wolf_Mountain",
+  "zh": "https://zh.wikipedia.org/wiki/%E7%99%BD%E7%8B%BC%E5%B1%B1%E4%B9%8B%E6%88%98"
+ },
+ "e:ch034-tan-stream": {
+  "zh": "https://zh.wikipedia.org/wiki/%E7%9A%84%E7%9B%A7"
+ },
+ "e:ch036-xu-shu-recommends": {
+  "en": "https://en.wikipedia.org/wiki/Xu_Shu",
+  "zh": "https://zh.wikipedia.org/wiki/%E5%BE%90%E5%BA%B6"
+ },
+ "e:ch037-three-visits": {
+  "zh": "https://zh.wikipedia.org/wiki/%E4%B8%89%E9%A1%A7%E8%8D%89%E5%BB%AC"
+ },
+ "e:ch038-longzhong-plan": {
+  "en": "https://en.wikipedia.org/wiki/Longzhong_Plan",
+  "zh": "https://zh.wikipedia.org/wiki/%E9%9A%86%E4%B8%AD%E5%B0%8D"
+ },
+ "e:ch039-bowang": {
+  "en": "https://en.wikipedia.org/wiki/Battle_of_Bowang",
+  "zh": "https://zh.wikipedia.org/wiki/%E5%8D%9A%E6%9C%9B%E5%9D%A1%E4%B9%8B%E6%88%B0"
+ },
+ "e:ch041-zhao-yun-changban": {
+  "en": "https://en.wikipedia.org/wiki/Battle_of_Changban",
+  "zh": "https://zh.wikipedia.org/wiki/%E9%95%BF%E5%9D%82%E5%9D%A1%E4%B9%8B%E6%88%98"
+ },
+ "e:ch043-debating-the-scholars": {},
+ "e:ch045-jiang-gan": {
+  "en": "https://en.wikipedia.org/wiki/Jiang_Gan",
+  "zh": "https://zh.wikipedia.org/wiki/%E8%94%A3%E5%B9%B9"
+ },
+ "e:ch046-borrowing-arrows": {
+  "zh": "https://zh.wikipedia.org/wiki/%E6%BF%A1%E9%A1%BB%E4%B9%8B%E6%88%98_%28213%E5%B9%B4%29"
+ },
+ "e:ch046-huang-gai-beaten": {
+  "zh": "https://zh.wikipedia.org/wiki/%E8%8B%A6%E8%82%89%E8%A8%88"
+ },
+ "e:ch049-red-cliffs": {
+  "en": "https://en.wikipedia.org/wiki/Battle_of_Red_Cliffs",
+  "zh": "https://zh.wikipedia.org/wiki/%E8%B5%A4%E5%A3%81%E4%B9%8B%E6%88%B0"
+ },
+ "e:ch050-huarong": {
+  "zh": "https://zh.wikipedia.org/wiki/%E8%8F%AF%E5%AE%B9%E9%81%93"
+ },
+ "e:ch051-first-anger": {
+  "en": "https://en.wikipedia.org/wiki/Battle_of_Jiangling_%28208%29",
+  "zh": "https://zh.wikipedia.org/wiki/%E6%B1%9F%E9%99%B5%E4%B9%8B%E6%88%98_%28208%E5%B9%B4%29"
+ },
+ "e:ch054-ganlu-temple": {
+  "zh": "https://zh.wikipedia.org/wiki/%E7%94%98%E9%9C%B2%E5%AF%BA_%28%E9%95%87%E6%B1%9F%29"
+ },
+ "e:ch058-cuts-his-beard": {
+  "en": "https://en.wikipedia.org/wiki/Battle_of_Tong_Pass",
+  "zh": "https://zh.wikipedia.org/wiki/%E6%BD%BC%E9%97%9C%E4%B9%8B%E6%88%B0"
+ },
+ "e:ch059-blotted-letter": {
+  "en": "https://en.wikipedia.org/wiki/Han_Sui",
+  "zh": "https://zh.wikipedia.org/wiki/%E9%9F%A9%E9%81%82"
+ },
+ "e:ch060-zhang-song-map": {
+  "zh": "https://zh.wikipedia.org/wiki/%E5%BC%A0%E6%9D%BE_%28%E4%B8%9C%E6%B1%89%29"
+ },
+ "e:ch060-liu-bei-enters-shu": {
+  "en": "https://en.wikipedia.org/wiki/Liu_Bei%27s_takeover_of_Yi_Province",
+  "zh": "https://zh.wikipedia.org/wiki/%E7%9B%8A%E5%B7%9E%E4%B9%8B%E6%88%98"
+ },
+ "e:ch063-pang-tong-dies": {
+  "zh": "https://zh.wikipedia.org/wiki/%E5%BA%9E%E7%BB%9F%E7%A5%A0%E5%A2%93"
+ },
+ "e:ch065-ma-chao-joins": {
+  "zh": "https://zh.wikipedia.org/wiki/%E8%91%AD%E8%90%8C%E5%85%B3"
+ },
+ "e:ch066-single-sword": {},
+ "e:ch067-xiaoyao-ford": {
+  "en": "https://en.wikipedia.org/wiki/Battle_of_Xiaoyao_Ford",
+  "zh": "https://zh.wikipedia.org/wiki/%E5%90%88%E8%82%A5%E4%B9%8B%E6%88%B0"
+ },
+ "e:ch067-hanzhong-taken": {
+  "en": "https://en.wikipedia.org/wiki/Battle_of_Yangping",
+  "zh": "https://zh.wikipedia.org/wiki/%E9%99%BD%E5%B9%B3%E9%97%9C%E4%B9%8B%E6%88%B0"
+ },
+ "e:ch068-gan-ning-raid": {
+  "en": "https://en.wikipedia.org/wiki/Battle_of_Ruxu_%28217%29",
+  "zh": "https://zh.wikipedia.org/wiki/%E6%BF%A1%E9%A1%BB%E4%B9%8B%E6%88%98_%28217%E5%B9%B4%29"
+ },
+ "e:ch071-dingjun-mountain": {
+  "en": "https://en.wikipedia.org/wiki/Battle_of_Mount_Dingjun",
+  "zh": "https://zh.wikipedia.org/wiki/%E5%AE%9A%E5%86%9B%E5%B1%B1%E4%B9%8B%E6%88%98"
+ },
+ "e:ch072-chicken-rib": {
+  "zh": "https://zh.wikipedia.org/wiki/%E6%A5%8A%E4%BF%AE"
+ },
+ "e:ch072-xie-valley-retreat": {
+  "en": "https://en.wikipedia.org/wiki/Hanzhong_Campaign",
+  "zh": "https://zh.wikipedia.org/wiki/%E6%BC%A2%E4%B8%AD%E4%B9%8B%E6%88%B0"
+ },
+ "e:ch073-guan-yu-north": {
+  "en": "https://en.wikipedia.org/wiki/Battle_of_Fancheng",
+  "zh": "https://zh.wikipedia.org/wiki/%E6%A8%8A%E5%9F%8E%E4%B9%8B%E6%88%B0"
+ },
+ "e:ch074-seven-armies": {
+  "zh": "https://zh.wikipedia.org/wiki/%E6%A8%8A%E5%9F%8E%E4%B9%8B%E6%88%B0"
+ },
+ "e:ch075-scraping-the-bone": {},
+ "e:ch075-white-robes": {
+  "en": "https://en.wikipedia.org/wiki/L%C3%BC_Meng%27s_invasion_of_Jing_Province"
+ },
+ "e:ch076-maicheng": {
+  "zh": "https://zh.wikipedia.org/wiki/%E9%BA%A6%E5%9F%8E"
+ },
+ "e:ch078-cao-cao-dies": {
+  "en": "https://en.wikipedia.org/wiki/Cao_Cao_Mausoleum",
+  "zh": "https://zh.wikipedia.org/wiki/%E6%9B%B9%E6%93%8D%E9%AB%98%E9%99%B5"
+ },
+ "e:ch079-seven-steps": {
+  "en": "https://en.wikipedia.org/wiki/The_Poem_of_Seven_Steps",
+  "zh": "https://zh.wikipedia.org/wiki/%E4%B8%83%E6%AD%A5%E8%AF%97"
+ },
+ "e:ch080-cao-pi-emperor": {
+  "en": "https://en.wikipedia.org/wiki/End_of_the_Han_dynasty"
+ },
+ "e:ch084-yiling": {
+  "en": "https://en.wikipedia.org/wiki/Battle_of_Xiaoting",
+  "zh": "https://zh.wikipedia.org/wiki/%E5%A4%B7%E9%99%B5%E4%B9%8B%E6%88%98"
+ },
+ "e:ch084-stone-sentinel-maze": {
+  "en": "https://en.wikipedia.org/wiki/Stone_Sentinel_Maze"
+ },
+ "e:ch085-baidi": {
+  "en": "https://en.wikipedia.org/wiki/Baidicheng",
+  "zh": "https://zh.wikipedia.org/wiki/%E7%99%BD%E5%B8%9D%E5%9F%8E"
+ },
+ "e:ch087-southern-campaign": {
+  "en": "https://en.wikipedia.org/wiki/Zhuge_Liang%27s_Southern_Campaign",
+  "zh": "https://zh.wikipedia.org/wiki/%E8%AB%B8%E8%91%9B%E4%BA%AE%E5%8D%97%E5%BE%81"
+ },
+ "e:ch090-seven-captures": {
+  "en": "https://en.wikipedia.org/wiki/Meng_Huo",
+  "zh": "https://zh.wikipedia.org/wiki/%E8%AB%B8%E8%91%9B%E4%BA%AE%E5%8D%97%E5%BE%81"
+ },
+ "e:ch091-memorial": {
+  "en": "https://en.wikipedia.org/wiki/Chu_Shi_Biao",
+  "zh": "https://zh.wikipedia.org/wiki/%E5%87%BA%E5%B8%AB%E8%A1%A8"
+ },
+ "e:ch093-wang-lang": {
+  "en": "https://en.wikipedia.org/wiki/Wang_Lang_%28Cao_Wei%29"
+ },
+ "e:ch095-jieting": {
+  "en": "https://en.wikipedia.org/wiki/Battle_of_Jieting",
+  "zh": "https://zh.wikipedia.org/wiki/%E8%A1%97%E4%BA%AD%E4%B9%8B%E6%88%B0"
+ },
+ "e:ch095-empty-fort": {
+  "en": "https://en.wikipedia.org/wiki/Empty_Fort_Strategy",
+  "zh": "https://zh.wikipedia.org/wiki/%E7%A9%BA%E5%9F%8E%E8%A8%88"
+ },
+ "e:ch096-ma-su-executed": {
+  "en": "https://en.wikipedia.org/wiki/Ma_Su",
+  "zh": "https://zh.wikipedia.org/wiki/%E9%A9%AC%E8%B0%A1"
+ },
+ "e:ch098-chencang": {
+  "en": "https://en.wikipedia.org/wiki/Siege_of_Chencang"
+ },
+ "e:ch099-wudu-yinping": {
+  "en": "https://en.wikipedia.org/wiki/Zhuge_Liang%27s_Northern_Expeditions",
+  "zh": "https://zh.wikipedia.org/wiki/%E8%AF%B8%E8%91%9B%E4%BA%AE%E5%8C%97%E4%BC%90"
+ },
+ "e:ch102-wooden-oxen": {
+  "en": "https://en.wikipedia.org/wiki/Wooden_ox",
+  "zh": "https://zh.wikipedia.org/wiki/%E6%9C%A8%E7%89%9B%E6%B5%81%E9%A9%AC"
+ },
+ "e:ch104-wuzhang": {
+  "en": "https://en.wikipedia.org/wiki/Battle_of_Wuzhang_Plains",
+  "zh": "https://zh.wikipedia.org/wiki/%E4%BA%94%E4%B8%88%E5%8E%9F%E4%B9%8B%E6%88%B0"
+ },
+ "e:ch105-wei-yan": {
+  "en": "https://en.wikipedia.org/wiki/Wei_Yan",
+  "zh": "https://zh.wikipedia.org/wiki/%E9%AD%8F%E5%BB%B6"
+ },
+ "e:ch106-liaodong": {
+  "en": "https://en.wikipedia.org/wiki/Sima_Yi%27s_Liaodong_campaign"
+ },
+ "e:ch107-gaopingling": {
+  "en": "https://en.wikipedia.org/wiki/Incident_at_the_Gaoping_Tombs",
+  "zh": "https://zh.wikipedia.org/wiki/%E9%AB%98%E5%B9%B3%E9%99%B5%E4%B9%8B%E5%8F%98"
+ },
+ "e:ch108-dongxing": {
+  "en": "https://en.wikipedia.org/wiki/Battle_of_Dongxing",
+  "zh": "https://zh.wikipedia.org/wiki/%E6%9D%B1%E8%88%88%E4%B9%8B%E6%88%B0"
+ },
+ "e:ch110-taoxi": {
+  "en": "https://en.wikipedia.org/wiki/Jiang_Wei%27s_Northern_Expeditions",
+  "zh": "https://zh.wikipedia.org/wiki/%E5%A7%9C%E7%B6%AD%E5%8C%97%E4%BC%90"
+ },
+ "e:ch111-zhuge-dan": {
+  "en": "https://en.wikipedia.org/wiki/Zhuge_Dan%27s_Rebellion",
+  "zh": "https://zh.wikipedia.org/wiki/%E5%A3%BD%E6%98%A5%E4%B9%8B%E6%88%B0"
+ },
+ "e:ch114-cao-mao": {
+  "en": "https://en.wikipedia.org/wiki/Cao_Mao",
+  "zh": "https://zh.wikipedia.org/wiki/%E6%9B%B9%E9%AB%A6"
+ },
+ "e:ch116-zhong-hui": {
+  "en": "https://en.wikipedia.org/wiki/Conquest_of_Shu_by_Wei",
+  "zh": "https://zh.wikipedia.org/wiki/%E9%AD%8F%E6%BB%85%E8%9C%80%E6%BC%A2%E4%B9%8B%E6%88%B0"
+ },
+ "e:ch117-mianzhu": {
+  "en": "https://en.wikipedia.org/wiki/Zhuge_Zhan",
+  "zh": "https://zh.wikipedia.org/wiki/%E8%AF%B8%E8%91%9B%E7%9E%BB"
+ },
+ "e:ch119-zhong-hui-revolt": {
+  "en": "https://en.wikipedia.org/wiki/Zhong_Hui%27s_Rebellion",
+  "zh": "https://zh.wikipedia.org/wiki/%E9%94%BA%E4%BC%9A%E4%B9%8B%E4%B9%B1"
+ },
+ "e:ch119-happy-here": {
+  "zh": "https://zh.wikipedia.org/wiki/%E5%88%98%E7%A6%85"
+ },
+ "e:ch120-wu-falls": {
+  "en": "https://en.wikipedia.org/wiki/Conquest_of_Wu_by_Jin",
+  "zh": "https://zh.wikipedia.org/wiki/%E6%99%89%E6%BB%85%E5%90%B3%E4%B9%8B%E6%88%B0"
+ }
+}

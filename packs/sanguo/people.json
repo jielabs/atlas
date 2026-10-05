@@ -495,7 +495,9 @@
    "lat": 39.48,
    "lon": 115.97,
    "known_for": "A distant kinsman of the Han who sold straw sandals; swore brotherhood in the peach garden, called on Zhuge Liang three times and founded Shu Han.",
-   "known_for_zh": "织席贩履的汉室宗亲，桃园结义起兵，三顾茅庐请出诸葛亮，建立蜀汉。"
+   "known_for_zh": "织席贩履的汉室宗亲，桃园结义起兵，三顾茅庐请出诸葛亮，建立蜀汉。",
+   "source": "https://en.wikipedia.org/wiki/Liu_Bei",
+   "source_zh": "https://zh.wikipedia.org/wiki/%E5%88%98%E5%A4%87"
   },
   {
    "id": "guan-yu",
@@ -512,7 +514,9 @@
    "lat": 30.35,
    "lon": 112.34,
    "known_for": "The Lord of the Beautiful Beard: slew Hua Xiong and Yan Liang, rode through five passes, held Jingzhou and lost it; worshipped later as a god of war.",
-   "known_for_zh": "美髯公，温酒斩华雄、斩颜良、过五关、单刀赴会、水淹七军，终因大意失荆州败走麦城，后世奉为武圣。"
+   "known_for_zh": "美髯公，温酒斩华雄、斩颜良、过五关、单刀赴会、水淹七军，终因大意失荆州败走麦城，后世奉为武圣。",
+   "source": "https://en.wikipedia.org/wiki/Guan_Yu",
+   "source_zh": "https://zh.wikipedia.org/wiki/%E5%85%B3%E7%BE%BD"
   },
   {
    "id": "zhang-fei",
@@ -529,7 +533,9 @@
    "lat": 31.58,
    "lon": 105.97,
    "known_for": "Zhang Yide of Yan, whose roar on the bridge at Changban held back Cao Cao's army; murdered by his own men before he could avenge Guan Yu.",
-   "known_for_zh": "燕人张翼德，长坂桥上一声断喝喝退曹军，义释严颜；为关羽报仇出兵前被部将刺杀。"
+   "known_for_zh": "燕人张翼德，长坂桥上一声断喝喝退曹军，义释严颜；为关羽报仇出兵前被部将刺杀。",
+   "source": "https://en.wikipedia.org/wiki/Zhang_Fei",
+   "source_zh": "https://zh.wikipedia.org/wiki/%E5%BC%A0%E9%A3%9E"
   },
   {
    "id": "zhao-yun",
@@ -546,7 +552,9 @@
    "lat": 38.15,
    "lon": 114.57,
    "known_for": "Zhao Zilong of Changshan, who rode through Cao Cao's army at Changban with Liu Bei's infant son, and in the novel still takes the field at seventy.",
-   "known_for_zh": "常山赵子龙，长坂坡单骑救阿斗，截江夺斗，汉水空营退曹军，演义写他七十岁仍出阵。"
+   "known_for_zh": "常山赵子龙，长坂坡单骑救阿斗，截江夺斗，汉水空营退曹军，演义写他七十岁仍出阵。",
+   "source": "https://en.wikipedia.org/wiki/Zhao_Yun",
+   "source_zh": "https://zh.wikipedia.org/wiki/%E8%B5%B5%E4%BA%91"
   },
   {
    "id": "zhuge-liang",
@@ -564,7 +572,9 @@
    "lat": 32.0,
    "lon": 112.05,
    "known_for": "The Sleeping Dragon: planned the three-way division of the realm, allied with Wu against Cao Cao, ran Shu Han for Liu Bei and his son, and died on campaign at Wuzhang Plains. The novel makes him a wizard.",
-   "known_for_zh": "卧龙，隆中对定三分天下之策，联吴抗曹，辅佐刘备父子治蜀，七擒孟获，六出祁山，病逝五丈原；演义把他写成神机妙算的化身。"
+   "known_for_zh": "卧龙，隆中对定三分天下之策，联吴抗曹，辅佐刘备父子治蜀，七擒孟获，六出祁山，病逝五丈原；演义把他写成神机妙算的化身。",
+   "source": "https://en.wikipedia.org/wiki/Zhuge_Liang",
+   "source_zh": "https://zh.wikipedia.org/wiki/%E8%AF%B8%E8%91%9B%E4%BA%AE"
   },
   {
    "id": "pang-tong",
@@ -582,7 +592,9 @@
    "lat": 30.98,
    "lon": 104.4,
    "known_for": "The Fledgling Phoenix, Zhuge Liang's equal; in the novel he talks Cao Cao into chaining his ships, and dies under arrows at Fallen Phoenix Slope (historically, a stray arrow at the siege of Luo).",
-   "known_for_zh": "凤雏，与卧龙齐名；演义写他向曹操献连环计（虚构），入川途中在落凤坡中箭身亡（史实是围雒城时中流矢）。"
+   "known_for_zh": "凤雏，与卧龙齐名；演义写他向曹操献连环计（虚构），入川途中在落凤坡中箭身亡（史实是围雒城时中流矢）。",
+   "source": "https://en.wikipedia.org/wiki/Pang_Tong",
+   "source_zh": "https://zh.wikipedia.org/wiki/%E5%BA%9E%E7%BB%9F"
   },
   {
    "id": "xu-shu",
@@ -598,7 +610,9 @@
    "lat": 32.52,
    "lon": 112.36,
    "known_for": "Liu Bei's first strategist, under the name Shan Fu; when Cao Cao held his mother he left, recommending Zhuge Liang as he rode away.",
-   "known_for_zh": "化名单福，为刘备出谋大破曹仁；因母亲被曹操扣押而离去，临行走马荐诸葛。"
+   "known_for_zh": "化名单福，为刘备出谋大破曹仁；因母亲被曹操扣押而离去，临行走马荐诸葛。",
+   "source": "https://en.wikipedia.org/wiki/Xu_Shu",
+   "source_zh": "https://zh.wikipedia.org/wiki/%E5%BE%90%E5%BA%B6"
   },
   {
    "id": "fa-zheng",
@@ -616,7 +630,9 @@
    "lat": 33.1,
    "lon": 106.82,
    "known_for": "Liu Zhang's officer who brought Liu Bei into Shu, and planned the Hanzhong campaign in which Huang Zhong killed Xiahou Yuan.",
-   "known_for_zh": "迎刘备入川的内应，汉中之战为黄忠定计斩夏侯渊。"
+   "known_for_zh": "迎刘备入川的内应，汉中之战为黄忠定计斩夏侯渊。",
+   "source": "https://en.wikipedia.org/wiki/Fa_Zheng",
+   "source_zh": "https://zh.wikipedia.org/wiki/%E6%B3%95%E6%AD%A3"
   },
   {
    "id": "ma-chao",
@@ -634,7 +650,9 @@
    "lat": 34.6,
    "lon": 110.39,
    "known_for": "Splendid Ma Chao, who rose to avenge his father and at Tong Pass sent Cao Cao fleeing without beard or cloak (historically he rebelled first, and his father was executed for it); later one of Liu Bei's five tiger generals.",
-   "known_for_zh": "锦马超，起兵为父报仇（史实是他先反，马腾因此被杀），潼关之战杀得曹操割须弃袍；后归刘备，为五虎上将之一。"
+   "known_for_zh": "锦马超，起兵为父报仇（史实是他先反，马腾因此被杀），潼关之战杀得曹操割须弃袍；后归刘备，为五虎上将之一。",
+   "source": "https://en.wikipedia.org/wiki/Ma_Chao",
+   "source_zh": "https://zh.wikipedia.org/wiki/%E9%A9%AC%E8%B6%85"
   },
   {
    "id": "huang-zhong",
@@ -651,7 +669,9 @@
    "lat": 33.195,
    "lon": 106.61,
    "known_for": "The old general who cut down Xiahou Yuan at Mount Dingjun; one of the five tiger generals.",
-   "known_for_zh": "老当益壮，定军山斩夏侯渊，五虎上将之一。"
+   "known_for_zh": "老当益壮，定军山斩夏侯渊，五虎上将之一。",
+   "source": "https://en.wikipedia.org/wiki/Huang_Zhong",
+   "source_zh": "https://zh.wikipedia.org/wiki/%E9%BB%84%E5%BF%A0"
   },
   {
    "id": "wei-yan",
@@ -668,7 +688,9 @@
    "lat": 33.07,
    "lon": 107.17,
    "known_for": "Held Hanzhong for Shu for fifteen years; his plan to strike through the Ziwu Valley was refused, and after Zhuge Liang's death he fell in a feud with Yang Yi. The novel gives him a rebel's bone.",
-   "known_for_zh": "镇守汉中十五年，子午谷奇谋未被采纳；诸葛亮死后与杨仪争权，被马岱斩杀。演义说他'脑后有反骨'。"
+   "known_for_zh": "镇守汉中十五年，子午谷奇谋未被采纳；诸葛亮死后与杨仪争权，被马岱斩杀。演义说他'脑后有反骨'。",
+   "source": "https://en.wikipedia.org/wiki/Wei_Yan",
+   "source_zh": "https://zh.wikipedia.org/wiki/%E9%AD%8F%E5%BB%B6"
   },
   {
    "id": "jiang-wei",
@@ -686,7 +708,9 @@
    "lat": 32.28,
    "lon": 105.52,
    "known_for": "Zhuge Liang's heir in war, who marched north again and again and held Jiange; after Shu surrendered he plotted with Zhong Hui to restore it, and died in the attempt.",
-   "known_for_zh": "诸葛亮的衣钵传人，九伐中原，据守剑阁；蜀亡后假意降钟会图谋复国，事败身死。"
+   "known_for_zh": "诸葛亮的衣钵传人，九伐中原，据守剑阁；蜀亡后假意降钟会图谋复国，事败身死。",
+   "source": "https://en.wikipedia.org/wiki/Jiang_Wei",
+   "source_zh": "https://zh.wikipedia.org/wiki/%E5%A7%9C%E7%BB%B4"
   },
   {
    "id": "liu-shan",
@@ -704,7 +728,9 @@
    "lat": 30.67,
    "lon": 104.21,
    "known_for": "A Dou, the Later Sovereign, who reigned forty-one years; a captive in Luoyang after the surrender, he said he was too happy there to miss Shu.",
-   "known_for_zh": "阿斗，蜀汉后主，在位四十一年；降魏后在洛阳说出'此间乐，不思蜀'。"
+   "known_for_zh": "阿斗，蜀汉后主，在位四十一年；降魏后在洛阳说出'此间乐，不思蜀'。",
+   "source": "https://en.wikipedia.org/wiki/Liu_Shan",
+   "source_zh": "https://zh.wikipedia.org/wiki/%E5%88%98%E7%A6%85"
   },
   {
    "id": "ma-su",
@@ -722,7 +748,9 @@
    "lat": 34.95,
    "lon": 105.83,
    "known_for": "Talked brilliantly of war and lost the crossroads of Jieting; Zhuge Liang executed him in tears.",
-   "known_for_zh": "好论军计，失守街亭，被诸葛亮挥泪斩首。"
+   "known_for_zh": "好论军计，失守街亭，被诸葛亮挥泪斩首。",
+   "source": "https://en.wikipedia.org/wiki/Ma_Su",
+   "source_zh": "https://zh.wikipedia.org/wiki/%E9%A9%AC%E8%B0%A1"
   },
   {
    "id": "guan-ping",
@@ -739,7 +767,9 @@
    "lat": 30.68,
    "lon": 112.06,
    "known_for": "Guan Yu's son (the novel makes him adopted), captured and killed with his father after Maicheng.",
-   "known_for_zh": "关羽之子（演义作义子），随父败走麦城，一同被擒遇害。"
+   "known_for_zh": "关羽之子（演义作义子），随父败走麦城，一同被擒遇害。",
+   "source": "https://en.wikipedia.org/wiki/Guan_Ping",
+   "source_zh": "https://zh.wikipedia.org/wiki/%E9%97%9C%E5%B9%B3"
   },
   {
    "id": "zhou-cang",
@@ -755,7 +785,9 @@
    "lat": 30.68,
    "lon": 111.78,
    "known_for": "Invented: the black-faced giant who carries Guan Yu's glaive, and cuts his own throat at Maicheng when Guan Yu falls.",
-   "known_for_zh": "虚构人物：为关羽扛青龙偃月刀的黑脸大汉，关羽死后在麦城自刎。"
+   "known_for_zh": "虚构人物：为关羽扛青龙偃月刀的黑脸大汉，关羽死后在麦城自刎。",
+   "source": "https://en.wikipedia.org/wiki/Zhou_Cang",
+   "source_zh": "https://zh.wikipedia.org/wiki/%E5%91%A8%E5%80%89"
   },
   {
    "id": "meng-huo",
@@ -771,7 +803,9 @@
    "lat": 25.5,
    "lon": 103.8,
    "known_for": "A Nanzhong chieftain whom Zhuge Liang captured seven times and released seven times, until he swore loyalty (the seven captures come only from a later source).",
-   "known_for_zh": "南中豪帅，被诸葛亮七擒七纵，终于心服归顺（七擒之说只见于裴注引《汉晋春秋》）。"
+   "known_for_zh": "南中豪帅，被诸葛亮七擒七纵，终于心服归顺（七擒之说只见于裴注引《汉晋春秋》）。",
+   "source": "https://en.wikipedia.org/wiki/Meng_Huo",
+   "source_zh": "https://zh.wikipedia.org/wiki/%E5%AD%9F%E7%8D%B2"
   },
   {
    "id": "jiang-wan",
@@ -784,7 +818,9 @@
    "lat": 30.775,
    "lon": 104.113,
    "known_for": "Zhuge Liang's chosen successor, who led the Shu government after him.",
-   "known_for_zh": "诸葛亮指定的继任者，诸葛亮死后主持蜀汉国政。"
+   "known_for_zh": "诸葛亮指定的继任者，诸葛亮死后主持蜀汉国政。",
+   "source": "https://en.wikipedia.org/wiki/Jiang_Wan",
+   "source_zh": "https://zh.wikipedia.org/wiki/%E8%94%A3%E7%90%AC"
   },
   {
    "id": "lady-sun",
@@ -800,7 +836,8 @@
    "lat": 30.06,
    "lon": 112.23,
    "known_for": "Sun Quan's sister, married to Liu Bei in the novel's comic match at Ganlu Temple and taken back to Wu; the name Sun Shangxiang comes from later opera.",
-   "known_for_zh": "孙权之妹，甘露寺招亲嫁给刘备，后被孙权接回东吴；'孙尚香'之名出自后世戏曲。"
+   "known_for_zh": "孙权之妹，甘露寺招亲嫁给刘备，后被孙权接回东吴；'孙尚香'之名出自后世戏曲。",
+   "source": "https://en.wikipedia.org/wiki/Lady_Sun"
   },
   {
    "id": "lady-mi",
@@ -816,7 +853,9 @@
    "lat": 30.82,
    "lon": 111.78,
    "known_for": "Liu Bei's wife who, in the novel, gives his son to Zhao Yun at Changban and throws herself into a well (the histories are silent).",
-   "known_for_zh": "刘备之妻；演义写她在长坂坡把阿斗托付给赵云后投井而死（史书未载）。"
+   "known_for_zh": "刘备之妻；演义写她在长坂坡把阿斗托付给赵云后投井而死（史书未载）。",
+   "source": "https://en.wikipedia.org/wiki/Lady_Mi",
+   "source_zh": "https://zh.wikipedia.org/wiki/%E9%BA%8B%E5%A4%AB%E4%BA%BA"
   },
   {
    "id": "yan-yan",
@@ -832,7 +871,9 @@
    "lat": 29.56,
    "lon": 106.55,
    "known_for": "The old general of Ba who would rather lose his head than surrender; Zhang Fei, struck by his courage, set him free.",
-   "known_for_zh": "巴郡老将，'但有断头将军，无有降将军'，张飞敬其义而释之。"
+   "known_for_zh": "巴郡老将，'但有断头将军，无有降将军'，张飞敬其义而释之。",
+   "source": "https://en.wikipedia.org/wiki/Yan_Yan_%28Three_Kingdoms%29",
+   "source_zh": "https://zh.wikipedia.org/wiki/%E5%9A%B4%E9%A1%8F"
   },
   {
    "id": "cao-cao",
@@ -850,7 +891,9 @@
    "lat": 34.03,
    "lon": 113.99,
    "known_for": "'An able minister in peace, a villain in chaos': held the emperor in his hand, beat Yuan Shao at Guandu, united the north and lost at the Red Cliffs. The novel makes him the villain; history also knows him as a poet and reformer.",
-   "known_for_zh": "'治世之能臣，乱世之奸雄'：挟天子以令诸侯，官渡破袁绍，统一北方，赤壁败北。演义把他写成奸雄，史书中他也是诗人和改革者。"
+   "known_for_zh": "'治世之能臣，乱世之奸雄'：挟天子以令诸侯，官渡破袁绍，统一北方，赤壁败北。演义把他写成奸雄，史书中他也是诗人和改革者。",
+   "source": "https://en.wikipedia.org/wiki/Cao_Cao",
+   "source_zh": "https://zh.wikipedia.org/wiki/%E6%9B%B9%E6%93%8D"
   },
   {
    "id": "cao-pi",
@@ -868,7 +911,9 @@
    "lat": 34.72,
    "lon": 112.76,
    "known_for": "Cao Cao's heir, who made the last Han emperor abdicate and founded Wei as its Emperor Wen; also a poet and critic.",
-   "known_for_zh": "曹操之子，逼汉献帝禅让建立魏朝，是为魏文帝；也是诗人和文论家。"
+   "known_for_zh": "曹操之子，逼汉献帝禅让建立魏朝，是为魏文帝；也是诗人和文论家。",
+   "source": "https://en.wikipedia.org/wiki/Cao_Pi",
+   "source_zh": "https://zh.wikipedia.org/wiki/%E6%9B%B9%E4%B8%95"
   },
   {
    "id": "cao-zhi",
@@ -886,7 +931,9 @@
    "lat": 36.3,
    "lon": 114.49,
    "known_for": "The finest poet of the age, author of the Nymph of the Luo; the poem made in seven paces is a later legend.",
-   "known_for_zh": "才高八斗，《洛神赋》作者；'七步成诗'出自《世说新语》的传说。"
+   "known_for_zh": "才高八斗，《洛神赋》作者；'七步成诗'出自《世说新语》的传说。",
+   "source": "https://en.wikipedia.org/wiki/Cao_Zhi",
+   "source_zh": "https://zh.wikipedia.org/wiki/%E6%9B%B9%E6%A4%8D"
   },
   {
    "id": "xun-yu",
@@ -904,7 +951,9 @@
    "lat": 34.135,
    "lon": 113.893,
    "known_for": "Cao Cao's chief counsellor, who urged him to take in the emperor and hold firm at Guandu; he opposed Cao Cao's rise to duke and died soon after (in the novel, on receiving an empty food box).",
-   "known_for_zh": "曹操首席谋臣，力主迎献帝、官渡坚守；反对曹操称魏公，不久忧死（演义说收到空食盒后服毒）。"
+   "known_for_zh": "曹操首席谋臣，力主迎献帝、官渡坚守；反对曹操称魏公，不久忧死（演义说收到空食盒后服毒）。",
+   "source": "https://en.wikipedia.org/wiki/Xun_Yu",
+   "source_zh": "https://zh.wikipedia.org/wiki/%E8%8D%80%E5%BD%A7"
   },
   {
    "id": "guo-jia",
@@ -922,7 +971,9 @@
    "lat": 34.095,
    "lon": 113.737,
    "known_for": "Cao Cao's brilliant young strategist, whose last plan won Liaodong; after the Red Cliffs Cao Cao wept that had he lived, the defeat would not have happened.",
-   "known_for_zh": "曹操的'鬼才'谋士，遗计定辽东；赤壁败后曹操大哭'若奉孝在，决不使吾有此大失'。"
+   "known_for_zh": "曹操的'鬼才'谋士，遗计定辽东；赤壁败后曹操大哭'若奉孝在，决不使吾有此大失'。",
+   "source": "https://en.wikipedia.org/wiki/Guo_Jia",
+   "source_zh": "https://zh.wikipedia.org/wiki/%E9%83%AD%E5%98%89"
   },
   {
    "id": "jia-xu",
@@ -940,7 +991,9 @@
    "lat": 33.0,
    "lon": 112.67,
    "known_for": "The coldest strategist of the age: told Li Jue and Guo Si to retake Chang'an, helped Zhang Xiu beat Cao Cao twice, then served Cao Cao and split Ma Chao from Han Sui.",
-   "known_for_zh": "毒士，劝李傕、郭汜反攻长安，助张绣两败曹操，归曹后献计离间马超、韩遂。"
+   "known_for_zh": "毒士，劝李傕、郭汜反攻长安，助张绣两败曹操，归曹后献计离间马超、韩遂。",
+   "source": "https://en.wikipedia.org/wiki/Jia_Xu",
+   "source_zh": "https://zh.wikipedia.org/wiki/%E8%B4%BE%E8%AF%A9"
   },
   {
    "id": "sima-yi",
@@ -958,7 +1011,9 @@
    "lat": 34.28,
    "lon": 107.65,
    "known_for": "Wei's great general and Zhuge Liang's patient opponent, scared off by the empty fort in the novel; his coup of 249 put Wei in his family's hands.",
-   "known_for_zh": "魏国重臣，诸葛亮北伐的老对手，演义中被空城计吓退；249年高平陵之变后司马氏掌控魏国。"
+   "known_for_zh": "魏国重臣，诸葛亮北伐的老对手，演义中被空城计吓退；249年高平陵之变后司马氏掌控魏国。",
+   "source": "https://en.wikipedia.org/wiki/Sima_Yi",
+   "source_zh": "https://zh.wikipedia.org/wiki/%E5%8F%B8%E9%A9%AC%E6%87%BF"
   },
   {
    "id": "xiahou-dun",
@@ -975,7 +1030,9 @@
    "lat": 34.73,
    "lon": 116.93,
    "known_for": "Cao Cao's kinsman and general, who in the novel pulls an arrow from his eye and swallows the eye.",
-   "known_for_zh": "曹操宗族大将，演义写他中箭后'拔矢啖睛'；博望坡中诸葛亮火攻。"
+   "known_for_zh": "曹操宗族大将，演义写他中箭后'拔矢啖睛'；博望坡中诸葛亮火攻。",
+   "source": "https://en.wikipedia.org/wiki/Xiahou_Dun",
+   "source_zh": "https://zh.wikipedia.org/wiki/%E5%A4%8F%E4%BE%AF%E6%83%87"
   },
   {
    "id": "xiahou-yuan",
@@ -992,7 +1049,9 @@
    "lat": 33.005,
    "lon": 106.61,
    "known_for": "Cao Cao's swift kinsman who held the west, killed by Huang Zhong at Mount Dingjun.",
-   "known_for_zh": "曹操宗族名将，镇守西方，定军山被黄忠斩杀。"
+   "known_for_zh": "曹操宗族名将，镇守西方，定军山被黄忠斩杀。",
+   "source": "https://en.wikipedia.org/wiki/Xiahou_Yuan",
+   "source_zh": "https://zh.wikipedia.org/wiki/%E5%A4%8F%E4%BE%AF%E6%B8%8A"
   },
   {
    "id": "cao-ren",
@@ -1010,7 +1069,9 @@
    "lat": 32.07,
    "lon": 112.29,
    "known_for": "Cao Cao's cousin, who held Fancheng against Guan Yu through the flood.",
-   "known_for_zh": "曹操族弟，镇守樊城，关羽水淹七军时坚守待援。"
+   "known_for_zh": "曹操族弟，镇守樊城，关羽水淹七军时坚守待援。",
+   "source": "https://en.wikipedia.org/wiki/Cao_Ren",
+   "source_zh": "https://zh.wikipedia.org/wiki/%E6%9B%B9%E4%BB%81"
   },
   {
    "id": "zhang-liao",
@@ -1028,7 +1089,9 @@
    "lat": 31.85,
    "lon": 117.25,
    "known_for": "Charged Sun Quan's army at Xiaoyao Ford with eight hundred men; in Wu, children were hushed with his name.",
-   "known_for_zh": "逍遥津八百人冲破孙权大军，威震江东，'小儿止啼'。"
+   "known_for_zh": "逍遥津八百人冲破孙权大军，威震江东，'小儿止啼'。",
+   "source": "https://en.wikipedia.org/wiki/Zhang_Liao",
+   "source_zh": "https://zh.wikipedia.org/wiki/%E5%BC%B5%E9%81%BC"
   },
   {
    "id": "xu-huang",
@@ -1045,7 +1108,9 @@
    "lat": 32.18,
    "lon": 112.15,
    "known_for": "Broke Guan Yu's siege lines and relieved Fancheng.",
-   "known_for_zh": "长驱直入，大破关羽，解樊城之围。"
+   "known_for_zh": "长驱直入，大破关羽，解樊城之围。",
+   "source": "https://en.wikipedia.org/wiki/Xu_Huang",
+   "source_zh": "https://zh.wikipedia.org/wiki/%E5%BE%90%E6%99%83"
   },
   {
    "id": "zhang-he",
@@ -1062,7 +1127,9 @@
    "lat": 34.35,
    "lon": 105.55,
    "known_for": "Went over to Cao Cao at Guandu, beat Ma Su at Jieting, and died in an ambush at Mumen.",
-   "known_for_zh": "官渡降曹，街亭大破马谡，木门道中伏身亡。"
+   "known_for_zh": "官渡降曹，街亭大破马谡，木门道中伏身亡。",
+   "source": "https://en.wikipedia.org/wiki/Zhang_He",
+   "source_zh": "https://zh.wikipedia.org/wiki/%E5%BC%B5%E9%83%83"
   },
   {
    "id": "dian-wei",
@@ -1079,7 +1146,9 @@
    "lat": 33.0,
    "lon": 112.39,
    "known_for": "Cao Cao's bodyguard, who held the camp gate alone at Wan so that his lord could escape.",
-   "known_for_zh": "曹操贴身护卫，宛城死守营门，掩护曹操逃生。"
+   "known_for_zh": "曹操贴身护卫，宛城死守营门，掩护曹操逃生。",
+   "source": "https://en.wikipedia.org/wiki/Dian_Wei",
+   "source_zh": "https://zh.wikipedia.org/wiki/%E5%85%B8%E9%9F%A6"
   },
   {
    "id": "xu-chu",
@@ -1095,7 +1164,9 @@
    "lat": 34.6,
    "lon": 110.11,
    "known_for": "The Tiger Fool, Cao Cao's guard, who fought Ma Chao stripped to the waist.",
-   "known_for_zh": "虎痴，曹操护卫，潼关裸衣斗马超。"
+   "known_for_zh": "虎痴，曹操护卫，潼关裸衣斗马超。",
+   "source": "https://en.wikipedia.org/wiki/Xu_Chu",
+   "source_zh": "https://zh.wikipedia.org/wiki/%E8%AE%B8%E8%A4%9A"
   },
   {
    "id": "pang-de",
@@ -1112,7 +1183,9 @@
    "lat": 32.07,
    "lon": 112.01,
    "known_for": "Brought his own coffin to the battle with Guan Yu, and died rather than surrender.",
-   "known_for_zh": "抬棺决战关羽，兵败被擒，宁死不降。"
+   "known_for_zh": "抬棺决战关羽，兵败被擒，宁死不降。",
+   "source": "https://en.wikipedia.org/wiki/Pang_De",
+   "source_zh": "https://zh.wikipedia.org/wiki/%E9%BE%90%E5%BE%B7"
   },
   {
    "id": "yu-jin",
@@ -1129,7 +1202,9 @@
    "lat": 31.96,
    "lon": 112.15,
    "known_for": "One of Cao Cao's best generals, who surrendered to Guan Yu when the Han river drowned his seven armies.",
-   "known_for_zh": "曹操名将，汉水泛滥七军被淹，向关羽投降，晚节不保。"
+   "known_for_zh": "曹操名将，汉水泛滥七军被淹，向关羽投降，晚节不保。",
+   "source": "https://en.wikipedia.org/wiki/Yu_Jin",
+   "source_zh": "https://zh.wikipedia.org/wiki/%E4%BA%8E%E7%A6%81"
   },
   {
    "id": "deng-ai",
@@ -1147,7 +1222,9 @@
    "lat": 32.95,
    "lon": 104.68,
    "known_for": "Led his army through the wilds of Yinping to take Chengdu and end Shu; arrested soon after on Zhong Hui's charges, and killed.",
-   "known_for_zh": "偷渡阴平，直取成都，灭蜀首功；旋即被钟会诬告，遇害。"
+   "known_for_zh": "偷渡阴平，直取成都，灭蜀首功；旋即被钟会诬告，遇害。",
+   "source": "https://en.wikipedia.org/wiki/Deng_Ai",
+   "source_zh": "https://zh.wikipedia.org/wiki/%E9%82%93%E8%89%BE"
   },
   {
    "id": "zhong-hui",
@@ -1165,7 +1242,9 @@
    "lat": 30.735,
    "lon": 103.957,
    "known_for": "Led Wei's main army against Shu and was held at Jiange; after the conquest he plotted with Jiang Wei to rule Shu himself, and was killed by his own troops.",
-   "known_for_zh": "统率伐蜀主力，被阻剑阁；灭蜀后与姜维合谋据蜀自立，被乱兵所杀。"
+   "known_for_zh": "统率伐蜀主力，被阻剑阁；灭蜀后与姜维合谋据蜀自立，被乱兵所杀。",
+   "source": "https://en.wikipedia.org/wiki/Zhong_Hui",
+   "source_zh": "https://zh.wikipedia.org/wiki/%E9%8D%BE%E6%9C%83"
   },
   {
    "id": "sima-zhao",
@@ -1183,7 +1262,9 @@
    "lat": 34.83,
    "lon": 112.62,
    "known_for": "'Everyone in the street knows what Sima Zhao has in mind': his men killed the emperor Cao Mao, he conquered Shu, and was made King of Jin.",
-   "known_for_zh": "'司马昭之心，路人皆知'：部下弑杀魏帝曹髦，他灭蜀后封晋王。"
+   "known_for_zh": "'司马昭之心，路人皆知'：部下弑杀魏帝曹髦，他灭蜀后封晋王。",
+   "source": "https://en.wikipedia.org/wiki/Sima_Zhao",
+   "source_zh": "https://zh.wikipedia.org/wiki/%E5%8F%B8%E9%A9%AC%E6%98%AD"
   },
   {
    "id": "sima-yan",
@@ -1201,7 +1282,9 @@
    "lat": 34.72,
    "lon": 112.48,
    "known_for": "Took the throne from Wei as the first Jin emperor, and in 280 conquered Wu: the three kingdoms became one.",
-   "known_for_zh": "受魏禅建立晋朝，280年灭吴，三分归一统。"
+   "known_for_zh": "受魏禅建立晋朝，280年灭吴，三分归一统。",
+   "source": "https://en.wikipedia.org/wiki/Emperor_Wu_of_Jin",
+   "source_zh": "https://zh.wikipedia.org/wiki/%E5%8F%B8%E9%A6%AC%E7%82%8E"
   },
   {
    "id": "yang-xiu",
@@ -1219,7 +1302,8 @@
    "lat": 34.2,
    "lon": 107.6,
    "known_for": "Too clever for his own good: he guessed what Cao Cao meant by 'chicken rib' and was put to death.",
-   "known_for_zh": "聪明外露，猜中曹操'鸡肋'之意，被曹操以扰乱军心之名处死。"
+   "known_for_zh": "聪明外露，猜中曹操'鸡肋'之意，被曹操以扰乱军心之名处死。",
+   "source_zh": "https://zh.wikipedia.org/wiki/%E6%A5%8A%E4%BF%AE"
   },
   {
    "id": "cai-yan",
@@ -1235,7 +1319,9 @@
    "lat": 34.15,
    "lon": 109.32,
    "known_for": "Cai Yong's daughter, twelve years a captive among the Xiongnu until Cao Cao ransomed her; the Eighteen Songs of a Nomad Flute are ascribed to her.",
-   "known_for_zh": "蔡邕之女，流落南匈奴十二年，被曹操重金赎回；相传作《胡笳十八拍》。"
+   "known_for_zh": "蔡邕之女，流落南匈奴十二年，被曹操重金赎回；相传作《胡笳十八拍》。",
+   "source": "https://en.wikipedia.org/wiki/Cai_Yan",
+   "source_zh": "https://zh.wikipedia.org/wiki/%E8%94%A1%E6%96%87%E5%A7%AC"
   },
   {
    "id": "hua-tuo",
@@ -1252,7 +1338,9 @@
    "lat": 33.85,
    "lon": 115.78,
    "known_for": "The divine physician, who in the novel scrapes the poison from Guan Yu's bone, and dies for offering to open Cao Cao's skull.",
-   "known_for_zh": "神医；演义写他为关羽刮骨疗毒，又因提议为曹操开颅治头风被杀。"
+   "known_for_zh": "神医；演义写他为关羽刮骨疗毒，又因提议为曹操开颅治头风被杀。",
+   "source": "https://en.wikipedia.org/wiki/Hua_Tuo",
+   "source_zh": "https://zh.wikipedia.org/wiki/%E5%8D%8E%E4%BD%97"
   },
   {
    "id": "kong-rong",
@@ -1270,7 +1358,9 @@
    "lat": 36.75,
    "lon": 118.75,
    "known_for": "A descendant of Confucius, the boy who took the smaller pear; executed for mocking Cao Cao.",
-   "known_for_zh": "孔子后裔，'孔融让梨'的主角，北海太守，因屡屡讥讽曹操被杀。"
+   "known_for_zh": "孔子后裔，'孔融让梨'的主角，北海太守，因屡屡讥讽曹操被杀。",
+   "source": "https://en.wikipedia.org/wiki/Kong_Rong",
+   "source_zh": "https://zh.wikipedia.org/wiki/%E5%AD%94%E8%9E%8D"
   },
   {
    "id": "mi-heng",
@@ -1288,7 +1378,9 @@
    "lat": 33.965,
    "lon": 113.737,
    "known_for": "Stripped and beat out an insult to Cao Cao on a drum; passed from patron to patron until Huang Zu killed him.",
-   "known_for_zh": "击鼓骂曹，被辗转送往刘表、黄祖处，终被黄祖所杀。"
+   "known_for_zh": "击鼓骂曹，被辗转送往刘表、黄祖处，终被黄祖所杀。",
+   "source": "https://en.wikipedia.org/wiki/Mi_Heng",
+   "source_zh": "https://zh.wikipedia.org/wiki/%E7%A5%A2%E8%A1%A1"
   },
   {
    "id": "chen-lin",
@@ -1305,7 +1397,9 @@
    "lat": 36.41,
    "lon": 114.35,
    "known_for": "Wrote Yuan Shao's denunciation of Cao Cao, so fierce it was said to cure Cao Cao's headache; Cao Cao spared him for his pen.",
-   "known_for_zh": "为袁绍写讨曹檄文，据说吓得曹操头风都好了；袁绍败后曹操爱其才而赦之。"
+   "known_for_zh": "为袁绍写讨曹檄文，据说吓得曹操头风都好了；袁绍败后曹操爱其才而赦之。",
+   "source": "https://en.wikipedia.org/wiki/Chen_Lin_%28Han_dynasty%29",
+   "source_zh": "https://zh.wikipedia.org/wiki/%E9%99%B3%E7%90%B3_%28%E6%9D%B1%E6%BC%A2%29"
   },
   {
    "id": "zuo-ci",
@@ -1321,7 +1415,9 @@
    "lat": 36.3,
    "lon": 114.21,
    "known_for": "A Daoist magician who mocks Cao Cao with conjuring at his banquet.",
-   "known_for_zh": "方士，在曹操宴上变戏法戏弄曹操（演义据《后汉书·方术传》）。"
+   "known_for_zh": "方士，在曹操宴上变戏法戏弄曹操（演义据《后汉书·方术传》）。",
+   "source": "https://en.wikipedia.org/wiki/Zuo_Ci",
+   "source_zh": "https://zh.wikipedia.org/wiki/%E5%B7%A6%E6%85%88"
   },
   {
    "id": "wang-lang",
@@ -1338,7 +1434,8 @@
    "lat": 34.1,
    "lon": 105.4,
    "known_for": "Wei minister whom, in the novel, Zhuge Liang scolds to death before the armies (invented; he died at home the same year).",
-   "known_for_zh": "魏国重臣；演义写他在阵前被诸葛亮骂死（虚构，史实是同年病逝）。"
+   "known_for_zh": "魏国重臣；演义写他在阵前被诸葛亮骂死（虚构，史实是同年病逝）。",
+   "source": "https://en.wikipedia.org/wiki/Wang_Lang_%28Cao_Wei%29"
   },
   {
    "id": "cai-mao",
@@ -1354,7 +1451,9 @@
    "lat": 29.95,
    "lon": 113.59,
    "known_for": "Liu Biao's admiral who went over to Cao Cao; the novel has Cao Cao behead him, fooled by a letter Zhou Yu forged (invented).",
-   "known_for_zh": "刘表的水军都督，降曹；演义写曹操中周瑜反间计将其斩首（虚构）。"
+   "known_for_zh": "刘表的水军都督，降曹；演义写曹操中周瑜反间计将其斩首（虚构）。",
+   "source": "https://en.wikipedia.org/wiki/Cai_Mao",
+   "source_zh": "https://zh.wikipedia.org/wiki/%E8%94%A1%E7%91%81"
   },
   {
    "id": "jiang-gan",
@@ -1370,7 +1469,9 @@
    "lat": 29.95,
    "lon": 113.31,
    "known_for": "Cao Cao's envoy to his old schoolmate Zhou Yu, who in the novel steals a forged letter and gets Cao Cao's admirals killed.",
-   "known_for_zh": "曹操派去劝降周瑜的同窗；演义写他群英会上盗走伪造的书信，害死蔡瑁、张允。"
+   "known_for_zh": "曹操派去劝降周瑜的同窗；演义写他群英会上盗走伪造的书信，害死蔡瑁、张允。",
+   "source": "https://en.wikipedia.org/wiki/Jiang_Gan",
+   "source_zh": "https://zh.wikipedia.org/wiki/%E8%94%A3%E5%B9%B9"
   },
   {
    "id": "emperor-xian",
@@ -1388,7 +1489,9 @@
    "lat": 33.925,
    "lon": 113.893,
    "known_for": "The last Han emperor, a pawn of Dong Zhuo, Li Jue and Cao Cao; his secret edict sewn into a belt failed, and in 220 he gave the throne to Cao Pi.",
-   "known_for_zh": "东汉末代皇帝，先后受制于董卓、李傕、曹操；衣带诏事泄，220年禅位于曹丕。"
+   "known_for_zh": "东汉末代皇帝，先后受制于董卓、李傕、曹操；衣带诏事泄，220年禅位于曹丕。",
+   "source": "https://en.wikipedia.org/wiki/Emperor_Xian_of_Han",
+   "source_zh": "https://zh.wikipedia.org/wiki/%E6%B1%89%E7%8C%AE%E5%B8%9D"
   },
   {
    "id": "sun-jian",
@@ -1406,7 +1509,9 @@
    "lat": 28.2,
    "lon": 112.97,
    "known_for": "The Tiger of Jiangdong: vanguard against Dong Zhuo, finder of the imperial seal in Luoyang, killed in an ambush fighting Liu Biao.",
-   "known_for_zh": "江东猛虎，讨董先锋，在洛阳得传国玉玺，攻刘表时中伏身亡。"
+   "known_for_zh": "江东猛虎，讨董先锋，在洛阳得传国玉玺，攻刘表时中伏身亡。",
+   "source": "https://en.wikipedia.org/wiki/Sun_Jian",
+   "source_zh": "https://zh.wikipedia.org/wiki/%E5%AD%99%E5%9D%9A"
   },
   {
    "id": "sun-ce",
@@ -1424,7 +1529,9 @@
    "lat": 31.3,
    "lon": 120.74,
    "known_for": "The Little Conqueror, who won the lands south of the Yangtze in a few years and died at twenty-five, haunted (says the novel) by the Daoist Yu Ji.",
-   "known_for_zh": "小霸王，数年间平定江东；遇刺伤重，二十六岁去世，演义说他是被于吉的鬼魂所扰。"
+   "known_for_zh": "小霸王，数年间平定江东；遇刺伤重，二十六岁去世，演义说他是被于吉的鬼魂所扰。",
+   "source": "https://en.wikipedia.org/wiki/Sun_Ce",
+   "source_zh": "https://zh.wikipedia.org/wiki/%E5%AD%99%E7%AD%96"
   },
   {
    "id": "sun-quan",
@@ -1442,7 +1549,9 @@
    "lat": 32.05,
    "lon": 118.94,
    "known_for": "Inherited Jiangdong at eighteen, allied with Liu Bei to beat Cao Cao at the Red Cliffs, took Jingzhou from Guan Yu, beat Liu Bei at Yiling and made himself emperor of Wu.",
-   "known_for_zh": "十八岁继承江东，联刘抗曹赤壁破敌，袭取荆州，夷陵败刘备，称帝建立吴国。"
+   "known_for_zh": "十八岁继承江东，联刘抗曹赤壁破敌，袭取荆州，夷陵败刘备，称帝建立吴国。",
+   "source": "https://en.wikipedia.org/wiki/Sun_Quan",
+   "source_zh": "https://zh.wikipedia.org/wiki/%E5%AD%99%E6%9D%83"
   },
   {
    "id": "zhou-yu",
@@ -1460,7 +1569,9 @@
    "lat": 29.88,
    "lon": 113.76,
    "known_for": "Handsome Zhou, commander at the Red Cliffs; the novel makes him jealous of Zhuge Liang, who angers him to death three times over, though history calls him generous.",
-   "known_for_zh": "美周郎，赤壁之战主帅；演义写他气量狭小，被诸葛亮'三气'而死，史书却称他'性度恢廓'。"
+   "known_for_zh": "美周郎，赤壁之战主帅；演义写他气量狭小，被诸葛亮'三气'而死，史书却称他'性度恢廓'。",
+   "source": "https://en.wikipedia.org/wiki/Zhou_Yu",
+   "source_zh": "https://zh.wikipedia.org/wiki/%E5%91%A8%E7%91%9C"
   },
   {
    "id": "lu-su",
@@ -1478,7 +1589,9 @@
    "lat": 29.68,
    "lon": 113.8,
    "known_for": "Wu's champion of the alliance with Liu Bei; the novel makes him an honest dupe, though at the 'single sword meeting' it was he who faced down Guan Yu.",
-   "known_for_zh": "力主孙刘联盟；演义把他写成被诸葛亮牵着走的老实人，其实'单刀会'上是他当面诘责关羽。"
+   "known_for_zh": "力主孙刘联盟；演义把他写成被诸葛亮牵着走的老实人，其实'单刀会'上是他当面诘责关羽。",
+   "source": "https://en.wikipedia.org/wiki/Lu_Su",
+   "source_zh": "https://zh.wikipedia.org/wiki/%E9%B2%81%E8%82%83"
   },
   {
    "id": "lu-meng",
@@ -1496,7 +1609,9 @@
    "lat": 29.75,
    "lon": 115.9,
    "known_for": "The soldier who took up books ('no longer the Lü Meng of Wu'); hid his men in merchant boats, dressed in white, to take Jingzhou from Guan Yu.",
-   "known_for_zh": "'士别三日，刮目相待'，白衣渡江袭取荆州，擒杀关羽。"
+   "known_for_zh": "'士别三日，刮目相待'，白衣渡江袭取荆州，擒杀关羽。",
+   "source": "https://en.wikipedia.org/wiki/L%C3%BC_Meng",
+   "source_zh": "https://zh.wikipedia.org/wiki/%E5%90%95%E8%92%99"
   },
   {
    "id": "lu-xun",
@@ -1514,7 +1629,9 @@
    "lat": 30.55,
    "lon": 111.42,
    "known_for": "A young scholar made commander, who burned Liu Bei's line of camps at Yiling.",
-   "known_for_zh": "书生拜将，夷陵之战火烧连营，大败刘备。"
+   "known_for_zh": "书生拜将，夷陵之战火烧连营，大败刘备。",
+   "source": "https://en.wikipedia.org/wiki/Lu_Xun_%28Eastern_Wu%29",
+   "source_zh": "https://zh.wikipedia.org/wiki/%E9%99%B8%E9%81%9C"
   },
   {
    "id": "huang-gai",
@@ -1530,7 +1647,9 @@
    "lat": 29.88,
    "lon": 113.48,
    "known_for": "Took a flogging to make his false surrender believable, then sailed the fire ships into Cao Cao's fleet at the Red Cliffs.",
-   "known_for_zh": "苦肉计受杖诈降，赤壁之战驾火船冲入曹军水寨。"
+   "known_for_zh": "苦肉计受杖诈降，赤壁之战驾火船冲入曹军水寨。",
+   "source": "https://en.wikipedia.org/wiki/Huang_Gai",
+   "source_zh": "https://zh.wikipedia.org/wiki/%E9%BB%83%E8%93%8B"
   },
   {
    "id": "gan-ning",
@@ -1546,7 +1665,9 @@
    "lat": 31.43,
    "lon": 117.86,
    "known_for": "A river pirate turned general, who raided Cao Cao's camp at Ruxu with a hundred horsemen.",
-   "known_for_zh": "锦帆贼出身，濡须口百骑劫魏营。"
+   "known_for_zh": "锦帆贼出身，濡须口百骑劫魏营。",
+   "source": "https://en.wikipedia.org/wiki/Gan_Ning",
+   "source_zh": "https://zh.wikipedia.org/wiki/%E7%94%98%E5%AE%81"
   },
   {
    "id": "taishi-ci",
@@ -1564,7 +1685,9 @@
    "lat": 32.0,
    "lon": 119.57,
    "known_for": "Fought Sun Ce to a standstill at Shenting, then became his general.",
-   "known_for_zh": "神亭岭与孙策酣斗，后归顺孙策。"
+   "known_for_zh": "神亭岭与孙策酣斗，后归顺孙策。",
+   "source": "https://en.wikipedia.org/wiki/Taishi_Ci",
+   "source_zh": "https://zh.wikipedia.org/wiki/%E5%A4%AA%E5%8F%B2%E6%85%88"
   },
   {
    "id": "zhang-zhao",
@@ -1582,7 +1705,8 @@
    "lat": 32.145,
    "lon": 118.73,
    "known_for": "Sun Ce's chief minister and Sun Quan's guardian, who argued for surrender to Cao Cao before the Red Cliffs.",
-   "known_for_zh": "孙策托孤重臣，赤壁之战前力主降曹。"
+   "known_for_zh": "孙策托孤重臣，赤壁之战前力主降曹。",
+   "source": "https://en.wikipedia.org/wiki/Zhang_Zhao_%28Eastern_Wu%29"
   },
   {
    "id": "qiao-sisters",
@@ -1598,7 +1722,9 @@
    "lat": 30.52,
    "lon": 116.05,
    "known_for": "The two beauties of Jiangdong: the elder married Sun Ce, the younger Zhou Yu. The novel has Zhuge Liang goad Zhou Yu by claiming Cao Cao wanted them for his Bronze Bird Terrace.",
-   "known_for_zh": "江东二乔：大乔嫁孙策，小乔嫁周瑜；演义写诸葛亮称曹操欲得二乔置于铜雀台，激怒周瑜。"
+   "known_for_zh": "江东二乔：大乔嫁孙策，小乔嫁周瑜；演义写诸葛亮称曹操欲得二乔置于铜雀台，激怒周瑜。",
+   "source": "https://en.wikipedia.org/wiki/Two_Qiaos",
+   "source_zh": "https://zh.wikipedia.org/wiki/%E4%BA%8C%E6%A1%A5"
   },
   {
    "id": "lu-kang",
@@ -1616,7 +1742,9 @@
    "lat": 30.75,
    "lon": 111.2,
    "known_for": "Lu Xun's son, who held the Jingzhou frontier against Yang Hu; the two enemies sent each other wine and medicine.",
-   "known_for_zh": "陆逊之子，与晋将羊祜对峙荆州边境，互赠酒药，传为'羊陆之交'。"
+   "known_for_zh": "陆逊之子，与晋将羊祜对峙荆州边境，互赠酒药，传为'羊陆之交'。",
+   "source": "https://en.wikipedia.org/wiki/Lu_Kang_%28Eastern_Wu%29",
+   "source_zh": "https://zh.wikipedia.org/wiki/%E9%99%B8%E6%8A%97"
   },
   {
    "id": "sun-hao",
@@ -1634,7 +1762,9 @@
    "lat": 31.955,
    "lon": 118.73,
    "known_for": "Wu's cruel last emperor, who surrendered with his hands bound when the Jin fleets reached Jianye in 280.",
-   "known_for_zh": "东吴末帝，暴虐无道；280年晋军顺江而下兵临建业，他面缚出降。"
+   "known_for_zh": "东吴末帝，暴虐无道；280年晋军顺江而下兵临建业，他面缚出降。",
+   "source": "https://en.wikipedia.org/wiki/Sun_Hao",
+   "source_zh": "https://zh.wikipedia.org/wiki/%E5%AD%99%E7%9A%93"
   },
   {
    "id": "yu-ji",
@@ -1651,7 +1781,8 @@
    "lat": 31.3,
    "lon": 120.46,
    "known_for": "A Daoist healer whom Sun Ce put to death; the novel has his ghost haunt Sun Ce to the grave.",
-   "known_for_zh": "道士，被孙策以惑众之名处死；演义写他的鬼魂纠缠孙策至死（出自《搜神记》等）。"
+   "known_for_zh": "道士，被孙策以惑众之名处死；演义写他的鬼魂纠缠孙策至死（出自《搜神记》等）。",
+   "source_zh": "https://zh.wikipedia.org/wiki/%E4%BA%8E%E5%90%89"
   },
   {
    "id": "dong-zhuo",
@@ -1668,7 +1799,9 @@
    "lat": 34.28,
    "lon": 107.75,
    "known_for": "The northwestern general who seized the capital, put one emperor in place of another, burned Luoyang and dragged the court to Chang'an, until Lü Bu killed him.",
-   "known_for_zh": "西凉军阀，入京废少帝立献帝，焚洛阳、迁长安，暴虐无道，被吕布所杀。"
+   "known_for_zh": "西凉军阀，入京废少帝立献帝，焚洛阳、迁长安，暴虐无道，被吕布所杀。",
+   "source": "https://en.wikipedia.org/wiki/Dong_Zhuo",
+   "source_zh": "https://zh.wikipedia.org/wiki/%E8%91%A3%E5%8D%93"
   },
   {
    "id": "lu-bu",
@@ -1685,7 +1818,9 @@
    "lat": 34.33,
    "lon": 118.1,
    "known_for": "'Among men Lü Bu, among horses Red Hare': the finest fighter of the age, who killed two masters, shot the halberd at the camp gate, and was strangled at White Gate Tower.",
-   "known_for_zh": "'人中吕布，马中赤兔'，先后杀丁原、董卓，辕门射戟，终在下邳白门楼被缢杀。"
+   "known_for_zh": "'人中吕布，马中赤兔'，先后杀丁原、董卓，辕门射戟，终在下邳白门楼被缢杀。",
+   "source": "https://en.wikipedia.org/wiki/L%C3%BC_Bu",
+   "source_zh": "https://zh.wikipedia.org/wiki/%E5%90%95%E5%B8%83"
   },
   {
    "id": "diao-chan",
@@ -1701,7 +1836,9 @@
    "lat": 34.27,
    "lon": 109.08,
    "known_for": "Invented (the histories mention only a maid of Dong Zhuo's who had an affair with Lü Bu): in Wang Yun's chain plot she sets Dong Zhuo and Lü Bu against each other.",
-   "known_for_zh": "虚构人物（史书只说吕布与董卓侍婢私通）：王允连环计中周旋于董卓、吕布之间，使二人反目。"
+   "known_for_zh": "虚构人物（史书只说吕布与董卓侍婢私通）：王允连环计中周旋于董卓、吕布之间，使二人反目。",
+   "source": "https://en.wikipedia.org/wiki/Diaochan",
+   "source_zh": "https://zh.wikipedia.org/wiki/%E8%B2%82%E8%9D%89"
   },
   {
    "id": "wang-yun",
@@ -1719,7 +1856,9 @@
    "lat": 34.27,
    "lon": 108.8,
    "known_for": "The minister who plotted Dong Zhuo's death; killed when Dong Zhuo's generals took Chang'an.",
-   "known_for_zh": "司徒，设计诛杀董卓；李傕、郭汜攻破长安后遇害。"
+   "known_for_zh": "司徒，设计诛杀董卓；李傕、郭汜攻破长安后遇害。",
+   "source": "https://en.wikipedia.org/wiki/Wang_Yun_%28Han_dynasty%29",
+   "source_zh": "https://zh.wikipedia.org/wiki/%E7%8E%8B%E5%85%81"
   },
   {
    "id": "yuan-shao",
@@ -1736,7 +1875,9 @@
    "lat": 36.19,
    "lon": 114.35,
    "known_for": "Of a family with four generations of high ministers; leader of the coalition against Dong Zhuo and master of the north, until Cao Cao beat him at Guandu.",
-   "known_for_zh": "四世三公，讨董盟主，雄踞河北，官渡之战败于曹操，忧愤而死。"
+   "known_for_zh": "四世三公，讨董盟主，雄踞河北，官渡之战败于曹操，忧愤而死。",
+   "source": "https://en.wikipedia.org/wiki/Yuan_Shao",
+   "source_zh": "https://zh.wikipedia.org/wiki/%E8%A2%81%E7%BB%8D"
   },
   {
    "id": "yuan-shu",
@@ -1753,7 +1894,9 @@
    "lat": 32.57,
    "lon": 116.78,
    "known_for": "Proclaimed himself emperor at Shouchun, was abandoned by all, and died vomiting blood, begging for honeyed water.",
-   "known_for_zh": "在寿春称帝，众叛亲离，临终求蜜水而不得，吐血而死。"
+   "known_for_zh": "在寿春称帝，众叛亲离，临终求蜜水而不得，吐血而死。",
+   "source": "https://en.wikipedia.org/wiki/Yuan_Shu",
+   "source_zh": "https://zh.wikipedia.org/wiki/%E8%A2%81%E6%9C%AF"
   },
   {
    "id": "liu-biao",
@@ -1771,7 +1914,9 @@
    "lat": 32.01,
    "lon": 112.27,
    "known_for": "Governor of Jingzhou, who kept his province out of the wars; after his death his son surrendered to Cao Cao.",
-   "known_for_zh": "荆州牧，坐保江汉；死后其子刘琮举州降曹。"
+   "known_for_zh": "荆州牧，坐保江汉；死后其子刘琮举州降曹。",
+   "source": "https://en.wikipedia.org/wiki/Liu_Biao",
+   "source_zh": "https://zh.wikipedia.org/wiki/%E5%88%98%E8%A1%A8"
   },
   {
    "id": "liu-zhang",
@@ -1788,7 +1933,9 @@
    "lat": 30.605,
    "lon": 103.957,
    "known_for": "The weak governor of Yi province, who invited Liu Bei in against Zhang Lu and lost his province to him.",
-   "known_for_zh": "暗弱的益州牧，请刘备入川抵御张鲁，反被刘备夺去益州。"
+   "known_for_zh": "暗弱的益州牧，请刘备入川抵御张鲁，反被刘备夺去益州。",
+   "source": "https://en.wikipedia.org/wiki/Liu_Zhang_%28warlord%29",
+   "source_zh": "https://zh.wikipedia.org/wiki/%E5%8A%89%E7%92%8B"
   },
   {
    "id": "zhang-lu",
@@ -1796,7 +1943,7 @@
    "name_zh": "张鲁",
    "died": 216,
    "show": [
-    212,
+    211,
     216
    ],
    "field": "religious",
@@ -1805,7 +1952,9 @@
    "lat": 33.07,
    "lon": 106.89,
    "known_for": "Master of the Five Pecks of Rice, who ruled Hanzhong as a church-state for nearly thirty years before submitting to Cao Cao.",
-   "known_for_zh": "五斗米道师君，以政教合一统治汉中近三十年，后降曹操。"
+   "known_for_zh": "五斗米道师君，以政教合一统治汉中近三十年，后降曹操。",
+   "source": "https://en.wikipedia.org/wiki/Zhang_Lu_%28Han_dynasty%29",
+   "source_zh": "https://zh.wikipedia.org/wiki/%E5%BC%A0%E9%B2%81"
   },
   {
    "id": "zhang-jiao",
@@ -1822,7 +1971,9 @@
    "lat": 37.22,
    "lon": 115.03,
    "known_for": "Leader of the Way of Great Peace, who raised the Yellow Turbans with 'the blue heaven is dead, the yellow heaven shall rise', and died of illness that same year.",
-   "known_for_zh": "太平道首领，以'苍天已死，黄天当立'发动黄巾起义，当年病死。"
+   "known_for_zh": "太平道首领，以'苍天已死，黄天当立'发动黄巾起义，当年病死。",
+   "source": "https://en.wikipedia.org/wiki/Zhang_Jue",
+   "source_zh": "https://zh.wikipedia.org/wiki/%E5%BC%B5%E8%A7%92"
   },
   {
    "id": "gongsun-zan",
@@ -1839,7 +1990,9 @@
    "lat": 39.05,
    "lon": 115.5,
    "known_for": "The White Horse General of the north, beaten by Yuan Shao, who burned himself in his tower at Yijing.",
-   "known_for_zh": "白马将军，界桥败于袁绍，困守易京，最后自焚而死。"
+   "known_for_zh": "白马将军，界桥败于袁绍，困守易京，最后自焚而死。",
+   "source": "https://en.wikipedia.org/wiki/Gongsun_Zan",
+   "source_zh": "https://zh.wikipedia.org/wiki/%E5%85%AC%E5%AD%99%E7%93%92"
   },
   {
    "id": "ma-teng",
@@ -1856,7 +2009,9 @@
    "lat": 37.93,
    "lon": 102.63,
    "known_for": "The northwestern warlord, Ma Chao's father; the novel has him killed for joining the plot of the belt edict (historically, for Ma Chao's rising).",
-   "known_for_zh": "西凉军阀，马超之父；演义写他参与衣带诏谋曹被诱杀（史实是马超起兵后他在邺城被杀）。"
+   "known_for_zh": "西凉军阀，马超之父；演义写他参与衣带诏谋曹被诱杀（史实是马超起兵后他在邺城被杀）。",
+   "source": "https://en.wikipedia.org/wiki/Ma_Teng",
+   "source_zh": "https://zh.wikipedia.org/wiki/%E9%A6%AC%E9%A8%B0"
   },
   {
    "id": "tao-qian",
@@ -1874,7 +2029,9 @@
    "lat": 34.6,
    "lon": 118.35,
    "known_for": "Governor of Xu province, who on his deathbed left it to Liu Bei; the novel has him offer it three times.",
-   "known_for_zh": "徐州牧，临终将徐州让给刘备（演义写成'三让徐州'）。"
+   "known_for_zh": "徐州牧，临终将徐州让给刘备（演义写成'三让徐州'）。",
+   "source": "https://en.wikipedia.org/wiki/Tao_Qian_%28Han_dynasty%29",
+   "source_zh": "https://zh.wikipedia.org/wiki/%E9%99%B6%E8%AC%99"
   },
   {
    "id": "he-jin",
@@ -1891,7 +2048,9 @@
    "lat": 34.61,
    "lon": 112.62,
    "known_for": "Grand General and the empress's brother, who called Dong Zhuo to the capital to destroy the eunuchs and was murdered by them first.",
-   "known_for_zh": "大将军，何皇后之兄，召董卓进京诛宦官，反被十常侍抢先杀害。"
+   "known_for_zh": "大将军，何皇后之兄，召董卓进京诛宦官，反被十常侍抢先杀害。",
+   "source": "https://en.wikipedia.org/wiki/He_Jin",
+   "source_zh": "https://zh.wikipedia.org/wiki/%E4%BD%95%E8%BF%9B"
   },
   {
    "id": "sima-hui",
@@ -1908,7 +2067,9 @@
    "lat": 32.105,
    "lon": 112.06,
    "known_for": "Mr Water Mirror, the recluse who told Liu Bei that with either the Sleeping Dragon or the Fledgling Phoenix he could win the realm.",
-   "known_for_zh": "水镜先生，告诉刘备'伏龙、凤雏，两人得一，可安天下'。"
+   "known_for_zh": "水镜先生，告诉刘备'伏龙、凤雏，两人得一，可安天下'。",
+   "source": "https://en.wikipedia.org/wiki/Sima_Hui",
+   "source_zh": "https://zh.wikipedia.org/wiki/%E5%8F%B8%E9%A9%AC%E5%BE%BD"
   },
   {
    "id": "hua-xiong",
@@ -1925,7 +2086,9 @@
    "lat": 34.86,
    "lon": 113.2,
    "known_for": "Dong Zhuo's champion, whom Guan Yu kills before his cup of wine grows cold (historically, Sun Jian's army killed him).",
-   "known_for_zh": "董卓骁将；演义写关羽温酒斩华雄，史实是死于孙坚之手。"
+   "known_for_zh": "董卓骁将；演义写关羽温酒斩华雄，史实是死于孙坚之手。",
+   "source": "https://en.wikipedia.org/wiki/Hua_Xiong",
+   "source_zh": "https://zh.wikipedia.org/wiki/%E5%8D%8E%E9%9B%84"
   },
   {
    "id": "yan-liang",
@@ -1942,7 +2105,9 @@
    "lat": 35.55,
    "lon": 114.65,
    "known_for": "Yuan Shao's champion, cut down by Guan Yu in the midst of his army at Baima.",
-   "known_for_zh": "袁绍大将，白马之战被关羽于万军之中刺杀。"
+   "known_for_zh": "袁绍大将，白马之战被关羽于万军之中刺杀。",
+   "source": "https://en.wikipedia.org/wiki/Yan_Liang",
+   "source_zh": "https://zh.wikipedia.org/wiki/%E9%A2%9C%E8%89%AF"
   },
   {
    "id": "wen-chou",
@@ -1959,7 +2124,9 @@
    "lat": 35.15,
    "lon": 114.2,
    "known_for": "Yuan Shao's other champion, killed at Yanjin (by Guan Yu, says the novel).",
-   "known_for_zh": "袁绍大将，延津之战被杀（演义说是关羽所斩）。"
+   "known_for_zh": "袁绍大将，延津之战被杀（演义说是关羽所斩）。",
+   "source": "https://en.wikipedia.org/wiki/Wen_Chou",
+   "source_zh": "https://zh.wikipedia.org/wiki/%E6%96%87%E9%86%9C"
   },
   {
    "id": "chen-gong",
@@ -1976,7 +2143,9 @@
    "lat": 34.33,
    "lon": 117.82,
    "known_for": "Freed Cao Cao when he was a fugitive, left him in disgust, served Lü Bu, and refused to be spared at White Gate Tower.",
-   "known_for_zh": "捉放曹后弃曹而去，辅佐吕布，白门楼宁死不降。"
+   "known_for_zh": "捉放曹后弃曹而去，辅佐吕布，白门楼宁死不降。",
+   "source": "https://en.wikipedia.org/wiki/Chen_Gong",
+   "source_zh": "https://zh.wikipedia.org/wiki/%E9%99%88%E5%AE%AB"
   },
   {
    "id": "xu-you",
@@ -1993,7 +2162,9 @@
    "lat": 35.07,
    "lon": 114.42,
    "known_for": "Yuan Shao's adviser who deserted to Cao Cao at Guandu and told him where Yuan's grain lay at Wuchao.",
-   "known_for_zh": "袁绍谋士，官渡之战投曹，献计火烧乌巢粮仓。"
+   "known_for_zh": "袁绍谋士，官渡之战投曹，献计火烧乌巢粮仓。",
+   "source": "https://en.wikipedia.org/wiki/Xu_You_%28Han_dynasty%29",
+   "source_zh": "https://zh.wikipedia.org/wiki/%E8%A8%B1%E6%94%B8"
   },
   {
    "id": "gongsun-yuan",
@@ -2010,7 +2181,9 @@
    "lat": 41.27,
    "lon": 123.17,
    "known_for": "Lord of Liaodong who named himself King of Yan; destroyed by Sima Yi in 238.",
-   "known_for_zh": "辽东割据者，自立为燕王，238年被司马懿讨灭。"
+   "known_for_zh": "辽东割据者，自立为燕王，238年被司马懿讨灭。",
+   "source": "https://en.wikipedia.org/wiki/Gongsun_Yuan",
+   "source_zh": "https://zh.wikipedia.org/wiki/%E5%85%AC%E5%AD%AB%E6%B7%B5"
   },
   {
    "id": "yang-hu",
@@ -2028,7 +2201,9 @@
    "lat": 31.915,
    "lon": 112.06,
    "known_for": "Jin's commander in Jingzhou, who won the frontier with kindness and on his deathbed planned the conquest of Wu.",
-   "known_for_zh": "晋朝镇守荆州的统帅，以德怀柔边民，临终举荐杜预，定下灭吴之策。"
+   "known_for_zh": "晋朝镇守荆州的统帅，以德怀柔边民，临终举荐杜预，定下灭吴之策。",
+   "source": "https://en.wikipedia.org/wiki/Yang_Hu",
+   "source_zh": "https://zh.wikipedia.org/wiki/%E7%BE%8A%E7%A5%9C"
   },
   {
    "id": "du-yu",
@@ -2046,7 +2221,9 @@
    "lat": 30.35,
    "lon": 112.06,
    "known_for": "A commander in the conquest of Wu, who said the war would go 'like splitting bamboo'.",
-   "known_for_zh": "灭吴主将之一，'势如破竹'的出处。"
+   "known_for_zh": "灭吴主将之一，'势如破竹'的出处。",
+   "source": "https://en.wikipedia.org/wiki/Du_Yu",
+   "source_zh": "https://zh.wikipedia.org/wiki/%E6%9D%9C%E9%A2%84"
   },
   {
    "id": "wang-jun",
@@ -2064,7 +2241,9 @@
    "lat": 30.565,
    "lon": 104.113,
    "known_for": "Built the great fleet in Shu that sailed down the Yangtze, burned Wu's iron chains and took Sun Hao's surrender at Jianye.",
-   "known_for_zh": "在蜀地督造楼船，顺江而下烧断吴人铁锁，在建业受孙皓投降。"
+   "known_for_zh": "在蜀地督造楼船，顺江而下烧断吴人铁锁，在建业受孙皓投降。",
+   "source": "https://en.wikipedia.org/wiki/Wang_Jun_%28Jin_dynasty%29",
+   "source_zh": "https://zh.wikipedia.org/wiki/%E7%8E%8B%E6%BF%AC"
   },
   {
    "id": "chen-shou",
@@ -2082,7 +2261,9 @@
    "lat": 30.8,
    "lon": 106.08,
    "known_for": "A Shu official who, under Jin, wrote the Records of the Three Kingdoms, the history the novel draws on most.",
-   "known_for_zh": "蜀汉旧臣，入晋后撰《三国志》，是《三国演义》最主要的史料来源。"
+   "known_for_zh": "蜀汉旧臣，入晋后撰《三国志》，是《三国演义》最主要的史料来源。",
+   "source": "https://en.wikipedia.org/wiki/Chen_Shou",
+   "source_zh": "https://zh.wikipedia.org/wiki/%E9%99%88%E5%AF%BF"
   }
  ]
 }

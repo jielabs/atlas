@@ -15,9 +15,10 @@ them, when they come on stage, until their death, or for the years the novel nam
 longer; a person no event names shows for their life or the years the novel gives them.
 
 Each event gets "people": everyone its Chinese title or summary names, by name or by a by-name the novel uses (孔明,
-云长, 阿斗...), in order of first mention.
+云长, 阿斗...), in order of first mention. People link to the Wikipedia pages tools/sanguo/fetch_images.py found
+(tools/sanguo/wiki_pages.json), shown on their cards.
 """
-import ast, json, math, re
+import ast, json, math, os, re
 
 PACK = "packs/sanguo"
 # The novel's places, shared with the army movements (tools/sanguo/build_layers.py), plus a few of the people's own.
@@ -450,6 +451,7 @@ def build():
         polities[key] = {"name_zh": zh, **({"focus": True} if focus else {})}
         rulers[key] = [{"name": n, "name_zh": nz, **({"title": t, "title_zh": tz} if t else {}), "from": a, "to": b,
                         **({"circa": True} if c else {})} for n, nz, t, tz, a, b, c in reigns]
+    wiki = json.load(open("tools/sanguo/wiki_pages.json", encoding="utf-8")) if os.path.exists("tools/sanguo/wiki_pages.json") else {}
     people = []
     for pid, name, zh, born, died, field, place, aka, en, kz, show in PEOPLE:
         lon, lat = P[place]
@@ -464,6 +466,9 @@ def build():
         if show: p["show"] = show
         p.update(field=field, place=PLACE_EN[place], place_zh=PLACE_ZH.get(place, place), lat=lat, lon=lon,
                  known_for=en, known_for_zh=kz)
+        for k, w in (("source", "en"), ("source_zh", "zh")):
+            if wiki.get(f"p:{pid}", {}).get(w):
+                p[k] = wiki[f"p:{pid}"][w]
         people.append(p)
     fan(people)
     with open(f"{PACK}/people.json", "w", encoding="utf-8") as f:
