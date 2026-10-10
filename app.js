@@ -10,8 +10,11 @@
 const BASE = document.baseURI.replace(/[^/]*([?#].*)?$/, "");
 // Large generated assets (terrain and imagery packs, AI pictures) live in a Cloudflare R2 bucket, not in git
 // (tools/upload_assets.py). Their names carry a content hash; data/tiles.json and data/ai-illustrations.json name them.
-// For local work a mirror can stand in: localStorage["atlas-data-url"] = "http://localhost:8766".
-const DATA_URL = (() => { try { return localStorage.getItem("atlas-data-url"); } catch { return null; } })() || "https://data.atlas.daiyip.com";
+// For local work a mirror can stand in: localStorage["atlas-data-url"] = "http://localhost:8766". A site that hosts its
+// own copies names them on the page (<html data-data-url="…">, relative to the page).
+const DATA_URL = (() => { try { return localStorage.getItem("atlas-data-url"); } catch { return null; } })()
+  || (document.documentElement.dataset.dataUrl && new URL(document.documentElement.dataset.dataUrl, location.href).href.replace(/\/$/, ""))
+  || "https://data.atlas.daiyip.com";
 // Atlas's own files on R2 sit under atlas/; plugin apps keep theirs under apps/<id>/ (docs/data-updates.md#layout-on-r2).
 const R2 = DATA_URL + "/atlas";
 const BASE_PATH = new URL(BASE).pathname;
@@ -4319,7 +4322,8 @@ function renderWorldStrip() {
   const box = $("world-strip");
   let off = false;
   try { off = localStorage.getItem("atlas-wstrip") === "0"; } catch {}
-  if (off || !state.regions?.length || state.tour || cmp.on) { box.hidden = true; stripKey = ""; return; }
+  // A pack shown alone has no other regions to look across to.
+  if (off || !state.regions?.length || state.pack?.only || state.tour || cmp.on) { box.hidden = true; stripKey = ""; return; }
   const y = state.year, here = state.mode;
   const key = `${y}|${here}|${state.lang}|${wsScope}|${state.snapshot}|${state.sel?.id || ""}`;
   if (key === stripKey) return;
@@ -7225,6 +7229,10 @@ async function init() {
     for (const el of document.querySelectorAll(".era-layers .chip.layer")) el.hidden = !own[el.id.slice(2)];
     $("tab-rulers").hidden = !own.rulers;
     $("tab-people").hidden = !own.people;
+    // The atlas's narration and music name only its own periods and tours; a pack without its own (media) has none.
+    if (!pack.media?.narration) for (const el of [...document.querySelectorAll(".narr-toggle")]) el.hidden = true;
+    if (!pack.media?.narration) $("st-narr").parentElement.hidden = true;
+    if (!pack.media?.music) for (const el of [...document.querySelectorAll(".music-toggle")]) el.hidden = true;
     if (!places.length) $("t-places").hidden = true;
     if (offEarth) { $("t-neighbours").hidden = true; if (!state.geo.length) $("t-geo").hidden = true; }
     if (state.basemap && !state.basemap.dem) $("t-3d").hidden = true;

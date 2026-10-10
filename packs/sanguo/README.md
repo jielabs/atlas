@@ -80,8 +80,11 @@ rather than survey it.
 
 ## Publishing
 
-The pack is published as a stand-alone site in two environments, built by `tools/sanguo/build_site.py` (150 MB with
-all tiles for the region). The page names the pack in `<html data-pack>`, so addresses stay clean, and every build
+The pack is published as a stand-alone site in two environments, built by `tools/sanguo/build_site.py` (155 MB with
+all tiles for the region). The atlas keeps its elevation and imagery tiles on R2 rather than in git; the build keeps a
+copy in `tiles/` (downloading from R2 what is missing, so the first build needs the network) and ships the region's
+tiles with the site under `atlas/tiles/`, where `<html data-data-url=".">` tells the page to look, so the site leans on
+no one else's bucket. The page names the pack in `<html data-pack>`, so addresses stay clean, and every build
 writes `version.json` (commit, branch, uncommitted changes, build time), so each environment says what it runs.
 
 | | Development | Production |
@@ -96,7 +99,7 @@ uncommitted changes, with a commit that is not on GitHub, or when dev runs a dif
 last check for an urgent fix.
 
 Development, from a workstation (`deploy_dev.sh` copies to `jie@dev:/var/www/atlas`), or on the server itself, which
-needs only Python 3 and rsync:
+needs only Python 3, rsync and access to the atlas's R2 for the first build:
 
 ```sh
 git clone --depth 1 -b sanguo git@github.com:jielabs/atlas.git && cd atlas

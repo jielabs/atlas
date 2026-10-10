@@ -51,9 +51,10 @@ server {
     location ~* \.(html|js|css|json)$ {
         add_header Cache-Control "no-cache";
     }
-    # Elevation and imagery archives: large, and rebuilt rarely. Cloudflare caches them at the edge too.
-    location /tiles/ {
-        add_header Cache-Control "public, max-age=2592000";
+    # Elevation and imagery archives: large, and named by their content (a new one gets a new name), so they never
+    # change. Cloudflare caches them at the edge too.
+    location /atlas/tiles/ {
+        add_header Cache-Control "public, max-age=2592000, immutable";
     }
     location / {
         try_files $uri $uri/ =404;

@@ -6,9 +6,12 @@ The engine needs only a small part of the atlas to run one pack shown alone: the
 pack's East Asia window for its years, the river and landscape names, and the elevation and imagery tiles. This
 copies exactly that, plus the pack, into one folder that any static web server can serve.
 
-Tiles: `full` keeps every bundled zoom that touches the pack's area (the page works with no outside tile source);
-`lean` keeps zooms 0-5 only, and past them the browser fetches AWS Terrain Tiles and EOX Sentinel-2 itself, as
-app.js already does when it can reach them (LIVE).
+Tiles: the atlas keeps its elevation and imagery archives on R2, named in data/tiles.json by content hash. The build
+keeps a copy of each in tiles/<pack|sat>/ (the layout tools/fetch_assets.py uses; it downloads what is missing or out
+of date) and ships those the region needs under atlas/tiles/, where the page looks for them (<html data-data-url=".">
+makes the site its own R2), so the site depends on no one else's bucket. `full` keeps every zoom that touches the
+pack's area (the page works with no outside tile source); `lean` keeps zooms 0-5 only, and past them the browser
+fetches AWS Terrain Tiles and EOX Sentinel-2 itself, as app.js already does when it can reach them (LIVE).
 
 The root address opens the pack: index.html names it in <html data-pack data-packonly>, so the address stays
 clean. The manifest's library is dropped, since the site has one book.
@@ -22,10 +25,12 @@ each environment says what it runs; tools/sanguo/deploy_prod.sh compares it befo
 build as the development site: " · dev" after the pack's name (tab title and panels) and a robots.txt that keeps
 search engines out.
 """
-import argparse, datetime, gzip, json, math, os, re, shutil, subprocess
+import argparse, datetime, gzip, json, math, os, shutil, subprocess, urllib.request, zlib
 
 ROOT = os.path.normpath(os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", ".."))
 PACK = "packs/sanguo"
+# The atlas's tile archives on R2 (data/tiles.json names them).
+R2_TILES = "https://data.atlas.daiyip.com/atlas/tiles/"
 # Tiles: everything the pack's region can show, with a margin for panning.
 BBOX = (88.0, 14.0, 132.0, 47.0)  # west, south, east, north
 LEAN_MAX_ZOOM = 5
@@ -67,7 +72,7 @@ html = open(src("index.html"), encoding="utf-8").read()
 title = f"{manifest['name_zh']} · {manifest['name']}" + (" (dev)" if args.env == "dev" else "")
 html = html.replace("<title>Atlas</title>", f"<title>{title}</title>")
 assert html.count('<html lang="zh-CN">') == 1
-html = html.replace('<html lang="zh-CN">', f'<html lang="zh-CN" data-pack="{PACK}/manifest.json" data-packonly="1">')
+html = html.replace('<html lang="zh-CN">', f'<html lang="zh-CN" data-pack="{PACK}/manifest.json" data-packonly="1" data-data-url=".">')
 write("index.html", html)
 
 # Data the engine always reads (app.js init and buildStyle).
@@ -77,6 +82,13 @@ for p in ["data/regions.json", "data/world/index.json", "data/geo/rivers.geojson
 # The atlas's illustration index, which the engine always reads: empty, since the pack brings its own pictures
 # (data.illustrations) and the atlas's would only add weight.
 write("data/illustrations.json", json.dumps({"keys": {}, "images": {}}))
+# The format of the atlas's data, which the page checks; and the atlas's own media and overlays for its periods and
+# tours (music, moods, narration, AI scenes, modern disputed areas), empty here: they name nothing in the pack.
+copy("data/manifest.json")
+for p, empty in [("data/music.json", {}), ("data/moods.json", {}), ("data/narration.json", {}),
+                 ("data/ai-illustrations.json", {"keys": {}, "images": {}}),
+                 ("data/disputes.json", {"type": "FeatureCollection", "features": []})]:
+    write(p, json.dumps(empty))
 
 # The pack, without the shelf and without its working notes.
 eras = json.load(open(src(f"{PACK}/eras.json"), encoding="utf-8"))
@@ -136,13 +148,28 @@ def keep(name):
     return (x0 >> sh) <= bx <= (x1 >> sh) and (y0 >> sh) <= by <= (y1 >> sh)
 
 
-kept = dropped = 0
-for d in ["tiles/pack", "tiles/sat"]:
-    for f in sorted(os.listdir(src(d))):
-        if re.fullmatch(r"\d+-\d+-\d+\.png", f) and keep(f):
-            copy(f"{d}/{f}"); kept += 1
-        else:
-            dropped += 1
+def local_tile(key, name):
+    """tiles/<key>.png, downloaded from R2 when it is missing or its content is not the one named."""
+    path = src(f"tiles/{key}.png")
+    want = name.rsplit("-", 1)[1][:8]
+    if not (os.path.exists(path) and format(zlib.crc32(open(path, "rb").read()), "08x") == want):
+        data = urllib.request.urlopen(urllib.request.Request(R2_TILES + name, headers={"User-Agent": "sanguo-build"}), timeout=120).read()
+        assert format(zlib.crc32(data), "08x") == want, f"{name}: downloaded content does not match its name"
+        os.makedirs(os.path.dirname(path), exist_ok=True)
+        open(path, "wb").write(data)
+    return f"tiles/{key}.png"
+
+
+names, shipped, dropped = json.load(open(src("data/tiles.json"))), {}, 0
+for key, name in sorted(names.items()):
+    if keep(key.split("/")[1] + ".png"):
+        copy(local_tile(key, name), f"atlas/tiles/{name}")
+        shipped[key] = name
+    else:
+        dropped += 1
+kept = len(shipped)
+# Only the shipped archives are named, so the page asks for no others (past them it goes live).
+write("data/tiles.json", json.dumps(shipped, separators=(",", ":")))
 
 
 def git(*a):
@@ -157,7 +184,7 @@ if args.env == "dev":
     write("robots.txt", "User-agent: *\nDisallow: /\n")
 
 if args.pages:
-    write("_headers", "/tiles/*\n  Cache-Control: public, max-age=2592000\n"
+    write("_headers", "/atlas/tiles/*\n  Cache-Control: public, max-age=2592000, immutable\n"
                       "/*.geojson\n  Content-Type: application/geo+json\n")
 
 # Report.
@@ -174,10 +201,10 @@ mb = lambda b: f"{b / 2**20:.1f} MB"
 total = size(OUT)
 print(f"{args.out} ({args.tiles} tiles): {mb(total)}, {sum(len(fs) for _, _, fs in os.walk(OUT))} files; "
       f"tile archives kept {kept}, dropped {dropped}")
-for part in ["tiles/pack", "tiles/sat", "data", PACK, "."]:
+for part in ["atlas/tiles", "data", PACK, "."]:
     p = dst(part)
     if part == ".":
-        rest = total - sum(size(dst(x)) for x in ["tiles", "data", "packs"])
+        rest = total - sum(size(dst(x)) for x in ["atlas", "data", "packs"])
         print(f"  {'page (html, js, css, icons)':<28} {mb(rest)}")
     else:
         print(f"  {part:<28} {mb(size(p))}")

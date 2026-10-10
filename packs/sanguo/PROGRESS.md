@@ -138,3 +138,12 @@ pack event without a story shows its summary alone.
 - [x] **S3. stories for the 153 key and major events** (six batches written in parallel, each checked)
 - [x] **S4. validate, browser check, docs**
 - chunk S1-S4, round 4: stories and pictures: 153 stories (all level 1 and 2 events), 88 with a line from the novel, each embellished or invented one ending with its 史实 paragraph; 86 portraits and 70 event pictures (free licences, credited), Wikipedia links for all 93 people and 88 events. Checking the stories against the sources corrected nine summaries (Wei Yan's shout, Zhao Yun's five generals, Yang Xiu, the bone-scraping, Xiaoyao Ford, Zhang Song's map, the three visits, the fireflies at Beimang, the novel's last lines) and moved the meeting at Fu to 211. (events total 272)
+
+## Merge: upstream with its history rewritten (2026-10)
+
+Upstream moved its tiles to R2 and rewrote its history, so it shares no commit with ours. Merged as a three-way merge
+on the old main (8c7fe7f, which upstream's 5e2fc8a matches except for the tiles), keeping both sides in the three
+conflicted files. The site build now copies the region's tiles from a local cache of R2 (`tiles/`, filled on demand)
+into `atlas/tiles/`, names its own data URL on the page, and ships empty indexes for the atlas's music, narration, AI
+pictures and modern disputed areas. A pack without its own narration or music hides those controls, and a pack shown
+alone hides the strip of events elsewhere.
