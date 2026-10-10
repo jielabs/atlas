@@ -6,6 +6,7 @@
 </p>
 
 <h1 align="center">Atlas</h1>
+<p align="center"><b>Map with Stories · 地图上的故事</b></p>
 
 **An interactive 3D history map, from 3000 BCE to today.** Pick a year and the map shows that moment's borders,
 cities and events. Take guided tours, read the stories behind events, and switch on layers for armies, roads, faith,
@@ -19,7 +20,7 @@ inventions and more. It works in English and Chinese.
   civilisation you are looking at: over Europe it shows Europe's periods, over India India's. About 3,500 events,
   204 guided tours, and rulers and people for 14 regions, plus trade routes and the spread of faiths, techniques and crops.
 - **China in depth.** Xia to Qing, with battles, roads, walls, elites and long event stories.
-- **3D terrain and satellite imagery** need no API keys. Overview tiles are bundled with the site; zoom in and sharper
+- **3D terrain and satellite imagery** need no API keys. Overview tiles come with the site (served from its own data host); zoom in and sharper
   terrain (about 30 m) and 10 m imagery load on demand.
 - **An engine for your own history.** Any site can show its own periods, events, tours, map layers and plugins on the
   atlas, and embed the result.
@@ -39,12 +40,17 @@ The atlas provides the map, terrain, borders, timeline, tours and search. Your p
 | **Periods, events and tours** | `eras.json`, `events.json`, `tours.json`. See [docs/custom-data.md](docs/custom-data.md). |
 | **Map layers** | GeoJSON roads, regions or sites that appear and disappear with the years. No code needed. See [docs/plugins.md](docs/plugins.md#layers). |
 | **Plugins** | JavaScript modules that get the map and the atlas's events, for animations and anything interactive. See [docs/plugins.md](docs/plugins.md#plugins). |
+| **Your own ground** | Another planet or an invented world instead of Earth: your own imagery, elevation and place names. `tools/make_tiles.py` turns one picture into tiles. See [docs/custom-ground.md](docs/custom-ground.md). |
 
 ![A pack with its own layers and a journey playback plugin](docs/img/pack-demo.jpg)
 
 [`examples/demo-pack/`](examples/demo-pack/) is a complete pack: Paul's journeys, Roman roads and churches as
 layers, and a plugin that animates each leg of a journey. To try it, open
 `/?pack=examples/demo-pack/manifest.json&packonly=1#tour=paul-first&s=1` on a local copy.
+
+A pack can even bring its own world: [`examples/mars-pack/`](examples/mars-pack/) replaces Earth with Mars (its own
+elevation, imagery and place names) and follows the landers from 1971 to today. Open
+`/?pack=examples/mars-pack/manifest.json&packonly=1`. See [docs/custom-ground.md](docs/custom-ground.md).
 
 ### Embed it in your app
 
@@ -68,6 +74,7 @@ The atlas is a plain web page, so it embeds with an `iframe`:
 | --- | --- |
 | `?pack=<manifest URL>` | Loads your pack. Add `&packonly=1` to hide the atlas's own data. |
 | `?lang=en` / `zh` | Interface language. |
+| `?style=<id>` | Map style: `satellite` (default), `terrain`, `antique`, `plain` (flat, no relief or 3D), `dark` (terrain, dark) or `night` (simple, dark). Overrides the visitor's own choice. |
 | `?embed=1` | Only the map and a small period label: no panels, timeline or tour card. For a host page that tells the story itself and moves the map through a plugin (see [Embedding](docs/plugins.md#embedding)). |
 | `#y=<year>&c=<lon>,<lat>,<zoom>,<pitch>,<bearing>` | Opens at a year and camera. Negative years are BCE. |
 | `#tour=<id>&s=<step>` | Starts a tour at a step (counting from 1). |
@@ -95,9 +102,10 @@ Opening `index.html` straight from disk won't work, because browsers block `fetc
 
 ## Docs
 
-- [docs/custom-data.md](docs/custom-data.md): the data pack format, hosting and links.
+- [docs/custom-data.md](docs/custom-data.md): the data pack format, versions, checking a pack (`tools/validate.py`), hosting and links.
 - [docs/plugins.md](docs/plugins.md): map layers and the plugin API.
 - [docs/internals.md](docs/internals.md): how the built-in data is organised and built, data sources and known limits.
+- [docs/data-updates.md](docs/data-updates.md): where pictures and map tiles live (git or R2) and how to update them.
 
 ## Credits
 
@@ -109,6 +117,11 @@ against sources. See [docs/internals.md](docs/internals.md#data-sources-and-know
 
 ## License
 
-The code is released under the [MIT License](LICENSE). Bundled third-party data keeps its own licence: the border
-maps derived from historical-basemaps are GPL-3.0 (with Cliopatria data, CC BY 4.0), the satellite imagery is CC BY 4.0, and illustrations from
-Wikimedia Commons carry the licence shown under each image.
+The atlas engine is source-available under the [Business Source License 1.1](LICENSE). It is free for personal use,
+for schools, universities, libraries, museums, congregations and other non-profits, on private networks, and for
+building data packs and plugins; running it as a competing public atlas site is not allowed. Each version becomes
+MIT three years after it is first published.
+
+The atlas's own events, stories and tours are CC BY-SA 4.0, the examples' code is MIT, and bundled third-party data
+keeps its own licence. Your own packs and plugins are yours to license as you like. See [LICENSES.md](LICENSES.md)
+for every path, and [CONTRIBUTING.md](CONTRIBUTING.md) before sending a change.

@@ -40,6 +40,7 @@ List them in the manifest:
 | `radius` | Dot radius in pixels. |
 | `on` | `false` starts the layer switched off. |
 | `years` | `[from, to)`: the whole layer only shows in these years. |
+| `atlas` | Optional. The [Atlas format](custom-data.md#versions) this layer needs; an older atlas skips it. |
 
 ### Features
 
@@ -67,6 +68,9 @@ A plugin is an ES module listed in the manifest. Paths are relative to the manif
 "plugins": ["plugins/journey.js"]
 ```
 
+An entry can also be `{ "src": "plugins/journey.js", "atlas": 2 }`: a plugin that needs a newer
+[Atlas format](custom-data.md#versions) than the rest of the pack. An older atlas skips it.
+
 It exports a setup function. The atlas calls it once, after the map has loaded:
 
 ```js
@@ -84,13 +88,13 @@ Plugins run inside the atlas page, so they load only from the sites a pack may c
 [Hosting and the allowlist](custom-data.md#hosting-and-the-allowlist). If a plugin fails to load or throws, the atlas
 logs it in the console and carries on without it.
 
-### The `atlas` object (API version 1)
+### The `atlas` object
 
 **State** (read-only)
 
 | | |
 | --- | --- |
-| `atlas.version` | Plugin API version, `1`. |
+| `atlas.version` | The [Atlas format](custom-data.md#versions) this page reads, `2`. The plugin API is part of it. |
 | `atlas.map` | The [MapLibre GL](https://maplibre.org/maplibre-gl-js/docs/API/) map, already loaded. |
 | `atlas.maplibregl` | The MapLibre library, for markers and popups. |
 | `atlas.pack` | The pack's manifest. |
@@ -108,6 +112,8 @@ logs it in the console and carries on without it.
 | `tour-end` | `{}`: the tour was closed or finished. |
 | `event` | `{id, event}`: an event was opened. |
 | `lang` | `{lang}`: the language changed. |
+| `panel` | `{color, opacity}`: the panel colour (`auto` or `#rrggbb`) or opacity (0.2–1, `null` = built-in) changed. |
+| `panelStyle` | `{style}`: the panel style changed (`classic`, `paper`, `glass`, `editorial` or `lacquer`). |
 
 **Adding to the map**
 
@@ -122,8 +128,20 @@ logs it in the console and carries on without it.
 | | |
 | --- | --- |
 | `atlas.setYear(year)` | Moves the timeline. |
+| `atlas.setStyle(id)` / `atlas.style` / `atlas.styles` | Switches the map style (`satellite`, `terrain`, `antique`, `plain`, `dark`, `night`); the current one; all of them. |
 | `atlas.startTour(id, step)` | Starts a tour (step counts from 0). |
 | `atlas.openEvent(id)` | Opens an event's story. |
+
+**Places** (format 2): the [place graph](places.md), ids as in the graph. `year` defaults to the current year.
+
+| | |
+| --- | --- |
+| `atlas.places.ready()` | Resolves once the graph has loaded; the others return nothing useful before. |
+| `atlas.places.get(id)` | The node, or `null`. |
+| `atlas.places.path(id, year)` | Where it lies: `[id, parent, …, group]`. |
+| `atlas.places.held(id, year)` | Who held it: `[{id, polity, share}]`, a map name's `id` resolved to its `polity` id. |
+| `atlas.places.claims(id, year)` | The polity ids claiming it. |
+| `atlas.places.open(id)` | Opens an area's 地区史 card and selects it. |
 
 **Helpers**
 
@@ -164,6 +182,16 @@ Try it at `/?pack=examples/demo-pack/manifest.json&packonly=1#tour=paul-first&s=
 With `?embed=1` the atlas shows only the map and a small period label. The panels, the timeline and the tour card are
 hidden, and tours frame their stops for the whole map. Use it when the host page shows the story itself, beside the
 map.
+
+Add `&mini=1` for a small inset map (beside a tour card, say): a tour step frames the leg from the last stop to
+this one rather than flying in to the stop, and the period label and map buttons go too.
+
+`&hide=` hides parts of an embedded atlas, as a comma-separated list: `era` (the period label), `controls` (zoom,
+compass and full screen), `credits` (the data credits button; show your sources elsewhere if you hide it) and `span`
+(the time beside a tour leg). For example `?embed=1&hide=era,controls`.
+
+The Simple styles (`style=plain`, `style=night`) draw land as a shape and load no elevation tiles, so they are the
+lightest choice for an embedded map.
 
 To move an embedded atlas without reloading it, let your pack's plugin listen to the host page with `postMessage`,
 and report back what the visitor does on the map:

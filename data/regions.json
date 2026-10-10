@@ -1,9 +1,77 @@
 {
+ "groups": [
+  {
+   "id": "east-asia",
+   "name": "East Asia",
+   "name_zh": "东亚",
+   "regions": [
+    "china",
+    "korea",
+    "japan"
+   ]
+  },
+  {
+   "id": "inner-asia",
+   "name": "Central Asia",
+   "name_zh": "中亚",
+   "regions": [
+    "central-asia-steppe"
+   ]
+  },
+  {
+   "id": "south-southeast-asia",
+   "short": "S & SE Asia",
+   "name": "South and Southeast Asia",
+   "name_zh": "南亚与东南亚",
+   "regions": [
+    "south-asia",
+    "southeast-asia"
+   ]
+  },
+  {
+   "id": "west-asia-north-africa",
+   "short": "W Asia & N Africa",
+   "name": "West Asia and North Africa",
+   "name_zh": "西亚与北非",
+   "regions": [
+    "iran",
+    "middle-east",
+    "egypt-north-africa"
+   ]
+  },
+  {
+   "id": "europe",
+   "name": "Europe",
+   "name_zh": "欧洲",
+   "regions": [
+    "europe"
+   ]
+  },
+  {
+   "id": "africa",
+   "name": "Africa",
+   "name_zh": "非洲",
+   "regions": [
+    "sub-saharan-africa"
+   ]
+  },
+  {
+   "id": "americas",
+   "short": "Americas",
+   "name": "The Americas",
+   "name_zh": "美洲",
+   "regions": [
+    "north-america",
+    "mesoamerica",
+    "south-america"
+   ]
+  }
+ ],
  "regions": [
   {
    "id": "china",
-   "name": "China",
-   "name_zh": "中国",
+   "name": "China and Mainland East Asia",
+   "name_zh": "中国与东亚大陆",
    "color": "#c0392b",
    "polygon": [
     [
@@ -144,12 +212,14 @@
     {
      "id": "xia",
      "start": -2070,
-     "end": -1601
+     "end": -1601,
+     "until": -1600
     },
     {
      "id": "shang",
      "start": -1600,
-     "end": -1047
+     "end": -1047,
+     "until": -1046
     },
     {
      "id": "western-zhou",
@@ -169,7 +239,8 @@
     {
      "id": "qin",
      "start": -221,
-     "end": -207
+     "end": -207,
+     "entity": "qin-bc770"
     },
     {
      "id": "western-han",
@@ -179,12 +250,14 @@
     {
      "id": "xin",
      "start": 9,
-     "end": 24
+     "end": 24,
+     "until": 23
     },
     {
      "id": "eastern-han",
      "start": 25,
-     "end": 219
+     "end": 219,
+     "until": 220
     },
     {
      "id": "three-kingdoms",
@@ -194,7 +267,8 @@
     {
      "id": "jin",
      "start": 266,
-     "end": 419
+     "end": 419,
+     "until": 420
     },
     {
      "id": "north-south",
@@ -204,12 +278,14 @@
     {
      "id": "sui",
      "start": 581,
-     "end": 617
+     "end": 617,
+     "until": 618
     },
     {
      "id": "tang",
      "start": 618,
-     "end": 906
+     "end": 906,
+     "until": 907
     },
     {
      "id": "five-dynasties",
@@ -229,12 +305,14 @@
     {
      "id": "yuan",
      "start": 1271,
-     "end": 1367
+     "end": 1367,
+     "until": 1368
     },
     {
      "id": "ming",
      "start": 1368,
-     "end": 1643
+     "end": 1643,
+     "until": 1644
     },
     {
      "id": "qing",
@@ -253,13 +331,16 @@
      "summary": "After the 1911 Revolution ended imperial rule, China was split among warlords, reunified in name by the Nationalists, invaded by Japan and torn by civil war.",
      "summary_zh": "辛亥革命结束了帝制。此后中国经历了军阀割据、国民政府统一、抗日战争和国共内战。",
      "focus": [
+      "Republic of China",
       "Chinese Warlords",
       "Chinese warlords",
       "Manchuria",
       "Mongolia",
       "Tibet",
       "Xinjiang"
-     ]
+     ],
+     "since": 1912,
+     "entity": "roc"
     },
     {
      "id": "cn-prc",
@@ -479,7 +560,8 @@
       "Korea",
       "Goryeo"
      ],
-     "layers": true
+     "layers": true,
+     "entity": "goryeo-960"
     },
     {
      "id": "kr-joseon",
@@ -495,7 +577,8 @@
      "focus": [
       "Korea"
      ],
-     "layers": true
+     "layers": true,
+     "entity": "joseon"
     },
     {
      "id": "kr-korean-empire",
@@ -552,8 +635,8 @@
   },
   {
    "id": "japan",
-   "name": "Japan",
-   "name_zh": "日本",
+   "name": "Japanese Archipelago",
+   "name_zh": "日本列岛",
    "color": "#d35400",
    "seal": "#ad1457",
    "polygon": [
@@ -1482,7 +1565,8 @@
       "Gupta Empire",
       "Satavahanihara"
      ],
-     "layers": true
+     "layers": true,
+     "until": 550
     },
     {
      "id": "sa-early-medieval",
@@ -1543,7 +1627,8 @@
       "Bahmani Kingdom",
       "Orissa"
      ],
-     "layers": true
+     "layers": true,
+     "until": 1526
     },
     {
      "id": "sa-mughal",
@@ -1600,7 +1685,8 @@
       "Ceylon",
       "Nepal"
      ],
-     "layers": true
+     "layers": true,
+     "until": 1947
     },
     {
      "id": "sa-independent",
@@ -1879,7 +1965,8 @@
       "Göktürks",
       "Umayyad Caliphate"
      ],
-     "layers": true
+     "layers": true,
+     "entity": "gokturks"
     },
     {
      "id": "ca-samanid",
@@ -1954,7 +2041,8 @@
       "White Horde",
       "Chagatai Khanate"
      ],
-     "layers": true
+     "layers": true,
+     "until": 1507
     },
     {
      "id": "ca-khanates",
@@ -2231,7 +2319,8 @@
      "focus": [
       "Achaemenid Empire"
      ],
-     "layers": true
+     "layers": true,
+     "until": -330
     },
     {
      "id": "ir-seleucid",
@@ -2283,7 +2372,8 @@
       "Persia",
       "Sasanian Empire"
      ],
-     "layers": true
+     "layers": true,
+     "until": 651
     },
     {
      "id": "ir-caliphate",
@@ -2388,7 +2478,8 @@
      "focus": [
       "Safavid Empire"
      ],
-     "layers": true
+     "layers": true,
+     "until": 1736
     },
     {
      "id": "ir-afsharid-zand",
@@ -2848,7 +2939,8 @@
       "Umayyad Caliphate",
       "Byzantine Empire"
      ],
-     "layers": true
+     "layers": true,
+     "until": 750
     },
     {
      "id": "me-abbasid",
@@ -2867,7 +2959,8 @@
       "Fatimid Caliphate",
       "Buyid Emirate"
      ],
-     "layers": true
+     "layers": true,
+     "entity": "abbasid-caliphate-750"
     },
     {
      "id": "me-seljuk-crusades",
@@ -3265,7 +3358,8 @@
       "Numidia",
       "Mauretania"
      ],
-     "layers": true
+     "layers": true,
+     "entity": "ptolemaic-kingdom-bc272"
     },
     {
      "id": "eg-roman",
@@ -3353,7 +3447,8 @@
       "Fatimid Caliphate",
       "Almoravid dynasty"
      ],
-     "layers": true
+     "layers": true,
+     "entity": "fatimid-caliphate-926"
     },
     {
      "id": "eg-ayyubid",
@@ -3766,7 +3861,8 @@
      "focus": [
       "Roman Empire"
      ],
-     "layers": true
+     "layers": true,
+     "entity": "rome"
     },
     {
      "id": "eu-late-roman",
@@ -4268,7 +4364,8 @@
       "Benin",
       "Islamic city-states"
      ],
-     "layers": true
+     "layers": true,
+     "entity": "mali-empire"
     },
     {
      "id": "ss-songhai",
@@ -4289,7 +4386,8 @@
       "Hausa States",
       "Benin"
      ],
-     "layers": true
+     "layers": true,
+     "until": 1591
     },
     {
      "id": "ss-slave-trade",
@@ -5011,7 +5109,8 @@
       "Mixtec Empire",
       "Maya city-states"
      ],
-     "layers": true
+     "layers": true,
+     "entity": "aztec"
     },
     {
      "id": "ma-new-spain",

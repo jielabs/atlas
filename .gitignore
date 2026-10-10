@@ -8,3 +8,13 @@ tools/.cache/clio/
 tools/.cache/world_sources.json
 dist/
 .wrangler/
+
+# Generated AI pictures are served from R2 (tools/upload_assets.py), not from git
+data/ai/
+# Terrain and imagery packs are served from R2 (tools/upload_assets.py tiles), not from git
+tiles/
+data/music/
+tools/.cache/chgis*
+data/narration/
+.claude/mind-transfer/
+tools/.cache/ne/

@@ -11,6 +11,7 @@
    "glyph": "夏",
    "start": -2070,
    "end": -1601,
+   "until": -1600,
    "snapshots": [
     {
      "from": -2070,
@@ -29,6 +30,7 @@
    "glyph": "商",
    "start": -1600,
    "end": -1047,
+   "until": -1046,
    "snapshots": [
     {
      "from": -1600,
@@ -199,6 +201,7 @@
    "glyph": "秦",
    "start": -221,
    "end": -207,
+   "entity": "qin-bc770",
    "snapshots": [
     {
      "from": -221,
@@ -225,10 +228,20 @@
      "borders": "data/borders/western-han.geojson"
     },
     {
+     "from": -108,
+     "borders": "data/borders/fix/western-han--108.geojson",
+     "fix": true
+    },
+    {
      "from": -60,
      "borders": "data/borders/western-han-wr.geojson",
      "label": "60 BCE: Protectorate of the Western Regions",
      "label_zh": "前60年：设立西域都护府"
+    },
+    {
+     "from": -37,
+     "borders": "data/borders/fix/western-han--37.geojson",
+     "fix": true
     }
    ],
    "summary": "Liu Bang founded a dynasty that set the pattern for imperial China. Emperor Wu pushed into Central Asia and the Silk Road opened.",
@@ -241,6 +254,7 @@
    "glyph": "新",
    "start": 9,
    "end": 24,
+   "until": 23,
    "snapshots": [
     {
      "from": 9,
@@ -257,6 +271,7 @@
    "glyph": "东汉",
    "start": 25,
    "end": 219,
+   "until": 220,
    "snapshots": [
     {
      "from": 25,
@@ -310,6 +325,7 @@
    "glyph": "两晋",
    "start": 266,
    "end": 419,
+   "until": 420,
    "snapshots": [
     {
      "from": 266,
@@ -334,6 +350,11 @@
      "borders": "data/borders/sixteen-kingdoms.json#sk-311",
      "label": "311: Yongjia catastrophe: Han Zhao sacks Luoyang; Cheng holds most of Shu",
      "label_zh": "311年：永嘉之乱，汉赵攻陷洛阳；成汉据有蜀地"
+    },
+    {
+     "from": 313,
+     "borders": "data/borders/fix/jin-313.geojson",
+     "fix": true
     },
     {
      "from": 316,
@@ -538,6 +559,7 @@
    "glyph": "隋",
    "start": 581,
    "end": 617,
+   "until": 618,
    "snapshots": [
     {
      "from": 581,
@@ -568,6 +590,7 @@
    "glyph": "唐",
    "start": 618,
    "end": 906,
+   "until": 907,
    "snapshots": [
     {
      "from": 618,
@@ -578,6 +601,21 @@
      "borders": "data/borders/tang-700.geojson",
      "label": "640 onward: Anxi and Beiting Protectorates",
      "label_zh": "640年起：设立安西、北庭都护府"
+    },
+    {
+     "from": 668,
+     "borders": "data/borders/fix/tang-668.geojson",
+     "fix": true
+    },
+    {
+     "from": 698,
+     "borders": "data/borders/fix/tang-698.geojson",
+     "fix": true
+    },
+    {
+     "from": 701,
+     "borders": "data/borders/fix/tang-701.geojson",
+     "fix": true
     },
     {
      "from": 756,
@@ -774,6 +812,7 @@
    "glyph": "元",
    "start": 1271,
    "end": 1367,
+   "until": 1368,
    "snapshots": [
     {
      "from": 1271,
@@ -794,10 +833,16 @@
    "glyph": "明",
    "start": 1368,
    "end": 1643,
+   "until": 1644,
    "snapshots": [
     {
      "from": 1368,
      "borders": "data/borders/ming.geojson"
+    },
+    {
+     "from": 1429,
+     "borders": "data/borders/fix/ming-1429.geojson",
+     "fix": true
     },
     {
      "from": 1616,
@@ -947,9 +992,27 @@
     },
     {
      "from": 1860,
-     "borders": "data/borders/qing-1900.geojson",
+     "borders": "data/borders/qing-1860.geojson",
      "label": "1860 onward: territory lost to Russia",
      "label_zh": "1860年以后：领土被沙俄割占"
+    },
+    {
+     "from": 1879,
+     "borders": "data/borders/fix/qing-1879.geojson",
+     "fix": true
+    },
+    {
+     "from": 1895,
+     "borders": "data/borders/qing-1900.geojson",
+     "label": "1895: Taiwan ceded to Japan by the Treaty of Shimonoseki",
+     "label_zh": "1895年：《马关条约》割让台湾予日本"
+    },
+    {
+     "from": 1905,
+     "borders": "data/borders/fix/qing-1905.geojson",
+     "fix": true,
+     "label": "1905: the Treaty of Portsmouth gives southern Sakhalin to Japan",
+     "label_zh": "1905年：《朴次茅斯和约》将库页岛南部割予日本"
     }
    ],
    "summary": "The Manchu Qing built the largest Chinese empire, then faced rebellion and Western and Japanese imperialism. It ended with the abdication of the last emperor in 1912.",

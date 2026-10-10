@@ -8,10 +8,17 @@
 // Years are integers; negative years are BCE. Text fields come in pairs: `x` (English) and `x_zh`.
 
 const BASE = document.baseURI.replace(/[^/]*([?#].*)?$/, "");
+// Large generated assets (terrain and imagery packs, AI pictures) live in a Cloudflare R2 bucket, not in git
+// (tools/upload_assets.py). Their names carry a content hash; data/tiles.json and data/ai-illustrations.json name them.
+// For local work a mirror can stand in: localStorage["atlas-data-url"] = "http://localhost:8766".
+const DATA_URL = (() => { try { return localStorage.getItem("atlas-data-url"); } catch { return null; } })() || "https://data.atlas.daiyip.com";
+// Atlas's own files on R2 sit under atlas/; plugin apps keep theirs under apps/<id>/ (docs/data-updates.md#layout-on-r2).
+const R2 = DATA_URL + "/atlas";
+const BASE_PATH = new URL(BASE).pathname;
 // Data packs: another site's history (eras, events, tours) shown on this engine's world map, opened with
 // ?pack=<manifest URL>. Pack text ends up in the page, so packs load only from these sites (and a local
 // server while developing). See docs/custom-data.md.
-const PACK_ORIGINS = ["https://atlas.daiyip.com", "https://bible.daiyip.com", "https://daiyip.github.io"];
+const PACK_ORIGINS = ["https://atlas.daiyip.com", "https://bible.daiyip.com", "https://gallery.daiyip.com", "https://daiyip.github.io"];
 // A site built around one pack names it on the page instead (<html data-pack="…" data-packonly="1">), so its address
 // stays clean; ?pack= in the address still wins.
 const QUERY = new URLSearchParams(location.search), PAGE = document.documentElement.dataset;
@@ -22,6 +29,14 @@ const PACK_ONLY = PACK_URL && ["1", "true"].includes(QUERY.has("pack") ? QUERY.g
 // shows the story and drives the atlas through a pack plugin (docs/plugins.md, "Embedding").
 const EMBED = new URLSearchParams(location.search).get("embed") === "1";
 if (EMBED) document.documentElement.classList.add("embed");
+// &mini=1 (with embed): a small inset map, such as beside a tour card. A tour step frames the leg from the last stop
+// to this one instead of flying in to the stop, and the era label and map buttons go (as hide= below).
+const MINI = EMBED && new URLSearchParams(location.search).get("mini") === "1";
+// &hide=era,controls,credits,span (with embed): parts of the page the embedding site doesn't want. era: the period
+// label; controls: the zoom, compass and full-screen buttons; credits: the data credits button; span: a tour leg's time.
+const HIDE = new Set([...(MINI ? ["era", "controls"] : []),
+  ...(EMBED ? (new URLSearchParams(location.search).get("hide") || "").split(",").map((x) => x.trim()) : [])]);
+for (const h of ["era", "controls", "credits", "span"]) if (HIDE.has(h)) document.documentElement.classList.add("hide-" + h);
 // Overview elevation tiles are bundled with the page (it works offline and in sandboxed previews): zoom 2-6 as PNG files,
 // zoom 7 (whole map) and 8 (China proper) packed into archives in tiles/pack/ and served through the
 // "atlas" protocol below. Satellite imagery (Sentinel-2, 2020) is packed the same way in tiles/sat/, every zoom.
@@ -55,7 +70,16 @@ const state = {
   selected: "an-lushan",
   reading: false,       // story view open in the ledger
   tab: "events",        // ledger tab: "events" or "rulers"
+  speed: 1,             // playback speed (SPEEDS)
+  playMode: "events",   // what the play button does (PLAY_MODES)
+  eraMin: false,        // era panel minimised
+  railMin: false,       // timeline folded down to its play button
+  narration: true,      // tour narration (on, male voice, until switched off; remembered)
+  voice: "Charon",      // narration voice: Charon (male) or Kore (female), Gemini TTS
+  music: true,          // background music during tours and timeline playback (on until switched off; remembered)
   rulerPolity: null,    // country shown in the ruler list
+  countries: null,      // data/countries.json: when each polity is on the map, and lineages joining renamed ones
+  sel: null,            // the selected country: { id, names: Set, name, name_zh, spans, from, to } (selectCountry)
   scope: null,          // the reign the timeline is narrowed to: { polity, i, label }
   borders: {},          // borders path -> GeoJSON
   bundles: {},          // border bundle file -> promise of {map id: GeoJSON}
@@ -65,7 +89,7 @@ const state = {
   closedArmies: new Set(),
   win: null,            // [start, end] years shown on the rail when zoomed in
   lang: "zh",
-  show3d: true, showSat: true, showNeighbours: true, showPlaces: true, showGeo: true,
+  show3d: true, look: "satellite", flat3d: false, showNeighbours: true, showPlaces: true, showGeo: true, showAI: true,
   geo: [],              // labels for rivers, lakes, mountains, plains, seas
   layers: {},           // era id -> promise of { rulers, armies, routes }
   exchange: { routes: [], topics: {}, spread: [] }, // cross-civilisation routes and spreads (data/exchange.json)
@@ -73,12 +97,15 @@ const state = {
   auto: {},             // layers on only for the current story or tour step (syncAuto)
   autoOff: {}, autoCtx: "",
   autoLayers: true,
-  show: { rulers: true, armies: true, routes: true, people: true, capitals: false, faith: false, inventions: false, passes: true, roads: true, clans: true, walls: true, exchange: true, spread: true },
+  show: { rulers: true, armies: true, routes: true, people: true, capitals: false, faith: false, inventions: false, passes: true, roads: true, clans: true, walls: true, exchange: true, spread: true, admin: false, economy: false, climate: false, ties: true },
   overlays: { population: [], faith: [], inventions: [] },
   passes: [],           // famous passes (关隘), data/passes.json
   roads: [],            // major official roads (官道), data/roads.json
   clans: [],            // local elite groups (豪族/士人集团), data/clans.json
   walls: [],            // Great Walls (长城) by period, data/walls.json
+  climate: null,        // temperature sketch, warm/cold phases and disasters (气候与灾害), data/climate.json
+  admin: null,          // administrative seats (郡/州/府… 治所), data/admin.json, loaded when first shown
+  adminAreas: null,     // their sketch areas, data/admin-areas.json (Map by seat index), loaded with them
   playing: null,
 };
 
@@ -88,50 +115,60 @@ const $ = (id) => document.getElementById(id);
 
 const UI = {
   zh: {
-    title: "历代地图", events: "事件", hide: "收起", show: "展开", t3d: "3D 地形", sat: "卫星影像", neighbours: "周边政权", cities: "城市", geo: "山川",
+    title: "Atlas · 地图上的故事", events: "事件", hide: "收起", show: "展开", install: { title: "安装到主屏幕", why: "像 App 一样全屏打开，看过的地图离线也能用。", step1: (ipad, icon, other) => other ? `点地址栏里的分享按钮 ${icon}` : `点 Safari ${ipad ? "地址栏右侧" : "底部"}的分享按钮 ${icon}`, step2: "在菜单里选「添加到主屏幕」", go: "安装", ok: "知道了", never: "不再显示" }, minimise: "收起面板", restore: "展开面板", railHide: "收起时间轴", railShow: "展开时间轴", speed: "播放速度", playMode: "播放方式", playModes: { years: "只走年份", events: "事件停留", tours: "依次导览" }, playRead: "读这件事", playOn: "继续", fullscreen: "全屏", t3d: "3D 地形", sat: "卫星影像", neighbours: "周边政权", cities: "城市", geo: "山川", aiPics: "插图", music: "背景音乐", slimOn: "换成精简时间轴（只显示年份）", slimOff: "换成完整时间轴（显示朝代）",
     other: "English", map: "地图：", count: (n, era) => `${era} · ${n} 件`, countWin: (n) => `本时段 · ${n} 件`,
     fc: { ok: "已与维基百科/维基数据核对年份", fixed: "已更正", doubt: "存疑", none: "AI 撰写，尚未核对" },
-    sm: { ok: "简介已与维基百科对照（AI 审读）", fixed: "简介已更正", doubt: "简介存疑" }, back: "返回列表", prev: "上一件", next: "下一件", why: "历史意义", people: "相关人物", wiki: "维基百科", wikiOther: "English Wikipedia",
+    sm: { ok: "简介已与维基百科对照（AI 审读）", fixed: "简介已更正", doubt: "简介存疑" },
+    vc: { ok: "已与维基百科对照（AI 审读）", fixed: "已按维基百科更正", doubt: "存疑" }, back: "返回列表", prev: "上一件", next: "下一件", why: "历史意义", people: "相关人物", aiIllu: "AI 生成的示意图，非史料", closePic: "关闭图片", wiki: "维基百科", wikiOther: "English Wikipedia",
     more: "阅读详情 →", loading: "正在载入…", noStory: "这件事的详细介绍还在编写中。",
-    notePack: "疆域为近似示意，取自开源 Cliopatria（Seshat）与 historical-basemaps 数据集。地形、海岸线和河流均为现代地理。",
-    note: "疆域为近似示意：取自开源 historical-basemaps 数据集，并参照谭其骧《中国历史地图集》人工修订。地形、海岸线和河流均为现代地理。",
+    notePack: "疆域为近似示意，取自开源 Cliopatria（Seshat）与 historical-basemaps 数据集。地形、海岸线和河流均为现代地理。按当时实际控制绘制，斜线为争议地区，不代表对主权的立场。",
+    note: "疆域为近似示意：取自开源 historical-basemaps 数据集，并参照谭其骧《中国历史地图集》人工修订。地形、海岸线和河流均为现代地理。按当时实际控制绘制，斜线为争议地区，不代表对主权的立场。",
     zooms: ["全部", "朝代", "数十年"], country: "国家", reignLen: (n) => `${n}年`, rulerCount: (n) => `${n} 位`, noRulers: "本时期暂无君主资料", worldMap: (y) => `${y}前后的世界`, worldName: "世界 · 公元纪年", noRegionEvents: "这个地区的事件还在整理中，下一步加入。现在可以看各时期的疆域。", noPeople: "本时期暂无人物资料", peopleHint: "点击人物，地图飞到其居所并显示生平", pgroups: { all: "全部", mil: "军事", pol: "政治", cul: "思想文学", art: "艺术", sci: "科技" }, scopeHint: "点击君主，时间轴缩放到其在位期间", zoomIn: "放大时间轴", zoomOut: "缩小时间轴", earlier: "向前", later: "向后",
     hint: ["点击朝代跳转 · 按 + 放大时间轴", (era) => `${era} · 每一段是一幅地图`, (era) => `${era} · 数十年视图`],
     play: "播放", pause: "暂停", year: "年份", loadError: "地图数据无法载入。",
     detail: "详略", levels: ["大事", "要事", "细目"], allCats: "全部", cat: { war: "战争", politics: "政治", reform: "改革", rebellion: "起义", culture: "文化", economy: "经济", diplomacy: "外交", science: "科技", society: "社会" },
-    layers: "图层", g_map: "地图", g_pol: "政治", g_war: "军事", g_move: "交通", g_cul: "人文", g_pack: "专题", rulers: "君主", armies: "军队", routes: "路线", forces: "参战双方", ruler: "在位：",
+    layers: "图层", settings: "设置", stStyle: "面板风格", stLook: "外观", stPanel: "面板颜色", stMapStyle: "地图样式", stRail: "时间轴", stRailStyle: "样式", stLayout: "布局", stAutoLayout: "自动布局", stAutoLayoutHint: "导览时转为导览布局，读故事时转为阅读布局，播放时转为一览，之后回到所选布局", stPins: "研究布局：固定两侧面板", stPinsHint: "取消固定后，面板收成屏幕边上的标签", pin: "固定面板", unpin: "取消固定", exLayers: "图层", stFull: "完整", stSlim: "精简", stDial: "拨盘", stDialLook: "拨盘样式", slower: "慢", faster: "快", dialLabel: "年份拨盘：按住转动，外圈换朝代，内圈换年份，按住中心 1.5 秒播放，轻点暂停，慢/快调播放速度", holdPlay: "按住 1.5 秒播放", stContent: "内容", stAI: "AI 插图", stNarr: "导览旁白", stOff: "关", stLang: "语言", stLocal: "设置只保存在这台设备上", stReset: "恢复默认", g_ai: "AI", g_map: "地图", g_look: "底图", g_pol: "政治", g_war: "军事", g_move: "交通", g_cul: "人文", g_pack: "专题", g_panel: "面板", panelOp: "不透明度", panelCustom: "自定义…", rulers: "君主", armies: "军队", routes: "路线", forces: "参战双方", ruler: "在位：",
     reign: (a, b) => `${a}–${b}年在位`, troops: "兵力", unknown: "不详", losses: "伤亡",
     result: { won: "胜", lost: "败", draw: "平" },
     units: { infantry: "步兵", cavalry: "骑兵", chariots: "战车", archers: "弓兵", crossbows: "弩兵", navy: "水军", siege: "攻城", firearms: "火器", artillery: "火炮", elephants: "象兵" },
-    kinds: { campaign: "进军", journey: "行程", trade: "商路", canal: "运河", wall: "长城" }, exchange: "交流", spread: "传播", spreadGroups: { faith: "宗教传播", tech: "技术传播", crop: "作物传播" }, arrived: (y) => `${y}传到`, set_out: (y) => `${y}起`, world_t: "世界", worldHead: "同一年的世界", goRegion: "切换地区", allWorld: "全球", worldHint: "点击地区，地图和时间轴切换过去；点击事件阅读详情", noWorldEv: "前后几十年没有收录的大事", elsewhere: "同时期的世界", hideStrip: "隐藏", showStrip: "在时间轴上方显示同时期的世界",
-    people_l: "人物", cmp: { one: "对比", open: "两地对比", sync: "同步视角", openTime: "两时对比", place: "两地", time: "两时", period: "时期", year: "年份", close: "关闭对比", pick: "对比地区", rulers: "君主", events: "前后大事", none: "前后几十年没有收录的大事" }, lasted: (n) => `共${n}年`, close: "关闭", search: "搜索", share: "分享这个视图", tours: "导览", toursHead: "导览 · 跟着地图读历史", tourStory: "读这段故事", tourBack: "返回导览", tourPrev: "上一步", tourNext: "下一步", tourPlay: "自动播放", tourPause: "暂停", tourEnd: "结束导览", tourDone: "导览结束", tourSteps: (n) => `${n} 站`, tourCount: (n) => `${n} 条导览`, tourAt: (n) => `第${n}站`, toursHere: "本时期导览", toursOther: "其他时期", noTours: "本时期还没有导览", tourHint: "点击一条导览，地图会跟着故事移动", linkCopied: "链接已复制，可以发给别人", linkCopy: "复制这个链接：", searchPh: "搜索导览、事件、人物、君主、城市或年份（如 755、前221）", autoLayers: "自动图层", autoHint: "打开事件或导览时，自动显示相关图层，自动打开的图层标为虚线", autoOn: "已自动显示", autoAlso: "相关图层", sgroups: { time: "时间", era: "朝代", tour: "导览", event: "事件", person: "人物", ruler: "君主", city: "城市" }, noResults: "没有找到相关内容", jumpYear: "跳到这一年", capitals: "都城·人口", faith: "宗教思想", inventions: "发明", passes: "关隘", roads: "官道", walls: "长城", wallBy: "修筑", wallLen: (n) => `约${n.toLocaleString()}公里`, ruin: "已废弃，现为遗迹", clans: "豪族", ckinds: { gentry: "门阀士族", bloc: "地域集团", military: "军事集团", faction: "朋党", merchant: "商帮" }, seats: "郡望/根据地", families: "代表家族", members: "代表人物", drafted: "AI 整理，未经核对", cityEvents: (n) => `城中大事（${n}）· 点击跳转`,  personEvents: (n) => `相关事件（${n}）· 点击跳转`, pranks: { capital: "都城", secondary: "陪都", major: "重要城市", port: "港口", frontier: "军事重镇" }, rkinds: { imperial: "驰道", post: "驿道", trade: "商道" }, via: "途经", inUse: "使用年代",
+    kinds: { campaign: "进军", journey: "行程", trade: "商路", canal: "运河", wall: "长城" }, exchange: "交流", spread: "传播", spreadGroups: { faith: "宗教传播", tech: "技术传播", crop: "作物传播" }, arrived: (y) => `${y}传到`, set_out: (y) => `${y}起`, world_t: "世界", worldHead: "同一年的世界", goRegion: "切换地区", allWorld: "全球", worldHint: "点击地区，地图和时间轴切换过去；点击事件阅读详情", noWorldEv: "前后几十年没有收录的大事", elsewhere: "同时期的世界", wsHead: (x) => `同时期的${x}`, wsNearShort: "邻国", wsWorld: "世界", wsNear: (n) => `${n}的邻国`, wsNone: "前后几年没有收录的大事", hideStrip: "隐藏", showStrip: "在时间轴上方显示同时期的世界",
+    area: { kind: "地区史", none: "地图上无政权", today: "今", strip: "历代归属", disputed: "有争议", story: "播放地区史", runs: (n) => `历次归属 ${n}`, events: (n) => `此地大事 ${n}`, topOnly: (n) => `只列大事 · 共 ${n} 件`, note: "归属由本图各时期的疆域推算，按当时实际控制；简介和说明为 AI 整理。不代表对任何领土主权的立场。", held: (y, n) => `${y}起，地图上此地属${n}。`, tourTitle: (n) => `${n}的历史`, menu: "地区史", inArea: "所在地区", kids: "下级地区" },
+    sel: { hint: "点击地图上的国家即可选中，地图和各栏只显示与它相关的内容；再点一次取消", off: "这一年不在地图上", offMap: "这一年的地图没有单独画出它", before: "这一年尚未建立", after: "这一年已不存在", jump: (y) => `跳到${y}`, events: (n) => `事件 ${n}`, people: (n) => `本时期人物 ${n}`, cities: "城市", clear: "取消选中", circa: "约", away: "已移出视野，时间轴仍跟随它", back: (n) => `回到${n}`, story: "播放它的故事", now: "今", more: (n) => `另 ${n} 国`, less: "收起" },
+    disp: "争议地区", dispYears: (a, b) => b ? `${a}–${b}` : `${a}至今`, dispCtl: "实际控制", dispClaim: "主张方", dispFoot: "地图按当时的实际控制绘制，斜线表示主权有争议，不代表本图对任何领土主权的立场。说明为 AI 整理，未经核对。", borderNote: "边界为示意，按当时实际控制绘制，斜线为争议地区，不代表对主权的立场",
+    people_l: "人物", climate: "气候灾害", climHead: "气候 · 华东气温", climNow: (a, p) => `较 1961–90 ${a >= 0 ? "暖" : "冷"} ${Math.abs(a).toFixed(1)}°C${p ? " · " + p : ""}`, climKinds: { drought: "旱灾", flood: "水灾", locust: "蝗灾", famine: "饥荒", quake: "地震", plague: "疫病", cold: "寒冬", river: "黄河决徙" }, climKey: { reb: "起义", cap: "迁都", dis: "灾害" }, climToll: "伤亡", climArea: "范围", climLinked: "相关事件 · 点击跳转", climAfter: "前后的起义与迁都", climPhase: "当时气候", climNote: "灾害与冷暖期为 AI 整理，标 ✓ 的已与维基百科对照；气温曲线为示意", climCurve: "气温曲线依竺可桢（1972）与葛全胜等（2013）的冷暖分期手绘示意，不是原始数据", climElse: "气候曲线只画中国东部", cmp: { one: "对比", open: "两地对比", sync: "同步视角", openTime: "两时对比", place: "两地", time: "两时", period: "时期", year: "年份", close: "关闭对比", pick: "对比地区", rulers: "君主", events: "前后大事", none: "前后几十年没有收录的大事" }, lasted: (n) => `共${n}年`, packs: "专题", rpMore: "这一年的君主、大事与国家", asState: "作为国家：", close: "关闭", search: "搜索", share: "分享这个视图", tours: "导览", toursHead: "导览 · 跟着地图读历史", tourStory: "读这段故事", tourMusic: " 音乐", tourNarr: " 旁白", tourNarrHint: "朗读每一站的解说（AI 语音，中文）", voices: { Charon: "男声", Kore: "女声" }, tourMusicHint: "导览和时间轴播放时的背景音乐（AI 生成）", tourImmersive: "沉浸", tourImmersiveHint: "放大图片，收起其它面板（Esc 退出）", tourBack: "返回导览", tourPrev: "上一步", tourNext: "下一步", tourPlay: "自动播放", tourPause: "暂停", tourEnd: "结束导览", tourDone: "导览结束", tourSteps: (n) => `${n} 站`, tourCount: (n) => `${n} 条导览`, followLife: "跟随一生", trail: "足迹", trailShow: "足迹", trailHint: "在地图上画出一生足迹，随时间轴移动", trailPrev: "上一站", trailNext: "下一站", trailBefore: (y) => `还没有出生。足迹从${y}开始，点“下一站”或拖动时间轴。`, trailAfter: "一生行迹到此为止。", livesHere: "本时期人物的一生", livesAll: "人物一生", ties: "关系网", tieKinds: { teach: "师承", serve: "君臣·幕僚", kin: "亲属", friend: "交游", rival: "政敌·论敌", war: "交战", verse: "诗文往来" }, tieHead: (n) => `人物关系（${n}）· 点击看对方`, tieKind: "人物关系", tieThen: "此时的交往", tieLater: "以后", tieAway: "不在本时期地图上", tourAt: (n) => `第${n}站`, toursHere: "本时期导览", toursOther: "其他时期", noTours: "本时期还没有导览", tourHint: "点击一条导览，地图会跟着故事移动", linkCopied: "链接已复制，可以发给别人", linkCopy: "复制这个链接：", searchPh: "搜索导览、事件、人物、君主、城市或年份（如 755、前221）", autoLayers: "自动图层", autoHint: "打开事件或导览时，自动显示相关图层，自动打开的图层标为虚线", autoOn: "已自动显示", autoAlso: "相关图层", tipOn: "已打开", stLayBtn: "图层按钮", stLayPos: "图层排列", layBtns: { text: "文字", icon: "图标", both: "图标+文字" }, layPos: { group: "分组", nowrap: "一行·滑动", wrap: "一行·换行" }, tipOff: "已关闭", tipAuto: "自动显示", sgroups: { time: "时间", era: "朝代", area: "地区史", tour: "导览", event: "事件", person: "人物", ruler: "君主", city: "城市", place: "地名" }, noResults: "没有找到相关内容", jumpYear: "跳到这一年", capitals: "都城·人口", faith: "宗教思想", inventions: "发明", passes: "关隘", admin: "政区", adminSeat: "治所", adminWas: "汉时旧名", adminSite: "此地历代 · 点击跳转", adminNow: "今", adminSnap: (y) => `以${y}为准 · AI 整理，已与 CHGIS 抽查比对`, adminUnsure: "位置待核", adminChgis: "查 CHGIS 记录", adminChgisWait: "正在查询 CHGIS…", adminChgisDown: "暂时连不上 CHGIS，稍后再试", adminChgisNone: "CHGIS 在这一年没有同名记录", adminChgisSrc: "来自 CHGIS 时空地名库（哈佛、复旦），实时查询", adminChgisMoved: "治所位置与本图略有不同", roads: "官道", walls: "长城", wallBy: "修筑", wallLen: (n) => `约${n.toLocaleString()}公里`, ruin: "已废弃，现为遗迹", clans: "豪族", ckinds: { gentry: "门阀士族", bloc: "地域集团", military: "军事集团", faction: "朋党", merchant: "商帮" }, seats: "郡望/根据地", families: "代表家族", members: "代表人物", drafted: "AI 整理，未经核对", cityEvents: (n) => `城中大事（${n}）· 点击跳转`, cityHere: (n, m) => n === m ? `城中大事 ${n} 件` : `这一段大事 ${n} 件 · 全城 ${m} 件`, cityNone: (m) => `这一段没有收录大事 · 点上方色条看其他时期（共 ${m} 件）`, cityTop: "要事", cityAll: "全部", gazHead: "地名古今 · 点击跳转", cityTabEv: (n) => n ? `城中大事 ${n}` : "城中大事", cityNoEv: "这一段没有收录大事", gazHeld: "属", gazIn: "约在", gazKind: "地名古今", gazNote: "由本图的城市、政区和疆域推算 · AI 整理，未经核对",  personEvents: (n) => `相关事件（${n}）· 点击跳转`, pranks: { capital: "都城", secondary: "陪都", major: "重要城市", port: "港口", frontier: "军事重镇" }, rkinds: { imperial: "驰道", post: "驿道", trade: "商道" }, via: "途经", inUse: "使用年代",
     fields: { general: "军事家", statesman: "政治家", thinker: "思想家", poet: "诗人", writer: "文学家", historian: "史学家", scientist: "科学家", physician: "医学家", engineer: "工程师", artist: "艺术家", religious: "宗教人物", explorer: "旅行家", scholar: "学者", strategist: "谋士", other: "其他" },
     faiths: { buddhist: "佛教", daoist: "道教", confucian: "儒家", islam: "伊斯兰教", christian: "基督教", thought: "思想", other: "其他" },
     ifields: { craft: "工艺", writing: "文字", printing: "印刷", metallurgy: "冶金", military: "军事", astronomy: "天文", math: "数学", medicine: "医学", agriculture: "农业", navigation: "航海", engineering: "工程", money: "货币" },
+    economy: "经济重心", econPop: "人口", econWealth: "财赋", econSouth: "南方占", econSouthHint: "秦岭—淮河以南", econNorthHint: "秦岭—淮河以北", econShareOf: (n, m) => `${n}% ${m === "pop" ? "人口" : "财赋"}`, econChina: "中国", econOnlyChina: "只有中国（汉至清）有数据，切到中国地区才能打开", econCentre: "重心约在", econTop: "最多", econFrom: "数据", econNext: "下一个数据点", econOut: "这一层只覆盖汉至清（前206—1912）", econCentrePop: "人口重心", econCentreWealth: "财赋重心", econNote: "各省比例按历代户口、田赋统计约略复原，再分到当时的政区治所 · AI 整理，仅个别数据点与维基百科对照", econKind: { census: "户口", estimate: "估计", record: "账册" },
     pop: "人口", popOf: (m, y, k) => { const w = Math.round(m * 100); return `${k === "estimate" ? "估计约" : "约"}${w >= 10000 ? (w / 10000).toFixed(1).replace(/\.0$/, "") + "亿" : w + "万"}（${y}）`; },
     capital: "都城", works: "代表作", life: (a, b) => `${a} – ${b}`, inventor: "发明者", pkinds: { pass: "山隘", wall: "长城关口", gate: "关口" }, guards: "扼守", battles: "关前史事", built: (y) => `${y}建`,
   },
   en: {
-    title: "Atlas", events: "Events", hide: "Hide", show: "Show", t3d: "3D terrain", sat: "Satellite", neighbours: "Neighbours", cities: "Cities", geo: "Landscape",
+    title: "Atlas: Map with Stories", events: "Events", hide: "Hide", show: "Show", install: { title: "Add to Home Screen", why: "Opens full screen like an app, and maps you have seen work offline.", step1: (ipad, icon, other) => other ? `Tap the Share button ${icon} in the address bar` : `Tap Safari's Share button ${icon} ${ipad ? "next to the address bar" : "at the bottom"}`, step2: "Choose “Add to Home Screen”", go: "Install", ok: "Got it", never: "Don't show again" }, minimise: "Minimise panel", restore: "Restore panel", railHide: "Fold the timeline away", railShow: "Show the timeline", speed: "Playback speed", playMode: "Play", playModes: { years: "Years only", events: "Stop at events", tours: "Tours in turn" }, playRead: "Read it", playOn: "Go on", fullscreen: "Full screen", t3d: "3D terrain", sat: "Satellite", neighbours: "Neighbours", cities: "Cities", geo: "Landscape", aiPics: "Pictures", music: "Music", slimOn: "Switch to the slim timeline (years only)", slimOff: "Switch to the full timeline (with periods)",
     other: "中文", map: "Map: ", count: (n, era) => `${n} in ${era}`, countWin: (n) => `${n} in view`,
     fc: { ok: "Years checked against Wikipedia/Wikidata", fixed: "Corrected", doubt: "Doubtful", none: "AI-drafted, not yet checked" },
-    sm: { ok: "Summary compared with Wikipedia (AI review)", fixed: "Summary corrected", doubt: "Summary doubtful" }, back: "All events", prev: "Previous", next: "Next", why: "Why it matters", people: "People", wiki: "Wikipedia", wikiOther: "中文维基百科",
+    sm: { ok: "Summary compared with Wikipedia (AI review)", fixed: "Summary corrected", doubt: "Summary doubtful" },
+    vc: { ok: "Compared with Wikipedia (AI review)", fixed: "Corrected after Wikipedia", doubt: "Doubtful" }, back: "All events", prev: "Previous", next: "Next", why: "Why it matters", people: "People", aiIllu: "AI-generated illustration, not a historical source", closePic: "Close picture", wiki: "Wikipedia", wikiOther: "中文维基百科",
     more: "Read the story →", loading: "Loading…", noStory: "The full story for this event is still being written.",
-    notePack: "Borders are approximate, from the open Cliopatria (Seshat) and historical-basemaps datasets. Terrain, coastlines and rivers are modern.",
-    note: "Borders are approximate: from the open historical-basemaps dataset, revised by hand after Tan Qixiang's Historical Atlas of China. Terrain, coastlines and rivers are modern.",
+    notePack: "Borders are approximate, from the open Cliopatria (Seshat) and historical-basemaps datasets. Terrain, coastlines and rivers are modern. They follow actual control at the time; hatched areas are disputed; no position on sovereignty is taken.",
+    note: "Borders are approximate: from the open historical-basemaps dataset, revised by hand after Tan Qixiang's Historical Atlas of China. Terrain, coastlines and rivers are modern. They follow actual control at the time; hatched areas are disputed; no position on sovereignty is taken.",
     zooms: ["All", "Dynasty", "Decades"], country: "Country", reignLen: (n) => `${n} yr${n > 1 ? "s" : ""}`, rulerCount: (n) => `${n} rulers`, noPeople: "No famous people listed for this period", peopleHint: "Click a person to fly to where they lived and read about them", pgroups: { all: "All", mil: "Military", pol: "Politics", cul: "Thought & letters", art: "Arts", sci: "Science" }, noRulers: "No rulers recorded for this period", worldMap: (y) => `the world around ${y}`, worldName: "World · calendar years", noRegionEvents: "Events for this region are still being written. For now you can follow its borders through the periods.", scopeHint: "Pick a ruler to narrow the timeline to their reign", zoomIn: "Zoom in", zoomOut: "Zoom out", earlier: "Earlier", later: "Later",
     hint: ["Click a dynasty to jump · + to zoom in", (era) => `${era} · each segment is one map`, (era) => `${era} · decades view`],
     play: "Play timeline", pause: "Pause timeline", year: "Year", loadError: "The map data could not be loaded. ",
     detail: "Detail", levels: ["Key", "Major", "All"], allCats: "All", cat: { war: "War", politics: "Politics", reform: "Reform", rebellion: "Uprising", culture: "Culture", economy: "Economy", diplomacy: "Diplomacy", science: "Science", society: "Society" },
-    layers: "Layers", g_map: "Map", g_pol: "Power", g_war: "War", g_move: "Travel", g_cul: "Culture", g_pack: "Pack", rulers: "Rulers", armies: "Armies", routes: "Routes", forces: "Forces", ruler: "Ruler: ",
+    layers: "Layers", settings: "Settings", stStyle: "Panel style", stLook: "Appearance", stPanel: "Panel colour", stMapStyle: "Map style", stRail: "Timeline", stRailStyle: "Style", stLayout: "Layout", stAutoLayout: "Auto layout", stAutoLayoutHint: "A tour switches to Cinema, a story to Reader, playback to Glance, then back to your layout", stPins: "Explorer: pin both side panels", stPinsHint: "Unpinned panels fold to tabs on the screen edge", pin: "Pin panel", unpin: "Unpin panel", exLayers: "Layers", stFull: "Full", stSlim: "Slim", stDial: "Dial", stDialLook: "Dial look", slower: "−", faster: "+", dialLabel: "Year dial: press and turn; the outer ring changes period, the inner ring the year; hold the centre for 1.5 seconds to play, tap to pause; − and + set the speed", holdPlay: "Hold to play", stContent: "Content", stAI: "AI pictures", stNarr: "Tour narration", stOff: "Off", stLang: "Language", stLocal: "Settings are kept on this device only", stReset: "Reset", g_ai: "AI", g_map: "Map", g_look: "Style", g_pol: "Power", g_war: "War", g_move: "Travel", g_cul: "Culture", g_pack: "Pack", g_panel: "Panels", panelOp: "Opacity", panelCustom: "Custom…", rulers: "Rulers", armies: "Armies", routes: "Routes", forces: "Forces", ruler: "Ruler: ",
     reign: (a, b) => `r. ${a}–${b}`, troops: "Troops", unknown: "unknown", losses: "Losses",
     result: { won: "Won", lost: "Lost", draw: "Draw" },
     units: { infantry: "Infantry", cavalry: "Cavalry", chariots: "Chariots", archers: "Archers", crossbows: "Crossbows", navy: "Navy", siege: "Siege", firearms: "Firearms", artillery: "Artillery", elephants: "Elephants" },
-    kinds: { campaign: "Campaign", journey: "Journey", trade: "Trade route", canal: "Canal", wall: "Wall" }, exchange: "Exchange", spread: "Spread", spreadGroups: { faith: "Faith spreads", tech: "Technique spreads", crop: "Crop spreads" }, arrived: (y) => `arrived ${y}`, set_out: (y) => `from ${y}`, world_t: "World", worldHead: "The world this year", goRegion: "Go to region", allWorld: "Whole world", worldHint: "Click a region to move the map and timeline there; click an event to read it", noWorldEv: "No major events recorded within a few decades", elsewhere: "Elsewhere", hideStrip: "Hide", showStrip: "Show other regions above the timeline",
-    people_l: "People", cmp: { one: "Compare", open: "Compare regions", sync: "Sync view", openTime: "Compare times", place: "Two places", time: "Two times", period: "Period", year: "Year", close: "Close compare", pick: "Compare with", rulers: "Rulers", events: "Around this year", none: "No major events recorded within a few decades" }, lasted: (n) => `${n} years`, close: "Close", search: "Search", share: "Share this view", tours: "Tours", toursHead: "Guided tours", tourStory: "Read the story", tourBack: "Back to the tour", tourPrev: "Back", tourNext: "Next", tourPlay: "Play", tourPause: "Pause", tourEnd: "End tour", tourDone: "End of tour", tourSteps: (n) => `${n} stops`, tourCount: (n) => `${n} tour${n === 1 ? "" : "s"}`, tourAt: (n) => `Stop ${n}`, toursHere: "Tours for this period", toursOther: "Other periods", noTours: "No tours for this period yet", tourHint: "Pick a tour and the map follows the story", linkCopied: "Link copied", linkCopy: "Copy this link:", searchPh: "Search tours, events, people, rulers, cities or a year (755, 221 BC)", autoLayers: "Auto layers", autoHint: "Reading an event or a tour stop switches on the layers it needs; those get a dashed outline", autoOn: "Switched on for this", autoAlso: "Related layers", sgroups: { time: "Year", era: "Periods", tour: "Tours", event: "Events", person: "People", ruler: "Rulers", city: "Cities" }, noResults: "Nothing found", jumpYear: "Go to this year", capitals: "Capitals", faith: "Faith", inventions: "Inventions", passes: "Passes", roads: "Roads", walls: "Great Walls", wallBy: "Built by", wallLen: (n) => `about ${n.toLocaleString()} km`, ruin: "Abandoned; ruins remain", clans: "Elites", ckinds: { gentry: "Great clans", bloc: "Regional bloc", military: "Military clique", faction: "Court faction", merchant: "Merchant guild" }, seats: "Home seats", families: "Families", members: "Key figures", drafted: "AI-drafted, not source-checked", cityEvents: (n) => `Events here (${n}) · click to jump`, personEvents: (n) => `Related events (${n}) · click to jump`, pranks: { capital: "Capital", secondary: "Secondary capital", major: "Major city", port: "Port", frontier: "Military stronghold" }, rkinds: { imperial: "Imperial highway", post: "Post road", trade: "Trade road" }, via: "Via", inUse: "In use",
+    kinds: { campaign: "Campaign", journey: "Journey", trade: "Trade route", canal: "Canal", wall: "Wall" }, exchange: "Exchange", spread: "Spread", spreadGroups: { faith: "Faith spreads", tech: "Technique spreads", crop: "Crop spreads" }, arrived: (y) => `arrived ${y}`, set_out: (y) => `from ${y}`, world_t: "World", worldHead: "The world this year", goRegion: "Go to region", allWorld: "Whole world", worldHint: "Click a region to move the map and timeline there; click an event to read it", noWorldEv: "No major events recorded within a few decades", elsewhere: "Elsewhere", wsHead: (x) => `Meanwhile · ${x}`, wsNearShort: "Neighbours", wsWorld: "World", wsNear: (n) => `Around ${n}`, wsNone: "No recorded events in these years", hideStrip: "Hide", showStrip: "Show other regions above the timeline",
+    area: { kind: "Area history", none: "No state on the map", today: "today", strip: "Holders through time", disputed: "Disputed", story: "Play its history", runs: (n) => `${n} stretches`, events: (n) => `${n} events here`, topOnly: (n) => `Key events only · ${n} in all`, note: "Holders worked out from this atlas's maps of each period (who controlled it then); introductions and notes AI-drafted. Takes no position on any territorial claim.", held: (y, n) => `From ${y} the map shows it held by ${n}.`, tourTitle: (n) => `The history of ${n}`, menu: "Area histories", inArea: "Area", kids: "Within it" },
+    sel: { hint: "Click a country on the map to select it: the map and panels then show only what concerns it. Click it again to clear", off: "Not on the map in this year", offMap: "The map for this year doesn't draw it separately", before: "Not yet founded in this year", after: "No longer exists in this year", jump: (y) => `Go to ${y}`, events: (n) => `${n} events`, people: (n) => `${n} people this period`, cities: "Cities", clear: "Clear selection", circa: "c. ", away: "Out of view; the timeline still follows it", back: (n) => `Back to ${n}`, story: "Play its story", now: "today", more: (n) => `${n} more`, less: "Fewer" },
+    disp: "Disputed", dispYears: (a, b) => b ? `${a}–${b}` : `${a}–today`, dispCtl: "Controlled by", dispClaim: "Claimed by", dispFoot: "The map follows who actually controlled a place at the time; hatching marks disputed sovereignty and takes no side. Notes AI-drafted, not source-checked.", borderNote: "Borders are approximate and follow actual control at the time; hatched areas are disputed; no position on sovereignty is taken",
+    people_l: "People", climate: "Climate & disasters", climHead: "Climate · E. China", climNow: (a, p) => `${Math.abs(a).toFixed(1)}°C ${a >= 0 ? "warmer" : "colder"} than 1961–90${p ? " · " + p : ""}`, climKinds: { drought: "Drought", flood: "Flood", locust: "Locusts", famine: "Famine", quake: "Earthquake", plague: "Epidemic", cold: "Severe cold", river: "Yellow River breach" }, climKey: { reb: "revolts", cap: "capital moves", dis: "disasters" }, climToll: "Toll", climArea: "Area", climLinked: "Related events · click to jump", climAfter: "Revolts and capital moves around it", climPhase: "Climate then", climNote: "Disasters and warm/cold phases AI-drafted; those marked ✓ were compared with Wikipedia; the temperature line is a sketch", climCurve: "The temperature line is hand-drawn after the warm and cold phases of Zhu Kezhen (1972) and Ge et al. (2013); not the published data", climElse: "The climate line covers eastern China only", cmp: { one: "Compare", open: "Compare regions", sync: "Sync view", openTime: "Compare times", place: "Two places", time: "Two times", period: "Period", year: "Year", close: "Close compare", pick: "Compare with", rulers: "Rulers", events: "Around this year", none: "No major events recorded within a few decades" }, lasted: (n) => `${n} years`, packs: "Packs", rpMore: "Rulers, events and countries this year", asState: "As a state: ", close: "Close", search: "Search", share: "Share this view", tours: "Tours", toursHead: "Guided tours", tourStory: "Read the story", tourMusic: " Music", tourNarr: " Narration", tourNarrHint: "Read each stop aloud (AI voice, in Chinese)", voices: { Charon: "Male", Kore: "Female" }, tourMusicHint: "Background music during tours and timeline playback (AI-generated)", tourImmersive: "Immersive", tourImmersiveHint: "Enlarge the picture and fold the other panels away (Esc to leave)", tourBack: "Back to the tour", tourPrev: "Back", tourNext: "Next", tourPlay: "Play", tourPause: "Pause", tourEnd: "End tour", tourDone: "End of tour", tourSteps: (n) => `${n} stops`, tourCount: (n) => `${n} tour${n === 1 ? "" : "s"}`, followLife: "Follow their life", trail: "Footsteps", trailShow: "Footsteps", trailHint: "Draw their whole life journey on the map; it moves with the timeline", trailPrev: "Previous", trailNext: "Next stop", trailBefore: (y) => `Not born yet. The journey starts in ${y}; press Next stop or drag the timeline.`, trailAfter: "The journey ends here.", livesHere: "Lives in this period", livesAll: "Lives", ties: "Ties", tieKinds: { teach: "Teacher & student", serve: "Served", kin: "Family", friend: "Friends", rival: "Rivals", war: "Fought", verse: "Poems & letters" }, tieHead: (n) => `Ties (${n}) · click to see them`, tieKind: "Tie", tieThen: "Around now", tieLater: "later", tieAway: "not on this period's map", tourAt: (n) => `Stop ${n}`, toursHere: "Tours for this period", toursOther: "Other periods", noTours: "No tours for this period yet", tourHint: "Pick a tour and the map follows the story", linkCopied: "Link copied", linkCopy: "Copy this link:", searchPh: "Search tours, events, people, rulers, cities or a year (755, 221 BC)", autoLayers: "Auto layers", autoHint: "Reading an event or a tour stop switches on the layers it needs; those get a dashed outline", autoOn: "Switched on for this", autoAlso: "Related layers", tipOn: "On", stLayBtn: "Layer buttons", stLayPos: "Layer layout", layBtns: { text: "Text", icon: "Icon", both: "Icon + text" }, layPos: { group: "Groups", nowrap: "One row, scroll", wrap: "One row, wrap" }, tipOff: "Off", tipAuto: "On for this story", sgroups: { time: "Year", era: "Periods", area: "Area histories", tour: "Tours", event: "Events", person: "People", ruler: "Rulers", city: "Cities", place: "Place names" }, noResults: "Nothing found", jumpYear: "Go to this year", capitals: "Capitals", faith: "Faith", inventions: "Inventions", passes: "Passes", admin: "Prefectures", adminSeat: "Seat", adminWas: "Han name", adminSite: "This seat by dynasty · click to jump", adminNow: "Today", adminSnap: (y) => `As in ${y} · AI-drafted, spot-checked against CHGIS`, adminUnsure: "position uncertain", adminChgis: "Look up in CHGIS", adminChgisWait: "Asking CHGIS…", adminChgisDown: "CHGIS can't be reached right now; try again later", adminChgisNone: "No record of this name in CHGIS for this year", adminChgisSrc: "From the CHGIS Temporal Gazetteer (Harvard, Fudan), looked up live", adminChgisMoved: "its seat differs a little from this map", roads: "Roads", walls: "Great Walls", wallBy: "Built by", wallLen: (n) => `about ${n.toLocaleString()} km`, ruin: "Abandoned; ruins remain", clans: "Elites", ckinds: { gentry: "Great clans", bloc: "Regional bloc", military: "Military clique", faction: "Court faction", merchant: "Merchant guild" }, seats: "Home seats", families: "Families", members: "Key figures", drafted: "AI-drafted, not source-checked", cityEvents: (n) => `Events here (${n}) · click to jump`, cityHere: (n, m) => n === m ? `${n} events here` : `${n} events in this phase · ${m} in all`, cityNone: (m) => `No events recorded in this phase · tap the bar for other periods (${m} in all)`, cityTop: "Major", cityAll: "All", gazHead: "Names through time · click to jump", cityTabEv: (n) => n ? `Events ${n}` : "Events", cityNoEv: "No events recorded in this phase", gazHeld: "held by", gazIn: "roughly in", gazKind: "Place through time", gazNote: "Worked out from this atlas's cities, prefectures and borders · AI-drafted, approximate", personEvents: (n) => `Related events (${n}) · click to jump`, pranks: { capital: "Capital", secondary: "Secondary capital", major: "Major city", port: "Port", frontier: "Military stronghold" }, rkinds: { imperial: "Imperial highway", post: "Post road", trade: "Trade road" }, via: "Via", inUse: "In use",
     fields: { general: "Military", statesman: "Statesman", thinker: "Thinker", poet: "Poet", writer: "Writer", historian: "Historian", scientist: "Scientist", physician: "Physician", engineer: "Engineer", artist: "Artist", religious: "Religious figure", explorer: "Traveller", scholar: "Scholar", strategist: "Strategist", other: "Other" },
     faiths: { buddhist: "Buddhism", daoist: "Daoism", confucian: "Confucianism", islam: "Islam", christian: "Christianity", thought: "Thought", other: "Other" },
     ifields: { craft: "Craft", writing: "Writing", printing: "Printing", metallurgy: "Metalwork", military: "Military", astronomy: "Astronomy", math: "Mathematics", medicine: "Medicine", agriculture: "Farming", navigation: "Navigation", engineering: "Engineering", money: "Money" },
+    economy: "Economic centre", econPop: "Population", econWealth: "Revenue", econSouth: "South", econSouthHint: "south of the Qinling–Huai line", econNorthHint: "north of the Qinling–Huai line", econShareOf: (n, m) => `${n}% of ${m === "pop" ? "people" : "revenue"}`, econChina: "China", econOnlyChina: "Only China (Han to Qing) has figures; switch to China to turn it on", econCentre: "Centre near", econTop: "Largest", econFrom: "Data", econNext: "next data point", econOut: "This layer covers Han to Qing (206 BC – 1912)", econCentrePop: "Population centre", econCentreWealth: "Revenue centre", econNote: "Province shares roughly rebuilt from dynastic census and tax figures, spread over that period's prefecture seats · AI-drafted; only a few data points compared with Wikipedia", econKind: { census: "census", estimate: "estimate", record: "ledger" },
     pop: "Population", popOf: (m, y, k) => `${k === "estimate" ? "c. " : ""}${m} million (${y})`,
     capital: "Capital", works: "Known works", life: (a, b) => `${a} – ${b}`, inventor: "Inventor", pkinds: { pass: "Mountain pass", wall: "Great Wall gate", gate: "Gate" }, guards: "Guards", battles: "Happened here", built: (y) => `built ${y}`,
   },
@@ -150,12 +187,33 @@ const cmp = { sync: true, on: false, region: null, map: null, marks: [], key: ""
 const tx = (o, k) => (zh() ? o[k + "_zh"] || o[k] : o[k] || o[k + "_zh"]) || "";
 const titleOf = (o) => (zh() ? o.title_zh || o.title : o.title);
 const nameOf = (o) => (zh() ? o.name_zh || o.name : o.name);
+// A region (a geographic area: 欧洲与地中海, 中国与东亚大陆) by its short name: 欧洲, 中国.
+const regionShort = (r) => (zh() ? r.short_zh || r.name_zh : r.short || r.name);
 const bandName = (e) => (zh() ? e.glyph : e.short || e.name); // the period on the timeline
+// The seal: a pack can give an English one (`glyph_en`) for its Chinese glyph; the atlas's own periods keep theirs.
+const glyphOf = (e) => (!zh() && e.glyph_en) || e.glyph;
 
 function fmtYear(y, circa) {
   const n = y === 0 ? 1 : Math.abs(y);
   if (zh()) return `${circa ? "约" : ""}${y < 0 ? "前" : ""}${n}年`;
   return `${circa ? "c. " : ""}${n}${y < 0 ? " BCE" : ""}`;
+}
+// An exact date, "1949-10-01" or "1949-10" (a year may be negative: "-44-03-15"), in the reader's language.
+function fmtDate(d) {
+  const m = String(d).match(/^(-?\d{1,4})(?:-(\d\d)(?:-(\d\d))?)?$/);
+  if (!m) return String(d);
+  const y = +m[1], mo = m[2] && +m[2], da = m[3] && +m[3];
+  if (zh()) return fmtYear(y) + (mo ? `${mo}月` : "") + (da ? `${da}日` : "");
+  const M = mo ? new Date(2000, mo - 1, 1).toLocaleString("en", { month: "short" }) : "";
+  return [da, M, fmtYear(y)].filter(Boolean).join(" ");
+}
+// When an event happened, as its story and cards show it: exact dates when it has them (`date`, `endDate`), else
+// years; `year_range` [a, b] adds how uncertain the year is.
+function evWhen(ev) {
+  const a = ev.date ? fmtDate(ev.date) : fmtYear(ev.year, ev.circa);
+  const b = ev.endDate ? fmtDate(ev.endDate) : ev.endYear != null ? fmtYear(ev.endYear) : "";
+  const r = Array.isArray(ev.year_range) ? ` (${fmtYear(ev.year_range[0])}–${fmtYear(ev.year_range[1])})` : "";
+  return (b ? `${a} – ${b}` : a) + r;
 }
 function fmtYearParts(y) {
   const n = String(y === 0 ? 1 : Math.abs(y));
@@ -173,7 +231,14 @@ function applyLang() {
   // A pack's own note replaces the China borders note.
   if (state.pack?.only) document.querySelector('[data-i18n="note"]').textContent = tx(state.pack.manifest, "note") || t("notePack");
   document.querySelectorAll("[data-i18n-title]").forEach((el) => { el.title = t(el.dataset.i18nTitle); el.setAttribute("aria-label", el.title); });
-  $("lang-name").textContent = L.short;
+  for (const [w, k] of [["prev", "tourPrev"], ["auto", "tourPlay"], ["story", "tourStory"], ["next", "tourNext"]]) tourBtn(w, $("tour").querySelector(".tour-" + w).dataset.key || k);
+  iconChips();
+  setMinButton($("era-min"), !!state.eraMin);
+  renderLayoutChips();
+  setRailButton(!!state.railMin);
+  setRailStyleButton();
+  setMinButton($("ledger-min"), $("ledger").classList.contains("collapsed"));
+  if (!$("settings").hidden) renderSettings();
   $("zoom-in").setAttribute("aria-label", t("zoomIn"));
   $("zoom-out").setAttribute("aria-label", t("zoomOut"));
   $("pan-prev").setAttribute("aria-label", t("earlier"));
@@ -201,6 +266,8 @@ async function setLang(lang) {
   renderPolityLabels(state.borders[state.snapshot]);
   renderPlaces();
   renderGeo();
+  renderLookChips();
+  renderPanelChip();
   renderLedger();
   updateCompare(true);
   emit("lang", { lang });
@@ -215,10 +282,35 @@ async function loadBorders(path) {
 }
 
 async function loadJSON(path) {
-  // Revalidate, so a browser holding an older data file picks up the new one after a publish.
-  const res = await fetch(new URL(path, BASE), { cache: "no-cache" });
-  if (!res.ok) throw new Error(`Could not load ${path} (${res.status})`);
-  return res.json();
+  bootFile(1);
+  try {
+    // Revalidate, so a browser holding an older data file picks up the new one after a publish.
+    const res = await fetch(new URL(path, BASE), { cache: "no-cache" });
+    if (!res.ok) throw new Error(`Could not load ${path} (${res.status})`);
+    return await res.json();
+  } finally { bootFile(0); }
+}
+
+// 加载中: the bar under the "Loading" note (index.html #boot) fills as the start-up files arrive; it goes once the map
+// and the first period are drawn. About this many files load before the map; more simply move the bar on more slowly.
+const boot = { on: document.documentElement.classList.contains("booting"), asked: 0, got: 0, expect: 16, p: 0 };
+function bootFile(start) {
+  if (!boot.on) return;
+  if (start) boot.asked++; else boot.got++;
+  bootProgress(0.1 + 0.75 * boot.got / Math.max(boot.expect, boot.asked));
+}
+function bootProgress(p) {
+  if (!boot.on || p <= (boot.p || 0)) return; // files asked for later never move the bar back
+  boot.p = p;
+  $("boot").style.setProperty("--boot", p.toFixed(3));
+  $("boot-p").textContent = Math.round(p * 100) + "%";
+}
+function bootDone(err) {
+  if (!boot.on) return;
+  if (err) { $("boot-t").textContent = t("loadError") + err.message; $("boot").classList.add("failed"); return; }
+  bootProgress(1);
+  boot.on = false;
+  document.documentElement.classList.remove("booting");
 }
 
 // Hypsometric tint: sea, lowland plains, loess and hills, plateau, high peaks.
@@ -245,13 +337,31 @@ async function liveTile(kind, z, x, y) {
 }
 
 const packs = {};
+// data/tiles.json maps each pack ("pack/4-0-0") to its current hashed file name on R2.
+let tileNamesJob = null;
+const tileNames = () => tileNamesJob ||= loadJSON("data/tiles.json").then((names) => {
+  pruneKept(["/tiles/", "/atlas/tiles/", BASE_PATH + "tiles/"], Object.values(names).map((n) => "/atlas/tiles/" + n));
+  return names;
+}, () => ({}));
+// The service worker keeps packs and pictures forever under their names. A file that changed has a new name, so once
+// the current list is known, kept copies it no longer names (and copies from before R2) are dropped.
+async function pruneKept(prefixes, keepPaths) {
+  try {
+    const keep = new Set(keepPaths), c = await caches.open("atlas-keep-v1");
+    for (const req of await c.keys()) {
+      const p = new URL(req.url).pathname;
+      if (prefixes.some((x) => p.startsWith(x)) && !keep.has(p)) c.delete(req);
+    }
+  } catch {}
+}
 function loadPack(z, px, py, dir = "pack") {
   const key = `${dir}/${z}-${px}-${py}`;
   if (!(key in packs)) {
     // Each archive is wrapped in a 1x1 PNG (the host serves only standard file types); the archive itself sits in
     // a private "tpAk" chunk: a 4-byte index length, a JSON index {"x/y": [offset, length]}, then the tile PNGs.
-    packs[key] = fetch(`${BASE}tiles/${key}.png`)
-      .then((r) => (r.ok ? r.arrayBuffer() : null))
+    packs[key] = tileNames()
+      .then((names) => names[key] && fetch(`${R2}/tiles/${names[key]}`))
+      .then((r) => (r?.ok ? r.arrayBuffer() : null))
       .then((png) => {
         if (!png) return null;
         const v = new DataView(png);
@@ -319,73 +429,488 @@ async function satTile(z, x, y) {
   c.getContext("2d").drawImage(bmp, (x & 1) * 128, (y & 1) * 128, 128, 128, 0, 0, 256, 256);
   return (await c.convertToBlob({ type: "image/jpeg", quality: 0.9 })).arrayBuffer();
 }
+const demJobs = new Map();
 maplibregl.addProtocol("atlas", async (params) => {
+  // A pack's base map tiles (see buildStyle) go through here too, so they load the same way as Earth's.
+  const pk = params.url.match(/^atlas:\/\/pk-(dem|img)\/(\d+)\/(\d+)\/(\d+)$/);
+  if (pk) {
+    const src = state.basemap[pk[1] === "dem" ? "dem" : "imagery"];
+    const r = await fetch(src.tiles.replace("{z}", pk[2]).replace("{x}", pk[3]).replace("{y}", pk[4]));
+    if (!r.ok) throw new Error(`no tile ${params.url}`);
+    return { data: await r.arrayBuffer() };
+  }
   const sat = params.url.startsWith("atlas://sat/");
   const [z, x, y] = params.url.slice(sat ? "atlas://sat/".length : "atlas://".length).split("/").map(Number);
-  const data = await (sat ? satTile(z, x, y) : demTile(z, x, y));
+  // The hillshade and the 3D terrain read the same elevation tiles from two sources; fetch (or enlarge) each tile once.
+  let job = sat ? null : demJobs.get(params.url);
+  if (!job) {
+    job = sat ? satTile(z, x, y) : demTile(z, x, y);
+    if (!sat) {
+      demJobs.set(params.url, job);
+      const url = params.url, drop = () => demJobs.get(url) === job && demJobs.delete(url);
+      job.then((d) => d || drop(), drop);
+      if (demJobs.size > 64) demJobs.delete(demJobs.keys().next().value);
+    }
+  }
+  const data = await job;
   if (!data) throw new Error(`no ${sat ? "imagery" : "elevation"} tile ${z}/${x}/${y}`);
-  return { data };
+  // MapLibre hands the buffer to a worker, which takes it over, so each caller gets its own copy.
+  return { data: sat ? data : data.slice(0) };
 });
+
+// With 3D terrain a marker fades when a hill hides it. MapLibre checks that by reading pixels back from the GPU, one
+// marker at a time, every 100 ms while the map moves; with a few hundred markers those reads stall every frame of a
+// flight (each read waits for the GPU). Here markers keep their look while the map moves, and once it comes to rest
+// all of them are checked from one read of the depth image.
+const markerDepth = { queue: new Set(), timer: 0 };
+{
+  const P = maplibregl.Marker.prototype, own = P._updateOpacity;
+  if (own) P._updateOpacity = function (force = false) {
+    const m = this._map, terrain = m?.terrain;
+    if (!terrain?.depthAtPoint || !terrain.painter || m.transform.isLocationOccluded(this._lngLat)) return own.call(this, force);
+    if (!force && m.isMoving()) return;
+    markerDepth.queue.add(this);
+    markerDepth.timer ||= setTimeout(markerDepthCheck, 0);
+  };
+}
+// Placing a marker on the terrain looks up its height, and MapLibre first works out which elevation tiles cover the
+// view, once per marker and twice per frame. That answer is the same for every marker in a frame, so keep it per view.
+function shareTerrainZoom(terrain) {
+  const T = Object.getPrototypeOf(terrain);
+  if (T.__sharedZoom || !T.getElevationForLngLat || !T.getElevationForLngLatZoom) return;
+  T.__sharedZoom = true;
+  const own = T.getElevationForLngLat;
+  T.getElevationForLngLat = function (lnglat, tr) {
+    const c = tr.center, key = `${tr.zoom} ${c.lng} ${c.lat} ${tr.pitch} ${tr.bearing} ${tr.width} ${tr.height} ${tr.elevation}`;
+    const memo = this.__zoomMemo;
+    if (memo?.key === key && memo.tr === tr && performance.now() - memo.t < 100) return this.getElevationForLngLatZoom(lnglat, memo.zoom);
+    // Ask MapLibre once for this view and note the zoom it settles on.
+    let zoom = null, v;
+    this.getElevationForLngLatZoom = (ll, z) => { zoom = z; return T.getElevationForLngLatZoom.call(this, ll, z); };
+    try { v = own.call(this, lnglat, tr); } finally { delete this.getElevationForLngLatZoom; }
+    this.__zoomMemo = zoom === null ? null : { key, tr, zoom, t: performance.now() };
+    return v;
+  };
+}
+// With 3D terrain MapLibre paints the flat layers into one texture per terrain tile and keeps those textures while
+// nothing changes. It decides that from a fingerprint per source, but also takes one for sources whose layers are all
+// hidden (the flat styles' land, a switched-off overlay), which is then never matched, so every texture was painted
+// again on every frame. This is MapLibre 5.24's preparation step with hidden layers left out. Style changes (showing a
+// layer, a new filter) still clear the textures through MapLibre's own "style" data event.
+const RTT_TYPES = { background: 1, fill: 1, line: 1, raster: 1, hillshade: 1, "color-relief": 1 };
+function keepTerrainTextures(m) {
+  const rt = m.painter?.renderToTexture, RT = rt && Object.getPrototypeOf(rt);
+  if (!RT || RT.__keep || maplibregl.getVersion?.() !== "5.24.0") return;
+  RT.__keep = true;
+  // The texture pool reused an older free texture before making a new one, so with more than one stack of layers
+  // (anything drawn live, like dots, splits the stack) each stack painted over the other's textures every frame.
+  // Grow the pool first; reuse the least recently used texture only once it is full.
+  const P = Object.getPrototypeOf(rt.pool), take = P.getOrCreateFreeObject;
+  P.getOrCreateFreeObject = function () {
+    if (this._objects.length < this._size) {
+      const obj = this._createObject(this._objects.length);
+      this._objects.push(obj);
+      return obj;
+    }
+    return take.call(this);
+  };
+  RT.prepareForRender = function (style, zoom) {
+    this._stacks = [];
+    this._prevType = null;
+    this._rttTiles = [];
+    this._renderableTiles = this.terrain.tileManager.getRenderableTiles();
+    this._renderableLayerIds = style._order.filter((id) => !style._layers[id].isHidden(zoom));
+    this._coordsAscending = {};
+    for (const id in style.tileManagers) {
+      const asc = (this._coordsAscending[id] = {});
+      const tm = style.tileManagers[id], ranges = tm.getSource().terrainTileRanges || null;
+      for (const tileID of tm.getVisibleCoordinates()) {
+        const keys = this.terrain.tileManager.getTerrainCoords(tileID, ranges);
+        for (const key in keys) (asc[key] ||= []).push(keys[key]);
+      }
+    }
+    this._rttFingerprints = {};
+    for (const id of this._renderableLayerIds) {
+      const source = style._layers[id].source;
+      if (!RTT_TYPES[style._layers[id].type] || this._rttFingerprints[source]) continue;
+      const fp = (this._rttFingerprints[source] = {});
+      const revision = style.tileManagers[source]?.getState().revision ?? 0;
+      for (const key in this._coordsAscending[source]) fp[key] = `${this._coordsAscending[source][key].map((c) => c.key).sort().join()}#${revision}`;
+    }
+    for (const tile of this._renderableTiles) {
+      for (const source in this._rttFingerprints) {
+        const fp = this._rttFingerprints[source][tile.tileID.key];
+        if (fp && fp !== tile.rttFingerprint[source]) tile.rtt = [];
+      }
+    }
+  };
+}
+function markerDepthCheck() {
+  markerDepth.timer = 0;
+  const list = [...markerDepth.queue].filter((mk) => mk._map?.terrain);
+  markerDepth.queue.clear();
+  if (!list.length) return;
+  const m = list[0]._map, terrain = m.terrain, tr = m.transform, painter = terrain.painter, ctx = painter.context, gl = ctx.gl;
+  const W = Math.floor(painter.width / devicePixelRatio), H = Math.floor(painter.height / devicePixelRatio);
+  // Each marker is looked at where it stands and, if that is hidden, at its middle.
+  const pts = list.map((mk) => [mk._pos, new maplibregl.Point(mk._pos.x, mk._pos.y - mk._offset.y)]);
+  let x0 = W, y0 = H, x1 = -1, y1 = -1;
+  for (const p of pts.flat()) {
+    const x = Math.floor(p.x), y = Math.floor(p.y);
+    if (x < 0 || y < 0 || x >= W || y >= H) continue;
+    x0 = Math.min(x0, x); x1 = Math.max(x1, x); y0 = Math.min(y0, y); y1 = Math.max(y1, y);
+  }
+  const w = x1 - x0 + 1, h = y1 - y0 + 1, buf = new Uint8Array(Math.max(0, w * h * 4));
+  if (w > 0) {
+    ctx.bindFramebuffer.set(terrain.getFramebuffer("depth").framebuffer);
+    gl.readPixels(x0, H - y1 - 1, w, h, gl.RGBA, gl.UNSIGNED_BYTE, buf);
+    ctx.bindFramebuffer.set(null);
+  }
+  // Depth as MapLibre encodes it (terrain_depth.fragment.glsl); off screen counts as hidden.
+  const depthAt = (p) => {
+    const x = Math.floor(p.x), y = Math.floor(p.y);
+    if (x < x0 || x > x1 || y < y0 || y > y1) return 0;
+    const k = ((y1 - y) * w + (x - x0)) * 4;
+    return (buf[k] / 16777216 + buf[k + 1] / 65536 + buf[k + 2] / 256 + buf[k + 3]) / 256;
+  };
+  const near = 0.006;
+  list.forEach((mk, i) => {
+    const elev = terrain.getElevationForLngLat(mk._lngLat, tr);
+    let hidden = tr.lngLatToCameraDepth(mk._lngLat, elev) - depthAt(pts[i][0]) >= near;
+    if (hidden) {
+      const up = (Math.sin((m.getPitch() * Math.PI) / 180) * -mk._offset.y) / tr.pixelsPerMeter;
+      hidden = tr.lngLatToCameraDepth(mk._lngLat, elev + up) - depthAt(pts[i][1]) > near;
+      if (hidden && mk._popup?.isOpen()) mk._popup.remove();
+    }
+    mk._element.style.opacity = hidden ? mk._opacityWhenCovered : mk._opacity;
+    mk._element.classList.toggle("maplibregl-marker-covered", hidden);
+  });
+}
 
 // Two looks: satellite colours with light shading, or the drawn relief map (hypsometric tint, stronger shading).
 const SKY = {
+  space: { "sky-color": "#05060a", "horizon-color": "#2a1d18", "fog-color": "#1a1412",
+           "sky-horizon-blend": 0.5, "horizon-fog-blend": 0.6, "fog-ground-blend": 0.5, "atmosphere-blend": 0.4 },
   sat: { "sky-color": "#3f86c8", "horizon-color": "#cfe4f2", "fog-color": "#d6e6f0",
          "sky-horizon-blend": 0.5, "horizon-fog-blend": 0.7, "fog-ground-blend": 0.3, "atmosphere-blend": 0.8 },
+  antique: { "sky-color": "#d8cfb8", "horizon-color": "#efe7d2", "fog-color": "#efe7d2",
+             "sky-horizon-blend": 0.6, "horizon-fog-blend": 0.6, "fog-ground-blend": 0.4, "atmosphere-blend": 0.4 },
+  dark: { "sky-color": "#0c1219", "horizon-color": "#26313b", "fog-color": "#1c242b",
+          "sky-horizon-blend": 0.6, "horizon-fog-blend": 0.6, "fog-ground-blend": 0.4, "atmosphere-blend": 0.3 },
   relief: { "sky-color": "#a9c4d0", "horizon-color": "#e3ebe8", "fog-color": "#e3ebe8",
             "sky-horizon-blend": 0.6, "horizon-fog-blend": 0.6, "fog-ground-blend": 0.4, "atmosphere-blend": 0.5 },
 };
 // Relief is exaggerated more as you zoom in, so hills and ranges keep standing out at close range.
-const terrainExaggeration = (z) => Math.min(5, 2 + Math.max(0, z - 5) * 0.9);
+const terrainExaggeration = (z) => Math.min(5, 2 + Math.max(0, z - 5) * 0.9) * (state.basemap ? state.basemap.exaggeration ?? 1 : 1);
 function setTerrainForZoom() {
-  if (!state.show3d) return;
+  if (!state.show3d || (state.basemap && !state.basemap.dem)) return;
   const e = Math.round(terrainExaggeration(map.getZoom()) * 10) / 10;
   if (e === state.terrainExag) return;
   state.terrainExag = e;
   // Calling setTerrain again would rebuild the terrain and stall tile loading; adjust the live terrain instead.
   if (map.terrain) { map.terrain.exaggeration = e; map.triggerRepaint(); }
+  // A flight that starts while the style is still being swapped (a new period's look) ends here before the style has
+  // loaded, and setTerrain would throw; try again once the map is idle.
+  else if (!map.isStyleLoaded()) { state.terrainExag = null; map.once("idle", setTerrainForZoom); return; }
   else map.setTerrain({ source: "dem-terrain", exaggeration: e });
+  if (map.terrain) { shareTerrainZoom(map.terrain); keepTerrainTextures(map); }
 }
-function applyLook() {
-  const sat = state.showSat;
-  document.documentElement.classList.toggle("sat", sat);
-  if (!map?.getLayer("satellite")) return;
-  map.setLayoutProperty("satellite", "visibility", sat ? "visible" : "none");
-  // The drawn relief stays underneath, so it shows where the imagery stops (west of about 70°E).
-  map.setLayoutProperty("relief", "visibility", "visible");
-  map.setPaintProperty("hillshade", "hillshade-exaggeration", sat
-    ? ["interpolate", ["linear"], ["zoom"], 3, 0.3, 6, 0.55, 8, 0.8]
-    : ["interpolate", ["linear"], ["zoom"], 3, 0.45, 6, 0.6, 8, 0.7]);
-  map.setPaintProperty("hillshade", "hillshade-highlight-color", sat
-    ? ["rgba(255,244,214,0.5)", "rgba(255,244,214,0.35)", "rgba(255,244,214,0.2)", "rgba(255,244,214,0.35)"] : ["#fffdf5", "#fffdf5", "#fff8e8", "#fffdf5"]);
-  map.setPaintProperty("hillshade", "hillshade-shadow-color", sat
-    ? ["rgba(8,14,6,0.95)", "rgba(8,14,6,0.8)", "rgba(8,14,6,0.6)", "rgba(8,14,6,0.8)"] : ["#3a3328", "#4a3f33", "#3a3328", "#2e2a24"]);
-  map.setPaintProperty("lakes", "fill-opacity", sat ? 0 : 0.9);
-  map.setPaintProperty("bg", "background-color", sat ? "#1d4f86" : "#9db8bf");
-  map.setSky(SKY[sat ? "sat" : "relief"]);
+// Map styles (底图). Each sets the land colours, the hillshade, the water and the sky; `flat` turns 3D off while it is
+// chosen. ?style=<id> picks one on load (for embedders), and plugins can call atlas.setStyle(id).
+const flatRelief = (sea, land) => ["interpolate", ["linear"], ["elevation"], -1, sea, 0, land, 9000, land];
+const shade = (hi, lo) => [[hi, hi, hi, hi], [lo, lo, lo, lo]];
+const LOOKS = {
+  satellite: { name: "Satellite", name_zh: "卫星", swatch: "linear-gradient(135deg,#2c4a2a,#6b6a45 55%,#1d4f86 56%)", dark: true, sat: true,
+    relief: RELIEF, bg: "#1d4f86", lakes: 0, river: "#4f86a3", sky: "sat",
+    shadeEx: ["interpolate", ["linear"], ["zoom"], 3, 0.3, 6, 0.55, 8, 0.8],
+    hi: ["rgba(255,244,214,0.5)", "rgba(255,244,214,0.35)", "rgba(255,244,214,0.2)", "rgba(255,244,214,0.35)"],
+    lo: ["rgba(8,14,6,0.95)", "rgba(8,14,6,0.8)", "rgba(8,14,6,0.6)", "rgba(8,14,6,0.8)"] },
+  terrain: { name: "Terrain", name_zh: "地形", swatch: "linear-gradient(135deg,#a9c98e,#dccb94 45%,#97795f 70%,#9db8bf 71%)",
+    relief: RELIEF, bg: "#9db8bf", lakes: 0.9, lakeColor: "#86afc2", river: "#4f86a3", sky: "relief",
+    shadeEx: ["interpolate", ["linear"], ["zoom"], 3, 0.45, 6, 0.6, 8, 0.7],
+    hi: ["#fffdf5", "#fffdf5", "#fff8e8", "#fffdf5"], lo: ["#3a3328", "#4a3f33", "#3a3328", "#2e2a24"] },
+  antique: { name: "Antique", name_zh: "古风", swatch: "linear-gradient(135deg,#efe4c8,#d9c49b 50%,#a98c63 70%,#b9c4b6 71%)",
+    relief: ["interpolate", ["linear"], ["elevation"], -6000, "#a7ad98", -200, "#bdc1aa", -1, "#cfcfb6",
+      0, "#f1e6c6", 300, "#eadbb2", 1000, "#dfc794", 2500, "#c9a874", 4500, "#ad8f68", 6500, "#e6dcc4"],
+    bg: "#cfcfb6", lakes: 0.9, lakeColor: "#bdc1aa", river: "#7d8a72", sky: "antique",
+    shadeEx: ["interpolate", ["linear"], ["zoom"], 3, 0.35, 6, 0.5, 8, 0.6],
+    hi: ["#fbf5e4", "#fbf5e4", "#f6eed8", "#fbf5e4"], lo: ["#5b4630", "#6a5238", "#5b4630", "#4c3a28"] },
+  plain: { name: "Simple", name_zh: "简洁", swatch: "linear-gradient(135deg,#f3f0e8 55%,#cfe0ea 56%)", flat: true,
+    relief: flatRelief("#cfe0ea", "#f4f1e9"), land: "#f4f1e9", coast: "#a9bfcc", bg: "#cfe0ea", lakes: 1, lakeColor: "#cfe0ea", river: "#8fb3c9", sky: "relief", noShade: true },
+  dark: { name: "Terrain · dark", name_zh: "地形·暗色", swatch: "linear-gradient(135deg,#2a3230,#3d4440 55%,#0f1a24 56%)", dark: true,
+    relief: ["interpolate", ["linear"], ["elevation"], -6000, "#0a121a", -1, "#122030", 0, "#262d2b", 1500, "#2f3532", 4000, "#3c403c", 6500, "#5a5d5a"],
+    bg: "#122030", lakes: 1, lakeColor: "#16283a", river: "#3f6f8c", sky: "dark",
+    shadeEx: ["interpolate", ["linear"], ["zoom"], 3, 0.4, 6, 0.55, 8, 0.65],
+    hi: ["rgba(255,255,255,0.18)", "rgba(255,255,255,0.12)", "rgba(255,255,255,0.08)", "rgba(255,255,255,0.12)"],
+    lo: ["rgba(0,0,0,0.9)", "rgba(0,0,0,0.75)", "rgba(0,0,0,0.6)", "rgba(0,0,0,0.75)"] },
+};
+// Flat and quiet, for reading the data on top: charcoal land, navy sea, thin slate-blue rivers and lake outlines.
+LOOKS.night = { name: "Simple · dark", name_zh: "简洁·暗色", swatch: "linear-gradient(135deg,#2b2a28 55%,#1c2333 56%)", dark: true, flat: true,
+  relief: flatRelief("#1c2333", "#1c2333"), land: "#2b2a28", coast: "#4a4b50", bg: "#1c2333", lakes: 1, lakeColor: "#1c2333", lakeLine: 0.9, river: "#6f86b8", riverWidth: 0.7,
+  sky: "dark", noShade: true };
+// Menu order: each light style next to its dark twin.
+const LOOK_ORDER = ["satellite", "terrain", "dark", "plain", "night", "antique"];
+const OLD_LOOK = { sat: "satellite", relief: "terrain" };
+const lookId = (v) => (LOOKS[v] ? v : OLD_LOOK[v] || null);
+// Under a pack's base map only its own styles exist: its imagery (if any) and its elevation coloured by its `relief`.
+function basemapLooks() {
+  const B = state.basemap, out = {};
+  if (B.imagery) out.satellite = { ...LOOKS.satellite, name: B.imagery.name || "Imagery", name_zh: B.imagery.name_zh || B.imagery.name || "影像",
+    relief: B.relief ? reliefExpr(B.relief) : flatRelief(B.background || "#000", B.background || "#000"), bg: B.background || "#000", sky: "space" };
+  if (B.dem) out.terrain = { ...LOOKS.terrain, name: B.reliefName || "Relief", name_zh: B.reliefName_zh || "地形",
+    swatch: `linear-gradient(135deg,${(B.relief || []).map((r) => r[1]).join(",") || "#888,#ccc"})`,
+    relief: B.relief ? reliefExpr(B.relief) : RELIEF, bg: B.background || "#000", sky: "space" };
+  return out;
+}
+const reliefExpr = (stops) => ["interpolate", ["linear"], ["elevation"], ...stops.flat()];
+const looks = () => (state.basemap ? basemapLooks() : LOOKS);
+const lookOrder = () => (state.basemap ? Object.keys(basemapLooks()) : LOOK_ORDER);
+function applyLook(m = map) {
+  const L = looks()[state.look] || Object.values(looks())[0] || LOOKS.satellite;
+  if (m === map || m === null) {
+    document.documentElement.classList.toggle("sat", !!L.dark);
+    document.documentElement.dataset.look = state.look;
+  }
+  if (!m?.getLayer("satellite")) return;
+  m.setLayoutProperty("satellite", "visibility", L.sat ? "visible" : "none");
+  // Earth's imagery covers the whole world, so under it the relief would only cost drawing time (a third of each
+  // frame in 3D); a pack's own imagery may stop short, so the relief stays under that.
+  // The flat styles draw Earth's land as a shape over the background, so they need no relief either, and with neither
+  // drawn no elevation tiles load at all (unless 3D is turned on).
+  m.setLayoutProperty("relief", "visibility", (L.sat || L.land) && !state.basemap ? "none" : "visible");
+  m.setPaintProperty("relief", "color-relief-color", L.relief);
+  m.setLayoutProperty("hillshade", "visibility", L.noShade ? "none" : "visible");
+  if (!L.noShade) {
+    m.setPaintProperty("hillshade", "hillshade-exaggeration", L.shadeEx);
+    m.setPaintProperty("hillshade", "hillshade-highlight-color", L.hi);
+    m.setPaintProperty("hillshade", "hillshade-shadow-color", L.lo);
+  }
+  m.setPaintProperty("lakes", "fill-opacity", L.lakes);
+  for (const id of ["land", "coast"]) m.setLayoutProperty(id, "visibility", L.land ? "visible" : "none");
+  if (L.land) {
+    m.setPaintProperty("land", "fill-color", L.land);
+    m.setPaintProperty("coast", "line-color", L.coast);
+    if (!m._landLoaded) { m._landLoaded = true; m.getSource("land").setData(BASE + "data/geo/land.geojson"); }
+  }
+  m.setPaintProperty("lakes-line", "line-opacity", L.lakeLine || 0);
+  m.setPaintProperty("rivers", "line-opacity", L.riverWidth ? 0.95 : 0.9);
+  m.setPaintProperty("rivers", "line-width", L.riverWidth
+    ? ["interpolate", ["linear"], ["zoom"], 3, ["case", ["<=", ["get", "rank"], 3], 1, 0.5], 8, ["case", ["<=", ["get", "rank"], 3], 2.4, 1.6]]
+    : ["interpolate", ["linear"], ["zoom"], 3, ["case", ["<=", ["get", "rank"], 3], 1.2, 0.6], 8, ["case", ["<=", ["get", "rank"], 3], 4.5, 3]]);
+  if (L.lakeColor) m.setPaintProperty("lakes", "fill-color", L.lakeColor);
+  for (const id of ["rivers", "rivers-minor", "old-river"]) m.setPaintProperty(id, "line-color", L.river);
+  m.setPaintProperty("bg", "background-color", L.bg);
+  // 政区 area edges: cream over dark looks, ink over light ones.
+  if (m.getLayer("admin-area-line")) m.setPaintProperty("admin-area-line", "line-color", L.dark ? "#f3e6c4"
+    : ["match", ["get", "lv"], 3, "#2f5f8a", "#5a3d2a"]);
+  m.setSky(state.basemap?.sky || SKY[L.sky]);
+  if (state.basemap) {
+    // Earth's own water and coast stay off; without elevation there is no relief to shade.
+    if (state.basemap.earth === false) for (const id of ["rivers", "rivers-minor", "lakes", "lakes-line", "land", "coast", "old-river", "old-coast"]) m.setLayoutProperty(id, "visibility", "none");
+    if (!state.basemap.dem) for (const id of ["relief", "hillshade"]) m.setLayoutProperty(id, "visibility", "none");
+  }
+}
+// The map's style already dressed in the chosen look, so a reload doesn't first draw the default terrain colours and
+// switch over once the map has loaded: applyLook is run against the style description instead of a live map.
+function buildStyle() {
+  const style = baseStyle(), layer = (id) => style.layers.find((l) => l.id === id);
+  const shim = {
+    getLayer: layer,
+    setLayoutProperty: (id, k, v) => { const l = layer(id); if (l) (l.layout ||= {})[k] = v; },
+    setPaintProperty: (id, k, v) => { const l = layer(id); if (l) (l.paint ||= {})[k] = v; },
+    setSky: (sky) => { style.sky = sky; },
+    getSource: (id) => ({ setData: (data) => { style.sources[id].data = data; } }),
+  };
+  applyLook(shim);
+  return style;
+}
+// Picks a map style; a flat style turns 3D off and remembers whether it was on, so leaving it brings 3D back.
+function setLook(id, remember = true) {
+  id = lookId(id);
+  if (!id || !looks()[id]) return false;
+  const was = looks()[state.look], now = looks()[id];
+  state.look = id;
+  if (remember) try { localStorage.setItem("atlas-look", id); } catch {}
+  if (now.flat && !was?.flat && state.show3d) { state.flat3d = true; set3d(false); }
+  else if (!now.flat && was?.flat && state.flat3d) { state.flat3d = false; set3d(true); }
+  applyLook();
+  if (cmp.map && cmp.loaded) applyLook(cmp.map);
+  renderLookChips();
+  return true;
+}
+// The style button in the 地图 row shows the current style; its menu lists them all.
+const lookSwatch = (L) => `<i style="background:${L.swatch}"></i>`;
+function renderLookChips() {
+  const btn = $("look-btn"), L = looks()[state.look] || Object.values(looks())[0];
+  if (!btn) return;
+  btn.innerHTML = `${lookSwatch(L)}<b>${esc(zh() ? L.name_zh : L.name)}</b><svg viewBox="0 0 10 10" aria-hidden="true"><path d="M2 3.5l3 3 3-3" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>`;
+  btn.title = t("g_look");
+  if (!$("look-pop").hidden) toggleLookPop(true);
+}
+function toggleLookPop(open) {
+  const pop = $("look-pop"), btn = $("look-btn");
+  open ??= pop.hidden;
+  pop.hidden = !open;
+  btn.setAttribute("aria-expanded", open);
+  if (!open) return;
+  pop.innerHTML = lookOrder().map((id) => [id, looks()[id]]).map(([id, L]) => `<button type="button" role="menuitemradio" aria-checked="${id === state.look}" data-look="${id}"><span>${lookSwatch(L)}<b>${esc(zh() ? L.name_zh : L.name)}</b></span><svg viewBox="0 0 12 12" aria-hidden="true"><path d="M2.5 6.5l2.3 2.2L9.5 3.5" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></button>`).join("");
+  // Fixed to the window (the layers panel clips on phones); opens upward when there is no room below.
+  if (pop.parentNode !== document.body) document.body.appendChild(pop);
+  const r = btn.getBoundingClientRect(), h = pop.offsetHeight;
+  pop.style.position = "fixed";
+  pop.style.top = `${r.bottom + 6 + h > innerHeight - 8 ? Math.max(8, r.top - 6 - h) : r.bottom + 6}px`;
+  pop.style.left = `${Math.min(r.left, innerWidth - pop.offsetWidth - 8)}px`;
+  pop.style.right = "auto";
+  pop.querySelector('[aria-checked="true"]')?.focus();
 }
 
-function buildStyle() {
-  const dem = { type: "raster-dem", tiles: [TILE_URL], tileSize: 256, encoding: "terrarium", maxzoom: 10 };
+// Panel colour and opacity (面板 row). "auto" keeps the built-in light/dark panel; a dark colour
+// switches the interface to dark ink. Opacity applies to the era card, ledger, timeline and tour card.
+const PANEL_COLORS = [
+  { id: "auto", name: "Default", name_zh: "默认", swatch: "linear-gradient(135deg, #f7f9f8 50%, #151a1d 50%)" },
+  { id: "#f7f9f8", name: "Light", name_zh: "浅色" },
+  { id: "#ffffff", name: "White", name_zh: "雪白" },
+  { id: "#f2e8d3", name: "Paper", name_zh: "宣纸" },
+  { id: "#dce9e2", name: "Celadon", name_zh: "青瓷" },
+  { id: "#151a1d", name: "Dark", name_zh: "深色" },
+  { id: "#000000", name: "Black", name_zh: "纯黑" },
+  { id: "#162a2b", name: "Teal ink", name_zh: "黛青" },
+  { id: "#18213a", name: "Night blue", name_zh: "夜蓝" },
+  { id: "#2e221b", name: "Umber", name_zh: "赭石" },
+];
+const hexOk = (c) => /^#[0-9a-f]{6}$/i.test(c || "") ? c.toLowerCase() : null;
+const hexRgb = (c) => [1, 3, 5].map((i) => parseInt(c.slice(i, i + 2), 16));
+const hexDark = (c) => { const [r, g, b] = hexRgb(c).map((v) => { v /= 255; return v <= 0.04045 ? v / 12.92 : ((v + 0.055) / 1.055) ** 2.4; }); return 0.2126 * r + 0.7152 * g + 0.0722 * b < 0.18; };
+function applyPanel() {
+  const root = document.documentElement, st = root.style, c = state.panelColor;
+  if (c === "auto") {
+    for (const k of ["--panel-rgb", "--panel-solid"]) st.removeProperty(k);
+    root.removeAttribute("data-theme");
+  } else {
+    st.setProperty("--panel-rgb", hexRgb(c).join(", "));
+    st.setProperty("--panel-solid", c);
+    root.dataset.theme = hexDark(c) ? "dark" : "light";
+  }
+  if (state.panelOp == null) st.removeProperty("--panel-op");
+  else st.setProperty("--panel-op", String(state.panelOp));
+  renderPanelChip();
+}
+function setPanel({ color = state.panelColor, op = state.panelOp } = {}) {
+  state.panelColor = color;
+  state.panelOp = op;
+  applyPanel();
+  try {
+    localStorage.setItem("atlas-panel-color", color);
+    if (op == null) localStorage.removeItem("atlas-panel-op"); else localStorage.setItem("atlas-panel-op", String(op));
+  } catch {}
+  emit("panel", { color, opacity: op });
+}
+const panelEntry = (c) => PANEL_COLORS.find((p) => p.id === c) || { id: c, name: "Custom", name_zh: "自定义" };
+const panelSwatch = (p) => `<i style="background:${p.swatch || p.id}"></i>`;
+function renderPanelChip() {
+  const btn = $("panel-btn");
+  if (!btn) return;
+  const p = panelEntry(state.panelColor);
+  btn.innerHTML = `${panelSwatch(p)}<b>${esc(zh() ? p.name_zh : p.name)}</b><svg viewBox="0 0 10 10" aria-hidden="true"><path d="M2 3.5l3 3 3-3" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>`;
+  btn.title = t("g_panel");
+  // Unset opacity shows the built-in one (92% light, 90% dark).
+  const op = Math.round(100 * (state.panelOp ?? (parseFloat(getComputedStyle(document.documentElement).getPropertyValue("--panel-a")) || 0.92)));
+  $("panel-op").value = op;
+  $("panel-op-v").value = `${op}%`;
+}
+function togglePanelPop(open) {
+  const pop = $("panel-pop"), btn = $("panel-btn");
+  open ??= pop.hidden;
+  pop.hidden = !open;
+  btn.setAttribute("aria-expanded", open);
+  if (!open) return;
+  const tick = '<svg viewBox="0 0 12 12" aria-hidden="true"><path d="M2.5 6.5l2.3 2.2L9.5 3.5" fill="none" stroke="currentColor" stroke-width="1.6"/></svg>';
+  const item = (p) => `<button type="button" role="menuitemradio" aria-checked="${p.id === state.panelColor}" data-panel="${p.id}"><span>${panelSwatch(p)}<b>${esc(zh() ? p.name_zh : p.name)}</b></span>${tick}</button>`;
+  const custom = !PANEL_COLORS.some((p) => p.id === state.panelColor);
+  const cur = hexOk(state.panelColor) || "#f7f9f8";
+  pop.innerHTML = PANEL_COLORS.slice(0, 5).map(item).join("") + "<hr>" + PANEL_COLORS.slice(5).map(item).join("") + "<hr>"
+    + `<button type="button" role="menuitemradio" aria-checked="${custom}" class="panel-custom"><span>${custom ? panelSwatch({ id: cur }) : "<i></i>"}<b>${esc(t("panelCustom"))}</b></span>${tick}<input type="color" value="${cur}" aria-label="${esc(t("panelCustom"))}"></button>`;
+  if (pop.parentNode !== document.body) document.body.appendChild(pop);
+  const r = btn.getBoundingClientRect(), h = pop.offsetHeight;
+  pop.style.position = "fixed";
+  pop.style.top = `${r.bottom + 6 + h > innerHeight - 8 ? Math.max(8, r.top - 6 - h) : r.bottom + 6}px`;
+  pop.style.left = `${Math.min(r.left, innerWidth - pop.offsetWidth - 8)}px`;
+  pop.style.right = "auto";
+  pop.querySelector('[aria-checked="true"]')?.focus();
+}
+// Panel styles (设置 › 外观): each is a block of CSS under html[data-ui="<id>"] in style.css; "classic" sets none.
+// A first visit opens in 毛玻璃 at 55% opacity (the boot script in index.html has the same defaults).
+const DEFAULT_UI = "glass", DEFAULT_OP = 0.55;
+// The preview is a tiny drawing of the panels over a map: --p panel fill, --b edge, --r corner.
+const UI_STYLES = [
+  { id: "classic", name: "Classic", name_zh: "经典", preview: "--p:rgba(247,249,248,.95);--r:4px" },
+  { id: "paper", name: "Paper", name_zh: "宣纸", preview: "--p:#f5eede;--b:#8a6a46;--r:1px" },
+  { id: "glass", name: "Glass", name_zh: "毛玻璃", preview: "--p:rgba(20,24,30,.6);--b:rgba(255,255,255,.4);--r:6px" },
+  { id: "editorial", name: "Editorial", name_zh: "简报", preview: "--p:#fff;--b:#111;--r:0" },
+  { id: "lacquer", name: "Lacquer", name_zh: "漆金", preview: "--p:#1d1311;--b:#d8b46e;--r:2px" },
+];
+function setUIStyle(id, remember = true) {
+  if (!UI_STYLES.some((u) => u.id === id)) id = "classic";
+  state.ui = id;
+  if (id === "classic") document.documentElement.removeAttribute("data-ui");
+  else document.documentElement.dataset.ui = id;
+  renderPanelChip();
+  if (!remember) return;
+  try { localStorage.setItem("atlas-ui", id); } catch {}
+  emit("panelStyle", { style: id });
+}
+let savedUI = null;
+try { savedUI = localStorage.getItem("atlas-ui"); } catch {}
+setUIStyle(savedUI || DEFAULT_UI, false);
+
+// Applied before the map loads so the panels never flash in the old colour.
+try {
+  state.panelColor = localStorage.getItem("atlas-panel-color") || "auto";
+  const v = localStorage.getItem("atlas-panel-op"), op = parseFloat(v ?? DEFAULT_OP);
+  state.panelOp = op >= 0.2 && op <= 1 ? op : null;
+} catch {}
+if (state.panelColor !== "auto" && !hexOk(state.panelColor)) state.panelColor = "auto";
+state.panelOp ??= null;
+applyPanel();
+
+function baseStyle() {
+  // A pack's own base map (another planet, an invented world) replaces Earth's elevation and imagery.
+  const B = state.basemap;
+  const dem = B?.dem ? { type: "raster-dem", tiles: ["atlas://pk-dem/{z}/{x}/{y}"], tileSize: B.dem.tileSize || 256, encoding: B.dem.encoding || "terrarium", maxzoom: B.dem.maxzoom ?? 6 }
+    : { type: "raster-dem", tiles: [TILE_URL], tileSize: 256, encoding: "terrarium", maxzoom: 10 };
+  const sat = B ? { type: "raster", tiles: B.imagery ? ["atlas://pk-img/{z}/{x}/{y}"] : [], tileSize: B.imagery?.tileSize || 256, maxzoom: B.imagery?.maxzoom ?? 6 }
+    : { type: "raster", tiles: [SAT_URL], tileSize: 256, maxzoom: 10,
+        attribution: "Imagery: Sentinel-2 2020, Copernicus/Sentinel Hub (CC BY 4.0); Sentinel-2 cloudless 2016 by EOX, s2maps.eu (CC BY 4.0)" };
   return {
     version: 8,
     sources: {
-      dem, "dem-terrain": { ...dem },
-      sat: { type: "raster", tiles: [SAT_URL], tileSize: 256, maxzoom: 10,
-             attribution: "Imagery: Sentinel-2 2020, Copernicus/Sentinel Hub (CC BY 4.0); Sentinel-2 cloudless 2016 by EOX, s2maps.eu (CC BY 4.0)" },
+      dem, "dem-terrain": { ...dem }, sat,
       rivers: { type: "geojson", data: BASE + "data/geo/rivers.geojson" },
       lakes: { type: "geojson", data: BASE + "data/geo/lakes.geojson" },
+      land: { type: "geojson", data: { type: "FeatureCollection", features: [] } },
       oldgeo: { type: "geojson", data: BASE + "data/geo/old-rivers.geojson" },
       borders: { type: "geojson", data: { type: "FeatureCollection", features: [] } },
       routes: { type: "geojson", data: { type: "FeatureCollection", features: [] } },
       spread: { type: "geojson", data: { type: "FeatureCollection", features: [] } },
+      ties: { type: "geojson", data: { type: "FeatureCollection", features: [] } },
       roads: { type: "geojson", data: { type: "FeatureCollection", features: [] } },
       clans: { type: "geojson", data: { type: "FeatureCollection", features: [] } },
+      disputes: { type: "geojson", data: { type: "FeatureCollection", features: [] } },
+      area: { type: "geojson", data: { type: "FeatureCollection", features: [] } },
+      disasters: { type: "geojson", data: { type: "FeatureCollection", features: [] } },
       walls: { type: "geojson", data: { type: "FeatureCollection", features: [] } },
+      admin: { type: "geojson", data: { type: "FeatureCollection", features: [] } },
+      adminAreas: { type: "geojson", data: { type: "FeatureCollection", features: [] } },
+      econ: { type: "geojson", data: { type: "FeatureCollection", features: [] } },
+      econTrail: { type: "geojson", data: { type: "FeatureCollection", features: [] } },
     },
     sky: SKY.relief,
     layers: [
       { id: "bg", type: "background", paint: { "background-color": "#9db8bf" } },
       { id: "relief", type: "color-relief", source: "dem", paint: { "color-relief-color": RELIEF } },
+      // Natural Earth land (10m, simplified): flat styles draw it over the relief for a crisp coast.
+      { id: "land", type: "fill", source: "land", layout: { visibility: "none" }, paint: { "fill-color": "#2b2a28" } },
+      { id: "coast", type: "line", source: "land", layout: { visibility: "none", "line-join": "round" }, paint: { "line-color": "#55565a", "line-width": 0.8 } },
       { id: "satellite", type: "raster", source: "sat", layout: { visibility: "none" },
         paint: { "raster-fade-duration": 150, "raster-contrast": 0.08, "raster-saturation": 0.05 } },
       // Light from several directions so ranges read clearly whichever way they run.
@@ -398,6 +923,7 @@ function buildStyle() {
           "hillshade-exaggeration": ["interpolate", ["linear"], ["zoom"], 3, 0.45, 6, 0.6, 8, 0.7] } },
       // Modern rivers and lakes (Natural Earth); minor rivers appear as you zoom in.
       { id: "lakes", type: "fill", source: "lakes", paint: { "fill-color": "#86afc2", "fill-opacity": 0.9 } },
+      { id: "lakes-line", type: "line", source: "lakes", paint: { "line-color": "#7d8fb8", "line-width": 1.2, "line-opacity": 0 } },
       { id: "rivers-minor", type: "line", source: "rivers", minzoom: 4.5, filter: [">", ["get", "rank"], 5],
         layout: { "line-cap": "round", "line-join": "round" },
         paint: { "line-color": "#4a82a0", "line-opacity": 0.85,
@@ -426,15 +952,32 @@ function buildStyle() {
         paint: { "line-color": "#f6f3e8", "line-width": 5, "line-opacity": 0.7, "line-blur": 1 } },
       { id: "focus-line", type: "line", source: "borders", filter: ["get", "focus"],
         paint: { "line-color": "#b93a26", "line-width": ["case", ["has", "color"], 1.4, 2.2] } },
+      // The selected country: every other state dimmed, its own edge in gold (applySelMap sets the filters).
+      { id: "sel-dim", type: "fill", source: "borders", layout: { visibility: "none" }, paint: { "fill-color": "#141a1e", "fill-opacity": 0.45 } },
+      { id: "sel-line", type: "line", source: "borders", filter: ["==", ["get", "name"], "\u0000"], layout: { "line-join": "round" },
+        paint: { "line-color": "#f0b429", "line-width": ["interpolate", ["linear"], ["zoom"], 3, 2.5, 8, 5] } },
       // The states a tour step talks about (tourHighlight sets the filter).
       { id: "hl-fill", type: "fill", source: "borders", filter: ["==", ["get", "name_zh"], "\u0000"],
         paint: { "fill-color": "#f2c14e", "fill-opacity": 0.42 } },
       { id: "hl-line", type: "line", source: "borders", filter: ["==", ["get", "name_zh"], "\u0000"], layout: { "line-join": "round" },
         paint: { "line-color": "#f2c14e", "line-width": ["interpolate", ["linear"], ["zoom"], 3, 3, 8, 6], "line-blur": 0.5 } },
+      // Disputed areas (data/disputes.json): hatched in the years of the dispute; the borders below follow actual control.
+      { id: "dispute-fill", type: "fill", source: "disputes", filter: ["==", ["get", "id"], "\u0000"], paint: { "fill-pattern": "hatch", "fill-opacity": 0.9 } },
+      { id: "dispute-line", type: "line", source: "disputes", filter: ["==", ["get", "id"], "\u0000"], layout: { "line-join": "round" },
+        paint: { "line-color": "#8c2f1f", "line-width": ["interpolate", ["linear"], ["zoom"], 3, 0.8, 8, 1.8], "line-opacity": 0.8, "line-dasharray": [2, 1.5] } },
+      // The area whose history card is open (地区史): a gold dashed outline over a faint wash.
+      { id: "area-dim", type: "fill", source: "area", filter: ["has", "mask"], paint: { "fill-color": "#141a1e", "fill-opacity": 0.4 } },
+      { id: "area-fill", type: "fill", source: "area", filter: ["!", ["has", "mask"]], paint: { "fill-color": "#f0b429", "fill-opacity": 0.08 } },
+      { id: "area-line", type: "line", source: "area", filter: ["!", ["has", "mask"]], layout: { "line-join": "round" },
+        paint: { "line-color": "#d9971a", "line-width": ["interpolate", ["linear"], ["zoom"], 3, 1.8, 8, 3.5], "line-dasharray": [2.5, 1.5] } },
       // Elite groups (豪族/士人集团): a soft tint over their home region with a dashed edge, coloured by kind.
       { id: "clan-fill", type: "fill", source: "clans", paint: { "fill-color": ["get", "color"], "fill-opacity": 0.3 } },
       { id: "clan-line", type: "line", source: "clans", layout: { "line-join": "round" },
         paint: { "line-color": ["get", "color"], "line-width": 2, "line-opacity": 0.95, "line-dasharray": [2, 1.5] } },
+      // Disasters (气候与灾害): a soft tint over the stricken area, coloured by kind; faded once it is over.
+      { id: "dis-fill", type: "fill", source: "disasters", paint: { "fill-color": ["get", "color"], "fill-opacity": ["case", ["get", "past"], 0.05, 0.13] } },
+      { id: "dis-line", type: "line", source: "disasters", layout: { "line-join": "round" },
+        paint: { "line-color": ["get", "color"], "line-width": 1.6, "line-opacity": ["case", ["get", "past"], 0.35, 0.85], "line-dasharray": [1, 1.4] } },
       // Great Walls (长城): manned walls as a dark line with battlement ticks; abandoned ones as faint dashes.
       { id: "wall-ruin", type: "line", source: "walls", filter: ["==", ["get", "ruin"], true],
         paint: { "line-color": "#6b5a48", "line-opacity": 0.45, "line-width": 1.6, "line-dasharray": [2, 2] } },
@@ -453,6 +996,34 @@ function buildStyle() {
                  "line-width": ["interpolate", ["linear"], ["zoom"], 3, 2, 8, 4.5],
                  "line-dasharray": ["match", ["get", "kind"], "trade", ["literal", [1, 1.5]], ["literal", [1, 0]]] } },
       { id: "road-hit", type: "line", source: "roads", paint: { "line-color": "#000", "line-opacity": 0, "line-width": 14 } },
+      // Administrative seats (郡/州/府… 治所): small rings, frontier and military offices in slate; names come as
+      // markers from zoom 5 on (renderAdminLabels).
+      // Their rough areas (nearest seat, clipped to the period map): faint dashed edges, the open seat's area tinted.
+      // Economic centre (经济重心): a heatmap of each province's share of people or revenue, spread over the period's
+      // seats, with the drift of its weighted centre drawn as a trail (renderEconomy).
+      { id: "econ-heat", type: "heatmap", source: "econ", maxzoom: 9, paint: {
+          "heatmap-weight": ["get", "w"],
+          "heatmap-intensity": ["interpolate", ["linear"], ["zoom"], 3, 1, 6, 2],
+          "heatmap-radius": ["interpolate", ["exponential", 2], ["zoom"], 3, 22, 5, 50, 7, 120],
+          "heatmap-color": ["interpolate", ["linear"], ["heatmap-density"], 0, "rgba(255,236,160,0)", 0.15, "rgba(255,226,120,0.35)",
+            0.35, "rgba(250,180,60,0.55)", 0.6, "rgba(232,110,40,0.68)", 0.85, "rgba(200,40,30,0.75)", 1, "rgba(150,10,30,0.8)"],
+          "heatmap-opacity": ["interpolate", ["linear"], ["zoom"], 3, 0.85, 8, 0.55] } },
+      // The Qinling–Huai line that splits north from south; the share on each side is written beside it.
+      { id: "econ-divide-case", type: "line", source: "econTrail", layout: { "line-cap": "round", "line-join": "round" },
+        paint: { "line-color": "#f6efe0", "line-width": 5, "line-opacity": 0.8 } },
+      { id: "econ-divide", type: "line", source: "econTrail", layout: { "line-cap": "round", "line-join": "round" },
+        paint: { "line-color": "#5c120c", "line-width": 2.4, "line-dasharray": [2.2, 1.6] } },
+      { id: "admin-area-on", type: "fill", source: "adminAreas", filter: ["==", ["get", "i"], -1],
+        paint: { "fill-color": "#d9b45a", "fill-opacity": 0.3 } },
+      { id: "admin-area-line", type: "line", source: "adminAreas", layout: { "line-join": "round" },
+        paint: { "line-color": ["match", ["get", "lv"], 3, "#2f5f8a", "#5a3d2a"],
+                 "line-opacity": ["interpolate", ["linear"], ["zoom"], 3.5, 0, 4.5, 0.55, 7, 0.8],
+                 "line-width": ["interpolate", ["linear"], ["zoom"], 4, 0.8, 8, 1.6], "line-dasharray": [3, 2] } },
+      { id: "admin-dot", type: "circle", source: "admin", paint: {
+          "circle-radius": ["interpolate", ["linear"], ["zoom"], 3, 1.8, 6, 3.5, 9, 5],
+          "circle-color": "#f6efe0", "circle-opacity": 0.95,
+          "circle-stroke-color": ["match", ["get", "lv"], 3, "#2f5f8a", 1, "#8a2f1c", "#5a3d2a"],
+          "circle-stroke-width": ["interpolate", ["linear"], ["zoom"], 3, 1, 7, 1.8] } },
       // Routes: campaigns and journeys dashed, trade routes, canals and walls solid.
       { id: "route-casing", type: "line", source: "routes", layout: { "line-cap": "round", "line-join": "round" },
         paint: { "line-color": "#f6f3e8", "line-opacity": 0.8, "line-width": ["match", ["get", "kind"], "wall", 7, 6] } },
@@ -468,6 +1039,16 @@ function buildStyle() {
                  "line-width": ["case", ["==", ["get", "live"], 1], 3, 1.6] } },
       { id: "spread-dot", type: "circle", source: "spread", filter: ["==", ["geometry-type"], "Point"],
         paint: { "circle-radius": 3.5, "circle-color": ["get", "color"], "circle-stroke-color": "#fff", "circle-stroke-width": 1, "circle-opacity": 0.85 } },
+      // 人物关系网 (renderTies): a bow between two people, coloured by kind; the person in focus's ties bright, the rest faint.
+      { id: "tie-casing", type: "line", source: "ties", filter: ["==", ["get", "hot"], 1], layout: { "line-cap": "round", "line-join": "round" },
+        paint: { "line-color": "#fff", "line-width": 5.5, "line-opacity": 0.7 } },
+      { id: "tie-line", type: "line", source: "ties", filter: ["!=", ["get", "kind"], "war"], layout: { "line-cap": "round", "line-join": "round" },
+        paint: { "line-color": ["get", "color"], "line-width": ["case", ["==", ["get", "hot"], 1], 3, 2],
+                 "line-opacity": ["case", ["==", ["get", "hot"], 1], 0.95, ["==", ["get", "dim"], 1], 0.2, 0.75] } },
+      { id: "tie-war", type: "line", source: "ties", filter: ["==", ["get", "kind"], "war"], layout: { "line-join": "round" },
+        paint: { "line-color": ["get", "color"], "line-width": ["case", ["==", ["get", "hot"], 1], 3, 2], "line-dasharray": [2, 1.4],
+                 "line-opacity": ["case", ["==", ["get", "hot"], 1], 0.95, ["==", ["get", "dim"], 1], 0.2, 0.75] } },
+      { id: "tie-hit", type: "line", source: "ties", paint: { "line-color": "#000", "line-opacity": 0, "line-width": 12 } },
     ],
   };
 }
@@ -546,6 +1127,63 @@ function addPack(manifest, eras, worldIndex, only) {
   state.eras = list;
   state.mode = id;
 }
+/* ---------- data format versions ---------- */
+// One number, the Atlas format, versions everything a pack can hold: its manifest, its data files (eras, events,
+// tours, layers) and the plugin API. A pack's manifest says `"atlas": N`, the lowest format that can read it.
+// FORMAT goes up when the atlas learns something a pack may rely on (a new field or file whose absence an older
+// atlas would get wrong); fields an older atlas can safely ignore don't need a bump. The atlas reads every format up
+// to its own: UPGRADES[n] turns format n into n + 1, so the rest of this file only ever sees the current shape.
+// A newer pack is refused, unless the atlas page is simply stale (see checkDataFormat). A layer or plugin entry may
+// carry its own `atlas` too: an optional extra that is skipped, not fatal, on an older atlas.
+// FORMAT is separate from the app version (?v=, APP_VERSION): many releases share one format. The atlas's own data/
+// declares its format in data/manifest.json. Each format and the app version that brought it: docs/custom-data.md#versions.
+const FORMAT = 2;
+const UPGRADES = {
+  // n: { manifest(m), eras(d), events(d), tours(d) }, each returning format n + 1's shape.
+  // 1 → 2 added the place graph (data.graph, docs/places.md) and atlas.places. A format-1 pack has no graph; its
+  // region becomes the node region:<pack id> as it loads, so nothing in it changes.
+  1: {},
+};
+const formatOf = (x) => (Number.isInteger(x?.atlas) && x.atlas > 0 ? x.atlas : 1);
+// Too-new error, in the visitor's language.
+function newerFormat(n) {
+  const e = new Error(zh() ? `需要更新版本的 Atlas（数据格式 ${n}，本页支持到 ${FORMAT}）。请刷新页面。`
+    : `This needs a newer Atlas (data format ${n}; this page reads up to ${FORMAT}). Try reloading the page.`);
+  e.format = n;
+  return e;
+}
+function upgradeManifest(m) {
+  const n = formatOf(m);
+  if (n > FORMAT) throw newerFormat(n);
+  for (let v = n; v < FORMAT; v++) m = UPGRADES[v]?.manifest?.(m) ?? m;
+  return { ...m, atlas: FORMAT, format: n };
+}
+// A pack data file (key: eras, events, tours), written in the pack's own format, brought up to FORMAT.
+function upgradeFile(key, data, from) {
+  for (let v = from; v < FORMAT; v++) data = UPGRADES[v]?.[key]?.(data) ?? data;
+  return data;
+}
+// Optional manifest entries (layers, plugins) that need a newer format than this atlas are left out.
+const fitsFormat = (entry) => {
+  if (formatOf(entry) <= FORMAT) return true;
+  console.warn(`Skipped ${entry.id || entry.src || "an entry"}: it needs Atlas format ${entry.atlas}, this page reads ${FORMAT}.`);
+  return false;
+};
+// The atlas's own data/ moves with app.js, but a browser can still pair a cached old page with new data. Then the
+// page reloads once to pick up the new code; if that doesn't help, it says so.
+async function checkDataFormat() {
+  const n = formatOf(await loadJSON("data/manifest.json").catch(() => null));
+  if (n <= FORMAT) { try { sessionStorage.removeItem("atlas-format-reload"); } catch {} return; }
+  let again = false;
+  try { again = !sessionStorage.getItem("atlas-format-reload"); sessionStorage.setItem("atlas-format-reload", "1"); } catch {}
+  if (again) {
+    await navigator.serviceWorker?.getRegistration?.().then((r) => r?.update()).catch(() => {});
+    location.reload();
+    await new Promise(() => {});
+  }
+  throw newerFormat(n);
+}
+
 // Packs and plugins load only from this site, the sites in PACK_ORIGINS and a local server.
 const allowedOrigin = (u) => u.origin === location.origin || PACK_ORIGINS.includes(u.origin) || ["localhost", "127.0.0.1"].includes(u.hostname);
 // The manifest named by ?pack=, or null. Throws with a readable message when the pack cannot be used.
@@ -555,8 +1193,7 @@ async function openPack(url) {
   if (!allowedOrigin(u)) throw new Error(`Packs from ${u.origin} are not allowed.`);
   const res = await fetch(u, { cache: "no-cache" });
   if (!res.ok) throw new Error(`Could not load the pack (${res.status}).`);
-  const manifest = await res.json();
-  if (manifest.atlas !== 1) throw new Error(`This pack needs a newer atlas (format ${manifest.atlas}).`);
+  const manifest = upgradeManifest(await res.json());
   for (const k of ["eras", "events"]) if (!manifest.data?.[k]) throw new Error(`The pack has no ${k}.`);
   if (!/^[a-z0-9-]+$/.test(manifest.id || "")) throw new Error("The pack has no valid id.");
   return { url: u.href, manifest, only: PACK_ONLY };
@@ -595,8 +1232,29 @@ function packFile(key) {
   return fetch(new URL(path, state.pack.url), { cache: "no-cache" }).then((r) => {
     if (!r.ok) throw new Error(`Could not load the pack's ${key} (${r.status})`);
     return r.json();
-  });
+  }).then((d) => upgradeFile(key, d, state.pack.manifest.format));
 }
+// A pack's own pictures, narration and music (manifest "media", docs/custom-data.md#tour-media): indexes in the same
+// shape as the atlas's (data/ai-illustrations.json, data/narration.json, data/music.json), whose file names sit under
+// media.base/ai/, /narration/ and /music/ (an app's folder on R2, apps/<id>/). Each is merged into the atlas's own index
+// with its file names made absolute, so the players need no second lookup. A missing or unreadable index is left out.
+const MEDIA_DIRS = { pictures: "ai", narration: "narration", music: "music" };
+async function packMedia(kind) {
+  const M = state.pack?.manifest.media, path = M?.[kind];
+  if (!path || !M.base) return null;
+  let base;
+  try { base = new URL(M.base.replace(/\/?$/, "/"), state.pack.url); } catch { return null; }
+  if (!allowedOrigin(base) && !base.href.startsWith(DATA_URL + "/apps/")) return null;
+  const idx = await fetch(new URL(path, state.pack.url), { cache: "no-cache" }).then((r) => (r.ok ? r.json() : null)).catch(() => null);
+  if (!idx) return null;
+  const abs = (f) => new URL(`${MEDIA_DIRS[kind]}/${f}`, base).href;
+  const fix = (o, keys) => Object.fromEntries(Object.entries(o).map(([k, v]) => [k, { ...v, ...Object.fromEntries(keys.filter((x) => v[x]).map((x) => [x, abs(v[x])])) }]));
+  if (kind === "pictures") return { keys: idx.keys || {}, images: fix(idx.images || {}, ["f"]) };
+  return fix(idx, kind === "music" ? ["f"] : ["Charon", "Kore"]);
+}
+// A file of an index: its name under the atlas's folder, or a pack's absolute address.
+const mediaSrc = (dir, f) => (/^https?:/.test(f) ? f : `${R2}/${dir}/${f}`);
+
 // A link from an event or tour step to the pack's own page for it (the Bible pack: the verse in the reader).
 function refLink(refs) {
   const R = state.pack?.manifest.refs;
@@ -612,7 +1270,7 @@ function refLabel(ref) {
 // A pack can bring its own map layers: GeoJSON the engine draws and filters by year (manifest "layers"), and code
 // (manifest "plugins": ES modules from the allowed sites) that gets the plugin API below. Each layer gets a switch in a
 // "Pack" group of the layers panel, remembered per pack. See docs/plugins.md.
-const PLUGIN_API = 1;
+const PLUGIN_API = FORMAT; // the plugin API is part of the Atlas format
 const hooks = {};           // event name -> handlers: year, lang, event, tour-step, tour-end
 function emit(name, detail) {
   for (const fn of hooks[name] || []) {
@@ -633,7 +1291,7 @@ function packChip(def, on, onClick) {
     g.className = "lg";
     g.id = "lg-pack";
     g.innerHTML = `<span data-i18n="g_pack">${esc(t("g_pack"))}</span>`;
-    document.querySelector(".era-layers").append(g);
+    document.querySelector(".era-layers").appendChild(g);
   }
   const b = document.createElement("button");
   b.type = "button";
@@ -661,7 +1319,7 @@ function addPackLayer(def, base) {
     line: { "line-color": color, "line-width": def.width ?? 2.5, "line-opacity": 0.9, ...(def.dash ? { "line-dasharray": def.dash } : {}) },
     circle: { "circle-color": color, "circle-radius": def.radius ?? 5, "circle-stroke-color": "#fff8ee", "circle-stroke-width": 1.5 },
   };
-  const before = map.getLayer("tour-path") ? "tour-path" : undefined;
+  const before = map.getLayer("tour-past") ? "tour-past" : undefined;
   const ids = [];
   for (const kind of def.type ? [def.type] : ["fill", "line", "circle"]) {
     const id = `${src}-${kind}`;
@@ -730,6 +1388,9 @@ function pluginApi(src) {
     text: (a, b) => (typeof a === "object" ? tx(a, b) : zh() && b ? b : a),
     on(name, fn) { (hooks[name] ||= []).push(fn); return () => (hooks[name] = hooks[name].filter((f) => f !== fn)); },
     setYear: (y) => setYear(y),
+    get style() { return state.look; },
+    get styles() { return lookOrder(); },
+    setStyle: (id) => setLook(id, false),
     startTour: (id, step = 0) => startTour(id, step),
     openEvent: (id) => state.events.some((e) => e.id === id) && openStory(id),
     // Plugin code is trusted (it comes from an allowed site), so its card HTML goes in as is.
@@ -746,14 +1407,24 @@ function pluginApi(src) {
       fn(L.on);
       return { get on() { return L.on; } };
     },
+    // The place graph (docs/places.md), from format 2: ready() resolves once it has loaded; ids as in the graph.
+    places: {
+      ready: () => (placeGraph(), graphLoad || Promise.resolve()).then(() => {}),
+      get: (id) => placeNode(id) || null,
+      path: (id, y = state.year) => placePath(id, y),
+      held: (id, y = state.year) => placeHeld(id, y),
+      claims: (id, y = state.year) => placeUp(id, "claim", y).map((e) => e.parent),
+      open: (id) => openArea(id),
+    },
     url: (path) => new URL(path, base).href,
     fetchJSON: (path) => fetch(new URL(path, base)).then((r) => { if (!r.ok) throw new Error(`${path}: ${r.status}`); return r.json(); }),
   };
 }
 // Imports the pack's plugin modules (started early, so they load alongside the data).
 function importPlugins() {
-  return (state.pack?.manifest.plugins || []).map((p) => {
-    const u = new URL(p, state.pack.url);
+  // An entry is a path, or { src, atlas } for a plugin that needs a newer format than the pack itself.
+  return (state.pack?.manifest.plugins || []).map((p) => (typeof p === "string" ? { src: p } : p)).filter(fitsFormat).map(({ src }) => {
+    const u = new URL(src, state.pack.url);
     if (!allowedOrigin(u)) return Promise.reject(new Error(`Plugins from ${u.origin} are not allowed.`));
     return import(u.href).then((m) => ({ src: u.href, m }));
   });
@@ -761,7 +1432,7 @@ function importPlugins() {
 // Once the map has loaded: the manifest's layers, then each plugin's setup(atlas). A broken one is logged and skipped.
 async function startPlugins(imports) {
   const base = state.pack.url;
-  for (const def of state.pack.manifest.layers || []) {
+  for (const def of (state.pack.manifest.layers || []).filter(fitsFormat)) {
     try { addPackLayer(def, base); } catch (e) { console.error(`Pack layer "${def.id}" was skipped:`, e); }
   }
   for (const r of await Promise.allSettled(imports)) {
@@ -786,6 +1457,19 @@ function polyBounds(poly) {
   const xs = poly.map((p) => p[0]), ys = poly.map((p) => p[1]);
   return [[Math.min(...xs), Math.min(...ys)], [Math.max(...xs), Math.max(...ys)]];
 }
+// A flight with `padding` (a tour's event stop) leaves that padding on the map, and MapLibre adds it to the padding
+// of every later fit: a tour card's tall padding counted twice left no room, and the map flew off to the far south.
+// So a fit first drops the map's own padding, keeping the spot at the middle of the screen where it is.
+function clearPad() {
+  const p = map.getPadding();
+  if (!p.top && !p.bottom && !p.left && !p.right) return;
+  const c = map.getCanvas();
+  map.jumpTo({ center: map.unproject([c.clientWidth / 2, c.clientHeight / 2]), padding: { top: 0, bottom: 0, left: 0, right: 0 } });
+}
+function fitMap(b, opts) {
+  clearPad();
+  map.fitBounds(b, opts);
+}
 // Sample a grid over the open part of the map, the middle counting most; sea and unassigned land are left out.
 // A region with most of the rest wins; once chosen, a region keeps the timeline while it still holds a good share.
 function detectRegion() {
@@ -809,12 +1493,14 @@ function detectRegion() {
   return best && best[1] >= 0.45 * hit && best[1] >= 1.5 * (second?.[1] || 0) ? best[0] : "world";
 }
 // Switch the timeline to a region's periods (or the calendar years), keeping the year.
-function setMode(id, quiet) {
-  if (id === state.mode || (id !== "world" && !state.regionById[id])) return false;
+// `force` rebuilds the periods when the region stays but the selected country changes.
+function setMode(id, quiet, force) {
+  if (id !== "world" && !state.regionById[id]) return false;
+  const eras = id === "world" ? state.worldEras : erasOf(id);
+  if (id === state.mode && (!force || eras === state.eras)) return false;
   state.mode = id;
-  state.eras = id === "world" ? state.worldEras : state.regionById[id].eras;
+  state.eras = eras;
   state.scope = null;
-  state.country = null;
   buildScale();
   if (state.zoom) state.win = windowFor(state.zoom, state.year);
   state.era = null;
@@ -934,29 +1620,47 @@ async function setYear(year, opts = {}) {
   $("year").textContent = num;
   $("year-suffix").textContent = suffix;
   if (!opts.fromSlider) $("slider").value = yearToPos(state.year);
+  if (state.dial && !dial.drag) drawDial();
   revealYear(true);
   saveView();
+  refreshRegionPop();
   const snap = snapshotFor(era, state.year);
-  const label = snap.world ? t("worldMap")(fmtYear(worldAt(state.year)?.from ?? snap.from)) : tx(snap, "label");
+  const label = snap.world && state.basemap?.earth === false ? "" : snap.world ? t("worldMap")(fmtYear(worldAt(state.year)?.from ?? snap.from)) : tx(snap, "label");
   $("era-snap").textContent = label ? t("map") + label : "";
   $("era-snap").hidden = !label;
   document.querySelectorAll(".band.snap").forEach((b) => b.classList.toggle("current", b.dataset.path === snap.borders && +b.dataset.from === snap.from));
   await setMaps(era, state.year);
+  applySelMap();
+  renderSelCard();
   updateCompare();
   renderEventStates();
   renderPlaces();
   renderOverlays();
+  if (trail.life) updateTrail();
   renderOldGeo();
+  renderDisputes();
   renderPackLayers();
   emit("year", { year: state.year, era: era.id, eraChanged });
   renderWorldStrip();
 }
 
+// A period (朝代) can be part of a longer-lived state (实体): 秦朝 前221 within 秦国 from 前770, 民国 on the mainland
+// until 1948 while the country goes on. Such periods name the state's lineage in `entity` (tools/check_eras.py).
+function entityLine(era) {
+  const L = era.entity && (state.countries?.lineages || []).find((l) => l.id === era.entity);
+  if (!L || L.start == null) return "";
+  const yrs = `${fmtYear(L.start)} – ${L.end == null ? t("sel").now : fmtYear(L.end)}`;
+  return `<span class="era-entity">${esc(t("asState"))}${esc(nameOf(L))} ${esc(yrs)}</span>`;
+}
+
 function setEra(era, quiet) {
   state.era = era;
+  syncMusic();
   const seal = $("era-glyph");
-  seal.textContent = era.seal || era.glyph;
-  seal.classList.toggle("double", (era.seal || era.glyph).length > 1);
+  const g = era.seal || glyphOf(era);
+  seal.textContent = g;
+  seal.classList.toggle("double", g.length > 1);
+  seal.classList.toggle("latin", /^[\x20-\x7e]+$/.test(g));
   const civ = era.region === "world" ? { seal: "#56606a" } : state.regionById[era.region];
   const color = era.region === "china" ? null : era.color || civ?.seal || civ?.color;
   seal.classList.toggle("civ", !!color);
@@ -964,9 +1668,10 @@ function setEra(era, quiet) {
   $("era-name").textContent = zh() ? era.name_zh : era.name;
   // Each piece wraps whole: other-language name, span of years, length.
   const region = state.regionById[era.region];
-  $("era-zh").innerHTML = (region ? [nameOf(region), zh() ? era.name : era.name_zh, `${fmtYear(era.start)} – ${fmtYear(era.end)}`, t("lasted")(eraYears(era))]
+  const L = era.country && (state.countries?.lineages || []).find((l) => l.id === era.country);
+  $("era-zh").innerHTML = (region ? [L ? nameOf(L) : regionShort(region), zh() ? era.name : era.name_zh, `${fmtYear(era.since ?? era.start)} – ${fmtYear(era.until ?? era.end)}`, t("lasted")(eraYears(era))]
     : [t("worldName"), t("lasted")(eraYears(era))])
-    .map((x) => `<span>${esc(x)}</span>`).join(" · ");
+    .map((x) => `<span>${esc(x)}</span>`).join(" · ") + entityLine(era);
   $("era-summary").textContent = tx(era, "summary");
   const note = tx(era, "note");
   $("era-note").textContent = note;
@@ -976,7 +1681,7 @@ function setEra(era, quiet) {
   loadDetails(era);
   state.layerData = null;
   popup?.remove();
-  loadLayers(era).then((d) => { if (state.era === era) { state.layerData = d; renderOverlays(); if (state.tab === "events" && !state.reading) renderLedger(); } });
+  loadLayers(era).then((d) => { if (state.era === era) { state.layerData = d; renderOverlays(); renderSelCard(); if (state.tab === "events" && !state.reading) renderLedger(); } });
   if (!quiet) {
     buildEventMarkers();
     if (!state.reading) renderLedger();
@@ -1014,9 +1719,11 @@ async function setMaps(era, year) {
   const prev = state.shownBorders;
   state.shownBorders = state.borders[key];
   renderPolityLabels(state.borders[key]);
+  renderWorldStrip();
+  applySelMap();
   // While playing, the old map turns into the new one; otherwise it simply switches.
   const shown = ["focus-fill", "neighbour-fill"].some((id) => map.getLayer(id) && map.getLayoutProperty(id, "visibility") !== "none");
-  if (state.playing && prev && shown && !matchMedia("(prefers-reduced-motion: reduce)").matches && morphBorders(prev, state.borders[key])) return;
+  if ((state.playing || state.tour?.tr.morph) && prev && shown && !matchMedia("(prefers-reduced-motion: reduce)").matches && morphBorders(prev, state.borders[key])) return;
   endMorph();
   map.getSource("borders")?.setData(state.borders[key]);
 }
@@ -1163,8 +1870,10 @@ function renderPolityLabels(gj) {
     const minArea = p.kind === "state" ? 2 : p.name_zh ? 3 : 20;
     if (!p.focus && (p.area < minArea || !state.showNeighbours || p.nolabel)) continue;
     const el = document.createElement("div");
+    // Dynasty names are one or two characters and get a big, spaced label; longer names (平原野牛猎人) a smaller one.
+    const len = zh() ? (p.name_zh || "").length : p.name.length / 3;
     el.className = "mk-polity" + (p.focus ? " focus" : p.name_zh ? " neighbour" : "") +
-      (p.kind === "state" ? " state" : "") + (p.minor ? " minor" : "");
+      (p.kind === "state" ? " state" : "") + (p.minor ? " minor" : "") + (len > 5 ? " longer" : len > 3 ? " long" : "");
     if (zh()) el.innerHTML = p.name_zh ? esc(p.name_zh) : `<small>${esc(p.name)}</small>`;
     else el.innerHTML = `<span>${esc(p.name)}</span>` + (p.name_zh ? `<small lang="zh-CN">${esc(p.name_zh)}</small>` : "");
     markers.polities.push(new maplibregl.Marker({ element: el }).setLngLat(p.label).addTo(map));
@@ -1173,17 +1882,577 @@ function renderPolityLabels(gj) {
   updateRulers();
 }
 
+/* ---------- one country selected: the map, the panels and the timeline follow it ---------- */
+// Click a state on the map (or pick it in the 世界 tab or the event filter) to select it: every other state dims,
+// and events, people, rulers and cities narrow to it. data/countries.json (tools/build_countries.py) says when each
+// name is on the map; the same name centuries apart is another country, and `lineages` join a country's names
+// (Wessex → England → Great Britain). Events and people carry `states`, the polities they belong to.
+// A lineage's names may carry their own years, ["China", 1945, 1948]; the rest take the lineage's from/to.
+function lineageWin(L) {
+  if (!L.win) {
+    L.win = {};
+    for (const x of L.names) { const [n, a, b] = Array.isArray(x) ? x : [x]; L.win[n] = [a ?? L.from ?? -1e9, b ?? L.to ?? 1e9]; }
+  }
+  return L.win;
+}
+const lineageAt = (name, year) => (state.countries?.lineages || []).find((l) => { const w = lineageWin(l)[name]; return w && year >= w[0] && year <= w[1]; });
+function countryEntity(name, year) {
+  const C = state.countries || { spans: {}, lineages: [] };
+  const runs = C.spans[name] || [];
+  const near = (r) => (year < r[0] ? r[0] - year : year > r[1] ? year - r[1] : 0);
+  const run = [...runs].sort((a, b) => near(a) - near(b))[0];
+  const L = lineageAt(name, year);
+  let spans, win, label;
+  if (L) {
+    win = lineageWin(L);
+    label = { name: L.name, name_zh: L.name_zh };
+    spans = [];
+    for (const [a, b] of Object.entries(win).flatMap(([n, [lo, hi]]) => (C.spans[n] || []).filter((r) => r[1] >= lo && r[0] <= hi)
+      .map((r) => [Math.max(lo, r[0]), Math.min(hi, r[1])])).sort((x, y) => x[0] - y[0])) {
+      const last = spans.at(-1);
+      if (last && a <= last[1] + 1) last[1] = Math.max(last[1], b); else spans.push([a, b]);
+    }
+  } else {
+    const f = state.shownBorders?.features.find((f) => f.properties.name === name);
+    label = { name, name_zh: run?.[2] || f?.properties.name_zh || "" };
+    spans = run ? [[run[0], run[1]]] : [];
+    win = { [name]: run ? [run[0], run[1]] : [-1e9, 1e9] };
+  }
+  // Its years: from the country table (data/lineages.json `start`/`end`, end null = today) when dated, else the maps'
+  // snapshots (approximate). `spans` stays the years it is on the map.
+  const dated = L && L.start != null;
+  const years = dated ? [[L.start, L.end ?? 2026]] : spans;
+  return { id: L ? "L:" + L.id : `${name}@${run?.[0] ?? ""}`, names: new Set(Object.keys(win)), win, ...label, spans, years, dated,
+    region: L?.region || run?.[3] || "", from: years[0]?.[0] ?? -1e9, to: years.at(-1)?.[1] ?? 1e9 };
+}
+// The selected country's names on the map in a year (中华民国 is "China" only until 1948).
+const selNames = (y = state.year) => new Set(state.sel ? Object.entries(state.sel.win).filter(([, [a, b]]) => y >= a && y <= b).map(([n]) => n) : []);
+const selName = (s = state.sel) => (zh() ? s.name_zh || s.name : s.name);
+// Something tagged with these states over these years belongs to the selected country.
+function selHas(states, a, b) {
+  const s = state.sel;
+  return !!s && (states || []).some((n) => s.win[n] && b >= s.win[n][0] && a <= s.win[n][1]);
+}
+const selPerson = (p) => !state.sel || selHas(p.states, ...personSpan(p));
+const selOnMap = () => !!state.sel && state.sel.spans.some(([a, b]) => state.year >= a && state.year <= b) &&
+  !!state.shownBorders?.features.some((f) => selNames().has(f.properties.name));
+// The selected country's land on the map now, for cities inside it.
+function selContains(lon, lat) {
+  if (!selOnMap()) return false;
+  const now = selNames();
+  return state.shownBorders.features.some((f) => {
+    if (!now.has(f.properties.name)) return false;
+    const g = f.geometry, polys = g.type === "Polygon" ? [g.coordinates] : g.type === "MultiPolygon" ? g.coordinates : [];
+    return polys.some((p) => inPoly(lon, lat, p[0]) && !p.slice(1).some((h) => inPoly(lon, lat, h)));
+  });
+}
+// Layer items for the selected country: one with a point or a line on its land (or within ~30 km of its border,
+// for ports and frontier passes) belongs to it. With no country selected everything shows.
+function selNear(lon, lat) {
+  if (selContains(lon, lat)) return true;
+  const d = 0.3;
+  return [[d, 0], [-d, 0], [0, d], [0, -d]].some(([x, y]) => selContains(lon + x, lat + y));
+}
+const selKeep = (pts) => !state.sel || pts.some((p) => p && selNear(p[0], p[1]));
+function applySelMap() {
+  if (!map?.getLayer("sel-dim")) return;
+  const on = selOnMap(), now = selNames(), names = on ? [...now] : [];
+  const key = on ? `${state.snapshot}|${state.sel.id}` : "";
+  if (key === applySelMap.key) return;
+  applySelMap.key = key;
+  // Every other state is dimmed. (A world-sized mask with the country cut out would also dim the sea, but the
+  // maps' rounded rings can cross themselves, and as holes they tear the mask.)
+  map.setLayoutProperty("sel-dim", "visibility", on ? "visible" : "none");
+  map.setFilter("sel-dim", ["!", ["in", ["get", "name"], ["literal", names]]]);
+  map.setFilter("sel-line", ["in", ["get", "name"], ["literal", names]]);
+  for (const p of markers.polityEls) p.el.classList.toggle("dim", on && !now.has(p.name));
+}
+// The periods the timeline runs on. A place has periods at whatever level fits it: Europe has 中世纪 and 文艺复兴,
+// England has 都铎 and 斯图亚特. While a country with its own periods (data/country-periods.json, copied into
+// countries.json `periods`) is selected, its periods replace its region's over its years; before and after them the
+// region's periods go on. Rulers and people for a country period come from the region periods it overlaps.
+function erasOf(id) {
+  const R = state.regionById[id].eras, s = state.sel;
+  const L = s?.id.startsWith("L:") && s.region === id && (state.countries?.lineages || []).find((l) => "L:" + l.id === s.id);
+  const P = L && state.countries.periods?.[L.id];
+  if (!P?.length) return R;
+  if (erasOf.key === s.id + id) return erasOf.list;
+  const a = P[0].start, b = P.at(-1).end, names = Object.keys(lineageWin(L));
+  const clip = (e, lo, hi) => (e.start >= lo && e.end <= hi ? e : { ...e, start: Math.max(e.start, lo), end: Math.min(e.end, hi) });
+  const mine = P.map((p) => ({ ...p, region: id, country: L.id, worldMaps: true, layers: true, focus: names,
+    layerFrom: R.filter((e) => e.layers && e.start <= p.end && e.end >= p.start).map((e) => e.id), snapshots: worldSnaps(p.start, p.end) }));
+  erasOf.key = s.id + id;
+  return (erasOf.list = [...R.filter((e) => e.start < a).map((e) => clip(e, -1e9, a - 1)), ...mine,
+    ...R.filter((e) => e.end > b).map((e) => clip(e, b + 1, 1e9))]);
+}
+const selRegion = () => (state.regionById[state.sel?.region] ? state.sel.region : state.mode);
+function selectCountry(name, opts = {}) {
+  if (name) closeArea(true);
+  state.sel = name ? countryEntity(name, opts.year ?? state.year) : null;
+  // The timeline moves to the country's region; letting go hands it back to the map.
+  if (state.ready) setMode(state.sel ? selRegion() : state.area ? state.area.region : detectRegion(), false, true);
+  // The rulers tab follows the selection; with none it goes back to the period's main country.
+  if (!state.sel) state.rulerPolity = null;
+  saveView();
+  applySelMap();
+  renderPlaces();
+  renderOverlays();
+  refreshTimeline();
+  renderSelCard();
+  if (state.reading) renderLedger();
+  if (opts.fly) flyToCountry(name);
+}
+function countryBounds(name) {
+  let x0 = 180, y0 = 90, x1 = -180, y1 = -90;
+  for (const f of state.shownBorders?.features || []) {
+    if (f.properties.name !== name) continue;
+    const g = f.geometry;
+    for (const poly of g.type === "Polygon" ? [g.coordinates] : g.coordinates) for (const [x, y] of poly[0]) {
+      x0 = Math.min(x0, x); y0 = Math.min(y0, y); x1 = Math.max(x1, x); y1 = Math.max(y1, y);
+    }
+  }
+  return x1 > x0 ? [[x0, y0], [x1, y1]] : null;
+}
+function flyToCountry(name) {
+  const b = countryBounds(name);
+  if (b) fitMap(b, { padding: { top: 120, bottom: 150, left: 60, right: innerWidth > 720 ? 400 : 60 }, maxZoom: 6, duration: 1400 });
+}
+// The card over the ledger: the selected country's years, ruler now, counts and its cities on the map this year.
+function renderSelCard() {
+  renderWorldStrip();
+  renderAreaCard();
+  const box = $("sel-card"), s = state.sel;
+  box.hidden = !s;
+  $("ledger").classList.toggle("has-sel", !!s);
+  if (!s) return;
+  const on = selOnMap();
+  const span = s.years.length ? `${s.dated ? "" : t("sel").circa}${fmtYear(s.from)} – ${s.to >= 2026 ? t("sel").now : fmtYear(s.to)}` : "";
+  const name = [...selNames()].find((n) => rulerAt(n, state.year));
+  const r = name && rulerAt(name, state.year);
+  const nEv = state.events.filter((ev) => selHas(ev.states, ev.year, ev.year)).length;
+  const nPp = (state.layerData?.people || []).filter((p) => state.sel && selPerson(p)).length;
+  const cities = on ? state.places.filter((p) => state.year >= p.from && state.year <= p.to && selContains(p.lon, p.lat))
+    .sort((a, b) => (b.rank === "capital") - (a.rank === "capital")).slice(0, 14) : [];
+  // Not on the map this year: offer the nearest year it is.
+  const near = !on && s.spans.length ? (state.year < s.spans[0][0] ? s.spans[0][0] : s.spans.findLast(([a]) => a <= state.year)?.[1] ?? s.spans.at(-1)[1]) : null;
+  const S = t("sel");
+  // Scrolled away from the country: a button flies back to it (the timeline keeps following it meanwhile).
+  const b = on && countryBounds([...selNames()].find((n) => state.shownBorders.features.some((f) => f.properties.name === n)));
+  const v = map.getBounds();
+  const away = b && (b[1][0] < v.getWest() || b[0][0] > v.getEast() || b[1][1] < v.getSouth() || b[0][1] > v.getNorth());
+  box.innerHTML = `<div class="sc-head"><span class="sc-dot"></span><b>${esc(selName(s))}</b>${!zh() && s.name_zh ? `<small lang="zh-CN">${esc(s.name_zh)}</small>` : zh() && s.name !== s.name_zh ? `<small lang="en">${esc(s.name)}</small>` : ""}
+      <span class="sc-years">${esc(span)}</span><button type="button" class="sc-x" aria-label="${esc(S.clear)}" title="${esc(S.clear)}">×</button></div>
+    ${away ? `<p class="sc-off">${esc(S.away)} <button type="button" class="chip" data-back>${esc(S.back(selName(s)))}</button></p>` : ""}
+    ${on ? "" : `<p class="sc-off">${esc(state.year >= s.from && state.year <= s.to ? S.offMap : state.year < s.from ? S.before : S.after)}${near != null ? ` <button type="button" class="chip" data-y="${near}">${esc(S.jump(fmtYear(near)))}</button>` : ""}</p>`}
+    ${nEv >= 3 ? `<button type="button" class="sc-story" data-story>▶ ${esc(S.story)}</button>` : ""}
+    <p class="sc-meta">${r ? `<span>${esc(t("ruler"))}${esc(rulerText(r)[0])}</span>` : ""}<button type="button" data-tab="events">${esc(S.events(nEv))}</button>${nPp ? `<button type="button" data-tab="people">${esc(S.people(nPp))}</button>` : ""}</p>
+    ${cities.length ? `<p class="sc-cities"><span>${esc(S.cities)}</span>${cities.map((c) => `<button type="button" data-c="${esc(c.id)}"${c.rank === "capital" ? ' class="cap"' : ""}>${esc(zh() ? c.name_zh : c.name)}</button>`).join("")}</p>` : ""}`;
+  box.querySelector(".sc-x").addEventListener("click", () => selectCountry(null));
+  box.querySelector("[data-story]")?.addEventListener("click", () => { const tr = countryTour(); if (tr) startTour(tr.id, 0, true); });
+  box.querySelector("[data-back]")?.addEventListener("click", () => flyToCountry([...selNames()].find((n) => countryBounds(n))));
+  box.querySelector("[data-y]")?.addEventListener("click", (e) => { stop(); setYear(+e.currentTarget.dataset.y); });
+  box.querySelectorAll("[data-tab]").forEach((b) => b.addEventListener("click", () => { $("tab-" + b.dataset.tab).click(); }));
+  box.querySelectorAll("[data-c]").forEach((b) => b.addEventListener("click", () => {
+    const c = state.places.find((p) => p.id === b.dataset.c);
+    map.flyTo({ center: [c.lon, c.lat], zoom: Math.max(map.getZoom(), 6), duration: 1200, essential: true });
+    map.once("moveend", () => showCard([c.lon, c.lat], placeCard(c)));
+  }));
+}
+/* ---------- the place graph: places, and how they relate year by year ---------- */
+// data/graph.json and the files it includes (format: docs/places.md; checked by tools/check_graph.py). Nodes are
+// places and states with ids that never change (group:east-asia, region:china, area:taiwan, polity:qing, map:Qing);
+// edges say how one belongs to another, each with its own years: `in` (where it lies, a tree that does not change),
+// `held` (who controlled it, with a share), `claim`, `part` (a state under another) and `name` (a name on the border
+// maps that means a state). Files are JSON ({include, nodes, edges}) or JSONL (one node, edge or include per line).
+// A pack's manifest may add data.graph; its own ids start with "<pack id>:" and its region is region:<pack id>.
+const GRAPH_RELS = new Set(["in", "held", "claim", "part", "name"]);
+// A file's records in order, its includes fetched side by side and spliced in where they are named.
+async function graphRecords(url, seen = []) {
+  if (seen.includes(url.href)) throw new Error(`include loop: ${[...seen, url.href].join(" → ")}`);
+  const res = await fetch(url, { cache: "no-cache" });
+  if (!res.ok) throw new Error(`Could not load ${url.pathname} (${res.status})`);
+  let recs;
+  if (url.pathname.endsWith(".jsonl")) recs = (await res.text()).split("\n").filter((l) => l.trim()).map((l) => JSON.parse(l));
+  else { const d = await res.json(); recs = [...(d.atlas != null ? [{ atlas: d.atlas }] : []), ...(d.include ? [{ include: d.include }] : []), ...(d.nodes || []), ...(d.edges || [])]; }
+  // A file whose header asks for a newer format is left out (with its includes), like a layer that needs one: the
+  // rest of the graph still loads.
+  const head = recs.find((r) => r.atlas != null && !r.child && !r.id);
+  if (head && formatOf(head) > FORMAT) { console.warn(`${url.pathname} skipped: it needs Atlas format ${head.atlas}, this page reads ${FORMAT}.`); return []; }
+  const parts = await Promise.all(recs.map((r) => (r.include ? Promise.all([r.include].flat().map((p) => graphRecords(new URL(p, url), [...seen, url.href]))).then((l) => l.flat()) : [r])));
+  return parts.flat();
+}
+async function readGraph(url, out, ns) {
+  for (const r of await graphRecords(url)) {
+    // An edge has `child` (and may have an id of its own); a node has an id and no `child`.
+    if (r.child) {
+      if (!GRAPH_RELS.has(r.rel)) continue;
+      if (ns && !r.child.startsWith(ns + ":")) console.warn(`Edge ${r.child} ${r.rel} ${r.parent} skipped: a pack only adds edges from its own places.`);
+      else out.edges.push(r);
+    } else if (r.id) {
+      if (ns && !r.id.startsWith(ns + ":")) console.warn(`Place ${r.id} skipped: a pack's ids start with "${ns}:".`);
+      else if (out.nodes.has(r.id)) console.warn(`Place ${r.id} is defined twice; the first one is kept.`);
+      else out.nodes.set(r.id, r);
+    } else if (r.span) out.span ||= r.span;
+  }
+}
+const edgeAt = (e, y) => (e.from == null || e.from <= y) && (e.to == null || y <= e.to);
+let graphLoad;
+// The graph, loaded once (null until it arrives); then the areas a reader can follow (state.areas) are built from it.
+function placeGraph() {
+  if (state.graph) return state.graph;
+  graphLoad ||= (async () => {
+    const g = { nodes: new Map(), edges: [], span: null };
+    if (!state.pack?.only) await readGraph(new URL(BASE + "data/graph.json", location.href), g).catch((e) => console.warn("Place graph:", e.message));
+    const m = state.pack?.manifest;
+    if (m?.data.graph) {
+      g.nodes.set("region:" + m.id, { id: "region:" + m.id, kind: "region", name: m.name, name_zh: m.name_zh });
+      await readGraph(new URL(m.data.graph, state.pack.url), g, m.id).catch((e) => console.warn("The pack's places:", e.message));
+    }
+    g.up = new Map(); g.down = new Map();
+    // Edges to a replaced id count for the node that replaced it.
+    const real = (id) => { for (let i = 0; i < 8 && g.nodes.get(id)?.replacedBy; i++) id = g.nodes.get(id).replacedBy; return id; };
+    g.edges = g.edges.map((e) => (g.nodes.get(e.child)?.replacedBy || g.nodes.get(e.parent)?.replacedBy ? { ...e, child: real(e.child), parent: real(e.parent) } : e));
+    for (const e of g.edges) {
+      if (!g.nodes.has(e.child) || !g.nodes.has(e.parent)) continue;
+      (g.up.get(e.child) || g.up.set(e.child, []).get(e.child)).push(e);
+      (g.down.get(e.parent) || g.down.set(e.parent, []).get(e.parent)).push(e);
+    }
+    state.graph = g;
+    state.areas = buildAreas(g);
+    if (state.pendingArea) { const [id, o] = state.pendingArea; state.pendingArea = null; openArea(id, o); }
+    if (!$("search").hidden) renderSearch();
+  })().catch((e) => { console.warn(e); state.graph = { nodes: new Map(), edges: [], up: new Map(), down: new Map() }; state.areas = []; });
+  return null;
+}
+// An id that was merged into another (`replacedBy`) still works: it resolves to the node that replaced it.
+function placeId(id) {
+  for (let i = 0, n; i < 8 && (n = state.graph?.nodes.get(id))?.replacedBy; i++) id = n.replacedBy;
+  return id;
+}
+const placeNode = (id) => state.graph?.nodes.get(placeId(id));
+// Edges up from a place (rel: "in", "held" …), in a given year or (year undefined) all of them.
+const placeUp = (id, rel, y) => (state.graph?.up.get(placeId(id)) || []).filter((e) => e.rel === rel && (y === undefined || edgeAt(e, y)));
+// Where a place lies: [itself, its parent, … up to its group], following `in` edges in year y.
+function placePath(id, y) {
+  const out = [placeId(id)];
+  for (let e = placeUp(id, "in", y)[0]; e && !out.includes(e.parent); e = placeUp(e.parent, "in", y)[0]) out.push(e.parent);
+  return out;
+}
+// Who held a place in year y: [{id, polity, share}], a map name resolved to its country by `name` edges.
+// Hand-written `held` edges win over ones worked out from the maps (by: "maps") in the years they cover.
+function heldEdges(id, y) {
+  const es = placeUp(id, "held", y), hand = es.filter((e) => e.by !== "maps");
+  if (y !== undefined) return hand.length ? hand : es;
+  if (!hand.length) return es;
+  const out = [...hand];
+  for (const e of es) if (e.by === "maps") {
+    // The years of e that no hand edge covers, as pieces.
+    let pieces = [[e.from ?? -1e6, e.to ?? 1e6]];
+    for (const h of hand) {
+      const a = h.from ?? -1e6, b = h.to ?? 1e6;
+      pieces = pieces.flatMap(([x, z]) => (b < x || a > z ? [[x, z]] : [...(x < a ? [[x, a - 1]] : []), ...(b < z ? [[b + 1, z]] : [])]));
+    }
+    for (const [x, z] of pieces) out.push({ ...e, from: x === -1e6 ? e.from : x, to: z === 1e6 ? e.to : z });
+  }
+  return out;
+}
+const placeHeld = (id, y) => heldEdges(id, y).map((e) => ({ id: e.parent, polity: e.parent.startsWith("map:") ? placeUp(e.parent, "name", y)[0]?.parent || null : e.parent, share: e.share ?? 100 }));
+// A node's outline in year y: geo.poly, or the one of geo.shapes ([{from, to, poly}]) whose years hold y (y undefined:
+// the latest). null when it has none to draw.
+function shapeAt(n, y) {
+  const g = n.geo || {};
+  if (g.poly?.length > 2) return g.poly;
+  const l = (g.shapes || []).filter((x) => x.poly?.length > 2);
+  return (y === undefined ? l.at(-1) : l.find((x) => edgeAt(x, y)))?.poly || null;
+}
+// The areas with an outline, in the shape the 地区史 card reads: `runs` [[from, to, [[name, name_zh, %, colour], …]], …]
+// rebuilt from the `held` edges, with the years no state held filled in (name null) across the maps' span.
+function buildAreas(g) {
+  const out = [];
+  for (const n of g.nodes.values()) {
+    if (n.kind !== "area" || n.replacedBy || !shapeAt(n)) continue;
+    const path = placePath(n.id);
+    const par = path.slice(1).find((p) => p.startsWith("area:") || /^[^:]+:area:/.test(p));
+    const reg = path.find((p) => g.nodes.get(p)?.kind === "region");
+    const byYears = new Map();
+    for (const e of heldEdges(n.id)) {
+      const k = `${e.from ?? g.span?.[0] ?? -3000}|${e.to ?? g.span?.[1] ?? 2026}`;
+      (byYears.get(k) || byYears.set(k, []).get(k)).push(e);
+    }
+    const runs = [];
+    // Years no edge covers are filled in only for holders worked out from the maps, which cover the maps' whole span.
+    const byMaps = placeUp(n.id, "held").some((e) => e.by === "maps");
+    let prev = byMaps && g.span ? g.span[0] - 1 : null;
+    for (const [k, es] of [...byYears].sort((a, b) => parseInt(a[0]) - parseInt(b[0]))) {
+      const [from, to] = k.split("|").map(Number);
+      if (prev != null && from > prev + 1) runs.push([prev + 1, from - 1, [[null, "", 100, ""]]]);
+      const hold = es.map((e) => { const h = g.nodes.get(e.parent); return [h.kind === "map" ? h.name : tx(h, "name"), h.name_zh || "", e.share ?? 100, h.color || ""]; });
+      const rest = 100 - hold.reduce((s, h) => s + h[2], 0);
+      if (rest >= 10) hold.push([null, "", rest, ""]);
+      runs.push([from, to, hold.sort((a, b) => b[2] - a[2])]);
+      prev = to;
+    }
+    if (byMaps && g.span && prev < g.span[1] && runs.length) runs.push([prev + 1, g.span[1], [[null, "", 100, ""]]]);
+    out.push({ id: n.id, name: n.name, name_zh: n.name_zh || n.name, get poly() { return shapeAt(n, state.year) || shapeAt(n); }, intro: n.intro || "", intro_zh: n.intro_zh || n.intro || "",
+      notes: n.notes || [], parent: par || null, region: reg ? reg.slice(7) : state.home, runs, claims: placeUp(n.id, "claim") });
+  }
+  return out.filter((a) => a.runs.length || a.notes.length);
+}
+/* ---------- 地区史: one area's own history, whoever held it ---------- */
+// Areas a reader can follow through time (Taiwan, Xinjiang, Alsace …) are the place graph's areas with an outline: an
+// introduction, notes for contested years, and who held what share of the outline from one map change to the next
+// (`held` edges, worked out from the atlas's own maps by tools/build_graph.py). Names on the maps are joined into
+// countries the way the selection does (lineages), so 清 and 清朝 or China and 中国 make one stretch. The card sits over
+// the ledger: a strip of holders through time (click to go to a year), the stretches as a list, the notes, the area's
+// events and a generated tour. The outline is drawn on the map while the card is open.
+const areaData = () => (state.graph ? state.areas : (placeGraph(), null));
+const areaById = (id) => (state.areas || []).find((a) => a.id === placeId(id));
+// Areas form a tree that does not change with time (新疆 › 吐鲁番盆地, `in` edges); who holds an area changes with the
+// year (`runs`). A point's chain runs from the smallest area holding it up to the largest.
+const areaParent = (a) => a.parent && areaById(a.parent);
+const areaDepth = (a) => { let d = 0; for (let p = areaParent(a); p; p = areaParent(p)) d++; return d; };
+const areaChainAt = (lon, lat) => (state.areas || []).filter((a) => inPoly(lon, lat, a.poly)).sort((x, y) => areaDepth(y) - areaDepth(x));
+const areaAt = (lon, lat) => areaChainAt(lon, lat)[0];
+const areaName = (a) => (zh() ? a.name_zh : a.name);
+// A holder under the map's own name for it; `key` joins the names of one country (法兰西王国, 法国) for colour,
+// selection and the tour, which stops only when the country changes, not its name.
+function areaHolder([n, z, pct, color], y) {
+  if (!n) return { key: "", label: t("area").none, pct, color: "" };
+  const L = lineageAt(n, y);
+  return { key: L ? "L:" + L.id : n, label: zh() ? z || n : n, pct, color, name: n };
+}
+// The stretches; neighbouring ones with the same holders under the same names merge.
+function areaStretches(a) {
+  const out = [];
+  for (const [from, to, hold] of a.runs) {
+    const hs = [];
+    for (const h of hold.map((h) => areaHolder(h, from))) {
+      const same = hs.find((x) => x.label === h.label);
+      if (same) same.pct += h.pct; else hs.push(h);
+    }
+    const last = out.at(-1);
+    if (last && last.hold.map((h) => h.label).join("|") === hs.map((h) => h.label).join("|")) {
+      if (to - from > last.len) { last.hold = hs; last.len = to - from; }
+      last.to = to;
+    } else out.push({ from, to, hold: hs, len: to - from });
+  }
+  return out;
+}
+// One colour per holder for the whole strip: the map's own colour the first time it appears, else one from a palette.
+const AREA_PAL = ["#2c7a68", "#b0563a", "#566fa8", "#9a7b2f", "#7d4f8f", "#3f8a9e", "#a8485f", "#5f7f3a"];
+function areaColours(st) {
+  const col = {};
+  let k = 0;
+  for (const s of st) for (const h of s.hold) if (h.key && !col[h.key]) col[h.key] = h.color || AREA_PAL[k++ % AREA_PAL.length];
+  return col;
+}
+// The strip's time axis gives recent centuries more room (where most changes are): x grows with -log(2126 - year).
+function areaScale(lo, hi) {
+  const f = (y) => -Math.log(2126 - y), a = f(lo), b = f(hi + 1);
+  return { x: (y) => ((f(Math.min(hi + 1, Math.max(lo, y))) - a) / (b - a)) * 100, y: (p) => Math.round(2126 - Math.exp(-(a + (p / 100) * (b - a)))) };
+}
+function areaEvents(a) {
+  return (a.evs ||= state.events.filter((ev) => ev.lon != null && inPoly(ev.lon, ev.lat, a.poly)).sort((x, y) => x.year - y.year));
+}
+function areaBounds(a) {
+  return polyBounds(a.poly);
+}
+const areaPad = () => ({ top: 120, bottom: 160, left: 60, right: innerWidth > 720 ? 400 : 60 });
+// An open area is a selected district: the map dims around it, the event list and cities narrow to it, and it stays
+// selected as the timeline moves, whoever holds it then (台湾 under 明郑, 清, 日本 …). Clicking a state on the map that lies
+// within an area's outline selects the area rather than that state.
+async function openArea(id, opts = {}) {
+  if (!areaData()) { state.pendingArea = [id, opts]; return; }
+  const a = areaById(id);
+  if (!a) return;
+  closeSearch();
+  state.area = a;
+  if (state.sel) selectCountry(null);
+  setMode(a.region);
+  drawArea();
+  // The card lives in the ledger: a folded ledger (the phone's sheet) opens for it.
+  if ($("ledger").classList.contains("collapsed")) foldLedger(false);
+  if (opts.fly !== false) fitMap(areaBounds(a), { padding: areaPad(), maxZoom: 6.5, duration: 1400 });
+  areaChanged();
+}
+function closeArea(quiet) {
+  if (!state.area) return;
+  state.area = null;
+  if (quiet) { drawArea(); renderAreaCard(); return; }
+  if (state.ready) setMode(detectRegion(), false, true);
+  areaChanged();
+}
+function areaChanged() {
+  drawArea();
+  renderAreaCard();
+  renderPlaces();
+  if (state.ready) renderLedger();
+  saveView();
+  emit("area", { id: state.area?.id ?? null });
+}
+function drawArea() {
+  const a = state.area, ring = a && [...a.poly, a.poly[0]];
+  // The outline, and a world-sized mask with the area as its hole to dim everything else.
+  const fc = { type: "FeatureCollection", features: a ? [{ type: "Feature", properties: {}, geometry: { type: "Polygon", coordinates: [ring] } },
+    { type: "Feature", properties: { mask: true }, geometry: { type: "Polygon", coordinates: [[[-180, -85], [180, -85], [180, 85], [-180, 85], [-180, -85]], [...ring].reverse()] } }] : [] };
+  map.getSource("area")?.setData(fc);
+}
+function renderAreaCard() {
+  const box = $("area-card"), a = state.area;
+  box.hidden = !a;
+  $("ledger").classList.toggle("has-area", !!a);
+  if (!a) return;
+  if (placeNode(a.id)?.geo?.shapes) { a.evs = null; drawArea(); }   // an outline that changes with the year
+  const A = t("area"), y = state.year, st = areaStretches(a), col = areaColours(st);
+  const lo = st[0].from, hi = st.at(-1).to, sc = areaScale(lo, hi);
+  const cur = st.find((s) => y >= s.from && y <= s.to);
+  const segs = st.map((s) => `<i style="left:${sc.x(s.from).toFixed(2)}%;width:${(sc.x(s.to + 1) - sc.x(s.from)).toFixed(2)}%" title="${esc(`${fmtYear(s.from)}–${fmtYear(s.to)} ${s.hold.map((h) => h.label).join(" · ")}`)}">${
+    s.hold.map((h) => `<b style="flex:${h.pct}${h.key ? `;background:${col[h.key]}` : ""}"${h.key ? "" : ' class="none"'}></b>`).join("")}</i>`).join("");
+  const marks = a.notes.filter((n) => n.disputed).map((n) => `<u style="left:${sc.x(n.from).toFixed(2)}%;width:${Math.max(0.8, sc.x(n.to + 1) - sc.x(n.from)).toFixed(2)}%" title="${esc(A.disputed)}"></u>`).join("");
+  // Round years as ticks, kept apart from each other and from both ends.
+  const kept = [lo];
+  for (const t of [-2000, -1000, 1000, 1500, 1800, 1900]) if (t > lo && sc.x(t) - sc.x(kept.at(-1)) > 17 && sc.x(t) < 86) kept.push(t);
+  const axis = kept.map((t, i) => `<span style="left:${sc.x(t).toFixed(2)}%"${i ? "" : ' class="first"'}>${esc(fmtYear(t))}</span>`).join("") + `<span class="last">${hi >= 2026 ? esc(A.today) : esc(fmtYear(hi))}</span>`;
+  const notes = a.notes.filter((n) => y >= n.from && y <= n.to);
+  const pct = (h) => (h.pct < 90 && cur.hold.length > 1 ? ` <small>${zh() ? "约" : "~"}${Math.round(h.pct / 5) * 5}%</small>` : "");
+  const holder = (h, yy) => h.key ? `<button type="button" data-h="${esc(h.name)}" data-y="${yy}">${esc(h.label)}</button>` : `<em>${esc(h.label)}</em>`;
+  const evs = areaEvents(a), top = evs.filter((ev) => ev.level === 1);
+  const showEv = evs.length > 12 && top.length >= 4 ? top : evs;
+  const near = showEv.length ? showEv.reduce((b, ev) => (Math.abs(ev.year - y) < Math.abs(b.year - y) ? ev : b)) : null;
+  box.innerHTML = `<div class="sc-head"><span class="sc-dot ar-dot"></span><b>${esc(areaName(a))}</b><small lang="${zh() ? "en" : "zh-CN"}">${esc(zh() ? a.name : a.name_zh)}</small>
+      <span class="sc-years">${esc(A.kind)}</span><button type="button" class="sc-x" aria-label="${esc(t("close"))}" title="${esc(t("close"))}">×</button></div>
+    ${areaPath(a)}<p class="ar-intro">${esc(tx(a, "intro"))}</p>
+    <div class="ar-strip" style="--now:${sc.x(y).toFixed(2)}%" role="slider" aria-label="${esc(A.strip)}" aria-valuetext="${esc(fmtYear(y))}" tabindex="0">
+      <div class="ar-bar">${segs}${marks}<s class="ar-now"></s></div><div class="ar-axis">${axis}</div></div>
+    <p class="ar-cur"><span>${esc(fmtYear(y))}</span>${cur ? cur.hold.map((h) => holder(h, y) + pct(h)).join(zh() ? "、" : ", ") : `<em>${esc(A.none)}</em>`}</p>
+    ${notes.map((n) => `<p class="ar-note${n.disputed ? " disputed" : ""}">${n.disputed ? `<b>${esc(A.disputed)}</b>` : ""}${esc(zh() ? n.zh : n.en)}</p>`).join("")}
+    <div class="ar-row">${st.length > 1 ? `<button type="button" class="sc-story" data-story>▶ ${esc(A.story)}</button>` : ""}
+      <button type="button" class="ar-tg" data-tg="runs" aria-expanded="${!!state.areaOpen?.runs}">${esc(A.runs(st.length))}</button>
+      ${evs.length ? `<button type="button" class="ar-tg" data-tg="evs" aria-expanded="${!!state.areaOpen?.evs}">${esc(A.events(evs.length))}</button>` : ""}</div>
+    ${state.areaOpen?.runs ? `<ol class="ar-runs">${st.map((s) => `<li${s === cur ? ' class="on"' : ""}><button type="button" class="ar-y" data-y="${s.from}">${esc(fmtYear(s.from))}–${s.to >= 2026 ? esc(A.today) : esc(fmtYear(s.to))}</button><span>${
+      s.hold.map((h) => `<i style="background:${h.key ? col[h.key] : "transparent"}"${h.key ? "" : ' class="none"'}></i>${holder(h, s.from)}${s.hold.length > 1 ? `<small>${Math.round(h.pct / 5) * 5}%</small>` : ""}`).join(" ")}</span></li>`).join("")}</ol>` : ""}
+    ${state.areaOpen?.evs ? `<div class="ar-evs">${eventButtons(showEv, (ev) => ev === near)}${showEv !== evs ? `<p class="pc-meta">${esc(A.topOnly(evs.length))}</p>` : ""}</div>` : ""}
+    <p class="pc-meta">${esc(A.note)}</p>`;
+  const li = box.querySelector(".ar-runs li.on"), ol = li?.parentElement;
+  if (ol) ol.scrollTop = li.offsetTop - ol.offsetTop - ol.clientHeight / 2 + li.offsetHeight / 2;
+}
+// Where the area sits: its group and region, then its parent areas (buttons), then the areas inside it.
+function areaPath(a) {
+  const r = state.regionById[a.region], g = r && groupOf(r.id), up = [];
+  for (let p = areaParent(a); p; p = areaParent(p)) up.unshift(p);
+  const kids = (state.areas || []).filter((x) => x.parent === a.id);
+  return `<p class="ar-path">${[g && esc(zh() ? g.name_zh : g.name), r && esc(regionShort(r)), ...up.map((p) => areaChip(p))].filter(Boolean).join(" › ")}</p>` +
+    (kids.length ? `<p class="ar-path ar-kids"><span>${esc(t("area").kids)}</span>${kids.map((k) => areaChip(k)).join("")}</p>` : "");
+}
+function areaTour(a) {
+  const A = t("area"), st = areaStretches(a);
+  const bounds = areaBounds(a);
+  const steps = [];
+  // A stop at each change of the main holder's country; smaller shares are named along with it. Stretches with no
+  // state on the map get none (an area's notes say what was there).
+  let main = null;
+  for (const s of st) {
+    const m = s.hold[0].key;
+    if (m === main || !m) { main = m; continue; }
+    main = m;
+    const n = s.hold.filter((h) => h.key).map((h) => h.label + (s.hold.length > 1 && h.pct < 90 ? (zh() ? `（约${Math.round(h.pct / 10) * 10}%）` : ` (about ${Math.round(h.pct / 10) * 10}%)`) : ""));
+    // Generated in the reader's language, so both fields carry it.
+    const text = A.held(fmtYear(s.from), n.join(zh() ? "、" : ", "));
+    steps.push({ year: s.from, bounds, layers: ["rulers"], text, text_zh: text, highlight: [] });
+  }
+  // Each note is told at its first year: added to the stop there, or a stop of its own.
+  for (const x of a.notes) {
+    const y = Math.max(x.from, st[0].from), here = steps.find((s) => s.year === y);
+    const add = zh() ? x.zh : x.en;
+    if (here) { here.text += (zh() ? "" : " ") + add; here.text_zh = here.text; }
+    else steps.push({ year: y, bounds, layers: ["rulers"], text: add, text_zh: add, highlight: [] });
+  }
+  // Then the area's key events, at most one between two holder stops when there are many.
+  const evs = areaEvents(a).filter((ev) => ev.level === 1);
+  for (const ev of evs.length > 16 ? evs.filter((_, i) => i % Math.ceil(evs.length / 16) === 0) : evs)
+    steps.push({ year: ev.year, at: [ev.lon, ev.lat], zoom: 6, event: ev.id, layers: ev.layers, text: `${ev.title}. ${ev.summary}`, text_zh: `${ev.title_zh}：${ev.summary_zh}` });
+  steps.sort((x, y) => x.year - y.year || !!x.event - !!y.event);
+  // The opening stop states what the area is.
+  steps.unshift({ year: steps[0]?.year ?? st[0].from, bounds, text: a.intro, text_zh: a.intro_zh, layers: ["rulers"], highlight: [] });
+  return state.genTour = { id: a.id, region: a.region, path: false, morph: true, start: steps[0].year, end: steps.at(-1).year,
+    title: A.tourTitle(a.name), title_zh: A.tourTitle(a.name_zh), summary: "", summary_zh: "", steps };
+}
+document.addEventListener("click", (e) => {
+  const box = e.target.closest?.("#area-card");
+  if (!box || !state.area) return;
+  const a = state.area;
+  if (e.target.closest(".sc-x")) return closeArea();
+  if (e.target.closest("[data-story]")) { const tr = areaTour(a); return startTour(tr.id, 0, true); }
+  const tg = e.target.closest("[data-tg]");
+  if (tg) { state.areaOpen = { ...state.areaOpen, [tg.dataset.tg]: !state.areaOpen?.[tg.dataset.tg] }; return renderAreaCard(); }
+  const ev = e.target.closest("[data-ev]");
+  if (ev) return openStory(ev.dataset.ev);
+  const h = e.target.closest("[data-h]");
+  if (h) { stop(); return setYear(+h.dataset.y).then(() => selectCountry(h.dataset.h, { year: +h.dataset.y })); }
+  const yb = e.target.closest("[data-y]");
+  if (yb) return jumpToYear(+yb.dataset.y);
+  const bar = e.target.closest(".ar-bar");
+  if (bar) {
+    const r = bar.getBoundingClientRect(), st = areaStretches(a), sc = areaScale(st[0].from, st.at(-1).to);
+    jumpToYear(Math.max(state.range.start, Math.min(state.range.end, sc.y(((e.clientX - r.left) / r.width) * 100))));
+  }
+});
+// Area chips for a region's menu row and a city card.
+const areaChip = (a, more = "") => `<button type="button" class="chip ar-chip" data-area="${esc(a.id)}">${esc(areaName(a) + more)}</button>`;
+document.addEventListener("click", (e) => {
+  const c = e.target.closest?.("[data-area]");
+  if (!c) return;
+  e.stopPropagation();
+  e.preventDefault();
+  if (c.closest("#region-pop")) toggleRegionPop(false);
+  popup?.remove();
+  openArea(c.dataset.area);
+}, true);
+function areaSearch(has) {
+  return (state.areas || []).filter((a) => has(a.name_zh, a.name)).map((a) => ({ g: "area", year: null, title: areaName(a),
+    sub: tx(a, "intro").slice(0, zh() ? 30 : 70) + "…", go: () => openArea(a.id) }));
+}
+// The countries on the map now whose label lies in a region, main states first, then by size.
+function regionCountries(r) {
+  const out = [], seen = new Set();
+  for (const f of state.shownBorders?.features || []) {
+    const p = f.properties;
+    if (!p.label || seen.has(p.name) || (!p.focus && (p.area || 0) < 1.5)) continue;
+    const x = ((((p.label[0] + 180) % 360) + 360) % 360) - 180;
+    if (!(r.polygon?.length > 2 && inPoly(x, p.label[1], r.polygon))) continue;
+    // One chip per country: names joined in a lineage (Kingdom of France, France) count once.
+    const L = lineageAt(p.name, state.year);
+    for (const n of L ? Object.keys(lineageWin(L)) : [p.name]) seen.add(n);
+    out.push(L ? { ...p, name_zh: L.name_zh, label_en: L.name } : p);
+  }
+  return out.sort((a, b) => !!b.focus - !!a.focus || (b.area || 0) - (a.area || 0));
+}
+
 /* ---------- overlay layers: rulers, armies, routes ---------- */
 
 // Length of a period in years; there is no year 0, so a span across it is one year shorter.
 const eraYears = (e) => e.end - e.start + 1 - (e.start < 0 && e.end > 0 ? 1 : 0);
 function loadLayers(era) {
   if (!era.layers) return Promise.resolve({});
-  if (era.packPeople) return (state.layers["pack:" + era.id] ||= Promise.resolve(packPeriod(era)));
+  if (era.packPeople) return (state.layers["pack:" + era.id] ||= Promise.resolve(normLayers(packPeriod(era))));
+  // A country's own period takes the rulers and people of the region periods it overlaps.
+  if (era.layerFrom) return (state.layers[era.id] ||= Promise.all(era.layerFrom.map((id) => loadLayers(regionEras(era.region).find((e) => e.id === id))))
+    .then((ds) => {
+      const out = { polities: {}, rulers: {}, people: [] }, seen = new Set();
+      for (const d of ds) {
+        Object.assign(out.polities, d.polities);
+        for (const [k, rs] of Object.entries(d.rulers || {})) for (const r of rs) {
+          const key = `${k}|${r.id || r.name + "|" + r.from}`;
+          if (!seen.has(key)) { seen.add(key); (out.rulers[k] ||= []).push(r); }
+        }
+        for (const p of d.people || []) if (!seen.has("p" + p.id)) { seen.add("p" + p.id); out.people.push(p); }
+      }
+      return out;
+    }));
   // Periods of the other world regions share one file per region (the artifact caps its file count).
-  if (!state.layers[era.id]) state.layers[era.id] = era.worldMaps
+  if (!state.layers[era.id]) state.layers[era.id] = (era.worldMaps
     ? (state.layers["world-" + era.region] ||= loadJSON(`data/layers/world-${era.region}.json`).catch(() => ({}))).then((b) => b[era.id] || {})
-    : loadJSON(`data/layers/${era.id}.json`).catch(() => ({}));
+    : loadJSON(`data/layers/${era.id}.json`).catch(() => ({}))).then(normLayers);
   return state.layers[era.id];
 }
 
@@ -1196,6 +2465,18 @@ function packPeriod(era) {
   return { polities: P.polities || {}, rulers, people: (P.people || []).filter((p) => touches(personSpan(p))) };
 }
 
+// Fields kept ready for richer data: a reign may list several `titles` ([{title, title_zh, kind}]: 庙号, 谥号, 年号 …)
+// and a person several `places` ([{lon, lat, place, place_zh, role}], home first). Shown through the single fields.
+function normLayers(d) {
+  for (const rs of Object.values(d.rulers || {})) for (const r of rs) {
+    if (!r.title && !r.rank && r.titles?.length) Object.assign(r, { title: r.titles[0].title, title_zh: r.titles[0].title_zh });
+  }
+  for (const p of d.people || []) {
+    const h = p.places?.[0];
+    if (p.lat == null && h) Object.assign(p, { lat: h.lat, lon: h.lon, place: p.place ?? h.place, place_zh: p.place_zh ?? h.place_zh });
+  }
+  return d;
+}
 function rulerAt(name, year) {
   // In a handover year two reigns overlap; the newer ruler wins.
   return (state.layerData?.rulers?.[name] || []).findLast((r) => year >= r.from && year <= r.to);
@@ -1209,15 +2490,20 @@ function rulerText(r) {
 }
 
 // Layers switched on for the story being read or the tour step being shown ("auto layers"); they go off again after.
-const shown = (k) => state.show[k] || !!state.auto[k];
+// Layers drawn from the atlas's own China data, which it loads by itself, stay off for a pack shown alone.
+const OWN_DATA = ["admin", "economy"];
+const shown = (k) => !(state.pack?.only && OWN_DATA.includes(k)) && (state.show[k] || !!state.auto[k]);
 const AUTO_RULES = [
   [["armies", "passes"], (c, x) => c === "war" || c === "rebellion" || /之战|战役|大战|围攻|攻破|北伐|西征|东征|南征|出兵|起兵|起义|击败|大败|会战|叛乱/.test(x)],
   [["walls"], (c, x) => /长城|边塞|匈奴|突厥|蒙古|瓦剌|鞑靼|鲜卑|柔然|边墙/.test(x)],
   [["routes", "roads"], (c, x) => /运河|渠|驿|驰道|直道|官道|丝绸之路|西域|出使|西行|东渡|下西洋|巡游|南巡|漕运|海运|行军|远征/.test(x)],
   [["capitals"], (c, x) => /迁都|定都|建都|都城|营建|东迁|南渡|国都|京城|首都/.test(x)],
+  [["economy"], (c, x) => /经济重心|南移|户口|漕运|赋税|苏湖熟|湖广熟|衣冠南渡|永嘉之乱|靖康/.test(x)],
+  [["admin"], (c, x) => /郡县|设郡|置郡|分天下为|行省|改土归流|废郡|置州|设府|郡国并行|推恩令|州郡|道制/.test(x)],
   [["faith"], (c, x) => /佛|寺|僧|道教|道士|儒|孔子|孟子|理学|心学|书院|景教|伊斯兰|摩尼|祆教|基督|天主|传教|石窟|经书|佛经|百家/.test(x)],
   [["inventions"], (c, x) => c === "science" || /发明|造纸|印刷|火药|指南|历法|地动仪|天文|算|医书|本草|农书|技术|瓷/.test(x)],
   [["clans"], (c, x) => /门阀|士族|世家|豪族|朋党|党争|党禁|商帮|集团|郡望/.test(x)],
+  [["climate"], (c, x) => /旱|蝗|饥荒|大饥|奇荒|水灾|大水|洪水|决口|决堤|改道|夺淮|地震|大疫|瘟疫|鼠疫|雪灾|寒冬|结冰/.test(x)],
 ];
 // A dashed (auto) chip clicked is switched off until the story or step changes; clicked again it is on for good.
 function syncAuto() {
@@ -1231,7 +2517,13 @@ function syncAuto() {
   }
   const auto = {};
   if (ctx !== state.autoCtx) { state.autoCtx = ctx; state.autoOff = {}; }
-  if (text) for (const [keys, test] of AUTO_RULES) if (test(cat, text)) for (const k of keys) if (!state.autoOff[k]) auto[k] = true;
+  // Each event and tour stop names its own layers (`layers`, chosen one by one); the keyword rules are the fallback.
+  const s = state.autoLayers && state.tour?.tr.steps[state.tour.i];
+  const ev = state.autoLayers && state.events.find((e) => e.id === (s ? s.event : state.reading && state.selected));
+  const own = s ? s.layers ?? (s.event ? ev?.layers : undefined) : ev?.layers;
+  const ok = (k) => !state.autoOff[k] && !$("l-" + k)?.hidden && $("l-" + k)?.getAttribute("aria-disabled") !== "true" && k in state.show;
+  if (Array.isArray(own)) own.forEach((k) => { if (ok(k)) auto[k] = true; });
+  else if (text) for (const [keys, test] of AUTO_RULES) if (test(cat, text)) for (const k of keys) if (ok(k)) auto[k] = true;
   for (const k of Object.keys(state.show)) $("l-" + k)?.classList.toggle("auto", !state.show[k] && !!auto[k]);
   renderAutoStrip(auto);
   const key = Object.keys(auto).sort().join();
@@ -1251,6 +2543,103 @@ function renderAutoStrip(auto) {
     (also.length ? `<span>${t("autoAlso")}</span>` + also.map((k) => `<button type="button" class="chip layer" aria-pressed="true" data-k="${k}">${esc(label(k))}</button>`).join("") : "");
   box.querySelectorAll("[data-k]").forEach((b) => b.addEventListener("click", () => $("l-" + b.dataset.k).click()));
 }
+// Layer switches are icons; the name shows in a tip: on hover with a mouse, and briefly after each tap on a phone
+// (with the new state), or while a finger holds the icon without switching it.
+const LAYER_ICONS = {
+  "t-3d": '<path d="M12 3l8 4.5v9L12 21l-8-4.5v-9z"/><path d="M4 7.5l8 4.5 8-4.5M12 12v9"/>',
+  "t-geo": '<path d="M2 17l6-9 4 5 3-4 7 8"/><path d="M3 21c3-1.5 5 1.5 9 0s6 1.5 9 0"/>',
+  "t-neighbours": '<path d="M3 5h7l1 6-1 8H3z"/><path d="M14 5h7v14h-7l-1-6z" stroke-dasharray="2.6 2"/>',
+  "l-rulers": '<path d="M3.5 8l4 4.5L12 6l4.5 6.5 4-4.5L19 18H5z"/><path d="M5 21h14"/>',
+  "l-capitals": '<path d="M2 9l10-5 10 5"/><path d="M5 9v12M19 9v12M3 21h18M10 21v-5h4v5"/>',
+  "t-places": '<path d="M3 21V10h6M9 21V4h7v17M16 13h5v8M2 21h20M12 8h1M12 12h1M12 16h1"/>',
+  "l-admin": '<path d="M3 4h18v16H3z"/><path d="M3 11h7l2 3h9M10 4v7M14 14v6"/>',
+  "l-economy": '<path d="M5 14a7 7 0 0014 0M8 14a4 4 0 008 0"/><circle cx="12" cy="14" r="1.2" fill="currentColor"/><path d="M12 3v6.5M9.2 7l2.8 2.8L14.8 7"/>',
+  "l-clans": '<circle cx="9" cy="8" r="3"/><path d="M3 20c0-3.5 2.7-6 6-6s6 2.5 6 6"/><circle cx="17" cy="9" r="2.5"/><path d="M16 14.2c2.8.3 5 2.6 5 5.8"/>',
+  "l-armies": '<path d="M4 4l11 11M20 4L9 15M13 17l4-4M11 17l-4-4M16 16l3 3M8 16l-3 3"/>',
+  "l-passes": '<path d="M3 21V10h18v11M2 10l2-4h16l2 4M9 21v-5a3 3 0 016 0v5"/>',
+  "l-walls": '<path d="M3 20V7h3v3h4.5V7h3v3H18V7h3v13z"/><path d="M10 20v-3a2 2 0 014 0v3"/>',
+  "l-roads": '<path d="M9 3L4 21M15 3l5 18M12 5v2M12 11v2M12 17v3"/>',
+  "l-routes": '<circle cx="5" cy="18" r="2"/><path d="M7 17c4-2 2-8 7-9 3-.6 4-1.5 5-3" stroke-dasharray="2.6 2.4"/><path d="M16 4.5l3.2.3.3 3.2"/>',
+  "l-climate": '<path d="M9 14.5V5a2.5 2.5 0 015 0v9.5a4 4 0 11-5 0z"/><path d="M11.5 9v8"/><path d="M17.5 4.5c1.6 1.4 2.5 3 2.5 4.5a2.5 2.5 0 01-5 0c0-1.5.9-3.1 2.5-4.5z"/>',
+  "l-people": '<circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-7 8-7s8 2.6 8 7"/>',
+  "l-ties": '<circle cx="5.5" cy="6.5" r="2.5"/><circle cx="18.5" cy="6.5" r="2.5"/><circle cx="12" cy="18.5" r="2.5"/><path d="M8 6.5h8M7 8.7l3.6 7.6M17 8.7l-3.6 7.6"/>',
+  "l-faith": '<path d="M12 20c-4 0-8-3-9-7 3 0 6 1 9 4 3-3 6-4 9-4-1 4-5 7-9 7z"/><path d="M12 17c-2-2-3-5-3-8 1.5 1 2.5 2 3 3 .5-1 1.5-2 3-3 0 3-1 6-3 8z"/>',
+  "l-inventions": '<path d="M9 18h6M10 21h4"/><path d="M12 3a6 6 0 00-3.5 10.9c.6.5 1 1.2 1 2.1h5c0-.9.4-1.6 1-2.1A6 6 0 0012 3z"/>',
+  "l-exchange": '<path d="M4 8h15l-3-3M20 16H5l3 3"/>',
+  "l-spread": '<circle cx="12" cy="12" r="2" fill="currentColor"/><path d="M8 8a5.7 5.7 0 000 8M16 8a5.7 5.7 0 010 8M5 5a10 10 0 000 14M19 5a10 10 0 010 14"/>',
+};
+function iconChips() {
+  for (const b of document.querySelectorAll(".chip.ico[data-tip]")) {
+    if (!b.firstElementChild) b.innerHTML = `<svg viewBox="0 0 24 24" aria-hidden="true">${LAYER_ICONS[b.id] || ""}</svg><small aria-hidden="true"></small>`;
+    b.querySelector("small").textContent = t(b.dataset.tip);
+    b.setAttribute("aria-label", t(b.dataset.tip));
+  }
+}
+// How the layer buttons look and sit (设置 → 图层按钮 / 图层排列): text, icon (default) or both; in their groups
+// (default), all in one scrolling row, or all in one wrapping run. html[data-laybtn] / [data-laypos] pick the CSS.
+const LAY_BTNS = ["text", "icon", "both"], LAY_POS = ["group", "nowrap", "wrap"];
+function setLayButtons({ btn = state.layBtn, pos = state.layPos } = {}, remember = true) {
+  state.layBtn = LAY_BTNS.includes(btn) ? btn : "icon";
+  state.layPos = LAY_POS.includes(pos) ? pos : "group";
+  const root = document.documentElement;
+  if (state.layBtn === "icon") root.removeAttribute("data-laybtn"); else root.dataset.laybtn = state.layBtn;
+  if (state.layPos === "group") root.removeAttribute("data-laypos"); else root.dataset.laypos = state.layPos;
+  hideLayerTip();
+  if (remember) try { localStorage.setItem("atlas-laybtn", state.layBtn); localStorage.setItem("atlas-laypos", state.layPos); } catch {}
+}
+const layerTip = { el: null, timer: 0, hold: 0, held: null, touch: false };
+function tipText(b) {
+  const name = t(b.dataset.tip);
+  if (b.dataset.tipHint) return `<b>${esc(name)}</b><span>${esc(t(b.dataset.tipHint))}</span>`;
+  const st = b.classList.contains("auto") ? t("tipAuto") : b.getAttribute("aria-pressed") === "true" ? t("tipOn") : t("tipOff");
+  return `<b>${esc(name)}</b><i>${esc(st)}</i>`;
+}
+function showLayerTip(b, ms) {
+  if (state.layBtn !== "icon" && !b.dataset.tipHint) return;
+  let el = layerTip.el;
+  if (!el) { el = layerTip.el = document.createElement("div"); el.className = "layer-tip"; el.setAttribute("role", "tooltip"); document.body.append(el); }
+  clearTimeout(layerTip.timer);
+  el.innerHTML = tipText(b);
+  el.hidden = false;
+  const r = b.getBoundingClientRect(), w = el.offsetWidth, h = el.offsetHeight;
+  const x = Math.max(8, Math.min(innerWidth - w - 8, r.left + r.width / 2 - w / 2));
+  const above = r.top - h - 8 >= 8;
+  el.style.left = x + "px";
+  el.style.top = (above ? r.top - h - 8 : r.bottom + 8) + "px";
+  el.classList.toggle("below", !above);
+  el.style.setProperty("--arrow", r.left + r.width / 2 - x + "px");
+  if (ms) layerTip.timer = setTimeout(hideLayerTip, ms);
+}
+function hideLayerTip() { clearTimeout(layerTip.timer); if (layerTip.el) layerTip.el.hidden = true; }
+function initLayerTips() {
+  const box = document.querySelector(".era-layers");
+  const tipOf = (e) => e.target.closest?.("[data-tip]");
+  box.addEventListener("pointerover", (e) => { const b = tipOf(e); if (b && e.pointerType === "mouse") showLayerTip(b); });
+  box.addEventListener("pointerout", (e) => { if (e.pointerType === "mouse" && tipOf(e) && !tipOf(e).contains(e.relatedTarget)) hideLayerTip(); });
+  box.addEventListener("focusin", (e) => { const b = tipOf(e); if (b && b.matches(":focus-visible")) showLayerTip(b); });
+  box.addEventListener("focusout", hideLayerTip);
+  // A finger held on an icon shows its name and the lift does not switch it.
+  box.addEventListener("pointerdown", (e) => {
+    const b = tipOf(e);
+    layerTip.touch = e.pointerType !== "mouse";
+    if (!b || !layerTip.touch) return;
+    clearTimeout(layerTip.hold);
+    layerTip.held = null;
+    layerTip.hold = setTimeout(() => { layerTip.held = b; showLayerTip(b); }, 420);
+  });
+  const lift = () => { clearTimeout(layerTip.hold); if (layerTip.held) layerTip.timer = setTimeout(hideLayerTip, 1600); };
+  box.addEventListener("pointerup", lift);
+  box.addEventListener("pointercancel", () => { clearTimeout(layerTip.hold); layerTip.held = null; hideLayerTip(); });
+  box.addEventListener("contextmenu", (e) => { if (tipOf(e)) e.preventDefault(); });
+  box.addEventListener("click", (e) => {
+    const b = tipOf(e);
+    if (b && layerTip.held === b) { e.stopImmediatePropagation(); e.preventDefault(); layerTip.held = null; }
+  }, true);
+  // After a tap the tip names the layer and its new state (the switch's own handler has run by then).
+  box.addEventListener("click", (e) => { const b = tipOf(e); if (b && layerTip.touch) showLayerTip(b, 1600); });
+  box.closest(".era")?.addEventListener("scroll", hideLayerTip, { passive: true });
+  addEventListener("resize", hideLayerTip);
+}
 function renderOverlays() {
   scheduleDeclutter();
   if (state.tab !== "events") renderLedger();
@@ -1265,20 +2654,55 @@ function renderOverlays() {
   renderRoads();
   renderClans();
   renderWalls();
+  renderAdmin();
   renderPopulation();
+  renderEconomy();
+  renderDisasters();
+  renderClimChart();
 }
 
 /* People, capitals, religion & thought, inventions: small markers that open a card. */
 
-let popup;
+let popup, cardPerson = null;
 function showCard(lngLat, html) {
+  const wasFocus = tieState.focus;
   popup?.remove();
   popup = new maplibregl.Popup({ className: "atlas-pop", maxWidth: "300px", offset: 14, focusAfterOpen: false })
     .setLngLat(lngLat).setHTML(html).addTo(map);
+  // A person's card puts their ties in focus until it closes; a tie's own card keeps the focus it was opened from.
+  const pid = popup.getElement().querySelector(".pc-ties")?.dataset.pid || (popup.getElement().querySelector(".tie-h") ? wasFocus : null) || null;
+  if (pid !== tieState.focus || pid !== wasFocus) { tieState.focus = pid; renderTies(); }
+  if (pid) popup.on("close", () => { if (tieState.focus === pid) { tieState.focus = null; renderTies(); } });
+  popup.getElement().querySelectorAll("[data-tp]").forEach((b) => b.addEventListener("click", () => openTiePerson(b.dataset.tp)));
   fillIllus(popup.getElement());
+  popup.getElement().querySelectorAll(".pc-gaz[data-gaz]").forEach(fillGaz);
   // Event lists open at the city's current period and jump to that moment when clicked.
   const list = popup.getElement().querySelector(".pc-events"), now = list?.querySelector(".now");
   if (now) list.scrollTop = now.parentElement.offsetTop - list.offsetTop - 4;
+  const el = popup.getElement();
+  el.querySelectorAll("[data-seg]").forEach((b) => b.addEventListener("click", async () => {
+    const q = state.places.find((q) => q.id === b.dataset.seg);
+    if (!q) return;
+    await setYear(q.from);
+    showCard([q.lon, q.lat], placeCard(q));
+  }));
+  el.querySelectorAll("[data-ctab]").forEach((b) => b.addEventListener("click", () => {
+    cityTab = b.dataset.ctab;
+    el.querySelectorAll("[data-ctab]").forEach((c) => c.setAttribute("aria-selected", String(c === b)));
+    el.querySelectorAll("[data-pane]").forEach((d) => (d.hidden = d.dataset.pane !== cityTab));
+    const box = el.querySelector(`[data-pane="${cityTab}"] .pc-gaz`);
+    if (box) gazScroll(box);
+  }));
+  el.querySelectorAll("[data-cf]").forEach((b) => b.addEventListener("click", () => {
+    el.querySelector(".pc-evwrap")?.classList.toggle("top", b.dataset.cf === "top");
+    el.querySelectorAll("[data-cf]").forEach((c) => c.setAttribute("aria-pressed", String(c === b)));
+  }));
+  popup.getElement().querySelector("[data-life]")?.addEventListener("click", (e) => { popup?.remove(); startTour(e.currentTarget.dataset.life); });
+  popup.getElement().querySelector("[data-trail]")?.addEventListener("click", (e) => {
+    const p = cardPerson?.id === e.currentTarget.dataset.trail ? cardPerson : e.currentTarget.dataset.trail;
+    popup?.remove();
+    showTrail(p, { fit: true });
+  });
   popup.getElement().querySelectorAll("[data-ev]").forEach((b) => b.addEventListener("click", () => {
     popup?.remove();
     state.reading = false;
@@ -1287,14 +2711,27 @@ function showCard(lngLat, html) {
 }
 /* ---------- illustrations ---------- */
 // data/illustrations.json maps "p:<person id>" / "e:<event id>" to an image; the pictures themselves sit in data/img/<bucket>.json
-// as data URLs (the hosted page cannot load images from other sites). Built by tools/pack_illustrations.py. A pack may
-// bring its own index in the same format (manifest data.illustrations, buckets beside it), which wins on the same key.
-let illuIndex = null;
+// as data URLs (the hosted page cannot load images from other sites). Built by tools/pack_illustrations.py.
+// "a:<event id>" keys are AI-generated scenes from data/ai-illustrations.json + <DATA_URL>/atlas/ai/<file>.webp (tools/pack_ai_illustrations.py),
+// always captioned as AI-generated. A pack may bring its own pictures of either kind: AI scenes as media
+// (packMedia) and others in the img format (manifest data.illustrations, buckets beside it, packIllustrations).
+const illuSets = {};
 const illuBuckets = {};
+// A pack's own pictures join the set of their kind.
+const illuSet = (set) => illuSets[set] ||= loadJSON(set === "ai" ? "data/ai-illustrations.json" : "data/illustrations.json")
+  .then((idx) => {
+    if (set === "ai") pruneKept(["/ai/", "/atlas/ai/", BASE_PATH + "data/ai/"], Object.values(idx.images).filter((im) => !/^https?:/.test(im.f)).map((im) => "/atlas/ai/" + im.f));
+    return idx;
+  }, () => ({ keys: {}, images: {} }))
+  .then(async (idx) => {
+    const p = set === "ai" ? await packMedia("pictures") : await packIllustrations();
+    return p ? { keys: { ...idx.keys, ...p.keys }, images: { ...idx.images, ...p.images } } : idx;
+  }).then((idx) => (illuSets[set + "Ready"] = idx));
 async function packIllustrations() {
   const path = state.pack?.manifest.data.illustrations;
-  if (!path) return { keys: {}, images: {} };
-  const idx = await packFile("illustrations").catch(() => ({ keys: {}, images: {} }));
+  if (!path) return null;
+  const idx = await packFile("illustrations").catch(() => null);
+  if (!idx) return null;
   const dir = path.replace(/[^/]*$/, "");
   for (const im of Object.values(idx.images || {})) im.bucket = packPath(`${dir}${im.b}.json`);
   return { keys: idx.keys || {}, images: idx.images || {} };
@@ -1304,21 +2741,35 @@ function illuSlot(key) {
 }
 async function fillIllus(root) {
   const slots = [...root.querySelectorAll("figure[data-illu]:not(.done)")];
-  if (!slots.length) return;
-  illuIndex ||= Promise.all([loadJSON("data/illustrations.json").catch(() => ({ keys: {}, images: {} })), packIllustrations()])
-    .then(([a, p]) => ({ keys: { ...a.keys, ...p.keys }, images: { ...a.images, ...p.images } }));
-  const idx = await illuIndex;
   for (const fig of slots) {
     fig.classList.add("done");
+    const set = fig.dataset.illu.startsWith("a:") ? "ai" : "img";
+    const idx = await illuSet(set);
     const id = idx.keys[fig.dataset.illu], im = idx.images[id];
     if (!im) continue;
-    const bucket = im.bucket || `data/img/${im.b}.json`;
-    illuBuckets[bucket] ||= loadJSON(bucket).catch(() => ({}));
-    const src = (await illuBuckets[bucket])[id];
+    let src = im.f && mediaSrc(set, im.f); // AI pictures are files of their own, served from R2
+    if (!src) {
+      const bucket = im.bucket || `data/${set}/${im.b}.json`;
+      illuBuckets[bucket] ||= loadJSON(bucket).catch(() => ({}));
+      src = (await illuBuckets[bucket])[id];
+    }
     if (!src) continue;
     const credit = [im.artist, im.license].filter(Boolean).join(" · ");
-    fig.innerHTML = `<img src="${src}" alt="${esc(im.page)}" style="aspect-ratio:${im.w}/${im.h}">` +
-      `<figcaption><a href="${esc(im.url)}" target="_blank" rel="noopener">${esc(credit || "Wikimedia Commons")} ↗</a></figcaption>`;
+    fig.classList.toggle("ai", !!im.ai);
+    // An AI picture is described by its event ("Battle of Sarhu – AI-generated illustration, …"), the others by their page.
+    const ev = im.ai && state.events.find((e) => e.id === fig.dataset.illu.slice(2));
+    const alt = im.ai ? (ev ? `${titleOf(ev)} – ${t("aiIllu")}` : t("aiIllu")) : im.page;
+    // An AI picture carries its note in the AI badge (tap or hover), not in a caption line.
+    const note = im.ai && `${t("aiIllu")} · ${im.ai}`;
+    fig.innerHTML = `<img src="${src}" alt="${esc(alt)}" style="aspect-ratio:${im.w}/${im.h}">` + (im.ai
+      ? `<button type="button" class="ai-badge" aria-label="${esc(note)}" aria-expanded="false">AI<span class="ai-tip" role="tooltip">${esc(note)}</span></button>`
+      : `<figcaption><a href="${esc(im.url)}" target="_blank" rel="noopener">${esc(credit || "Wikimedia Commons")} ↗</a></figcaption>`);
+    // A picture that cannot be fetched (offline, or its host unreachable) leaves no broken frame behind.
+    fig.querySelector("img").addEventListener("error", () => {
+      fig.hidden = true;
+      const box = fig.closest(".event-pic, .tour-pic");
+      if (box) box.hidden = true;
+    });
     fig.hidden = false;
   }
 }
@@ -1339,26 +2790,36 @@ function pointMarkers(key, items, make) {
 function renderPeople() {
   const list = shown("people") ? (state.layerData?.people || []) : [];
   // Alive this year; a person with no birth year shows for the 40 years before death.
-  const alive = list.filter((p) => state.year >= personSpan(p)[0] && state.year <= personSpan(p)[1]);
-  pointMarkers("people", alive, (p) => {
+  const alive = list.filter((p) => state.year >= personSpan(p)[0] && state.year <= personSpan(p)[1] && selPerson(p));
+  // Someone with a life journey stands where they were that year, not at home (the one followed shows as the trail's dot).
+  const placed = alive.filter((p) => trail.life?.person !== p.id).map((p) => {
+    const life = state.lifeBy?.get(p.id);
+    if (!life) return p;
+    const s = life.steps[lifeIdx(life, state.year)];
+    return { ...p, lon: s.at[0], lat: s.at[1], here: stopPlace(s) };
+  });
+  state.peopleOnMap = new Set(alive.map((p) => p.id));
+  pointMarkers("people", placed, (p) => {
     const el = document.createElement("div");
-    el.className = "mk-person f-" + p.field;
+    el.className = "mk-person f-" + p.field + (p.here ? " moves" : "");
     const nm = nameOf(p);
-    el.innerHTML = `<i>${esc((p.name_zh || p.name).slice(0, 1))}</i><span>${esc(nm)}<small>${esc(t("fields")[p.field] || "")}</small></span>`;
+    el.innerHTML = `<i>${esc((p.name_zh || p.name).slice(0, 1))}</i><span>${esc(nm)}<small>${esc(t("fields")[p.field] || "")}${p.here ? ` · ${esc(p.here)}` : ""}</small></span>`;
     return { el, anchor: "left", card: () => personCard(p) };
   });
+  renderTies();
 }
 function personLife(p) {
   if (p.died == null && p.born != null) return zh() ? `${fmtYear(p.born, p.circa)}生` : `born ${fmtYear(p.born, p.circa)}`; // living
   return p.died != null ? t("life")(p.born != null ? fmtYear(p.born, p.circa) : "?", fmtYear(p.died, p.circa)) : (zh() ? "生卒不详" : "dates unknown");
 }
 function personCard(p) {
+  cardPerson = p;
   const works = (p.works || []).map((w) => zh() ? `《${esc(w.title_zh || w.title)}》` : `<i>${esc(w.title)}</i>`).join(zh() ? "" : ", ");
   const line = p.line_zh ? `<blockquote><span lang="zh-CN">${esc(p.line_zh)}</span>${!zh() && p.line_en ? `<em>${esc(p.line_en)}</em>` : ""}</blockquote>` : "";
   return `${illuSlot("p:" + p.id)}<div class="pc-kind">${esc(t("fields")[p.field] || p.field)} · ${personLife(p)}</div>
     <h4>${esc(nameOf(p))} <span lang="${zh() ? "en" : "zh-CN"}">${esc(zh() ? p.name : p.name_zh)}</span></h4>
     <p>${esc(tx(p, "known_for"))}</p>${works ? `<p class="pc-works"><b>${t("works")}</b> ${works}</p>` : ""}${line}
-    ${personEventList(p)}${checkNote(p)}<p class="pc-meta">${esc(tx(p, "place"))} ${wikiA((zh() && p.source_zh) || p.source)}</p>`;
+    ${state.lifeOf?.has(p.id) ? `<span class="pc-lives">${trail.life?.person === p.id ? "" : `<button type="button" class="pc-life pc-trail" data-trail="${esc(p.id)}" title="${esc(t("trailHint"))}">◉ ${esc(t("trailShow"))}</button>`}<button type="button" class="pc-life" data-life="${esc(state.lifeOf.get(p.id))}">▶ ${esc(t("followLife"))}</button></span>` : ""}${personTies(p)}${personEventList(p)}${checkNote(p)}<p class="pc-meta">${esc(tx(p, "place"))} ${wikiA((zh() && p.source_zh) || p.source)}</p>`;
 }
 function personEventList(p) {
   const evs = personEvents(p);
@@ -1367,12 +2828,127 @@ function personEventList(p) {
   const last = evs.filter((ev) => ev.year <= state.year).pop() || evs[0];
   return `<p class="pc-works"><b>${t("personEvents")(evs.length)}</b></p>${eventButtons(evs, (ev) => ev === last)}`;
 }
+// Where a person was in this year: their life journey's stop, else home.
+function personAt(p) {
+  const life = state.lifeBy?.get(p.id);
+  return life ? life.steps[lifeIdx(life, state.year)].at : [p.lon, p.lat];
+}
 // Years a person's marker is on the map: their life, or the 40 years before death when the birth year is unknown.
 const personSpan = (p) => p.show ? p.show : [p.born ?? p.died - 40, p.died ?? state.range.end];
 
+/* ---------- 人物关系网: who taught, served, fought or wrote to whom (data/relations.json, AI-drafted) ----------
+   A tie is a bow between the two people where they were that year (their 足迹 stop, else home), coloured by kind.
+   Ties between people on the map show faintly once they have begun; the person whose card is open, or whose 足迹
+   is drawn, has theirs bright and labelled, reaching people off this period's map too. Built by tools/build_relations.py. */
+const TIE_COLORS = { teach: "#2e8b57", serve: "#2f6fb5", kin: "#8e44ad", friend: "#0f9b8e", rival: "#d9741a", war: "#c0392b", verse: "#c2417a" };
+const tieState = { focus: null, labels: [] };
+let ties = null;
+const loadTies = () => ties || (ties = (state.pack?.only ? Promise.resolve({ people: {}, links: [] }) : loadJSON("data/relations.json").catch(() => ({ people: {}, links: [] })))
+  .then((d) => {
+    state.ties = d;
+    state.tiesOf = new Map();
+    d.links.forEach((l, i) => { l.i = i; for (const id of [l.a, l.b]) { if (!state.tiesOf.has(id)) state.tiesOf.set(id, []); state.tiesOf.get(id).push(l); } });
+    renderTies();
+    return d;
+  }));
+const tieName = (id) => { const q = state.ties?.people[id]; return q ? nameOf(q) : id; };
+const tieAlive = (id, y) => { const q = state.ties?.people[id]; return !!q && y >= personSpan(q)[0] && y <= personSpan(q)[1]; };
+// Where someone was in the year on the timeline: the 足迹 dot for the person followed, their journey's stop, else home.
+function tiePos(id) {
+  if (trail.life?.person === id) return trail.life.steps[Math.max(0, trail.k)].at;
+  const life = state.lifeBy?.get(id), q = state.ties?.people[id];
+  return life ? life.steps[lifeIdx(life, state.year)].at : q && [q.lon, q.lat];
+}
+const tieLabel = (l) => (zh() ? l.rel_zh || l.rel : l.rel || l.rel_zh) || t("tieKinds")[l.kind];
+function renderTies() {
+  const src = map?.getSource("ties");
+  tieState.labels.forEach((m) => m.remove());
+  tieState.labels = [];
+  if (!src) return;
+  const R = state.ties, y = state.year, feats = [];
+  const focus = trail.life?.person || tieState.focus;
+  if (R && shown("ties")) {
+    const onMap = state.peopleOnMap || new Set();
+    const hot = (l) => focus && (l.a === focus || l.b === focus);
+    const list = R.links.filter((l) => y >= l.year && (hot(l) ? tieAlive(l.a, y) && tieAlive(l.b, y) : onMap.has(l.a) && onMap.has(l.b)));
+    for (const l of list) {
+      const a = tiePos(l.a), b = tiePos(l.b);
+      if (!a || !b || (Math.abs(a[0] - b[0]) < 0.01 && Math.abs(a[1] - b[1]) < 0.01)) continue;
+      const pts = arcLeg(a, b, 24), h = hot(l) ? 1 : 0;
+      feats.push({ type: "Feature", properties: { i: l.i, kind: l.kind, color: TIE_COLORS[l.kind] || "#888", hot: h, dim: focus && !h ? 1 : 0 }, geometry: lineGeom(pts) });
+      if (!h) continue;
+      // The focus person's ties carry their label at the middle of the bow, and name whoever has no marker of their own.
+      const lab = document.createElement("button");
+      lab.type = "button";
+      lab.className = "tie-lab";
+      lab.style.setProperty("--tie", TIE_COLORS[l.kind]);
+      lab.textContent = tieLabel(l);
+      lab.addEventListener("click", (e) => { e.stopPropagation(); showCard(pts[pts.length >> 1], tieCard(l)); });
+      tieState.labels.push(new maplibregl.Marker({ element: lab }).setLngLat(pts[pts.length >> 1]).addTo(map));
+      const other = l.a === focus ? l.b : l.a;
+      if (!onMap.has(other)) {
+        const el = document.createElement("button");
+        el.type = "button";
+        el.className = "tie-who";
+        el.innerHTML = `<i></i>${esc(tieName(other))}`;
+        el.addEventListener("click", (e) => { e.stopPropagation(); openTiePerson(other); });
+        tieState.labels.push(new maplibregl.Marker({ element: el, anchor: "left", offset: [-5, 0] }).setLngLat(other === l.a ? a : b).addTo(map));
+      }
+    }
+  }
+  src.setData({ type: "FeatureCollection", features: feats });
+}
+function tieCard(l) {
+  const ev = l.event && state.events.find((e) => e.id === l.event);
+  const who = (id) => `<button type="button" class="tie-p" data-tp="${esc(id)}">${esc(tieName(id))}</button>`;
+  return `<div class="pc-kind"><i class="tie-sw" style="--tie:${TIE_COLORS[l.kind]}"></i>${esc(t("tieKinds")[l.kind])} · ${fmtYear(l.year)}${l.to ? ` – ${fmtYear(l.to)}` : ""}</div>
+    <h4 class="tie-h">${who(l.a)} <span>${esc(tieLabel(l))}</span> ${who(l.b)}</h4>
+    <p>${esc(tx(l, "text"))}</p>${ev ? eventButtons([ev], () => true) : ""}${l.check ? vcNote(l) : `<p class="pc-meta">${esc(t("drafted"))}</p>`}`;
+}
+// A person's ties for their card: those begun by now first, the rest marked "later"; each opens the other person.
+function personTies(p) {
+  const list = state.tiesOf?.get(p.id);
+  if (!list?.length) return "";
+  const rows = [...list].sort((a, b) => a.year - b.year).map((l) => {
+    const other = l.a === p.id ? l.b : l.a, later = l.year > state.year;
+    return `<li><button type="button" class="tie-row${later ? " later" : ""}" data-tp="${esc(other)}" title="${esc(tx(l, "text"))}"><i class="tie-sw" style="--tie:${TIE_COLORS[l.kind]}"></i><b>${esc(tieLabel(l))}</b>${esc(tieName(other))}${vcMark(l)}<small>${fmtYear(l.year)}${later ? ` · ${esc(t("tieLater"))}` : ""}</small></button>${l.event ? `<button type="button" class="tie-ev" data-ev="${esc(l.event)}" aria-label="${esc(t("tourStory"))}">↗</button>` : ""}</li>`;
+  }).join("");
+  return `<div class="pc-ties" data-pid="${esc(p.id)}"><p class="pc-works"><b>${t("tieHead")(list.length)}</b></p><ul>${rows}</ul></div>`;
+}
+// Open someone a tie names: on this map if they are alive in it, else in their own period.
+async function openTiePerson(id) {
+  const q = state.ties?.people[id];
+  if (!q) return;
+  popup?.remove();
+  const era = state.chinaEras.find((e) => e.id === q.era);
+  const here = (state.layerData?.people || []).find((p) => p.id === id);
+  if (here && tieAlive(id, state.year)) return focusPerson(here);
+  if (!era) return;
+  const p = (await loadLayers(era)).people?.find((x) => x.id === id);
+  if (!p) return;
+  if (tieAlive(id, state.year) && state.mode === era.region) {
+    await jumpToYear(state.year);
+    state.layerData = await loadLayers(eraFor(state.year));
+    return focusPerson((state.layerData.people || []).find((x) => x.id === id) || p);
+  }
+  jumpToPerson(p, era);
+}
+// Ties of the person followed that fall in the stretch of life at the current stop (up to the next stop).
+function trailTies(life, k) {
+  const list = state.tiesOf?.get(life.person);
+  if (!list) return "";
+  const a = life.steps[k].year, b = life.steps[k + 1]?.year ?? Infinity;
+  const now = list.filter((l) => l.year >= a && l.year < b || (k === 0 && l.year < a)).slice(0, 5);
+  if (!now.length) return "";
+  return `<div class="tr-ties"><span>${esc(t("tieThen"))}</span>${now.map((l) => {
+    const other = l.a === life.person ? l.b : l.a;
+    return `<button type="button" class="tie-chip" data-ti="${l.i}" title="${esc(tx(l, "text"))}"><i class="tie-sw" style="--tie:${TIE_COLORS[l.kind]}"></i>${esc(tieName(other))}<small>${esc(tieLabel(l))}</small></button>`;
+  }).join("")}</div>`;
+}
+
 function renderCapitals() {
   const list = shown("capitals") ? (state.layerData?.capitals || []) : [];
-  const now = list.filter((c) => state.year >= c.from && state.year <= c.to);
+  const now = list.filter((c) => state.year >= c.from && state.year <= c.to && (!state.sel || selNames().has(c.polity) || selKeep([[c.lon, c.lat]])));
   pointMarkers("capitals", now, (c) => {
     const el = document.createElement("div");
     el.className = "mk-capital";
@@ -1385,10 +2961,10 @@ function renderCapitals() {
 
 // Faith sites and inventions: those of the current era up to this year (in the decades view, of the window).
 function cumulative(key, items, cls, glyph, kindLabel) {
-  const start = state.zoom === 2 ? state.win[0] : state.era.start;
-  const shown = items.filter((x) => x.year <= state.year && x.year >= start);
+  const start = state.zoom === 2 ? state.win[0] : state.era?.start ?? state.year;
+  const shown = items.filter((x) => x.year <= state.year && x.year >= start && selKeep([[x.lon, x.lat]]));
   pointMarkers(key, shown, (x) => {
-    const recent = x.year >= state.era.start;
+    const recent = x.year >= (state.era?.start ?? state.year);
     const el = document.createElement("div");
     el.className = `${cls} k-${x.kind || x.field}` + (recent ? "" : " old");
     el.innerHTML = `<i>${glyph(x)}</i>` + (recent ? `<span>${esc(nameOf(x))}</span>` : "");
@@ -1405,7 +2981,7 @@ function renderFaith() {
 }
 // Passes stand from their founding year until abandoned; battles already fought there are listed on the card.
 function renderPasses() {
-  const list = shown("passes") ? state.passes.filter((x) => state.year >= x.from && (x.to == null || state.year <= x.to)) : [];
+  const list = shown("passes") ? state.passes.filter((x) => state.year >= x.from && (x.to == null || state.year <= x.to) && selKeep([[x.lon, x.lat]])) : [];
   pointMarkers("passes", list, (x) => {
     const el = document.createElement("div");
     el.className = "mk-pass k-" + x.kind;
@@ -1430,7 +3006,7 @@ function roadCard(r) {
     <p class="pc-meta">${wikiA(r.source)}</p>`;
 }
 function renderRoads() {
-  const list = shown("roads") ? state.roads.filter((r) => state.year >= r.from && (r.to == null || state.year <= r.to)) : [];
+  const list = shown("roads") ? state.roads.filter((r) => state.year >= r.from && (r.to == null || state.year <= r.to) && selKeep(r.via)) : [];
   map.getSource("roads")?.setData({ type: "FeatureCollection", features: list.map((r) => ({
     type: "Feature", properties: { id: r.id, kind: r.kind }, geometry: { type: "LineString", coordinates: r.via.map((v) => [v[0], v[1]]) } })) });
   (markers.roads || []).forEach((m) => m.remove());
@@ -1458,7 +3034,7 @@ function clanCard(g) {
     <p class="pc-meta">${t("drafted")} ${wikiA(g.source)}</p>`;
 }
 function renderClans() {
-  const list = shown("clans") ? state.clans.filter((g) => state.year >= g.from && state.year <= g.to) : [];
+  const list = shown("clans") ? state.clans.filter((g) => state.year >= g.from && state.year <= g.to && selKeep(g.seats)) : [];
   map.getSource("clans")?.setData({ type: "FeatureCollection", features: list.map((g) => ({
     type: "Feature", properties: { id: g.id, color: CLAN[g.kind][0] }, geometry: g.geometry })) });
   pointMarkers("clans", list.map((g) => ({ ...g, lon: g.label[0], lat: g.label[1] })), (g) => {
@@ -1478,8 +3054,240 @@ function wallCard(w) {
     <p>${esc(tx(w, "summary"))}</p>${ruin ? `<p class="pc-meta">${t("ruin")}</p>` : ""}
     <p class="pc-meta">${t("drafted")} ${wikiA(w.source)}</p>`;
 }
+// Administrative seats (政区: 郡/州/府/路/军… 治所): one drafted snapshot per dynasty (data/admin.json, built by
+// tools/build_admin.py), shown through that dynasty's years as far as each unit's own years allow. Dots for all of
+// them; names from zoom 5 on, for the seats in view. A card can look the seat up live in CHGIS's Temporal Gazetteer.
+const ADMIN_LABEL_ZOOM = 5;
+let adminLoad, areasLoad;
+// data/admin-areas.json (tools/build_admin_areas.py): one sketch polygon per seat, keyed by its index in admin.json.
+function adminAreas() {
+  if (state.adminAreas) return state.adminAreas;
+  areasLoad ||= loadJSON("data/admin-areas.json").then((d) => {
+    state.adminAreas = new Map(d.features.map((f) => [f.properties.i, f]));
+    renderAdmin();
+  }).catch(() => { state.adminAreas = new Map(); });
+  return null;
+}
+function adminData() {
+  if (state.admin) return state.admin;
+  adminLoad ||= loadJSON("data/admin.json").then((d) => {
+    const F = d.fields;
+    state.admin = { ...d, items: d.items.map((r, i) => {
+      const o = { i };
+      F.forEach((f, k) => (o[f] = r[k]));
+      o.lv = d.types[o.type]?.[2] ?? 2;
+      return o;
+    }) };
+    renderAdmin();
+    renderEconomy();
+  }).catch(() => { state.admin = { items: [], types: [] }; });
+  return null;
+}
+// The China period this year falls in: its snapshot is the one shown.
+const chinaEraAt = (y) => (state.chinaEras || []).find((e) => y >= e.start && y <= e.end)?.id;
+const adminNow = (x, y = state.year) => x.era === chinaEraAt(y) && y >= x.from && (x.to == null || y <= x.to);
+function adminList() {
+  const d = shown("admin") ? adminData() : null;
+  if (!d) return [];
+  // A period with several snapshots (唐 639, 742, 820) can have two records of one seat valid in the same year:
+  // the record from the snapshot nearest this year wins.
+  const now = d.items.filter((x) => adminNow(x) && selKeep([[x.lon, x.lat]]))
+    .sort((a, b) => Math.abs(a.snap - state.year) - Math.abs(b.snap - state.year));
+  const kept = [];
+  for (const x of now) {
+    if (!kept.some((o) => o.snap !== x.snap && Math.abs(o.lon - x.lon) < 0.2 && Math.abs(o.lat - x.lat) < 0.2)) kept.push(x);
+  }
+  return kept;
+}
+const adminType = (x) => { const T = state.admin.types[x.type] || []; return zh() ? T[0] : T[1]; };
+const adminName = (x) => (zh() ? x.name_zh : x.name);
+function renderAdmin() {
+  const list = adminList();
+  state.adminShown = list;
+  map.getSource("admin")?.setData({ type: "FeatureCollection", features: list.map((x) => ({
+    type: "Feature", properties: { i: x.i, lv: x.lv }, geometry: { type: "Point", coordinates: [x.lon, x.lat] } })) });
+  const areas = list.length ? adminAreas() : null;
+  map.getSource("adminAreas")?.setData({ type: "FeatureCollection", features: areas ? list.map((x) => areas.get(x.i))
+    .filter(Boolean).map((f) => ({ ...f, properties: { i: f.properties.i, lv: state.admin.items[f.properties.i].lv } })) : [] });
+  if (map.getLayer("admin-area-on") && !list.some((x) => x.i === state.adminOn)) adminHighlight(null);
+  renderAdminLabels();
+}
+function renderAdminLabels() {
+  (markers.admin || []).forEach((m) => m.remove());
+  markers.admin = [];
+  if (!map || map.getZoom() < ADMIN_LABEL_ZOOM || !state.adminShown?.length) return scheduleDeclutter();
+  const b = map.getBounds();
+  for (const x of state.adminShown) {
+    if (!b.contains([x.lon, x.lat])) continue;
+    const el = document.createElement("div");
+    el.className = "mk-admin lv-" + x.lv + (x.conf === 0 ? " unsure" : "");
+    el.textContent = adminName(x);
+    el.dataset.name = adminName(x);
+    el.addEventListener("click", (e) => { e.stopPropagation(); openAdmin(x); });
+    markers.admin.push(new maplibregl.Marker({ element: el, anchor: "left", offset: [6, 0] }).setLngLat([x.lon, x.lat]).addTo(map));
+  }
+  scheduleDeclutter();
+}
+const adminSpan = (x) => `${fmtYear(x.from)} – ${x.to == null ? "" : fmtYear(x.to)}`;
+function adminCard(x) {
+  // Every snapshot's seat at this site (within ~5 km), oldest first: how the unit here was named dynasty by dynasty.
+  const site = state.admin.items.filter((o) => Math.abs(o.lon - x.lon) < 0.05 && Math.abs(o.lat - x.lat) < 0.05)
+    .sort((a, b) => a.snap - b.snap);
+  const seat = x.seat_zh && (zh() ? `${t("adminSeat")} ${x.seat_zh}` : `${t("adminSeat")}: ${x.seat_zh}`);
+  return `<div class="pc-kind">${esc(adminType(x))}${x.state ? ` · ${esc(x.state)}` : ""} · ${adminSpan(x)}</div>
+    <h4>${esc(adminName(x))} <span lang="${zh() ? "en" : "zh-CN"}">${esc(zh() ? x.name : x.name_zh)}</span></h4>
+    ${x.was_zh ? `<p class="pc-works"><b>${t("adminWas")}</b> <span lang="zh-CN">${esc(x.was_zh)}</span></p>` : ""}
+    <p class="pc-works">${seat ? `<span lang="zh-CN">${esc(seat)}</span>　` : ""}${x.modern_zh ? `<b>${t("adminNow")}</b> <span lang="zh-CN">${esc(x.modern_zh.replace(/^今/, ""))}</span>` : ""}</p>
+    <div class="pc-gaz" data-gaz="a:${x.i}">${site.length > 1 ? `<p class="pc-works"><b>${t("adminSite")}</b></p><ul class="pc-battles pc-admin">${site.map((o) =>
+      `<li${o === x ? ' class="on"' : ""} data-admin-year="${o.snap}"><span>${fmtYear(o.snap)}</span> ${esc(adminName(o))} <small>${esc(adminType(o))}</small></li>`).join("")}</ul>` : ""}</div>
+    <div class="pc-chgis" data-chgis="${x.i}"><button type="button" class="pc-life">${t("adminChgis")}</button></div>
+    <p class="pc-meta">${t("adminSnap")(fmtYear(x.snap))}${x.conf === 0 ? ` · ${t("adminUnsure")}` : ""}</p>`;
+}
+// The card's history list opens scrolled to the record shown.
+function adminHighlight(i) {
+  state.adminOn = i;
+  map.setFilter("admin-area-on", ["==", ["get", "i"], i ?? -1]);
+}
+function openAdmin(x) {
+  showCard([x.lon, x.lat], adminCard(x));
+  adminHighlight(x.i);
+  popup.on("close", () => { if (state.adminOn === x.i) adminHighlight(null); });
+  requestAnimationFrame(() => {
+    const li = document.querySelector(".pc-admin li.on"), ul = li?.parentElement;
+    if (ul) ul.scrollTop = li.offsetTop - ul.offsetTop - ul.clientHeight / 2;
+  });
+}
+// CHGIS's own record for a seat, fetched only when the reader asks (the 「CHGIS 记录」 button): one call per seat and
+// year, kept for the visit, at most one call a second from this browser, and nothing shown if Harvard is slow or
+// down. CHGIS's data stays on Harvard's server; the atlas only shows what the reader looked up.
+const TGAZ = "https://chgis.hudci.org/tgaz/placename";
+const tgazCache = new Map();
+let tgazLast = 0;
+async function tgazLookup(x, year) {
+  const key = `${x.name_zh}|${year}`;
+  if (tgazCache.has(key)) return tgazCache.get(key);
+  const wait = tgazLast + 1000 - Date.now();
+  if (wait > 0) await new Promise((r) => setTimeout(r, wait));
+  tgazLast = Date.now();
+  const ctl = new AbortController(), timer = setTimeout(() => ctl.abort(), 6000);
+  const p = fetch(`${TGAZ}?fmt=json&n=${encodeURIComponent(x.name_zh)}&yr=${year}`, { signal: ctl.signal })
+    .then((r) => r.json()).then((d) => (d.placenames || []).map((p) => {
+      const [lon, lat] = String(p["xy coordinates"] || "").split(",").map(Number);
+      return { ...p, lon, lat };
+    // The same unit nearby (CHGIS also has villages and counties of the same name elsewhere).
+    }).filter((p) => p.name === x.name_zh && p.lon && Math.abs(p.lon - x.lon) < 0.6 && Math.abs(p.lat - x.lat) < 0.6))
+    .catch(() => null).finally(() => clearTimeout(timer));
+  tgazCache.set(key, p);
+  const out = await p;
+  if (out == null) tgazCache.delete(key);   // try again next time
+  return out;
+}
+async function showChgis(box) {
+  const x = state.admin.items[+box.dataset.chgis];
+  box.innerHTML = `<p class="pc-meta">${t("adminChgisWait")}</p>`;
+  const year = Math.min(Math.max(state.year, x.from), x.to ?? state.year);
+  const found = await tgazLookup(x, year);
+  if (!box.isConnected) return;
+  box.innerHTML = found == null ? `<p class="pc-meta">${t("adminChgisDown")}</p>`
+    : !found.length ? `<p class="pc-meta">${t("adminChgisNone")}</p>`
+    : `<ul class="pc-battles pc-chgis-list">${found.slice(0, 4).map((p) => `<li><span>${esc(String(p.years || "").replace(/\s*~\s*/, "–"))}</span> ${esc(p.name)} <small>${esc(String(p["feature type"] || "").replace(/\s*\(.*\)/, ""))}${p["parent name"] ? ` · ${esc(String(p["parent name"]).replace(/\s*\(.*\)/, ""))}` : ""}</small> <a href="${esc(p.uri)}" target="_blank" rel="noopener">↗</a></li>`).join("")}</ul>
+      <p class="pc-meta">${t("adminChgisSrc")}${found.some((p) => Math.hypot(p.lon - x.lon, p.lat - x.lat) > 0.25) ? ` · ${t("adminChgisMoved")}` : ""}</p>`;
+}
+document.addEventListener("click", (e) => {
+  const box = e.target.closest?.(".pc-chgis");
+  if (box && e.target.closest("button")) return showChgis(box);
+  const li = e.target.closest?.("[data-admin-year]");
+  if (li) jumpToYear(+li.dataset.adminYear);
+});
+// 地名古今 (data/gazetteer.json, tools/build_gazetteer.py): for each site (a city with the seats at it, or seats no
+// city claims), every China period's names, who held it at each of the period's maps, and the 郡/州 it lay in when it
+// was no seat itself, down to its modern name. Loaded with the first city or seat card; city and seat cards show it.
+let gazLoad;
+function gazData() {
+  if (state.gaz) return state.gaz;
+  gazLoad ||= loadJSON("data/gazetteer.json").then((d) => {
+    const byCity = new Map(), byAdmin = new Map();
+    d.sites.forEach((s, k) => { s.k = k; if (s.city) byCity.set(s.city, s); for (const i of s.adm || []) byAdmin.set(i, s); });
+    state.gaz = { ...d, byCity, byAdmin };
+    document.querySelectorAll(".pc-gaz[data-gaz]").forEach(fillGaz);
+    if (!$("search").hidden) renderSearch();
+  }).catch(() => { state.gaz = { names: [], eras: [], sites: [], byCity: new Map(), byAdmin: new Map() }; });
+  return null;
+}
+// data-gaz keys: c:<city id>, a:<admin index>, s:<site index>
+function gazSite(key) {
+  const g = state.gaz, [k, v] = [key.slice(0, 1), key.slice(2)];
+  return k === "c" ? g.byCity.get(v) : k === "a" ? g.byAdmin.get(+v) : g.sites[+v];
+}
+const gazName = (i) => { const n = state.gaz.names[i]; return zh() ? n[0] : n[1]; };
+const gazNow = (s) => (zh() ? s.now[0] : s.now[1] || s.now[0]);
+function gazRows(s) {
+  const G = state.gaz, cur = chinaEraAt(state.year);
+  const rows = s.rows.map(([ei, y, city, seats, hold, units]) => {
+    const e = state.chinaEras.find((e) => e.id === G.eras[ei]);
+    if (!e) return "";
+    // The holder is left out when it is the period's own dynasty (唐 in 唐).
+    const own = hold.length === 1 && [e.name_zh, e.glyph].includes(G.names[hold[0][1]][0]);
+    const held = hold.length && !own ? `<small class="gz-held">${t("gazHeld")} ${hold.map(([hy, h]) =>
+      `<i data-gaz-year="${hy}" title="${fmtYear(hy)}">${esc(gazName(h))}</i>`).join(" → ")}</small>` : "";
+    const lay = units?.length ? `<small>${t("gazIn")} ${units.map((u) => esc(gazName(u))).join(zh() ? "、" : ", ")}</small>` : "";
+    const names = city.length ? `<b>${city.map((n) => esc(gazName(n))).join(zh() ? "、" : ", ")}</b>` : "";
+    const seat = seats.length ? `<small class="gz-seat">${seats.map((n) => esc(gazName(n))).join(" · ")}</small>` : "";
+    return `<li data-gaz-year="${y}"${e.id === cur ? ' class="on"' : ""}><span>${esc(zh() ? e.name_zh : e.short || e.name)}</span><div>${names}${seat}${held}${lay}${names || seat ? "" : `<em>—</em>`}</div></li>`;
+  }).join("");
+  const now = gazNow(s);
+  return `<p class="pc-works"><b>${t("gazHead")}</b></p><ul class="pc-gazlist">${rows}${now ? `<li class="today"><span>${t("adminNow")}</span><div><b>${esc(now)}</b></div></li>` : ""}</ul>`;
+}
+function fillGaz(box) {
+  if (!gazData()) return;    // fills when the file arrives
+  const s = gazSite(box.dataset.gaz);
+  if (!s) return;            // keeps whatever the card put there
+  box.innerHTML = gazRows(s);
+  gazScroll(box);
+}
+function gazScroll(box) {
+  const li = box.querySelector("li.on"), ul = li?.parentElement;
+  if (ul) ul.scrollTop = li.offsetTop - ul.offsetTop - ul.clientHeight / 2 + li.offsetHeight / 2;
+}
+// A card of its own for a site found by search (a seat or an old name).
+function gazCard(s, title) {
+  const now = gazNow(s);
+  return `<div class="pc-kind">${t("gazKind")}</div>
+    <h4>${esc(title)}${now ? ` <span lang="zh-CN">${esc(zh() ? `今${now}` : now)}</span>` : ""}</h4>
+    <div class="pc-gaz" data-gaz="s:${s.k}"></div><p class="pc-meta">${t("gazNote")}</p>`;
+}
+document.addEventListener("click", async (e) => {
+  const hit = e.target.closest?.(".pc-gazlist [data-gaz-year]");
+  if (!hit) return;
+  await jumpToYear(+hit.dataset.gazYear);
+  // The open card stays; its row for the new period lights up.
+  const box = hit.closest(".pc-gaz");
+  if (box?.isConnected) { box.innerHTML = gazRows(gazSite(box.dataset.gaz)); gazScroll(box); }
+});
+// Search: sites by any name they ever had or by their modern name, beyond the cities search already lists.
+function gazSearch(has, citiesFound) {
+  const G = state.gaz, out = [];
+  if (!G) return out;
+  for (const s of G.sites) {
+    if (s.city && citiesFound.has(s.city)) continue;
+    let row = s.rows.find((r) => [...r[2], ...r[3]].some((n) => has(...G.names[n])));
+    if (!row && !s.city && has(...s.now)) row = s.rows[s.rows.length - 1];
+    if (!row) continue;
+    const n = [...row[2], ...row[3]].find((n) => has(...G.names[n])) ?? row[3][0] ?? row[2][0];
+    const e = state.chinaEras.find((e) => e.id === G.eras[row[0]]);
+    out.push({ g: "place", year: row[1], title: gazName(n), sub: `${e ? nameOf(e) + " · " : ""}${zh() ? "今" : "modern "}${gazNow(s)}`,
+      go: () => jumpToGaz(s, row[1], gazName(n)) });
+    if (out.length >= 8) break;
+  }
+  return out;
+}
+async function jumpToGaz(s, y, title) {
+  await jumpToYear(y);
+  map.flyTo({ center: [s.lon, s.lat], zoom: Math.max(map.getZoom(), 6), duration: 1200, essential: true });
+  map.once("moveend", () => showCard([s.lon, s.lat], gazCard(s, title)));
+}
 function renderWalls() {
-  const list = shown("walls") ? state.walls.filter((w) => state.year >= w.from) : [];
+  const list = shown("walls") ? state.walls.filter((w) => state.year >= w.from && (!state.sel || w.paths.some(selKeep))) : [];
   const feats = [];
   for (const w of list) for (const p of w.paths)
     feats.push({ type: "Feature", properties: { id: w.id, ruin: state.year > w.to }, geometry: { type: "LineString", coordinates: p } });
@@ -1522,11 +3330,258 @@ function renderPopulation() {
     </svg>`;
 }
 
+// Economic centre (经济重心): where the people and the revenue were, 汉 to 清. data/economy.json gives each modern
+// province's share at a handful of census or ledger years; each share is spread evenly over that province's seats in
+// data/admin.json at that year (more prefectures, more people), and between two data points the two heat sets
+// cross-fade. Each data point's weighted centre is drawn as a trail, this year's as a marker. AI-drafted figures.
+const ECON_SPAN = [-206, 1912];
+let econLoad;
+function econData() {
+  if (state.econ) return state.econ;
+  econLoad ||= loadJSON("data/economy.json").then((d) => { state.econ = d; renderEconomy(); })
+    .catch(() => { state.econ = { provinces: {}, metrics: {} }; });
+  return null;
+}
+// The Qinling–Huai line as a latitude at a longitude (data/economy.json `huai`): south of it counts as the south.
+function huaiLat(H, lon) {
+  if (lon <= H[0][0]) return H[0][1];
+  for (let i = 1; i < H.length; i++) if (lon <= H[i][0]) {
+    const [x0, y0] = H[i - 1], [x1, y1] = H[i];
+    return y0 + ((lon - x0) / (x1 - x0)) * (y1 - y0);
+  }
+  return H[H.length - 1][1];
+}
+// One data point made into weighted points: the province shares (normalised to 100) over that year's seats.
+function econPoints(d, s) {
+  if (s.pts) return s;
+  const A = state.admin.items;
+  let seats = A.filter((x) => x.era === s.era && s.year >= x.from && (x.to == null || s.year <= x.to));
+  if (seats.length < 10) {
+    const snaps = [...new Set(A.filter((x) => x.era === s.era).map((x) => x.snap))];
+    const near = snaps.sort((a, b) => Math.abs(a - s.year) - Math.abs(b - s.year))[0];
+    seats = A.filter((x) => x.era === s.era && x.snap === near);
+  }
+  seats.sort((a, b) => Math.abs(a.snap - s.year) - Math.abs(b.snap - s.year));
+  const kept = [];
+  for (const x of seats) if (!kept.some((o) => Math.abs(o.lon - x.lon) < 0.2 && Math.abs(o.lat - x.lat) < 0.2)) kept.push(x);
+  const P = d.provinces, provOf = {};
+  for (const [id, p] of Object.entries(P)) provOf[id] = [];
+  for (const x of kept) {
+    const m = (x.modern_zh || "").replace(/^今/, "");
+    const id = Object.keys(P).find((k) => P[k].match.some((z) => m.startsWith(z)));
+    if (id) provOf[id].push(x);
+  }
+  const sum = Object.values(s.share).reduce((a, b) => a + b, 0);
+  s.pts = [];
+  for (const [id, v] of Object.entries(s.share)) {
+    const share = (v / sum) * 100, at = provOf[id]?.length ? provOf[id] : [{ lon: P[id].lon, lat: P[id].lat }];
+    for (const x of at) s.pts.push({ lon: x.lon, lat: x.lat, w: share / at.length, m: x.modern_zh });
+  }
+  const W = s.pts.reduce((a, p) => a + p.w, 0);
+  s.centre = [s.pts.reduce((a, p) => a + p.w * p.lon, 0) / W, s.pts.reduce((a, p) => a + p.w * p.lat, 0) / W];
+  s.south = s.pts.reduce((a, p) => a + (p.lat < huaiLat(d.huai, p.lon) ? p.w : 0), 0) / W;
+  s.top = Object.entries(s.share).sort((a, b) => b[1] - a[1]).slice(0, 3).map(([id]) => id);
+  return s;
+}
+// The two data points around a year and how far between them it is.
+function econAt(list, y) {
+  if (y <= list[0].year) return [list[0], list[0], 0];
+  for (let i = 1; i < list.length; i++) if (y < list[i].year) return [list[i - 1], list[i], (y - list[i - 1].year) / (list[i].year - list[i - 1].year)];
+  const last = list[list.length - 1];
+  return [last, last, 0];
+}
+function econFrame(d, metric, y) {
+  const list = d.metrics[metric].map((s) => econPoints(d, s));
+  const [a, b, f] = econAt(list, y);
+  const lerp = (u, v) => u + (v - u) * f;
+  return { list, a, b, f, centre: [lerp(a.centre[0], b.centre[0]), lerp(a.centre[1], b.centre[1])], south: lerp(a.south, b.south) };
+}
+function renderEconomy() {
+  const box = $("econ-box");
+  const clear = () => {
+    map.getSource("econ")?.setData({ type: "FeatureCollection", features: [] });
+    map.getSource("econTrail")?.setData({ type: "FeatureCollection", features: [] });
+    (markers.econ || []).forEach((m) => m.remove());
+    markers.econ = [];
+  };
+  // The figures are China's only: elsewhere the switch is greyed out (its tip says why) and nothing is shown.
+  const here = state.mode === "china", chip = $("l-economy");
+  chip.setAttribute("aria-disabled", String(!here));
+  if (here) delete chip.dataset.tipHint; else chip.dataset.tipHint = "econOnlyChina";
+  if (!here || !shown("economy")) { box.hidden = true; return clear(); }
+  const d = econData(), adm = adminData();
+  box.hidden = false;
+  if (!d || !adm || !d.metrics?.pop) { box.innerHTML = ""; return clear(); }
+  const y = state.year, metric = state.econMetric === "wealth" ? "wealth" : "pop";
+  const inSpan = y >= ECON_SPAN[0] && y <= ECON_SPAN[1];
+  const fr = econFrame(d, metric, y);
+  const other = econFrame(d, metric === "pop" ? "wealth" : "pop", y);
+  const pt = (c, props) => ({ type: "Feature", properties: props, geometry: { type: "Point", coordinates: c } });
+  clear();
+  if (inSpan) {
+    const feats = fr.a.pts.map((p) => pt([p.lon, p.lat], { w: p.w * (1 - fr.f) }));
+    if (fr.f > 0) feats.push(...fr.b.pts.map((p) => pt([p.lon, p.lat], { w: p.w * fr.f })));
+    map.getSource("econ")?.setData({ type: "FeatureCollection", features: feats });
+    // North and south of the Qinling–Huai line, each side's share in large type: the shift reads at a glance.
+    map.getSource("econTrail")?.setData({ type: "FeatureCollection", features: [
+      { type: "Feature", properties: {}, geometry: { type: "LineString", coordinates: d.huai } }] });
+    const lon = 108.6, h = huaiLat(d.huai, lon);
+    for (const [side, share, lat, anchor] of [["n", 1 - fr.south, h + 0.9, "bottom"], ["s", fr.south, h - 0.9, "top"]]) {
+      const el = document.createElement("div");
+      el.className = "mk-econ-half " + side;
+      el.innerHTML = `<b>${t("econShareOf")(Math.round(share * 100), metric)}</b><small>${t(side === "n" ? "econNorthHint" : "econSouthHint")}</small>`;
+      markers.econ.push(new maplibregl.Marker({ element: el, anchor }).setLngLat([lon, lat]).addTo(map));
+    }
+    const el = document.createElement("div");
+    el.className = "mk-econ";
+    el.innerHTML = `<i></i><span>${esc(t(metric === "pop" ? "econCentrePop" : "econCentreWealth"))}</span>`;
+    markers.econ.push(new maplibregl.Marker({ element: el, anchor: "center" }).setLngLat(fr.centre).addTo(map));
+  }
+  // Card: metric switch, south share and centre now, and a chart of the south's share for both measures.
+  const P = d.provinces, pname = (id) => (zh() ? P[id].zh : P[id].en);
+  const near = [...fr.a.pts, ...fr.b.pts].filter((p) => p.m)
+    .sort((p, q) => Math.hypot(p.lon - fr.centre[0], p.lat - fr.centre[1]) - Math.hypot(q.lon - fr.centre[0], q.lat - fr.centre[1]))[0];
+  const src = fr.f > 0.5 ? fr.b : fr.a;
+  const W = 288, H = 46, sx = (yr) => ((yr - ECON_SPAN[0]) / (ECON_SPAN[1] - ECON_SPAN[0])) * W, sy = (v) => H - 3 - v * (H - 6);
+  const path = (f) => [ECON_SPAN[0], ...f.list.map((s) => s.year), ECON_SPAN[1]].map((yr, i) => {
+    const [a, b, k] = econAt(f.list, yr);
+    return `${i ? "L" : "M"}${sx(yr).toFixed(1)},${sy(a.south + (b.south - a.south) * k).toFixed(1)}`;
+  }).join("");
+  const cx = sx(Math.max(ECON_SPAN[0], Math.min(ECON_SPAN[1], y)));
+  box.innerHTML = `<div class="pop-head"><b>${t("economy")} · ${t("econChina")}</b><span class="econ-seg" role="group">${["pop", "wealth"].map((k) =>
+      `<button type="button" data-m="${k}" aria-pressed="${k === metric}">${t(k === "pop" ? "econPop" : "econWealth")}</button>`).join("")}</span></div>
+    ${inSpan ? `<p class="econ-now"><b>${t("econSouth")} ${Math.round(fr.south * 100)}%</b> <small>${t("econSouthHint")}</small><br>
+      ${near ? `${t("econCentre")} <span lang="zh-CN">${esc(near.m.replace(/^今/, ""))}</span> · ` : ""}${t("econTop")} ${src.top.map(pname).map(esc).join(zh() ? "、" : ", ")}</p>` : `<p class="econ-now">${t("econOut")}</p>`}
+    <svg viewBox="0 0 ${W} ${H}" preserveAspectRatio="none" role="img" aria-label="${t("econSouth")}">
+      <line class="econ-half" x1="0" x2="${W}" y1="${sy(0.5)}" y2="${sy(0.5)}"/>
+      <path class="econ-line other" d="${path(other)}"/><path class="econ-line" d="${path(fr)}"/>
+      ${fr.list.map((s) => `<circle class="econ-pt${s === src ? " on" : ""}" cx="${sx(s.year).toFixed(1)}" cy="${sy(s.south).toFixed(1)}" r="${s === src ? 3.2 : 2}"><title>${esc(fmtYear(s.year))} · ${t("econSouth")} ${Math.round(s.south * 100)}% · ${esc(tx(s, "src"))}</title></circle>`).join("")}
+      ${inSpan ? `<line class="pop-now" x1="${cx}" x2="${cx}" y1="0" y2="${H}"/>` : ""}
+    </svg>
+    <p class="econ-src">${t("econFrom")}: ${esc(fmtYear(src.year))} ${esc(tx(src, "src"))} <i>${esc(t("econKind")[src.kind] || "")}</i>${vcMark(src, true)}</p>
+    <p class="econ-src">${t("econNote")}</p>`;
+  box.querySelectorAll("[data-m]").forEach((b) => b.addEventListener("click", () => {
+    state.econMetric = b.dataset.m;
+    try { localStorage.setItem("atlas-econ", state.econMetric); } catch {}
+    renderEconomy();
+  }));
+}
+
+// Climate and disasters (气候与灾害, data/climate.json from tools/build_climate.py): droughts, floods, locusts, famines,
+// quakes, epidemics, cold winters and Yellow River breaches stand on the map while they last (and fade for a few years
+// after); a strip in the era panel draws the temperature sketch with its warm and cold phases across the whole timeline,
+// with the disasters, revolts and capital moves as ticks, so the three can be read against each other.
+const DIS = { drought: ["#c9852b", "旱"], flood: ["#2f7fc1", "涝"], locust: ["#7f9a2a", "蝗"], famine: ["#8a5a3c", "饥"],
+  quake: ["#8d5bb0", "震"], plague: ["#b0405f", "疫"], cold: ["#5aa7c9", "寒"], river: ["#2a5f8f", "河"] };
+const DIS_LINGER = 3;
+const disNow = (d, y = state.year) => y >= d.from && y <= d.to + DIS_LINGER;
+function anomalyAt(y) {
+  const c = state.climate?.curve;
+  if (!c?.length) return null;
+  if (y <= c[0][0]) return c[0][1];
+  for (let i = 1; i < c.length; i++) if (y <= c[i][0]) {
+    const [y0, a0] = c[i - 1], [y1, a1] = c[i];
+    return a0 + ((y - y0) / (y1 - y0)) * (a1 - a0);
+  }
+  return c[c.length - 1][1];
+}
+// The innermost warm or cold phase around a year (the coldest century sits inside the Little Ice Age).
+const climPhase = (y) => (state.climate?.periods || []).filter((p) => y >= p.from && y <= p.to).sort((a, b) => (a.to - a.from) - (b.to - b.from))[0];
+function circleGeom(lon, lat, km) {
+  const ring = [];
+  for (let i = 0; i <= 48; i++) {
+    const a = (i / 48) * 2 * Math.PI;
+    ring.push([lon + (km / (111.3 * Math.cos((lat * Math.PI) / 180))) * Math.cos(a), lat + (km / 111.3) * Math.sin(a)]);
+  }
+  return { type: "Polygon", coordinates: [ring] };
+}
+const chinaEv = (ev) => !ev.region && ev.year != null;
+const isCapMove = (ev) => chinaEv(ev) && /迁都|定都|建都|南渡|东迁|西迁/.test(ev.title_zh || "");
+const isRevolt = (ev) => chinaEv(ev) && ev.category === "rebellion" && (ev.level || 1) <= 2;
+function disasterCard(d) {
+  const [col] = DIS[d.kind] || ["#888"];
+  const years = d.to > d.from ? `${fmtYear(d.from, d.circa)} – ${fmtYear(d.to)}` : fmtYear(d.from, d.circa);
+  const byId = (id) => state.events.find((e) => e.id === id);
+  const linked = (d.events || []).map(byId).filter(Boolean);
+  // Revolts and capital moves in China from just before to a decade after, near enough to the stricken area.
+  const far = Math.max(6, (d.r_km * 1.8) / 111);
+  const around = state.events.filter((ev) => (isRevolt(ev) || isCapMove(ev)) && !linked.includes(ev) && ev.year >= d.from - 2 && ev.year <= d.to + 12
+    && (ev.lon == null || Math.hypot(ev.lon - d.lon, ev.lat - d.lat) < far)).sort((a, b) => a.year - b.year).slice(0, 5);
+  const ph = climPhase(d.from), a = anomalyAt(d.from);
+  const now = (ev) => ev.year <= state.year && state.year <= ev.year + 5;
+  return `<div class="pc-kind" style="color:${col}">${esc(t("climKinds")[d.kind] || d.kind)} · ${years}</div>
+    <h4>${esc(nameOf(d))} <span lang="${zh() ? "en" : "zh-CN"}">${esc(zh() ? d.name : d.name_zh)}</span></h4>
+    <p class="pc-works"><b>${t("climArea")}</b> ${esc(tx(d, "area"))}</p>
+    ${tx(d, "toll") ? `<p class="pc-works"><b>${t("climToll")}</b> ${esc(tx(d, "toll"))}</p>` : ""}
+    <p>${esc(tx(d, "summary"))}</p>
+    ${a != null ? `<p class="pc-works"><b>${t("climPhase")}</b> ${esc(t("climNow")(a, ph ? nameOf(ph) : ""))}${vcMark(ph)}</p>` : ""}
+    ${linked.length ? `<p class="pc-works"><b>${t("climLinked")}</b></p>${eventButtons(linked, now)}` : ""}
+    ${around.length ? `<p class="pc-works"><b>${t("climAfter")}</b></p>${eventButtons(around, now)}` : ""}
+    ${d.check ? vcNote(d) : ""}<p class="pc-meta">${d.check ? "" : t("drafted")} ${wikiA(d.source)}</p>`;
+}
+function renderDisasters() {
+  const list = shown("climate") && state.climate ? state.climate.disasters.filter((d) => disNow(d) && selKeep([[d.lon, d.lat]])) : [];
+  map.getSource("disasters")?.setData({ type: "FeatureCollection", features: list.map((d) => ({
+    type: "Feature", properties: { id: d.id, color: (DIS[d.kind] || ["#888"])[0], past: state.year > d.to }, geometry: circleGeom(d.lon, d.lat, d.r_km) })) });
+  pointMarkers("disasters", list, (d) => {
+    const el = document.createElement("div");
+    const past = state.year > d.to;
+    el.className = "mk-dis k-" + d.kind + (past ? " past" : "");
+    el.style.setProperty("--c", (DIS[d.kind] || ["#888"])[0]);
+    el.innerHTML = `<i>${(DIS[d.kind] || ["", "灾"])[1]}</i>` + (past ? "" : `<span>${esc(nameOf(d))}</span>`);
+    el.title = `${fmtYear(d.from, d.circa)} · ${nameOf(d)}`;
+    return { el, anchor: past ? "center" : "left", card: () => disasterCard(d) };
+  });
+}
+function renderClimChart() {
+  const box = $("clim-chart");
+  const c = state.climate;
+  box.hidden = !shown("climate") || !c || !state.scale?.length;
+  if (box.hidden) return;
+  const W = 288, H = 66, top = 9, bot = H - 9, lo = -1.3, hi = 1.8;
+  const first = state.scale[0].era.start, last = state.scale[state.scale.length - 1].era.end;
+  const sx = (y) => {
+    const s = state.scale.find((s) => y >= s.era.start && y <= s.era.end) || (y < first ? state.scale[0] : state.scale[state.scale.length - 1]);
+    const f = Math.min(1, Math.max(0, (y - s.era.start) / (s.era.end + 1 - s.era.start)));
+    return ((s.p0 + f * (s.p1 - s.p0)) / SLIDER_MAX) * W;
+  };
+  const sy = (a) => bot - ((a - lo) / (hi - lo)) * (bot - top);
+  const pts = c.curve.filter(([y]) => y >= first - 10 && y <= last + 10);
+  const line = pts.map(([y, a], i) => `${i ? "L" : "M"}${sx(y).toFixed(1)},${sy(a).toFixed(1)}`).join("");
+  const z = sy(0).toFixed(1);
+  const bands = c.periods.filter((p) => p.to >= first && p.from <= last).map((p) => {
+    const x0 = sx(Math.max(p.from, first)), x1 = sx(Math.min(p.to, last));
+    return `<rect class="cl-band ${p.kind}" x="${x0.toFixed(1)}" width="${Math.max(0.8, x1 - x0).toFixed(1)}" y="${top}" height="${bot - top}"><title>${esc(nameOf(p))} · ${fmtYear(p.from, p.circa)} – ${fmtYear(p.to)}</title></rect>`;
+  }).join("");
+  const tick = (cls, x, y0, y1, title, data, color) => `<line class="${cls}"${color ? ` style="stroke:${color}"` : ""} x1="${x}" x2="${x}" y1="${y0}" y2="${y1}"/><rect class="cl-hit" x="${(x - 2).toFixed(1)}" width="4" y="${y0 - 1}" height="${y1 - y0 + 2}" ${data}><title>${esc(title)}</title></rect>`;
+  const dis = c.disasters.filter((d) => d.from >= first && d.from <= last).map((d) =>
+    tick("cl-dis", sx(d.from).toFixed(1), H - 7, H, `${fmtYear(d.from, d.circa)} · ${nameOf(d)}`, `data-dis="${esc(d.id)}"`, (DIS[d.kind] || ["#888"])[0])).join("");
+  const evTicks = state.events.filter((ev) => (isRevolt(ev) || isCapMove(ev)) && ev.year >= first && ev.year <= last).map((ev) =>
+    tick(isCapMove(ev) ? "cl-cap" : "cl-reb", sx(ev.year).toFixed(1), 0, 6, `${fmtYear(ev.year, ev.circa)} · ${zh() ? ev.title_zh || ev.title : ev.title}`, `data-ev="${esc(ev.id)}"`)).join("");
+  const a = anomalyAt(state.year), ph = climPhase(state.year), cx = sx(state.year).toFixed(1);
+  const china = state.mode === "china";
+  box.innerHTML = `<div class="pop-head"><b>${t("climHead")}</b><span title="${esc(t("climCurve"))}">${a == null ? "—" : esc(t("climNow")(a, ph ? nameOf(ph) : ""))}</span></div>
+    <svg viewBox="0 0 ${W} ${H}" preserveAspectRatio="none" role="img" aria-label="${esc(t("climHead"))}">
+      ${bands}<line class="cl-zero" x1="0" x2="${W}" y1="${z}" y2="${z}"/>
+      <path class="cl-line" d="${line}"/>${china ? evTicks : ""}${dis}
+      <line class="pop-now" x1="${cx}" x2="${cx}" y1="0" y2="${H}"/>
+    </svg>
+    <div class="cl-key"><span class="k-reb">${t("climKey").reb}</span><span class="k-cap">${t("climKey").cap}</span><span class="k-dis">${t("climKey").dis}</span><span class="cl-src" title="${esc(t("climCurve"))}">${china ? t("climNote") : t("climElse")}</span></div>`;
+  box.querySelectorAll("[data-ev]").forEach((r) => r.addEventListener("click", () => openStory(r.dataset.ev)));
+  box.querySelectorAll("[data-dis]").forEach((r) => r.addEventListener("click", async () => {
+    const d = c.disasters.find((x) => x.id === r.dataset.dis);
+    if (!d) return;
+    await setYear(d.from);
+    map.easeTo({ center: [d.lon, d.lat], duration: 800 });
+    showCard([d.lon, d.lat], disasterCard(d));
+  }));
+}
+
 function updateRulers() {
   const focus = [];
   for (const p of markers.polityEls) {
     p.el.querySelector(".ruler")?.remove();
-    const r = shown("rulers") && rulerAt(p.name, state.year);
+    const r = shown("rulers") && (!state.sel || selNames().has(p.name)) && rulerAt(p.name, state.year);
     if (!r) continue;
     if (p.focus) focus.push(r);
     const [title, name] = rulerText(r);
@@ -1655,6 +3710,36 @@ function bearing(a, b) {
   return Math.atan2((b[0] - a[0]) * Math.cos(((a[1] + b[1]) / 2) * rad), b[1] - a[1]) / rad;
 }
 
+// Campaigns and journeys are drawn as flowing curves through their waypoints (a centripetal Catmull-Rom spline),
+// and a two-point march as a gentle bow, instead of ruler lines. Cached per path array.
+const smoothCache = new WeakMap();
+function smoothPath(path) {
+  if (path.length < 2) return path;
+  if (smoothCache.has(path)) return smoothCache.get(path);
+  let out;
+  if (path.length === 2) out = arcLeg(path[0], path[1], 24);
+  else {
+    const p = unwrapLine(path);
+    const ext = [[2 * p[0][0] - p[1][0], 2 * p[0][1] - p[1][1]], ...p, [2 * p[p.length - 1][0] - p[p.length - 2][0], 2 * p[p.length - 1][1] - p[p.length - 2][1]]];
+    out = [p[0]];
+    for (let i = 1; i < ext.length - 2; i++) {
+      const [p0, p1, p2, p3] = [ext[i - 1], ext[i], ext[i + 1], ext[i + 2]];
+      const d = (a, b) => Math.max(1e-6, Math.hypot(b[0] - a[0], b[1] - a[1]) ** 0.5);
+      const t1 = d(p0, p1), t2 = t1 + d(p1, p2), t3 = t2 + d(p2, p3);
+      const n = Math.max(2, Math.min(16, Math.round(Math.hypot(p2[0] - p1[0], p2[1] - p1[1]) * 2)));
+      for (let k = 1; k <= n; k++) {
+        const t = t1 + ((t2 - t1) * k) / n;
+        const lerp = (a, b, ta, tb) => [0, 1].map((c) => ((tb - t) * a[c] + (t - ta) * b[c]) / (tb - ta));
+        const a1 = lerp(p0, p1, 0, t1), a2 = lerp(p1, p2, t1, t2), a3 = lerp(p2, p3, t2, t3);
+        const b1 = lerp(a1, a2, 0, t2), b2 = lerp(a2, a3, t1, t3);
+        out.push(lerp(b1, b2, t1, t2));
+      }
+    }
+    out = out.map(([x, y]) => [((x + 540) % 360) - 180, y]);
+  }
+  smoothCache.set(path, out);
+  return out;
+}
 function renderRoutes() {
   markers.routes.forEach((m) => m.remove());
   markers.routes = [];
@@ -1665,9 +3750,11 @@ function renderRoutes() {
   const feats = [];
   for (const r of routes) {
     if (state.year < r.from || state.year > r.to || r.path.length < 2 || r.kind === "wall") continue;
+    // A campaign or journey belongs to the country its event names, or whose land it crosses.
+    if (state.sel && !(r.event && selHas(state.events.find((ev) => ev.id === r.event)?.states, r.from, r.to)) && !selKeep(r.path)) continue;
     const moving = r.kind === "campaign" || r.kind === "journey";
     const f = moving && r.to > r.from ? Math.max(0.08, (state.year - r.from + 1) / (r.to - r.from + 1)) : 1;
-    const path = moving ? partialPath(r.path, f) : r.path;
+    const path = moving ? partialPath(smoothPath(r.path), f) : r.path;
     feats.push({ type: "Feature", properties: { kind: r.kind }, geometry: lineGeom(path) });
     if (moving && path.length > 1) {
       const head = document.createElement("div");
@@ -1696,6 +3783,7 @@ function renderSpread() {
   if (shown("spread")) for (const s of state.exchange.spread) {
     // Gone from the map three centuries after it arrived, so the late centuries don't fill with old lines.
     if (state.year < s.start || state.year > s.year + 300) continue;
+    if (!selKeep(s.path)) continue;
     const tp = state.exchange.topics[s.topic] || {};
     const f = s.year > s.start ? Math.min(1, Math.max(0.08, (state.year - s.start + 1) / (s.year - s.start + 1))) : 1;
     const growing = state.year < s.year;
@@ -1748,7 +3836,8 @@ function dcItems() {
   const add = (m, kind, prio, opts = {}) => { const el = m.getElement(); if (el.isConnected) out.push({ m, el, kind, prio, ...opts }); };
   for (const m of markers.events.values()) {
     const el = m.getElement();
-    add(m, "event", el.classList.contains("active") ? 100 : el.classList.contains("minor") ? 50 : 60);
+    // The open event's name always shows; other current events' names take their turn with the rest.
+    add(m, "event", el.classList.contains("open") ? 100 : el.classList.contains("active") ? 90 : el.classList.contains("minor") ? 50 : 60);
   }
   (markers.capitals || []).forEach((m) => add(m, "capital", 80));
   (markers.people || []).forEach((m) => add(m, "person", 70));
@@ -1758,7 +3847,9 @@ function dcItems() {
   markers.places.forEach((m) => add(m, "place", m.getElement().classList.contains("capital") ? 75 : m.getElement().classList.contains("r-secondary") ? 48 : m.getElement().classList.contains("r-frontier") ? 63 : 40, { fixed: true }));
   (markers.roads || []).forEach((m) => add(m, "road", 20, { fixed: true, labelOnly: true }));
   (markers.clans || []).forEach((m) => add(m, "clan", 55));
+  (markers.disasters || []).forEach((m) => add(m, "disaster", m.getElement().classList.contains("past") ? 26 : 61));
   (markers.walls || []).forEach((m) => add(m, "wall", 22, { fixed: true, labelOnly: true }));
+  (markers.admin || []).forEach((m) => add(m, "admin", m.getElement().classList.contains("lv-3") ? 14 : 16, { fixed: true, labelOnly: true }));
   // Route and spread names: the lines and arrows always show; the name only where there is room.
   markers.routes.forEach((m) => {
     const el = m.getElement();
@@ -1804,11 +3895,18 @@ function declutter() {
   // to hold it and it doesn't run into a more important name, so smaller states appear as you zoom in.
   const ppd = (512 * 2 ** map.getZoom()) / 360;
   const polities = [];
-  for (const p of [...markers.polityEls].sort((a, b) => b.focus - a.focus || b.area - a.area)) {
+  // The selected country first, then the period's main states (the largest of them always shows; the others, as
+  // several peoples of one period can be, give way when they run into it), then the rest.
+  const selNow = selNames();
+  const rank = (p) => (selNow.has(p.name) ? 2 : p.focus ? 1 : 0);
+  let firstFocus = true;
+  for (const p of [...markers.polityEls].sort((a, b) => rank(b) - rank(a) || b.area - a.area)) {
     const r = p.el.getBoundingClientRect();
     if (!r.width) continue;
     const onScreen = p.area * ppd * ppd * Math.cos((p.lat * Math.PI) / 180);
-    if (!p.focus && (onScreen < r.width * r.height * (phone ? 4 : 2.5) || polities.some((t) => overlaps(r, t, pad)))) {
+    const must = (p.focus && (firstFocus || p.state)) || selNow.has(p.name);
+    if (p.focus) firstFocus = false;
+    if (!must && (onScreen < r.width * r.height * (phone ? 4 : 2.5) || polities.some((t) => overlaps(r, t, pad)))) {
       p.el.classList.add("dc-hide");
       continue;
     }
@@ -1818,33 +3916,48 @@ function declutter() {
   // and the territory names push away the landscape, road and route names.
   const taken = markers.armies.map((m) => m.getElement().getBoundingClientRect());
   // A label gives way to labels and icons of more important markers; it may cover a less important icon.
+  // The same name twice close together (an event at 咸阳 beside the city 咸阳, or two events there) shows once.
+  const named = [];
   for (const it of kept) {
     const span = it.labelOnly ? it.el : it.el.querySelector("span");
     const r = span?.getBoundingClientRect();
+    const name = !it.labelOnly && span?.textContent.trim();
+    if (r?.width && name && named.some((n) => n.name === name && Math.hypot(n.x - it.cx, n.y - it.cy) < 140)) {
+      it.el.classList.add("dc-nolabel");
+      if (!it.fixed) taken.push(it.icon);
+      continue;
+    }
     if (r?.width) {
       const blocked = budget <= 0 || taken.some((t) => overlaps(r, t, pad)) ||
         ((it.kind === "geo" || it.kind === "road" || it.kind === "route") && polities.some((t) => overlaps(r, t)));
       // The open event's name always shows.
       if (blocked && it.prio < 100) it.el.classList.add("dc-nolabel");
-      else { taken.push(r); budget--; }
+      else { taken.push(r); budget--; if (name) named.push({ name, x: it.cx, y: it.cy }); }
     }
     if (!it.labelOnly && !it.fixed) taken.push(it.icon);
   }
   for (const it of kept) if (it.group) addGroupBadge(it);
 }
+// A folded spot shows one small tag per kind, each with how many of that kind sit there (事 3 · 人 2), the shown
+// marker included; a tag opens the list of just that kind, the badge's edge the whole list.
+const DC_KINDS = { event: ["事", "◆"], person: ["人", "●"], capital: ["都", "■"], invention: ["器", "⚙"], faith: ["教", "✦"], pass: ["关", "▲"], clan: ["族", "◼"], disaster: ["灾", "≈"], place: ["城", "•"] };
 function addGroupBadge(host) {
+  const byKind = new Map();
+  for (const g of host.group) { if (!byKind.has(g.kind)) byKind.set(g.kind, []); byKind.get(g.kind).push(g); }
   const b = document.createElement("b");
   b.className = "dc-more";
-  b.textContent = "+" + (host.group.length - 1);
+  b.innerHTML = [...byKind].map(([k, l]) => `<b class="dk k-${k}" data-k="${k}">${(DC_KINDS[k] || ["", "•"])[zh() ? 0 : 1]}${l.length}</b>`).join("");
   b.title = host.group.map((g) => g.el.dataset.name).join(" · ");
   b.addEventListener("click", (e) => {
     e.stopPropagation();
-    const kinds = { event: t("events"), capital: t("capitals"), person: t("people_l"), invention: t("inventions"), faith: t("faith"), pass: t("passes") };
-    showCard(host.m.getLngLat(), `<div class="pc-kind">${zh() ? `此处 ${host.group.length} 项` : `${host.group.length} here`}</div>
-      <ul class="dc-list">${host.group.map((g, i) => `<li><button data-i="${i}"><span class="dc-ico ${esc(g.el.className.replace(/\b(dc|maplibregl)-\S+/g, ""))}">${(g.el.querySelector("i") || {}).outerHTML || ""}</span>
+    const only = e.target.closest("[data-k]")?.dataset.k;
+    const list = only ? byKind.get(only) : host.group;
+    const kinds = { event: t("events"), capital: t("capitals"), person: t("people_l"), invention: t("inventions"), faith: t("faith"), pass: t("passes"), clan: t("clans"), disaster: t("climate") };
+    showCard(host.m.getLngLat(), `<div class="pc-kind">${only ? esc(kinds[only] || "") + " · " : ""}${zh() ? `此处 ${list.length} 项` : `${list.length} here`}</div>
+      <ul class="dc-list">${list.map((g, i) => `<li><button data-i="${i}"><span class="dc-ico ${esc(g.el.className.replace(/\b(dc|maplibregl)-\S+/g, ""))}">${(g.el.querySelector("i") || {}).outerHTML || ""}</span>
         <span>${esc(g.el.dataset.name || "")}<small>${esc(kinds[g.kind] || "")}</small></span></button></li>`).join("")}</ul>`);
     popup.getElement().querySelectorAll(".dc-list button").forEach((btn) =>
-      btn.addEventListener("click", () => host.group[+btn.dataset.i].el.click()));
+      btn.addEventListener("click", () => list[+btn.dataset.i].el.click()));
   });
   host.el.appendChild(b);
 }
@@ -1865,12 +3978,13 @@ function visibleEvents() {
 // The detail switch (大事 / 要事 / 细目) sets the finest level shown; tags narrow to some categories.
 // The open event always stays visible.
 function shownEvent(ev) {
-  // Each region shows its own events; the world view shows all.
-  if (state.mode !== "world" && (ev.region || state.home) !== state.mode && !ev.also?.includes(state.mode)) return false;
+  // With a country selected, only its events, from whichever region's list they come (the Korean War for China).
+  if (state.sel) { if (!selHas(ev.states, ev.year, ev.year) && ev.id !== state.selected) return false; }
+  // With a district (area) selected, the events that happened inside it.
+  else if (state.area) { if (!(ev.lon != null && inPoly(ev.lon, ev.lat, state.area.poly)) && ev.id !== state.selected) return false; }
+  // Otherwise each region shows its own events; the world view shows all.
+  else if (state.mode !== "world" && (ev.region || state.home) !== state.mode && !ev.also?.includes(state.mode)) return false;
   if (ev.id === state.selected) return true;
-  // The country filter belongs to one period; events of other periods ignore it.
-  const c = state.country;
-  if (c && ev.year >= c.start && ev.year <= c.end && !(ev.states || []).includes(c.key)) return false;
   return (ev.level || 1) <= state.detail && (!state.cats.length || state.cats.includes(ev.category));
 }
 // Countries of this period that have events (from each event's `states`), main dynasties first, then by event count.
@@ -1885,22 +3999,23 @@ const CATS = ["war", "politics", "reform", "rebellion", "diplomacy", "economy", 
 function renderEventFilter() {
   const box = $("ev-filter");
   box.hidden = false;
-  const cur = state.country && state.country.start === state.era.start ? state.country.key : "";
-  const key = `${state.detail}|${state.cats.join()}|${state.lang}|${state.era.id}|${cur}|${state.layerData ? 1 : 0}`;
+  const cur = state.sel ? eventCountries().find((c) => state.sel.names.has(c.key))?.key || "" : "";
+  const key = `${state.detail}|${state.cats.join()}|${state.lang}|${state.era.id}|${cur}|${state.sel?.id || ""}|${state.layerData ? 1 : 0}`;
   if (box.dataset.key === key) return;
   box.dataset.key = key;
   const cs = eventCountries();
   // Row 1: level of detail and (in multi-state periods) the country; row 2: the categories.
+  // A country selected on the map that this period's list doesn't name still shows as the choice.
+  if (state.sel && !cur) cs.unshift({ key: [...state.sel.names][0], name: selName(), count: state.events.filter((ev) => ev.year >= state.era.start && ev.year <= state.era.end && selHas(ev.states, ev.year, ev.year)).length, picked: true });
   const country = cs.length > 1 ? `<select id="ef-country" class="ef-country" aria-label="${t("country")}"><option value="">${zh() ? "全部国家" : "All countries"}</option>${cs.map((c) =>
-      `<option value="${esc(c.key)}" ${c.key === cur ? "selected" : ""}>${esc(c.name)}${zh() ? `（${c.count}）` : ` (${c.count})`}</option>`).join("")}</select>` : "";
+      `<option value="${esc(c.key)}" ${c.key === cur || c.picked ? "selected" : ""}>${esc(c.name)}${zh() ? `（${c.count}）` : ` (${c.count})`}</option>`).join("")}</select>` : "";
   box.innerHTML = `<div class="ef-top"><div class="ef-levels" role="group" aria-label="${t("detail")}">${t("levels").map((l, i) =>
       `<button data-lv="${i + 1}" aria-pressed="${state.detail === i + 1}">${l}</button>`).join("")}</div>${country}</div>
     <div class="ef-cats"><button class="chip" data-cat="" aria-pressed="${!state.cats.length}">${t("allCats")}</button>${CATS.map((c) =>
       `<button class="chip cat-${c}" data-cat="${c}" aria-pressed="${state.cats.includes(c)}">${t("cat")[c]}</button>`).join("")}</div>`;
   box.querySelectorAll("[data-lv]").forEach((b) => b.addEventListener("click", () => setEventFilter(+b.dataset.lv, state.cats)));
   $("ef-country")?.addEventListener("change", (e) => {
-    state.country = e.target.value ? { key: e.target.value, start: state.era.start, end: state.era.end } : null;
-    setEventFilter(state.detail, state.cats);
+    if (!state.sel?.names.has(e.target.value)) selectCountry(e.target.value || null);
   });
   box.querySelectorAll("[data-cat]").forEach((b) => b.addEventListener("click", () => {
     const c = b.dataset.cat;
@@ -1924,6 +4039,10 @@ function buildEventMarkers() {
     const el = document.createElement("div");
     el.className = "mk-event" + ((ev.level || 1) > 1 ? " minor" : "");
     el.appendChild(document.createElement("i"));
+    // While current, the marker names its place (马邑, not 马邑（今山西朔州）): it sits on the city, whose own label it hides.
+    const where = document.createElement("span");
+    where.textContent = (tx(ev, "place") || "").split(/[（(,，]/)[0].trim();
+    if (where.textContent) el.appendChild(where);
     el.title = `${fmtYear(ev.year, ev.circa)} · ${titleOf(ev)}`;
     el.dataset.name = `${fmtYear(ev.year, ev.circa)} ${titleOf(ev)}`;
     el.addEventListener("click", (e) => { e.stopPropagation(); openStory(ev.id); });
@@ -1940,6 +4059,8 @@ function isActive(ev, y) {
 
 function renderEventStates() {
   scheduleDeclutter();
+  // The open event has a marker even when the detail filter leaves it out of the list (a level-3 story opened from a city).
+  if (state.selected && !markers.events.has(state.selected) && state.events.some((e) => e.id === state.selected)) buildEventMarkers();
   for (const [id, m] of markers.events) {
     const ev = state.events.find((x) => x.id === id);
     const happened = ev.year <= state.year;
@@ -1948,6 +4069,7 @@ function renderEventStates() {
     const el = m.getElement();
     const active = isActive(ev, state.year) || ev.id === state.selected;
     el.classList.toggle("active", active);
+    el.classList.toggle("open", ev.id === state.selected);
     el.classList.toggle("past", happened && !active);
   }
   document.querySelectorAll(".ev").forEach((btn) => {
@@ -1959,6 +4081,33 @@ function renderEventStates() {
 // Names of rivers, mountains, plains and seas; they don't change with the year.
 // Which Yellow River course and which old shorelines belong to the current year; the modern lower river only from 1855.
 const inYears = (y) => ["all", ["<=", ["get", "from"], y], [">", ["get", "to"], y]];
+// Disputed areas: diagonal stripes drawn on a small canvas (re-added if a style change drops the image).
+function hatchImage() {
+  const n = 12, c = document.createElement("canvas");
+  c.width = c.height = n;
+  const g = c.getContext("2d");
+  g.strokeStyle = "rgba(140, 47, 31, 0.75)";
+  g.lineWidth = 1.6;
+  g.beginPath();
+  for (const o of [-n, 0, n]) { g.moveTo(o, n); g.lineTo(o + n, 0); }
+  g.stroke();
+  return g.getImageData(0, 0, n, n);
+}
+function addHatch(m) {
+  if (!m.hasImage("hatch")) m.addImage("hatch", hatchImage(), { pixelRatio: 2 });
+}
+function renderDisputes() {
+  if (!map?.getLayer("dispute-fill")) return;
+  const y = state.year, f = ["all", ["<=", ["get", "from"], y], [">=", ["get", "to"], y]];
+  for (const id of ["dispute-fill", "dispute-line"]) map.setFilter(id, f);
+}
+function disputeCard(p) {
+  const L = (k) => esc(zh() ? p[k + "_zh"] || p[k] : p[k]);
+  const yrs = t("dispYears")(fmtYear(p.from), p.to < 9999 ? fmtYear(p.to) : null);
+  return `<div class="pc-dispute"><h4>${L("name")} <span class="pc-badge">${esc(t("disp"))}</span></h4><p class="pc-meta">${esc(yrs)}</p>
+    <dl><dt>${esc(t("dispCtl"))}</dt><dd>${L("control")}</dd><dt>${esc(t("dispClaim"))}</dt><dd>${L("claim")}</dd></dl>
+    <p>${L("note")}</p><p class="pc-foot">${esc(t("dispFoot"))}</p></div>`;
+}
 function renderOldGeo() {
   if (!map?.getLayer("old-river")) return;
   const y = state.year, vis = state.showGeo ? "visible" : "none";
@@ -2002,14 +4151,45 @@ function renderGeo() {
   }
 }
 
-// City card: its role and name in this period, the years it held them and today's name.
+// City card: the city's whole life as a bar (one segment per name and role, ticks for its events, a line at the
+// current year), then the events of the segment open now. Segments are the places sharing the city id (xian-0…6).
+const cityLife = (p) => state.places.filter((q) => cityId(q) === cityId(p)).sort((a, b) => a.from - b.from);
+const lifeEnd = (y) => Math.min(y, 1912);
+// The card's two tabs, 大事 and 地名古今; the one picked last stays picked for the next city.
+let cityTab = "ev";
 function placeCard(p) {
   const modern = zh() ? p.modern_zh || p.modern : p.modern;
   const now = modern && modern !== (zh() ? p.name_zh : p.name) ? (zh() ? `今${modern}` : `modern ${modern}`) : "";
-  return `<div class="pc-kind">${esc(t("pranks")[p.rank] || "")} · ${fmtYear(p.from, true)} – ${p.to >= 1912 ? (zh() ? "清末" : "1912") : fmtYear(p.to, true)}</div>
+  const span = (q) => `${fmtYear(q.from, true)} – ${q.to >= 1912 ? (zh() ? "清末" : "1912") : fmtYear(q.to, true)}`;
+  const life = cityLife(p), all = cityEvents(p);
+  const lo = life[0].from, hi = lifeEnd(Math.max(...life.map((q) => q.to))), w = Math.max(1, hi - lo);
+  const x = (y) => ((Math.min(Math.max(y, lo), hi) - lo) / w * 100).toFixed(2);
+  const segs = life.map((q) => {
+    const pc = (lifeEnd(q.to) - q.from) / w * 100;
+    return `<button type="button" class="seg r-${q.rank}${q === p ? " on" : ""}" data-seg="${esc(q.id)}" style="left:${x(q.from)}%;width:${pc.toFixed(2)}%"
+      title="${esc(nameOf(q))} · ${esc(t("pranks")[q.rank] || "")} · ${span(q)}">${pc > 13 ? esc(nameOf(q)) : ""}</button>`;
+  }).join("");
+  const ticks = all.filter((ev) => ev.year >= lo && ev.year <= hi)
+    .map((ev) => `<i class="${ev.level === 1 ? "l1" : ""}" style="left:${x(ev.year)}%"></i>`).join("");
+  const ranks = [...new Set(life.map((q) => q.rank))];
+  const bar = life.length > 1 || all.length ? `<div class="pc-citylife" style="--now:${x(state.year)}%">
+      <div class="pc-bar">${segs}<b class="pc-now" title="${fmtYear(state.year)}"></b></div><div class="pc-ticks">${ticks}</div>
+      <div class="pc-axis"><span>${fmtYear(lo)}</span><span>${hi >= 1912 ? (zh() ? "清末" : "1912") : fmtYear(hi)}</span></div>
+      ${ranks.length > 1 ? `<div class="pc-legend">${ranks.map((r) => `<span><i class="r-${r}"></i>${esc(t("pranks")[r] || "")}</span>`).join("")}</div>` : ""}</div>` : "";
+  const here = all.filter((ev) => ev.year >= p.from && ev.year <= p.to), top = here.filter((ev) => ev.level === 1);
+  // Long lists open on the key events (要事) with a switch to all; a short one shows everything.
+  const chips = here.length > 8 && top.length && top.length < here.length
+    ? `<span class="pc-cf" role="group"><button type="button" data-cf="top" aria-pressed="true">${t("cityTop")}</button><button type="button" data-cf="all" aria-pressed="false">${t("cityAll")}</button></span>` : "";
+  const list = here.length ? `<p class="pc-works"><b>${t("cityHere")(here.length, all.length)}</b>${chips}</p>
+    <div class="pc-evwrap${chips ? " top" : ""}">${eventButtons(here, (ev) => ev.level === 1)}</div>` : all.length ? `<p class="pc-meta">${t("cityNone")(all.length)}</p>` : "";
+  return `<div class="pc-kind">${esc(t("pranks")[p.rank] || "")} · ${span(p)}</div>
     <h4>${esc(nameOf(p))} <span lang="${zh() ? "en" : "zh-CN"}">${esc(zh() ? p.name : p.name_zh)}</span></h4>
     ${now ? `<p class="pc-meta">${esc(now)}</p>` : ""}${tx(p, "note") ? `<p>${esc(tx(p, "note"))}</p>` : ""}
-    ${placeEventList(p)}<p class="pc-meta">${t("drafted")}</p>`;
+    ${bar}<div class="pc-tabs" role="tablist">${[["ev", t("cityTabEv")(here.length)], ["gaz", t("gazKind")]].map(([k, l]) =>
+      `<button type="button" role="tab" data-ctab="${k}" aria-selected="${cityTab === k}">${esc(l)}</button>`).join("")}</div>
+    <div data-pane="ev"${cityTab === "ev" ? "" : " hidden"}>${list || `<p class="pc-meta">${t("cityNoEv")}</p>`}</div>
+    <div data-pane="gaz"${cityTab === "gaz" ? "" : " hidden"}><div class="pc-gaz" data-gaz="c:${esc(cityId(p))}"></div>${areaAt(p.lon, p.lat) ? `<p class="pc-area">${esc(t("area").inArea)} ${areaChip(areaAt(p.lon, p.lat), ` · ${t("area").kind} ›`)}</p>` : ""}</div>
+    <p class="pc-meta">${t("drafted")}</p>`;
 }
 // Reverse index from each event's `places` (city ids) and `people` (person ids), filled by tools/link_events.py,
 // so city and person cards list their events as soon as new events carry those fields.
@@ -2049,7 +4229,7 @@ function renderPlaces() {
   markers.places = [];
   if (!state.showPlaces) return;
   for (const p of state.places) {
-    if (state.year < p.from || state.year > p.to) continue;
+    if (state.year < p.from || state.year > p.to || (state.sel && !selContains(p.lon, p.lat)) || (state.area && !inPoly(p.lon, p.lat, state.area.poly))) continue;
     const el = document.createElement("div");
     el.className = "mk-place r-" + p.rank + (p.rank === "capital" ? " capital" : "");
     el.innerHTML = zh() ? `<i></i><span>${esc(p.name_zh)}</span>` : `<i></i><span>${esc(p.name)} <em>${esc(p.name_zh)}</em></span>`;
@@ -2061,8 +4241,10 @@ function renderPlaces() {
 
 /* ---------- ledger: event list and story view ---------- */
 
-const TABS = ["tours", "events", "rulers", "people", "world"];
+const TABS = ["tours", "events", "rulers", "people"];
 function renderLedger() {
+  if (state.layout) { applyLayout(); renderExNav(); }
+  renderEdgeTabs();    // a folded panel's edge tab names the tab open now
   if (!state.era) return;
   syncAuto();
   $("ev-filter").hidden = true;
@@ -2070,12 +4252,13 @@ function renderLedger() {
   $("rulers").hidden = state.tab !== "rulers";
   $("people").hidden = state.tab !== "people";
   $("tour-tab").hidden = state.tab !== "tours";
-  $("world").hidden = state.tab !== "world";
   if (state.tab !== "events") {
+    hideEventPic(true);
     $("story").hidden = $("ev-list").hidden = true;
-    return state.tab === "rulers" ? renderRulers() : state.tab === "people" ? renderPeopleTab() : state.tab === "world" ? renderWorldTab() : renderToursTab();
+    return state.tab === "rulers" ? renderRulers() : state.tab === "people" ? renderPeopleTab() : renderToursTab();
   }
   if (state.reading && state.selected) return renderStory();
+  hideEventPic(true);
   $("story").hidden = true;
   $("ev-list").hidden = false;
   renderList();
@@ -2086,82 +4269,169 @@ function renderLedger() {
 // Over the timeline: a few headline events from other regions near the current year, one per region, so links
 // across civilisations show while scrubbing. Click one to read it (the map moves there); × hides the strip.
 let stripKey = "";
+// The strip's reach (同时期的…): the world (one headline per other region), the area group, the region (one per
+// country), or the neighbours of the selected country (or of the period's main state). Chosen from a menu on its
+// head, remembered as atlas-wscope; a reach that doesn't apply here falls back to the next wider one.
+const WS_SCOPES = ["near", "region", "group", "world"];
+let wsScope = "world";
+try { wsScope = localStorage.getItem("atlas-wscope") || "world"; } catch {}
+function stripAnchor() {
+  const feats = state.shownBorders?.features || [];
+  const names = state.sel ? selNames() : new Set(feats.filter((f) => f.properties.focus && f.properties.kind !== "state").map((f) => f.properties.name));
+  const own = feats.filter((f) => names.has(f.properties.name));
+  return own.length ? { names, own } : null;
+}
+// A state's display name: from the map shown now, else from any map seen this visit.
+function polityLabel(name) {
+  let f = state.shownBorders?.features.find((x) => x.properties.name === name);
+  if (!f?.properties.name_zh) for (const fc of Object.values(state.borders || {})) { f = fc?.features?.find((x) => x.properties.name === name && x.properties.name_zh); if (f) break; }
+  if (f) return zh() ? f.properties.name_zh || name : f.properties.label_en || name;
+  // Not on any map loaded yet: the country table's Chinese name for it.
+  return (zh() && state.countries?.spans?.[name]?.[0]?.[2]) || name;
+}
+// States on the map whose land comes within about half a degree of the anchor's.
+function neighbourNames(anchor) {
+  const cell = (x, y) => `${Math.floor(x * 2)},${Math.floor(y * 2)}`, grid = new Set();
+  const each = (g, fn) => { const walk = (c) => (typeof c[0] === "number" ? fn(c) : c.forEach(walk)); walk(g.coordinates); };
+  for (const f of anchor.own) each(f.geometry, ([x, y]) => { for (let i = -1; i <= 1; i++) for (let j = -1; j <= 1; j++) grid.add(cell(x + i / 2, y + j / 2)); });
+  const out = new Set();
+  for (const f of state.shownBorders.features) {
+    const n = f.properties.name;
+    if (anchor.names.has(n) || out.has(n) || !f.geometry) continue;
+    let hit = false;
+    each(f.geometry, ([x, y]) => { if (!hit && grid.has(cell(x, y))) hit = true; });
+    if (hit) out.add(n);
+  }
+  return out;
+}
+const groupOf = (rid) => (state.groups || []).find((g) => g.regions.includes(rid));
+// The reaches that make sense here, narrowest first, each with its menu label.
+function stripScopes() {
+  const here = state.mode, r = state.regionById?.[here], g = groupOf(here), anchor = stripAnchor(), out = [];
+  const nm = (o) => (o ? (zh() ? o.short_zh || o.name_zh || o.name : o.short || o.name) : "");
+  if (anchor) out.push({ id: "near", label: t("wsNear")(polityLabel(anchor.own[0].properties.name)), head: t("wsNearShort"), anchor });
+  if (r) out.push({ id: "region", label: nm(r) });
+  if (g && g.regions.filter((id) => id !== here && state.regionById[id]).length) out.push({ id: "group", label: nm(g) });
+  out.push({ id: "world", label: t("wsWorld") });
+  return out;
+}
 function renderWorldStrip() {
   const box = $("world-strip");
   let off = false;
   try { off = localStorage.getItem("atlas-wstrip") === "0"; } catch {}
   if (off || !state.regions?.length || state.tour || cmp.on) { box.hidden = true; stripKey = ""; return; }
   const y = state.year, here = state.mode;
-  const key = `${y}|${here}|${state.lang}`;
+  const key = `${y}|${here}|${state.lang}|${wsScope}|${state.snapshot}|${state.sel?.id || ""}`;
   if (key === stripKey) return;
   stripKey = key;
+  const scopes = stripScopes();
+  // The chosen reach, or the next wider one that applies here.
+  const want = WS_SCOPES.indexOf(wsScope);
+  const sc = scopes.find((s) => WS_SCOPES.indexOf(s.id) >= want) || scopes[scopes.length - 1];
   const win = Math.max(10, Math.min(40, Math.round((state.era?.end - state.era?.start || 100) / 8)));
+  const g = groupOf(here);
+  // Each pick is keyed by what it stands for: a region (world, group) or a state (region, neighbours).
+  let keyOf;
+  if (sc.id === "world") keyOf = (ev) => { const r = ev.region || "china"; return r === here ? null : r; };
+  else if (sc.id === "group") keyOf = (ev) => { const r = ev.region || "china"; return r !== here && g.regions.includes(r) ? r : null; };
+  else {
+    const anchor = sc.anchor || stripAnchor(), mine = anchor?.names || new Set();
+    const near = sc.id === "near" ? neighbourNames(anchor) : null;
+    keyOf = (ev) => {
+      if (sc.id === "region" && (ev.region || "china") !== here) return null;
+      const st = (ev.states || []).filter((n) => !mine.has(n) && (!near || near.has(n)));
+      if (!st.length || (ev.states || []).some((n) => mine.has(n)) && sc.id === "near") return null;
+      return "s:" + st[0];
+    };
+  }
   const best = new Map();
   for (const ev of state.events) {
-    const r = ev.region || "china";
-    if (r === here || ev.level > 2 || Math.abs(ev.year - y) > win) continue;
+    if (ev.level > 2 || Math.abs(ev.year - y) > win) continue;
+    const k = keyOf(ev);
+    if (!k) continue;
     const score = ev.level * win + Math.abs(ev.year - y);
-    if (!best.has(r) || score < best.get(r).score) best.set(r, { ev, score });
+    if (!best.has(k) || score < best.get(k).score) best.set(k, { ev, k, score });
   }
-  const picks = [...best.values()].sort((a, b) => a.score - b.score).slice(0, 4).map((x) => x.ev).sort((a, b) => a.year - b.year);
-  if (!picks.length) { box.hidden = true; return; }
+  const picks = [...best.values()].sort((a, b) => a.score - b.score).slice(0, 4).sort((a, b) => a.ev.year - b.ev.year);
   box.hidden = false;
-  box.innerHTML = `<span class="ws-head">${esc(t("elsewhere"))}</span>` + picks.map((ev) => {
+  const head = `<button type="button" class="ws-head" aria-haspopup="menu" aria-expanded="false">${esc(t("wsHead")(sc.head || sc.label))}<svg viewBox="0 0 10 10" aria-hidden="true"><path d="M2 3.5l3 3 3-3" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></button>`;
+  box.dataset.scope = sc.id;
+  box.innerHTML = head + (picks.length ? picks.map(({ ev, k }) => {
     const r = state.regionById[ev.region || "china"];
-    return `<button type="button" data-ev="${esc(ev.id)}" style="--rc:${esc(r?.seal || r?.color || "#888")}" title="${esc(tx(ev, "summary"))}"><i></i><b>${esc(r ? (zh() ? r.short_zh || r.name_zh : r.short || r.name) : "")}</b><span>${fmtYear(ev.year)}</span> ${esc(zh() ? ev.title_zh || ev.title : ev.title)}</button>`;
-  }).join("") + `<button type="button" class="ws-x" aria-label="${esc(t("hideStrip"))}" title="${esc(t("hideStrip"))}">×</button>`;
+    const who = k.startsWith("s:") ? polityLabel(k.slice(2)) : r ? (zh() ? r.short_zh || r.name_zh : r.short || r.name) : "";
+    return `<button type="button" data-ev="${esc(ev.id)}" style="--rc:${esc(r?.seal || r?.color || "#888")}" title="${esc(tx(ev, "summary"))}"><i></i><b>${esc(who)}</b><span>${fmtYear(ev.year)}</span> ${esc(zh() ? ev.title_zh || ev.title : ev.title)}</button>`;
+  }).join("") : `<span class="ws-none">${esc(t("wsNone"))}</span>`) + `<button type="button" class="ws-x" aria-label="${esc(t("hideStrip"))}" title="${esc(t("hideStrip"))}">×</button>`;
+}
+function toggleStripPop(open) {
+  const pop = $("ws-pop"), btn = $("world-strip").querySelector(".ws-head");
+  open ??= pop.hidden;
+  pop.hidden = !open || !btn;
+  btn?.setAttribute("aria-expanded", !pop.hidden);
+  if (pop.hidden) return;
+  const cur = $("world-strip").dataset.scope;
+  // Widest first, the levels joined by a thin line like a path down the hierarchy.
+  pop.innerHTML = stripScopes().reverse().map((s, i) => `<button type="button" role="menuitemradio" aria-checked="${s.id === cur}" data-scope="${s.id}"><i aria-hidden="true"></i><b>${esc(s.label)}</b><svg viewBox="0 0 12 12" aria-hidden="true"><path d="M2.5 6.5l2.3 2.2L9.5 3.5" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></button>`).join("");
+  if (pop.parentNode !== document.body) document.body.appendChild(pop);
+  const r = btn.getBoundingClientRect();
+  pop.style.position = "fixed";
+  pop.style.left = `${r.left}px`;
+  pop.style.top = `${Math.max(8, r.top - 6 - pop.offsetHeight)}px`;
 }
 
+// Regions in their groups (东亚: 中国, 朝鲜半岛, 日本; 欧洲: 欧洲), as data/regions.json `groups` lists them; regions in
+// no group (a data pack's) come last. A group is only for finding regions: the timeline belongs to regions.
+function regionGroups() {
+  const used = new Set(), out = [];
+  for (const g of state.groups || []) {
+    const rs = g.regions.map((id) => state.regionById[id]).filter(Boolean);
+    rs.forEach((r) => used.add(r.id));
+    if (rs.length) out.push([g, rs]);
+  }
+  const rest = state.regions.filter((r) => !used.has(r.id));
+  return rest.length ? [...out, [null, rest]] : out;
+}
 function regionEra(r, y) { return r.eras.find((e) => y >= e.start && y <= e.end); }
-function renderWorldTab() {
-  const box = $("world"), y = state.year;
-  const key = `${y}|${state.lang}|${state.mode}`;
-  $("ev-count").textContent = fmtYear(y);
-  if (box.dataset.key === key) return;
-  box.dataset.key = key;
-  const rows = state.regions.map((r) => {
-    const era = regionEra(r, y);
-    // The biggest events within 30 years, nearest first.
-    const evs = state.events.filter((ev) => ((ev.region || "china") === r.id || ev.also?.includes(r.id)) && Math.abs(ev.year - y) <= 30)
-      .sort((a, b) => Math.abs(a.year - y) - Math.abs(b.year - y) || a.level - b.level).slice(0, 3).sort((a, b) => a.year - b.year);
-    return `<li class="wd-row${r.id === state.mode ? " here" : ""}" style="--rc:${esc(r.color || "#888")}">
-      <button type="button" class="wd-head" data-r="${esc(r.id)}"><b>${esc(nameOf(r))}</b><span>${era ? esc(nameOf(era)) : ""}</span></button>
-      <p class="wd-rulers" data-era="${era?.layers ? esc(era.id) : ""}"></p>
-      ${evs.length ? `<ul class="wd-ev">${evs.map((ev) => `<li><button type="button" data-ev="${esc(ev.id)}"><span>${fmtYear(ev.year)}</span> ${esc(zh() ? ev.title_zh || ev.title : ev.title)}</button></li>`).join("")}</ul>`
-        : `<p class="wd-none">${t("noWorldEv")}</p>`}</li>`;
+// One region in this year, opened under its row in the region menu: who ruled, the nearest big events and its
+// countries (click one to select it).
+function regionDetail(r, y) {
+  const evs = state.events.filter((ev) => ((ev.region || "china") === r.id || ev.also?.includes(r.id)) && Math.abs(ev.year - y) <= 30)
+    .sort((a, b) => Math.abs(a.year - y) - Math.abs(b.year - y) || a.level - b.level).slice(0, 3).sort((a, b) => a.year - b.year);
+  const areas = (state.areas || []).filter((a) => a.region === r.id);
+  return `<p class="wd-rulers"></p>${countryChips(r)}${areas.length ? `<div class="wd-areas"><span>${esc(t("area").menu)}</span>${areas.map(areaChip).join("")}</div>` : ""}` + (evs.length
+    ? `<ul class="wd-ev">${evs.map((ev) => `<li><button type="button" data-ev="${esc(ev.id)}"><span>${fmtYear(ev.year)}</span> ${esc(zh() ? ev.title_zh || ev.title : ev.title)}</button></li>`).join("")}</ul>`
+    : `<p class="wd-none">${t("noWorldEv")}</p>`);
+}
+// The main countries with a ruler this year, filled in when the region's layer file arrives.
+function fillRegionRulers(p, r, y) {
+  const era = regionEra(r, y);
+  if (!era?.layers) return;
+  loadLayers(era).then((L) => {
+    const pol = L.polities || {};
+    const names = Object.keys(L.rulers || {}).sort((a, b) => !!pol[b]?.focus - !!pol[a]?.focus);
+    const out = [];
+    for (const n of names) {
+      const x = (L.rulers[n] || []).findLast((x) => y >= x.from && y <= x.to);
+      if (x) out.push(`${esc(zh() ? pol[n]?.name_zh || n : n)}：${esc(rulerText(x)[0])}`);
+      if (out.length === 3) break;
+    }
+    p.innerHTML = out.join(" · ");
   });
-  let stripOff = false;
-  try { stripOff = localStorage.getItem("atlas-wstrip") === "0"; } catch {}
-  box.innerHTML = `<p class="rl-hint">${t("worldHint")}</p>` + (stripOff ? `<button type="button" class="chip ws-on" id="ws-on">${esc(t("showStrip"))}</button>` : "") + `<ol class="wd-list">${rows.join("")}</ol>`;
-  $("ws-on")?.addEventListener("click", () => {
-    try { localStorage.removeItem("atlas-wstrip"); } catch {}
-    box.dataset.key = ""; renderWorldTab(); renderWorldStrip();
-  });
-  box.querySelectorAll(".wd-head").forEach((b) => b.addEventListener("click", () => goRegion(b.dataset.r)));
-  box.querySelectorAll("[data-ev]").forEach((b) => b.addEventListener("click", () => openStory(b.dataset.ev)));
-  // Who ruled where: the main countries with a ruler this year, filled in as each region's layer file arrives.
-  box.querySelectorAll(".wd-rulers").forEach((p, i) => {
-    const era = regionEra(state.regions[i], y);
-    if (!era?.layers) return;
-    loadLayers(era).then((L) => {
-      if (box.dataset.key !== key) return;
-      const pol = L.polities || {};
-      const names = Object.keys(L.rulers || {}).sort((a, b) => !!pol[b]?.focus - !!pol[a]?.focus);
-      const out = [];
-      for (const n of names) {
-        const r = (L.rulers[n] || []).findLast((r) => y >= r.from && y <= r.to);
-        if (r) out.push(`${esc(zh() ? pol[n]?.name_zh || n : n)}：${esc(rulerText(r)[0])}`);
-        if (out.length === 3) break;
-      }
-      p.innerHTML = out.join(" · ");
-    });
-  });
+}
+// A region's countries this year as chips: the first eight, the rest behind a "more" button.
+function countryChips(r) {
+  const cs = regionCountries(r);
+  if (!cs.length) return "";
+  const chip = (p, i) => `<button type="button" class="chip${i >= 8 ? " extra" : ""}" data-country="${esc(p.name)}" aria-pressed="${selNames().has(p.name)}">${esc(zh() ? p.name_zh || p.name : p.label_en || p.name)}</button>`;
+  return `<div class="wd-countries">${cs.map(chip).join("")}${cs.length > 8 ? `<button type="button" class="wd-more" data-n="${cs.length - 8}">${esc(t("sel").more(cs.length - 8))}</button>` : ""}</div>`;
 }
 function goRegion(id) {
   const reg = state.regionById[id];
   if (!reg) return;
+  // Going to another region on purpose lets go of a country selected elsewhere.
+  if (state.sel && selRegion() !== id) selectCountry(null);
+  if (state.area && state.area.region !== id) closeArea(true);
   setMode(id);
-  if (reg.polygon?.length) map.fitBounds(polyBounds(reg.polygon), { padding: { top: 120, bottom: 140, left: 60, right: innerWidth > 720 ? 380 : 60 }, maxZoom: 5, duration: 1400 });
+  if (reg.polygon?.length) fitMap(polyBounds(reg.polygon), { padding: { top: 120, bottom: 140, left: 60, right: innerWidth > 720 ? 380 : 60 }, maxZoom: 5, duration: 1400 });
   renderLedger();
 }
 
@@ -2171,20 +4441,7 @@ function renderRegionBtn() {
   $("region-name").textContent = r ? (zh() ? r.short_zh || r.name_zh : r.short || r.name) : t("allWorld");
   $("region-btn").hidden = state.regions.length < 2 && !state.library?.length && !state.pack?.only;
 }
-function toggleLangPop(open) {
-  const pop = $("lang-pop"), btn = $("lang");
-  open ??= pop.hidden;
-  pop.hidden = !open;
-  btn.setAttribute("aria-expanded", open);
-  if (!open) return;
-  pop.innerHTML = LANGS.map((l) => `<button type="button" role="menuitemradio" aria-checked="${l.id === state.lang}" data-lang="${l.id}" lang="${l.html}"><b>${esc(l.name)}</b><svg viewBox="0 0 12 12" aria-hidden="true"><path d="M2.5 6.5l2.3 2.2L9.5 3.5" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></button>`).join("");
-  // Placed under the button, inside the panel that holds both.
-  const r = btn.getBoundingClientRect(), o = pop.offsetParent.getBoundingClientRect();
-  pop.style.top = `${r.bottom - o.top + 6}px`;
-  pop.style.right = `${Math.max(0, o.right - r.right)}px`;
-  pop.querySelector('[aria-checked="true"]')?.focus();
-}
-
+const stripOff = () => { try { return localStorage.getItem("atlas-wstrip") === "0"; } catch { return false; } };
 function toggleRegionPop(open) {
   const pop = $("region-pop"), btn = $("region-btn");
   open ??= pop.hidden;
@@ -2206,10 +4463,23 @@ function toggleRegionPop(open) {
   }
   // A single region (a pack shown alone) has no whole-world view to offer, and compares only across time.
   const single = state.regions.length < 2;
-  pop.innerHTML = state.regions.map((r) => { const era = regionEra(r, y); return row(r.id, r.color || "#888", zh() ? r.short_zh || r.name_zh : r.short || r.name, era ? nameOf(era) : "", nameOf(r)); }).join("")
-    + (single ? "" : row("world", "#777", t("allWorld"), fmtYear(y)))
-    + `<button type="button" role="menuitem" class="rp-cmp" id="rp-cmp"><svg viewBox="0 0 16 16" aria-hidden="true"><rect x="1.5" y="3" width="5.5" height="10" rx="1"/><rect x="9" y="3" width="5.5" height="10" rx="1"/></svg>${esc(t("cmp").one)}</button>`;
+  // 全球 and compare lead (the list runs past one screen on phones); then each group of regions, its name in a
+  // narrow column on the left, its regions two to a row.
+  const pill = (cls, id, icon, label, sub = "") => `<button type="button" role="menuitem" class="rp-pill ${cls}${id === state.mode ? " here" : ""}"${id ? ` data-r="${id}"` : ` id="rp-cmp"`}>${icon}<b>${esc(label)}</b>${sub ? `<span>${esc(sub)}</span>` : ""}</button>`;
+  pop.innerHTML = `<div class="rp-top">${single ? "" : pill("rp-world", "world", `<svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="6.2"/><path d="M1.8 8h12.4M8 1.8c2 2 2 10.4 0 12.4M8 1.8c-2 2-2 10.4 0 12.4"/></svg>`, t("allWorld"), fmtYear(y))}`
+    + `${pill("rp-cmp", "", `<svg viewBox="0 0 16 16" aria-hidden="true"><rect x="1.5" y="3" width="5.5" height="10" rx="1"/><rect x="9" y="3" width="5.5" height="10" rx="1"/></svg>`, t("cmp").one)}</div>`
+    + regionGroups().map(([g, rs]) => `<div class="rp-grp"><h6>${esc(g ? (zh() ? g.name_zh : g.short || g.name) : t("packs")).replace("与", "<br>")}</h6><div class="rp-items">${rs.map((r) => {
+      const era = regionEra(r, y);
+      // The row goes to the region; its ▸ opens this year's rulers, events and countries there underneath.
+      return `<div class="rp-reg">${row(r.id, r.color || "#888", regionShort(r), era ? nameOf(era) : "", nameOf(r))}<button type="button" class="rp-x" data-x="${esc(r.id)}" aria-expanded="false" aria-label="${esc(t("rpMore"))}" title="${esc(t("rpMore"))}"><svg viewBox="0 0 12 12" aria-hidden="true"><path d="M4.5 2.5L8 6l-3.5 3.5"/></svg></button></div>`;
+    }).join("")}</div></div>`).join("")
+    + `<p class="rp-foot">${esc(t("sel").hint)}</p>` + (stripOff() ? `<button type="button" class="chip ws-on" id="ws-on">${esc(t("showStrip"))}</button>` : "");
   $("rp-cmp").addEventListener("click", () => { toggleRegionPop(false); openCompare(null, single ? "time" : undefined); });
+  $("ws-on")?.addEventListener("click", () => {
+    try { localStorage.removeItem("atlas-wstrip"); } catch {}
+    $("ws-on").remove();
+    renderWorldStrip();
+  });
   pop.querySelectorAll("[data-r]").forEach((b) => b.addEventListener("click", () => {
     toggleRegionPop(false);
     if (b.dataset.r !== "world") return goRegion(b.dataset.r);
@@ -2217,6 +4487,54 @@ function toggleRegionPop(open) {
     map.flyTo({ center: [60, 30], zoom: innerWidth <= 720 ? 0.6 : 1.4, pitch: 0, bearing: 0, duration: 1400 });
     renderLedger();
   }));
+  // One region open at a time; the block spans the group's width under its row (the grid backfills the other column).
+  pop.querySelectorAll("[data-x]").forEach((b) => b.addEventListener("click", () => {
+    const open = b.getAttribute("aria-expanded") !== "true";
+    pop.querySelectorAll(".rp-detail").forEach((d) => d.remove());
+    pop.querySelectorAll("[data-x]").forEach((x) => x.setAttribute("aria-expanded", "false"));
+    if (!open) return;
+    b.setAttribute("aria-expanded", "true");
+    const r = state.regionById[b.dataset.x], d = document.createElement("div");
+    d.className = "rp-detail";
+    d.dataset.region = r.id;
+    d.style.setProperty("--rc", r.color || "#888");
+    b.parentElement.after(d);
+    fillRegionDetail(d, r);
+    d.scrollIntoView({ block: "nearest" });
+  }));
+}
+// An open region's box in the menu for the current year.
+function fillRegionDetail(d, r) {
+  const y = state.year;
+  d.innerHTML = regionDetail(r, y);
+  fillRegionRulers(d.querySelector(".wd-rulers"), r, y);
+  d.querySelectorAll("[data-country]").forEach((c) => c.addEventListener("click", () => {
+    toggleRegionPop(false);
+    state.sel?.names.has(c.dataset.country) ? selectCountry(null) : selectCountry(c.dataset.country, { fly: true });
+  }));
+  d.querySelector(".wd-more")?.addEventListener("click", (e) => {
+    const ul = e.target.closest(".wd-countries"), on = ul.classList.toggle("open");
+    e.target.textContent = on ? t("sel").less : t("sel").more(+e.target.dataset.n);
+  });
+  d.querySelectorAll("[data-ev]").forEach((c) => c.addEventListener("click", () => { toggleRegionPop(false); openStory(c.dataset.ev); }));
+}
+// While the menu is open the timeline can move under it: each region's period, the year and the open box follow.
+function refreshRegionPop() {
+  const pop = $("region-pop");
+  if (pop.hidden) return;
+  const y = state.year;
+  const w = pop.querySelector('.rp-world span');
+  if (w) w.textContent = fmtYear(y);
+  pop.querySelectorAll(".rp-reg [data-r]").forEach((b) => {
+    const era = regionEra(state.regionById[b.dataset.r], y);
+    b.querySelector("span").textContent = era ? nameOf(era) : "";
+  });
+  // The box is rebuilt once the year rests, not on every step of a drag.
+  clearTimeout(refreshRegionPop.timer);
+  refreshRegionPop.timer = setTimeout(() => {
+    const d = pop.querySelector(".rp-detail");
+    if (d && !pop.hidden) fillRegionDetail(d, state.regionById[d.dataset.region]);
+  }, 200);
 }
 
 function setLean(on, remember) {
@@ -2250,12 +4568,10 @@ function openCompare(id, kind = cmp.kind || "region") {
   map.resize();
   if (!cmp.map) {
     cmp.map = new maplibregl.Map({ container: "map2", style: buildStyle(), center: [10, 45], zoom: 3, minZoom: 1.2, maxZoom: 9, attributionControl: false });
+    cmp.map.on("styleimagemissing", (e) => { if (e.id === "hatch") addHatch(cmp.map); });
     cmp.map.on("load", () => {
-      const sat = state.showSat;
-      cmp.map.setLayoutProperty("satellite", "visibility", sat ? "visible" : "none");
-      cmp.map.setPaintProperty("bg", "background-color", sat ? "#1d4f86" : "#9db8bf");
-      cmp.map.setPaintProperty("lakes", "fill-opacity", sat ? 0 : 0.9);
-      if (!state.showGeo) for (const l of ["rivers", "rivers-minor", "lakes"]) cmp.map.setLayoutProperty(l, "visibility", "none");
+      applyLook(cmp.map);
+      if (!state.showGeo) for (const l of ["rivers", "rivers-minor", "lakes", "lakes-line"]) cmp.map.setLayoutProperty(l, "visibility", "none");
       cmp.loaded = true;
       compareTerrain();
       fitCompare();
@@ -2364,7 +4680,7 @@ const evTitleText = (ev) => zh() ? ev.title_zh || ev.title : ev.title;
 function compareEventPopup(ev) {
   cmp.popup?.remove();
   cmp.popup = new maplibregl.Popup({ className: "atlas-pop", maxWidth: "300px", offset: 14, focusAfterOpen: false }).setLngLat([ev.lon, ev.lat])
-    .setHTML(`<div class="pc-kind">${fmtYear(ev.year, ev.circa)} · ${esc(tx(ev, "place"))}</div><h4>${esc(evTitleText(ev))}</h4><p>${esc(tx(ev, "summary"))}</p>`)
+    .setHTML(`<div class="pc-kind">${evWhen(ev)} · ${esc(tx(ev, "place"))}</div><h4>${esc(evTitleText(ev))}</h4><p>${esc(tx(ev, "summary"))}</p>`)
     .addTo(cmp.map);
 }
 function renderCompareCard(era) {
@@ -2431,6 +4747,10 @@ function renderRulers() {
     $("ev-count").textContent = "";
     return;
   }
+  // A selected country shows its own rulers.
+  const own = state.sel && ps.find((p) => selNames().has(p.n));
+  if (own && state.rulerPolity !== own.n && box.dataset.sel !== state.sel.id) state.rulerPolity = own.n;
+  box.dataset.sel = state.sel?.id || "";
   if (!ps.some((p) => p.n === state.rulerPolity)) {
     // Default: the main country ruling this year, as in the Five Dynasties the dynasty of the moment.
     state.rulerPolity = (ps.find((p) => p.focus && rulerAt(p.n, state.year)) || ps.find((p) => rulerAt(p.n, state.year)) || ps[0]).n;
@@ -2473,12 +4793,12 @@ const PGROUP = { general: "mil", statesman: "pol", thinker: "cul", poet: "cul", 
   strategist: "mil", artist: "art", scientist: "sci", physician: "sci", engineer: "sci", explorer: "sci" };
 function renderPeopleTab() {
   const box = $("people");
-  const all = [...(state.layerData?.people || [])].sort((a, b) => personSpan(a)[0] - personSpan(b)[0]);
+  const all = (state.layerData?.people || []).filter(selPerson).sort((a, b) => personSpan(a)[0] - personSpan(b)[0]);
   const g = state.peopleGroup || "all";
   const list = g === "all" ? all : all.filter((p) => PGROUP[p.field] === g);
   $("ev-count").textContent = all.length ? t("rulerCount")(list.length) : "";
   if (!all.length) { box.innerHTML = `<p class="rl-empty">${t("noPeople")}</p>`; box.dataset.key = ""; return; }
-  const key = `${state.era.id}|${state.lang}|${g}`;
+  const key = `${state.era.id}|${state.lang}|${g}|${state.sel?.id || ""}`;
   if (box.dataset.key !== key || box._data !== state.layerData) {
     box.dataset.key = key;
     box._data = state.layerData;
@@ -2488,7 +4808,7 @@ function renderPeopleTab() {
         `<button class="chip" data-g="${k}" aria-pressed="${k === g}">${t("pgroups")[k]}</button>`).join("")}</div>
       <p class="rl-hint">${t("peopleHint")}</p><ol class="rl-list">${list.map((p, i) =>
       `<li><button class="rl pp f-${esc(p.field)}" data-i="${i}"><span class="rl-years">${p.born != null ? fmtYear(p.born, p.circa) : "?"}<br>${p.died != null ? fmtYear(p.died, p.circa) : p.born != null ? (zh() ? "今" : "now") : "?"}</span>
-        <span class="rl-name">${esc(nameOf(p))}</span><span class="rl-sub">${esc(tx(p, "known_for"))}</span><span class="rl-len">${esc(t("fields")[p.field] || "")}</span></button></li>`).join("")}</ol>`;
+        <span class="rl-name">${esc(nameOf(p))}</span><span class="rl-sub">${esc(tx(p, "known_for"))}</span><span class="rl-len">${state.lifeOf?.has(p.id) ? `<i class="pp-life" title="${esc(t("followLife"))}">▶</i>` : ""}${esc(t("fields")[p.field] || "")}</span></button></li>`).join("")}</ol>`;
     box.querySelectorAll(".rl").forEach((btn) => btn.addEventListener("click", () => focusPerson(box._list[+btn.dataset.i])));
     box.querySelectorAll("[data-g]").forEach((btn) => btn.addEventListener("click", () => { state.peopleGroup = btn.dataset.g; renderPeopleTab(); }));
     box._fresh = true;
@@ -2510,6 +4830,12 @@ async function focusPerson(p) {
   if (y !== state.year) {
     if (state.zoom && (y < state.win[0] || y > state.win[1])) { state.scope = null; state.win = windowFor(state.zoom, y); refreshTimeline(); }
     await setYear(y);
+  }
+  // Someone with a life journey: their 足迹 framed whole, the card where they were this year.
+  if (state.lifeBy?.has(p.id)) {
+    await showTrail(p, { fit: true });
+    map.once("moveend", () => showCard(personAt(p), personCard(p)));
+    return;
   }
   map.flyTo({ center: [p.lon, p.lat], zoom: Math.min(Math.max(map.getZoom(), 5), 6), pitch: state.show3d ? 45 : 0, duration: 1400, essential: true });
   map.once("moveend", () => showCard([p.lon, p.lat], personCard(p)));
@@ -2580,7 +4906,7 @@ async function renderStory() {
   const evs = visibleEvents();
   const i = evs.findIndex((e) => e.id === ev.id);
   const prev = evs[i - 1], next = evs[i + 1];
-  const when = ev.endYear ? `${fmtYear(ev.year, ev.circa)} – ${fmtYear(ev.endYear)}` : fmtYear(ev.year, ev.circa);
+  const when = evWhen(ev);
   const cat = t("cat")[ev.category] || ev.category;
   $("ev-count").textContent = i >= 0 ? `${i + 1} / ${evs.length}` : "";
   box.innerHTML = `
@@ -2597,14 +4923,21 @@ async function renderStory() {
       <div class="story-sub" lang="${zh() ? "en" : "zh-CN"}">${esc(zh() ? ev.title : ev.title_zh)}</div>
       <button class="story-place" data-go="map"><i></i>${esc(tx(ev, "place"))}</button>
     </header>
-    ${illuSlot("e:" + ev.id)}
+    ${illuSlot("e:" + ev.id)}${illuSlot("a:" + ev.id)}
     <p class="story-lede">${esc(tx(ev, "summary"))}</p>
     <div class="story-body"><p class="muted">${t("loading")}</p></div>`;
   box.scrollTop = 0;
   fillIllus(box);
+  showEventPic(ev.id);
   box.onclick = (e) => {
+    // Any picture in the story opens large (its credit link still goes to Commons).
+    const pic = !e.target.closest("a") && e.target.closest("figure.illu[data-illu]");
+    if (pic) pic.dataset.illu.startsWith("a:") ? showEventPic(ev.id, true) : showIlluLarge(pic.dataset.illu);
     const go = e.target.closest("[data-go]")?.dataset.go;
-    if (go === "back") { state.reading = false; $("app").classList.remove("tour-reading"); renderLedger(); }
+    if (go === "back") {
+      state.reading = false; $("app").classList.remove("tour-reading"); renderLedger();
+      if (state.tour && immersivePref()) setImmersive(true, false); // back to a tour that was immersive
+    }
     if (go === "prev" && prev) openStory(prev.id);
     if (go === "next" && next) openStory(next.id);
     if (go === "map") flyToEvent(ev);
@@ -2649,7 +4982,9 @@ function linkTags(ev, layer) {
   const people = (ev.people || []).map((id) => (layer.people || []).find((p) => p.id === id)).filter(Boolean);
   const cities = (ev.places || []).map((id) => {
     const all = state.places.filter((p) => cityId(p) === id);
-    return all.find((p) => ev.year >= p.from && ev.year <= p.to) || all[0];
+    // The name in use that year, else the nearest in time (Beijing after 1912 is 北京, not 蓟).
+    const gap = (p) => (ev.year < p.from ? p.from - ev.year : ev.year > p.to ? ev.year - p.to : 0);
+    return [...all].sort((a, b) => gap(a) - gap(b))[0];
   }).filter(Boolean);
   if (!people.length && !cities.length) return "";
   linkTags.items = [...cities, ...people];
@@ -2676,6 +5011,20 @@ function checkNote(x) {
   const m = x?.sum;
   return line(s, icon, L[s], note) + (m ? line(m.s, { ok: "✓", fixed: "✎", doubt: "?" }[m.s], t("sm")[m.s], tx(m, "n")) : "");
 }
+// The source check of the later layers (life journeys, ties, disasters, climate phases, economy snapshots; tools/apply_more.py):
+// a full line for cards, a small mark for tight spots. Items without a `check` keep their "AI-drafted" note.
+function vcNote(x) {
+  const c = x?.check;
+  if (!c) return "";
+  const n = tx(c, "n");
+  return `<p class="fc fc-${c.s}"><b>${{ ok: "✓", fixed: "✎", doubt: "?" }[c.s]}</b> ${esc(t("vc")[c.s])}${n ? `${zh() ? "：" : ": "}${esc(n)}` : ""}</p>`;
+}
+function vcMark(x, full) {
+  const c = x?.check;
+  if (!c) return "";
+  const n = tx(c, "n"), label = t("vc")[c.s] + (n ? (zh() ? "：" : ": ") + n : "");
+  return `<span class="fc-mk fc-${c.s}" title="${esc(label)}">${{ ok: "✓", fixed: "✎", doubt: "?" }[c.s]}${full && c.s !== "ok" ? ` <small>${esc(label)}</small>` : ""}</span>`;
+}
 function checkMark(x) {
   const s = x?.check?.s;
   if (!s || s === "ok") return s ? `<span class="fc-mk fc-ok" title="${esc(t("fc").ok)}">✓</span>` : "";
@@ -2684,12 +5033,18 @@ function checkMark(x) {
 function links(ev, d) {
   const zhUrl = wikiLink(d?.source_zh || ev.source_zh), enUrl = wikiLink(ev.source);
   const main = zh() ? zhUrl || enUrl : enUrl || zhUrl;
+  // More sources (`sources`: links, or {url, title, title_zh}) and the area the event belongs to (`area`, a place
+  // graph id) follow the other links.
+  const more = (ev.sources || []).map((x) => (typeof x === "string" ? { url: x } : x)).filter((x) => /^https?:/.test(x.url || ""))
+    .map((x) => `<a href="${esc(x.url)}" target="_blank" rel="noopener">${esc(tx(x, "title") || new URL(x.url).hostname)} ↗</a>`).join("");
+  // Opens once the place graph has loaded (openArea waits for it), so it needs no check here.
+  const area = ev.area ? `<a href="#" data-area="${esc(ev.area)}">${esc(t("area").kind)} ›</a>` : "";
   const r = refLink(ev.refs);
-  if (r) return `<p class="story-links">` + ev.refs.map((ref) => `<a href="${esc(refLink(ref).href)}" title="${esc(r.label)}" target="_blank" rel="noopener">${esc(refLabel(ref))} ↗</a>`).join("") + `</p>`;
-  if (!main) return "";
+  if (r) return `<p class="story-links">` + ev.refs.map((ref) => `<a href="${esc(refLink(ref).href)}" title="${esc(r.label)}" target="_blank" rel="noopener">${esc(refLabel(ref))} ↗</a>`).join("") + more + area + `</p>`;
+  if (!main && !more && !area) return "";
   const other = zhUrl && enUrl ? (zh() ? enUrl : zhUrl) : null;
-  return `<p class="story-links"><a href="${esc(main)}" target="_blank" rel="noopener">${t("wiki")} ↗</a>` +
-    (other ? `<a href="${esc(other)}" target="_blank" rel="noopener">${t("wikiOther")} ↗</a>` : "") + `</p>`;
+  return `<p class="story-links">` + (main ? `<a href="${esc(main)}" target="_blank" rel="noopener">${t("wiki")} ↗</a>` : "") +
+    (other ? `<a href="${esc(other)}" target="_blank" rel="noopener">${t("wikiOther")} ↗</a>` : "") + more + area + `</p>`;
 }
 
 function flyToEvent(ev) {
@@ -2729,6 +5084,7 @@ async function goToEra(era) {
   refreshTimeline();
   const b = focusBounds() || (fly && polyBounds(r.polygon));
   if (b) {
+    clearPad();
     const cam = map.cameraForBounds(b, { padding: { top: 120, bottom: 140, left: 60, right: innerWidth > 720 ? 380 : 60 } });
     if (cam) map.flyTo({ ...cam, zoom: Math.min(cam.zoom, 5), pitch: state.show3d ? 45 : 0, bearing: -6, duration: 1600, essential: true });
   }
@@ -2736,9 +5092,167 @@ async function goToEra(era) {
 
 /* ---------- guided tours: data/tours.json, a camera path through years with narration ---------- */
 let tours = null;
+// Life journeys (data/lives.json): one tour per person, `person` set, its stops the places of their life.
+// state.lifeOf maps a person id to their journey's id, for the "follow their life" button on person cards.
+let lives = null;
+const loadLives = () => lives || (lives = (state.pack?.only ? Promise.resolve([]) : loadJSON("data/lives.json").catch(() => []))
+  .then((l) => { state.lifeOf = new Map(l.map((tr) => [tr.person, tr.id])); state.lifeBy = new Map(l.map((tr) => [tr.person, tr])); return l; }));
+// Where a life had got to by a year: the index of its last stop at or before it (the first stop before birth).
+const lifeIdx = (life, y) => { let k = 0; life.steps.forEach((s, j) => { if (s.year <= y) k = j; }); return k; };
+
+/* ---------- 足迹: a person's whole life journey on the map, driven by the timeline ----------
+   All stops and legs are drawn at once: the way already travelled solid, the rest faint and dashed, each stop named
+   with its year. A gold dot marks where they were in the year on the timeline and glides along the leg when the year
+   passes the next stop, so playing or dragging the timeline walks them through their life. The card under the map
+   tells what happened at the current stop; ‹ › step from stop to stop. */
+const trail = { life: null, p: null, k: -1, anim: 0, labels: [] };
+function trailSrc() {
+  if (!map.getSource("trail")) {
+    map.addSource("trail", { type: "geojson", data: { type: "FeatureCollection", features: [] } });
+    map.addSource("trail-now", { type: "geojson", data: { type: "FeatureCollection", features: [] } });
+    const kind = (k) => ["==", ["get", "kind"], k];
+    const before = map.getLayer("tour-past") ? "tour-past" : undefined;
+    map.addLayer({ id: "trail-ahead", type: "line", source: "trail", filter: kind("ahead"), layout: { "line-cap": "round", "line-join": "round" },
+      paint: { "line-color": "#8a5a12", "line-width": 2.2, "line-dasharray": [1.5, 2], "line-opacity": 0.7 } }, before);
+    map.addLayer({ id: "trail-casing", type: "line", source: "trail", filter: kind("done"), layout: { "line-cap": "round", "line-join": "round" },
+      paint: { "line-color": "#5a3a08", "line-width": 6.5, "line-opacity": 0.55 } }, before);
+    map.addLayer({ id: "trail-done", type: "line", source: "trail", filter: kind("done"), layout: { "line-cap": "round", "line-join": "round" },
+      paint: { "line-color": "#f0b429", "line-width": 3.5 } }, before);
+    map.addLayer({ id: "trail-stops", type: "circle", source: "trail", filter: kind("stop"),
+      paint: { "circle-radius": ["case", ["==", ["get", "past"], 1], 5, 4], "circle-color": ["case", ["==", ["get", "past"], 1], "#f0b429", "#fffaf0"],
+        "circle-stroke-color": "#8a5a12", "circle-stroke-width": 1.5, "circle-opacity": 0.95 } }, before);
+    map.addLayer({ id: "trail-now-halo", type: "circle", source: "trail-now",
+      paint: { "circle-radius": 18, "circle-color": "#f0b429", "circle-opacity": 0.35, "circle-blur": 0.5 } }, before);
+    map.addLayer({ id: "trail-now", type: "circle", source: "trail-now",
+      paint: { "circle-radius": 9, "circle-color": "#f0b429", "circle-stroke-color": "#fff", "circle-stroke-width": 3 } }, before);
+  }
+  return map.getSource("trail");
+}
+// Show a person's 足迹 (or switch it off with null). `fit` frames the whole journey.
+async function showTrail(person, { fit = false } = {}) {
+  cancelAnimationFrame(trail.anim);
+  trail.labels.forEach((m) => m.remove());
+  trail.labels = [];
+  const life = person && (await loadLives(), state.lifeBy?.get(person.id || person));
+  trail.life = life || null;
+  trail.p = life ? (typeof person === "object" ? person : null) : null;
+  trail.k = -1;
+  trail.pin = null;
+  $("app").classList.toggle("trailing", !!life);
+  if (!life) {
+    $("trail").hidden = true;
+    if (map.getSource("trail")) { map.getSource("trail").setData({ type: "FeatureCollection", features: [] }); map.getSource("trail-now").setData({ type: "FeatureCollection", features: [] }); }
+    renderPeople();
+    return;
+  }
+  if (state.tour) endTour(false);
+  const reg = tourRegion(life);
+  if (state.mode !== reg) setMode(reg);
+  // Into their life: the nearest year of it.
+  const y = Math.min(life.end, Math.max(life.start, state.year));
+  if (y !== state.year) {
+    if (state.zoom && !inWindow(y)) { state.scope = null; state.win = windowFor(state.zoom, y); refreshTimeline(); }
+    await setYear(y);
+  }
+  // Each place is named once, with all its years (长安 742·754).
+  const byPlace = new Map();
+  life.steps.forEach((s, j) => {
+    const key = s.at.map((v) => v.toFixed(1)).join(",");
+    if (!byPlace.has(key)) byPlace.set(key, { at: s.at, s, idx: [] });
+    byPlace.get(key).idx.push(j);
+  });
+  for (const g of byPlace.values()) {
+    const el = document.createElement("button");
+    el.type = "button";
+    el.className = "trail-lab";
+    el.dataset.idx = g.idx.join(",");
+    el.innerHTML = `<b>${g.idx.map((j) => esc(fmtYear(life.steps[j].year))).join(" · ")}</b> ${esc(stopPlace(g.s) || "")}`;
+    el.addEventListener("click", (e) => { e.stopPropagation(); trailGo(g.idx.find((j) => j > trail.k) ?? g.idx[0]); });
+    trail.labels.push(new maplibregl.Marker({ element: el, anchor: "left", offset: [12, 0] }).setLngLat(g.at).addTo(map));
+  }
+  updateTrail(true);
+  if (fit) {
+    const b = new maplibregl.LngLatBounds();
+    life.steps.forEach((s) => b.extend(s.at));
+    const wide = innerWidth > 720;
+    clearPad();
+    const cam = map.cameraForBounds(b, { padding: { top: wide ? 110 : 150, bottom: wide ? 260 : 300, left: wide ? 80 : 30, right: wide ? 420 : 30 } });
+    if (cam) map.flyTo({ ...cam, zoom: Math.min(cam.zoom, 6.5), pitch: state.show3d ? 30 : 0, bearing: 0, duration: 1600, essential: true });
+  }
+}
+// Redraw for the current year. The dot glides along the leg when the year has moved on by one stop.
+function updateTrail(first) {
+  const life = trail.life;
+  if (!life || !map.getSource("trail") && !trailSrc()) return;
+  const k = trail.pin?.year === state.year ? trail.pin.k : lifeIdx(life, state.year), was = trail.k;
+  const born = state.year >= life.start;
+  if (k === was && !first) return trailCard();
+  trail.k = k;
+  const legs = life.steps.slice(1).map((s, j) => [j + 1, arcLeg(life.steps[j].at, s.at)]);
+  const feats = legs.map(([j, pts]) => ({ type: "Feature", properties: { kind: j <= k && born ? "done" : "ahead" }, geometry: lineGeom(pts) }));
+  life.steps.forEach((s, j) => feats.push({ type: "Feature", properties: { kind: "stop", past: j <= k && born ? 1 : 0 }, geometry: { type: "Point", coordinates: s.at } }));
+  trailSrc().setData({ type: "FeatureCollection", features: feats });
+  for (const m of trail.labels) {
+    const idx = m.getElement().dataset.idx.split(",").map(Number);
+    m.getElement().classList.toggle("now", idx.includes(k) && born);
+    m.getElement().classList.toggle("ahead", !born || idx.every((j) => j > k));
+  }
+  const dot = (c) => map.getSource("trail-now").setData({ type: "FeatureCollection", features: born ? [{ type: "Feature", properties: {}, geometry: { type: "Point", coordinates: c } }] : [] });
+  cancelAnimationFrame(trail.anim);
+  const leg = k === was + 1 && !first && legs[k - 1] && unwrapLine(legs[k - 1][1]);
+  if (!leg || matchMedia("(prefers-reduced-motion: reduce)").matches) dot(life.steps[k].at);
+  else {
+    const t0 = performance.now(), dur = state.playing ? 600 : 1000;
+    const tick = (now) => {
+      if (trail.life !== life || trail.k !== k) return;
+      const f = Math.min(1, Math.max(0, (now - t0) / dur)), g = 1 - (1 - f) ** 3;
+      const x = g * (leg.length - 1), i = Math.min(leg.length - 2, Math.floor(x)), u = x - i;
+      const c = [leg[i][0] + (leg[i + 1][0] - leg[i][0]) * u, leg[i][1] + (leg[i + 1][1] - leg[i][1]) * u];
+      dot([((c[0] + 540) % 360) - 180, c[1]]);
+      if (f < 1) trail.anim = requestAnimationFrame(tick);
+    };
+    trail.anim = requestAnimationFrame(tick);
+  }
+  renderTies();
+  trailCard();
+}
+function trailCard() {
+  const life = trail.life, box = $("trail");
+  if (!life) return;
+  const k = trail.k, s = life.steps[k], n = life.steps.length;
+  const before = state.year < life.start, after = state.year > life.end && state.year > (trail.p?.died ?? life.end);
+  const name = trail.p ? nameOf(trail.p) : tx(life, "title");
+  const key = `${life.id}|${k}|${before}|${after}|${state.lang}|${!!state.ties}`;
+  box.hidden = false;
+  if (box.dataset.key === key) return;
+  box.dataset.key = key;
+  const dots = life.steps.map((x, j) => `<button type="button" class="tr-dot${j < k ? " past" : j === k && !before ? " now" : ""}" data-j="${j}" title="${esc(fmtYear(x.year))} ${esc(stopPlace(x) || "")}" aria-label="${esc(fmtYear(x.year))} ${esc(stopPlace(x) || "")}"></button>`).join("");
+  const text = before ? t("trailBefore")(fmtYear(life.start)) : after ? t("trailAfter") : tx(s, "text").replace(/^[^:：，,]{1,14}?(年，|: )/, "");
+  box.innerHTML = `<div class="tour-head"><span class="tour-title">◉ ${esc(name)} · ${esc(t("trail"))}</span><span class="tour-count">${before ? "" : `${k + 1}/${n}`}</span><button type="button" class="zbtn tour-close" data-tr="x" aria-label="${esc(t("close"))}">×</button></div>
+    <div class="tr-dots">${dots}</div>
+    <p>${before ? "" : `<b class="tour-year">${esc(fmtYear(s.year))} · ${esc(stopPlace(s) || "")}</b>`}<span>${esc(text)}</span></p>${before || after ? "" : trailTies(life, k)}
+    <div class="tour-ctl"><button type="button" class="chip" data-tr="prev"${k <= 0 && !after ? " disabled" : ""}>‹ ${esc(t("trailPrev"))}</button>
+      ${s.event && !before ? `<button type="button" class="chip" data-tr="story">${esc(t("tourStory"))}</button>` : ""}
+      <button type="button" class="chip" data-tr="tour">▶ ${esc(t("followLife"))}</button>
+      <button type="button" class="chip tour-next" data-tr="next"${k >= n - 1 && !before ? " disabled" : ""}>${esc(t("trailNext"))} ›</button></div>
+    <p class="tr-note">${esc(t("drafted"))}</p>`;
+}
+// Step to a stop: its year on the timeline, the camera on the place.
+async function trailGo(j) {
+  const life = trail.life, s = life?.steps[j];
+  if (!s) return;
+  stop();
+  if (state.zoom && !inWindow(s.year)) { state.scope = null; state.win = windowFor(state.zoom, s.year); refreshTimeline(); }
+  // Two stops in one year: the timeline can't tell them apart, so the stop is pinned while the year stays.
+  trail.pin = { year: s.year, k: j };
+  await setYear(s.year);
+  if (trail.k !== j) { trail.pin = { year: s.year, k: j }; updateTrail(); }
+  const z = Math.min(Math.max(map.getZoom(), (s.zoom || 6) - 0.5), 7);
+  map.easeTo({ center: s.at, zoom: z, duration: 1100, essential: true });
+}
 // The atlas's own tours and the pack's (marked with the pack's region), or the pack's alone.
 const loadTours = () => tours || (tours = Promise.all([
-  state.pack?.only ? [] : loadJSON("data/tours.json").catch(() => []),
+  state.pack?.only ? [] : Promise.all([loadJSON("data/tours.json").catch(() => []), loadLives()]).then(([a, b]) => [...a, ...b]),
   state.pack?.manifest.data.tours ? packFile("tours").then((l) => l.map((tr) => ({ ...tr, region: state.pack.manifest.id }))).catch(() => []) : [],
 ]).then(([a, b]) => [...a, ...b]));
 const tourRegion = (tr) => tr.region || state.home;
@@ -2750,21 +5264,26 @@ const tourIn = (tr, era) => tourEra(tr) === era.id || (tr.also || []).includes(e
 function tourItem(tr, era) {
   const on = state.tour?.id === tr.id;
   const home = era && tourEra(tr) !== era.id ? regionEras(tourRegion(tr)).find((e) => e.id === tourEra(tr)) : null;
-  return `<button type="button" class="tour-item${on ? " on" : ""}" data-tour="${tr.id}"><b>${esc(tx(tr, "title"))}</b><span>${fmtYear(tr.start)}–${fmtYear(tr.end)} · ${t("tourSteps")(tr.steps.length)}${home ? ` · ${esc(nameOf(home))}` : ""}</span><small>${esc(tx(tr, "summary"))}</small></button>`;
+  return `<button type="button" class="tour-item${on ? " on" : ""}${tr.person ? " life" : ""}" data-tour="${tr.id}"><b>${esc(tx(tr, "title"))}</b><span>${fmtYear(tr.start)}–${fmtYear(tr.end)} · ${t("tourSteps")(tr.steps.length)}${home ? ` · ${esc(nameOf(home))}` : ""}</span><small>${esc(tx(tr, "summary"))}</small></button>`;
 }
 async function renderToursTab() {
-  const list = await loadTours();
+  let list = await loadTours();
   if (state.tab !== "tours") return;
   const box = $("tour-tab");
   // This region's tours for the period on screen, then its other periods, then the other regions.
   const reg = state.mode === "world" ? null : state.era.region || state.mode;
+  const lifeList = list.filter((tr) => tr.person);
+  list = list.filter((tr) => !tr.person);
   const here = list.filter((tr) => reg && tourRegion(tr) === reg && tourIn(tr, state.era)).sort((a, b) => a.start - b.start);
+  // Lives of people of this region who were alive in this period.
+  const livesHere = lifeList.filter((tr) => reg && tourRegion(tr) === reg && tr.start <= state.era.end && tr.end >= state.era.start).sort((a, b) => a.start - b.start);
   $("ev-count").textContent = t("tourCount")(here.length);
   const key = `${state.mode}|${state.era.id}|${state.lang}|${state.tour?.id || ""}`;
   if (box.dataset.key === key) return;
   box.dataset.key = key;
   let html = `<p class="rl-hint">${t("tourHint")}</p>`;
   html += here.length ? here.map((tr) => tourItem(tr, state.era)).join("") : `<p class="rl-empty">${t("noTours")}</p>`;
+  if (livesHere.length) html += `<h5 class="tour-lives">${esc(t("livesHere"))}</h5>` + livesHere.map((tr) => tourItem(tr)).join("");
   const group = (title, groups) => {
     groups = groups.filter(([, l]) => l.length);
     if (!groups.length) return "";
@@ -2773,20 +5292,72 @@ async function renderToursTab() {
       groups.map(([h, l]) => `<h5>${esc(h)}</h5>` + l.map((tr) => tourItem(tr)).join("")).join("") + `</details>`;
   };
   if (reg) html += group(t("toursOther"), regionEras(reg).filter((e) => e.id !== state.era.id).map((e) => [nameOf(e), list.filter((tr) => tourRegion(tr) === reg && tourEra(tr) === e.id)]));
+  html += group(t("livesAll"), [...new Set(lifeList.map(tourRegion))].map((id) => [nameOf(state.regionById[id] || { name: id }), lifeList.filter((tr) => tourRegion(tr) === id).sort((a, b) => a.start - b.start)]));
   for (const r of state.regions) if (r.id !== reg) {
     const l = list.filter((tr) => tourRegion(tr) === r.id).sort((a, b) => a.start - b.start);
     html += group(nameOf(r), regionEras(r.id).map((e) => [nameOf(e), l.filter((tr) => tourEra(tr) === e.id)]));
   }
   box.innerHTML = html + `<p class="tour-note">${t("drafted")}</p>`;
 }
-async function startTour(id, i = 0) {
-  const tr = (await loadTours()).find((x) => x.id === id);
+// A country's story, built on the spot from what the atlas knows about it: it opens on the country as first mapped,
+// stops at its key events (all level-1 events, topped up with level-2 ones spread over its years, about 18 in all),
+// and closes on its last map (or today). Borders morph between stops.
+function countryTour() {
+  const c = state.sel;
+  if (!c) return null;
+  const evs = state.events.filter((ev) => ev.year >= c.from && ev.year <= c.to && selHas(ev.states, ev.year, ev.year)).sort((a, b) => a.year - b.year);
+  let pick = evs.filter((ev) => ev.level === 1);
+  // Top up with level-2 events, each time into the longest stretch of years with no stop yet, so long quiet
+  // centuries get a stop too instead of the extras bunching where events are dense.
+  const more = evs.filter((ev) => ev.level === 2), shut = new Set();
+  for (let room = 18 - pick.length; room > 0 && more.length; room--) {
+    const ys = [c.from, ...pick.map((ev) => ev.year), Math.min(c.to, 2026)].sort((a, b) => a - b);
+    let best = null;
+    for (let j = 1; j < ys.length; j++) {
+      const [a, b] = [ys[j - 1], ys[j]], mid = (a + b) / 2, key = `${a}|${b}`;
+      if (shut.has(key) || (best && b - a <= best.len)) continue;
+      const ev = more.filter((e) => e.year > a && e.year < b).sort((x, y) => Math.abs(x.year - mid) - Math.abs(y.year - mid))[0];
+      if (ev) best = { len: b - a, ev }; else shut.add(key);
+    }
+    if (!best) break;
+    pick.push(best.ev);
+    more.splice(more.indexOf(best.ev), 1);
+  }
+  if (pick.length > 30) pick = Array.from({ length: 30 }, (_, j) => pick[Math.floor((j * pick.length) / 30)]);
+  pick = [...new Set(pick)].sort((a, b) => a.year - b.year || a.level - b.level);
+  if (pick.length < 2) return null;
+  const first = c.spans[0]?.[0] ?? c.from, last = c.spans.at(-1)?.[1] ?? c.to;
+  const from = Math.max(c.from, Math.min(first, pick[0].year)), to = Math.min(c.to, last);
+  const name = c.name, name_zh = c.name_zh || c.name;
+  const steps = [
+    { year: from, fit: true, layers: ["rulers", "capitals"],
+      text: `${name} ${c.dated ? "is founded" : "appears on the map"}.`, text_zh: `${name_zh}${c.dated ? "立国" : "出现在地图上"}。` },
+    ...pick.map((ev) => ({ year: ev.year, at: [ev.lon, ev.lat], zoom: 5.2, event: ev.id, layers: ev.layers,
+      text: `${ev.title}. ${ev.summary}`, text_zh: `${ev.title_zh}：${ev.summary_zh}` })),
+  ];
+  const ends = c.to >= 2026 ? { text: `${name} today.`, text_zh: `${name_zh}延续至今。` } : { text: `The end of ${name}.`, text_zh: `${name_zh}的终结。` };
+  if (to > pick.at(-1).year || c.to >= 2026) steps.push({ year: Math.max(to, pick.at(-1).year), fit: true, layers: ["rulers"], ...ends });
+  return state.genTour = { id: "country:" + c.id, region: c.region || selRegion(), path: false, morph: true, start: from, end: steps.at(-1).year,
+    title: `The story of ${name}`, title_zh: `${name_zh}的故事`, summary: "", summary_zh: "", steps };
+}
+async function startTour(id, i = 0, auto = false, chain = null) {
+  const tr = id === state.genTour?.id ? state.genTour : (await loadTours()).find((x) => x.id === id);
   if (!tr) return;
   stop(); closeSearch();
-  state.tour = { id, tr, i: 0, auto: false };
+  if (trail.life) showTrail(null);
+  await illuSet("ai");
+  // Where the visitor was before the tour (kept when one tour follows another): ending the tour goes back there.
+  const c = map.getCenter();
+  const before = state.tour?.before || { year: state.year, mode: state.mode, win: state.win, scope: state.scope,
+    cam: { center: [c.lng, c.lat], zoom: map.getZoom(), bearing: map.getBearing(), pitch: map.getPitch() } };
+  // `chain`: the tours 依次导览 plays after this one (their ids).
+  state.tour = { id, tr, i: 0, auto, before, chain };
+  applyLayout();
+  syncMusic();
   setMode(tourRegion(tr));
   $("tour").hidden = false;
   $("app").classList.add("touring");
+  if (immersivePref()) setImmersive(true, false);
   if (state.tab === "tours") renderToursTab();
   await tourStep(Math.max(0, Math.min(i, tr.steps.length - 1)));
 }
@@ -2798,28 +5369,50 @@ async function tourStep(i) {
   $("app").classList.remove("tour-reading");
   tour.i = i;
   const s = tr.steps[i];
-  // Draw the journey so far.
-  const src = map.getSource("tour");
-  if (src) {
-    const pts = tr.path ? tr.steps.slice(0, i + 1).map((x) => x.at) : [];
-    src.setData({ type: "FeatureCollection", features: [
-      ...(pts.length > 1 ? [{ type: "Feature", properties: { kind: "path" }, geometry: { type: "LineString", coordinates: pts } }] : []),
-      ...tr.steps.slice(0, i + 1).map((x, k) => ({ type: "Feature", properties: { kind: "stop", now: k === i ? 1 : 0, n: k + 1 }, geometry: { type: "Point", coordinates: x.at } })),
-    ] });
-  }
+  drawTourPath(tour, i);
   tourCard();
+  narrateStep(tour, i);
+  syncMusic();
   state.selected = s.event || null;
   state.reading = false;
   if (state.zoom && !inWindow(s.year)) { state.scope = null; state.win = windowFor(state.zoom, s.year); refreshTimeline(); }
-  map.flyTo({ center: s.at, zoom: s.zoom ?? 4.8, pitch: state.show3d ? s.pitch ?? 48 : 0, bearing: s.bearing ?? -8,
-    padding: tourPadding(), duration: 2600, essential: true });
   emit("tour-step", { id: tour.id, index: i, step: s, steps: tr.steps, path: !!tr.path });
-  await setYear(s.year);
-  if (state.tour === tour && tour.i === i) tourHighlight(s);
-  renderArmies();
-  renderLedger();
+  // Redrawing the map and lists for the new year takes a moment; doing it in the flight's first frames made the camera
+  // stall and then jump. So the year, battle cards and list change first and the flight starts after, unless the year's data is still
+  // loading, in which case the flight leaves without waiting for it.
+  const year = setYear(s.year).then(() => {
+    if (state.tour !== tour || tour.i !== i) return;
+    tourHighlight(s);
+    renderArmies();
+    renderLedger();
+  });
+  if (s.at) {
+    const padding = tourPadding();
+    await Promise.race([year, new Promise((r) => setTimeout(r, 400))]);
+    if (state.tour !== tour || tour.i !== i) return;
+    const from = MINI && i > 0 && tr.steps[i - 1].at;
+    if (from && (from[0] !== s.at[0] || from[1] !== s.at[1])) {
+      fitMap([[Math.min(from[0], s.at[0]), Math.min(from[1], s.at[1])], [Math.max(from[0], s.at[0]), Math.max(from[1], s.at[1])]],
+        { padding, maxZoom: s.zoom ?? 4.8, pitch: 0, bearing: 0, duration: 2600, essential: true });
+    } else map.flyTo({ center: s.at, zoom: MINI ? (s.zoom ?? 4.8) - 1 : s.zoom ?? 4.8, pitch: MINI ? 0 : state.show3d ? s.pitch ?? 48 : 0,
+      bearing: MINI ? 0 : s.bearing ?? -8, padding, duration: 2600, essential: true });
+  }
+  // A step with `bounds` frames that box (an area's history keeps its outline in view).
+  if (s.bounds && !s.at) fitMap(s.bounds, { padding: tourPadding(), maxZoom: 6.5, pitch: state.show3d && !MINI ? 30 : 0, bearing: 0, duration: 2200, essential: true });
+  await year;
+  // A step with `fit` frames the selected country as the map draws it that year (a country's story opens and closes so).
+  if (s.fit && state.tour === tour && tour.i === i) {
+    const b = [...selNames()].map(countryBounds).find(Boolean);
+    if (b) fitMap(b, { padding: tourPadding(), maxZoom: 6, pitch: state.show3d ? 30 : 0, bearing: 0, duration: 2200 });
+  }
   saveView();
-  if (tour.auto) map.once("moveend", () => { if (state.tour === tour && tour.auto) tour.timer = setTimeout(() => tourNext(), 3000 + tx(s, "text").length * (zh() ? 110 : 45)); });
+  // Autoplay moves on once the map has arrived and the narration (if any) has finished, else after a reading pause.
+  // The map's arrival counts, or 4 s at most: a hidden page (a locked phone) pauses the flight but not the narration.
+  if (tour.auto) Promise.race([new Promise((r) => map.once("moveend", r)), sleep(4000)]).then(async () => {
+    if (state.tour !== tour || !tour.auto || tour.i !== i) return;
+    if (narr.done) { await narr.done; if (state.tour === tour && tour.auto && tour.i === i) tour.timer = setTimeout(() => tourNext(), 1500); }
+    else tour.timer = setTimeout(() => tourNext(), 3000 + tx(s, "text").length * (zh() ? 110 : 45));
+  });
 }
 // Light up every state on the current map that the step's caption names (齐 in "齐桓公任用管仲"), or the step's own
 // "highlight" list. The period's own dynasty (唐 on a Tang map) is left out: it would light up the whole map.
@@ -2853,56 +5446,404 @@ function tourCard() {
   const [when, rest] = captionLead(tx(s, "text"));
   box.querySelector(".tour-year").textContent = when || fmtYear(s.year);
   box.querySelector(".tour-text").textContent = rest;
+  box.querySelector(".tour-fc").innerHTML = vcMark(s, true);
   box.querySelector(".tour-story").hidden = !s.event;
   const r = refLink(s.ref), a = box.querySelector(".tour-ref");
   a.hidden = !r;
   if (r) { a.href = r.href; a.title = r.label; a.textContent = `${refLabel(r.ref)} ↗`; }
   box.querySelector(".tour-prev").disabled = i === 0;
-  box.querySelector(".tour-next").textContent = i === tr.steps.length - 1 ? t("tourEnd") : t("tourNext");
-  box.querySelector(".tour-auto").textContent = tour.auto ? t("tourPause") : t("tourPlay");
+  tourBtn("next", i === tr.steps.length - 1 ? "tourEnd" : "tourNext");
+  tourBtn("auto", tour.auto ? "tourPause" : "tourPlay");
   box.querySelector(".tour-bar i").style.width = ((i + 1) / tr.steps.length) * 100 + "%";
+  placeTourPic();
+  syncTourTop();
+}
+// Free screen rectangles for a floating picture, clear of the panels in `els` and above `bottom`: the column between the
+// side panels, and the full width below them. A panel wider than 60% of the screen (phone bars and sheets) only limits
+// the top or bottom.
+function freeRects(els, bottom, gap = 10, edge = 8) {
+  let top = edge, colL = edge, colR = innerWidth - edge, below = edge;
+  for (const el of els) {
+    const r = el?.getBoundingClientRect();
+    if (!r || !r.width || !r.height || getComputedStyle(el).display === "none" || r.top >= bottom) continue;
+    if (r.width > innerWidth * 0.6) {
+      if (r.top + r.height / 2 < innerHeight / 2) top = Math.max(top, r.bottom + gap); else bottom = Math.min(bottom, r.top - gap);
+    } else {
+      below = Math.max(below, r.bottom + gap);
+      if (r.left + r.width / 2 < innerWidth / 2) colL = Math.max(colL, r.right + gap); else colR = Math.min(colR, r.left - gap);
+    }
+  }
+  return [{ l: colL, r: colR, t: top, b: bottom }, { l: edge, r: innerWidth - edge, t: Math.max(top, below), b: bottom }];
+}
+// The biggest picture of the given aspect ratio that fits one of the rectangles, taking at most `share` of its height.
+function fitPic(rects, ratio, share, maxW, maxH) {
+  let best = null;
+  for (const q of rects) {
+    const w = Math.min(q.r - q.l, Math.min((q.b - q.t) * share, maxH) * ratio, maxW);
+    if (w > 0 && (!best || w > best.w)) best = { ...q, w, h: w / ratio };
+  }
+  return best;
+}
+// The step's AI picture floats above the tour card, as large as the free space allows, taking at most about half
+// the height above the card; tourPadding() keeps the map's focus in the space left over.
+// A floating picture fades out, changes (`change` swaps its content and returns where it goes, or null to stay hidden),
+// and fades back in once the new image has loaded. A newer change cancels an older one still waiting.
+const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+const placeBox = (box, at) => Object.assign(box.style, { left: at.x + "px", top: at.y + "px", width: at.w + "px", height: at.h + "px" });
+async function fadePic(box, change) {
+  const tok = (box.fadeTok = (box.fadeTok || 0) + 1);
+  if (!box.hidden) { box.classList.add("fade-out"); await sleep(300); if (box.fadeTok !== tok) return; }
+  const at = await change();
+  if (box.fadeTok !== tok) return;
+  if (!at) { box.hidden = true; box.classList.remove("fade-out"); return; }
+  box.classList.add("fade-out");
+  placeBox(box, at);
+  box.hidden = false;
+  const img = box.querySelector("img");
+  if (img && !img.complete) await Promise.race([new Promise((r) => { img.addEventListener("load", r, { once: true }); img.addEventListener("error", r, { once: true }); }), sleep(1500)]);
+  if (box.fadeTok !== tok) return;
+  if (!img || (img.complete && !img.naturalWidth)) { box.hidden = true; box.classList.remove("fade-out"); return; } // could not be fetched
+  void box.offsetWidth; // apply the transparent start first, so removing the class transitions
+  box.classList.remove("fade-out");
+}
+// Where the step's AI picture goes above the tour card, or null when it does not fit. Worked out at once (tourPadding
+// needs it before the flight starts), while the picture itself fades in a moment later.
+function tourPicRect(im) {
+  const card = $("tour").getBoundingClientRect();
+  // Immersive mode folds the panels away, so the picture takes most of the screen above the card.
+  const p = state.immersive ? fitPic(freeRects([], card.top - 10, 10, 16), im.w / im.h, 0.8, 1200, 800)
+    : fitPic(freeRects([document.querySelector(".era"), $("ledger")], card.top - 10), im.w / im.h, 0.5, 560, 360);
+  if (!p || p.h < 80) return null;
+  const mid = Math.min(Math.max(card.left + card.width / 2, p.l + p.w / 2), p.r - p.w / 2);
+  return { x: mid - p.w / 2, y: p.b - p.h, w: p.w, h: p.h };
+}
+function placeTourPic() {
+  const box = $("tour-pic"), tour = state.tour, s = tour?.tr.steps[tour.i];
+  // A step shows its event's picture, or else one painted for the step itself (tools/ai_prompts.json "tour.<tour id>.<step>").
+  const idx = illuSets.aiReady, key = s?.event ? "a:" + s.event : s ? `a:tour.${tour.id}.${tour.i}` : "";
+  const im = !EMBED && s && state.showAI && idx?.images[idx.keys[key]];
+  const at = im ? tourPicRect(im) : null;
+  box.rect = at;
+  if (at && box.dataset.key === key + state.lang && !box.hidden) return placeBox(box, at);
+  box.dataset.key = at ? key + state.lang : "";
+  fadePic(box, async () => {
+    if (!at) return null;
+    box.innerHTML = illuSlot(key);
+    await fillIllus(box);
+    return at;
+  });
+}
+// An opened event's AI picture is shown large in the middle of the free map area, with a close button. Closed, it
+// stays closed for that event until the story is left; the small copy in the story opens it again.
+const eventPic = { key: null, closed: null };
+function eventPicRect(im) {
+  // Above the timeline; in immersive mode (timeline hidden) above the tour card.
+  const rail = document.querySelector(".rail").getBoundingClientRect(), tour = $("tour").getBoundingClientRect();
+  const bottom = (rail.height ? rail.top : tour.height ? tour.top : innerHeight) - 10;
+  const ratio = im.w / im.h;
+  let p = fitPic(freeRects([document.querySelector(".era"), $("ledger")], bottom, 16), ratio, 0.8, 900, 600);
+  // Too little room between the panels: cover them instead, centred over the map, until it is closed.
+  if (!p || p.w < Math.min(480, innerWidth * 0.6)) p = fitPic([{ l: 8, r: innerWidth - 8, t: 8, b: bottom }], ratio, 0.75, 900, 600);
+  return p && p.h >= 100 ? { x: (p.l + p.r - p.w) / 2, y: (p.t + p.b - p.h) / 2, w: p.w, h: p.h } : null;
+}
+async function showEventPic(id, force) {
+  const box = $("event-pic"), key = "a:" + id;
+  if (force) eventPic.closed = null;
+  if (EMBED || !state.showAI || eventPic.closed === key) return hideEventPic();
+  const idx = await illuSet("ai"), im = idx.images[idx.keys[key]];
+  if (!im || state.selected !== id || !state.reading) return hideEventPic();
+  const at = eventPicRect(im);
+  if (!at) return hideEventPic();
+  box.classList.toggle("manual", !!force); // opened by a click: shown even over the immersive reading card
+  // Rebuilt when the language changes too, for the picture's description.
+  if (eventPic.key === key + state.lang && !box.hidden) return placeBox(box, at);
+  eventPic.key = key + state.lang;
+  fadePic(box, async () => {
+    box.querySelector(".ep-fig").innerHTML = illuSlot(key);
+    await fillIllus(box);
+    return at;
+  });
+}
+// A Wikimedia picture opens in the same viewer: the packed thumbnail at once, then a sharp copy from Commons when it
+// arrives (if Commons can't be reached, the thumbnail stays).
+const commonsLarge = (url) => {
+  const m = /^https:\/\/commons\.wikimedia\.org\/wiki\/File:(.+)$/.exec(url || "");
+  return m ? `https://commons.wikimedia.org/wiki/Special:FilePath/${m[1]}?width=1280` : null;
+};
+async function showIlluLarge(key) {
+  const box = $("event-pic"), idx = await illuSet("img"), im = idx.images[idx.keys[key]];
+  const at = im && eventPicRect(im);
+  if (!at) return;
+  eventPic.key = key + state.lang;
+  box.classList.add("manual");
+  fadePic(box, async () => {
+    box.querySelector(".ep-fig").innerHTML = illuSlot(key);
+    await fillIllus(box);
+    const img = box.querySelector("img"), big = commonsLarge(im.url);
+    if (img && big) { const hi = new Image(); hi.onload = () => { if (img.isConnected) img.src = big; }; hi.src = big; }
+    return at;
+  });
+}
+function hideEventPic(forget) {
+  const box = $("event-pic");
+  if (forget) { eventPic.closed = null; eventPic.key = null; }
+  else if (box.hidden) return;
+  fadePic(box, () => null);
 }
 // Keep the spot clear of the tour card at the bottom and the ledger on the right.
 function tourPadding() {
+  if (MINI) return { top: 44, bottom: 28, left: 32, right: 32 }; // room for the names above the stops and the host's link
   if (EMBED) return { top: 50, bottom: 30, left: 30, right: 30 };
   const phone = innerWidth <= 720;
   const card = $("tour").offsetHeight || 160;
+  const pic = $("tour-pic").rect;
+  if (state.immersive) return { top: 20, bottom: innerHeight - (pic ? pic.y : $("tour").getBoundingClientRect().top) + 20, left: 30, right: 30 };
+  if (pic) {
+    const b = innerHeight - pic.y + 30;
+    return phone ? { top: 60, bottom: b, left: 20, right: 20 } : { top: 60, bottom: b, left: Math.min(380, innerWidth * 0.26), right: Math.min(380, innerWidth * 0.26) };
+  }
   return phone ? { top: 60, bottom: card + 40, left: 20, right: 20 } : { top: 60, bottom: card + 60, left: Math.min(380, innerWidth * 0.26), right: Math.min(380, innerWidth * 0.26) };
 }
 function tourNext() {
   const tour = state.tour;
   if (!tour) return;
   if (tour.i < tour.tr.steps.length - 1) tourStep(tour.i + 1);
+  else if (tour.chain?.length) startTour(tour.chain[0], 0, tour.auto, tour.chain.slice(1));
   else endTour();
 }
 function tourPause() {
   const tour = state.tour; if (!tour) return;
   tour.auto = false; clearTimeout(tour.timer);
-  $("tour").querySelector(".tour-auto").textContent = t("tourPlay");
+  stopNarration();
+  tourBtn("auto", "tourPlay");
 }
-function endTour() {
+// The tour's 上一步 / 播放 / 读这段故事 / 下一步 buttons: an icon and a label (phones show the icon only), named for screen readers either way.
+const TOUR_ICONS = {
+  tourPrev: '<path d="M15 5l-7 7 7 7"/>', tourNext: '<path d="M9 5l7 7-7 7"/>', tourEnd: '<path d="M5 12.5l4.5 4.5L19 7.5"/>',
+  tourPlay: '<path d="M7.5 5v14l11-7z" fill="currentColor"/>', tourStory: '<path d="M12 6.5C10 5 7 4.5 3.5 5v13c3.5-.5 6.5 0 8.5 1.5 2-1.5 5-2 8.5-1.5V5C17 4.5 14 5 12 6.5zM12 6.5v13"/>', tourPause: '<path d="M8 5v14M16 5v14" stroke-width="3.2"/>',
+};
+function tourBtn(which, key) {
+  const b = $("tour").querySelector(".tour-" + which);
+  b.innerHTML = `<svg viewBox="0 0 24 24" aria-hidden="true">${TOUR_ICONS[key]}</svg><span class="tl">${esc(t(key))}</span>`;
+  b.dataset.key = key;
+  b.setAttribute("aria-label", t(key)); b.title = t(key);
+}
+// 沉浸 (immersive): during a tour, every panel but the tour card folds away and the step's picture grows. The choice is
+// remembered for the next tour; reading the story or ending the tour leaves it.
+// How far the tour card's top is from the bottom of the screen: the immersive reading card ends just above it.
+const syncTourTop = () => document.documentElement.style.setProperty("--tour-top", innerHeight - $("tour").getBoundingClientRect().top + "px");
+const immersivePref = () => { try { return !EMBED && localStorage.getItem("atlas-immersive") === "1"; } catch { return false; } };
+function setImmersive(on, remember = true) {
+  state.immersive = on;
+  $("app").classList.toggle("immersive", on);
+  $("tour").querySelector(".tour-immersive").setAttribute("aria-pressed", String(on));
+  if (remember) try { localStorage.setItem("atlas-immersive", on ? "1" : "0"); } catch {}
   if (!state.tour) return;
+  placeTourPic();
+  syncTourTop();
+  map.easeTo({ padding: tourPadding(), duration: 600 }); // keep the step's spot in view in the space that is left
+}
+// Ending or closing a tour puts the timeline and the camera back where they were before it started; `back` is false
+// when something else (a life journey) takes over the map.
+function endTour(back = true) {
+  if (!state.tour) return;
+  setImmersive(false, false);
   clearTimeout(state.tour.timer);
+  const { before } = state.tour;
   state.tour = null;
+  applyLayout();
+  stopNarration();
+  syncMusic();
   $("tour").hidden = true;
+  $("tour-pic").rect = null; $("tour-pic").dataset.key = ""; fadePic($("tour-pic"), () => null);
   $("app").classList.remove("touring", "tour-reading");
   if (state.tab === "tours") renderToursTab();
   map.getSource("tour")?.setData({ type: "FeatureCollection", features: [] });
+  tourLine.leg = null; drawTourLine();
   tourHighlight(null);
   emit("tour-end", {});
   syncAuto();
   renderArmies();
   map.setPadding({ top: 0, bottom: 0, left: 0, right: 0 });
+  if (back && before) {
+    if (before.mode !== state.mode) setMode(before.mode);
+    if (state.zoom && before.win) { state.scope = before.scope; state.win = before.win; refreshTimeline(); }
+    map.flyTo({ ...before.cam, duration: 1600, essential: true });
+    setYear(before.year).then(() => { renderLedger(); saveView(); });
+  }
   saveView();
+}
+// A leg of a journey is drawn as a gentle bow, not a ruler line: a quadratic curve bent to the left of travel by
+// about a seventh of its length (at most 6°), taking the short way round the dateline.
+function arcLeg(a, b, n = 40) {
+  let bx = b[0];
+  if (bx - a[0] > 180) bx -= 360; else if (a[0] - bx > 180) bx += 360;
+  const k = Math.max(0.2, Math.cos(((a[1] + b[1]) / 2) * Math.PI / 180));
+  const dx = (bx - a[0]) * k, dy = b[1] - a[1], len = Math.hypot(dx, dy);
+  if (len < 0.02) return [a, b];
+  const bend = Math.min(len / 7, 6);
+  const cx = (a[0] + bx) / 2 - (dy / len) * bend / k, cy = (a[1] + b[1]) / 2 + (dx / len) * bend;
+  const pts = [];
+  for (let j = 0; j <= n; j++) {
+    const t = j / n, u = 1 - t;
+    const x = u * u * a[0] + 2 * u * t * cx + t * t * bx;
+    pts.push([((x + 540) % 360) - 180, u * u * a[1] + 2 * u * t * cy + t * t * b[1]]);
+  }
+  return pts;
+}
+// The journey so far: legs already travelled as a dotted trail, the leg into this stop as a solid line that draws
+// itself while the camera flies, with an arrowhead at its tip, and the stops as rings (this one filled).
+// The trail and stops are map layers, set once per stop. The leg being drawn is an SVG overlay re-projected on every
+// rendered frame, so line and arrow move exactly with the map instead of waiting for the map to re-tile new data.
+const tourLine = { svg: null, top: null, leg: null, f: 0, hooked: false, places: [], span: "" };
+// The place a stop is at (its `place`/`place_zh`), shown by the stop while the tour is there.
+const stopPlace = (s) => s && (zh() ? s.place_zh || s.place : s.place || s.place_zh);
+function drawTourPath(tour, i) {
+  const src = map.getSource("tour");
+  if (!src) return;
+  const { tr } = tour;
+  cancelAnimationFrame(tour.anim);
+  const steps = tr.steps.slice(0, i + 1);
+  const stops = steps.map((x, k) => x.at && ({ type: "Feature", properties: { kind: "stop", now: k === i ? 1 : 0, n: k + 1 }, geometry: { type: "Point", coordinates: x.at } })).filter(Boolean);
+  const legs = tr.path ? steps.slice(1).map((x, k) => arcLeg(steps[k].at, x.at)) : [];
+  const past = legs.slice(0, -1).map((pts) => ({ type: "Feature", properties: { kind: "past" }, geometry: lineGeom(pts) }));
+  src.setData({ type: "FeatureCollection", features: [...past, ...stops] });
+  const leg = legs[legs.length - 1];
+  tourLine.leg = leg && unwrapLine(leg);
+  // Name the leg's two ends (or just the stop, on a tour without a trail).
+  const prev = leg && steps[i - 1], cur = steps[i];
+  tourLine.places = [prev && { at: prev.at, name: stopPlace(prev), from: true }, cur.at && { at: cur.at, name: stopPlace(cur) }]
+    .filter((p) => p?.name && p.at);
+  if (tourLine.places.length === 2 && tourLine.places[0].name === tourLine.places[1].name) tourLine.places.shift();
+  // How long the leg took: the stop's own `took`/`took_zh` (e.g. "4个月") if it has one, else the years between the stops.
+  tourLine.span = prev ? legSpan(prev, cur) : "";
+  if (!leg || matchMedia("(prefers-reduced-motion: reduce)").matches) { tourLine.f = 1; return drawTourLine(); }
+  const t0 = performance.now(), dur = 2200;
+  const tick = (now) => {
+    if (state.tour !== tour || tour.i !== i) return;
+    // A frame's timestamp can be a little earlier than t0, so clamp to 0..1.
+    const f = Math.min(1, Math.max(0, (now - t0) / dur));
+    tourLine.f = 1 - (1 - f) ** 3;
+    drawTourLine();
+    if (f < 1) tour.anim = requestAnimationFrame(tick);
+  };
+  tourLine.f = 0;
+  drawTourLine();
+  tour.anim = requestAnimationFrame(tick);
+}
+// Longitudes made continuous (no jump at the dateline) so a point can be interpolated along the leg.
+function unwrapLine(pts) {
+  const out = [pts[0].slice()];
+  for (let j = 1; j < pts.length; j++) {
+    let x = pts[j][0];
+    while (x - out[j - 1][0] > 180) x -= 360;
+    while (out[j - 1][0] - x > 180) x += 360;
+    out.push([x, pts[j][1]]);
+  }
+  return out;
+}
+function legSpan(a, b) {
+  const took = zh() ? b.took_zh || b.took : b.took || b.took_zh;
+  const n = b.year - a.year;
+  if (n === 0) return took || (zh() ? `${fmtYear(b.year)} · 同年` : `${fmtYear(b.year)} · same year`);
+  const yrs = took || (zh() ? `${n}年` : `${n} year${n === 1 ? "" : "s"}`);
+  return `${fmtYear(a.year)} → ${fmtYear(b.year)} · ${yrs}`;
+}
+function drawTourLine() {
+  const { leg, f, places, span } = tourLine;
+  let svg = tourLine.svg, top = tourLine.top;
+  if ((!leg && !places.length) || !state.tour) { for (const el of [svg, top]) if (el) el.style.display = "none"; return; }
+  if (!svg) {
+    svg = tourLine.svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+    svg.setAttribute("class", "tour-line");
+    svg.innerHTML = `<path class="tl-glow"/><path class="tl-line"/><path class="tl-arrow" d="M0 -10 8 7 0 3 -8 7Z"/>`;
+    const box = map.getCanvasContainer();
+    box.insertBefore(svg, map.getCanvas().nextSibling);
+    // The names and the time go on a layer of their own above the map's markers, so a city or event marker can't hide them.
+    top = tourLine.top = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+    top.setAttribute("class", "tour-line tour-labels");
+    top.innerHTML = `<text class="tl-place"/><text class="tl-place"/><text class="tl-span"/>`;
+    box.appendChild(top);
+  }
+  svg.style.display = top.style.display = "";
+  // A city marker that already shows the same name right there keeps the map from saying it twice (checked a few
+  // times a second, not every frame).
+  const now = performance.now();
+  if (!(now - (tourLine.dupAt || 0) < 300)) {
+    tourLine.dupAt = now;
+    const mk = [...document.querySelectorAll(".maplibregl-marker:not(.dc-hide)")].filter((el) => !el.classList.contains("dc-nolabel"));
+    for (const p of places) {
+      const q = map.project(p.at), box = map.getContainer().getBoundingClientRect();
+      p.dup = mk.some((el) => {
+        const span = el.querySelector("span");
+        if (!span || span.textContent.trim() !== p.name) return false;
+        const r = el.getBoundingClientRect();
+        return Math.hypot((r.left + r.right) / 2 - box.left - q.x, (r.top + r.bottom) / 2 - box.top - q.y) < 60;
+      });
+    }
+  }
+  top.querySelectorAll(".tl-place").forEach((el, k) => {
+    const p = places[k];
+    el.style.display = p && !p.dup ? "" : "none";
+    if (!p) return;
+    const q = map.project(p.at);
+    el.textContent = p.name;
+    el.classList.toggle("from", !!p.from);
+    el.setAttribute("x", q.x.toFixed(1));
+    el.setAttribute("y", (q.y - 14).toFixed(1));
+  });
+  const arrow = svg.querySelector(".tl-arrow"), spanEl = top.querySelector(".tl-span");
+  spanEl.style.display = "none";
+  if (!leg) {
+    svg.querySelector(".tl-glow").setAttribute("d", "");
+    svg.querySelector(".tl-line").setAttribute("d", "");
+    arrow.style.display = "none";
+    return;
+  }
+  const at = (g) => {
+    const p = Math.min(1, Math.max(0, g)) * (leg.length - 1), j = Math.min(leg.length - 2, Math.floor(p)), t = p - j;
+    return [leg[j][0] + (leg[j + 1][0] - leg[j][0]) * t, leg[j][1] + (leg[j + 1][1] - leg[j][1]) * t];
+  };
+  const n = Math.max(0, Math.floor(f * (leg.length - 1)));
+  const pts = [...leg.slice(0, n + 1), at(f)].map((q) => map.project(q));
+  const d = pts.length > 1 && f > 0 ? "M" + pts.map((q) => `${q.x.toFixed(1)} ${q.y.toFixed(1)}`).join("L") : "";
+  svg.querySelector(".tl-glow").setAttribute("d", d);
+  svg.querySelector(".tl-line").setAttribute("d", d);
+  // While drawing, the arrowhead leads the line; once there it rests halfway along, clear of the stop's ring.
+  // The time sits beside the middle of the leg once the line has passed it; when the middle is off screen (a long leg
+  // seen close up), under the destination's name.
+  if (span && f >= 0.5) {
+    const m = map.project(at(0.5)), a = map.project(at(0.45)), b = map.project(at(0.55));
+    const c = map.getContainer(), onScreen = m.x > 60 && m.y > 40 && m.x < c.clientWidth - 60 && m.y < c.clientHeight - 40;
+    let x, y;
+    if (onScreen) {
+      const len = Math.hypot(b.x - a.x, b.y - a.y) || 1, nx = -(b.y - a.y) / len, ny = (b.x - a.x) / len, side = ny > 0 ? -1 : 1;
+      x = m.x + nx * side * 16; y = m.y + ny * side * 16 + 4;
+    } else {
+      const d = map.project(leg[leg.length - 1]);
+      x = d.x; y = d.y + 26;
+    }
+    spanEl.textContent = span;
+    spanEl.style.display = "";
+    spanEl.setAttribute("x", x.toFixed(1));
+    spanEl.setAttribute("y", y.toFixed(1));
+  }
+  const g = f >= 1 ? 0.55 : f;
+  if (g <= 0.01) { arrow.style.display = "none"; return; }
+  const pa = map.project(at(Math.max(0, g - 0.02))), pb = map.project(at(g));
+  arrow.style.display = "";
+  arrow.setAttribute("transform", `translate(${pb.x.toFixed(1)} ${pb.y.toFixed(1)}) rotate(${((Math.atan2(pb.x - pa.x, pa.y - pb.y) * 180) / Math.PI).toFixed(1)})`);
 }
 function addTourLayers() {
   map.addSource("tour", { type: "geojson", data: { type: "FeatureCollection", features: [] } });
-  map.addLayer({ id: "tour-path", type: "line", source: "tour", filter: ["==", ["get", "kind"], "path"],
+  const line = (kind) => ["==", ["get", "kind"], kind];
+  map.addLayer({ id: "tour-past", type: "line", source: "tour", filter: line("past"),
     layout: { "line-cap": "round", "line-join": "round" },
-    paint: { "line-color": "#b93a26", "line-width": 3, "line-dasharray": [2, 1.5], "line-opacity": 0.9 } });
-  map.addLayer({ id: "tour-stops", type: "circle", source: "tour", filter: ["==", ["get", "kind"], "stop"],
+    paint: { "line-color": "#b93a26", "line-width": 3, "line-dasharray": [0, 2], "line-opacity": 0.75 } }, map.getLayer("spread-dot") ? "spread-dot" : undefined);
+  map.addLayer({ id: "tour-stops", type: "circle", source: "tour", filter: line("stop"),
     paint: { "circle-radius": ["case", ["==", ["get", "now"], 1], 8, 4.5], "circle-color": ["case", ["==", ["get", "now"], 1], "#b93a26", "#fff6f2"],
-      "circle-stroke-color": "#b93a26", "circle-stroke-width": 2 } });
+      "circle-stroke-color": ["case", ["==", ["get", "now"], 1], "#fff6f2", "#b93a26"], "circle-stroke-width": ["case", ["==", ["get", "now"], 1], 2.5, 2] } });
+  if (!tourLine.hooked) { tourLine.hooked = true; map.on("render", () => { if (tourLine.leg || tourLine.places.length) drawTourLine(); }); }
 }
 
 /* ---------- search: events, people, rulers, cities, periods and years ---------- */
@@ -2938,7 +5879,8 @@ function searchResults(q) {
   const y = parseYear(q);
   if (y != null) out.push({ g: "time", year: y, title: fmtYear(y), sub: `${nameOf(eraFor(y))} · ${t("jumpYear")}`, go: () => jumpToYear(y) });
   for (const r of state.regions) for (const e of r.eras) if (has(e.name, e.name_zh, e.glyph))
-    out.push({ g: "era", year: e.start, title: nameOf(e), sub: `${nameOf(r)} · ${fmtYear(e.start)} – ${fmtYear(e.end)}`, go: () => goToEra(e) });
+    out.push({ g: "era", year: e.start, title: nameOf(e), sub: `${nameOf(r)} · ${fmtYear(e.since ?? e.start)} – ${fmtYear(e.until ?? e.end)}`, go: () => goToEra(e) });
+  out.push(...areaSearch(has));
   if (searchIndex) {
     // Tours named in the title first, then by summary, then by any step that mentions it (which the tour opens at).
     const tm = searchIndex.tours.map((tr) => {
@@ -2956,10 +5898,13 @@ function searchResults(q) {
     for (const { r, i, polity, era, pz } of searchIndex.rulers.filter(({ r }) => has(r.name_zh, r.name, r.title_zh, r.title, r.rank_zh)).slice(0, 10))
       out.push({ g: "ruler", year: r.from, title: zh() ? `${r.title_zh || r.title || r.rank_zh || ""} ${r.name_zh || ""}`.trim() : `${r.title || r.name}`,
         sub: `${zh() ? pz || polity : polity} · ${fmtYear(r.from)} – ${fmtYear(r.to)}`, go: () => jumpToRuler(polity, i, era) });
+    const found = new Set();
     for (const list of searchIndex.cities.filter((l) => l.some((c) => has(c.name_zh, c.name, c.modern_zh, c.modern))).slice(0, 8)) {
       const c = list.find((c) => has(c.name_zh, c.name)) || list[0];
+      found.add(cityId(c));
       out.push({ g: "city", year: c.from, title: nameOf(c), sub: zh() ? `今${c.modern_zh || c.modern}` : `modern ${c.modern}`, go: () => jumpToCity(c) });
     }
+    out.push(...gazSearch(has, found));
   }
   // Events named in the title first, then those that only happened at a matching place; key events first.
   const evs = state.events.map((ev) => [ev, has(ev.title_zh, ev.title) ? 0 : has(ev.place_zh, ev.place) ? 1 : 2]).filter(([, m]) => m < 2)
@@ -2981,14 +5926,34 @@ function renderSearch() {
   });
   box.innerHTML = html;
 }
+// The era panel makes room below the search panel and follows its height as results come and go.
+const SEARCH_GAP = 8;
+let searchShut = 0, searchSize = null;
+function pushEra() {
+  const box = $("search"), open = !box.hidden && !box.classList.contains("closing");
+  document.documentElement.style.setProperty("--search-push", open ? `${box.offsetHeight + SEARCH_GAP}px` : "0px");
+}
 async function openSearch() {
+  clearTimeout(searchShut);
+  $("search").classList.remove("closing");
   $("search").hidden = false;
+  if (!searchSize && window.ResizeObserver) (searchSize = new ResizeObserver(pushEra)).observe($("search"));
+  pushEra();
   $("search-q").placeholder = t("searchPh");
   $("search-q").focus();
   $("search-q").select();
+  gazData();
   if (!searchIndex) { searchIndex = await buildSearchIndex(); renderSearch(); }
 }
-function closeSearch() { $("search").hidden = true; }
+function closeSearch() {
+  const box = $("search");
+  if (box.hidden || box.classList.contains("closing")) return;
+  box.classList.add("closing");
+  pushEra();
+  const done = () => { box.hidden = true; box.classList.remove("closing"); };
+  if (matchMedia("(prefers-reduced-motion: reduce)").matches) return done();
+  searchShut = setTimeout(done, 200);
+}
 function pickSearch(i) { const h = searchHits[i]; if (!h) return; closeSearch(); h.go(); }
 async function jumpToYear(y) {
   stop();
@@ -3007,7 +5972,7 @@ async function jumpToRuler(polity, i, era) {
   // A ruler of another region: switch the timeline there and bring the region into view.
   const reg = state.regionById[era.region];
   if (setMode(era.region) && reg?.polygon?.length)
-    map.fitBounds(polyBounds(reg.polygon), { padding: { top: 120, bottom: 140, left: 60, right: innerWidth > 720 ? 380 : 60 }, maxZoom: 5, duration: 1400 });
+    fitMap(polyBounds(reg.polygon), { padding: { top: 120, bottom: 140, left: 60, right: innerWidth > 720 ? 380 : 60 }, maxZoom: 5, duration: 1400 });
   const r = (await loadLayers(era)).rulers[polity][i];
   await jumpToYear(Math.max(era.start, Math.min(era.end, r.from)));
   state.layerData = await loadLayers(era);
@@ -3038,7 +6003,15 @@ function showScrubTag(p, y) {
   tag.style.left = `clamp(56px, ${x}px, calc(100% - 56px))`;
   document.querySelectorAll(".band.era-band").forEach((b) => b.classList.toggle("scrub", b.dataset.era === era.id));
 }
+// After a tap on the slim timeline the tag stays a moment, so the period it landed in is named.
+let tagTimer = 0;
+function flashScrubTag(p, y) {
+  showScrubTag(p, y);
+  clearTimeout(tagTimer);
+  tagTimer = setTimeout(hideScrubTag, 1400);
+}
 function hideScrubTag() {
+  clearTimeout(tagTimer);
   const tag = $("scrub-tag");
   if (tag) tag.hidden = true;
   document.querySelectorAll(".band.scrub").forEach((b) => b.classList.remove("scrub"));
@@ -3076,7 +6049,7 @@ function fitBandLabels() {
   }
 }
 // Phones, whole-history view: the track is wider than the screen and pages sideways, so every period gets its name.
-const pagedRail = () => state.zoom === 0 && innerWidth <= 720;
+const pagedRail = () => state.zoom === 0 && innerWidth <= 720 && !state.railSlim;
 function sizeTrack() {
   const view = $("track-view"), track = document.querySelector(".track");
   track.style.width = pagedRail() ? Math.round(view.clientWidth * 3.6) + "px" : "";
@@ -3089,9 +6062,56 @@ function revealYear(smooth) {
   if (x < view.scrollLeft + m || x > view.scrollLeft + view.clientWidth - m)
     view.scrollTo({ left: x - view.clientWidth / 2, behavior: smooth ? "smooth" : "auto" });
 }
+// Slim timeline: a thin strip of periods without names and a row of round years under the slider; the tag names the
+// period while pointing, dragging or after a tap. Years are placed coarse to fine, each kept only where it has room,
+// so the stretched short periods of the whole-history view get finer numbers than the long ones.
+const YEAR_STEPS = [1000, 500, 200, 100, 50, 20, 10, 5, 2, 1];
+// The button on the timeline shows what it switches to: the full timeline's two rows, or the slim one's single line.
+const RAIL_FULL_ICON = '<svg viewBox="0 0 16 16" aria-hidden="true"><rect x="2" y="3.5" width="12" height="4" rx="1" fill="none" stroke="currentColor" stroke-width="1.4"/><path d="M2 11.5h12" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>';
+const RAIL_SLIM_ICON = '<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8h12" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path d="M5 11v1M8 11v1M11 11v1" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>';
+function setRailStyleButton() {
+  const btn = $("rail-style"), on = !!state.railSlim;
+  btn.innerHTML = on ? RAIL_FULL_ICON : RAIL_SLIM_ICON;
+  btn.setAttribute("aria-pressed", String(on));
+  btn.title = t(on ? "slimOff" : "slimOn");
+  btn.setAttribute("aria-label", btn.title);
+}
+function setRailSlim(on, remember) {
+  state.railSlim = on;
+  document.querySelector(".rail").classList.toggle("slim", on);
+  setRailStyleButton();
+  if (remember) try { localStorage.setItem("atlas-rail-slim", on ? "1" : "0"); } catch {}
+  hideScrubTag();
+  if (state.ready) buildRail();
+  if (!$("settings").hidden) renderSettings();
+}
+function renderYearMarks() {
+  const box = $("years");
+  box.innerHTML = "";
+  const w = box.clientWidth;
+  if (!state.railSlim || !w || !state.eras?.length) return;
+  const [a, b] = state.zoom ? state.win : [state.eras[0]?.start ?? state.range.start, state.eras.at(-1)?.end ?? state.range.end];
+  const placed = [], pad = innerWidth <= 720 ? 10 : 18;
+  for (const step of YEAR_STEPS) {
+    if (!state.zoom && step < 50) break;
+    for (let y = Math.ceil(a / step) * step; y <= b; y += step) {
+      if (y === 0) continue;
+      const x = (yearToPos(y) / SLIDER_MAX) * w, n = Math.abs(y);
+      const s = document.createElement("span");
+      s.innerHTML = y > 0 ? n : zh() ? "前" + n : `${n}<small>BCE</small>`;
+      s.style.left = x + "px";
+      box.appendChild(s);
+      const h = s.offsetWidth / 2;
+      // The play button's speed badge reaches over the strip's left end.
+      if (x - h < 10 || x + h > w || placed.some(([p, q]) => x + h + pad > p && x - h - pad < q)) { s.remove(); continue; }
+      placed.push([x - h, x + h]);
+    }
+  }
+}
 function buildRail() {
+  if (state.dial) buildDial();
   sizeTrack();
-  requestAnimationFrame(() => { fitBandLabels(); revealYear(false); });
+  requestAnimationFrame(() => { fitBandLabels(); renderYearMarks(); revealYear(false); });
   const pct = (p) => (p / SLIDER_MAX) * 100;
   const bands = $("bands");
   bands.innerHTML = "";
@@ -3104,7 +6124,7 @@ function buildRail() {
       b.style.left = pct(s.p0) + "%";
       b.style.width = pct(s.p1 - s.p0) + "%";
       b.innerHTML = `<b>${esc(bandName(e))}</b>`;
-      b.title = `${nameOf(e)} ${fmtYear(e.start)} – ${fmtYear(e.end)} · ${t("lasted")(eraYears(e))}`;
+      b.title = `${nameOf(e)} ${fmtYear(e.since ?? e.start)} – ${fmtYear(e.until ?? e.end)} · ${t("lasted")(eraYears(e))}`;
       b.addEventListener("click", () => goToEra(e));
       bands.appendChild(b);
       // English names are longer than the Chinese glyphs: fall back to the tiny form, then to nothing (the tooltip has it).
@@ -3127,11 +6147,23 @@ function buildRail() {
         b.style.left = pct(yearToPos(from)) + "%";
         b.style.width = pct(yearToPos(to + 1) - yearToPos(from)) + "%";
         b.innerHTML = (i === 0 && s.from >= a ? `<b>${esc(bandName(e))}</b> ` : "") + `<span>${s.from >= a ? "" : "← "}${fmtYear(s.from)}</span>`;
-        b.title = tx(s, "label") || `${nameOf(e)} ${fmtYear(e.start)} – ${fmtYear(e.end)}`;
+        b.title = tx(s, "label") || `${nameOf(e)} ${fmtYear(e.since ?? e.start)} – ${fmtYear(e.until ?? e.end)}`;
         b.addEventListener("click", () => { stop(); setYear(from); });
         bands.appendChild(b);
       });
     }
+  }
+  // The selected country's years, as a gold bar under the bands.
+  for (const [a, b] of state.sel?.years || []) {
+    const [lo, hi] = state.zoom ? state.win : [state.eras[0]?.start, state.eras.at(-1)?.end];
+    if (b < lo || a > hi) continue;
+    const bar = document.createElement("div");
+    bar.className = "sel-span";
+    const p0 = yearToPos(Math.max(a, lo)), p1 = yearToPos(Math.min(b, hi) + 1);
+    bar.style.left = pct(p0) + "%";
+    bar.style.width = Math.max(0.3, pct(p1 - p0)) + "%";
+    bar.title = `${selName()} ${fmtYear(a)} – ${fmtYear(b)}`;
+    bands.appendChild(bar);
   }
   const ticks = $("ticks");
   ticks.innerHTML = "";
@@ -3161,38 +6193,853 @@ function buildRail() {
 }
 
 // Playback moves through each era (or the zoomed window) in roughly the same time.
+/* ---------- background music ---------- */
+// One quiet track per period (data/music.json names <DATA_URL>/atlas/music/<file>, made by tools/ai_music.py and
+// tools/pack_music.py). It plays during tours and timeline playback while the music switch is on, follows the period
+// on screen and crossfades when that changes. Volume goes through Web Audio, because iOS ignores an audio
+// element's volume (the R2 files send the CORS header this needs).
+const MUSIC_VOL = 0.3, MUSIC_FADE = 1.5;
+// In a tour, a step can carry a mood (data/moods.json: {"<tour id>/<step>": sorrow|tension|battle|triumph|journey|serene|
+// solemn}, AI-tagged); its track ("mood/<culture>-<mood>", the culture from the tour's region and the step's year: the
+// region's early instruments before 500, its later ones after, a modern ensemble from 1840) then plays instead of the
+// period's, and the period's comes back on steps without one. Consecutive steps with one mood keep the track playing.
+const music = { key: null, track: null, ctx: null, index: null, moods: null };
+const moodCulture = (region, year) => year >= 1840 ? (region === "china" ? "china-modern" : "modern")
+  : year < 500 ? `${region}-early` : region;
+function musicWanted() {
+  if (EMBED || !state.music || !(state.tour || state.playing) || !state.era || state.era.region === "world") return null;
+  const period = `${state.era.region}/${state.era.id}`, tour = state.tour, s = tour?.tr.steps[tour.i];
+  const mood = s && music.moods?.[`${tour.id}/${tour.i}`];
+  return mood ? [`mood/${moodCulture(tourRegion(tour.tr), s.year)}-${mood}`, period] : [period];
+}
+async function syncMusic() {
+  if (state.tour && !music.moods) music.moods = await loadJSON("data/moods.json").catch(() => ({}));
+  music.index ||= Promise.all([loadJSON("data/music.json").catch(() => ({})), packMedia("music")]).then(([a, p]) => ({ ...a, ...p }));
+  const idx = await music.index;
+  const want = musicWanted()?.find((k) => idx[k]) || null;
+  if (want === music.key) return;
+  music.key = want;
+  if (music.track) stopTrack(music.track);
+  music.track = null;
+  const f = want && idx[want]?.f;
+  if (!f) return;
+  try {
+    const ctx = music.ctx ||= new (window.AudioContext || window.webkitAudioContext)();
+    if (ctx.state === "suspended") ctx.resume();
+    const el = new Audio();
+    el.crossOrigin = "anonymous"; el.loop = true; el.preload = "auto"; el.src = mediaSrc("music", f);
+    const gain = ctx.createGain();
+    gain.gain.value = 0;
+    ctx.createMediaElementSource(el).connect(gain).connect(ctx.destination);
+    music.track = { el, gain };
+    await el.play();
+    gain.gain.setValueAtTime(0, ctx.currentTime);
+    gain.gain.linearRampToValueAtTime(narr.done ? MUSIC_VOL * 0.3 : MUSIC_VOL, ctx.currentTime + MUSIC_FADE); // under a voice already speaking, stepped back
+  } catch {} // no audio (blocked autoplay, offline): the atlas goes on silently
+}
+function stopTrack({ el, gain }) {
+  const ctx = music.ctx, now = ctx.currentTime;
+  gain.gain.cancelScheduledValues(now);
+  gain.gain.setValueAtTime(gain.gain.value, now);
+  gain.gain.linearRampToValueAtTime(0, now + MUSIC_FADE);
+  setTimeout(() => { el.pause(); el.removeAttribute("src"); el.load(); }, MUSIC_FADE * 1000 + 100);
+}
+// Tour narration: each step's Chinese caption read by a Gemini TTS voice (data/narration.json, tools/ai_narration.py), when
+// the 旁白 switch is on. One audio element is reused, because iOS only lets an element that a tap has started play
+// again later. A file is used only if it was made from the step's current caption (CRC), so an edited caption falls
+// silent rather than reading old words. While a voice speaks, the background music steps back.
+const narr = { el: null, index: null, done: null, unlocked: false };
+const crc32 = (str) => {
+  let c, crc = -1;
+  for (const b of new TextEncoder().encode(str)) { c = (crc ^ b) & 255; for (let k = 0; k < 8; k++) c = c & 1 ? (c >>> 1) ^ 0xedb88320 : c >>> 1; crc = (crc >>> 8) ^ c; }
+  return ((crc ^ -1) >>> 0).toString(16).padStart(8, "0");
+};
+async function narrateStep(tour, i) {
+  stopNarration();
+  const s = tour.tr.steps[i];
+  if (EMBED || !state.narration || !s?.text_zh) return; // an app embedding the atlas plays its own sound
+  narr.index ||= Promise.all([loadJSON("data/narration.json").catch(() => ({})), packMedia("narration")]).then(([a, p]) => ({ ...a, ...p }));
+  const n = (await narr.index)[`${tour.id}/${i}`], f = n && n.h === crc32(s.text_zh) && n[state.voice];
+  if (!f || state.tour !== tour || tour.i !== i) return;
+  const el = narr.el ||= new Audio();
+  el.src = mediaSrc("narration", f);
+  narr.done = new Promise((r) => { el.onended = el.onerror = r; });
+  duckMusic(true);
+  narr.done.then(() => duckMusic(false));
+  el.play().catch((err) => { console.warn("narration", err); narr.done = null; duckMusic(false); });
+}
+// Browsers only let audio start from a tap, and the clip starts after the narration list has loaded and the step has
+// begun, when that tap no longer counts. So the first tap or key press while narration is on plays a silent sound on the
+// shared element, which lets it play later without one.
+const SILENT = "data:audio/wav;base64,UklGRiYAAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YQIAAACAgA==";
+function unlockNarration() {
+  if (!state.narration || narr.unlocked) return;
+  narr.unlocked = true;
+  const el = narr.el ||= new Audio();
+  if (el.src && !el.paused) return;
+  el.src = SILENT;
+  el.play().catch((err) => { if (err.name === "NotAllowedError") narr.unlocked = false; });
+}
+for (const ev of ["pointerdown", "keydown"]) addEventListener(ev, unlockNarration, { capture: true });
+function stopNarration() {
+  if (narr.el && !narr.el.paused) narr.el.pause();
+  narr.done = null;
+  duckMusic(false);
+}
+function duckMusic(on) {
+  const tr = music.track, ctx = music.ctx;
+  if (!tr || !ctx) return;
+  const now = ctx.currentTime;
+  tr.gain.gain.cancelScheduledValues(now);
+  tr.gain.gain.setValueAtTime(tr.gain.gain.value, now);
+  tr.gain.gain.linearRampToValueAtTime(on ? MUSIC_VOL * 0.3 : MUSIC_VOL, now + 0.6);
+}
+function setNarration(on, remember = true) {
+  state.narration = on;
+  for (const b of document.querySelectorAll(".narr-toggle")) b.setAttribute("aria-pressed", String(on));
+  for (const b of document.querySelectorAll(".narr-toggle")) {
+    const inTour = !!b.closest(".tour-ctl");
+    b.querySelector(".music-label").textContent = (inTour ? " " : "") + (on ? (inTour ? "" : t("tourNarr").trim() + " · ") + t("voices")[state.voice] : t("tourNarr").trim());
+    b.querySelector(".narr-short").textContent = on ? t("voices")[state.voice].slice(0, 1) : "";
+    b.dataset.voice = on ? state.voice : "off"; // the speaker is drawn blue (male), red (female) or grey (off)
+  }
+  if (remember) try { localStorage.setItem("atlas-narration", on ? "1" : "0"); localStorage.setItem("atlas-voice", state.voice); } catch {}
+  if (state.tour && on) narrateStep(state.tour, state.tour.i); else stopNarration();
+  if (!$("settings").hidden) renderSettings();
+}
+function setMusic(on, remember = true) {
+  state.music = on;
+  for (const b of document.querySelectorAll(".music-toggle")) b.setAttribute("aria-pressed", String(on));
+  if (remember) try { localStorage.setItem("atlas-music", on ? "1" : "0"); } catch {}
+  syncMusic();
+}
+// 播放方式: the play button walks the years (years), walks them but stops at each event the filter shows with a short
+// card (events), or plays the region's guided tours one after another from the year on screen (tours).
+const PLAY_MODES = ["years", "events", "tours"];
+const playHold = { timer: 0, queue: [] };
 function play() {
   if (state.playing) return stop();
+  if (state.playMode === "tours") return playTours();
   if (state.year >= state.range.end) setYear(state.range.start);
   state.selected = null;
   state.reading = false;
   $("play-icon").innerHTML = '<path d="M3 2h4v12H3zM9 2h4v12H9z"/>';
   $("play").setAttribute("aria-label", t("pause"));
+  const base = state.zoom === 2 ? 450 : 260, tick = Math.max(120, base / state.speed);
+  setTimeout(syncMusic, 0); // once state.playing is set
+  setTimeout(() => state.layout && applyLayout(), 0);
   state.playing = setInterval(() => {
+    if (playHold.queue.length) return; // an event card is up
     if (state.year >= state.range.end) return stop();
     const era = state.era;
     const len = state.zoom === 2 ? state.win[1] - state.win[0] + 1 : era.end - era.start + 1;
-    const step = Math.max(1, Math.round(len / 50));
+    // Fast speeds take bigger steps rather than ticking faster than the map can redraw.
+    const step = Math.max(1, Math.round((len / 50) * Math.max(1, (tick * state.speed) / base)));
     let next = Math.min(state.year + step, state.range.end);
     if (next > era.end && era.end >= state.year) next = era.end + 1; // land on the next era's first year
-    const hit = state.events.filter((e) => shownEvent(e) && e.year > state.year && e.year <= next).pop();
+    const hits = state.events.filter((e) => shownEvent(e) && e.year > state.year && e.year <= next);
+    if (state.playMode === "events" && hits.length) {
+      // Stop on the first year with events and show them one by one; the walk goes on from there.
+      const y = Math.min(...hits.map((e) => e.year));
+      playHold.queue = hits.filter((e) => e.year === y).sort((a, b) => (a.level || 1) - (b.level || 1));
+      return setYear(y).then(() => state.playing && playCard());
+    }
+    const hit = hits.pop();
     if (hit) state.selected = hit.id;
     setYear(next).then(() => { if (hit) renderLedger(); });
-  }, state.zoom === 2 ? 450 : 260);
+  }, tick);  if (state.dial) drawDial();
+}
+// The card for the event playback stopped at: it stays for a reading pause (shorter at faster speeds), then the next
+// event of the same year, or the walk goes on. 读这件事 opens the story (and ends playback); 继续 moves on at once.
+function playCard() {
+  clearTimeout(playHold.timer);
+  const box = $("play-card"), ev = playHold.queue[0];
+  if (!ev || !state.playing) { box.hidden = true; playHold.queue = []; return; }
+  state.selected = ev.id;
+  renderLedger();
+  const text = tx(ev, "summary") || "";
+  const ms = Math.min(15000, Math.max(1500, (2200 + text.length * (zh() ? 70 : 28)) / Math.sqrt(state.speed)));
+  box.querySelector(".tour-title").textContent = tx(ev, "title");
+  box.querySelector(".tour-count").textContent = playHold.queue.length > 1 ? `+${playHold.queue.length - 1}` : "";
+  box.querySelector(".tour-year").textContent = fmtYear(ev.year);
+  box.querySelector(".tour-text").textContent = text;
+  box.querySelector(".pc-read").textContent = t("playRead");
+  box.querySelector(".pc-on").textContent = t("playOn");
+  const bar = box.querySelector(".tour-bar i");
+  bar.style.transition = "none"; bar.style.width = "0";
+  box.hidden = false;
+  requestAnimationFrame(() => requestAnimationFrame(() => { bar.style.transition = `width ${ms}ms linear`; bar.style.width = "100%"; }));
+  playHold.timer = setTimeout(playNext, ms);
+}
+function playNext() {
+  playHold.queue.shift();
+  if (playHold.queue.length) return playCard();
+  clearTimeout(playHold.timer);
+  $("play-card").hidden = true;
+}
+// The region's tours that start from the year on screen on, in order; each runs on autoplay and hands over to the next.
+async function playTours() {
+  const reg = state.mode === "world" ? state.home : state.era.region || state.mode;
+  const all = (await loadTours()).filter((tr) => !tr.person && tourRegion(tr) === reg).sort((a, b) => a.start - b.start || a.end - b.end);
+  let chain = all.filter((tr) => tr.start >= state.year);
+  if (!chain.length) chain = all;
+  if (!chain.length) { state.playMode = "events"; play(); state.playMode = "tours"; return; }
+  startTour(chain[0].id, 0, true, chain.slice(1).map((tr) => tr.id));
+}
+// Playback speed: the badge on the play button opens a menu of these.
+const SPEEDS = [0.125, 0.25, 0.5, 1, 2, 4, 8];
+const speedText = (v) => ({ 0.125: "⅛", 0.25: "¼", 0.5: "½" }[v] || String(v)) + "×";
+function setPlayMode(v, remember) {
+  state.playMode = PLAY_MODES.includes(v) ? v : "events";
+  if (remember) try { localStorage.setItem("atlas-playmode", state.playMode); } catch {}
+  if (state.playing) { stop(); play(); }
+}
+function setSpeed(v, remember) {
+  state.speed = SPEEDS.includes(v) ? v : 1;
+  $("speed").textContent = speedText(state.speed);
+  if (remember) try { localStorage.setItem("atlas-speed", String(state.speed)); } catch {}
+  if (state.playing) { stop(); play(); }
+  if (!$("settings").hidden) renderSettings();
+}
+/* ---------- layouts: how the panels are arranged (html[data-layout], style.css) ---------- */
+
+// The chosen layout is where Atlas rests; 自动布局 changes it for a while: a story being read → 阅读, a tour → 导览,
+// playback → 一览. The preview draws the panels on a 56×40 map.
+const LAYOUTS = [
+  { id: "classic", name: "Classic", name_zh: "经典", svg: '<rect x="3" y="3" width="16" height="12" rx="1"/><rect x="38" y="3" width="15" height="24" rx="1"/><rect x="3" y="31" width="50" height="6" rx="1"/>' },
+  { id: "glance", name: "Glance", name_zh: "一览", svg: '<rect x="3" y="3" width="15" height="5" rx="1"/><rect x="38" y="3" width="15" height="5" rx="1"/><rect x="3" y="34" width="50" height="3" rx="1"/>' },
+  { id: "reader", name: "Reader", name_zh: "阅读", svg: '<rect x="3" y="3" width="12" height="7" rx="1"/><rect x="33" y="0" width="23" height="40"/><rect x="3" y="33" width="27" height="4" rx="1"/>' },
+  { id: "cinema", name: "Cinema", name_zh: "导览", svg: '<rect x="14" y="27" width="28" height="7" rx="1"/><rect x="3" y="36" width="50" height="2" rx="1"/>' },
+  { id: "explorer", name: "Explorer", name_zh: "研究", svg: '<rect x="0" y="0" width="13" height="40"/><rect x="43" y="0" width="13" height="40"/><rect x="13" y="35" width="30" height="5"/>' },
+];
+const PIN_ICON = '<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M6 1.5h4l-.5 4 2.5 2.5v1.5H8.7L8 15l-.7-5.5H4V8l2.5-2.5z"/></svg>';
+const layoutOk = (id) => LAYOUTS.some((l) => l.id === id);
+function layoutNow() {
+  if (state.immersive) return state.layoutShown || state.layout;
+  if (state.autoLayout) {
+    if (state.reading) return "reader";
+    if (state.tour) return "cinema";
+    if (state.playing) return "glance";
+  }
+  return state.layout;
+}
+function applyLayout() {
+  const L = layoutNow(), root = document.documentElement;
+  if (L === state.layoutShown) return;
+  const bootFold = $("ledger").dataset.boot === "fold";
+  delete $("ledger").dataset.boot;
+  // 一览 folds the ledger to its tabs (it can still be opened); leaving it unfolds a ledger it folded.
+  // A ledger index.html folded before the first paint for 一览 counts as folded by it.
+  if (L === "glance") { state.glanceFolded = !$("ledger").classList.contains("collapsed") || bootFold; if (state.glanceFolded) foldLedger(true); }
+  else if (state.layoutShown === "glance" && state.glanceFolded) { state.glanceFolded = false; foldLedger(false); }
+  // Docked panels (阅读's side panel; both 研究 panels) fold with their pins, not by minimising; one that was
+  // minimised before opens again so the dock is never an empty column.
+  if (L === "reader" || L === "explorer") {
+    if ($("ledger").classList.contains("collapsed")) foldLedger(false);
+    if (L === "explorer" && state.eraMin) setEraMin(false, true);
+  }
+  state.layoutShown = L;
+  if (L === "classic") root.removeAttribute("data-layout"); else root.dataset.layout = L;
+  root.classList.remove("l-peek", "r-peek");
+  if (!$("settings").hidden) renderSettings();
+  if (typeof sizeRailVars === "function" && state.ready) requestAnimationFrame(sizeRailVars);
+  renderEdgeTabs();
+}
+function foldLedger(c) {
+  $("ledger").classList.toggle("collapsed", c);
+  $("ledger-toggle").textContent = c ? t("show") : t("hide");
+  $("ledger-toggle").setAttribute("aria-expanded", String(!c));
+  setMinButton($("ledger-min"), c);
+}
+function setLayout(id, remember = true) {
+  state.layout = layoutOk(id) ? id : "classic";
+  if (remember) try { localStorage.setItem("atlas-layout", state.layout); } catch {}
+  applyLayout();
+  renderLayoutChips();
+}
+function setAutoLayout(on, remember = true) {
+  state.autoLayout = on;
+  if (remember) try { localStorage.setItem("atlas-autolayout", on ? "1" : "0"); } catch {}
+  applyLayout();
+}
+// Pins (研究 both panels, 阅读 the side panel): l = era panel, r = side panel. Unpinned panels hide behind a tab on their edge.
+function setPins(pins, remember = true) {
+  state.pins = { ...state.pins, ...pins };
+  const root = document.documentElement;
+  root.classList.toggle("l-off", !state.pins.l);
+  root.classList.toggle("r-off", !state.pins.r);
+  root.classList.remove("l-peek", "r-peek");
+  for (const [k, id] of [["l", "pin-l"], ["r", "pin-r"]]) {
+    const b = $(id);
+    b.setAttribute("aria-pressed", String(state.pins[k]));
+    b.title = t(state.pins[k] ? "unpin" : "pin");
+    b.setAttribute("aria-label", b.title);
+  }
+  if (remember) try { localStorage.setItem("atlas-pins", JSON.stringify(state.pins)); } catch {}
+  renderEdgeTabs();
+}
+function renderEdgeTabs() {
+  const l = $("edge-l"), r = $("edge-r");
+  if (r) r.innerHTML = esc(t(state.tab === "people" ? "people_l" : state.tab));
+  if (!l || !state.era) return;
+  l.innerHTML = `<span class="sl">${esc((glyphOf(state.era) || "").slice(0, 1))}</span>${esc(zh() ? state.era.name_zh || state.era.glyph : bandName(state.era))}<small>${esc(fmtYear(state.year))}</small>`;
+}
+const layoutIcon = (id) => `<svg viewBox="-2 -2 60 44" aria-hidden="true"><rect x="-1" y="-1" width="58" height="42" rx="5" fill="none" stroke="currentColor" stroke-width="3"/><g fill="currentColor">${LAYOUTS.find((l) => l.id === id).svg}</g></svg>`;
+function renderLayoutChips() {
+  const b = $("layout-open");
+  if (!b) return;
+  const id = layoutOk(state.layout) ? state.layout : "classic", L = LAYOUTS.find((l) => l.id === id), name = (l) => zh() ? l.name_zh : l.name;
+  b.innerHTML = layoutIcon(id);
+  b.title = `${t("stLayout")}: ${name(L)}`;
+  b.setAttribute("aria-label", b.title);
+  $("cine-layout").innerHTML = layoutIcon("cinema");
+  $("cine-layout").title = t("stLayout");
+  $("cine-layout").setAttribute("aria-label", t("stLayout"));
+  $("cine-settings").title = t("settings");
+  $("cine-settings").setAttribute("aria-label", t("settings"));
+}
+function toggleLayoutPop(open, anchor) {
+  const pop = $("layout-pop");
+  if (!pop) return;
+  open ??= pop.hidden;
+  pop.hidden = !open;
+  for (const id of ["layout-open", "cine-layout"]) $(id).setAttribute("aria-expanded", String(open && state.layoutAnchor?.id === id));
+  if (!open) return;
+  state.layoutAnchor = anchor = anchor || state.layoutAnchor || $("layout-open");
+  anchor.setAttribute("aria-expanded", "true");
+  pop.innerHTML = LAYOUTS.map((l) => `<button type="button" role="menuitemradio" aria-checked="${l.id === state.layout}" data-lay="${l.id}"><span><i class="lp-pic"><svg viewBox="0 0 56 40" aria-hidden="true">${l.svg}</svg></i><b>${esc(zh() ? l.name_zh : l.name)}</b></span><svg viewBox="0 0 12 12" aria-hidden="true"><path d="M2.5 6.5l2.3 2.2L9.5 3.5" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></button>`).join("") +
+    `<button type="button" class="lp-auto switch" aria-pressed="${state.autoLayout}"><i aria-hidden="true"></i><span>${esc(t("stAutoLayout"))}</span></button>`;
+  const r = anchor.getBoundingClientRect(), h = pop.offsetHeight;
+  pop.style.position = "fixed";
+  pop.style.top = `${r.bottom + 6 + h > innerHeight - 8 ? Math.max(8, r.top - 6 - h) : r.bottom + 6}px`;
+  pop.style.left = `${Math.max(8, Math.min(r.left, innerWidth - pop.offsetWidth - 8))}px`;
+  pop.querySelector('[aria-checked="true"]')?.focus();
+}
+function initLayouts() {
+  const edge = (side) => {
+    const b = document.createElement("button");
+    b.type = "button";
+    b.className = `edge-tab ${side}`;
+    b.id = `edge-${side}`;
+    b.addEventListener("click", (e) => { e.stopPropagation(); document.documentElement.classList.add(`${side}-peek`); });
+    $("app").append(b);
+  };
+  edge("l"); edge("r");
+  const pin = (id, where, k) => {
+    const b = document.createElement("button");
+    b.type = "button";
+    b.className = "pin";
+    b.id = id;
+    b.innerHTML = PIN_ICON;
+    b.addEventListener("click", (e) => { e.stopPropagation(); setPins({ [k]: !state.pins[k] }); });
+    where.append(b);
+  };
+  // Quick layout switch: a chip before the gear showing the current layout, and in 导览 (no panels) two small icons
+  // in the map's top-left corner for the layout menu and settings.
+  const lb = document.createElement("button");
+  lb.type = "button";
+  lb.className = "chip search-open layout-open";
+  lb.id = "layout-open";
+  lb.setAttribute("aria-haspopup", "true");
+  lb.setAttribute("aria-expanded", "false");
+  lb.addEventListener("click", (e) => { e.stopPropagation(); toggleLayoutPop(undefined, lb); });
+  $("settings-open").before(lb);
+  const cine = document.createElement("div");
+  cine.className = "cine-tools";
+  cine.innerHTML = `<button type="button" id="cine-layout" aria-haspopup="true"></button><button type="button" id="cine-settings" aria-haspopup="dialog">${$("settings-open").innerHTML}</button>`;
+  $("app").append(cine);
+  $("cine-layout").addEventListener("click", (e) => { e.stopPropagation(); toggleLayoutPop(undefined, e.currentTarget); });
+  $("cine-settings").addEventListener("click", (e) => { e.stopPropagation(); toggleLayoutPop(false); toggleSettings(); });
+  const pop = document.createElement("div");
+  pop.className = "lang-pop layout-pop";
+  pop.id = "layout-pop";
+  pop.setAttribute("role", "menu");
+  pop.hidden = true;
+  document.body.append(pop);
+  pop.addEventListener("click", (e) => {
+    e.stopPropagation();
+    const b = e.target.closest("[data-lay]");
+    if (b) { setLayout(b.dataset.lay); return toggleLayoutPop(false); }
+    if (e.target.closest(".lp-auto")) { setAutoLayout(!state.autoLayout); toggleLayoutPop(true, state.layoutAnchor); }
+  });
+  document.addEventListener("click", (e) => { if (!pop.hidden && !e.target.closest("#layout-pop")) toggleLayoutPop(false); });
+  document.addEventListener("keydown", (e) => { if (e.key === "Escape" && !pop.hidden) { toggleLayoutPop(false); state.layoutAnchor?.focus(); } });
+  pin("pin-l", document.querySelector(".era-corner"), "l");
+  pin("pin-r", document.querySelector(".ledger-head"), "r");
+  // A panel slid out from its tab folds away again when the map is touched.
+  map.on("mousedown", () => document.documentElement.classList.remove("l-peek", "r-peek"));
+  map.on("touchstart", () => document.documentElement.classList.remove("l-peek", "r-peek"));
+  // Phone 研究: a bottom bar of the side panel's tabs plus the layers.
+  const nav = document.createElement("nav");
+  nav.className = "ex-nav";
+  const ICONS = {
+    tours: '<path d="M4 18l5-12 5 8 3-4 3 8z"/>', events: '<rect x="4" y="5" width="16" height="15" rx="2"/><path d="M4 10h16M9 3v4M15 3v4"/>',
+    rulers: '<path d="M4 17l2-9 4 4 2-6 2 6 4-4 2 9z"/><path d="M4 20h16"/>', people: '<circle cx="12" cy="8" r="3.5"/><path d="M5 20c1-4 4-6 7-6s6 2 7 6"/>',
+    layers: '<path d="M12 4l9 5-9 5-9-5z"/><path d="M3 14l9 5 9-5"/>',
+  };
+  nav.innerHTML = ["tours", "events", "rulers", "people", "layers"].map((k) => `<button type="button" data-k="${k}" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true">${ICONS[k]}</svg><span>${esc(t(k === "people" ? "people_l" : k === "layers" ? "exLayers" : k))}</span></button>`).join("");
+  nav.addEventListener("click", (e) => {
+    const k = e.target.closest("[data-k]")?.dataset.k;
+    if (!k) return;
+    if (k === "layers") return $("era-more").click();
+    const open = state.tab === k && !$("ledger").classList.contains("collapsed");
+    if (open) return $("ledger-toggle").click();
+    $("tab-" + k).click();
+  });
+  $("app").append(nav);
+  try {
+    state.layout = localStorage.getItem("atlas-layout");
+    state.autoLayout = localStorage.getItem("atlas-autolayout") !== "0";
+    state.pins = JSON.parse(localStorage.getItem("atlas-pins") || "null");
+  } catch {}
+  if (!layoutOk(state.layout)) state.layout = "classic";
+  state.autoLayout ??= true;
+  if (!state.pins) state.pins = { l: true, r: true };
+  setPins(state.pins, false);
+  setAutoLayout(state.autoLayout, false);
+  renderLayoutChips();
+}
+function renderExNav() {
+  const open = !$("ledger").classList.contains("collapsed");
+  document.querySelectorAll(".ex-nav [data-k]").forEach((b) => b.setAttribute("aria-pressed", String(open && b.dataset.k === state.tab)));
+}
+
+/* ---------- time dial: the timeline as a puck in the corner that opens into two rings ---------- */
+
+// Outer ring: the periods of the timeline (one sector each, settles on a period's first year when let go). Inner ring:
+// years, one turn = 100 years, faster turns go further. The ring turns with the finger: clockwise goes forward in time.
+const DIAL_SKINS = [
+  { id: "plain", name: "Plain", name_zh: "简洁", o: "#f3f5f4", c: "#1b2226", m: "#b93a26" },
+  { id: "luopan", name: "Compass", name_zh: "罗盘", o: "#b07a2e", c: "#1a0f0b", m: "#c0281a" },
+  { id: "sundial", name: "Sundial", name_zh: "日晷", o: "#d6ddcf", c: "#4f8a6c", m: "#33493a" },
+  { id: "glass", name: "Glass", name_zh: "玻璃", o: "rgba(255,255,255,.35)", c: "rgba(10,14,18,.6)", m: "#7ff0d4" },
+  { id: "watch", name: "Watch", name_zh: "表盘", o: "#0d0f11", c: "#25292d", m: "#ff8a1f" },
+];
+// A first visit opens with the dial (not the bar), in 玻璃.
+const DEFAULT_DIAL = "glass";
+const SVGNS = "http://www.w3.org/2000/svg";
+const dial = { el: null, eras: [], key: "", year: 0, open: false, closeT: 0, drag: null, sent: 0, lastIdx: -1, hintUntil: 0 };
+// Playback starts from the dial only when its centre is held this long (a ring fills round the centre meanwhile), so a
+// stray tap doesn't set the map moving; a tap while playing pauses at once, and a short tap says to hold.
+const DIAL_HOLD = 1500;
+const svgEl = (tag, attrs, parent) => { const e = document.createElementNS(SVGNS, tag); for (const k in attrs) e.setAttribute(k, attrs[k]); parent.append(e); return e; };
+const dialStep = () => 360 / dial.eras.length;
+const dialIdx = (y) => { for (let i = dial.eras.length - 1; i >= 0; i--) if (y >= dial.eras[i].start) return i; return 0; };
+const dialPos = (y) => { const i = dialIdx(y), e = dial.eras[i]; return i + Math.min(1, Math.max(0, (y - e.start) / (e.end - e.start + 1))); };
+const dialYearAt = (p) => { p = Math.max(0, Math.min(dial.eras.length - 1e-6, p)); const i = Math.floor(p), e = dial.eras[i]; return e.start + (p - i) * (e.end - e.start + 1); };
+const dialLabel = (e) => (zh() ? e.glyph : (e.tiny || e.short || e.name || "").split("|")[0]);
+function makeDial() {
+  const el = document.createElement("div");
+  el.className = "dial small";
+  el.id = "dial";
+  el.tabIndex = 0;
+  el.setAttribute("role", "slider");
+  el.innerHTML = `<svg viewBox="-130 -130 260 260" aria-hidden="true"><defs>
+    <radialGradient id="g-bronze" cx="40%" cy="35%" r="75%"><stop offset="0" stop-color="#e2b866"/><stop offset=".55" stop-color="#b07a2e"/><stop offset="1" stop-color="#6b4317"/></radialGradient>
+    <radialGradient id="g-bronze2" cx="40%" cy="35%" r="75%"><stop offset="0" stop-color="#c99a4a"/><stop offset="1" stop-color="#7a501f"/></radialGradient>
+    <radialGradient id="g-stone" cx="35%" cy="30%" r="80%"><stop offset="0" stop-color="#eef2e6"/><stop offset=".7" stop-color="#c9d3c0"/><stop offset="1" stop-color="#a9b6a2"/></radialGradient>
+    <radialGradient id="g-jade" cx="35%" cy="30%" r="80%"><stop offset="0" stop-color="#8fbfa6"/><stop offset="1" stop-color="#3f7a5f"/></radialGradient>
+    <linearGradient id="g-shadow" x1="0" y1="1" x2="0" y2="0"><stop offset="0" stop-color="#1d2a22" stop-opacity=".05"/><stop offset="1" stop-color="#1d2a22" stop-opacity=".45"/></linearGradient>
+    <radialGradient id="g-steel" cx="40%" cy="30%" r="80%"><stop offset="0" stop-color="#3a3f44"/><stop offset="1" stop-color="#0d0f11"/></radialGradient></defs>
+    <circle r="128" class="d-outer"/><circle r="95" class="d-inner"/><circle r="60" class="d-core"/><g class="deco-under"></g>
+    <g class="g-periods"></g><g class="g-ticks"></g>
+    <path d="M0 -129 L-6 -138 L6 -138 Z" class="d-notch"/><line x1="0" y1="-95" x2="0" y2="-62" class="d-hair"/><g class="deco-over"></g>
+    <circle r="57" class="c-hold" transform="rotate(-90)" pathLength="100" stroke-dasharray="100" stroke-dashoffset="100"/>
+    <text y="-46" class="c-sub"></text><text y="-21" class="c-glyph"></text><text y="11" class="c-year"></text>
+    <g class="c-speed"><g class="c-sbtn" data-d="-1"><circle cx="-35" cy="35" r="11"/><text x="-35" y="35"></text></g>
+    <g class="c-play"><circle cy="35" r="14"/><path class="c-play-i"/></g>
+    <g class="c-sbtn" data-d="1"><circle cx="35" cy="35" r="11"/><text x="35" y="35"></text></g></g></svg>`;
+  $("app").append(el);
+  const ticks = el.querySelector(".g-ticks");
+  for (let k = 0; k < 100; k++) {
+    const a = (k * 3.6 * Math.PI) / 180, maj = k % 10 === 0, r0 = maj ? 76 : 86;
+    svgEl("line", { x1: r0 * Math.sin(a), y1: -r0 * Math.cos(a), x2: 93 * Math.sin(a), y2: -93 * Math.cos(a), class: maj ? "t-maj" : "t-min" }, ticks);
+  }
+  el.addEventListener("pointerdown", dialDown);
+  el.addEventListener("pointermove", dialMove);
+  el.addEventListener("pointerup", dialUp);
+  el.addEventListener("pointercancel", dialUp);
+  el.addEventListener("contextmenu", (e) => e.preventDefault()); // a long press is the hold to play, not a menu
+  el.addEventListener("focus", () => setDialOpen(true));
+  // With a mouse the open dial stays open while the pointer is over it, so periods can be clicked one after another.
+  el.addEventListener("pointerenter", (e) => { if (e.pointerType === "mouse") { dial.hover = true; clearTimeout(dial.closeT); } });
+  el.addEventListener("pointerleave", (e) => { if (e.pointerType === "mouse") { dial.hover = false; scheduleDialClose(); } });
+  el.addEventListener("blur", () => scheduleDialClose());
+  dial.el = el;
+  setDialSkin(state.dialSkin, false);
+}
+// The period ring is redrawn when the timeline's periods change (another region, a selected country).
+function buildDial() {
+  if (!dial.el) return;
+  const eras = state.eras.filter((e) => e.end >= e.start);
+  const key = eras.map((e) => e.id).join("|") + state.lang;
+  if (key === dial.key) return drawDial();
+  dial.key = key;
+  dial.eras = eras;
+  const g = dial.el.querySelector(".g-periods"), step = dialStep();
+  g.innerHTML = "";
+  eras.forEach((e, i) => {
+    const a = (i * step * Math.PI) / 180, b = ((i + 0.5) * step * Math.PI) / 180, x = 112 * Math.sin(a), y = -112 * Math.cos(a);
+    svgEl("line", { x1: 97 * Math.sin(b), y1: -97 * Math.cos(b), x2: 127 * Math.sin(b), y2: -127 * Math.cos(b), class: "p-sep" }, g);
+    svgEl("text", { x, y, class: "p-lab", transform: `rotate(${i * step} ${x} ${y})` }, g).textContent = dialLabel(e);
+  });
+  drawDial();
+}
+// Periods run clockwise round the ring, so later ones come up from the right and time reads left to right across
+// the top; the rings turn anticlockwise as time goes on.
+// give: degrees the ring is pushed past either end (it moves a third as far, like a rubber band).
+function drawDial(y = state.year, give = 0) {
+  if (!dial.el || !dial.eras.length) return;
+  dial.year = y;
+  const yr = Math.round(y), i = dialIdx(yr), e = dial.eras[i], step = dialStep();
+  // The current period's name sits centred under the pointer; only while the period ring itself is turned does it
+  // slide continuously (a period is centred halfway through, so letting go at its start keeps it centred).
+  dial.rot = dial.drag?.gear === "era" && dial.drag.moved >= 3 ? (dialPos(y) - 0.5) * step : i * step;
+  dial.el.querySelector(".g-periods").setAttribute("transform", `rotate(${-(dial.rot + give / 3)})`);
+  dial.el.querySelector(".g-ticks").setAttribute("transform", `rotate(${-(y * 3.6 + give / 3)})`);
+  dial.el.querySelectorAll(".p-lab").forEach((t, k) => t.classList.toggle("on", k === i));
+  const [num] = fmtYearParts(yr);
+  dial.el.querySelector(".c-glyph").textContent = glyphOf(e);
+  dial.el.querySelector(".c-year").textContent = num;
+  const hint = performance.now() < dial.hintUntil, sub = dial.el.querySelector(".c-sub");
+  sub.textContent = hint ? t("holdPlay") : speedText(state.speed);
+  sub.classList.toggle("hint", hint);
+  dial.el.querySelector(".c-play-i").setAttribute("d", state.playing ? "M-5.5 28h4v14h-4zM1.5 28h4v14h-4z" : "M-4 27.5L7 35l-11 7.5z");
+  dial.el.classList.toggle("playing", !!state.playing);
+  dial.el.querySelectorAll(".c-sbtn").forEach((b) => {
+    const d = +b.dataset.d;
+    b.querySelector("text").textContent = t(d < 0 ? "slower" : "faster");
+    b.classList.toggle("off", !SPEEDS[SPEEDS.indexOf(state.speed) + d]);
+  });
+  dial.el.setAttribute("aria-label", t("dialLabel"));
+  dial.el.setAttribute("aria-valuemin", dial.eras[0].start);
+  dial.el.setAttribute("aria-valuemax", dial.eras.at(-1).end);
+  dial.el.setAttribute("aria-valuenow", yr);
+  dial.el.setAttribute("aria-valuetext", `${nameOf(e)} ${fmtYear(yr)}`);
+  if (dial.drag && dial.lastIdx !== -1 && i !== dial.lastIdx) try { navigator.vibrate?.(8); } catch {}
+  dial.lastIdx = i;
+}
+function setDialOpen(on) {
+  dial.open = on;
+  dial.el.style.setProperty("--s", on ? 1 : 0.34);
+  dial.el.classList.toggle("small", !on);
+}
+function scheduleDialClose() {
+  clearTimeout(dial.closeT);
+  if (!state.playing && !dial.drag && !dial.hover) dial.closeT = setTimeout(() => { if (document.activeElement !== dial.el || !state.playing) setDialOpen(false); }, 2200);
+}
+// While turning, the dial shows each year at once; the map follows a few times a second (on touch screens only when
+// let go, as with the timeline's slider).
+const dialCoarse = matchMedia("(pointer: coarse)");
+function dialTo(y) {
+  const a = dial.eras[0].start, b = dial.eras.at(-1).end;
+  y = Math.max(Math.max(a, state.range.start), Math.min(Math.min(b, state.range.end), y));
+  drawDial(y);
+  const now = performance.now();
+  if (!dialCoarse.matches && now - dial.sent > 160 && Math.round(y) !== state.year) { dial.sent = now; setYear(Math.round(y)); }
+}
+function dialCentre() { const r = dial.el.getBoundingClientRect(); return { x: r.right - 130, y: r.bottom - 130, r: 130 }; }
+// The hold on the centre: the ring fills over DIAL_HOLD, then playback starts (the finger can stay down).
+function dialHold(dr) {
+  const ring = dial.el.querySelector(".c-hold"), t0 = performance.now();
+  dial.el.classList.add("holding");
+  const frame = () => {
+    if (dial.drag !== dr || dr.gear !== "core" || dr.held) return dialHoldEnd();
+    const p = Math.min(1, (performance.now() - t0) / DIAL_HOLD);
+    ring.setAttribute("stroke-dashoffset", String(100 - p * 100));
+    if (p < 1) return void (dr.raf = requestAnimationFrame(frame));
+    dr.held = true;
+    try { navigator.vibrate?.(20); } catch {}
+    dialHoldEnd();
+    play();
+    drawDial();
+  };
+  dr.raf = requestAnimationFrame(frame);
+}
+function dialHoldEnd() {
+  dial.el.classList.remove("holding");
+  dial.el.querySelector(".c-hold").setAttribute("stroke-dashoffset", "100");
+}
+function dialDown(ev) {
+  const wasOpen = dial.open;
+  clearTimeout(dial.closeT);
+  setDialOpen(true);
+  try { dial.el.setPointerCapture(ev.pointerId); } catch {}
+  const c = dialCentre(), d = Math.hypot(ev.clientX - c.x, ev.clientY - c.y);
+  const a = Math.atan2(ev.clientX - c.x, c.y - ev.clientY);
+  dial.drag = { c, gear: !wasOpen ? "year" : d < 60 ? "core" : d < 95 ? "year" : "era", a, a0: a, t: performance.now(), moved: 0, over: 0, pos: dialIdx(state.year) + 0.5 };
+  // The 慢/快 buttons under the year step the playback speed.
+  const k = c.r / 130; // the dial's size on screen against its 260-unit drawing
+  if (dial.drag.gear === "core") dial.drag.sbtn = [...dial.el.querySelectorAll(".c-sbtn")].find((b) => Math.hypot(ev.clientX - c.x - 35 * k * b.dataset.d, ev.clientY - c.y - 35 * k) < 15 * k);
+  if (dial.drag.gear === "core" && !dial.drag.sbtn && !state.playing) dialHold(dial.drag);
+  if (dial.drag.gear !== "core" && state.playing) stop();
+}
+function dialMove(ev) {
+  const dr = dial.drag;
+  if (!dr) return;
+  const a = Math.atan2(ev.clientX - dr.c.x, dr.c.y - ev.clientY);
+  let da = ((a - dr.a) * 180) / Math.PI;
+  if (da > 180) da -= 360;
+  if (da < -180) da += 360;
+  da = -da; // the ring follows the finger: turning it anticlockwise moves forward in time
+  // (Touch events can arrive in bursts; a floor on the gap keeps a burst from reading as a flick.)
+  const now = performance.now(), speed = (Math.abs(da) / Math.max(16, now - dr.t)) * 1000;
+  dr.a = a; dr.t = now; dr.moved += Math.abs(da);
+  if (dr.moved < 3) return;
+  if (dr.gear === "era") {
+    const end = dial.eras.length - 1e-6, w = dialEdge(dr, da, dr.pos <= 0, dr.pos >= end);
+    if (w === "held") return;
+    dr.pos = w > 0 ? 0 : w < 0 ? end : Math.max(0, Math.min(end, dr.pos + da / dialStep()));
+    dialTo(dialYearAt(dr.pos));
+  } else if (dr.gear !== "core" || dr.moved > 12) {
+    if (dr.gear === "core") { dr.gear = "year"; cancelAnimationFrame(dr.raf); dialHoldEnd(); if (state.playing) stop(); }
+    const [lo, hi] = dialEnds(), w = dialEdge(dr, da, dial.year <= lo + 0.01, dial.year >= hi - 0.01);
+    if (w === "held") return;
+    dialTo(w > 0 ? lo : w < 0 ? hi : dial.year + (da / 3.6) * (1 + Math.max(0, speed - 250) / 120));
+  }
+}
+const dialEnds = () => [Math.max(dial.eras[0].start, state.range.start), Math.min(dial.eras.at(-1).end, state.range.end)];
+// Past either end the dial resists: the ring only gives a little, and turned on through 45° it wraps round to
+// the other end. Returns "held" while resisting, 1 to wrap from the end to the start, -1 the other way, else 0.
+const DIAL_WRAP = 45;
+function dialEdge(dr, da, atStart, atEnd) {
+  if (dr.over > 0 || (atEnd && da > 0)) dr.over = Math.max(0, dr.over + da);
+  else if (dr.over < 0 || (atStart && da < 0)) dr.over = Math.min(0, dr.over + da);
+  else return 0;
+  if (Math.abs(dr.over) < DIAL_WRAP) { drawDial(dial.year, dr.over); return "held"; }
+  const w = Math.sign(dr.over);
+  dr.over = 0;
+  try { navigator.vibrate?.(15); } catch {}
+  return w;
+}
+function dialUp() {
+  const dr = dial.drag;
+  if (!dr) return;
+  dial.drag = null;
+  if (dr.moved < 3 && dr.sbtn) { const v = SPEEDS[SPEEDS.indexOf(state.speed) + +dr.sbtn.dataset.d]; if (v) setSpeed(v, true); drawDial(); }
+  else if (dr.gear === "core" && !dr.held && dr.moved < 3) {
+    cancelAnimationFrame(dr.raf); dialHoldEnd();
+    if (state.playing) stop();
+    else { dial.hintUntil = performance.now() + 1800; setTimeout(() => drawDial(), 1850); }
+    drawDial();
+  }
+  // A click (or tap) on a period in the outer ring goes to its start.
+  else if (dr.moved < 3 && dr.gear === "era") {
+    const n = dial.eras.length, step = dialStep();
+    const i = ((Math.round((dial.rot + (dr.a0 * 180) / Math.PI) / step) % n) + n) % n;
+    setYear(Math.max(state.range.start, Math.min(state.range.end, dial.eras[i].start)));
+  }
+  else if (dr.gear === "era" && dr.moved >= 3) setYear(dial.eras[Math.min(dial.eras.length - 1, Math.floor(dr.pos))].start);
+  else if (dr.moved >= 3) setYear(Math.round(dial.year));
+  if (dr.over) drawDial();
+  scheduleDialClose();
+}
+function setDialSkin(id, remember = true) {
+  if (!DIAL_SKINS.some((d) => d.id === id)) id = DEFAULT_DIAL;
+  state.dialSkin = id;
+  if (remember) try { localStorage.setItem("atlas-dial-skin", id); } catch {}
+  if (!dial.el) return;
+  dial.el.dataset.skin = id;
+  const under = dial.el.querySelector(".deco-under"), over = dial.el.querySelector(".deco-over");
+  under.innerHTML = over.innerHTML = "";
+  if (id === "luopan") {
+    for (const r of [124, 99, 91, 66]) svgEl("circle", { r, class: "lp-ring" }, under);
+    for (let k = 0; k < 24; k++) { const a = (k * 15 * Math.PI) / 180; svgEl("circle", { cx: 63.5 * Math.sin(a), cy: -63.5 * Math.cos(a), r: 1.3, class: "lp-dot" }, under); }
+    svgEl("path", { d: "M0 -127 L6 -136 L0 -146 L-6 -136 Z", fill: "#c0281a", stroke: "#3b2508", "stroke-width": ".8" }, over);
+    svgEl("path", { d: "M0 -95 L4 -78 L0 -62 L-4 -78 Z", fill: "#c0281a" }, over);
+  } else if (id === "sundial") {
+    svgEl("path", { d: "M0 -60 L-26 -128 A128 128 0 0 1 26 -128 Z", class: "sd-shadow" }, under);
+    svgEl("path", { d: "M-3 -60 L0 -95 L3 -60 Z", class: "sd-gnomon" }, over);
+  } else if (id === "watch") {
+    for (let k = 0; k < 120; k++) { const a = (k * 3 * Math.PI) / 180; svgEl("line", { x1: 128 * Math.sin(a), y1: -128 * Math.cos(a), x2: 131 * Math.sin(a), y2: -131 * Math.cos(a), class: "wt-knurl" }, under); }
+    svgEl("circle", { cx: 0, cy: -137, r: 5, class: "wt-lume" }, over);
+  }
+}
+// The dial takes the timeline's place (its speed lives in settings); the bar comes back as it was, full or slim.
+function setDial(on, remember) {
+  state.dial = on;
+  if (on && !dial.el) makeDial();
+  $("app").classList.toggle("dial-mode", on);
+  if (dial.el) dial.el.hidden = !on;
+  if (on) { buildDial(); setDialOpen(false); }
+  if (remember) try { localStorage.setItem("atlas-dial", on ? "1" : "0"); } catch {}
+  sizeRailVars();
+}
+const dialPreview = (d) => `<svg viewBox="-20 -20 40 40" aria-hidden="true"><circle r="19" fill="${d.o}" stroke="rgba(0,0,0,.25)"/><circle r="12.5" fill="none" stroke="rgba(0,0,0,.15)"/><circle r="8" fill="${d.c}"/><path d="M0 -19 L-2.5 -23 L2.5 -23Z" fill="${d.m}"/><line y1="-12" y2="-8" stroke="${d.m}" stroke-width="1.5"/></svg>`;
+
+/* ---------- settings: one panel for how Atlas looks and behaves (the 图层 panel keeps the layers) ---------- */
+
+const seg = (items, cur) => items.map(([v, label]) => `<button type="button" data-v="${esc(v)}" aria-pressed="${String(v) === String(cur)}">${esc(label)}</button>`).join("");
+// Fills the parts that are drawn from state; the switches and chips moved here keep their own handlers.
+function renderSettings() {
+  $("st-ver").textContent = `Atlas v${APP_VERSION}`;
+  $("st-styles").innerHTML = UI_STYLES.map((u) => `<button type="button" data-v="${u.id}" aria-pressed="${u.id === state.ui}"><i style="${u.preview}"><b></b></i>${esc(zh() ? u.name_zh : u.name)}</button>`).join("");
+  $("st-laybtn").innerHTML = seg(LAY_BTNS.map((k) => [k, t("layBtns")[k]]), state.layBtn);
+  $("st-laypos").innerHTML = seg(LAY_POS.map((k) => [k, t("layPos")[k]]), state.layPos);
+  $("st-rail").innerHTML = seg([["full", t("stFull")], ["slim", t("stSlim")], ["dial", t("stDial")]], state.dial ? "dial" : state.railSlim ? "slim" : "full");
+  $("st-dials").hidden = !state.dial;
+  $("st-dials").innerHTML = DIAL_SKINS.map((d) => `<button type="button" data-v="${d.id}" aria-pressed="${d.id === state.dialSkin}">${dialPreview(d)}${esc(zh() ? d.name_zh : d.name)}</button>`).join("");
+  $("st-speed").innerHTML = seg(SPEEDS.map((v) => [v, speedText(v)]), state.speed);
+  $("st-play").innerHTML = seg(PLAY_MODES.map((k) => [k, t("playModes")[k]]), state.playMode);
+  $("st-narr").innerHTML = seg([["off", t("stOff")], ...Object.entries(t("voices"))], state.narration ? state.voice : "off");
+  $("st-lang").innerHTML = seg(LANGS.map((l) => [l.id, l.name]), state.lang);
+  $("st-wstrip").setAttribute("aria-pressed", String(!stripOff()));
+}
+// Beside the era panel on wide screens (over it when there is no room), a bottom sheet on phones (CSS).
+function toggleSettings(open) {
+  const box = $("settings"), btn = $("settings-open");
+  open ??= box.hidden;
+  if (open === !box.hidden) return;
+  box.hidden = !open;
+  btn.setAttribute("aria-expanded", String(open));
+  document.body.classList.toggle("settings-open", open);
+  if (!open) { toggleLookPop(false); togglePanelPop(false); return; }
+  toggleRegionPop(false);
+  renderSettings();
+  renderPanelChip();
+  // Beside the era panel; in 导览, where it is hidden, under the small settings icon on the map.
+  let r = document.querySelector(".era").getBoundingClientRect();
+  if (!r.width) { const c = $("cine-settings").parentNode.getBoundingClientRect(); r = { left: c.left, right: c.left - 12, top: c.bottom + 8 }; }
+  const room = innerWidth - r.right - 12 >= box.offsetWidth + 16;
+  box.style.left = `${room ? r.right + 12 : r.left}px`;
+  box.style.top = `${r.top}px`;
+  box.focus({ preventScroll: true });
+}
+function resetSettings() {
+  setLayout("classic");
+  setAutoLayout(true);
+  setPins({ l: true, r: true });
+  setUIStyle(DEFAULT_UI);
+  setPanel({ color: "auto", op: DEFAULT_OP });
+  state.flat3d = false;
+  setLook(lookOrder()[0]);
+  if (!state.show3d) $("t-3d").click();
+  if (!state.showAI) $("t-ai").click();
+  setRailSlim(false, true);
+  setDial(true, true);
+  setDialSkin(DEFAULT_DIAL);
+  setLayButtons({ btn: "icon", pos: "group" }, false);
+  try { localStorage.removeItem("atlas-laybtn"); localStorage.removeItem("atlas-laypos"); } catch {}
+  setSpeed(1, true);
+  setPlayMode("events", true);
+  setMusic(true);
+  state.voice = "Charon";
+  setNarration(true);
+  try { localStorage.removeItem("atlas-wstrip"); } catch {}
+  renderWorldStrip();
+  renderSettings();
+}
+function initSettings() {
+  $("settings-open").addEventListener("click", (e) => { e.stopPropagation(); toggleSettings(); });
+  $("settings-close").addEventListener("click", () => toggleSettings(false));
+  $("st-reset").addEventListener("click", resetSettings);
+  const on = (id, fn) => $(id).addEventListener("click", (e) => { const b = e.target.closest("[data-v]"); if (b) { fn(b.dataset.v); renderSettings(); } });
+  on("st-styles", (v) => setUIStyle(v));
+  on("st-laybtn", (v) => setLayButtons({ btn: v }));
+  on("st-laypos", (v) => setLayButtons({ pos: v }));
+  on("st-rail", (v) => { setDial(v === "dial", true); if (v !== "dial") setRailSlim(v === "slim", true); });
+  on("st-dials", (v) => { setDialSkin(v); setDialOpen(true); scheduleDialClose(); });
+  on("st-speed", (v) => setSpeed(+v, true));
+  on("st-play", (v) => setPlayMode(v, true));
+  on("st-narr", (v) => { if (v === "off") return setNarration(false); state.voice = v; setNarration(true); });
+  on("st-lang", (v) => { if (v !== state.lang) setLang(v); });
+  $("st-wstrip").addEventListener("click", () => {
+    try { if (stripOff()) localStorage.removeItem("atlas-wstrip"); else localStorage.setItem("atlas-wstrip", "0"); } catch {}
+    renderWorldStrip();
+    renderSettings();
+  });
+  // A click outside closes it, except in the colour and style menus it opens.
+  document.addEventListener("click", (e) => {
+    // (A segment button pressed here is redrawn before the click reaches the document, so it is no longer in the page.)
+    if (!$("settings").hidden && e.target.isConnected && !e.target.closest("#settings, #look-pop, #panel-pop, #settings-open, #cine-settings")) toggleSettings(false);
+  });
+  document.addEventListener("keydown", (e) => {
+    if (e.key !== "Escape" || $("settings").hidden || !$("look-pop").hidden || !$("panel-pop").hidden) return;
+    toggleSettings(false);
+    $("settings-open").focus();
+  });
+  addEventListener("resize", () => toggleSettings(false));
+}
+// Minimised panels leave the map to itself: the era panel shrinks to its seal, name and year; the side panel to its
+// tabs. The button turns into a restore button.
+const MIN_ICON = '<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3.5 8h9" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>';
+const MAX_ICON = '<svg viewBox="0 0 16 16" aria-hidden="true"><rect x="3" y="3" width="10" height="10" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.6"/></svg>';
+function setMinButton(btn, min) {
+  btn.innerHTML = min ? MAX_ICON : MIN_ICON;
+  btn.setAttribute("aria-expanded", String(!min));
+  btn.title = t(min ? "restore" : "minimise");
+  btn.setAttribute("aria-label", btn.title);
+}
+function toggleSpeedPop(open) {
+  const pop = $("speed-pop");
+  open ??= pop.hidden;
+  pop.hidden = !open;
+  $("speed").setAttribute("aria-expanded", String(open));
+  if (!open) return;
+  pop.innerHTML = `<b>${esc(t("speed"))}</b>` + [...SPEEDS].reverse().map((v) =>
+    `<button type="button" role="menuitemradio" data-speed="${v}" aria-checked="${v === state.speed}">${speedText(v)}</button>`).join("");
+  pop.querySelector('[aria-checked="true"]')?.focus();
+}
+// The timeline folds down to its play button (and the button that brings it back).
+// A drawer handle with a chevron, not the −/□ of the era panel: beside the timeline's zoom buttons a − read as zoom out.
+const CHEVRON = (up) => `<svg viewBox="0 0 16 16" aria-hidden="true"><path d="${up ? "M4 10l4-4 4 4" : "M4 6l4 4 4-4"}" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
+function setRailButton(min) {
+  const btn = $("rail-min");
+  btn.innerHTML = CHEVRON(min);
+  btn.setAttribute("aria-expanded", String(!min));
+  btn.title = t(min ? "railShow" : "railHide");
+  btn.setAttribute("aria-label", btn.title);
+}
+function setRailMin(on, remember) {
+  state.railMin = on;
+  document.querySelector(".rail").classList.toggle("min", on);
+  $("app").classList.toggle("rail-folded", on);
+  setRailButton(on);
+  if (on) toggleSpeedPop(false);
+  if (remember) try { localStorage.setItem("atlas-rail-min", on ? "1" : "0"); } catch {}
+}
+function setEraMin(on, remember) {
+  state.eraMin = on;
+  document.querySelector(".era").classList.toggle("min", on);
+  setMinButton($("era-min"), on);
+  if (on) { toggleRegionPop(false); toggleSettings(false); }
+  if (remember) try { localStorage.setItem("atlas-era-min", on ? "1" : "0"); } catch {}
+}
+// Panels below the timeline's top edge use its size; with the dial a phone keeps a strip for the puck instead.
+function sizeRailVars() {
+  const rail = document.querySelector(".rail"), st = document.documentElement.style;
+  st.setProperty("--rail-h", (state.dial ? 0 : rail.offsetHeight) + "px");
+  st.setProperty("--rail-w", (state.dial ? 0 : rail.offsetWidth) + "px");
 }
 function stop() {
   clearInterval(state.playing);
   state.playing = null;
+  clearTimeout(playHold.timer);
+  playHold.queue = [];
+  $("play-card").hidden = true;
+  if (state.layout) applyLayout();
+  syncMusic();
   $("play-icon").innerHTML = '<path d="M4 2l10 6-10 6z"/>';
   $("play").setAttribute("aria-label", t("play"));
+  if (state.dial) { drawDial(); scheduleDialClose(); }
 }
 
+function set3d(on, already = false) {
+  if (!already) {
+    state.show3d = on;
+    $("t-3d").setAttribute("aria-pressed", String(on));
+  }
+  state.terrainExag = null;
+  if (!map) return;
+  if (on) setTerrainForZoom(); else map.setTerrain(null);
+  map.easeTo({ pitch: on ? 52 : 0, duration: 800 });
+}
 function toggle(btnId, key, fn) {
   $(btnId).setAttribute("aria-pressed", String(state[key]));
   $(btnId).addEventListener("click", () => {
     state[key] = !state[key];
     $(btnId).setAttribute("aria-pressed", String(state[key]));
-    try { localStorage.setItem("atlas-toggles", JSON.stringify({ show3d: state.show3d, showNeighbours: state.showNeighbours, showPlaces: state.showPlaces, showGeo: state.showGeo })); } catch {}
+    try { localStorage.setItem("atlas-toggles", JSON.stringify({ show3d: state.show3d, showNeighbours: state.showNeighbours, showPlaces: state.showPlaces, showGeo: state.showGeo, showAI: state.showAI })); } catch {}
     fn();
   });
 }
@@ -3204,7 +7051,7 @@ function saveView() {
   saveTimer = setTimeout(() => {
     if (!map) return;
     const c = map.getCenter();
-    const view = { year: state.year, zoom: state.zoom, win: state.win, tab: state.tab,
+    const view = { year: state.year, zoom: state.zoom, win: state.win, tab: state.tab, country: state.sel ? [[...selNames(), ...state.sel.names][0], state.year] : null, area: state.area?.id || null,
       cam: { center: [+c.lng.toFixed(3), +c.lat.toFixed(3)], zoom: +map.getZoom().toFixed(2), pitch: Math.round(map.getPitch()), bearing: Math.round(map.getBearing()) } };
     try { localStorage.setItem(viewKey(), JSON.stringify(view)); } catch {}
   }, 500);
@@ -3253,7 +7100,7 @@ async function shareView() {
 function loadView() {
   let v = null, tg = null;
   try { v = JSON.parse(localStorage.getItem(viewKey()) || "null"); tg = JSON.parse(localStorage.getItem("atlas-toggles") || "null"); } catch {}
-  if (tg) for (const k of ["show3d", "showNeighbours", "showPlaces", "showGeo"]) if (typeof tg[k] === "boolean") state[k] = tg[k];
+  if (tg) for (const k of ["show3d", "showNeighbours", "showPlaces", "showGeo", "showAI"]) if (typeof tg[k] === "boolean") state[k] = tg[k];
   // A shared link wins over the remembered view. The address is then cleaned, so a bookmark or a Home Screen
   // icon made later opens the site as usual (the share button builds a link to the current view).
   const link = readHash();
@@ -3267,7 +7114,41 @@ function loadView() {
   state.year = Math.max(state.range.start, Math.min(state.range.end, Math.round(v.year)));
   if ([1, 2].includes(v.zoom) && Array.isArray(v.win) && v.win[0] <= state.year && state.year <= v.win[1]) { state.zoom = v.zoom; state.win = v.win; }
   if (TABS.includes(v.tab)) state.tab = v.tab;
+  if (Array.isArray(v.country) && typeof v.country[0] === "string") state.pendingCountry = v.country;
+  if (typeof v.area === "string") state.pendingArea = [v.area.includes(":") ? v.area : "area:" + v.area, { fly: false }];
   return v.cam && Array.isArray(v.cam.center) ? v.cam : null;
+}
+
+// The app's version is the cache-busting number index.html loads this script with (app.js?v=117).
+const APP_VERSION = new URL(document.currentScript?.src || location.href).searchParams.get("v") || "dev";
+// Installing: iPhone and iPad have no install prompt, so a card explains Share → Add to Home Screen. Other
+// browsers that offer one (beforeinstallprompt) get an install button on the same card. Not in embeds, the
+// preview, or when already running as the app; "don't show again" is remembered.
+const IOS = /iPad|iPhone|iPod/.test(navigator.userAgent) || (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
+const IPAD = IOS && !/iPhone|iPod/.test(navigator.userAgent);
+const STANDALONE = navigator.standalone === true || matchMedia("(display-mode: standalone)").matches;
+const CAN_INSTALL = !STANDALONE && !EMBED && location.protocol === "https:" && !/claude(usercontent)?\.(ai|com)$/.test(location.hostname);
+let installPrompt = null;
+let installReady = false;
+addEventListener("beforeinstallprompt", (e) => { e.preventDefault(); installPrompt = e; if (installReady) maybeInstallCard(); });
+function maybeInstallCard(force) {
+  if (!CAN_INSTALL || !(IOS || installPrompt)) return;
+  if (!force) {
+    try { if (localStorage.getItem("atlas-install") === "0" || sessionStorage.getItem("atlas-install-seen")) return; } catch {}
+  }
+  const card = $("install");
+  if (!card || !card.hidden) return;
+  const I = t("install");
+  const share = '<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 1.5v8.5M5 4.5l3-3 3 3M4.5 7H3.5v7h9V7h-1" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+  card.innerHTML = `<img src="docs/img/app-180.png" alt="" width="40" height="40"><div><b>${esc(I.title)}</b><p>${esc(I.why)}</p>` +
+    (IOS ? `<ol><li>${I.step1(IPAD, share, /CriOS|FxiOS|EdgiOS/.test(navigator.userAgent))}</li><li>${esc(I.step2)}</li></ol>` : "") +
+    `<div class="in-btns">${installPrompt ? `<button type="button" class="chip on" id="in-go">${esc(I.go)}</button>` : ""}` +
+    `<button type="button" class="chip" id="in-ok">${esc(I.ok)}</button><button type="button" class="in-never" id="in-never">${esc(I.never)}</button></div></div>`;
+  card.hidden = false;
+  const close = () => { card.hidden = true; try { sessionStorage.setItem("atlas-install-seen", "1"); } catch {} };
+  $("in-ok").onclick = close;
+  $("in-never").onclick = () => { try { localStorage.setItem("atlas-install", "0"); } catch {} close(); };
+  if ($("in-go")) $("in-go").onclick = async () => { close(); installPrompt.prompt(); await installPrompt.userChoice.catch(() => {}); installPrompt = null; };
 }
 
 // Home Screen app: a service worker keeps what has been viewed for offline use (not inside embeds or the preview).
@@ -3277,26 +7158,39 @@ if ("serviceWorker" in navigator && location.protocol === "https:" && !/[?&]embe
 async function init() {
   try { const l = localStorage.getItem("atlas-lang"); if (langOk(l)) state.lang = l; } catch {}
   try { const f = JSON.parse(localStorage.getItem("atlas-events") || "null"); if (f) { state.detail = f.detail || 2; state.cats = f.cats || []; } } catch {}
-  try { state.showSat = localStorage.getItem("atlas-look") !== "relief"; } catch {}
+  try { state.look = lookId(localStorage.getItem("atlas-look")) || state.look; } catch {}
+  const qs = lookId(new URLSearchParams(location.search).get("style"));
+  if (qs) state.look = qs;
   const q = new URLSearchParams(location.search).get("lang");
   if (langOk(q)) state.lang = q;
   const hl = new URLSearchParams(location.hash.slice(1)).get("l");
   if (langOk(hl)) state.lang = hl;
   // A link pasted into the same tab only changes the hash: start again from it.
   addEventListener("hashchange", () => { if (map && location.hash.length > 1) location.reload(); });
+  const formatOk = checkDataFormat();
   if (PACK_URL) {
     state.pack = await openPack(PACK_URL);
     state.selected = null;
     state.library = await openLibrary(state.pack).catch((e) => { console.warn(e.message); return []; });
+    // A pack shown alone can bring its own base map (manifest `basemap`, see docs/custom-data.md#base-map).
+    const B = state.pack.only && state.pack.manifest.basemap;
+    if (B) {
+      const abs = (p) => p && new URL(p, state.pack.url).href.replace(/%7B/g, "{").replace(/%7D/g, "}");
+      state.basemap = { ...B, dem: B.dem && { ...B.dem, tiles: abs(B.dem.tiles) }, imagery: B.imagery && { ...B.imagery, tiles: abs(B.imagery.tiles) } };
+      if (!looks()[state.look]) state.look = lookOrder()[0];
+      if (!B.dem) state.show3d = false;
+    }
   }
   applyLang();
+  loadLives().then(() => { if (state.tab === "people") renderPeopleTab(); });
+  loadTies();
   const plugins = importPlugins();
   plugins.forEach((p) => p.catch(() => {}));  // reported once the map is up
   const pack = state.pack?.manifest, only = state.pack?.only;
   const [eras, events, places, packEras, packEvents, packPeople] = await Promise.all([
     only ? { eras: [] } : loadJSON("data/eras.json"), only ? [] : loadJSON("data/events.json"), only ? [] : loadJSON("data/places.json"),
     pack && packFile("eras"), pack && packFile("events"),
-    pack?.data.people && packFile("people").catch((e) => { console.warn(e.message); return null; }),
+    pack?.data.people && packFile("people").catch((e) => { console.warn(e.message); return null; }), formatOk,
   ]);
   if (pack) state.pack.people = packPeople || null;
   // The atlas's own overlays (population, faith, inventions, passes, roads, clans, walls, exchange) stay out of a pack shown alone.
@@ -3306,13 +7200,18 @@ async function init() {
     state.roads = await loadJSON("data/roads.json").catch(() => []);
     state.clans = await loadJSON("data/clans.json").catch(() => []);
     state.walls = await loadJSON("data/walls.json").catch(() => []);
+    state.climate = await loadJSON("data/climate.json").catch(() => null);
     state.exchange = await loadJSON("data/exchange.json").catch(() => state.exchange);
   }
-  state.geo = await loadJSON("data/geo/features.json").catch(() => []);
-  state.oldGeo = (await loadJSON("data/geo/old-rivers.geojson").catch(() => ({ features: [] }))).features;
+  const offEarth = state.basemap?.earth === false;
+  // Off Earth, the landscape names come from the pack (basemap.labels, same shape as data/geo/features.json).
+  state.geo = offEarth ? (state.basemap.labels ? await fetch(new URL(state.basemap.labels, state.pack.url)).then((r) => r.json()).catch(() => []) : [])
+    : await loadJSON("data/geo/features.json").catch(() => []);
+  state.oldGeo = offEarth ? [] : (await loadJSON("data/geo/old-rivers.geojson").catch(() => ({ features: [] }))).features;
   const [regions, worldIndex] = await Promise.all([
-    loadJSON("data/regions.json").catch(() => ({ regions: [] })), loadJSON("data/world/index.json").catch(() => [])]);
+    loadJSON("data/regions.json").catch(() => ({ regions: [] })), offEarth ? [] : loadJSON("data/world/index.json").catch(() => [])]);
   if (!only) setupRegions(eras, regions.regions, worldIndex);
+  state.groups = regions.groups || [];
   if (pack) {
     addPack(pack, packEras, worldIndex, only);
     for (const ev of packEvents) ev.region = pack.id;
@@ -3327,28 +7226,48 @@ async function init() {
     $("tab-rulers").hidden = !own.rulers;
     $("tab-people").hidden = !own.people;
     if (!places.length) $("t-places").hidden = true;
+    if (offEarth) { $("t-neighbours").hidden = true; if (!state.geo.length) $("t-geo").hidden = true; }
+    if (state.basemap && !state.basemap.dem) $("t-3d").hidden = true;
     for (const g of document.querySelectorAll(".era-layers .lg")) g.hidden = ![...g.querySelectorAll(".chip")].some((c) => !c.hidden);
   }
   state.events = events.sort((a, b) => a.year - b.year || (a.level || 1) - (b.level || 1));
   state.places = places;
+  if (!only) state.countries = await loadJSON("data/countries.json").catch(() => null);
   buildScale();
   const cam = loadView();
+  if (state.basemap && !state.basemap.dem) state.show3d = false;
+  if (looks()[state.look]?.flat && state.show3d) { state.show3d = false; state.flat3d = true; }
   if (only && (!["events", "tours", "rulers", "people"].includes(state.tab) || $("tab-" + state.tab).hidden)) state.tab = "events";
 
+
+  const style = buildStyle();
+  applyLook(null);
   map = new maplibregl.Map({
     container: "map",
-    style: buildStyle(),
+    style,
     center: cam?.center || pack?.region?.view?.center || [108, 33.5], zoom: cam?.zoom ?? pack?.region?.view?.zoom ?? 3.7, pitch: state.show3d ? cam?.pitch ?? 52 : 0, bearing: cam?.bearing ?? -8,
     maxPitch: 65, minZoom: 1.6, maxZoom: 9.5,
     attributionControl: false,
   });
+  bootProgress(0.88);
+  // The flat styles' coast is already in the style; don't fetch it again when the look is applied on load.
+  if (typeof style.sources.land.data === "string") map._landLoaded = true;
+  // Full screen takes the whole app (panels included); browsers without the Fullscreen API (iPhone Safari) get none.
+  if (document.fullscreenEnabled) {
+    const fs = new maplibregl.FullscreenControl({ container: $("app") });
+    map.addControl(fs, "bottom-left");
+    fs._fullscreenButton?.setAttribute("title", t("fullscreen"));
+  }
   map.addControl(new maplibregl.NavigationControl({ visualizePitch: true }), "bottom-left");
   map.addControl(new maplibregl.AttributionControl({ compact: true,
-    customAttribution: "Terrain: Mapzen/AWS Terrain Tiles · Borders: Cliopatria/Seshat (CC BY 4.0), historical-basemaps (GPL-3.0)" + (pack?.attribution ? ` · ${esc(pack.attribution)}` : "") }), "bottom-left");
+    customAttribution: `<b>Atlas v${esc(APP_VERSION)}</b> · data format ${FORMAT}` + (CAN_INSTALL && IOS ? ` · <a href="#" id="attr-install">${esc(t("install").title)}</a>` : "") + " · " + (offEarth ? "" : `${esc(t("borderNote"))} · Terrain: Mapzen/AWS Terrain Tiles · Borders: Cliopatria/Seshat (CC BY 4.0), historical-basemaps (GPL-3.0), disputed areas: Natural Earth`) + (state.basemap?.attribution ? ` · ${esc(state.basemap.attribution)}` : "") + (pack?.attribution ? ` · ${esc(pack.attribution)}` : "") }), "bottom-left");
   // MapLibre opens the compact attribution on wide screens; start it folded to the "i" button.
   const foldAttribution = () => document.querySelector(".maplibregl-ctrl-attrib")?.classList.remove("maplibregl-compact-show");
   map.once("load", foldAttribution);
   map.once("idle", foldAttribution);
+  document.addEventListener("click", (e) => { if (e.target.id === "attr-install") { e.preventDefault(); maybeInstallCard(true); } });
+  // The install card waits until the map has been on screen a little while.
+  setTimeout(() => { installReady = true; maybeInstallCard(); }, 8000);
   map.on("move", () => scheduleDeclutter(120));
   map.on("click", "road-hit", (e) => {
     const r = state.roads.find((x) => x.id === e.features[0]?.properties.id);
@@ -3360,28 +7279,49 @@ async function init() {
   });
   map.on("mouseenter", "wall-hit", () => (map.getCanvas().style.cursor = "pointer"));
   map.on("mouseleave", "wall-hit", () => (map.getCanvas().style.cursor = ""));
+  map.on("click", "admin-dot", (e) => {
+    const x = state.admin?.items[e.features[0]?.properties.i];
+    if (x) openAdmin(x);
+  });
+  map.on("mouseenter", "admin-dot", () => (map.getCanvas().style.cursor = "pointer"));
+  map.on("mouseleave", "admin-dot", () => (map.getCanvas().style.cursor = ""));
+  map.on("click", "tie-hit", (e) => {
+    const l = state.ties?.links[e.features[0]?.properties.i];
+    if (l) showCard(e.lngLat, tieCard(l));
+  });
+  map.on("mouseenter", "tie-hit", () => (map.getCanvas().style.cursor = "pointer"));
+  map.on("mouseleave", "tie-hit", () => (map.getCanvas().style.cursor = ""));
   map.on("mouseenter", "road-hit", () => (map.getCanvas().style.cursor = "pointer"));
   map.on("mouseleave", "road-hit", () => (map.getCanvas().style.cursor = ""));
-  map.on("moveend", () => { scheduleDeclutter(); saveView(); if (!state.tour && state.ready) setMode(detectRegion()); });
+  // The timeline follows the region in view, except while a country is selected: then it stays on that country's
+  // region (its periods and events) until the selection is cleared, and the card offers the way back to it.
+  map.on("moveend", () => { if (state.adminShown?.length) renderAdminLabels(); scheduleDeclutter(); saveView(); if (!state.tour && state.ready) setMode(state.sel ? selRegion() : state.area ? state.area.region : detectRegion()); renderSelCard(); });
   map.on("zoomend", setTerrainForZoom);
+  map.on("styleimagemissing", (e) => { if (e.id === "hatch") addHatch(map); });
   map.on("load", async () => {
+    bootProgress(0.95);
     setTerrainForZoom();
     applyLook();
     renderGeo();
+    addHatch(map);
+    if (!offEarth) loadJSON("data/disputes.json").then((d) => { map.getSource("disputes")?.setData(d); renderDisputes(); }).catch(() => {});
     // Switches remembered from the last visit that the style starts with on.
     if (!state.showNeighbours) for (const id of ["neighbour-fill", "neighbour-line"]) map.setLayoutProperty(id, "visibility", "none");
-    if (!state.showGeo) for (const id of ["rivers", "rivers-minor", "lakes"]) map.setLayoutProperty(id, "visibility", "none");
+    if (!state.showGeo) for (const id of ["rivers", "rivers-minor", "lakes", "lakes-line"]) map.setLayoutProperty(id, "visibility", "none");
     addTourLayers();
     if (state.pack) await startPlugins(plugins);
     setMode(detectRegion(), true);
     renderRegionBtn();
     state.ready = true;
+    areaData();
     await setYear(state.year);
+    if (state.pendingCountry && state.countries) selectCountry(state.pendingCountry[0], { year: state.pendingCountry[1] });
     buildRail();
     renderLedger();
     if (state.pendingTour) startTour(...state.pendingTour);
     const ev = state.events.find((e) => e.id === state.selected);
     if (ev && !state.fromLink) map.easeTo({ center: [ev.lon - 4, ev.lat - 3], duration: 0 });
+    bootDone();
   });
 
   // Dragging the rail (slider, era bands or ticks) shows a tag with the period and year under the finger.
@@ -3394,8 +7334,8 @@ async function init() {
     if (!coarse && y !== state.year) setYear(y, { fromSlider: true });
   });
   $("slider").addEventListener("change", (e) => {
-    hideScrubTag();
     const y = posToYear(+e.target.value);
+    if (state.railSlim) flashScrubTag(+e.target.value, y); else hideScrubTag();
     if (y !== state.year) setYear(y, { fromSlider: true });
   });
   const track = document.querySelector(".track"), view = $("track-view");
@@ -3429,7 +7369,11 @@ async function init() {
     cancelAnimationFrame(s.raf);
     if (!s.moved) {
       // A tap on the slider line jumps there; a tap on a band or tick keeps its own click.
-      if (!s.onButton) setYear(posToYear(posAt(e.clientX)));
+      if (!s.onButton) {
+        const p = posAt(e.clientX);
+        setYear(posToYear(p));
+        if (state.railSlim) flashScrubTag(p, posToYear(p));
+      }
       return;
     }
     hideScrubTag();
@@ -3437,6 +7381,13 @@ async function init() {
     addEventListener("click", (c) => { c.stopPropagation(); c.preventDefault(); }, { capture: true, once: true });
     setTimeout(() => setYear(s.year), 0);
   });
+  // With a mouse, the slim timeline names the period under the pointer.
+  track.addEventListener("pointermove", (e) => {
+    if (scrub || coarse || e.pointerType !== "mouse" || !state.railSlim || e.buttons) return;
+    const p = posAt(e.clientX);
+    showScrubTag(p, posToYear(p));
+  });
+  track.addEventListener("pointerleave", () => { if (!scrub && state.railSlim && !coarse) hideScrubTag(); });
   addEventListener("pointercancel", () => {
     if (scrub) cancelAnimationFrame(scrub.raf);
     scrub = null; hideScrubTag();
@@ -3459,33 +7410,59 @@ async function init() {
     setZoom(state.zoom + (e.deltaY < 0 ? 1 : -1), e.deltaY < 0 ? y : state.year);
   }, { passive: false });
   $("world-strip").addEventListener("click", (e) => {
+    if (e.target.closest(".ws-head")) { e.stopPropagation(); return toggleStripPop(); }
     if (e.target.closest(".ws-x")) {
       try { localStorage.setItem("atlas-wstrip", "0"); } catch {}
-      $("world").dataset.key = "";
-      if (state.tab === "world") renderWorldTab();
       return renderWorldStrip();
     }
     const id = e.target.closest("[data-ev]")?.dataset.ev;
     if (id) openStory(id);
   });
-  $("lang").addEventListener("click", (e) => { e.stopPropagation(); toggleLangPop(); });
-  $("lang-pop").addEventListener("click", (e) => {
-    const l = e.target.closest("[data-lang]")?.dataset.lang;
-    toggleLangPop(false);
-    if (l && l !== state.lang) setLang(l);
+  $("ws-pop").addEventListener("click", (e) => {
+    const sc = e.target.closest("[data-scope]")?.dataset.scope;
+    toggleStripPop(false);
+    if (!sc) return;
+    wsScope = sc;
+    try { localStorage.setItem("atlas-wscope", sc); } catch {}
+    renderWorldStrip();
   });
-  document.addEventListener("click", (e) => { if (!$("lang-pop").hidden && !e.target.closest("#lang-pop")) toggleLangPop(false); });
-  document.addEventListener("keydown", (e) => { if (e.key === "Escape" && !$("lang-pop").hidden) { toggleLangPop(false); $("lang").focus(); } });
-  addEventListener("resize", () => toggleLangPop(false));
-  toggle("t-3d", "show3d", () => {
-    state.terrainExag = null;
-    if (state.show3d) setTerrainForZoom(); else map.setTerrain(null);
-    map.easeTo({ pitch: state.show3d ? 52 : 0, duration: 800 });
+  document.addEventListener("click", (e) => { if (!$("ws-pop").hidden && !e.target.closest("#ws-pop")) toggleStripPop(false); });
+  document.addEventListener("keydown", (e) => { if (e.key === "Escape" && !$("ws-pop").hidden) toggleStripPop(false); });
+  initSettings();
+  initLayouts();
+  toggle("t-3d", "show3d", () => { state.flat3d = false; set3d(state.show3d, true); });
+  initLayerTips();
+  const savedLay = {};
+  try { savedLay.btn = localStorage.getItem("atlas-laybtn"); savedLay.pos = localStorage.getItem("atlas-laypos"); } catch {}
+  setLayButtons(savedLay, false);
+  renderLookChips();
+  renderPanelChip();
+  $("look-btn").addEventListener("click", (e) => { e.stopPropagation(); toggleLookPop(); });
+  $("look-pop").addEventListener("click", (e) => { const b = e.target.closest("[data-look]"); toggleLookPop(false); if (b) setLook(b.dataset.look); });
+  document.addEventListener("click", (e) => { if (!$("look-pop").hidden && !e.target.closest("#look-pop")) toggleLookPop(false); });
+  document.addEventListener("keydown", (e) => { if (e.key === "Escape" && !$("look-pop").hidden) { toggleLookPop(false); $("look-btn").focus(); } });
+  addEventListener("resize", () => toggleLookPop(false));
+  $("panel-btn").addEventListener("click", (e) => { e.stopPropagation(); togglePanelPop(); });
+  $("panel-pop").addEventListener("click", (e) => {
+    const b = e.target.closest("[data-panel]");
+    if (b) { togglePanelPop(false); setPanel({ color: b.dataset.panel }); }
+    else if (e.target.closest(".panel-custom") && e.target.tagName !== "INPUT") e.target.closest(".panel-custom").querySelector("input").click();
   });
-  toggle("t-sat", "showSat", () => {
-    try { localStorage.setItem("atlas-look", state.showSat ? "sat" : "relief"); } catch {}
-    applyLook();
+  // The custom picker previews while dragging and is kept when it closes.
+  $("panel-pop").addEventListener("input", (e) => {
+    const c = hexOk(e.target.value);
+    if (!c) return;
+    state.panelColor = c;
+    applyPanel();
+    e.target.parentNode.querySelector("i").style.background = c;
   });
+  $("panel-pop").addEventListener("change", (e) => { const c = hexOk(e.target.value); if (c) setPanel({ color: c }); });
+  $("panel-op").addEventListener("input", (e) => { state.panelOp = +e.target.value / 100; applyPanel(); });
+  $("panel-op").addEventListener("change", (e) => setPanel({ op: +e.target.value / 100 }));
+  $("panel-op").addEventListener("dblclick", () => setPanel({ op: null }));
+  document.addEventListener("click", (e) => { if (!$("panel-pop").hidden && !e.target.closest("#panel-pop")) togglePanelPop(false); });
+  document.addEventListener("keydown", (e) => { if (e.key === "Escape" && !$("panel-pop").hidden) { togglePanelPop(false); $("panel-btn").focus(); } });
+  addEventListener("resize", () => togglePanelPop(false));
   toggle("t-neighbours", "showNeighbours", () => {
     const v = state.showNeighbours ? "visible" : "none";
     map.setLayoutProperty("neighbour-fill", "visibility", v);
@@ -3493,9 +7470,17 @@ async function init() {
     renderPolityLabels(state.borders[state.snapshot]);
   });
   toggle("t-places", "showPlaces", renderPlaces);
+  // AI-generated event pictures are loaded either way and only hidden, so switching back needs no reload.
+  const syncAI = () => {
+    document.body.classList.toggle("no-ai", !state.showAI);
+    if (state.tour) placeTourPic();
+    if (state.reading && state.selected) showEventPic(state.selected); else hideEventPic();
+  };
+  toggle("t-ai", "showAI", syncAI);
+  syncAI();
   toggle("t-geo", "showGeo", () => {
     renderGeo();
-    for (const id of ["rivers", "rivers-minor", "lakes"]) map.setLayoutProperty(id, "visibility", state.showGeo ? "visible" : "none");
+    for (const id of ["rivers", "rivers-minor", "lakes", "lakes-line"]) map.setLayoutProperty(id, "visibility", state.showGeo ? "visible" : "none");
     renderOldGeo();
   });
   try { state.autoLayers = localStorage.getItem("atlas-auto") !== "off"; } catch {}
@@ -3506,11 +7491,14 @@ async function init() {
     try { localStorage.setItem("atlas-auto", state.autoLayers ? "on" : "off"); } catch {}
     syncAuto();
   });
+  try { state.econMetric = localStorage.getItem("atlas-econ") || "pop"; } catch {}
   // Layer choices are remembered per browser.
   try { Object.assign(state.show, JSON.parse(localStorage.getItem("atlas-layers") || "{}")); } catch {}
+  if (state.pack?.only) for (const k of OWN_DATA) $("l-" + k).hidden = true;
   for (const k of Object.keys(state.show)) {
     $("l-" + k).setAttribute("aria-pressed", String(state.show[k]));
     $("l-" + k).addEventListener("click", () => {
+      if ($("l-" + k).getAttribute("aria-disabled") === "true") return;
       if (!state.show[k] && state.auto[k]) { state.autoOff[k] = true; return syncAuto(); }
       state.show[k] = !state.show[k];
       $("l-" + k).setAttribute("aria-pressed", String(state.show[k]));
@@ -3519,11 +7507,7 @@ async function init() {
       renderOverlays();
     });
   }
-  const collapseLedger = (c) => {
-    $("ledger").classList.toggle("collapsed", c);
-    $("ledger-toggle").textContent = c ? t("show") : t("hide");
-    $("ledger-toggle").setAttribute("aria-expanded", String(!c));
-  };
+  const collapseLedger = foldLedger;
   for (const k of TABS) $("tab-" + k).addEventListener("click", () => {
     // The open story survives a look at the other tabs; the events tab clicked again goes back to the list.
     if (k === "events" && state.tab === "events") state.reading = false;
@@ -3533,16 +7517,68 @@ async function init() {
     renderLedger();
   });
   $("region-btn").addEventListener("click", (e) => { e.stopPropagation(); toggleRegionPop(); });
-  document.addEventListener("click", (e) => { if (!$("region-pop").hidden && !e.target.closest("#region-pop")) toggleRegionPop(false); });
+  // The menu stays open while the timeline is used, so its periods can be watched changing.
+  document.addEventListener("click", (e) => { if (!$("region-pop").hidden && !e.target.closest("#region-pop, .rail")) toggleRegionPop(false); });
   document.addEventListener("keydown", (e) => { if (e.key === "Escape" && !$("region-pop").hidden) toggleRegionPop(false); });
   $("search-open").addEventListener("click", openSearch);
   $("share-open").addEventListener("click", shareView);
   $("tour-tab").addEventListener("click", (e) => { const b = e.target.closest("[data-tour]"); if (b) startTour(b.dataset.tour); });
+  $("trail").addEventListener("click", (e) => {
+    const b = e.target.closest("[data-tr], [data-j], [data-ti]"), life = trail.life;
+    if (!b || !life) return;
+    if (b.dataset.j) return trailGo(+b.dataset.j);
+    if (b.dataset.ti) {
+      const l = state.ties.links[+b.dataset.ti], a = tiePos(l.a), c = tiePos(l.b);
+      return showCard(tieAlive(l.a, state.year) && tieAlive(l.b, state.year) ? arcLeg(a, c, 24)[12] : a, tieCard(l));
+    }
+    const n = life.steps.length, before = state.year < life.start, after = state.year > life.end;
+    const go = { x: () => showTrail(null), prev: () => trailGo(after ? n - 1 : trail.k - 1), next: () => trailGo(before ? 0 : trail.k + 1),
+      story: () => { const s = life.steps[trail.k]; if (s?.event) { state.reading = false; selectEvent(s.event); } },
+      tour: () => startTour(life.id, Math.max(0, trail.k)) }[b.dataset.tr];
+    go?.();
+  });
   const tb = $("tour");
   tb.querySelector(".tour-prev").addEventListener("click", () => state.tour && tourStep(state.tour.i - 1));
   tb.querySelector(".tour-next").addEventListener("click", tourNext);
   tb.querySelector(".tour-close").addEventListener("click", endTour);
-  tb.querySelector(".tour-story").addEventListener("click", () => { const s = state.tour?.tr.steps[state.tour.i]; if (s?.event) { tourPause(); $("app").classList.add("tour-reading"); openStory(s.event); } });
+  // In immersive mode the story opens in the picture's place, as a reading card above the tour card, instead of
+  // bringing the side panel back.
+  const readStep = () => { const s = state.tour?.tr.steps[state.tour.i]; if (s?.event) { tourPause(); syncTourTop(); $("app").classList.add("tour-reading"); openStory(s.event); } };
+  tb.querySelector(".tour-immersive").addEventListener("click", () => setImmersive(!state.immersive));
+  // 🔊 cycles: off → male voice → female voice → off.
+  for (const b of document.querySelectorAll(".narr-toggle")) b.addEventListener("click", () => {
+    if (!state.narration) { state.voice = "Charon"; state.narration = true; unlockNarration(); setNarration(true); }  // this tap unlocks the player
+    else if (state.voice === "Charon") { state.voice = "Kore"; setNarration(true); }
+    else setNarration(false);
+  });
+  try { const n = localStorage.getItem("atlas-narration"); if (n) state.narration = n === "1"; const v = localStorage.getItem("atlas-voice"); if (v === "Charon" || v === "Kore") state.voice = v; } catch {}
+  setNarration(state.narration, false);
+  for (const b of document.querySelectorAll(".music-toggle")) b.addEventListener("click", () => setMusic(!state.music));
+  try { const m = localStorage.getItem("atlas-music"); if (m) state.music = m === "1"; } catch {}
+  setMusic(state.music, false);
+  // The reading card's × (immersive mode only): back to the step's picture.
+  const closeTourReading = () => { state.reading = false; $("app").classList.remove("tour-reading"); renderLedger(); };
+  $("read-close").addEventListener("click", closeTourReading);
+  // AI badges: a tap shows the note (and doesn't open the picture or the story); a tap anywhere else hides it.
+  document.addEventListener("click", (e) => {
+    const badge = e.target.closest(".ai-badge");
+    for (const b of document.querySelectorAll('.ai-badge[aria-expanded="true"]')) if (b !== badge) b.setAttribute("aria-expanded", "false");
+    if (!badge) return;
+    e.stopPropagation(); e.preventDefault();
+    badge.setAttribute("aria-expanded", String(badge.getAttribute("aria-expanded") !== "true"));
+  }, true);
+  document.addEventListener("keydown", (e) => {
+    if (e.key !== "Escape" || !state.immersive) return;
+    e.stopImmediatePropagation();
+    // Esc first closes a story being read (back to the step's picture), then leaves immersive mode.
+    if ($("app").classList.contains("tour-reading")) closeTourReading(); else setImmersive(false);
+  }, true);
+  tb.querySelector(".tour-story").addEventListener("click", readStep);
+  $("tour-pic").addEventListener("click", () => { readStep(); placeTourPic(); });
+  addEventListener("resize", () => { if (state.tour) { placeTourPic(); syncTourTop(); } if (!$("event-pic").hidden) showEventPic(state.selected); });
+  const closeEventPic = () => { eventPic.closed = "a:" + state.selected; hideEventPic(); };
+  $("event-pic").querySelector(".ep-close").addEventListener("click", (e) => { e.stopPropagation(); closeEventPic(); });
+  document.addEventListener("keydown", (e) => { if (e.key === "Escape" && !$("event-pic").hidden) { e.stopImmediatePropagation(); closeEventPic(); } }, true);
   tb.querySelector(".tour-auto").addEventListener("click", () => {
     const tour = state.tour; if (!tour) return;
     if (tour.auto) return tourPause();
@@ -3561,6 +7597,30 @@ async function init() {
     $("search-results").querySelectorAll("[data-i]").forEach((b) => b.classList.toggle("on", +b.dataset.i === searchOn));
     $("search-results").querySelector(".on")?.scrollIntoView({ block: "nearest" });
   });
+  $("ledger-min").addEventListener("click", () => collapseLedger(!$("ledger").classList.contains("collapsed")));
+  $("era-min").addEventListener("click", (e) => { e.stopPropagation(); setEraMin(!state.eraMin, true); });
+  $("rail-min").addEventListener("click", (e) => { e.stopPropagation(); setRailMin(!state.railMin, true); });
+  try { if (localStorage.getItem("atlas-rail-min") === "1") setRailMin(true); } catch {}
+  $("rail-style").addEventListener("click", () => setRailSlim(!state.railSlim, true));
+  let slim = false;
+  try { slim = localStorage.getItem("atlas-rail-slim") === "1"; } catch {}
+  setRailSlim(slim);
+  try { state.dialSkin = localStorage.getItem("atlas-dial-skin") || DEFAULT_DIAL; if (localStorage.getItem("atlas-dial") !== "0") setDial(true); } catch {}
+  $("speed").addEventListener("click", (e) => { e.stopPropagation(); toggleSpeedPop(); });
+  $("speed-pop").addEventListener("click", (e) => {
+    const b = e.target.closest("[data-speed]");
+    if (!b) return;
+    setSpeed(+b.dataset.speed, true);
+    toggleSpeedPop(false);
+  });
+  document.addEventListener("click", (e) => { if (!$("speed-pop").hidden && !e.target.closest("#speed-pop")) toggleSpeedPop(false); });
+  let speed = 1;
+  try { speed = +localStorage.getItem("atlas-speed") || 1; } catch {}
+  setSpeed(speed);
+  try { setPlayMode(localStorage.getItem("atlas-playmode") || "events"); } catch {}
+  $("play-card").querySelector(".pc-on").addEventListener("click", playNext);
+  $("play-card").querySelector(".pc-read").addEventListener("click", () => { const ev = playHold.queue[0]; if (ev) openStory(ev.id); });
+  try { if (localStorage.getItem("atlas-era-min") === "1") setEraMin(true); } catch {}
   $("ledger-toggle").addEventListener("click", () => $("app").classList.contains("tour-reading") ? $("app").classList.remove("tour-reading") : collapseLedger(!$("ledger").classList.contains("collapsed")));
   const phone = matchMedia("(max-width: 720px)");
   if (phone.matches) collapseLedger(true);
@@ -3570,10 +7630,41 @@ async function init() {
   $("era-more").addEventListener("click", () => phone.matches ? openEra(!document.querySelector(".era").classList.contains("open")) : setLean(!state.lean, true));
   try { setLean(localStorage.getItem("atlas-lean") === "1"); } catch { setLean(false); }
   map.on("click", () => { if (phone.matches) openEra(false); });
+  // Click a country to select it, click it again to let go. A click that closes an open card only closes it.
+  let hadCard = false;
+  map.on("mousedown", () => { hadCard = !!document.querySelector(".maplibregl-popup"); });
+  map.on("touchstart", () => { hadCard = !!document.querySelector(".maplibregl-popup"); });
+  map.on("click", async (e) => {
+    if (hadCard || e.originalEvent.target !== map.getCanvas() || state.tour) return;
+    // The areas come with the place graph: a click that beats it waits for it.
+    if (!state.graph) { placeGraph(); await graphLoad; }
+    // A click on a seat ring opens its card instead.
+    if (map.getLayer("admin-dot") && map.queryRenderedFeatures(e.point, { layers: ["admin-dot"] }).length) return;
+    const f = map.queryRenderedFeatures(e.point, { layers: ["focus-fill", "neighbour-fill"] }).find((f) => f.properties.name);
+    const d = map.getLayer("dispute-fill") && map.queryRenderedFeatures(e.point, { layers: ["dispute-fill"] })[0];
+    // Smallest first: the smallest area holding the point, then each larger one, then the state there this year,
+    // then nothing. Each click on the same spot moves one step up.
+    const steps = [...areaChainAt(e.lngLat.lng, e.lngLat.lat).map((a) => ({ area: a })), ...(f ? [{ country: f.properties.name }] : [])];
+    const cur = steps.findIndex((s) => (s.area ? state.area === s.area : selNames().has(s.country) && selOnMap()));
+    const next = steps[cur + 1];
+    if (next?.area) openArea(next.area.id, { fly: false });
+    else if (next) selectCountry(next.country);
+    else if (state.sel) selectCountry(null);
+    else closeArea();
+    // A disputed area also opens its card: who holds it, who claims it.
+    if (d) showCard(e.lngLat, disputeCard(d.properties));
+  });
+  document.addEventListener("keydown", (e) => {
+    if (e.key !== "Escape" || e.target.tagName === "INPUT" || state.reading || !$("search").hidden) return;
+    if (state.sel) selectCountry(null); else if (state.area) closeArea();
+  });
+  // The tour card grows and shrinks with each step's caption; the immersive reading card ends just above it.
+  new ResizeObserver(() => { if (state.tour) syncTourTop(); }).observe($("tour"));
   new ResizeObserver(() => {
-    document.documentElement.style.setProperty("--rail-h", document.querySelector(".rail").offsetHeight + "px");
+    sizeRailVars();
     sizeTrack();
     fitBandLabels();
+    renderYearMarks();
   }).observe(document.querySelector(".rail"));
   document.addEventListener("keydown", (e) => {
     if (e.target.tagName === "INPUT") return;
@@ -3592,5 +7683,6 @@ async function init() {
 
 init().catch((err) => {
   console.error(err);
+  bootDone(err);
   $("era-summary").textContent = t("loadError") + err.message;
 });

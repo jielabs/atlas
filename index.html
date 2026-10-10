@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Atlas</title>
+<title>Atlas: Map with Stories</title>
 <link rel="icon" href="docs/img/favicon.svg" type="image/svg+xml">
 <link rel="icon" href="docs/img/icon-32.png" sizes="32x32" type="image/png">
 <link rel="apple-touch-icon" href="docs/img/app-180.png">
@@ -17,7 +17,42 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500&family=IBM+Plex+Sans:wght@400;500;600&family=Noto+Serif+SC:wght@500;700&display=swap">
 <link rel="stylesheet" href="vendor/maplibre-gl.css">
-<link rel="stylesheet" href="style.css?v=101">
+<link rel="stylesheet" href="style.css?v=235">
+<script>
+// Before the first paint: the saved look of the page (panel style and colour, layout, map style, language), so it
+// never opens in the default one and then jumps. app.js applies the same settings again once it runs.
+(function () {
+  var d = document.documentElement, get = function (k) { try { return localStorage.getItem(k); } catch (e) { return null; } };
+  var qs = new URLSearchParams(location.search), hs = new URLSearchParams(location.hash.slice(1));
+  var set = function (k, v, dflt, ok) { if (v && v !== dflt && ok.indexOf(v) >= 0) d.setAttribute(k, v); };
+  d.classList.add("booting");
+  set("data-ui", get("atlas-ui") || "glass", "classic", ["paper", "glass", "editorial", "lacquer"]);
+  set("data-laybtn", get("atlas-laybtn"), "icon", ["text", "both"]);
+  set("data-laypos", get("atlas-laypos"), "group", ["nowrap", "wrap"]);
+  set("data-layout", get("atlas-layout"), "classic", ["glance", "reader", "cinema", "explorer"]);
+  var pins = null;
+  try { pins = JSON.parse(get("atlas-pins") || "null"); } catch (e) {}
+  if (pins && !pins.l) d.classList.add("l-off");
+  if (pins && !pins.r) d.classList.add("r-off");
+  var look = qs.get("style") || get("atlas-look") || "satellite";
+  look = { sat: "satellite", relief: "terrain" }[look] || look;
+  if (["satellite", "terrain", "dark", "plain", "night", "antique"].indexOf(look) < 0) look = "satellite";
+  d.setAttribute("data-look", look);
+  if (["satellite", "dark", "night"].indexOf(look) >= 0) d.classList.add("sat");
+  var lang = [hs.get("l"), qs.get("lang"), get("atlas-lang")].filter(function (l) { return l === "zh" || l === "en"; })[0] || "zh";
+  d.lang = lang === "zh" ? "zh-CN" : "en";
+  // Panel colour: same as applyPanel() in app.js.
+  var c = (get("atlas-panel-color") || "").toLowerCase(), op = parseFloat(get("atlas-panel-op") || "0.55");  // first visit: 毛玻璃 at 55%
+  if (/^#[0-9a-f]{6}$/.test(c)) {
+    var rgb = [1, 3, 5].map(function (i) { return parseInt(c.slice(i, i + 2), 16); });
+    var lin = rgb.map(function (v) { v /= 255; return v <= 0.04045 ? v / 12.92 : Math.pow((v + 0.055) / 1.055, 2.4); });
+    d.style.setProperty("--panel-rgb", rgb.join(", "));
+    d.style.setProperty("--panel-solid", c);
+    d.setAttribute("data-theme", 0.2126 * lin[0] + 0.7152 * lin[1] + 0.0722 * lin[2] < 0.18 ? "dark" : "light");
+  }
+  if (op >= 0.2 && op <= 1) d.style.setProperty("--panel-op", String(op));
+})();
+</script>
 </head>
 <body>
 <div id="app">
@@ -37,46 +72,81 @@
     <div class="era-corner">
       <button type="button" class="chip region-btn" id="region-btn" aria-expanded="false" aria-haspopup="true" data-i18n-title="goRegion" title="Go to region"><svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="6" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M2 8h12M8 2c2 2 2.6 4 2.6 6S10 12 8 14M8 2C6 4 5.4 6 5.4 8S6 12 8 14" fill="none" stroke="currentColor" stroke-width="1.2"/></svg><span id="region-name"></span></button>
       <button type="button" class="chip era-more" id="era-more" aria-expanded="false" data-i18n="layers">Layers</button>
-      <button type="button" class="chip lang-btn" id="lang" aria-haspopup="true" aria-expanded="false" aria-label="Language / 语言" title="Language / 语言"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 3.5h7M5.5 2v1.5M3.5 3.5c.6 2.4 2.2 4.3 4.5 5.3M7.5 3.5c-.5 2.6-2.3 4.8-5 6M8.5 14l2.75-6.5L14 14M9.4 12h3.7" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg><span id="lang-name"></span><svg class="caret" viewBox="0 0 10 10" aria-hidden="true"><path d="M2.5 4l2.5 2.5L7.5 4" fill="none" stroke="currentColor" stroke-width="1.4"/></svg></button>
+      <button type="button" class="chip search-open st-open" id="settings-open" aria-haspopup="dialog" aria-expanded="false" data-i18n-title="settings" title="Settings"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M6.9 1.5h2.2l.4 1.8 1.2.5 1.6-1 1.5 1.5-1 1.6.5 1.2 1.8.4v2.2l-1.8.4-.5 1.2 1 1.6-1.5 1.5-1.6-1-1.2.5-.4 1.8H6.9l-.4-1.8-1.2-.5-1.6 1-1.5-1.5 1-1.6-.5-1.2-1.8-.4V6.9l1.8-.4.5-1.2-1-1.6 1.5-1.5 1.6 1 1.2-.5z" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/><circle cx="8" cy="8" r="2.1" fill="none" stroke="currentColor" stroke-width="1.3"/></svg></button>
       <button type="button" class="chip search-open" id="search-open" aria-label="Search" title="Search"><svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="7" cy="7" r="4.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M10.5 10.5L14 14" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></button>
       <button type="button" class="chip search-open" id="share-open" data-i18n-title="share" aria-label="Share" title="Share"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M6.5 9.5l3-3M7 4.5l1.2-1.2a2.5 2.5 0 013.5 3.5L10.5 8M9 11.5l-1.2 1.2a2.5 2.5 0 01-3.5-3.5L5.5 8" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></button>
+      <button type="button" class="chip search-open era-min" id="era-min" aria-expanded="true" aria-label="Minimise" title="Minimise"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3.5 8h9" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></button>
     </div>
     <div class="region-pop" id="region-pop" role="menu" hidden></div>
-    <div class="lang-pop" id="lang-pop" role="menu" aria-label="Language / 语言" hidden></div>
+    <div class="lang-pop look-pop" id="look-pop" role="menu" hidden></div>
+    <div class="lang-pop look-pop panel-pop" id="panel-pop" role="menu" hidden></div>
     <div class="share-box" id="share-box" hidden><span></span><input type="text" readonly aria-label="Link"></div>
     <div class="era-layers" role="group" aria-labelledby="layers-label">
       <span id="layers-label" class="sr-only" data-i18n="layers">Layers</span>
-      <div class="auto-row"><button type="button" class="switch" id="t-auto" aria-pressed="true"><i aria-hidden="true"></i><span data-i18n="autoLayers">Auto layers</span></button><small data-i18n="autoHint"></small></div>
+      <div class="auto-row"><button type="button" class="switch" id="t-auto" aria-pressed="true" data-tip="autoLayers" data-tip-hint="autoHint"><i aria-hidden="true"></i><span data-i18n="autoLayers">Auto layers</span></button></div>
       <div class="lg"><span data-i18n="g_map">Map</span>
-        <button class="chip" id="t-3d" aria-pressed="true" data-i18n="t3d">3D terrain</button>
-        <button class="chip" id="t-sat" aria-pressed="true" data-i18n="sat">Satellite</button>
-        <button class="chip" id="t-geo" aria-pressed="true" data-i18n="geo">Landscape</button>
+        <button type="button" class="chip look" id="look-btn" aria-haspopup="menu" aria-expanded="false"></button>
+        <button type="button" class="chip ico" id="t-3d" aria-pressed="true" data-tip="t3d"></button>
+        <button type="button" class="chip ico" id="t-geo" aria-pressed="true" data-tip="geo"></button>
+        <button type="button" class="chip ico layer" id="l-climate" aria-pressed="false" data-tip="climate"></button>
       </div>
       <div class="lg"><span data-i18n="g_pol">Power</span>
-        <button class="chip" id="t-neighbours" aria-pressed="true" data-i18n="neighbours">Neighbours</button>
-        <button class="chip layer" id="l-rulers" aria-pressed="true" data-i18n="rulers">Rulers</button>
-        <button class="chip layer" id="l-capitals" aria-pressed="false" data-i18n="capitals">Capitals</button>
-        <button class="chip" id="t-places" aria-pressed="true" data-i18n="cities">Cities</button>
-        <button class="chip layer" id="l-clans" aria-pressed="true" data-i18n="clans">Elites</button>
+        <button type="button" class="chip ico" id="t-neighbours" aria-pressed="true" data-tip="neighbours"></button>
+        <button type="button" class="chip ico layer" id="l-rulers" aria-pressed="true" data-tip="rulers"></button>
+        <button type="button" class="chip ico layer" id="l-capitals" aria-pressed="false" data-tip="capitals"></button>
+        <button type="button" class="chip ico" id="t-places" aria-pressed="true" data-tip="cities"></button>
+        <button type="button" class="chip ico layer" id="l-admin" aria-pressed="false" data-tip="admin"></button>
+        <button type="button" class="chip ico layer" id="l-economy" aria-pressed="false" data-tip="economy"></button>
+        <button type="button" class="chip ico layer" id="l-clans" aria-pressed="true" data-tip="clans"></button>
       </div>
       <div class="lg"><span data-i18n="g_war">War</span>
-        <button class="chip layer" id="l-armies" aria-pressed="true" data-i18n="armies">Armies</button>
-        <button class="chip layer" id="l-passes" aria-pressed="true" data-i18n="passes">Passes</button>
-        <button class="chip layer" id="l-walls" aria-pressed="true" data-i18n="walls">Great Walls</button>
-      </div>
-      <div class="lg"><span data-i18n="g_move">Travel</span>
-        <button class="chip layer" id="l-roads" aria-pressed="true" data-i18n="roads">Roads</button>
-        <button class="chip layer" id="l-routes" aria-pressed="true" data-i18n="routes">Routes</button>
-        <button class="chip layer" id="l-exchange" aria-pressed="true" data-i18n="exchange">Exchange</button>
-        <button class="chip layer" id="l-spread" aria-pressed="true" data-i18n="spread">Spread</button>
+        <button type="button" class="chip ico layer" id="l-armies" aria-pressed="true" data-tip="armies"></button>
+        <button type="button" class="chip ico layer" id="l-passes" aria-pressed="true" data-tip="passes"></button>
+        <button type="button" class="chip ico layer" id="l-walls" aria-pressed="true" data-tip="walls"></button>
+        <button type="button" class="chip ico layer" id="l-roads" aria-pressed="true" data-tip="roads"></button>
+        <button type="button" class="chip ico layer" id="l-routes" aria-pressed="true" data-tip="routes"></button>
       </div>
       <div class="lg"><span data-i18n="g_cul">Culture</span>
-        <button class="chip layer" id="l-people" aria-pressed="true" data-i18n="people_l">People</button>
-        <button class="chip layer" id="l-faith" aria-pressed="false" data-i18n="faith">Faith</button>
-        <button class="chip layer" id="l-inventions" aria-pressed="false" data-i18n="inventions">Inventions</button>
+        <button type="button" class="chip ico layer" id="l-people" aria-pressed="true" data-tip="people_l"></button>
+        <button type="button" class="chip ico layer" id="l-ties" aria-pressed="true" data-tip="ties"></button>
+        <button type="button" class="chip ico layer" id="l-faith" aria-pressed="false" data-tip="faith"></button>
+        <button type="button" class="chip ico layer" id="l-inventions" aria-pressed="false" data-tip="inventions"></button>
+        <button type="button" class="chip ico layer" id="l-exchange" aria-pressed="true" data-tip="exchange"></button>
+        <button type="button" class="chip ico layer" id="l-spread" aria-pressed="true" data-tip="spread"></button>
       </div>
     </div>
     <div class="pop-chart" id="pop-chart" hidden></div>
+    <div class="econ-box" id="econ-box" hidden></div>
+    <div class="pop-chart clim-chart" id="clim-chart" hidden></div>
+  </section>
+
+  <section class="settings panel" id="settings" role="dialog" tabindex="-1" aria-labelledby="st-title" hidden>
+    <div class="st-head"><h2 id="st-title" data-i18n="settings">Settings</h2><small id="st-ver"></small><button type="button" class="zbtn" id="settings-close" data-i18n-title="close" aria-label="Close">×</button></div>
+    <div class="st-body">
+      <div class="st-sec"><h3 data-i18n="stLook">Appearance</h3>
+        <div class="st-styles" id="st-styles" role="group" data-i18n-title="stStyle"></div>
+        <div class="st-row"><span data-i18n="stPanel">Panel colour</span><button type="button" class="chip look" id="panel-btn" aria-haspopup="menu" aria-expanded="false"></button></div>
+        <div class="st-row"><span data-i18n="panelOp">Opacity</span><label class="panel-op"><input type="range" id="panel-op" min="20" max="100" step="1" data-i18n-title="panelOp"><output id="panel-op-v"></output></label></div>
+        <div class="st-row"><span data-i18n="stLayBtn">Layer buttons</span><span class="st-seg" id="st-laybtn" role="group"></span></div>
+        <div class="st-row"><span data-i18n="stLayPos">Layer layout</span><span class="st-seg" id="st-laypos" role="group"></span></div>
+      </div>
+      <div class="st-sec"><h3 data-i18n="stRail">Timeline</h3>
+        <div class="st-row"><span data-i18n="stRailStyle">Style</span><span class="st-seg" id="st-rail" role="group"></span></div>
+        <div class="st-dials" id="st-dials" role="group" data-i18n-title="stDialLook" hidden></div>
+        <div class="st-row"><span data-i18n="speed">Playback speed</span><span class="st-seg" id="st-speed" role="group"></span></div>
+        <div class="st-row"><span data-i18n="playMode">Play</span><span class="st-seg" id="st-play" role="group"></span></div>
+      </div>
+      <div class="st-sec"><h3 data-i18n="stContent">Content</h3>
+        <button type="button" class="switch st-switch" id="st-wstrip" aria-pressed="false"><span><b data-i18n="elsewhere"></b></span><i aria-hidden="true"></i></button>
+        <button type="button" class="switch st-switch" id="t-ai" aria-pressed="false"><span><b data-i18n="stAI"></b></span><i aria-hidden="true"></i></button>
+        <button type="button" class="switch st-switch music-toggle" id="st-music" aria-pressed="false" data-i18n-title="tourMusicHint"><span><b data-i18n="music"></b></span><i aria-hidden="true"></i></button>
+        <div class="st-row"><span data-i18n="stNarr">Narration</span><span class="st-seg" id="st-narr" role="group"></span></div>
+      </div>
+      <div class="st-sec"><h3 data-i18n="stLang">Language</h3>
+        <div class="st-row"><span class="st-seg" id="st-lang" role="group"></span></div>
+      </div>
+    </div>
+    <div class="st-foot"><span data-i18n="stLocal">Saved on this device</span><button type="button" class="chip" id="st-reset" data-i18n="stReset">Reset</button></div>
   </section>
 
   <div class="search panel" id="search" role="dialog" aria-label="Search" hidden>
@@ -85,18 +155,31 @@
   </div>
   <div class="auto-strip panel" id="auto-strip" aria-live="polite" hidden></div>
   <div class="world-strip" id="world-strip" aria-label="Elsewhere this year" hidden></div>
+  <div class="lang-pop ws-pop" id="ws-pop" role="menu" hidden></div>
   <section class="tour panel" id="tour" aria-live="polite" hidden>
     <div class="tour-bar"><i></i></div>
     <div class="tour-head"><span class="tour-title"></span><span class="tour-count"></span><button type="button" class="zbtn tour-close" aria-label="Close">×</button></div>
-    <p><b class="tour-year"></b><span class="tour-text"></span></p>
+    <p><b class="tour-year"></b><span class="tour-text"></span><span class="tour-fc"></span></p>
     <div class="tour-ctl">
-      <button type="button" class="chip tour-prev" data-i18n="tourPrev">Back</button>
-      <button type="button" class="chip tour-auto" data-i18n="tourPlay">Play</button>
-      <button type="button" class="chip tour-story" data-i18n="tourStory">Read the story</button>
+      <button type="button" class="chip tour-prev"></button>
+      <button type="button" class="chip tour-auto"></button>
+      <button type="button" class="chip tour-story"></button>
       <a class="chip tour-ref" target="_blank" rel="noopener" hidden></a>
-      <button type="button" class="chip tour-next" data-i18n="tourNext">Next</button>
+      <button type="button" class="chip narr-toggle" aria-pressed="false" data-i18n-title="tourNarrHint" data-voice="off"><svg class="narr-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9.5h3.5L12 5.5v13l-4.5-4H4z"/><path d="M15.5 9a4 4 0 0 1 0 6M18 6.5a7.5 7.5 0 0 1 0 11"/></svg><span class="music-label"> Narration</span><span class="narr-short"></span></button>
+      <button type="button" class="chip music-toggle" aria-pressed="false" data-i18n-title="tourMusicHint"><svg class="tc-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 17.5V6l10-2v11.5"/><circle cx="6.5" cy="17.5" r="2.5"/><circle cx="16.5" cy="15.5" r="2.5"/></svg><span class="music-label" data-i18n="tourMusic"> Music</span></button>
+      <button type="button" class="chip tour-immersive" aria-pressed="false" data-i18n-title="tourImmersiveHint"><svg class="tc-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9V5.5A1.5 1.5 0 0 1 5.5 4H9M15 4h3.5A1.5 1.5 0 0 1 20 5.5V9M20 15v3.5a1.5 1.5 0 0 1-1.5 1.5H15M9 20H5.5A1.5 1.5 0 0 1 4 18.5V15"/><circle cx="12" cy="12" r="2.6"/></svg><span class="tl" data-i18n="tourImmersive">Immersive</span></button>
+      <button type="button" class="chip tour-next"></button>
     </div>
   </section>
+  <section class="tour play-card panel" id="play-card" aria-live="polite" hidden>
+    <div class="tour-bar"><i></i></div>
+    <div class="tour-head"><span class="tour-title"></span><span class="tour-count"></span></div>
+    <p><b class="tour-year"></b><span class="tour-text"></span></p>
+    <div class="tour-ctl"><button type="button" class="chip pc-read"></button><button type="button" class="chip tour-next pc-on"></button></div>
+  </section>
+  <section class="tour trail panel" id="trail" aria-live="polite" hidden></section>
+  <div class="tour-pic" id="tour-pic" hidden></div>
+  <div class="event-pic" id="event-pic" hidden><div class="ep-fig"></div><button type="button" class="zbtn ep-close" data-i18n-title="closePic" title="Close picture" aria-label="Close picture">×</button></div>
   <aside class="ledger panel" id="ledger">
     <div class="ledger-head">
       <div class="ledger-tabs" role="tablist">
@@ -104,30 +187,39 @@
         <button class="tab" id="tab-events" role="tab" aria-selected="true" data-i18n="events">Events</button>
         <button class="tab" id="tab-rulers" role="tab" aria-selected="false" data-i18n="rulers">Rulers</button>
         <button class="tab" id="tab-people" role="tab" aria-selected="false" data-i18n="people_l">People</button>
-        <button class="tab" id="tab-world" role="tab" aria-selected="false" data-i18n="world_t">World</button>
       </div>
       <span id="ev-count"></span>
       <button class="chip ledger-toggle" id="ledger-toggle" aria-expanded="true">Hide</button>
+      <button type="button" class="chip search-open ledger-min" id="ledger-min" aria-expanded="true" aria-label="Minimise" title="Minimise"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3.5 8h9" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></button>
     </div>
+    <div class="sel-card" id="sel-card" aria-live="polite" hidden></div>
+    <div class="sel-card area-card" id="area-card" hidden></div>
     <div class="ev-filter" id="ev-filter" hidden></div>
     <ol class="ev-list" id="ev-list"></ol>
     <div class="rulers" id="rulers" hidden></div>
     <div class="rulers" id="people" hidden></div>
     <div class="rulers tour-tab" id="tour-tab" hidden></div>
-    <div class="rulers world-tab" id="world" hidden></div>
     <article class="story" id="story" hidden></article>
+    <button type="button" class="read-close" id="read-close" data-i18n-title="close" title="Close" aria-label="Close">×</button>
     <p class="note" data-i18n="note">Borders are rough snapshots from the open historical-basemaps dataset, with some hand-drawn approximations. Terrain, coastlines and rivers are modern.</p>
   </aside>
 
+  <aside class="install panel" id="install" role="dialog" aria-live="polite" hidden></aside>
+
   <section class="rail panel" aria-label="Timeline">
+    <div class="play-box">
     <button class="play" id="play" aria-label="Play timeline">
       <svg viewBox="0 0 16 16" id="play-icon"><path d="M4 2l10 6-10 6z"/></svg>
     </button>
+    <button type="button" class="speed" id="speed" data-i18n-title="speed" title="Speed" aria-haspopup="true" aria-expanded="false">1×</button>
+    <div class="speed-pop" id="speed-pop" role="menu" hidden></div>
+    </div>
     <div class="track-view" id="track-view">
       <div class="track">
         <div class="bands" id="bands"></div>
         <div class="ticks" id="ticks"></div>
         <input type="range" id="slider" min="0" max="1000" step="any" value="0" aria-label="Year">
+        <div class="years" id="years" aria-hidden="true"></div>
       </div>
     </div>
     <div class="scale"><span id="scale-start"></span><span class="scale-hint" id="scale-hint"></span><span id="scale-end"></span></div>
@@ -137,10 +229,31 @@
       <span class="zlevel" id="zoom-level"></span>
       <button class="zbtn" id="zoom-in" aria-label="Zoom in">+</button>
       <button class="zbtn" id="pan-next" aria-label="Later">›</button>
+      <button type="button" class="zbtn rail-style" id="rail-style" aria-pressed="false"></button>
     </div>
+    <button type="button" class="rail-min" id="rail-min" aria-expanded="true" aria-label="Minimise" title="Minimise"></button>
   </section>
+  <div class="boot panel" id="boot" role="status" aria-live="polite"><span class="boot-t" id="boot-t">Loading</span><span class="boot-p" id="boot-p"></span><i class="boot-bar"><b></b></i></div>
 </div>
+<script>
+// The panels' own saved states (folded, slim timeline, dial), set before the first paint like the settings in <head>.
+(function () {
+  var get = function (k) { try { return localStorage.getItem(k); } catch (e) { return null; } };
+  var q = function (s) { return document.querySelector(s); }, app = q("#app"), era = q(".era"), rail = q(".rail"), ledger = q("#ledger");
+  var phone = matchMedia("(max-width: 720px)").matches;
+  if (get("atlas-era-min") === "1") era.classList.add("min");
+  if (get("atlas-lean") === "1") era.classList.add("lean");
+  if (get("atlas-rail-slim") === "1") rail.classList.add("slim");
+  if (get("atlas-rail-min") === "1") { rail.classList.add("min"); app.classList.add("rail-folded"); }
+  if (get("atlas-dial") !== "0") app.classList.add("dial-mode");  // the dial unless switched to the bar
+  // A phone opens with the side panel folded; 一览 folds it too (applyLayout reads data-boot to unfold it on leaving).
+  var glance = document.documentElement.getAttribute("data-layout") === "glance";
+  if (phone || glance) ledger.classList.add("collapsed");
+  if (glance) ledger.dataset.boot = "fold";
+  q("#boot-t").textContent = document.documentElement.lang === "en" ? "Loading" : "加载中";
+})();
+</script>
 <script src="https://cdn.jsdelivr.net/npm/maplibre-gl@5.24.0/dist/maplibre-gl.js"></script>
-<script src="app.js?v=101"></script>
+<script src="app.js?v=235"></script>
 </body>
 </html>
